@@ -1,6 +1,6 @@
 # Load UI from file
 
-Through creating UI by code has more flexibility, using [`UI Editor`](../ui_editor/index.md) instead is more intuitive and easy for novice. The ideal approuch is to design the ui layout via the Editor and bind UI functional logic via code.
+Through creating UI by code has more flexibility, using [`UI Editor`](../ui_editor/index.md) instead is more intuitive and easy for novice. The ideal approach is to design the ui layout via the Editor and bind UI functional logic via code.
 
 !!! note "before reading"
     Make sure you has basic knowledge of how to create the ui via [`UI Editor`](../ui_editor/index.md) and prepare a ui file for loading.
@@ -18,7 +18,7 @@ You can get a `creator` via the method `UIProject.loadUIFromFile(location)`. `cr
 
     ``` java 
     public WidgetGroup createUI() {
-        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui.ui"));
+        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui"));
         // creator caches the resources to speed up the creation process.
         // you should better store it for the same project loading.
         return creator.get();
@@ -29,7 +29,7 @@ You can get a `creator` via the method `UIProject.loadUIFromFile(location)`. `cr
 
     ``` javascript
     function createUI() {
-        let creator = UIProject.loadUIFromFile("ldlib:test_ui.ui");
+        let creator = UIProject.loadUIFromFile("ldlib:test_ui");
         // creator caches the resources to speed up the creation process.
         // you should better store it for the same project loading.
         return creator.get();
