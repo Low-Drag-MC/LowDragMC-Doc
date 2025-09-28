@@ -1,6 +1,6 @@
 # Recipe Creation
 
-Add reipces to the recipe type (`id = mbd2:blender`).
+Add recipes to the recipe type (`id = mbd2:blender`).
 
 ```javascript
 // server script
