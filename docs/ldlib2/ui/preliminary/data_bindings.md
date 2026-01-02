@@ -7,7 +7,7 @@ the relationship between **UI components** and **data**.
 
 ---
 
-## Data bindings on the clent side
+## Data bindings on the client side
 
 If a UI component is data-driven, its role in the data model usually falls into one of the following categories:
 
@@ -404,7 +404,7 @@ root.addChildren(selector1, selector2);
 If you understand the two approaches shown in this code, you have essentially mastered data binding.
 
 - **Method 1** synchronizes a `String[]`, which is straightforward and works as expected.
-- **Method 2** synchronizes a `List<String>`. Since `List` is treated as a **read-only type** in LDLib2, you must explicitly provide an `initialValue` and specify the actual type (including generics).
+- **Method 2** synchronizes a `List<String>`. Since `Collection<T>` is treated as a **read-only type** in LDLib2, you must explicitly provide an `initialValue` and specify the actual type (including generics).
 
 This ensures the binding system can correctly identify and track the data.
 
