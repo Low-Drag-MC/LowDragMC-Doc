@@ -263,7 +263,7 @@ new BindableValue<int[]>().bind(
 If a type is **read-only** (see [Type Support](../../sync/types_support.md){ data-preview }):
 
 * The getter **must return a stable, non-null instance**.
-* It is recommended to explicitly define the type and initial value.
+* You have to define the type and initial value.
 
 Example with `INBTSerializable`:
 
@@ -278,7 +278,7 @@ new BindableValue<INBTSerializable>().bind(
             // Instance already updated, just react here
         }
     )
-    .initialValue(data).syncType(INBTSerializable.class) // not essentially, but recommended
+    .initialValue(data).syncType(INBTSerializable.class)
     .build()
 );
 ```
@@ -358,6 +358,56 @@ The example below shows how to sync server-side data to the client and use it to
             .build())
     );
     ```
+
+### Complex usage examples
+
+Ok, let's do one more complicated exmaple, let's bind a list of `String` stored at the server for a `Selector` (as candidates ).
+```java
+// method 1, we sync String[]
+// represent value stored on the server
+// var candidates = new ArrayList<>(List.of("a", "b", "c", "d"));
+
+var selector1 = new Selector<String>();
+selector1.addChild(
+    // a placeholder element value to sync candidates, it won't affect layout
+    new BindableValue<String[]>().bind(DataBindingBuilder.create(
+            () -> candidates.toArray(String[]::new), Consumers.nop())
+            .c2sStrategy(SyncStrategy.NONE) // only s -> c
+            .remoteSetter(candidates -> {
+                selector1.setCandidates(Arrays.stream(candidates).toList());
+            })
+            .build()
+    )
+);
+
+// method 2, we sync List<String>
+// represent value stored on the server and client
+// var candidates = new ArrayList<>(List.of("a", "b", "c", "d"));
+
+var selector2 = new Selector<String>();
+// because the List is a readonly value for ldlib2 sync system. you have to obtain the real type of List<String>
+Type type = new TypeToken<List<String>>(){}.getType();
+selector2.addChild(
+    // a placeholder element value to sync candidates, it won't affect layout
+    new BindableValue<List<String>>().bind(DataBindingBuilder.create(
+            () -> candidates, Consumers.nop())
+            .syncType(type)
+            .initialValue(candidates)
+            .c2sStrategy(SyncStrategy.NONE) // only s -> c
+            .remoteSetter(selector2::setCandidates)
+            .build()
+    )
+);
+
+root.addChildren(selector1, selector2);
+```
+If you understand the two approaches shown in this code, you have essentially mastered data binding.
+
+- **Method 1** synchronizes a `String[]`, which is straightforward and works as expected.
+- **Method 2** synchronizes a `List<String>`. Since `List` is treated as a **read-only type** in LDLib2, you must explicitly provide an `initialValue` and specify the actual type (including generics).
+
+This ensures the binding system can correctly identify and track the data.
+
 
 ---
 
