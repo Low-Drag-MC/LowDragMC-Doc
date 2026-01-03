@@ -432,7 +432,10 @@ private static ModularUI createModularUI(Player player) {
 }
 ```
 
-You have to create a `ModularUI` with a `Player`, which is necessary for the menu-based UI. Besides, not only the screen, you should also init the `ModularUI` for your `Menu` as well. The initialization should be done after creation and before writing the extra data buffer.
+You have to create a `ModularUI` with a `Player`, which is necessary for the menu-based UI. Besides, not only the screen, you should also init the `ModularUI` for your `Menu` as well:
+
+* The initialization should be done after creation and before writing the extra data buffer.
+* Don't forget to set a correct image size of your screen if necessary.
 
 ```java
 public class MyContainerMenu extends AbstractContainerMenu {
@@ -445,6 +448,18 @@ public class MyContainerMenu extends AbstractContainerMenu {
         if (this instanceof IModularUIHolderMenu holder) {
             holder.setModularUI(modularUI);
         }
+    }
+
+    // .....
+}
+
+public class MyContainerScreen extends AbstractContainerScreen<MyContainerMenu> {
+    @Override
+    public void init() {
+        // the modular widget has already added + init by events
+        this.imageWidth = (int) getMenu().getModularUI().getWidth();
+        this.imageHeight = (int) getMenu().getModularUI().getHeight();
+        super.init();
     }
 
     // .....

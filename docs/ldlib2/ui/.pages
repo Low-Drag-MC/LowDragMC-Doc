@@ -5,7 +5,7 @@ nav:
   - preliminary
   - factory.md
   - xml.md
-  - ui_editor
+  - editor.md
   - components
   - kjs_support.md
   - ...

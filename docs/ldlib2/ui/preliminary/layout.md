@@ -157,7 +157,7 @@ Elements are positioned relative to their parent container, but **do not partici
   ![alt text](../assets/relative.png)
   <br>
   ![alt text](../assets/absolute.png)
-  <figcaption>On the top, the blue visual element has a Relative position, with the parent element using Flex Direction: Row as the Flex setting. On the bottom, the blue visual element uses Absolute position and ignores the parent element’s Flexbox rules.</figcaption>
+  <figcaption>On the top, the blue ui element has a Relative position, with the parent element using Flex Direction: Row as the Flex setting. On the bottom, the blue ui element uses Absolute position and ignores the parent element’s Flexbox rules.</figcaption>
 </figure>
 
 ---
