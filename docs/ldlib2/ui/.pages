@@ -7,5 +7,6 @@ nav:
   - xml.md
   - editor.md
   - components
+  - textures
   - kjs_support.md
   - ...
