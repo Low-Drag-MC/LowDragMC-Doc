@@ -1,5 +1,7 @@
 # UI Editor
 
+{{ version_badge("2.1.5", label="Since", icon="tag") }}
+
 !!! warning inline end
     This command can only be used under the `single player` world.
 
@@ -89,7 +91,7 @@ Using the UI Editor, you can configure **layout**, **styles**, and other setting
 If you understand the concepts introduced in the *Preliminary* section, the editor should be intuitive to use.  
 For components with special configuration options, refer to their individual documentation pages.
 
-### Load UI Template
+### Load UI Template and setup
 There are two methods to load and use your template for your UI.
 
 1. you could also move it to your assets and loaed it by a `ResourceLoaction`.
@@ -107,10 +109,17 @@ There are two methods to load and use your template for your UI.
         var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
                 // resource location based
                 .getResource(new FilePath(ResourceLoaction.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
+
                 // file based
                 //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
+
                 .map(UITemplate::createUI)
                 .orElseGet(UI::empty);
+
+        // find elemetns and do data bindings or logic setup here
+        var buttons = ui.select(".button_container > button").toList(); // by selector
+        var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+
         return ModularUI.of(ui, player);
     }
     ```
@@ -125,11 +134,35 @@ There are two methods to load and use your template for your UI.
     function createUI(player) {
         // file based
         let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
+
         // resource location based
         // let ui = createUIFromUIResource("file(ldlib2:resources/global/modern_styles.ui.nbt)")
+
+        // find elemetns and do data bindings or logic setup here
+        let buttons = ui.select(".button_container > button").toList(); // by selector
+        let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+
         return ModularUI.of(ui, player)
     }
     ```
+
+### Loading Event
+
+A saved **UI Template** only defines the visual structure and styles — it does not include runtime logic by default.  
+In most cases, you load the template and then manually attach handlers or bindings in code.
+
+However, if you want to **reuse the same UI in different contexts**, repeating the same setup logic every time becomes tedious.
+
+To address this, **LDLib2 provides a hook event** that lets you **inject logic when the UI Template calls `createUI()`**, so you can configure the returned `UI` automatically during creation.
+
+```java
+@SubscribeEvent
+public static void onUICreated(UITemplate.CreateUI event) {
+    var template = event.template;
+    var ui = event.ui;
+    // do initialization here
+}
+```
 
 ---
 

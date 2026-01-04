@@ -31,7 +31,7 @@ When editing the XML in VS Code, IntelliJ IDEA, or other IDEs, the schema enable
 * Validation and error checking
 * Auto-completion and suggestions
 
-## Load UI Xml
+## Load UI Xml and setup
 
 You can load and use a UI XML file in the following way:
 
@@ -45,6 +45,10 @@ You can load and use a UI XML file in the following way:
     var xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
     if (xml != null) {
         var ui = UI.of(xml);
+
+        // find elemetns and do data bindings or logic setup here
+        var buttons = ui.select(".button_container > button").toList(); // by selector
+        var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
     }
     ```
 === "KubeJS"
@@ -53,6 +57,10 @@ You can load and use a UI XML file in the following way:
     let xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
     if (xml != null) {
         let ui = UI.of(xml);
+        
+        // find elemetns and do data bindings or logic setup here
+        let buttons = ui.select(".button_container > button").toList(); // by selector
+        let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
     }
     ```
 
