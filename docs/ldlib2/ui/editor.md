@@ -64,6 +64,8 @@ To create one, use the **Resource Panel**:
 2. Choose or create a **resource provider**.
 3. Right-click and create a **UI Template**, then double-click it to enter edit mode.
 
+### Edit your Template
+
 After opening a UI Template, you will see the following editor interface:
 
 <figure markdown="span">
@@ -86,6 +88,48 @@ After opening a UI Template, you will see the following editor interface:
 Using the UI Editor, you can configure **layout**, **styles**, and other settings visually.  
 If you understand the concepts introduced in the *Preliminary* section, the editor should be intuitive to use.  
 For components with special configuration options, refer to their individual documentation pages.
+
+### Load UI Template
+There are two methods to load and use your template for your UI.
+
+1. you could also move it to your assets and loaed it by a `ResourceLoaction`.
+2. if the resrouce is under the ldlib2 folder, you can right click the resource to obtain the resource path and load it.
+
+<figure markdown="span">
+  ![Editor appearance](./assets/template_path.png){ width="100%" }
+</figure>
+
+=== "Java"
+
+    ```java
+    @Override
+    public ModularUI createUI(Player player) {
+        var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
+                // resource location based
+                .getResource(new FilePath(ResourceLoaction.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
+                // file based
+                //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
+                .map(UITemplate::createUI)
+                .orElseGet(UI::empty);
+        return ModularUI.of(ui, player);
+    }
+    ```
+
+=== "KubeJS"
+
+    ```js
+    function createUIFromUIResource(path) {
+        return UIResource.INSTANCE.getResourceInstance().getResource(path).createUI();
+    }
+
+    function createUI(player) {
+        // file based
+        let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
+        // resource location based
+        // let ui = createUIFromUIResource("file(ldlib2:resources/global/modern_styles.ui.nbt)")
+        return ModularUI.of(ui, player)
+    }
+    ```
 
 ---
 
