@@ -13,9 +13,81 @@ Because of that, everything introduced in this page also applies to all other UI
 
 ## Usages
 
+=== "Java"
+
+    ```java
+    var element = new UIElement();
+    element.style(style -> style.background(MCSprites.RECT));
+    element.layout(layout -> layout.width(40).height(40));
+    element.setFocusable(true)
+    element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
+    root.addChild(element);
+    ```
+
+=== "KubeJS"
+
+    ```js
+    let element = new UIElement();
+    element.style(style => style.background(MCSprites.RECT));
+    element.layout(layout => layout.width(40).height(40));
+    element.setFocusable(true)
+    element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
+    root.addChild(element);
+    ```
+
 ---
 
 ## Styles
+
+!!! note "Layout"
+    layout attributes are actually styles as well.
+
+UIElement styles (include layouts) can be accessed as below:
+=== "Java"
+
+    ```java
+    element.style(style -> style.background(...));
+    element.layout(layout -> layout.width(...));
+    element.getStyle().background(...);
+    element.getLayout().width(...);
+    ```
+
+=== "KubeJS"
+
+    ```js
+    element.style(style -=> style.background(...));
+    element.layout(layout => layout.width(...));
+    element.getStyle().background(...);
+    element.getLayout().width(...);
+    ```
+### Layout Properties
+
+| LSS Name | Property Type | Code Usage | Description |
+|---------|---------------|------------|-------------|
+| `display` | `YogaDisplay` | `layout.display(FLEX)` | Controls whether the element participates in layout. `FLEX` enables normal layout, `NONE` removes the element from layout calculation. |
+| `layout-direction` | `YogaDirection` | `layout.layoutDirection(LTR)` | Sets the layout direction. Usually inherited from parent. |
+| `flex-basis` | `StyleSizeLength` | `layout.flexBasis(100)` | Sets the initial main size before flex grow/shrink. Supports **point**, **percent**, and **auto**. |
+| `flex` | `FloatOptional` | `layout.flex(1)` | Makes the element flexible along the main axis. |
+| `flex-grow` | `FloatOptional` | `layout.flexGrow(1)` | Controls how much the element grows when extra space is available. |
+| `flex-shrink` | `FloatOptional` | `layout.flexShrink(1)` | Controls how much the element shrinks when space is insufficient. |
+| `flex-direction` | `YogaFlexDirection` | `layout.flexDirection(ROW)` | Defines the main axis direction, e.g. `ROW` or `COLUMN`. |
+| `flex-wrap` | `YogaWrap` | `layout.flexWrap(WRAP)` | Controls whether children wrap into multiple lines. |
+| `position` | `YogaPositionType` | `layout.position(ABSOLUTE)` | Sets positioning mode. `RELATIVE` participates in layout, `ABSOLUTE` does not affect siblings. |
+| `top / right / bottom / left` | `StyleLength` | `layout.top(10)` | Offsets used when `position` is `RELATIVE` or `ABSOLUTE`. |
+| `margin-*` | `StyleLength` | `layout.marginTop(5)` | Sets outer spacing around the element. |
+| `padding-*` | `StyleLength` | `layout.paddingLeft(8)` | Sets inner spacing between border and content. |
+| `gap-*` | `StyleLength` | `layout.rowGap(6)` | Sets spacing between children in flex layouts. |
+| `width` | `StyleSizeLength` | `layout.width(100)` | Sets element width. Supports **point**, **percent**, and **auto** modes. |
+| `height` | `StyleSizeLength` | `layout.height(50)` | Sets element height. Supports **point**, **percent**, and **auto** modes. |
+| `min-width / min-height` | `StyleSizeLength` | `layout.minWidth(20)` | Sets the minimum size constraint. |
+| `max-width / max-height` | `StyleSizeLength` | `layout.maxHeight(200)` | Sets the maximum size constraint. |
+| `aspect-rate` | `FloatOptional` | `layout.aspectRate(1)` | Locks width–height ratio. Useful for square or icon elements. |
+| `overflow` | `YogaOverflow` | `layout.overflow(HIDDEN)` | Controls how overflowing content is handled. |
+| `align-items` | `YogaAlign` | `layout.alignItems(CENTER)` | Aligns children along the cross axis (container property). |
+| `justify-content` | `YogaJustify` | `layout.justifyContent(CENTER)` | Aligns children along the main axis (container property). |
+| `align-self` | `YogaAlign` | `layout.alignSelf(CENTER)` | Overrides cross-axis alignment for a single element. |
+| `align-content` | `YogaAlign` | `layout.alignContent(CENTER)` | Aligns wrapped lines when `flex-wrap` is enabled. |
+
 
 ---
 
