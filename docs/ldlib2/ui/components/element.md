@@ -863,7 +863,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `blur()`         | `void`        | Clears focus if this element is focused.             |
 | `isFocused()`    | `boolean`     | Returns true if this element is focused.             |
 | `isHover()`      | `boolean`     | Returns true if mouse is directly over this element. |
-| `isChildHover()` | `boolean`     | Returns true if a child is hovered.                  |
+| `isSelfOrChildHover()` | `boolean`     | Returns true if a slef or child is hovered.                  |
 | `startDrag(...)` | `DragHandler` | Starts a drag operation.                             |
 
 ---
