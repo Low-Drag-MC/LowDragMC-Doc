@@ -34,6 +34,16 @@ Because of that, everything introduced in this page also applies to all other UI
     element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
     root.addChild(element);
     ```
+---
+
+## Xml
+```xml
+<element id="my_id" class="class1 class2" focusable="false" visible="true" active="true" style="background: #fff; width: 50">
+    <!-- add children here -->
+    <button text="click me!"/>
+    <inventory-slots/>
+</element>
+```
 
 ---
 
@@ -62,36 +72,645 @@ UIElement styles (include layouts) can be accessed as below:
     ```
 ### Layout Properties
 
-| LSS Name | Property Type | Code Usage | Description |
-|---------|---------------|------------|-------------|
-| `display` | `YogaDisplay` | `layout.display(FLEX)` | Controls whether the element participates in layout. `FLEX` enables normal layout, `NONE` removes the element from layout calculation. |
-| `layout-direction` | `YogaDirection` | `layout.layoutDirection(LTR)` | Sets the layout direction. Usually inherited from parent. |
-| `flex-basis` | `StyleSizeLength` | `layout.flexBasis(100)` | Sets the initial main size before flex grow/shrink. Supports **point**, **percent**, and **auto**. |
-| `flex` | `FloatOptional` | `layout.flex(1)` | Makes the element flexible along the main axis. |
-| `flex-grow` | `FloatOptional` | `layout.flexGrow(1)` | Controls how much the element grows when extra space is available. |
-| `flex-shrink` | `FloatOptional` | `layout.flexShrink(1)` | Controls how much the element shrinks when space is insufficient. |
-| `flex-direction` | `YogaFlexDirection` | `layout.flexDirection(ROW)` | Defines the main axis direction, e.g. `ROW` or `COLUMN`. |
-| `flex-wrap` | `YogaWrap` | `layout.flexWrap(WRAP)` | Controls whether children wrap into multiple lines. |
-| `position` | `YogaPositionType` | `layout.position(ABSOLUTE)` | Sets positioning mode. `RELATIVE` participates in layout, `ABSOLUTE` does not affect siblings. |
-| `top / right / bottom / left` | `StyleLength` | `layout.top(10)` | Offsets used when `position` is `RELATIVE` or `ABSOLUTE`. |
-| `margin-*` | `StyleLength` | `layout.marginTop(5)` | Sets outer spacing around the element. |
-| `padding-*` | `StyleLength` | `layout.paddingLeft(8)` | Sets inner spacing between border and content. |
-| `gap-*` | `StyleLength` | `layout.rowGap(6)` | Sets spacing between children in flex layouts. |
-| `width` | `StyleSizeLength` | `layout.width(100)` | Sets element width. Supports **point**, **percent**, and **auto** modes. |
-| `height` | `StyleSizeLength` | `layout.height(50)` | Sets element height. Supports **point**, **percent**, and **auto** modes. |
-| `min-width / min-height` | `StyleSizeLength` | `layout.minWidth(20)` | Sets the minimum size constraint. |
-| `max-width / max-height` | `StyleSizeLength` | `layout.maxHeight(200)` | Sets the maximum size constraint. |
-| `aspect-rate` | `FloatOptional` | `layout.aspectRate(1)` | Locks width–height ratio. Useful for square or icon elements. |
-| `overflow` | `YogaOverflow` | `layout.overflow(HIDDEN)` | Controls how overflowing content is handled. |
-| `align-items` | `YogaAlign` | `layout.alignItems(CENTER)` | Aligns children along the cross axis (container property). |
-| `justify-content` | `YogaJustify` | `layout.justifyContent(CENTER)` | Aligns children along the main axis (container property). |
-| `align-self` | `YogaAlign` | `layout.alignSelf(CENTER)` | Overrides cross-axis alignment for a single element. |
-| `align-content` | `YogaAlign` | `layout.alignContent(CENTER)` | Aligns wrapped lines when `flex-wrap` is enabled. |
+You'd better read [Layout](../preliminary/layout.md){ data-preview } before using.
 
+!!! info ""
+    #### <p style="font-size: 1rem;">display</p>
+
+    Controls whether the element participates in layout. `FLEX` enables normal layout, `NONE` removes the element from layout calculation. `CONTENTS` doesn't affect layout but render its children.
+
+    === "Java"
+
+        ```java
+        layout.display(YogaDisplay.FLEX);
+        element.setDisplay(false); // equals to layout.display(YogaDisplay.NONE);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: flex;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">layout-direction</p>
+
+    Sets the layout direction. Usually inherited from parent.
+
+    === "Java"
+
+        ```java
+        layout.layoutDirection(YogaDirection.LTR);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            layout-direction: ltr;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex-basis</p>
+
+    Sets the initial main size before flex grow/shrink. Supports **point**, **percent**, and **auto**.
+
+    === "Java"
+
+        ```java
+        layout.flexBasis(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex-basis: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex</p>
+
+    Makes the element flexible along the main axis.
+
+    === "Java"
+
+        ```java
+        layout.flex(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex-grow</p>
+
+    Controls how much the element grows when extra space is available.
+
+    === "Java"
+
+        ```java
+        layout.flexGrow(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex-grow: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex-shrink</p>
+
+    Controls how much the element shrinks when space is insufficient.
+
+    === "Java"
+
+        ```java
+        layout.flexShrink(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex-shrink: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex-direction</p>
+
+    Defines the main axis direction, e.g. `ROW` or `COLUMN`.
+
+    === "Java"
+
+        ```java
+        layout.flexDirection(YogaFlexDirection.ROW);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex-direction: row;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">flex-wrap</p>
+
+    Controls whether children wrap into multiple lines.
+
+    === "Java"
+
+        ```java
+        layout.flexWrap(YogaWrap.WRAP);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            flex-wrap: wrap;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">position</p>
+
+    Sets positioning mode. `RELATIVE` participates in layout, `ABSOLUTE` does not affect siblings.
+
+    === "Java"
+
+        ```java
+        layout.position(YogaPositionType.ABSOLUTE);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            position: absolute;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">top / right / bottom / left / start / end / horizontal / vertical / all</p>
+
+    Offsets used when `position` is `RELATIVE` or `ABSOLUTE`.
+
+    === "Java"
+
+        ```java
+        layout.top(10);
+        layout.leftPercent(30); // 30%
+        layout.allAuto()
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            top: 10;
+            left: 30%;
+            all: auto;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">margin-*</p> 
+    
+    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+
+    Sets outer spacing around the element.
+
+    === "Java"
+
+        ```java
+        layout.marginTop(5);
+        layout.marginAll(3);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            margin-top: 5;
+            margin-all: 3;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">padding-*</p>
+
+    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+
+    Sets inner spacing between border and content.
+
+    === "Java"
+
+        ```java
+        layout.paddingLeft(8);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            padding-left: 8;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">gap-*</p>
+
+    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+
+    Sets spacing between children in flex layouts.
+
+    === "Java"
+
+        ```java
+        layout.rowGap(6);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            row-gap: 6;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">width</p>
+
+    Sets element width. Supports **point**, **percent**, and **auto** modes.
+
+    === "Java"
+
+        ```java
+        layout.width(100);
+        layout.widthPercent(20); // 20%
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            width: 100;
+            width: 20%;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">height</p>
+
+    Sets element height. Supports **point**, **percent**, and **auto** modes.
+
+    === "Java"
+
+        ```java
+        layout.height(50);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            height: 50;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">min-width / min-height</p>
+
+    Sets the minimum size constraint.
+
+    === "Java"
+
+        ```java
+        layout.minWidth(20);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            min-width: 20;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">max-width / max-height</p>
+
+    Sets the maximum size constraint.
+
+    === "Java"
+
+        ```java
+        layout.maxHeight(200);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            max-height: 200;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">aspect-rate</p>
+
+    Locks width–height ratio. Useful for square or icon elements.
+
+    === "Java"
+
+        ```java
+        layout.aspectRate(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            aspect-rate: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">overflow</p>
+
+    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
+
+    === "Java"
+
+        ```java
+        layout.overflow(YogaOverflow.HIDDEN);
+        element.setOverflowVisible(false); // equals to layout.overflow(YogaOverflow.HIDDEN);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            overflow: hidden;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">align-items</p>
+
+    Aligns children along the cross axis (container property).
+
+    === "Java"
+
+        ```java
+        layout.alignItems(YogaAlign.CENTER);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            align-items: center;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">justify-content</p>
+
+    Aligns children along the main axis (container property).
+
+    === "Java"
+
+        ```java
+        layout.justifyContent(YogaJustify.CENTER);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            justify-content: center;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">align-self</p>
+
+    Overrides cross-axis alignment for a single element.
+
+    === "Java"
+
+        ```java
+        layout.alignSelf(YogaAlign.CENTER);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            align-self: center;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">align-content</p>
+
+    Aligns wrapped lines when `flex-wrap` is enabled.
+
+    === "Java"
+
+        ```java
+        layout.alignContent(YogaAlign.CENTER);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            align-content: center;
+        }
+        ```
 
 ---
 
-## Xml
+### Basic Properties
+
+!!! info ""
+    #### <p style="font-size: 1rem;">background</p>
+
+    Sets the background rendering of below the element, such as color, rect, image.
+
+
+    === "Java"
+
+        ```java
+        layout.background(MCSprites.BORDER);
+        ```
+
+    === "LSS"
+        Check [Texture in LSS](../textures/lss.md) for lss supports.
+
+        ```css
+        element {
+            background: #FFF;
+            background: rect(#2ff, 3);
+            background: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">overlay</p>
+
+    Controls overlay rendering drawn above the element content.
+
+    === "Java"
+
+        ```java
+        layout.overlay(...);
+        ```
+
+    === "LSS"
+        Check [Texture in LSS](../textures/lss.md) for lss supports.
+
+        ```css
+        element {
+            overlay: #FFF;
+            overlay: rect(#2ff, 3);
+            overlay: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">tooltips</p>
+
+    Defines tooltip content displayed when hovering the element.
+
+    === "Java"
+
+        ```java
+        layout.tooltips("tips.0"， "tips.1");
+        layout.appendTooltips("tips.2");
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            tooltips: this is my tooltips;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">z-index</p>
+
+    Controls the stacking order of the element. Higher values appear above lower ones.
+
+    === "Java"
+
+        ```java
+        layout.zIndex(1);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            z-index: 1;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">opacity</p>
+
+    Sets the transparency level of the element. `0` is fully transparent, `1` is fully opaque.
+
+    === "Java"
+
+        ```java
+        layout.opacity(0.8f);
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            opacity: 0.8;
+        }
+        ```
+
+
+!!! info ""
+    #### <p style="font-size: 1rem;">overflow-clip</p>
+
+    If element's overflow is set `hidden`, clips elements rendering based on given texture's red channel. 
+
+    <div style="text-align: center;">
+        <video controls>
+        <source src="../../assets/overflow-clip.mp4" type="video/mp4">
+        Your browser does not support video.
+        </video>
+    </div>
+
+    === "Java"
+
+        ```java
+        layout.overflowClip(true);
+        ```
+
+    === "LSS"
+        Check [Texture in LSS](../textures/lss.md) for lss supports.
+
+        ```css
+        element {
+            background: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">transform-2d</p>
+
+    Applies 2D transformations such as translate, scale, or rotate.
+
+    === "Java"
+
+        ```java
+        layout.transform2D(Transform2D.identity().scale(0.5f));
+        element.transform(transform -> transform.translate(10, 0))
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            transform: translate(10, 20) rotate(45) scale(2， 2) pivot(0.5, 0.5);
+            transform: translateX(10) scale(0.5);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">transition</p>
+
+    Defines animated transitions between property changes.
+
+    <div style="text-align: center;">
+        <video controls>
+        <source src="../../assets/transition.mp4" type="video/mp4">
+        Your browser does not support video.
+        </video>
+    </div>
+
+    === "Java"
+
+        ```java
+        layout.transition(new Transition(Map.of(YogaProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            transition: width 1;
+            transition: background 0.8 quad_in_out,
+                        transform 0.3;
+        }
+        ```
+
 
 ---
 ## States

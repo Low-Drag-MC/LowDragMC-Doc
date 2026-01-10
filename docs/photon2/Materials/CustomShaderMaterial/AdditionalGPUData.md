@@ -21,6 +21,7 @@ In the `Particle Emitter` **Inspector**, enable **Additional GPU Data** and sele
 
 | Data                  | Type     | Description                         |
 | --------------------- | -------- | ----------------------------------- |
+| `Random`              | `float`  | Random value form [0, 1) |
 | `T`                   | `float`  | **Normalized lifetime**: `age / lifetime` |
 | `Age`                 | `float`  | Particle age                        |
 | `LifeTime`            | `float`  | Particle lifetime                   |
