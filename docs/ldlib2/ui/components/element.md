@@ -852,6 +852,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `hasClass(...)`    | `boolean`                                    | Checks if the class exists.                         |
 | `transform(...)`   | `UIElement transform(Consumer<Transform2D>)` | Applies a 2D transform.                             |
 | `animation()`      | `StyleAnimation`                             | Starts a style animation targeting this element.    |
+| `animation(a -> {})`| `StyleAnimation`                            | Starts a style animation targeting this element. (always works, when the `ModularUI` valid)    |
 
 ---
 
