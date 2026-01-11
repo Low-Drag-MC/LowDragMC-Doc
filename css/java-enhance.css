@@ -1,0 +1,25 @@
+/* Java 注释绿色 + 斜体 */
+.language-java .c1,
+.language-java .cm {
+  color: #6a9955 !important;
+  font-style: italic;
+}
+
+/* Java 注解（@XXX）紫色 */
+[data-md-color-scheme="default"] .language-java .nd {
+  color: #c95f0e !important;
+}
+
+[data-md-color-scheme="slate"] .language-java .nd {
+  color: #e1bb00 !important;
+}
+
+/* 关键字（public class static） */
+.language-java .k {
+  color: #569cd6 !important;
+}
+
+/* 类型（String, List 等） */
+.language-java .nc {
+  color: #4ec9b0 !important;
+}
