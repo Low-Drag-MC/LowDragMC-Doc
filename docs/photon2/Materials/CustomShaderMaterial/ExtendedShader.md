@@ -259,3 +259,4 @@ Photon2 adds more **built-in uniforms** on top of vanilla core shaders.
 | `U_CameraPosition`          | vec3 | Camera world position              |
 | `U_InverseProjectionMatrix` | mat4 | Precomputed inverse `ProjMat`      |
 | `U_InverseViewMatrix`       | mat4 | Precomputed inverse `ModelViewMat` |
+| `U_ViewPort`                | vec4 | ViewPort(x, y, w, h) `since 2.1.3.a` |
