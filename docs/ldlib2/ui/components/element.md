@@ -658,7 +658,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```css
         element {
-            background: sprite(ldlib2:textures/gui/icon.png);
+            overflow-clip: sprite(ldlib2:textures/gui/icon.png);
         }
         ```
 
