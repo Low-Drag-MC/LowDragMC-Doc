@@ -290,6 +290,23 @@ private void onIntValueChanged(int oldValue, int newValue) {
     LDLib2.LOGGER.info("Int value changed from {} to {}", oldValue, newValue);
 }
 ```
+---
+
+### `@ConditionalSynced`
+In general, all fields annotated with `@DescSynced` will be synced if chhanged. 
+However, you may want to control whether to sync, e.g., conditional sync.
+
+LDLib2 provide this annotation allow you to fine-grained control whether the field should be synced.
+
+```java
+@Configurable
+@ConditionalSynced(methodName = "shouldSync")
+int intField = 10;
+
+public boolean shouldSync(int value) {
+    return value > 0;
+}
+```
 
 ---
 
