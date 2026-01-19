@@ -290,6 +290,7 @@ private void onIntValueChanged(int oldValue, int newValue) {
     LDLib2.LOGGER.info("Int value changed from {} to {}", oldValue, newValue);
 }
 ```
+
 ---
 
 ### `@ConditionalSynced`
