@@ -1,0 +1,71 @@
+
+body {
+    line-height: 1;
+}
+
+
+p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.mdi {
+  font: normal normal normal 24px/1 "Material Design Icons";
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1em;
+}
+
+.mdx-badge {
+  display: inline-block;
+  border-radius: 6px;
+  margin: 0 0.25em 0.25em 0;
+  vertical-align: middle;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.mdx-version-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+[data-md-color-scheme="default"] .mdx-version-box {
+  background-color: rgba(119, 47, 186, 0.85);
+  color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .mdx-version-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: rgba(46, 18, 72, 0.85);
+}
+
+.mdx-badge__icon .mdi {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.mdx-badge__text a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+[data-md-color-scheme="default"] code:not(.md-code__content) {
+  background-color: #f5f2ff !important; /* 底色 */
+  color: #553c9a !important;            /* 前景色 */
+  border-radius: 4px !important;        /* 圆角大小 */
+  
+}
+
+[data-md-color-scheme="slate"] code:not(.md-code__content) {
+  background-color: #2b273f !important;
+  color: #d6b3ff !important;
+  border-radius: 4px !important;        /* 圆角大小 */
+}
