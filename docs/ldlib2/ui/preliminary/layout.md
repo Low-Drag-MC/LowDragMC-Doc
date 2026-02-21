@@ -1,23 +1,25 @@
 # Layout
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.2.0", label="Since", icon="tag") }}
 
 !!! info inline end
-    Grid layout support will be introduced into Yoga in the future.
+    Grid layout support will be introduced into Taffy in the future.
 
-LDLib2 UI layout is built on top of the [Yoga layout engine](https://www.yogalayout.dev/docs/about-yoga).
+We
 
-> **Yoga** is an embeddable layout system used in popular UI frameworks such as React Native.  
+LDLib2 UI layout is built on top of the [Taffy layout engine](https://github.com/DioxusLabs/taffy). It currently implements the CSS Block, Flexbox and CSS Grid layout algorithms.
+
+> **Taffy** is an embeddable layout system used in popular UI frameworks. 
 > It is **not** a UI framework and does not perform any rendering.  
 > Its sole responsibility is calculating the **size and position** of elements.
 
-LDLib2 adopts a **FlexBox-based layout model**, which allows you to describe complex UI structures in a flexible and predictable way.
+LDLib2 adopts a **FlexBox-based / Grid layout model**, which allows you to describe complex UI structures in a flexible and predictable way.
 
 ---
 
 ## Setting Layout Properties
 
-Each `UIElement` owns a layout object backed by Yoga.  
+Each `UIElement` owns a layout object backed by taffy.  
 You can configure layout properties in multiple ways, depending on your preference and use case.
 
 In addition to the examples below, layout properties can also be defined through  
@@ -30,7 +32,7 @@ In addition to the examples below, layout properties can also be defined through
 
     // Set layout directly
     element.getLayout()
-            .flexDirection(YogaFlexDirection.ROW)
+            .flexDirection(FlexDirection.ROW)
             .width(150)
             .heightPercent(100)
             .marginAll(10)
@@ -38,7 +40,7 @@ In addition to the examples below, layout properties can also be defined through
 
     // Set layout using a chaining lambda
     element.layout(layout -> layout
-            .flexDirection(YogaFlexDirection.ROW)
+            .flexDirection(FlexDirection.ROW)
             .width(150)
             .heightPercent(100)
             .marginAll(10)
@@ -60,7 +62,7 @@ In addition to the examples below, layout properties can also be defined through
 
     // Set layout directly
     element.getLayout()
-            .flexDirection(YogaFlexDirection.ROW)
+            .flexDirection(FlexDirection.ROW)
             .width(150)
             .heightPercent(100)
             .marginAll(10)
@@ -68,7 +70,7 @@ In addition to the examples below, layout properties can also be defined through
 
     // Set layout using a chaining lambda
     element.layout(layout -> layout
-            .flexDirection(YogaFlexDirection.ROW)
+            .flexDirection(FlexDirection.ROW)
             .width(150)
             .heightPercent(100)
             .marginAll(10)
@@ -88,8 +90,8 @@ In addition to the examples below, layout properties can also be defined through
 ## Learning Flex Layout
 
 !!! info
-    If you are already familiar with Flexbox, Yoga layout should feel very intuitive.  
-    If not, we recommend reading the official [Yoga documentation](https://www.yogalayout.dev/docs/about-yoga) for a complete explanation.
+    If you are already familiar with Flexbox, Taffy layout should feel very intuitive.  
+    If not, we recommend reading the official [Taffy documentation](https://taffylayout.com/docs) for a complete explanation.
 
     For a lighter introduction, this chapter focuses on the **most commonly used Flex concepts in LDLib2 UI**.
 
@@ -131,7 +133,7 @@ Break down the layout into logical sections, then refine each section using chil
 
 ## Positioning Modes
 
-Yoga supports two primary positioning modes:
+Taffy supports two primary positioning modes:
 
 ### Relative positioning (default)
 
@@ -317,3 +319,10 @@ LDLib2 UI follows a box model similar to CSS:
     A UI element with defined Size, Margin, Border, and Padding settings; elements with a fixed Width or Height can overflow the space.
     </figcaption>
 </figure>
+
+---
+
+
+## Grid Layout
+
+Grid is similar to the [css](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid). You are able to create grid layout and positioning its children.

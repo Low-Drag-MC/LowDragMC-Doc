@@ -447,16 +447,17 @@ var button = new UIElement().addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
 var clickEvent = RPCEventBuilder.simple(UIEvent.class, event -> {
     // do something on the server
 });
+var emitter = element.addRPCEvent(clickEvent);
 
-new UIElement().addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    e.currentElement.sendEvent(clickEvent, e);
-}).addRPCEvent(clickEvent);
+element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+   emitter.send(clickEvent, e);
+});
 ```
 
 You can use `RPCEventBuilder` to construct an `RPCEvent` and send data to the server when needed.
 
 !!! note
-    When sending RPC events, **the parameters passed to `sendEvent` must exactly match the parameters defined in the `RPCEventBuilder`**, including their order and types, and don't forget to `addRPCEvent` them. 
+    When sending RPC events, **the parameters passed to `RPCEmitter#send` must exactly match the parameters defined in the `RPCEventBuilder`**, including their order and types, and don't forget to `addRPCEvent` them. 
     Otherwise, the event will not be dispatched correctly.
 
 
@@ -469,13 +470,15 @@ var queryAdd = RPCEventBuilder.simple(int.class, int.class, int.class, (a, b) ->
     // calculate the result and return on the server
     return a + b;
 });
+var emitter = element.addRPCEvent(queryAdd);
 
-new UIElement().addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    e.currentElement.<Integer>sendEvent(queryAdd, result -> {
+element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    emitter.<Integer>send(queryAdd, result -> {
         // receive the result on the client
         assert result == 2;
     }, 1, 2);
-}).addRPCEvent(queryAdd);
+})
+
 ```
 
 ### Send event to the client

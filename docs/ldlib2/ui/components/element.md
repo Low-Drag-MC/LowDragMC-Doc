@@ -1,6 +1,6 @@
 # UIElement
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="Since", icon="tag") }}
 
 `UIElement` is the most fundamental and commonly used UI component in LDLib2.
 All UI components inherit from it.
@@ -21,7 +21,27 @@ Because of that, everything introduced in this page also applies to all other UI
     element.layout(layout -> layout.width(40).height(40));
     element.setFocusable(true)
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
+    element.addClass("add-class")
+    element.removeClass("add-class")
     root.addChild(element);
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    val root = element root@{
+        element({
+            layout = { size(40.px) }
+            style = { background(MCSprites.RECT) }
+            focusable = true
+            cls = {
+                +"add-class"
+                -"remove-class"
+            }
+        }) {
+            events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
+        }
+    }
     ```
 
 === "KubeJS"
@@ -32,6 +52,8 @@ Because of that, everything introduced in this page also applies to all other UI
     element.layout(layout => layout.width(40).height(40));
     element.setFocusable(true)
     element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
+    element.addClass("add-class")
+    element.removeClass("add-class")
     root.addChild(element);
     ```
 ---
@@ -62,6 +84,22 @@ UIElement styles (include layouts) can be accessed as below:
     element.getLayout().width(...);
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    element({
+        layout = { width(20.pct) }
+        style = { background(MCSprites.RECT) }
+    }) { }
+
+    element.layoutDsl { 
+        width(20.pct)
+    }
+    element.styleDsl { 
+        background(MCSprites.RECT)
+    }
+    ```
+
 === "KubeJS"
 
     ```js
@@ -82,10 +120,18 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.display(YogaDisplay.FLEX);
-        element.setDisplay(false); // equals to layout.display(YogaDisplay.NONE);
+        layout.display(TaffyDisplay.FLEX);
+        element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            display(false)
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -102,9 +148,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.layoutDirection(YogaDirection.LTR);
+        layout.layoutDirection(TaffyDirection.LTR);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            direction(TaffyDirection.LTR)
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -124,6 +178,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexBasis(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexBasis(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -143,6 +205,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flex(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flex(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -162,6 +232,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexGrow(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexGrow(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -181,6 +259,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexShrink(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexShrink(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -197,9 +283,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.flexDirection(YogaFlexDirection.ROW);
+        layout.flexDirection(FlexDirection.ROW);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexDirection(FlexDirection.ROW)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -216,9 +310,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.flexWrap(YogaWrap.WRAP);
+        layout.wrap(FlexWrap.WRAP);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            wrap(FlexWrap.WRAP)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -235,9 +337,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.position(YogaPositionType.ABSOLUTE);
+        layout.positionType(TaffyPosition.ABSOLUTE);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            position(TaffyPosition.ABSOLUTE)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -257,6 +367,18 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.top(10);
         layout.leftPercent(30); // 30%
         layout.allAuto()
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            pos {
+                top(10.px)
+                left(10.px)
+                bottom(auto)
+            }
+        }
         ```
 
     === "LSS"
@@ -283,6 +405,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.marginAll(3);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            margin {
+                top(5.px)
+                all(3.px)
+            }
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -305,6 +438,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.paddingLeft(8);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            padding { left(8) }
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -316,7 +457,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">gap-*</p>
 
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+    `*`: row / column / all
 
     Sets spacing between children in flex layouts.
 
@@ -326,11 +467,19 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.rowGap(6);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            gap { row(6) }
+        }
+        ```
+
     === "LSS"
 
         ```css
         element {
-            row-gap: 6;
+            gap-row: 6;
         }
         ```
 
@@ -346,6 +495,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.widthPercent(20); // 20%
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            width(100)
+            width(20.pct) // 20%
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -366,6 +524,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.height(50);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            widheightth(100)
+            height(20.pct) // 20%
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -383,6 +550,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.minWidth(20);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            minWidth(20);
+        }
         ```
 
     === "LSS"
@@ -404,6 +579,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.maxHeight(200);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            maxHeight(200);
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -423,31 +606,19 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.aspectRate(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            aspectRate(1);
+        }
+        ```
+
     === "LSS"
 
         ```css
         element {
             aspect-rate: 1;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow</p>
-
-    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
-
-    === "Java"
-
-        ```java
-        layout.overflow(YogaOverflow.HIDDEN);
-        element.setOverflowVisible(false); // equals to layout.overflow(YogaOverflow.HIDDEN);
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            overflow: hidden;
         }
         ```
 
@@ -459,7 +630,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignItems(YogaAlign.CENTER);
+        layout.alignItems(AlignItems.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignItems(AlignItems.CENTER)
+        }
         ```
 
     === "LSS"
@@ -478,7 +657,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.justifyContent(YogaJustify.CENTER);
+        layout.justifyContent(AlignContent.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            justifyContent(AlignContent.CENTER)
+        }
         ```
 
     === "LSS"
@@ -497,7 +684,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignSelf(YogaAlign.CENTER);
+        layout.alignSelf(AlignItems.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignSelf(AlignItems.CENTER)
+        }
         ```
 
     === "LSS"
@@ -516,7 +711,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignContent(YogaAlign.CENTER);
+        layout.alignContent(AlignContent.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignContent(AlignContent.CENTER)
+        }
         ```
 
     === "LSS"
@@ -543,6 +746,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.background(MCSprites.BORDER);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            background(MCSprites.BORDER)
+        }
+        ```
+
     === "LSS"
         Check [Texture in LSS](../textures/lss.md) for lss supports.
 
@@ -551,6 +762,35 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
             background: #FFF;
             background: rect(#2ff, 3);
             background: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+
+!!! info ""
+    #### <p style="font-size: 1rem;">overflow</p>
+
+    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
+
+    === "Java"
+
+        ```java
+        style.overflow(YogaOverflow.HIDDEN);
+        element.setOverflowVisible(false); // equals to style.overflow(YogaOverflow.HIDDEN);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overflowVisible(false)
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            overflow: hidden;
         }
         ```
 
@@ -563,6 +803,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.overlay(...);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overlay(MCSprites.BORDER)
+        }
         ```
 
     === "LSS"
@@ -588,6 +836,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.appendTooltips("tips.2");
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            tooltips("tips.0"， "tips.1")
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -607,6 +863,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.zIndex(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            zIndex(1)
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -624,6 +888,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.opacity(0.8f);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            opacity(0.8)
+        }
         ```
 
     === "LSS"
@@ -653,6 +925,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.overflowClip(true);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overflowClip(true)
+        }
+        ```
+
     === "LSS"
         Check [Texture in LSS](../textures/lss.md) for lss supports.
 
@@ -672,6 +952,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```java
         layout.transform2D(Transform2D.identity().scale(0.5f));
         element.transform(transform -> transform.translate(10, 0))
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            transform2D(Transform2D.identity().scale(0.5f))
+        }
         ```
 
     === "LSS"
@@ -698,7 +986,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.transition(new Transition(Map.of(YogaProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+        layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
+        }
         ```
 
     === "LSS"
@@ -886,7 +1182,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | -------------------------- | ----------- | ------------------------------------------ |
 | `addSyncValue(...)`        | `UIElement` | Registers a synced value.                  |
 | `removeSyncValue(...)`     | `UIElement` | Unregisters a synced value.                |
-| `addRPCEvent(...)`         | `UIElement` | Registers an RPC event.                    |
+| `addRPCEvent(...)`         | `RPCEmitter` | Registers an RPC event.                    |
 | `sendEvent(...)`           | `void`      | Sends an RPC event to server.              |
 | `sendEvent(..., callback)` | `<T> void`  | Sends an RPC event with response callback. |
 
