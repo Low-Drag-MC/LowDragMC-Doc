@@ -493,7 +493,7 @@ The example below shows how to sync server-side data to the client and use it to
 
     var element = new UIElement();
     element.addChildren(
-        new BindableValue<Float>().bind(DataBindingBuilder.floatS2C(() -> widthOnTheServer)
+        new BindableValue<Float>().bind(DataBindingBuilder.floatValS2C(() -> widthOnTheServer)
             .remoteSetter(width -> element.getLayout().width(width))
             .build())
     );
@@ -526,7 +526,7 @@ The example below shows how to sync server-side data to the client and use it to
 
     let element = new UIElement();
     element.addChildren(
-        new BindableValue().bind(DataBindingBuilder.floatS2C(() => widthOnTheServer)
+        new BindableValue().bind(DataBindingBuilder.floatValS2C(() => widthOnTheServer)
             .remoteSetter(width => element.getLayout().width(width))
             .build())
     );
