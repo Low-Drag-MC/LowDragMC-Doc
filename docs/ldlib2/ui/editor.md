@@ -136,7 +136,7 @@ There are two methods to load and use your template for your UI.
         let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
 
         // resource location based
-        // let ui = createUIFromUIResource("file(ldlib2:resources/global/modern_styles.ui.nbt)")
+        // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
 
         // find elemetns and do data bindings or logic setup here
         let buttons = ui.select(".button_container > button").toList(); // by selector
