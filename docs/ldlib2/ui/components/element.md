@@ -115,12 +115,13 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">display</p>
 
-    Controls whether the element participates in layout. `FLEX` enables normal layout, `NONE` removes the element from layout calculation. `CONTENTS` doesn't affect layout but render its children.
+    Controls whether the element participates in layout. `FLEX` enables flex layout, `GRID` enables grid layout, `NONE` removes the element from layout calculation, and `CONTENTS` doesn't affect layout but renders its children.
 
     === "Java"
 
         ```java
         layout.display(TaffyDisplay.FLEX);
+        layout.display(TaffyDisplay.GRID); // enable grid layout
         element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
         ```
 
@@ -129,14 +130,16 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```kotlin
         layout {
             display(false)
+            display(TaffyDisplay.GRID)
         }
         ```
-        
+
     === "LSS"
 
         ```css
         element {
             display: flex;
+            display: grid;
         }
         ```
 
@@ -732,6 +735,291 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
 ---
 
+### Grid Properties
+
+!!! note ""
+    To use grid layout, set `display(TaffyDisplay.GRID)` on the container element. Template properties define the grid structure on the **container**, while `grid-row` and `grid-column` are placed on **child** elements to control their positions.
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-rows</p>
+
+    Defines the explicit row tracks of a grid container.
+
+    Supported track sizes: `Npx` (fixed pixels), `N%` (percent), `Nfr` (fractional unit), `auto`, `min-content`, `max-content`, `minmax(min, max)`, `fit-content(limit)`, `repeat(count, size)`, `[name]` (named line). Multiple tracks are space-separated.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
+        layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
+        layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
+        layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateRows("1fr 1fr 1fr")
+                templateRows("repeat(3, 100px)")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: repeat(3, 100px);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-columns</p>
+
+    Defines the explicit column tracks of a grid container. Uses the same track sizing syntax as `grid-template-rows`.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
+        layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
+        layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateColumns("10px 1fr 10px")
+                templateColumns("repeat(3, 1fr)")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-columns: 10px 1fr 10px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-areas</p>
+
+    Assigns named areas to grid cells. Each quoted string represents a row; words within it name the cells in that row. Use `.` for empty cells. All rows must have the same number of cells.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateColumns("1fr 1fr 1fr");
+        layout.gridTemplateRows("auto 1fr auto");
+        layout.gridTemplateAreas(
+            "\"header header header\" \"sidebar content content\" \"footer footer footer\""
+        );
+        // Children reference areas via gridRow/gridColumn by area name
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateColumns("1fr 1fr 1fr")
+                templateRows("auto 1fr auto")
+                templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-rows</p>
+
+    Sets the row track size for implicitly created rows — those not covered by `grid-template-rows`.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoRows("auto");
+        layout.gridAutoRows("minmax(50px, auto)");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoRows("minmax(50px, auto)") }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-rows: minmax(50px, auto);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-columns</p>
+
+    Sets the column track size for implicitly created columns.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoColumns("auto");
+        layout.gridAutoColumns("100px");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoColumns("100px") }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-columns: 100px;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-flow</p>
+
+    Controls how auto-placed items fill the grid. `ROW` fills rows first (default); `COLUMN` fills columns first. `ROW_DENSE` / `COLUMN_DENSE` back-fill earlier gaps.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoFlow(GridAutoFlow.ROW);
+        layout.gridAutoFlow(GridAutoFlow.COLUMN);
+        layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoFlow(GridAutoFlow.COLUMN) }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-flow: column;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-row</p>
+
+    Controls a **child** element's row placement within the grid container. Set this on the child, not the container.
+
+    Placement values: `"1"` (line number), `"1 / 3"` (start / end lines), `"span 2"` (span N rows), `"1 / span 2"` (start + span), `"header"` (named area row), `"-1"` (last line).
+
+    === "Java"
+
+        ```java
+        child.layout(layout -> layout.gridRow("1"));          // row 1
+        child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1–3
+        child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
+        child.layout(layout -> layout.gridRow("header"));     // named area row
+        child.layout(layout -> layout.gridRow("-1"));         // last row line
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        element({
+            layout = {
+                grid { row("1 / span 2") }
+            }
+        }) { }
+        ```
+
+    === "LSS"
+
+        ```css
+        child {
+            grid-row: 1;
+            grid-row: 1 / 3;
+            grid-row: span 2;
+            grid-row: header;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-column</p>
+
+    Controls a **child** element's column placement within the grid container. Uses the same placement syntax as `grid-row`.
+
+    === "Java"
+
+        ```java
+        child.layout(layout -> layout.gridColumn("2"));
+        child.layout(layout -> layout.gridColumn("1 / span 3"));
+        child.layout(layout -> layout.gridColumn("sidebar"));
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        element({
+            layout = {
+                grid { column("1 / span 2") }
+            }
+        }) { }
+        ```
+
+    === "LSS"
+
+        ```css
+        child {
+            grid-column: 2;
+            grid-column: 1 / span 3;
+            grid-column: sidebar;
+        }
+        ```
+
+---
+
 ### Basic Properties
 
 !!! info ""
@@ -1174,6 +1462,89 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `removeEventListener(...)`           | `void`                                                         | Removes an event listener.               |
 | `stopInteractionEventsPropagation()` | `UIElement`                                                    | Stops mouse & drag event propagation.    |
 
+#### Usage
+
+=== "Java"
+
+    ```java
+    // Bubble-phase listener (default): fires after children handle the event
+    element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
+        event.currentElement.focus();
+    });
+
+    // Capture-phase listener: fires before children handle the event
+    element.addEventListener(UIEvents.CLICK, event -> {
+        event.stopPropagation(); // prevent children from seeing this event
+    }, true);
+
+    // Removing a specific listener
+    UIEventListener listener = event -> { /* ... */ };
+    element.addEventListener(UIEvents.CLICK, listener);
+    element.removeEventListener(UIEvents.CLICK, listener);
+
+    // Stop all mouse/drag events from bubbling to parent elements
+    element.stopInteractionEventsPropagation();
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element {
+        // Bubble events (default)
+        events {
+            UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
+            UIEvents.CLICK on { event -> /* handle click */ }
+        }
+        // Capture events
+        events(capture = true) {
+            UIEvents.CLICK on { it.stopPropagation() }
+        }
+    }
+    ```
+
+=== "KubeJS"
+
+    ```js
+    element.addEventListener(UIEvents.MOUSE_DOWN, event => {
+        event.currentElement.focus();
+    });
+    ```
+
+#### Available Events
+
+| Event | Description |
+| ----- | ----------- |
+| `UIEvents.MOUSE_DOWN` | Mouse button pressed over the element |
+| `UIEvents.MOUSE_UP` | Mouse button released |
+| `UIEvents.CLICK` | Mouse clicked (pressed and released on the same element) |
+| `UIEvents.DOUBLE_CLICK` | Mouse double-clicked |
+| `UIEvents.MOUSE_MOVE` | Mouse moved while over the element |
+| `UIEvents.MOUSE_ENTER` | Mouse pointer entered the element's bounds |
+| `UIEvents.MOUSE_LEAVE` | Mouse pointer left the element's bounds |
+| `UIEvents.MOUSE_WHEEL` | Mouse wheel scrolled |
+| `UIEvents.DRAG_ENTER` | A drag operation entered this element |
+| `UIEvents.DRAG_LEAVE` | A drag operation left this element |
+| `UIEvents.DRAG_UPDATE` | Drag target position updated |
+| `UIEvents.DRAG_SOURCE_UPDATE` | Drag source position updated |
+| `UIEvents.DRAG_PERFORM` | Item was dropped on this element |
+| `UIEvents.DRAG_END` | Drag operation ended |
+| `UIEvents.FOCUS` | Element gained keyboard focus |
+| `UIEvents.BLUR` | Element lost keyboard focus |
+| `UIEvents.FOCUS_IN` | Focus moved into this element's subtree |
+| `UIEvents.FOCUS_OUT` | Focus moved out of this element's subtree |
+| `UIEvents.KEY_DOWN` | Keyboard key pressed |
+| `UIEvents.KEY_UP` | Keyboard key released |
+| `UIEvents.CHAR_TYPED` | A printable character was typed |
+| `UIEvents.HOVER_TOOLTIPS` | Tooltip collection when hovering |
+| `UIEvents.VALIDATE_COMMAND` | Slash command validation |
+| `UIEvents.EXECUTE_COMMAND` | Slash command execution |
+| `UIEvents.LAYOUT_CHANGED` | Layout was recalculated |
+| `UIEvents.STYLE_CHANGED` | Styles were recomputed |
+| `UIEvents.REMOVED` | Element was removed from its parent |
+| `UIEvents.ADDED` | Element was added to a parent |
+| `UIEvents.MUI_CHANGED` | `ModularUI` association changed |
+| `UIEvents.TICK` | Periodic client-side tick |
+
 ---
 
 ### Client–Server Sync & RPC
@@ -1185,6 +1556,89 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `addRPCEvent(...)`         | `RPCEmitter` | Registers an RPC event.                    |
 | `sendEvent(...)`           | `void`      | Sends an RPC event to server.              |
 | `sendEvent(..., callback)` | `<T> void`  | Sends an RPC event with response callback. |
+
+#### Server Events
+
+Server-side event listeners run on the **server** instead of the client. They use the same `UIEvents` type constants and support both bubble and capture phases. They are automatically synchronized via an internal RPC mechanism.
+
+=== "Java"
+
+    ```java
+    // Runs on the server when UIEvents.TICK fires
+    element.addServerEventListener(UIEvents.TICK, event -> {
+        // server-side tick logic
+    });
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element {
+        serverEvents {
+            UIEvents.TICK on { event ->
+                // server-side logic
+            }
+        }
+        // Capture phase on server
+        serverEvents(capture = true) {
+            UIEvents.CLICK on { it.stopPropagation() }
+        }
+    }
+    ```
+
+#### RPC Events
+
+RPC (Remote Procedure Call) events let the client explicitly invoke logic on the server and optionally receive a response.
+
+=== "Java"
+
+    ```java
+    // Register an RPC event during element initialization
+    RPCEmitter emitter = element.addRPCEvent(ele ->
+        RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
+            // This runs on the server
+            ServerPlayer player = e.modularUI.player;
+            player.sendSystemMessage(Component.literal("Hello from server!"));
+        })
+    );
+
+    // Trigger the RPC from client (e.g., inside a client event listener)
+    element.addEventListener(UIEvents.CLICK, event ->
+        element.sendEvent(emitter.event())
+    );
+    ```
+
+#### Data Bindings
+
+Data bindings automatically synchronize values between server and client. Use `addSyncValue` in Java, or the `bind*` DSL helpers in Kotlin.
+
+=== "Java"
+
+    ```java
+    // Bidirectional: synced server <-> client
+    element.addSyncValue(new SyncValue<>(Integer.class,
+        () -> myData.count,
+        v  -> myData.count = v
+    ));
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element({}) {
+        // Bidirectional (server <-> client)
+        bind({ myData.count }, { myData.count = it })
+
+        // Server → client only
+        bindS2C({ myData.count })
+
+        // Client → server only
+        bindC2S({ v -> myData.count = v })
+
+        // Bind a mutable property directly (bidirectional)
+        bind(myData::count)
+    }
+    ```
 
 ---
 
