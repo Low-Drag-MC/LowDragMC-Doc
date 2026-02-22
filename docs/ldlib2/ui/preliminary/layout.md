@@ -2,9 +2,6 @@
 
 {{ version_badge("2.2.0", label="Since", icon="tag") }}
 
-!!! info inline end
-    Grid layout support will be introduced into Taffy in the future.
-
 LDLib2 UI layout is built on top of the [Taffy layout engine](https://github.com/DioxusLabs/taffy). It currently implements the CSS Block, Flexbox and CSS Grid layout algorithms.
 
 > **Taffy** is an embeddable layout system used in popular UI frameworks. 
