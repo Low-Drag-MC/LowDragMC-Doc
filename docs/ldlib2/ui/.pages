@@ -9,5 +9,6 @@ nav:
   - kotlin_support.md
   - components
   - textures
+  - hud.md
   - kjs_support.md
   - ...
