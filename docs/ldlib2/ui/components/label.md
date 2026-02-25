@@ -21,7 +21,7 @@ Default size: inherits width from layout; height defaults to **9 px** (one line 
     label.setText("my.translation.key", true);
 
     // Data-bound text (server → client)
-    label.bindDataSource(DataBindingBuilder.componentS2C(
+    label.bind(DataBindingBuilder.componentS2C(
         () -> Component.literal("Value: " + someObject.getValue())
     ).build());
 
@@ -35,11 +35,13 @@ Default size: inherits width from layout; height defaults to **9 px** (one line 
     label({
         text("my.translation.key")
         textStyle { textColor(0xFFFFFF).fontSize(10f) }
-    }) { }
+    }) { 
+        bindS2C({Component.literal("Value: $value")})
+    }
 
     // Data-bound
     val lbl = Label()
-    lbl.bindDataSource(DataBindingBuilder.componentS2C { Component.literal("Value: $value") }.build())
+    lbl.bind(DataBindingBuilder.componentS2C { Component.literal("Value: $value") }.build())
     ```
 
 === "KubeJS"
