@@ -5,6 +5,7 @@ nav:
   - layout.md
   - event.md
   - stylesheet.md
+  - style_animation.md
   - data_bindings.md
   - screen_and_menu.md
   - ...

@@ -18,6 +18,7 @@ Each page focuses on a specific aspect of the UI system.
 | [Layout](./layout.md) | Learn how UI layout works using Yoga-based flexbox rules. |
 | [Events](./event.md) | Understand the UI event system, including dispatching and bubbling. |
 | [Stylesheet](./stylesheet.md) | Use LSS to define styles declaratively and apply themes consistently. |
+| [StyleAnimation](./style_animation.md) | Animate style properties at runtime with code-driven keyframes and easing. |
 | [Data Bindings](./data_bindings.md) | Bind UI components to data sources with automatic updates. |
 | [Screen & Menu](./screen_and_menu.md) | Integrate ModularUI with client screens and server-backed menus. |
 

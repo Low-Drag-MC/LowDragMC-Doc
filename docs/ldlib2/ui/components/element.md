@@ -1194,6 +1194,34 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         }
         ```
 
+!!! info ""
+    #### <p style="font-size: 1rem;">color</p>
+
+    Tints the current element's `background` and `overlay` textures using an ARGB multiplier.
+    This tint is applied only to the current element and does not affect child elements.
+
+    === "Java"
+
+        ```java
+        style.color(0x80FF8080);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            color(0x80FF8080.toInt())
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            color: #80FF8080;
+        }
+        ```
+
 
 !!! info ""
     #### <p style="font-size: 1rem;">overflow-clip</p>
@@ -1315,7 +1343,13 @@ When `isActive` is set to `false`, the element may lose its interactive behavior
     selector.__disabled__ {
     }
 
+    selector:disabled {
+    }
+
     selector:not(.__disabled__) {
+    }
+
+    selector:not(:disabled) {
     }
     ```
 
@@ -1331,9 +1365,27 @@ Only when `focusable` is set to `true` can an element be focused via `focus()` o
     selector.__focused__ {
     }
 
+    selector:focused {
+    }
+
     selector:not(.__focused__) {
     }
+
+    selector:not(:focused) {
+    }
     ```
+
+### `hover state`
+When an element is hovered, a `__hovered__` class is automatically added.  
+For CSS compatibility, you can use `:hover` as selector sugar, which is equivalent to `.__hovered__`.
+
+```css
+selector.__hovered__ {
+}
+
+selector:hover {
+}
+```
 
 ### `isInternalUI`
 This is a special state that indicates whether an element is an internal part of a component.  
@@ -1379,7 +1431,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `styleBag`     | `StyleBag`    | private (getter)        | Stores resolved style candidates and computed styles.    |
 | `styles`       | `List<Style>` | private (getter)        | Inline styles attached to this element.                  |
 | `layoutStyle`  | `LayoutStyle` | private (getter)        | Layout-related style wrapper (Yoga-based).               |
-| `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, opacity, zIndex, etc.). |
+| `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, overlay tint color, opacity, zIndex, etc.). |
 | `isVisible`    | `boolean`     | private (getter/setter) | Whether the element is visible.                          |
 | `isActive`     | `boolean`     | private (getter/setter) | Whether the element participates in logic and events.    |
 | `focusable`    | `boolean`     | private (getter/setter) | Whether the element can receive focus.                   |
@@ -1434,9 +1486,14 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `addClass(...)`    | `UIElement addClass(String)`                 | Adds a CSS-like class.                              |
 | `removeClass(...)` | `UIElement removeClass(String)`              | Removes a class.                                    |
 | `hasClass(...)`    | `boolean`                                    | Checks if the class exists.                         |
+| `getLocalStylesheets()` | `List<Stylesheet>`                       | Returns local stylesheets attached to this element. |
+| `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(Stylesheet)` | Adds a local stylesheet (self + descendants only).  |
+| `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(String)`     | Parses and adds local stylesheet from LSS text.     |
+| `removeLocalStylesheet(...)` | `UIElement removeLocalStylesheet(Stylesheet)` | Removes a local stylesheet from this element scope. |
+| `clearLocalStylesheets()` | `UIElement`                              | Removes all local stylesheets attached to this element. |
 | `transform(...)`   | `UIElement transform(Consumer<Transform2D>)` | Applies a 2D transform.                             |
-| `animation()`      | `StyleAnimation`                             | Starts a style animation targeting this element.    |
-| `animation(a -> {})`| `StyleAnimation`                            | Starts a style animation targeting this element. (always works, when the `ModularUI` valid)    |
+| `animation()`      | `StyleAnimation`                             | Creates a style animation targeting this element. See [StyleAnimation](../preliminary/style_animation.md){ data-preview }. |
+| `animation(a -> {})`| `StyleAnimation`                            | Runs animation setup immediately if `ModularUI` is valid, or once on `MUI_CHANGED` when it becomes valid. |
 
 ---
 

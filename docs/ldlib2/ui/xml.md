@@ -88,6 +88,8 @@ You can reference external LSS files using the `<stylesheet>` tag:
 
 This allows you to reuse shared styles or let resource packs override UI appearance globally.
 
+When `<stylesheet>` is placed directly under `#!xml <ldlib2-ui>`, it is a **global stylesheet** for the whole UI.
+
 ### Embedded Styles
 
 Inline styles can be defined inside a `<style>` block using **LSS (LDLib Style Sheet)** syntax:
@@ -106,6 +108,39 @@ Inline styles can be defined inside a `<style>` block using **LSS (LDLib Style S
     }
 </style>
 ```
+
+When `<style>` is placed directly under `#!xml <ldlib2-ui>`, it is also **global** for the whole UI.
+
+### Local Stylesheet on Elements
+
+You can also place `<style>` or `<stylesheet>` inside any element node (for example `root`, `element`, `button`, `tab`, `selector`).
+
+In this case, the stylesheet is treated as a **local stylesheet** and only affects:
+
+* the current element
+* its descendants
+
+It does not affect parent elements or sibling branches.
+
+```xml
+<root>
+    <element id="left-panel">
+        <style>
+            button {
+                width: 70;
+            }
+        </style>
+        <button text="inside panel"/>
+    </element>
+
+    <button text="outside panel"/>
+</root>
+```
+
+In the example above, the width rule applies to the button inside `left-panel`, not to the sibling button outside.
+
+!!! note
+    `ldlib2-ui.xsd` includes these element-level `<style>` / `<stylesheet>` nodes, so IDE schema validation and completion work for local stylesheet definitions too.
 
 ### Inline Style Attribute
 
@@ -130,6 +165,7 @@ In short:
 
 * **`<stylesheet>`** → load external styles
 * **`<style>`** → define embedded styles
+* **element-level `<stylesheet>` / `<style>`** → local stylesheet scoped to that element subtree
 * **`style` attribute** → inline styles
 * **XML hierarchy** → UI component tree
 
