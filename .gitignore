@@ -4,3 +4,4 @@ venv/*
 /__pycache__
 /site
 /.worktrees
+/.claude
