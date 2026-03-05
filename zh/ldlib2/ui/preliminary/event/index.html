@@ -1,0 +1,1743 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/event/">
+      
+      
+      
+      
+        
+          <link rel="alternate" href="../../../../../ldlib2/ui/preliminary/event/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>事件 - LowDragMC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../css/custom.css">
+    
+      <link rel="stylesheet" href="../../../../../css/java-enhance.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../" title="LowDragMC" class="md-header__button md-logo" aria-label="LowDragMC" data-md-component="logo">
+      
+  <img src="../../../../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LowDragMC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              事件
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../../../ldlib2/ui/preliminary/event/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Low-Drag-MC" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Low-Drag-MC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LDLib2
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../" title="LowDragMC" class="md-nav__button md-logo" aria-label="LowDragMC" data-md-component="logo">
+      
+  <img src="../../../../../assets/icon.png" alt="logo">
+
+    </a>
+    LowDragMC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Low-Drag-MC" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Low-Drag-MC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LDLib2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事件分发
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="事件分发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事件传播
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事件目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        停止传播
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注册事件监听器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事件参考
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="事件参考">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        鼠标事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        拖放事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        焦点事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        键盘事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本输入事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        悬停提示事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        命令事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        布局事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        生命周期事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tick" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tick 事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">事件</h1>
+<p><span class="mdx-badge" title="Minimum version">
+  <span class="mdx-version-box">
+    <span class="mdx-badge__icon"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 7A1.5 1.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4 1.5 1.5 0 0 1 7 5.5 1.5 1.5 0 0 1 5.5 7m15.91 4.58-9-9C12.05 2.22 11.55 2 11 2H4c-1.11 0-2 .89-2 2v7c0 .55.22 1.05.59 1.41l8.99 9c.37.36.87.59 1.42.59s1.05-.23 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.56-.23-1.06-.59-1.42"></path></svg></span></span>
+    <span class="mdx-badge__text">
+      <a href="#v2.1.0">Since 2.1.0</a>
+    </span>
+  </span>
+</span></p>
+<p>LDLib2 UI 提供事件机制，用于向 UI 元素传达用户操作或通知。事件系统与 <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events#what_is_an_event">HTML 事件</a> 共享相同的术语和事件命名规范。</p>
+<hr>
+<h2 id="_2">事件分发</h2>
+<p>事件系统监听来自 ModularUI 或手动触发的事件，然后使用 <code>UIEventDispatcher</code> 将这些事件分发给 UI 元素。事件分发器为每个发送的事件确定适当的分发策略，然后执行该策略。</p>
+<h3 id="_3">事件传播</h3>
+<p>每个事件阶段都有其自己的分发行为。每种事件类型的行为分为两个阶段：</p>
+<ul>
+<li><code>捕获阶段</code>：在向下捕获阶段发送给元素的事件。</li>
+<li><code>冒泡阶段</code>：在向上冒泡阶段发送给元素的事件。</li>
+</ul>
+<p>在事件分发器选择事件 <code>target</code> 后，它会计算事件的传播路径。传播路径是接收事件的 UI 元素的有序列表。传播路径按以下顺序进行：</p>
+<ol>
+<li>路径从 UI 元素树的根部开始，向下延伸到 <code>target</code>。这是向下捕获阶段。</li>
+<li>事件目标接收事件。</li>
+<li>然后事件从目标向上返回到根部。这是向上冒泡阶段。</li>
+</ol>
+<figure style="width: 60%">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../../../ldlib2/ui/assets/event_phase.png" data-desc-position="bottom"><img alt="alt text" src="../../../../../ldlib2/ui/assets/event_phase.png"></a>
+<br>
+<figcaption>传播路径</figcaption>
+</figure>
+<p>大多数事件会发送给传播路径上的所有元素。某些事件会跳过冒泡阶段，某些事件仅发送给事件目标。</p>
+<h3 id="_4">事件目标</h3>
+<p>当 <code>UIEvent</code> 沿传播路径传播时，<code>UIEvent.currentElement</code> 会更新为<strong>当前正在处理</strong>事件的元素。这使得了解"当前是哪个元素在运行我的监听器"变得容易。</p>
+<p>在事件监听器中，LDLib2 区分两个重要的元素引用：</p>
+<ul>
+<li><strong><code>UIEvent.target</code></strong>：事件<strong>发起</strong>的元素（分发目标）。</li>
+<li><strong><code>UIEvent.relatedTarget</code>（可选）</strong>：某些事件中可能涉及的另一个元素。</li>
+<li><strong><code>UIEvent.currentElement</code></strong>：<strong>当前正在执行</strong>监听器的元素。</li>
+</ul>
+<p><code>target</code> 在分发开始前确定，且在传播过程中<strong>不会改变</strong>。<br>
+<code>currentElement</code> 随着分发器遍历树而变化（捕获 → 目标 → 冒泡）。</p>
+<h3 id="_5">停止传播</h3>
+<p>LDLib2 提供两种级别的取消机制：</p>
+<ul>
+<li>
+<p><code>event.stopPropagation()</code><br>
+  阻止事件到达<strong>后续元素和后续阶段</strong>（捕获/冒泡将停止）。</p>
+</li>
+<li>
+<p><code>event.stopImmediatePropagation()</code><br>
+  阻止<strong>当前元素</strong>上的其他监听器运行，并停止进一步传播。</p>
+</li>
+</ul>
+<hr>
+<h2 id="_6">注册事件监听器</h2>
+<p>LDLib2 使用<strong>类 DOM 事件模型</strong>：事件在 UI 树中传播，监听器可以注册到：</p>
+<ul>
+<li><strong>冒泡阶段</strong>（默认）</li>
+<li><strong>捕获阶段</strong>（设置 <code>useCapture = true</code>）</li>
+</ul>
+<p>使用 <code>addEventListener(eventType, listener)</code> 注册<strong>冒泡阶段</strong>监听器：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Java</label><label for="__tabbed_1_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">var</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UIElement</span><span class="p">().</span><span class="na">setId</span><span class="p">(</span><span class="s">"root"</span><span class="p">);</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">var</span><span class="w"> </span><span class="n">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UIElement</span><span class="p">().</span><span class="na">setId</span><span class="p">(</span><span class="s">"button"</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">root</span><span class="p">.</span><span class="na">addChild</span><span class="p">(</span><span class="n">button</span><span class="p">);</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">// UIEvents.CLICK == "mouseClick"</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">button</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"Bubble listener: current={}, target={}"</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">currentElement</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">target</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">UIElement</span><span class="p">().</span><span class="nx">setId</span><span class="p">(</span><span class="s2">"root"</span><span class="p">);</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">UIElement</span><span class="p">().</span><span class="nx">setId</span><span class="p">(</span><span class="s2">"button"</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">root</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">// UIEvents.CLICK == "mouseClick"</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Bubble listener: current=</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentElement</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb">, target=</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>要注册捕获阶段监听器，将第三个参数设为 true：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Java</label><label for="__tabbed_2_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">root</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"Capture: current={}, target={}"</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">currentElement</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">target</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">},</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">root</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Capture: current=</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentElement</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb">, target=</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">},</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>我们还提供了允许你在<code>服务端</code>监听事件的方法。事件在客户端触发并同步到服务端。并非所有事件都支持服务端监听器，请查看下方的<a href="#事件参考">事件参考</a>。</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Java</label><label for="__tabbed_3_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">root</span><span class="p">.</span><span class="na">addServerEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"Triggered on the server"</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">root</span><span class="p">.</span><span class="nx">addServerEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Triggered on the server"</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>要移除监听器，调用 <code>removeEventListener(...)</code>。
+确保 useCapture 标志与注册监听器时的值匹配：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Java</label><label for="__tabbed_4_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">UIEventListener</span><span class="w"> </span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"clicked!"</span><span class="p">);</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">button</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span><span class="w">       </span><span class="c1">// bubble</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">root</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">   </span><span class="c1">// capture</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">button</span><span class="p">.</span><span class="na">removeEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">);</span><span class="w">          </span><span class="c1">// remove bubble listener</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">root</span><span class="p">.</span><span class="na">removeEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">onClick</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">      </span><span class="c1">// remove capture listener</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">UIEventListener</span><span class="p">.</span><span class="nx">creatre</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">LDLib2</span><span class="p">.</span><span class="nx">LOGGER</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"clicked!"</span><span class="p">));</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">onClick</span><span class="p">);</span><span class="w">       </span><span class="c1">// bubble</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nx">root</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">onClick</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">   </span><span class="c1">// capture</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nx">button</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">onClick</span><span class="p">);</span><span class="w">          </span><span class="c1">// remove bubble listener</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nx">root</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">onClick</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">      </span><span class="c1">// remove capture listener</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="_7">事件参考</h2>
+<p>当用户与元素交互并更改元素状态时，LDLib2 会触发事件。事件设计类似于 HTML 元素的 Event 接口。</p>
+<p>事件类型基于 <code>UIEvent.class</code> 形成层次结构。每个事件系列实现一个接口，该接口定义了同一系列所有事件的共同特征。</p>
+<p>下面列出了适用于所有 UI 元素的常见事件。选择下面列出的任何事件类型以获取有关该事件的更多信息以及 API 文档链接。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>我们建议使用 <code>UIEvents.xxx</code> 而不是事件类型字符串。</p>
+</div>
+<h3 id="_8">鼠标事件</h3>
+<p>鼠标事件是最常用的事件。在处理程序开始捕获鼠标后发送的事件。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mouseDown</code></td>
+<td>当用户按下鼠标按钮时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseUp</code></td>
+<td>当用户释放鼠标按钮时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseClick</code></td>
+<td>当用户点击鼠标按钮（按下 + 释放）时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>doubleClick</code></td>
+<td>当用户双击鼠标按钮时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseMove</code></td>
+<td>当鼠标在元素上移动时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseEnter</code></td>
+<td>当鼠标进入元素或其子元素时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseLeave</code></td>
+<td>当鼠标离开元素或其子元素时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mouseWheel</code></td>
+<td>当用户滚动鼠标滚轮时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>鼠标位置 x</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>鼠标位置 y</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>鼠标按钮代码（0 - 左键，1 - 右键，2 - 中键，其他...）</td>
+<td><code>mouseDown</code> <code>mouseUp</code> <code>mouseClick</code> <code>doubleClick</code></td>
+</tr>
+<tr>
+<td><code>deltaX</code></td>
+<td>滚动增量 x</td>
+<td><code>mouseWheel</code></td>
+</tr>
+<tr>
+<td><code>deltaY</code></td>
+<td>滚动增量 y</td>
+<td><code>mouseWheel</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">Java</label><label for="__tabbed_5_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">DOUBLE_CLICK</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"double click {} with button {}"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">target</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">button</span><span class="p">)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">DOUBLE_CLICK</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`double click </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="si">}</span><span class="sb"> with button </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">button</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_9">拖放事件</h3>
+<p>拖放事件在拖动操作期间分发。
+<strong>这些事件仅限客户端，不会发送到服务端。</strong></p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dragEnter</code></td>
+<td>在拖动操作期间当指针进入元素时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>dragLeave</code></td>
+<td>在拖动操作期间当指针离开元素时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>dragUpdate</code></td>
+<td>在拖动期间当指针在元素上移动时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>dragSourceUpdate</code></td>
+<td>在拖动期间在拖动源上触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>dragPerform</code></td>
+<td>当拖动对象在元素上释放时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>dragEnd</code></td>
+<td>当拖动操作结束时在拖动源上触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>鼠标位置 x</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>鼠标位置 y</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>relatedTarget</code></td>
+<td>如果 relatedTarget 不为 null，表示新进入的元素。</td>
+<td><code>dragLeave</code></td>
+</tr>
+<tr>
+<td><code>deltaX</code></td>
+<td>拖动增量 x</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>deltaY</code></td>
+<td>拖动增量 y</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>dragStartX</code></td>
+<td>拖动前的起始位置 x</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>dragStartY</code></td>
+<td>拖动前的起始位置 y</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>dragHandler</code></td>
+<td>DragHandler 用于处理拖动事件。</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<p>所有拖动事件只有在 <code>startDrag</code> 启动拖动后才会触发。拖放生命周期如下：</p>
+<ol>
+<li>要触发拖动，例如在鼠标事件中，可以调用 <code>startDrag</code>。</li>
+<li>使用拖动事件进行操作，<code>dragEnter</code>、<code>dragLeave</code>、<code>dragUpdate</code> 和 <code>dragSourceUpdate</code>（如果定义了拖动源）。</li>
+<li>当拖动完成时，触发 <code>dragPerform</code> 和 <code>dragEnd</code>（如果定义了拖动源）。</li>
+</ol>
+<p><strong>方法：<code class="language-java highlight"><span class="n">DragHandler</span><span class="p">.</span><span class="na">startDrag</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">draggingObject</span><span class="p">,</span><span class="w"> </span><span class="n">IGuiTexture</span><span class="w"> </span><span class="n">dragTexture</span><span class="p">,</span><span class="w"> </span><span class="n">UIElement</span><span class="w"> </span><span class="n">dragSource</span><span class="p">)</span></code></strong></p>
+<p>参数：</p>
+<ul>
+<li><code>draggingObject</code>：被拖动的对象；可以是任何类型，用于表示拖动载荷</li>
+<li><code>dragTexture</code>：用于可视化表示拖动操作</li>
+<li><code>dragSource</code>：作为拖动操作源的 <code>UIElement</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>dragSourceUpdate</code> 和 <code>dragEnd</code> 仅分发给拖动源。</p>
+</div>
+<p>你也可以使用 <code>UIElement.startDrag</code> 启动拖动，这可以帮助你直接传递 <code>dragSource</code>。</p>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio"><input id="__tabbed_6_2" name="__tabbed_6" type="radio"><div class="tabbed-labels"><label for="__tabbed_6_1">Java</label><label for="__tabbed_6_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="c1">// start drag when the mouse down</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">elem</span><span class="p">.</span><span class="na">startDrag</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">});</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">DRAG_SOURCE_UPDATE</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"{} dragged ({}, {})"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">target</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">deltaX</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">deltaY</span><span class="p">)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="c1">// start drag when the mouse down</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nx">elem</span><span class="p">.</span><span class="nx">startDrag</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">});</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">DRAG_SOURCE_UPDATE</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nx">copnsole</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="si">}</span><span class="sb"> dragged (</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">deltaX</span><span class="si">}</span><span class="sb">, </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">deltaY</span><span class="si">}</span><span class="sb">)`</span><span class="p">)</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_10">焦点事件</h3>
+<p>焦点事件在 <code>focusable</code> 元素获得或失去焦点时分发。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>focusIn</code></td>
+<td>当元素即将获得焦点时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td>当元素已获得焦点后触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>focusOut</code></td>
+<td>当元素即将失去焦点时触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>blur</code></td>
+<td>当元素已失去焦点后触发。</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>relatedTarget</code></td>
+<td>对于 <code>focusIn</code> 和 <code>focus</code>，指上一个获得焦点的元素。<br> 对于 <code>focusOut</code> 和 <code>blur</code>，指上一个获得焦点的元素。</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>focusIn</code> 和 <code>focusOut</code> <strong>不会发送到服务端</strong>。</li>
+<li><code>relatedTarget</code> 表示正在失去或获得焦点的元素。</li>
+</ul>
+</div>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio"><input id="__tabbed_7_2" name="__tabbed_7" type="radio"><div class="tabbed-labels"><label for="__tabbed_7_1">Java</label><label for="__tabbed_7_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">elem</span><span class="p">.</span><span class="na">focus</span><span class="p">();</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">});</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">FOCUS</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"{} gained the focus"</span><span class="p">,</span><span class="w"> </span><span class="n">elem</span><span class="p">);</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nx">elem</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">});</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">FOCUS</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">elem</span><span class="si">}</span><span class="sb"> gained the focus`</span><span class="p">);</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_11">键盘事件</h3>
+<p>键盘事件分发给当前拥有<strong>焦点</strong>的元素。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keyDown</code></td>
+<td>当用户按下键盘上的按键时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>keyUp</code></td>
+<td>当用户释放键盘上的按键时触发。</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keyCode</code></td>
+<td>按键代码</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>scanCode</code></td>
+<td>扫描码</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>modifiers</code></td>
+<td>修饰键</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio"><input id="__tabbed_8_2" name="__tabbed_8" type="radio"><div class="tabbed-labels"><label for="__tabbed_8_1">Java</label><label for="__tabbed_8_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="n">elem</span><span class="p">.</span><span class="na">focus</span><span class="p">();</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">});</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">KEY_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"key {} pressed"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">keyCode</span><span class="p">);</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nx">elem</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">});</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">KEY_DOWN</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`key </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span><span class="si">}</span><span class="sb"> pressed`</span><span class="p">)</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_12">文本输入事件</h3>
+<p>文本输入事件用于字符级输入，例如在文本字段中输入，该事件也分发给当前拥有<strong>焦点</strong>的元素。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>charTyped</code></td>
+<td>当字符输入到元素中时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>codePoint</code></td>
+<td>码点</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>modifiers</code></td>
+<td>修饰键</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio"><input id="__tabbed_9_2" name="__tabbed_9" type="radio"><div class="tabbed-labels"><label for="__tabbed_9_1">Java</label><label for="__tabbed_9_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">elem</span><span class="p">.</span><span class="na">focus</span><span class="p">();</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">});</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">CHAR_TYPED</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"key {} pressed"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">codePoint</span><span class="p">);</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">setFocusable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">MOUSE_DOWN</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="c1">// request focus</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nx">elem</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">});</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">CHAR_TYPED</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`key </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">codePoint</span><span class="si">}</span><span class="sb"> pressed`</span><span class="p">)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_13">悬停提示事件</h3>
+<p>悬停提示事件在需要显示动态提示信息时分发。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hoverTooltips</code></td>
+<td>为元素提供悬停提示内容时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hoverTooltips</code></td>
+<td>设置要显示的悬停提示</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">TooltipComponent</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../../../ldlib2/ui/assets/tooltipcomponent.png" data-desc-position="bottom"><img align="right" alt="size" src="../../../../../ldlib2/ui/assets/tooltipcomponent.png" width="200"></a>
+<code>hoverTooltips</code> 允许你在文本组件之后追加 <code>TooltipComponent</code>。你可以使用 <code>ModularUITooltipComponent</code> 将 LDLib2 UI 追加到提示中。</p>
+</div>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio"><input id="__tabbed_10_2" name="__tabbed_10" type="radio"><div class="tabbed-labels"><label for="__tabbed_10_1">Java</label><label for="__tabbed_10_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">HOVER_TOOLTIPS</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="na">hoverTooltips</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HoverTooltips</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">        </span><span class="c1">// add text tooltips</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">        </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">Component</span><span class="p">.</span><span class="na">literal</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">),</span><span class="w"> </span><span class="n">Component</span><span class="p">.</span><span class="na">literal</span><span class="p">(</span><span class="s">"World"</span><span class="p">))</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">        </span><span class="c1">// add a image</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="p">.</span><span class="na">tooltipComponent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModularUITooltipComponent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UIElement</span><span class="p">().</span><span class="na">layout</span><span class="p">(</span><span class="n">layout</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">            </span><span class="n">layout</span><span class="p">.</span><span class="na">width</span><span class="p">(</span><span class="mi">100</span><span class="p">).</span><span class="na">height</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">        </span><span class="p">}).</span><span class="na">style</span><span class="p">(</span><span class="n">style</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">style</span><span class="p">.</span><span class="na">background</span><span class="p">(</span><span class="n">SpriteTexture</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"ldlib2:textures/gui/icon.png"</span><span class="p">)))));</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">HOVER_TOOLTIPS</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">hoverTooltips</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">HoverTooltips</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">        </span><span class="c1">// add text tooltips</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">        </span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">,</span><span class="w"> </span><span class="s2">"World"</span><span class="p">);</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="c1">// add a image</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">        </span><span class="p">.</span><span class="nx">tooltipComponent</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">ModularUITooltipComponent</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">UIElement</span><span class="p">().</span><span class="nx">layout</span><span class="p">(</span><span class="nx">layout</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">            </span><span class="nx">layout</span><span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mf">100</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="p">}).</span><span class="nx">style</span><span class="p">(</span><span class="nx">style</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span><span class="p">(</span><span class="nx">SpriteTexture</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="s2">"ldlib2:textures/gui/icon.png"</span><span class="p">)))));</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_14">命令事件</h3>
+<p>命令事件用于处理高级 UI 命令（如复制、粘贴、全选）。
+它们遵循验证 → 执行的流程。要在 <code>validateCommand</code> 期间声明命令，调用 <code>UIEvent.stopPropagation()</code>。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>validateCommand</code></td>
+<td>检查元素是否可以处理命令时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>executeCommand</code></td>
+<td>当命令在元素上执行时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+<th>支持的事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keyCode</code></td>
+<td>按键代码</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>scanCode</code></td>
+<td>扫描码</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>modifiers</code></td>
+<td>修饰键</td>
+<td>All</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>命令</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<p><strong>命令</strong></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>copy</code></td>
+<td>ctrl + c</td>
+</tr>
+<tr>
+<td><code>cut</code></td>
+<td>ctrl + x</td>
+</tr>
+<tr>
+<td><code>paste</code></td>
+<td>ctrl + v</td>
+</tr>
+<tr>
+<td><code>select-all</code></td>
+<td>ctrl + a</td>
+</tr>
+<tr>
+<td><code>undo</code></td>
+<td>ctrl + z</td>
+</tr>
+<tr>
+<td><code>redo</code></td>
+<td>ctrl + y / ctrl + shift + z</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td>ctrl + f</td>
+</tr>
+<tr>
+<td><code>save</code></td>
+<td>ctrl + s</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>如果检测到命令输入，命令事件将首先发送到 <code>focus</code> 元素（如果存在）。如果未被消费，它将发送到 UI 树中的元素，直到某个元素消费它。</p>
+</div>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio"><input id="__tabbed_11_2" name="__tabbed_11" type="radio"><div class="tabbed-labels"><label for="__tabbed_11_1">Java</label><label for="__tabbed_11_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">VALIDATE_COMMAND</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CommandEvents</span><span class="p">.</span><span class="na">COPY</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">command</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">        </span><span class="c1">// notify cosnuming</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="na">stopPropagation</span><span class="p">();</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="p">});</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">EXECUTE_COMMAND</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CommandEvents</span><span class="p">.</span><span class="na">COPY</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">command</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">        </span><span class="n">ClipboardManager</span><span class="p">.</span><span class="na">copyDirect</span><span class="p">(</span><span class="s">"data"</span><span class="p">);</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">VALIDATE_COMMAND</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">CommandEvents</span><span class="p">.</span><span class="nx">COPY</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">        </span><span class="c1">// notify cosnuming</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">        </span><span class="nx">event</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">});</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">EXECUTE_COMMAND</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">CommandEvents</span><span class="p">.</span><span class="nx">COPY</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">        </span><span class="nx">ClipboardManager</span><span class="p">.</span><span class="nx">copyDirect</span><span class="p">(</span><span class="s2">"data"</span><span class="p">);</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_15">布局事件</h3>
+<p>布局事件在元素的布局状态改变时分发。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layoutChanged</code></td>
+<td>当元素的 yoga 布局改变时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio"><input id="__tabbed_12_2" name="__tabbed_12" type="radio"><div class="tabbed-labels"><label for="__tabbed_12_1">Java</label><label for="__tabbed_12_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">LAYOUT_CHANGED</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="n">LDLib2</span><span class="p">.</span><span class="na">LOGGER</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"{} layout changed"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">target</span><span class="p">)</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">LAYOUT_CHANGED</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="si">}</span><span class="sb"> layout changed`</span><span class="p">)</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="_16">生命周期事件</h3>
+<p>生命周期事件描述元素在 UI 树中存在状态的变化。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>added</code></td>
+<td>当元素添加到 UI 树时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>removed</code></td>
+<td>当元素从 UI 树移除时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>muiChanged</code></td>
+<td>当元素的 <code>ModularUI</code> 实例改变时触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>removed</code> 不仅在元素移除时发送，在 UI 关闭时也会发送。你可以使用此事件来释放资源。</p>
+</div>
+<p><strong>用法</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio"><input id="__tabbed_13_2" name="__tabbed_13" type="radio"><div class="tabbed-labels"><label for="__tabbed_13_1">Java</label><label for="__tabbed_13_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">REMOVED</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="c1">// release resource here for safe</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">REMOVED</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="c1">// release resource here for safe</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr>
+<h3 id="tick">Tick 事件</h3>
+<p>Tick 事件在元素处于活动状态且可见时每游戏刻分发一次。</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>向下捕获</th>
+<th>向上冒泡</th>
+<th>支持服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tick</code></td>
+<td>当元素处于活动状态并显示时每刻触发。</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>tick</code> 不会自动发送到服务端。</li>
+<li>如果需要，你仍然可以在服务端监听它。</li>
+</ul>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio"><input id="__tabbed_14_2" name="__tabbed_14" type="radio"><div class="tabbed-labels"><label for="__tabbed_14_1">Java</label><label for="__tabbed_14_2">KubeJS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">elem</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">UIEvents</span><span class="p">.</span><span class="na">TICK</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">UIEvents</span><span class="p">.</span><span class="nx">TICK</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2019 - 2025 KilaBash
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.sections", "navigation.path", "navigation.tabs", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

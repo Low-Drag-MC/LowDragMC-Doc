@@ -1,0 +1,1767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://github.com/Low-Drag-MC/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/SyncData/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/SyncData/Anotations/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/Anotations/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/Anotations/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/SyncData/type/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/type/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/type/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/compass/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/compass/scene/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/scene/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/scene/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/compass/xml/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/xml/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/xml/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/code/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/code/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/code/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/code/load_ui_file/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/code/load_ui_file/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/code/load_ui_file/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/animation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/border/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/border/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/border/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/group/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/itemstack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/itemstack/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/itemstack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/progress/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/progress/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/progress/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/rect/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/resource/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/resourceborder/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/resourceborder/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resourceborder/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/shader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/shader/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/shader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/textures/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/text/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/group_widget/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/group_widget/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/group_widget/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/resource/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Button/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Button/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Button/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Image/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Image/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Image/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Label/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Label/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Label/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomSlot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomSlot/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomSlot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomTank/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomTank/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomTank/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Selector/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Slot/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Switch/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Switch/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Switch/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/Tank/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Tank/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Tank/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/TextField/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/TextField/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextField/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/TextTexture/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/TextTexture/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextTexture/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/WidgetGroup/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/WidgetGroup/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/WidgetGroup/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib/ui/widget/progress/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/progress/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/progress/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/PersistedParser/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/PersistedParser/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/PersistedParser/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/annotations/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/annotations/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/annotations/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/blockentity/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/blockentity/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/blockentity/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/rpc_packet/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/rpc_packet/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/rpc_packet/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/sync/types_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/types_support/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/types_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/agent_guide/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/agent_guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/agent_guide/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/editor/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/factory/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/factory/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/factory/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/getting_start/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/getting_start/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/getting_start/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/hud/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/hud/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/hud/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/kjs_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/kjs_support/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/kjs_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/kotlin_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/kotlin_support/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/kotlin_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/xei_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/xei_support/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/xei_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/xml/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/xml/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/xml/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/bindable-value/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/bindable-value/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/bindable-value/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/button/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/button/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/button/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/code-editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/code-editor/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/code-editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/color-selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/color-selector/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/color-selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/element/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/element/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/element/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/fluid-slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/fluid-slot/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/fluid-slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/graph-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/graph-view/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/graph-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/inspector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/inspector/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inspector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/inventory-slots/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/inventory-slots/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inventory-slots/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/item-slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/item-slot/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/item-slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/label/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/label/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/label/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/progress-bar/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/progress-bar/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/progress-bar/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/scene/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scene/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scene/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller-view/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/search-component/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/search-component/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/search-component/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/selector/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/split-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/split-view/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/split-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/switch/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/switch/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/switch/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/tab-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tab-view/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/tab/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tab/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/tag-field/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tag-field/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tag-field/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/template/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/template/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/template/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/text-area/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text-area/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-area/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/text-field/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text-field/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-field/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle-group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle-group/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle-group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/components/tree-list/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tree-list/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tree-list/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/data_bindings/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/data_bindings/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/data_bindings/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/event/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/event/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/event/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/layout/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/layout/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/layout/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/modularui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/modularui/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/modularui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/screen_and_menu/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/screen_and_menu/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/screen_and_menu/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/style_animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/style_animation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/style_animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/stylesheet/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/stylesheet/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/stylesheet/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/animation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-border/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-border/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-border/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-rect/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/fluid-stack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/fluid-stack/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/fluid-stack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/group/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/item-stack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/item-stack/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/item-stack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/lss/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/lss/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/lss/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/rect/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/sdf-rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/sdf-rect/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sdf-rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/shader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/shader/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/shader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/sprite/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/sprite/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sprite/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/text/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/ldlib2/ui/textures/ui-resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/ui-resource/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/ui-resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/event/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/event/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/event/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/proxy_recipetype/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/proxy_recipetype/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/proxy_recipetype/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/recipe/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/recipe/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/recipe/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/trait/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/trait/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/trait/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/ui/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/multiblocked2/KubeJS/upgrade_system/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/upgrade_system/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/upgrade_system/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/commands/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/commands/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/commands/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/resourcepack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/resourcepack/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/resourcepack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Java%20Integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Java%20Integration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Java%20Integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Materials/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/ExtendedShader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/ExtendedShader/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/ExtendedShader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/VertexFormat/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/VertexFormat/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/VertexFormat/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/SyncData/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/SyncData/Anotations/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/Anotations/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/Anotations/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/SyncData/type/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/SyncData/type/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/SyncData/type/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/compass/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/compass/scene/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/scene/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/scene/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/compass/xml/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/compass/xml/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/compass/xml/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/code/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/code/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/code/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/code/load_ui_file/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/code/load_ui_file/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/code/load_ui_file/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/animation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/border/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/border/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/border/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/group/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/itemstack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/itemstack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/itemstack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/progress/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/progress/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/progress/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/rect/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resource/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resourceborder/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/resourceborder/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/resourceborder/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/shader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/shader/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/shader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/textures/text/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/textures/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/group_widget/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/group_widget/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/group_widget/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/ui_editor/resource/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/ui_editor/resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Button/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Button/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Button/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Image/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Image/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Image/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Label/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Label/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Label/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomSlot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomSlot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomSlot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomTank/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/PlantomTank/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/PlantomTank/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Selector/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Slot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Switch/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Switch/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Switch/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Tank/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/Tank/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/Tank/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextField/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextField/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/TextField/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextTexture/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/TextTexture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/TextTexture/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/WidgetGroup/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/WidgetGroup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/WidgetGroup/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/progress/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib/ui/widget/progress/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib/ui/widget/progress/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/PersistedParser/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/PersistedParser/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/PersistedParser/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/annotations/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/annotations/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/annotations/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/blockentity/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/blockentity/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/blockentity/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/rpc_packet/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/rpc_packet/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/rpc_packet/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/sync/types_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/types_support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/sync/types_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/agent_guide/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/agent_guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/agent_guide/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/editor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/factory/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/factory/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/factory/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/getting_start/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/getting_start/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/getting_start/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/hud/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/hud/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/hud/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/kjs_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/kjs_support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/kjs_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/kotlin_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/kotlin_support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/kotlin_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/xei_support/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/xei_support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/xei_support/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/xml/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/xml/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/xml/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/bindable-value/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/bindable-value/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/bindable-value/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/button/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/button/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/button/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/code-editor/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/code-editor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/code-editor/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/color-selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/color-selector/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/color-selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/element/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/element/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/element/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/fluid-slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/fluid-slot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/fluid-slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/graph-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/graph-view/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/graph-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inspector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inspector/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/inspector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inventory-slots/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/inventory-slots/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/inventory-slots/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/item-slot/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/item-slot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/item-slot/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/label/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/label/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/label/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/progress-bar/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/progress-bar/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/progress-bar/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scene/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scene/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scene/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller-view/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/scroller/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/scroller/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/search-component/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/search-component/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/search-component/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/selector/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/selector/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/selector/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/split-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/split-view/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/split-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/switch/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/switch/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/switch/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab-view/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab-view/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tab-view/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tab/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tab/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tag-field/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tag-field/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tag-field/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/template/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/template/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/template/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-area/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-area/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text-area/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-field/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text-field/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text-field/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/text/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle-group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle-group/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle-group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/toggle/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/toggle/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tree-list/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/components/tree-list/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/components/tree-list/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/data_bindings/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/data_bindings/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/data_bindings/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/event/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/event/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/event/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/layout/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/layout/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/layout/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/modularui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/modularui/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/modularui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/screen_and_menu/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/screen_and_menu/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/screen_and_menu/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/style_animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/style_animation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/style_animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/stylesheet/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/preliminary/stylesheet/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/preliminary/stylesheet/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/animation/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/animation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/animation/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-border/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-border/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-border/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/color-rect/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/color-rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/fluid-stack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/fluid-stack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/fluid-stack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/group/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/group/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/group/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/item-stack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/item-stack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/item-stack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/lss/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/lss/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/lss/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/rect/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sdf-rect/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sdf-rect/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/sdf-rect/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/shader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/shader/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/shader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sprite/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/sprite/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/sprite/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/text/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/text/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/text/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/ui-resource/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/ldlib2/ui/textures/ui-resource/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/ldlib2/ui/textures/ui-resource/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/java_integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/java_integration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/java_integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/event/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/event/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/event/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/proxy_recipetype/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/proxy_recipetype/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/proxy_recipetype/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/recipe/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/recipe/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/recipe/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/trait/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/trait/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/trait/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/ui/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/ui/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/ui/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/upgrade_system/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/multiblocked2/KubeJS/upgrade_system/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/multiblocked2/KubeJS/upgrade_system/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/commands/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/commands/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/commands/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/resourcepack/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/resourcepack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/resourcepack/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Java%20Integration/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Java%20Integration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Java%20Integration/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Materials/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/AdditionalGPUData/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/ExtendedShader/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/ExtendedShader/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/ExtendedShader/"/>
+    </url>
+    <url>
+        <loc>https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/VertexFormat/</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://github.com/Low-Drag-MC/zh/photon2/Materials/CustomShaderMaterial/VertexFormat/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://github.com/Low-Drag-MC/photon2/Materials/CustomShaderMaterial/VertexFormat/"/>
+    </url>
+</urlset>
