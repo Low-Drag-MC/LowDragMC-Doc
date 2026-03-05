@@ -1,12 +1,20 @@
-# 文本元素
+# TextElement
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`TextElement` 是一个低级文本渲染元素。它显示一个`Component`（一个 Minecraft 富文本对象），具有可配置的字体、大小、颜色、对齐方式、换行和滚动行为。
-大多数用例可以通过 [`Label`](label.md){ data-preview } （添加数据绑定）或 [`Button`](button.md){ data-preview }、[`Toggle`](toggle.md){ data-preview } 等内置文本标签来更好地服务。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`TextElement` 是一个底层文本渲染元素。它显示一个 `Component`（Minecraft 富文本对象），支持配置字体、大小、颜色、对齐方式、换行和滚动行为。
+
+大多数场景下，建议使用 [`Label`](label.md){ data-preview }（支持数据绑定）或 [`Button`](button.md){ data-preview }、[`Toggle`](toggle.md){ data-preview } 等控件内置的文本标签。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）也适用于此元素。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var text = new TextElement();
     text.setText("my.translation.key", true);  // translated
@@ -19,7 +27,8 @@
     parent.addChild(text);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     text({
         layout { width(80).height(18) }
@@ -31,7 +40,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let text = new TextElement();
     text.setText(Component.literal("Hello world"));
@@ -42,190 +52,262 @@
 ---
 
 ## XML
-使用 Minecraft 的组件格式从元素的子节点读取文本内容：
+
+文本内容通过元素的子节点读取，使用 Minecraft 的 component 格式：
+
 ```xml
-<!-- Literal text via a plain text node -->
+<!-- 通过纯文本节点设置字面文本 -->
 <text>Hello World</text>
 
-<!-- Translatable via a translate child element -->
+<!-- 通过 translate 子元素设置可翻译文本 -->
 <text><translate key="my.translation.key"/></text>
 
-<!-- Multiple inline components are concatenated -->
+<!-- 多个内联组件会被拼接 -->
 <text>Prefix: <translate key="my.key"/></text>
 ```
 
-!!!笔记 ””`TextElement` 不能在 XML 中添加布局子项 — 只能添加文本内容。
+!!! note ""
+    `TextElement` 在 XML 中不能添加布局子元素——只能添加文本内容。
+
 ---
 
 ## 文本样式
-`TextStyle` 控制渲染文本的所有视觉方面。
-!!!信息“”#### <p style="font-size: 1rem;">字体大小</p>
-每行文本的高度（以像素为单位）。
-默认值：`9`
-===“Java”
+
+`TextStyle` 控制渲染文本的所有视觉属性。
+
+!!! info ""
+    #### <p style="font-size: 1rem;">font-size</p>
+
+    每行文本的高度（像素）。
+
+    默认值：`9`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.fontSize(12));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             font-size: 12;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">文字颜色</p>
-文本的 ARGB 颜色。使用`0xRRGGBB`（Alpha 默认为完全不透明）。
-默认值：`0xFFFFFF`（白色）
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">text-color</p>
+
+    文本的 ARGB 颜色。使用 `0xRRGGBB`（alpha 默认为完全不透明）。
+
+    默认值：`0xFFFFFF`（白色）
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.textColor(0xFFFF00));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             text-color: #FFFF00;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">文字阴影</p>
-是否在文本下方绘制阴影。
-默认值：`true`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">text-shadow</p>
+
+    是否在文本下方绘制阴影。
+
+    默认值：`true`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.textShadow(false));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             text-shadow: false;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">字体</p>
-要使用的字体的资源位置。
-默认：香草默认字体（`minecraft:default`）
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">font</p>
+
+    要使用的字体资源位置。
+
+    默认值：原版默认字体（`minecraft:default`）
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.font(ResourceLocation.parse("minecraft:uniform")));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             font: "minecraft:uniform";
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">水平对齐</p>
-元素内文本行的水平对齐方式。值：`LEFT`、`CENTER`、`RIGHT`。
-默认值：`LEFT`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">horizontal-align</p>
+
+    文本行在元素内的水平对齐方式。可选值：`LEFT`、`CENTER`、`RIGHT`。
+
+    默认值：`LEFT`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             horizontal-align: CENTER;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">垂直对齐</p>
-元素内文本块的垂直对齐方式。值：`TOP`、`CENTER`、`BOTTOM`。
-默认值：`TOP`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">vertical-align</p>
+
+    文本块在元素内的垂直对齐方式。可选值：`TOP`、`CENTER`、`BOTTOM`。
+
+    默认值：`TOP`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.textAlignVertical(Vertical.CENTER));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             vertical-align: CENTER;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">文字换行</p>
-控制文本超出元素宽度时的行为方式。
-默认值：`NONE`
-    | Value | Behaviour |
-    | ----- | --------- |
-    | `NONE` | No wrapping; text is displayed on one line and may overflow. |
-    | `WRAP` | Text wraps onto multiple lines. |
-    | `ROLL` | Text scrolls horizontally in a continuous loop. |
-    | `HOVER_ROLL` | Text scrolls horizontally only when the mouse hovers over the element. |
-    | `HIDE` | Text is clipped to one line; overflow is hidden. |
+!!! info ""
+    #### <p style="font-size: 1rem;">text-wrap</p>
 
-===“Java”
+    控制文本超出元素宽度时的行为。
+
+    默认值：`NONE`
+
+    | 值 | 行为 |
+    | ----- | --------- |
+    | `NONE` | 不换行；文本显示在一行，可能会溢出。 |
+    | `WRAP` | 文本换行到多行。 |
+    | `ROLL` | 文本以连续循环的方式水平滚动。 |
+    | `HOVER_ROLL` | 仅当鼠标悬停在元素上时文本才水平滚动。 |
+    | `HIDE` | 文本被裁剪为一行；溢出部分被隐藏。 |
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.textWrap(TextWrap.WRAP));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             text-wrap: WRAP;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">滚动速度</p>
-`ROLL` / `HOVER_ROLL` 滚动的速度倍增器。值越高，滚动速度越快。
-默认值：`1.0`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">roll-speed</p>
+
+    `ROLL` / `HOVER_ROLL` 滚动的速度倍数。值越大滚动越快。
+
+    默认值：`1.0`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.rollSpeed(2f));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             roll-speed: 2;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">行距</p>
-文本换行时，行间添加额外的空间像素。
-默认值：`1`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">line-spacing</p>
+
+    文本换行时行与行之间的额外像素间距。
+
+    默认值：`1`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.lineSpacing(3f));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             line-spacing: 3;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">自适应高度</p>
-当`true`时，元素的高度会自动设置以适合所有文本行。
-默认值：`false`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">adaptive-height</p>
+
+    当设为 `true` 时，元素的高度会自动调整以适应所有文本行。
+
+    默认值：`false`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.adaptiveHeight(true));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             adaptive-height: true;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">自适应宽度</p>
-当`true`时，元素的宽度会自动设置为适合第一行的文本。
-默认值：`false`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">adaptive-width</p>
+
+    当设为 `true` 时，元素的宽度会自动调整以适应第一行文本。
+
+    默认值：`false`
+
+    === "Java"
+
         ```java
         text.textStyle(style -> style.adaptiveWidth(true));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         text {
             adaptive-width: true;
@@ -235,18 +317,20 @@
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `textStyle` | `TextStyle` | `private` (getter) | The style object for this element's text. |
-| `text` | `Component` | `private` (getter) | The current text `Component`. |
+| `textStyle` | `TextStyle` | `private`（有 getter） | 此元素文本的样式对象。 |
+| `text` | `Component` | `private`（有 getter） | 当前的文本 `Component`。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setText(String, boolean)` | `TextElement` | Sets text. `true` = translatable, `false` = literal. |
-| `setText(Component)` | `TextElement` | Sets text from a `Component` directly. |
-| `textStyle(Consumer<TextStyle>)` | `TextElement` | Configures `TextStyle` fluently. |
-| `recompute()` | `void` | Forces a re-layout of the text lines (called automatically on style or size changes). |
-| `getText()` | `Component` | Returns the current text. |
+| `setText(String, boolean)` | `TextElement` | 设置文本。`true` = 可翻译，`false` = 字面文本。 |
+| `setText(Component)` | `TextElement` | 直接从 `Component` 设置文本。 |
+| `textStyle(Consumer<TextStyle>)` | `TextElement` | 流式配置 `TextStyle`。 |
+| `recompute()` | `void` | 强制重新布局文本行（样式或大小变化时会自动调用）。 |
+| `getText()` | `Component` | 返回当前文本。 |

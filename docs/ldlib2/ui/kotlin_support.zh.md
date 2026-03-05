@@ -1,23 +1,32 @@
 # Kotlin 支持
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-LDLib2 提供了用于构建 UI 树的类型安全的 Kotlin DSL。它将 Java API 与构建器模式、嵌套 lambda 和运算符重载封装在一起，使 UI 构造更加简洁和结构化。
+
+LDLib2 提供了类型安全的 Kotlin DSL 用于构建 UI 树。它通过构建器模式、嵌套 lambda 和运算符重载包装 Java API，使 UI 构建更加简洁和结构化。
+
 ---
 
 ## 核心概念
-DSL 围绕两个互补的想法构建：
-- **`ElementSpec`** — 保存在构建时应用于元素的配置（id、类、布局、样式等）。- **`UIContainer`** — 在生成最终的 `UIElement` 之前管理元素的子元素、事件和数据绑定的构建器。
-每个构建器函数都遵循相同的两个 lambda 签名：
+
+DSL 围绕两个互补的概念构建：
+
+- **`ElementSpec`** — 保存在构建时应用于元素的配置（id、类、布局、样式等）。
+- **`UIContainer`** — 在生成最终 `UIElement` 之前管理元素子项、事件和数据绑定的构建器。
+
+每个构建器函数都遵循相同的双 lambda 签名：
+
 ```kotlin
 element(
-    /* spec block: configure the element */
+    /* spec block: 配置元素 */
     { layout = { size(200.px) } }
 ) {
-    /* init block: add children, events, bindings */
+    /* init block: 添加子项、事件、绑定 */
     label({ text("Hello!") })
 }
 ```
 
-**规格块**是可选的。对于不需要配置的元素，您可以完全省略它：
+**spec block** 是可选的。对于不需要配置的元素，可以完全省略：
+
 ```kotlin
 element {
     button({ text("Click") })
@@ -26,17 +35,19 @@ element {
 
 ---
 
-## 元素规格
-规格块是`ElementSpec`接收器。它公开了以下属性：
-| Property | Type | Description |
+## Element Spec
+
+spec block 是一个 `ElementSpec` 接收器。它公开以下属性：
+
+| 属性 | 类型 | 描述 |
 | -------- | ---- | ----------- |
-| `id` | `String?` | Sets the element ID used by selectors and queries. |
-| `focusable` | `Boolean?` | Whether the element can receive keyboard focus. |
-| `visible` | `Boolean?` | Whether the element is rendered. |
-| `active` | `Boolean?` | Whether the element participates in events and ticks. |
-| `layout` | `TaffyLayoutStyleDsl.() -> Unit` | Layout configuration block. |
-| `style` | `BasicStyle.() -> Unit` | Visual style configuration block. |
-| `cls` | `ClassPatchDsl.() -> Unit` | Class add/remove block. |
+| `id` | `String?` | 设置选择器和查询使用的元素 ID。 |
+| `focusable` | `Boolean?` | 元素是否可以接收键盘焦点。 |
+| `visible` | `Boolean?` | 元素是否被渲染。 |
+| `active` | `Boolean?` | 元素是否参与事件和 tick。 |
+| `layout` | `TaffyLayoutStyleDsl.() -> Unit` | 布局配置块。 |
+| `style` | `BasicStyle.() -> Unit` | 视觉样式配置块。 |
+| `cls` | `ClassPatchDsl.() -> Unit` | 类添加/移除块。 |
 
 ```kotlin
 element({
@@ -65,8 +76,10 @@ element({
 }) { }
 ```
 
-### `layout`块
-使用`TaffyLayoutStyleDsl`。阅读 [Layout](preliminary/layout.md){ data-preview } 以获取所有可用属性。常见示例：
+### `layout` 块
+
+使用 `TaffyLayoutStyleDsl`。阅读 [布局](preliminary/layout.md){ data-preview } 了解所有可用属性。常见示例：
+
 ```kotlin
 layout = {
     size(200.px)           // width and height
@@ -88,10 +101,14 @@ layout = {
 }
 ```
 
-### `style`块
-直接使用`BasicStyle`。阅读 [UIElement Styles](components/element.md#styles){ data-preview } 以获取所有可用属性。
-### `cls`块
-将`ClassPatchDsl` 与`+` 和`-` 运算符一起使用：
+### `style` 块
+
+直接使用 `BasicStyle`。阅读 [UIElement 样式](components/element.md#styles){ data-preview } 了解所有可用属性。
+
+### `cls` 块
+
+使用带有 `+` 和 `-` 运算符的 `ClassPatchDsl`：
+
 ```kotlin
 cls = {
     +"selected"     // element.addClass("selected")
@@ -101,8 +118,10 @@ cls = {
 
 ---
 
-## 培养孩子
-第二个 lambda 是 `UIContainer` 接收器。您可以通过调用子构建器内部的 DSL 函数来添加子构建器：
+## 构建子元素
+
+第二个 lambda 是一个 `UIContainer` 接收器。你可以通过在其中调用 DSL 函数来添加子构建器：
+
 ```kotlin
 element({ layout = { size(200.px); gap { all(4.px) } } }) {
     label({ text("Title") })
@@ -116,10 +135,15 @@ element({ layout = { size(200.px); gap { all(4.px) } } }) {
 }
 ```
 
-### `row {}` 和`column {}`
-预先配置弹性布局的速记构建器：
-- `row {}` — 设置`flexDirection = ROW`、`alignItems = FLEX_START`- `column {}` — 设置`alignItems = FLEX_START`（默认列方向）
-两者都接受可选规范：
+### `row {}` 和 `column {}`
+
+预配置 flex 布局的简写构建器：
+
+- `row {}` — 设置 `flexDirection = ROW`、`alignItems = FLEX_START`
+- `column {}` — 设置 `alignItems = FLEX_START`（默认列方向）
+
+两者都接受可选的 spec：
+
 ```kotlin
 row({ layout = { gap { all(4.px) }; padding { all(8.px) } } }) {
     fluidSlot()
@@ -134,8 +158,10 @@ column {
 
 ---
 
-## 活动
-在 `events {}` 或 `events(capture = true) {}` 块中注册事件监听器。 lambda 接收 `EventsDsl` 作为 `this` 以及正在构建的元素作为第一个参数。
+## 事件
+
+在 `events {}` 或 `events(capture = true) {}` 块中注册事件监听器。lambda 接收 `EventsDsl` 作为 `this`，正在构建的元素作为第一个参数。
+
 ```kotlin
 element({ layout = { size(50.px) } }) {
     events { e ->
@@ -159,11 +185,15 @@ element({ layout = { size(50.px) } }) {
 }
 ```
 
-!!!笔记 ””`events { e -> ... }` 中的`e` 参数是正在构建的`UIElement`。当您需要对事件处理程序内的元素的引用（例如，调用`e.animation()`）时，它非常有用。
+!!! note ""
+    `events { e -> ... }` 中的 `e` 参数是正在构建的 `UIElement`。当你需要在事件处理器中引用元素时很有用（例如，调用 `e.animation()`）。
+
 ---
 
-## 服务器事件
-`serverEvents {}` 的工作方式与 `events {}` 完全相同，但侦听器在 **服务器** 上执行：
+## 服务端事件
+
+`serverEvents {}` 的工作方式与 `events {}` 完全相同，但监听器在**服务端**执行：
+
 ```kotlin
 button {
     serverEvents {
@@ -175,7 +205,8 @@ button {
 }
 ```
 
-还支持捕获阶段：
+也支持捕获阶段：
+
 ```kotlin
 serverEvents(capture = true) {
     UIEvents.CLICK on { it.stopPropagation() }
@@ -185,9 +216,14 @@ serverEvents(capture = true) {
 ---
 
 ## 数据绑定
-绑定在服务器和客户端之间同步值。它们设置在 `UIContainer` 上的 **init 块** 内。
-!!!笔记 ””绑定需要堆栈的两侧。它们仅在`@LDLRegister`（服务器端）菜单上下文中有意义，而不是仅在`@LDLRegisterClient` 屏幕中有意义。
-### `bind` — 双向
+
+绑定在服务端和客户端之间同步值。它们在 `UIContainer` 的 **init block** 中设置。
+
+!!! note ""
+    绑定需要双端支持。它们只在 `@LDLRegister`（服务端）菜单上下文中有意义，而不是仅 `@LDLRegisterClient` 的屏幕。
+
+### `bind` — 双向绑定
+
 ```kotlin
 // Bind a mutable Kotlin property reference (most concise)
 switch { bind(::myBool) }
@@ -198,7 +234,8 @@ scrollerHorizontal({ layout = { width(100.pct) } }) { bind(::myFloat) }
 switch { bind({ myData.enabled }, { myData.enabled = it }) }
 ```
 
-### `bindS2C` — 服务器 → 客户端（只读）
+### `bindS2C` — 服务端 → 客户端（只读）
+
 ```kotlin
 label {
     bindS2C({
@@ -208,15 +245,18 @@ label {
 }
 ```
 
-### `bindC2S` — 客户端 → 服务器（只写）
+### `bindC2S` — 客户端 → 服务端（只写）
+
 ```kotlin
 textField {
     bindC2S({ newValue -> serverData = newValue })
 }
 ```
 
-### `dataSource` 和`observer`
-直接在数据感知组件上使用较低级别的帮助程序。这些是客户端，并且**不**通过网络同步：
+### `dataSource` 和 `observer`
+
+直接用于数据感知组件的底层辅助函数。这些是客户端的，**不会**跨网络同步：
+
 ```kotlin
 var localValue = "hello"
 label { dataSource({ Component.literal(localValue) }) }
@@ -229,7 +269,9 @@ textField {
 ---
 
 ## RPC 事件
-对于带有类型化参数的显式客户端→服务器调用，请在元素引用上使用`rpcEvent`扩展（`UIContainer`上的`element`属性）：
+
+对于带有类型参数的显式客户端 → 服务端调用，在元素引用（`UIContainer` 的 `element` 属性）上使用 `rpcEvent` 扩展：
+
 ```kotlin
 button {
     // Declare the RPC: the lambda runs on the server when triggered
@@ -246,10 +288,14 @@ button {
 
 ---
 
-## 直接API访问
-对于规范或 init 块未涵盖的方法，请直接访问元素：
-###`api {}`
-调用底层 `UIElement` 上的块。在构建阶段立即运行：
+## 直接 API 访问
+
+对于 spec 或 init block 未涵盖的方法，可以直接访问元素：
+
+### `api {}`
+
+在底层 `UIElement` 上调用一个块。在构建阶段立即运行：
+
 ```kotlin
 element({}) {
     api {
@@ -260,8 +306,10 @@ element({}) {
 }
 ```
 
-###`onBuild {}`
-在元素完全构建后调用。当您需要延迟设置的最终元素参考时使用它：
+### `onBuild {}`
+
+在元素完全构建后调用。当你需要最终元素引用进行延迟设置时使用：
+
 ```kotlin
 element({}) {
     onBuild { builtElement ->
@@ -271,7 +319,9 @@ element({}) {
 ```
 
 ### 内联扩展函数
-在`.build()`之后，返回的`UIElement`可以与扩展函数链接：
+
+在 `.build()` 之后，返回的 `UIElement` 可以链式调用扩展函数：
+
 ```kotlin
 element({}) { }
     .layoutDsl { width(100.px) }
@@ -282,8 +332,13 @@ element({}) { }
 ---
 
 ## 完整示例：客户端 UI
-具有动画、数据绑定组件和项目/流体槽的仅限客户端的 UI。
-<div style="text-align: center;"><!-- VIDEO: TestDSL --></div>
+
+一个包含动画、数据绑定组件和物品/流体槽的纯客户端 UI。
+
+<div style="text-align: center;">
+    <!-- VIDEO: TestDSL -->
+</div>
+
 ```kotlin
 @LDLRegisterClient(name = "dsl", registry = "ldlib2:screen_test")
 class TestDSL : IScreenTest {
@@ -352,8 +407,13 @@ class TestDSL : IScreenTest {
 ---
 
 ## 完整示例：同步菜单 UI
-具有双向数据绑定、服务器端事件和 RPC 的服务器同步菜单。
-<div style="text-align: center;"><!-- VIDEO: TestMenuDSL --></div>
+
+一个带有双向数据绑定、服务端事件和 RPC 的服务端同步菜单。
+
+<div style="text-align: center;">
+    <!-- VIDEO: TestMenuDSL -->
+</div>
+
 ```kotlin
 @LDLRegister(name = "dsl_sync", registry = "ldlib2:menu_test")
 class TestMenuDSL : IMenuTest {

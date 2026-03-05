@@ -1,12 +1,20 @@
-# 颜色矩形纹理
+﻿# ColorRectTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`ColorRectTexture` 绘制一个实心 ARGB 填充矩形。它是最简单的纹理类型——没有圆角，没有边框，只有平面颜色。
-注册表名称：`color_rect_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`ColorRectTexture` 绘制一个纯色 ARGB 填充的矩形。它是最简单的纹理类型——没有圆角、没有边框，只有一个纯色填充。
+
+注册名：`color_rect_texture`
+
+!!! note ""
+    继承自 `TransformTexture`——支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Opaque dark background
     IGuiTexture bg = new ColorRectTexture(0xFF1A1A1A);
@@ -18,13 +26,15 @@
     IGuiTexture red = new ColorRectTexture(java.awt.Color.RED);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val bg = ColorRectTexture(0xFF1A1A1A.toInt())
     val overlay = ColorRectTexture(0x80FFFFFF.toInt())
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let bg = new ColorRectTexture(0xFF1A1A1A);
     let overlay = new ColorRectTexture(0x80FFFFFF);
@@ -33,6 +43,7 @@
 ---
 
 ## LSS
+
 ```css
 /* Hex color literal — automatically creates a ColorRectTexture */
 background: #1A1A1AFF;   /* #AARRGGBB */
@@ -48,15 +59,17 @@ background: color(#80FFFFFF);
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `color` | `int` | The packed ARGB colour value. |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `color` | `int` | 打包的 ARGB 颜色值。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setColor(int)` | `ColorRectTexture` | Sets the packed ARGB colour. |
-| `copy()` | `ColorRectTexture` | Returns a deep copy. |
-| `interpolate(IGuiTexture, float)` | `IGuiTexture` | Blends towards another `ColorRectTexture` using OkLab colour space. |
+## 方法
+
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
+| `setColor(int)` | `ColorRectTexture` | 设置打包的 ARGB 颜色。 |
+| `copy()` | `ColorRectTexture` | 返回深拷贝。 |
+| `interpolate(IGuiTexture, float)` | `IGuiTexture` | 使用 OkLab 色彩空间向另一个 `ColorRectTexture` 混合。 |

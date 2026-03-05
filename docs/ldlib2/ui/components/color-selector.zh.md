@@ -1,12 +1,24 @@
-# 颜色选择器
+# ColorSelector
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`ColorSelector` 是一个全功能的 HSB（色调-饱和度-亮度）颜色选择器。它扩展`BindableUIElement<Integer>`，其值是选定的颜色（作为压缩的 ARGB 整数）。它包括：
-- 可以在色调、饱和度和亮度轴之间切换的 HSB 渐变拾取表面。- 色相/Alpha 滑块。- 用于直接输入的 RGB 和十六进制文本字段。- 颜色预览样本。- 剪贴板复制支持。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`ColorSelector` 是一个功能完善的 HSB（色相–饱和度–亮度）颜色选择器。它继承自 `BindableUIElement<Integer>`，其值为所选颜色的 ARGB 压缩整数。包含以下功能：
+
+- HSB 渐变拾色面板，可在色相、饱和度和亮度轴之间切换。
+- 色相/透明度滑块。
+- RGB 和十六进制文本输入框，支持直接输入。
+- 颜色预览色块。
+- 剪贴板复制支持。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var picker = new ColorSelector();
     picker.setValue(0xFF4080FF, false); // initial ARGB color
@@ -14,7 +26,8 @@
     parent.addChild(picker);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     colorSelector({
         color(0xFF4080FF.toInt())
@@ -22,7 +35,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let picker = new ColorSelector();
     picker.setValue(0xFF4080FF, false);
@@ -33,21 +47,25 @@
 ---
 
 ## 内部结构
-| Field | Description |
+
+| 字段 | 描述 |
 | ----- | ----------- |
-| `pickerContainer` | Container holding the main HSB gradient surface. |
-| `colorPreview` | Swatch showing the currently selected color. |
-| `colorSlider` | Slider for the primary HSB axis (hue, saturation, or brightness). |
-| `alphaSlider` | Slider for the alpha (transparency) channel. |
-| `hsbButton` | Button that cycles between H, S, and B pick modes. |
-| `textContainer` | Container for the RGB and hex text field inputs. |
-| `hexConfigurator` | Text input for entering hex color codes. |
+| `pickerContainer` | 承载主 HSB 渐变面板的容器。 |
+| `colorPreview` | 显示当前所选颜色的预览色块。 |
+| `colorSlider` | 主 HSB 轴（色相、饱和度或亮度）的滑块。 |
+| `alphaSlider` | 透明度通道滑块。 |
+| `hsbButton` | 在 H、S、B 拾色模式之间循环切换的按钮。 |
+| `textContainer` | RGB 和十六进制文本输入框的容器。 |
+| `hexConfigurator` | 用于输入十六进制颜色代码的文本输入框。 |
 
 ---
 
 ## 值绑定
-`ColorSelector` 扩展`BindableUIElement<Integer>`：
-===“Java”
+
+`ColorSelector` 继承自 `BindableUIElement<Integer>`：
+
+=== "Java"
+
     ```java
     picker.bind(DataBindingBuilder.intVal(
         () -> config.getColor(),
@@ -55,25 +73,28 @@
     ).build());
     ```
 
-有关完整详细信息，请参阅[Data Bindings](../data_bindings.md){ data-preview }。
+详见 [数据绑定](../data_bindings.md){ data-preview }。
+
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问修饰 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `pickerContainer` | `UIElement` | `public final` | HSB gradient canvas. |
-| `colorPreview` | `UIElement` | `public final` | Color preview swatch. |
-| `colorSlider` | `UIElement` | `public final` | Primary HSB axis slider. |
-| `alphaSlider` | `UIElement` | `public final` | Alpha channel slider. |
-| `hsbButton` | `Button` | `public final` | Cycles the active HSB pick mode (H → S → B → H). |
-| `textContainer` | `UIElement` | `public final` | Container for text inputs. |
-| `hexConfigurator` | `StringConfigurator` | `public final` | Hex color input field. |
+| `pickerContainer` | `UIElement` | `public final` | HSB 渐变画布。 |
+| `colorPreview` | `UIElement` | `public final` | 颜色预览色块。 |
+| `colorSlider` | `UIElement` | `public final` | 主 HSB 轴滑块。 |
+| `alphaSlider` | `UIElement` | `public final` | 透明度通道滑块。 |
+| `hsbButton` | `Button` | `public final` | 循环切换 HSB 拾色模式（H → S → B → H）。 |
+| `textContainer` | `UIElement` | `public final` | 文本输入框容器。 |
+| `hexConfigurator` | `StringConfigurator` | `public final` | 十六进制颜色输入框。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setValue(Integer, boolean)` | `ColorSelector` | Sets the ARGB color value; second param controls notification. |
-| `getValue()` | `Integer` | Returns the current ARGB color. |
-| `registerValueListener(Consumer<Integer>)` | `void` | Registers a listener called whenever the color changes. |
+| `setValue(Integer, boolean)` | `ColorSelector` | 设置 ARGB 颜色值；第二个参数控制是否触发通知。 |
+| `getValue()` | `Integer` | 返回当前 ARGB 颜色值。 |
+| `registerValueListener(Consumer<Integer>)` | `void` | 注册颜色变化时调用的监听器。 |

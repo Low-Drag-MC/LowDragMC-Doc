@@ -1,12 +1,21 @@
-# SDF矩形纹理
+﻿# SDFRectTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`SDFRectTexture` 使用 SDF（有符号距离场）GPU 着色器绘制圆角矩形。它可以产生任何尺寸的锐利、抗锯齿边缘。支持每个角的半径、可选的描边边框和平滑的 CSS 过渡插值。
-注册表名称：`sdf_rect_texture`LSS 函数：`rect(...)` / `sdf(...)`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`SDFRectTexture` 使用 SDF（Signed Distance Field）GPU 着色器绘制圆角矩形。它能在任意尺寸下产生清晰、抗锯齿的边缘。支持逐角半径设置、可选的描边边框，以及平滑的 CSS 过渡插值。
+
+注册名称: `sdf_rect_texture`  
+LSS 函数: `rect(...)` / `sdf(...)`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 使用方法
+
+=== "Java"
+
     ```java
     // Filled rounded rect
     IGuiTexture panel = new SDFRectTexture()
@@ -24,7 +33,8 @@
     IGuiTexture simple = SDFRectTexture.of(0xFF3A3A3A);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val panel = SDFRectTexture()
         .setColor(0xFF2A2A2A.toInt())
@@ -36,7 +46,8 @@
         .setBorderColor(0xFFFFFFFF.toInt())
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let panel = new SDFRectTexture()
         .setColor(0xFF2A2A2A)
@@ -51,6 +62,7 @@
 ---
 
 ## LSS
+
 ```css
 /* rect(fillColor) */
 background: rect(#2A2A2A);
@@ -68,23 +80,25 @@ background: rect(#2A2A2A, 8 4 8 4);
 ---
 
 ## 字段
-| Name | Type | Description |
+
+| 名称 | 类型 | 描述 |
 | ---- | ---- | ----------- |
-| `color` | `int` | Fill colour (ARGB). Default: `0xFFFFFFFF`. |
-| `borderColor` | `int` | Stroke colour (ARGB). Default: `0xFF000000`. |
-| `radius` | `Vector4f` | Per-corner radii: `x` = bottom-left, `y` = bottom-right, `z` = top-right, `w` = top-left. |
-| `stroke` | `float` | Border stroke width in pixels. `0` disables the border. |
+| `color` | `int` | 填充颜色（ARGB）。默认值: `0xFFFFFFFF`。 |
+| `borderColor` | `int` | 描边颜色（ARGB）。默认值: `0xFF000000`。 |
+| `radius` | `Vector4f` | 逐角半径: `x` = 左下, `y` = 右下, `z` = 右上, `w` = 左上。 |
+| `stroke` | `float` | 边框描边宽度（像素）。`0` 表示禁用边框。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回类型 | 描述 |
 | ------ | ------- | ----------- |
-| `setColor(int)` | `SDFRectTexture` | Sets the fill colour. |
-| `setBorderColor(int)` | `SDFRectTexture` | Sets the stroke colour. |
-| `setRadius(float)` | `SDFRectTexture` | Sets all four corner radii to the same value. |
-| `setRadius(Vector4f)` | `SDFRectTexture` | Sets per-corner radii. |
-| `setStroke(float)` | `SDFRectTexture` | Sets the stroke width. |
-| `copy()` | `SDFRectTexture` | Returns a deep copy. |
-| `interpolate(IGuiTexture, float)` | `IGuiTexture` | Blends all properties toward another `SDFRectTexture`. |
-| `SDFRectTexture.of(int)` | `SDFRectTexture` | Static factory — creates a rect with the given fill colour. |
+| `setColor(int)` | `SDFRectTexture` | 设置填充颜色。 |
+| `setBorderColor(int)` | `SDFRectTexture` | 设置描边颜色。 |
+| `setRadius(float)` | `SDFRectTexture` | 将四个角半径设置为相同值。 |
+| `setRadius(Vector4f)` | `SDFRectTexture` | 设置逐角半径。 |
+| `setStroke(float)` | `SDFRectTexture` | 设置描边宽度。 |
+| `copy()` | `SDFRectTexture` | 返回深拷贝。 |
+| `interpolate(IGuiTexture, float)` | `IGuiTexture` | 将所有属性向另一个 `SDFRectTexture` 混合插值。 |
+| `SDFRectTexture.of(int)` | `SDFRectTexture` | 静态工厂方法 — 使用指定填充颜色创建矩形。 |

@@ -1,12 +1,20 @@
-# 切换
+# Toggle
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`Toggle` 是一个可检查的 UI 组件 - 一个带有标记图标和可选标签的方形按钮。单击可切换其 `on/off` 状态。可以将多个切换链接到 [`ToggleGroup`](#toggle-group) 以进行独占（类似单选按钮）选择。
-在内部，`Toggle` 是一个水平弹性行，包含 **`Button`** （内部带有标记图标的可点击框）和 **`Label`** （文本标签）。两者都是**内部**孩子。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`Toggle` 是一个可勾选的 UI 组件 — 一个带有标记图标和可选标签的方形按钮。点击可切换其 `开/关` 状态。多个 Toggle 可以链接到一个 [`ToggleGroup`](#toggle-group) 中实现互斥选择（类似单选按钮）。
+
+在内部，`Toggle` 是一个水平 flex 行，包含一个 **`Button`**（带有标记图标的可点击方框）和一个 **`Label`**（文本标签）。两者都是 **internal** 子元素。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var toggle = new Toggle();
     toggle.setText("my.toggle.label", true); // translated
@@ -17,7 +25,8 @@
     parent.addChild(toggle);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     toggle({
         text("my.toggle.label")
@@ -28,7 +37,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let toggle = new Toggle();
     toggle.setText("my.toggle.label", true);
@@ -40,6 +50,7 @@
 ---
 
 ## XML
+
 ```xml
 <!-- Simple toggle with a translated label -->
 <toggle text="my.toggle.label"/>
@@ -61,21 +72,24 @@
 </toggle>
 ```
 
-| XML Attribute | Type | Description |
+| XML 属性 | 类型 | 描述 |
 | ------------- | ---- | ----------- |
-| `text` | `string` | Sets the label text. Pass an empty string to hide the label. |
-| `is-on` | `boolean` | Initial on/off state. Default: `false`. |
+| `text` | `string` | 设置标签文本。传入空字符串可隐藏标签。 |
+| `is-on` | `boolean` | 初始开/关状态。默认：`false`。 |
 
 ---
 
 ## 内部结构
-Toggle 包含两个内部元素：
-| Index | Field | Type | CSS class | Description |
-| ----- | ----- | ---- | --------- | ----------- |
-| `0` | `toggleButton` | `Button` | `.__toggle_button__` | The clickable square box (contains the mark icon). |
-| `1` | `toggleLabel` | `Label` | `.__toggle_label__` | The text label to the right of the box. |
 
-**标记图标**位于`toggleButton`内部，可以通过CSS定位：
+Toggle 包含两个 internal 元素：
+
+| 索引 | 字段 | 类型 | CSS 类 | 描述 |
+| ----- | ----- | ---- | --------- | ----------- |
+| `0` | `toggleButton` | `Button` | `.__toggle_button__` | 可点击的方形框（包含标记图标）。 |
+| `1` | `toggleLabel` | `Label` | `.__toggle_label__` | 方框右侧的文本标签。 |
+
+**标记图标** 位于 `toggleButton` 内部，可通过 CSS 进行样式设置：
+
 ```css
 /* Style the mark / unmark icon */
 .__toggle_mark-icon__ {
@@ -91,12 +105,19 @@ toggle > label.__toggle_label__ {
 
 ---
 
-## 切换样式
-`ToggleStyle` 控制框按钮纹理和标记/取消标记图标。
-!!!信息“”#### <p style="font-size: 1rem;">基础背景/悬停背景</p>
-空闲和悬停状态下内部`Button`的纹理（委托给`ButtonStyle`）。
-默认值：`Sprites.RECT_DARK` / `Sprites.RECT_DARK` + 白色边框
-===“Java”
+## Toggle 样式
+
+`ToggleStyle` 控制方框按钮的纹理以及标记/未标记图标。
+
+!!! info ""
+    #### <p style="font-size: 1rem;">base-background / hover-background</p>
+
+    内部 `Button` 在空闲和悬停状态下的纹理（委托给 `ButtonStyle`）。
+
+    默认：`Sprites.RECT_DARK` / `Sprites.RECT_DARK` + 白色边框
+
+    === "Java"
+
         ```java
         toggle.toggleStyle(style -> {
             style.baseTexture(myIdleTexture);   // sets both base & pressed
@@ -104,7 +125,8 @@ toggle > label.__toggle_label__ {
         });
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         toggle({ toggleStyle = {
             baseTexture(myIdleTexture)
@@ -112,7 +134,8 @@ toggle > label.__toggle_label__ {
         } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         toggle > button.__toggle_button__ {
             base-background: rect(#4a4a4a, 2);
@@ -120,40 +143,54 @@ toggle > label.__toggle_label__ {
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">unmark-background</p>
-当开关处于 **关闭** 状态时，框中显示的图标。
-默认值：无（透明）
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">unmark-background</p>
+
+    当 Toggle 处于 **关闭** 状态时，方框内显示的图标。
+
+    默认：无（透明）
+
+    === "Java"
+
         ```java
         toggle.toggleStyle(style -> style.unmarkTexture(myUncheckedIcon));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         toggle({ toggleStyle = { unmarkTexture(myUncheckedIcon) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         toggle {
             unmark-background: sprite("mymod:textures/gui/unchecked.png");
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">标记背景</p>
-当开关处于**打开**状态时，框中显示的图标。
-默认值：`Icons.CHECK_SPRITE`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">mark-background</p>
+
+    当 Toggle 处于 **开启** 状态时，方框内显示的图标。
+
+    默认：`Icons.CHECK_SPRITE`
+
+    === "Java"
+
         ```java
         toggle.toggleStyle(style -> style.markTexture(myCheckedIcon));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         toggle({ toggleStyle = { markTexture(myCheckedIcon) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         toggle {
             mark-background: sprite("mymod:textures/gui/checked.png");
@@ -162,9 +199,12 @@ toggle > label.__toggle_label__ {
 
 ---
 
-## 切换组
-`ToggleGroup` 链接多个`Toggle` 实例，以便一次只能有一个实例处于活动状态（如单选按钮组）。当`allowEmpty` 为`false`（默认）时，至少有一个切换始终处于活动状态。
-===“Java”
+## Toggle Group
+
+`ToggleGroup` 将多个 `Toggle` 实例链接在一起，使得同一时间只能有一个处于激活状态（类似单选按钮组）。当 `allowEmpty` 为 `false`（默认值）时，始终至少有一个 Toggle 处于激活状态。
+
+=== "Java"
+
     ```java
     var group = new Toggle.ToggleGroup();
     // group.setAllowEmpty(true); // allow all toggles to be off
@@ -176,7 +216,8 @@ toggle > label.__toggle_label__ {
     group.getCurrentToggle(); // the currently active Toggle (or null if allowEmpty)
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val group = Toggle.ToggleGroup()
 
@@ -185,20 +226,27 @@ toggle > label.__toggle_label__ {
     val t3 = toggle({ text("Option C"); toggleGroup = group }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let group = new Toggle.ToggleGroup();
     let t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
     let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
     ```
 
-!!!提示 ””使用 [`ToggleGroupElement`](toggle-group.md){ data-preview } 通过 XML/编辑器自动管理组 - 它会在添加子项时注册它们，并在删除时取消注册它们。
+!!! tip ""
+    使用 [`ToggleGroupElement`](toggle-group.md){ data-preview } 可通过 XML / 编辑器自动管理组 — 它会在子元素添加时自动注册，移除时自动取消注册。
+
 ---
 
-＃＃ 文本
+## 文本
+
 ### `setText` / `noText` / `enableText`
-控制切换框右侧显示的标签。
-===“Java”
+
+控制 Toggle 方框右侧显示的标签。
+
+=== "Java"
+
     ```java
     toggle.setText("my.translation.key", true);  // translated
     toggle.setText("Literal label", false);        // literal
@@ -206,7 +254,8 @@ toggle > label.__toggle_label__ {
     toggle.enableText();                           // show it again
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     toggle({
         text("my.translation.key")   // translated (default)
@@ -214,7 +263,8 @@ toggle > label.__toggle_label__ {
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     toggle.setText(Component.literal("Literal label"));
     toggle.setText("my.key", true);
@@ -225,8 +275,11 @@ toggle > label.__toggle_label__ {
 ---
 
 ## 值绑定
-`Toggle` 扩展了`BindableUIElement<Boolean>`，因此它与数据绑定系统集成：
-===“Java”
+
+`Toggle` 扩展了 `BindableUIElement<Boolean>`，因此可以与数据绑定系统集成：
+
+=== "Java"
+
     ```java
     toggle.bind(DataBindingBuilder.bool(
         () -> myState.isEnabled(),
@@ -234,32 +287,35 @@ toggle > label.__toggle_label__ {
     ).build());
     ```
 
-有关完整详细信息，请参阅[Data Bindings](../data_bindings.md){ data-preview }。
+详情请参阅 [数据绑定](../data_bindings.md){ data-preview }。
+
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `toggleButton` | `Button` | `public final` | The inner clickable box. |
-| `markIcon` | `UIElement` | `public final` | The icon element inside the box. |
-| `toggleLabel` | `Label` | `public final` | The label element to the right. |
-| `toggleStyle` | `ToggleStyle` | `private` (getter) | Current toggle style. |
-| `isOn` | `boolean` | `private` (getter) | Current on/off state. |
-| `toggleGroup` | `ToggleGroup` | `private` (getter/nullable) | The group this toggle belongs to. |
+| `toggleButton` | `Button` | `public final` | 内部可点击方框。 |
+| `markIcon` | `UIElement` | `public final` | 方框内的图标元素。 |
+| `toggleLabel` | `Label` | `public final` | 右侧的标签元素。 |
+| `toggleStyle` | `ToggleStyle` | `private` (getter) | 当前 Toggle 样式。 |
+| `isOn` | `boolean` | `private` (getter) | 当前开/关状态。 |
+| `toggleGroup` | `ToggleGroup` | `private` (getter/nullable) | 此 Toggle 所属的组。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setOn(boolean)` | `Toggle` | Sets the on/off state and notifies listeners. |
-| `setToggleGroup(ToggleGroup)` | `Toggle` | Joins a `ToggleGroup`. Pass `null` to leave the group. |
-| `setOnToggleChanged(BooleanConsumer)` | `Toggle` | Registers a listener for state changes. |
-| `setText(String, boolean)` | `Toggle` | Sets label text. `true` = translatable. |
-| `noText()` | `Toggle` | Hides the label. |
-| `enableText()` | `Toggle` | Shows the label. |
-| `toggleStyle(Consumer<ToggleStyle>)` | `Toggle` | Configures `ToggleStyle` fluently. |
-| `toggleButton(Consumer<Button>)` | `Toggle` | Configures the inner `Button` directly. |
-| `toggleLabel(Consumer<Label>)` | `Toggle` | Configures the label directly. |
-| `markIcon(Consumer<UIElement>)` | `Toggle` | Configures the mark icon element directly. |
-| `getValue()` | `Boolean` | Returns the current on/off state. |
+| `setOn(boolean)` | `Toggle` | 设置开/关状态并通知监听器。 |
+| `setToggleGroup(ToggleGroup)` | `Toggle` | 加入一个 `ToggleGroup`。传入 `null` 可离开组。 |
+| `setOnToggleChanged(BooleanConsumer)` | `Toggle` | 注册状态变化监听器。 |
+| `setText(String, boolean)` | `Toggle` | 设置标签文本。`true` = 可翻译。 |
+| `noText()` | `Toggle` | 隐藏标签。 |
+| `enableText()` | `Toggle` | 显示标签。 |
+| `toggleStyle(Consumer<ToggleStyle>)` | `Toggle` | 流式配置 `ToggleStyle`。 |
+| `toggleButton(Consumer<Button>)` | `Toggle` | 直接配置内部 `Button`。 |
+| `toggleLabel(Consumer<Label>)` | `Toggle` | 直接配置标签。 |
+| `markIcon(Consumer<UIElement>)` | `Toggle` | 直接配置标记图标元素。 |
+| `getValue()` | `Boolean` | 返回当前开/关状态。 |

@@ -1,12 +1,20 @@
-# 标签
+# Label
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`Label` 通过 **数据绑定** 支持扩展了 [`TextElement`](text.md){ data-preview }。它实现了`IBindable<Component>`和`IDataConsumer<Component>`，因此它的文本可以由服务器到客户端或客户端数据提供程序驱动，只要值发生变化，该数据提供程序就会自动更新显示的文本。
-默认大小：从布局继承宽度；高度默认为**9 px**（默认字体大小一行）。
-!!!笔记 ””[TextElement](text.md){ data-preview } （文本样式、换行、对齐）和 [UIElement](../element.md){ data-preview } （布局、事件等）上记录的所有内容也适用于此处。
+
+`Label` 继承自 [`TextElement`](text.md){ data-preview }，并支持**数据绑定**功能。它实现了 `IBindable<Component>` 和 `IDataConsumer<Component>` 接口，因此其文本可以由服务端到客户端或客户端侧的数据提供者驱动，当值发生变化时自动更新显示的文本。
+
+默认尺寸：宽度从布局继承；高度默认为 **9 px**（默认字体大小下的一行高度）。
+
+!!! note ""
+    [TextElement](text.md){ data-preview } 中记录的所有内容（文本样式、换行、对齐）以及 [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、事件等）在此处同样适用。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Static text
     var label = new Label();
@@ -20,7 +28,8 @@
     parent.addChild(label);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     // Static label
     label({
@@ -35,7 +44,8 @@
     lbl.bind(DataBindingBuilder.componentS2C { Component.literal("Value: $value") }.build())
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let label = new Label();
     label.setText(Component.literal("Hello"));
@@ -50,6 +60,7 @@
 ---
 
 ## XML
+
 ```xml
 <!-- Literal text in element content -->
 <label>Hello World</label>
@@ -58,12 +69,16 @@
 <label><translate key="my.translation.key"/></label>
 ```
 
-标签接受与 `TextElement` 相同的文本内容语法 - 有关详细信息，请参阅[TextElement § XML](text.md#xml)。
+Label 接受与 `TextElement` 相同的文本内容语法——详见 [TextElement § XML](text.md#xml)。
+
 ---
 
 ## 数据绑定
-`Label`可以订阅一个或多个数据提供者。每个订阅都保持活动状态，直到 `unbindDataSource` 被调用或元素被删除。
-===“Java”
+
+`Label` 可以订阅一个或多个数据提供者。每个订阅会一直保持活跃，直到调用 `unbindDataSource` 或元素被移除。
+
+=== "Java"
+
     ```java
     // Server-to-client binding: updates on each server tick
     var binding = DataBindingBuilder.componentS2C(() ->
@@ -76,18 +91,23 @@
     label.unbindDataSource(binding);
     ```
 
-请参阅 [Data Bindings](../data_bindings.md){ data-preview } 了解完整的绑定 API。
+完整的绑定 API 请参阅 [数据绑定](../data_bindings.md){ data-preview }。
+
 ---
 
 ## 字段
-> 继承[TextElement § Fields](text.md#fields){ data-preview } 中的所有字段。
+
+> 继承自 [TextElement § 字段](text.md#fields){ data-preview } 的所有字段。
+
 ---
 
-＃＃ 方法
-> 继承[TextElement § Methods](text.md#methods){ data-preview } 的所有方法。
-| Method | Returns | Description |
+## 方法
+
+> 继承自 [TextElement § 方法](text.md#methods){ data-preview } 的所有方法。
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `bindDataSource(IDataProvider<Component>)` | `Label` | Subscribes to a data provider; text updates automatically. |
-| `unbindDataSource(IDataProvider<Component>)` | `Label` | Unsubscribes from a previously bound data provider. |
-| `setValue(Component)` | `Label` | Directly sets the text (same as `setText(Component)`). |
-| `getValue()` | `Component` | Returns the current text `Component`. |
+| `bindDataSource(IDataProvider<Component>)` | `Label` | 订阅数据提供者；文本会自动更新。 |
+| `unbindDataSource(IDataProvider<Component>)` | `Label` | 取消订阅先前绑定的数据提供者。 |
+| `setValue(Component)` | `Label` | 直接设置文本（与 `setText(Component)` 相同）。 |
+| `getValue()` | `Component` | 返回当前文本 `Component`。 |

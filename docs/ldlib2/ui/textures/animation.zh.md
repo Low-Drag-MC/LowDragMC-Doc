@@ -1,20 +1,28 @@
-# 动画纹理
+# AnimationTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`AnimationTexture` 从**均匀的精灵表**播放帧动画 - 排列为大小相等的单元格的 PNG 图像。动画以可配置的速度前进并在`from` 和`to` 帧索引之间循环。
-注册表名称：`animation_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`AnimationTexture` 从**统一精灵表**（一张由等尺寸单元格组成的网格 PNG 图像）播放帧动画。动画以可配置的速度推进，并在 `from` 和 `to` 帧索引之间循环播放。
+
+注册名：`animation_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
-    // 8×8 grid of 8 px cells, frames 32–44, advance every 1 tick
+    // 8×8 网格，每个单元格 8 像素，帧范围 32–44，每 1 tick 推进一帧
     IGuiTexture anim = new AnimationTexture("mymod:textures/gui/particles.png")
         .setCellSize(8)
         .setAnimation(32, 44)   // from frame 32 to frame 44
         .setAnimation(1);       // 1 tick per frame
 
-    // Tinted animation
+    // 带着色的动画
     IGuiTexture tinted = new AnimationTexture("mymod:textures/gui/glow.png")
         .setCellSize(4)
         .setAnimation(0, 15)
@@ -22,7 +30,8 @@
         .setColor(0xFF44AAFF);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val anim = AnimationTexture("mymod:textures/gui/particles.png")
         .setCellSize(8)
@@ -30,7 +39,8 @@
         .setAnimation(1)
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let anim = new AnimationTexture("mymod:textures/gui/particles.png")
         .setCellSize(8)
@@ -40,29 +50,37 @@
 
 ---
 
-## 网格如何工作
-精灵表被分成`cellSize × cellSize` 大小相等的单元，从左到右、从上到下排列。帧`n` 位于`n % cellSize` 列`n / cellSize` 行。
-例如，使用 `cellSize = 8`：- 帧 `0` → 第 0 列，第 0 行- 帧 `7` → 第 7 列，第 0 行- 帧 `8` → 第 0 列，第 1 行
+## 网格工作原理
+
+精灵表被划分为 `cellSize × cellSize` 个等尺寸单元格，从左到右、从上到下排列。第 `n` 帧位于第 `n % cellSize` 列、第 `n / cellSize` 行。
+
+例如，当 `cellSize = 8` 时：
+- 第 `0` 帧 → 第 0 列，第 0 行
+- 第 `7` 帧 → 第 7 列，第 0 行
+- 第 `8` 帧 → 第 0 列，第 1 行
+
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `imageLocation` | `ResourceLocation` | Path to the sprite sheet PNG. |
-| `cellSize` | `int` | Number of cells per row/column. The sheet is `cellSize × cellSize` cells. |
-| `from` | `int` | First frame index (inclusive). |
-| `to` | `int` | Last frame index (inclusive). |
-| `animation` | `int` | Game ticks to display each frame before advancing. |
-| `color` | `int` | ARGB tint colour. Default: `-1` (white). |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `imageLocation` | `ResourceLocation` | 精灵表 PNG 的路径。 |
+| `cellSize` | `int` | 每行/每列的单元格数量。精灵表为 `cellSize × cellSize` 个单元格。 |
+| `from` | `int` | 起始帧索引（包含）。 |
+| `to` | `int` | 结束帧索引（包含）。 |
+| `animation` | `int` | 每帧显示的游戏 tick 数。 |
+| `color` | `int` | ARGB 着色颜色。默认值：`-1`（白色）。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setTexture(String)` | `AnimationTexture` | Changes the sprite sheet image. |
-| `setCellSize(int)` | `AnimationTexture` | Sets the grid dimension (cells per row/column). |
-| `setAnimation(int from, int to)` | `AnimationTexture` | Sets the frame range and resets to the first frame. |
-| `setAnimation(int animation)` | `AnimationTexture` | Sets the ticks-per-frame speed. |
-| `setColor(int)` | `AnimationTexture` | Sets the ARGB tint colour. |
-| `copy()` | `AnimationTexture` | Returns a deep copy. |
+## 方法
+
+| 方法 | 返回类型 | 描述 |
+| ---- | -------- | ---- |
+| `setTexture(String)` | `AnimationTexture` | 更改精灵表图像。 |
+| `setCellSize(int)` | `AnimationTexture` | 设置网格维度（每行/每列的单元格数）。 |
+| `setAnimation(int from, int to)` | `AnimationTexture` | 设置帧范围并重置到第一帧。 |
+| `setAnimation(int animation)` | `AnimationTexture` | 设置每帧的 tick 数（播放速度）。 |
+| `setColor(int)` | `AnimationTexture` | 设置 ARGB 着色颜色。 |
+| `copy()` | `AnimationTexture` | 返回深拷贝。 |

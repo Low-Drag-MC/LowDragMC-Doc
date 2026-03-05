@@ -1,12 +1,20 @@
-# 转变
+# Switch
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`Switch` 是一个动画开/关开关，看起来像一个滑动药丸。切换时，内部指示器会通过平滑的 CSS 过渡从一端滑动到另一端。它没有文本标签 - 如果需要描述性文本，请使用 [`Label`](label.md){ data-preview } 或 [`Toggle`](toggle.md){ data-preview }。
-在内部，`Switch` 是一个水平弯曲行，包含一个 **弯曲间隔** (`placeholder`) 和一个 **方形指示器** (`markIcon`)。切换时，垫片从`flex: 0` 增长到`flex: 1`，将指示器推向远端。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`Switch` 是一个带动画效果的开关切换组件，外观为滑动的药丸形状。切换时，内部指示器会以平滑的 CSS 过渡效果从一端滑动到另一端。它没有文本标签——如果需要描述性文字，请使用 [`Label`](label.md){ data-preview } 或 [`Toggle`](toggle.md){ data-preview }。
+
+从内部结构看，`Switch` 是一个包含**弹性占位符**（`placeholder`）和**方形指示器**（`markIcon`）的水平弹性行。占位符在切换时从 `flex: 0` 增长到 `flex: 1`，将指示器推到另一侧。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var sw = new Switch();
     sw.setOn(true);
@@ -16,7 +24,8 @@
     parent.addChild(sw);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     switch({
         isOn = true
@@ -24,7 +33,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let sw = new Switch();
     sw.setOn(true);
@@ -35,6 +45,7 @@
 ---
 
 ## XML
+
 ```xml
 <!-- Default off switch -->
 <switch/>
@@ -43,97 +54,129 @@
 <switch is-on="true"/>
 ```
 
-| XML Attribute | Type | Description |
+| XML 属性 | 类型 | 描述 |
 | ------------- | ---- | ----------- |
-| `is-on` | `boolean` | Initial on/off state. Default: `false`. |
+| `is-on` | `boolean` | 初始开关状态。默认：`false`。 |
 
 ---
 
 ## 内部结构
-开关包含两个内部元件：
-| Index | Field | Type | CSS class | Description |
+
+Switch 包含两个内部元素：
+
+| 索引 | 字段 | 类型 | CSS 类 | 描述 |
 | ----- | ----- | ---- | --------- | ----------- |
-| `0` | `placeholder` | `UIElement` | — | Flex spacer that grows/shrinks to animate the indicator. |
-| `1` | `markIcon` | `UIElement` | `.__switch_mark-icon__` | The sliding square indicator. |
+| `0` | `placeholder` | `UIElement` | — | 弹性占位符，通过伸缩来实现指示器动画。 |
+| `1` | `markIcon` | `UIElement` | `.__switch_mark-icon__` | 滑动的方形指示器。 |
 
 ---
 
-## 切换风格
-`SwitchStyle`控制四个纹理：每个状态下的容器背景和每个状态下的指示器纹理。
-!!!信息“”#### <p style="font-size: 1rem;">基础背景</p>
-开关**关闭**时的容器背景。
-默认值：`Sprites.RECT_RD_DARK`
-===“Java”
+## Switch 样式
+
+`SwitchStyle` 控制四种纹理：两种状态下的容器背景和两种状态下的指示器纹理。
+
+!!! info ""
+    #### <p style="font-size: 1rem;">base-background</p>
+
+    开关处于**关闭**状态时的容器背景。
+
+    默认值：`Sprites.RECT_RD_DARK`
+
+    === "Java"
+
         ```java
         sw.switchStyle(style -> style.baseTexture(myOffBg));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         switch({ switchStyle = { baseTexture(myOffBg) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         switch {
             base-background: rect(#3a3a3a, 4);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">按下背景</p>
-开关打开**时的容器背景。
-默认值：`Sprites.RECT_RD_T`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">pressed-background</p>
+
+    开关处于**开启**状态时的容器背景。
+
+    默认值：`Sprites.RECT_RD_T`
+
+    === "Java"
+
         ```java
         sw.switchStyle(style -> style.pressedTexture(myOnBg));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         switch({ switchStyle = { pressedTexture(myOnBg) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         switch {
             pressed-background: rect(#3d7a4f, 4);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">unmark-background</p>
-开关**关闭**时滑动指示器的纹理。
-默认值：`Sprites.RECT_RD`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">unmark-background</p>
+
+    开关处于**关闭**状态时滑动指示器的纹理。
+
+    默认值：`Sprites.RECT_RD`
+
+    === "Java"
+
         ```java
         sw.switchStyle(style -> style.unmarkTexture(myOffIndicator));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         switch({ switchStyle = { unmarkTexture(myOffIndicator) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         switch {
             unmark-background: rect(#888888, 3);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">标记背景</p>
-开关打开**时滑动指示器的纹理。
-默认值：`Sprites.RECT_RD`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">mark-background</p>
+
+    开关处于**开启**状态时滑动指示器的纹理。
+
+    默认值：`Sprites.RECT_RD`
+
+    === "Java"
+
         ```java
         sw.switchStyle(style -> style.markTexture(myOnIndicator));
         ```
 
-===“科特林”
+    === "Kotlin"
+
         ```kotlin
         switch({ switchStyle = { markTexture(myOnIndicator) } }) { }
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         switch {
             mark-background: rect(#FFFFFF, 3);
@@ -143,8 +186,11 @@
 ---
 
 ## 值绑定
-`Switch` 扩展了`BindableUIElement<Boolean>`，因此它与数据绑定系统集成：
-===“Java”
+
+`Switch` 继承自 `BindableUIElement<Boolean>`，因此它可以与数据绑定系统集成：
+
+=== "Java"
+
     ```java
     sw.bind(DataBindingBuilder.bool(
         () -> config.isEnabled(),
@@ -152,23 +198,26 @@
     ).build());
     ```
 
-有关完整详细信息，请参阅[Data Bindings](../data_bindings.md){ data-preview }。
+详情请参阅 [数据绑定](../data_bindings.md){ data-preview }。
+
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `placeholder` | `UIElement` | `public final` | The flex spacer that drives the slide animation. |
-| `markIcon` | `UIElement` | `public final` | The visible sliding indicator. |
-| `switchStyle` | `SwitchStyle` | `private` (getter) | Current switch style. |
-| `isOn` | `boolean` | `private` (getter) | Current on/off state. |
+| `placeholder` | `UIElement` | `public final` | 驱动滑动动画的弹性占位符。 |
+| `markIcon` | `UIElement` | `public final` | 可见的滑动指示器。 |
+| `switchStyle` | `SwitchStyle` | `private` (getter) | 当前开关样式。 |
+| `isOn` | `boolean` | `private` (getter) | 当前开关状态。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setOn(boolean)` | `Switch` | Sets the on/off state and notifies listeners. |
-| `setOnSwitchChanged(BooleanConsumer)` | `Switch` | Registers a listener for state changes. |
-| `switchStyle(Consumer<SwitchStyle>)` | `Switch` | Configures `SwitchStyle` fluently. |
-| `getValue()` | `Boolean` | Returns the current on/off state. |
+| `setOn(boolean)` | `Switch` | 设置开关状态并通知监听器。 |
+| `setOnSwitchChanged(BooleanConsumer)` | `Switch` | 注册状态变化监听器。 |
+| `switchStyle(Consumer<SwitchStyle>)` | `Switch` | 流式配置 `SwitchStyle`。 |
+| `getValue()` | `Boolean` | 返回当前开关状态。 |

@@ -1,11 +1,18 @@
-# 库存槽位
+﻿# InventorySlots
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`InventorySlots` 是一个预先构建的玩家库存小部件。它渲染标准的3行主库存和9槽热栏，并在打开`ModularUI`时自动将它们绑定到玩家的`Inventory`。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`InventorySlots` 是一个预构建的玩家物品栏组件。它渲染标准的 3 行主物品栏和 9 格快捷栏，并在 `ModularUI` 打开时自动绑定到玩家的 `Inventory`。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 使用方法
+
+=== "Java"
+
     ```java
     var inv = new InventorySlots();
     // Slots are bound automatically when the UI opens.
@@ -14,7 +21,8 @@
     parent.addChild(inv);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     inventorySlots({}) {
         api {
@@ -23,7 +31,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let inv = new InventorySlots();
     parent.addChild(inv);
@@ -32,37 +41,44 @@
 ---
 
 ## XML
+
 ```xml
 <inventory-slots/>
 ```
 
-除了从 `UIElement` 继承的属性之外，`InventorySlots` 没有任何 XML 属性。
+`InventorySlots` 除了继承自 `UIElement` 的属性外，没有其他 XML 属性。
+
 ---
 
 ## 内部结构
-| CSS class | Description |
-| --------- | ----------- |
-| `.__inventory_main__` | Container wrapping the three main inventory rows. |
-| `.__inventory_row__` | Each of the four `Row` elements (three main + hotbar). |
-| `.__inventory_hotbar__` | The hotbar row (separated by 5 px top margin). |
 
-每行内的槽是`ItemSlot`实例，带有`is-player-slot: true`和ID`inventory_0`…`inventory_35`。
+| CSS 类名 | 描述 |
+| --------- | ----------- |
+| `.__inventory_main__` | 包裹三行主物品栏的容器。 |
+| `.__inventory_row__` | 四个 `Row` 元素中的每一个（三个主行 + 快捷栏）。 |
+| `.__inventory_hotbar__` | 快捷栏行（顶部间距 5 像素）。 |
+
+每行内的槽位是 `ItemSlot` 实例，具有 `is-player-slot: true` 属性，ID 为 `inventory_0` … `inventory_35`。
+
 ---
 
 ## 字段
-| Name | Type | Access | Description |
-| ---- | ---- | ------ | ----------- |
-| `rows` | `Row[3]` | `public final` | The three main inventory rows (indices 9–35). |
-| `hotbar` | `Row` | `public final` | The hotbar row (indices 0–8). |
 
-`Row` 是 `UIElement` 子类，具有：
-| Name | Type | Description |
+| 名称 | 类型 | 访问权限 | 描述 |
+| ---- | ---- | ------ | ----------- |
+| `rows` | `Row[3]` | `public final` | 三行主物品栏（索引 9–35）。 |
+| `hotbar` | `Row` | `public final` | 快捷栏行（索引 0–8）。 |
+
+`Row` 是 `UIElement` 的子类，包含：
+
+| 名称 | 类型 | 描述 |
 | ---- | ---- | ----------- |
-| `slots` | `ItemSlot[9]` | The nine item slots in this row. |
+| `slots` | `ItemSlot[9]` | 该行中的九个物品槽。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `apply(Consumer<ItemSlot>)` | `InventorySlots` | Applies a consumer to every slot across all rows and the hotbar. |
+| `apply(Consumer<ItemSlot>)` | `InventorySlots` | 对所有行和快捷栏中的每个槽位应用一个 consumer。 |

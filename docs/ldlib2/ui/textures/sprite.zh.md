@@ -1,13 +1,25 @@
-# 精灵纹理
+# SpriteTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`SpriteTexture` 从`assets/` 目录渲染PNG 图像文件。它支持：
-- **9 切片缩放** 通过 `setBorder(...)` — 边角保持清晰，而中心拉伸。- **精灵区域**通过`setSprite(x, y, width, height)` 在源图像中选择。- **包裹模式**用于平铺或镜像中心区域。- **色调**通过`setColor(int)`。
-注册表名称：`sprite_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`SpriteTexture` 用于渲染 `assets/` 目录中的 PNG 图像文件。支持以下功能：
+
+- **九宫格缩放**：通过 `setBorder(...)` 设置，角落保持清晰，中心区域拉伸。
+- **精灵区域**：通过 `setSprite(x, y, width, height)` 选择源图像中的特定区域。
+- **平铺模式**：用于平铺或镜像中心区域。
+- **颜色着色**：通过 `setColor(int)` 设置。
+
+注册名：`sprite_texture`
+
+!!! note ""
+    继承自 `TransformTexture`，支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Whole image, stretched
     IGuiTexture icon = SpriteTexture.of("mymod:textures/gui/icon.png");
@@ -33,7 +45,8 @@
         .setColor(0xFF44AAFF);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val icon = SpriteTexture.of("mymod:textures/gui/icon.png")
 
@@ -44,7 +57,8 @@
         .setWrapMode(SpriteTexture.WrapMode.REPEAT)
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let icon = SpriteTexture.of("mymod:textures/gui/icon.png");
 
@@ -58,6 +72,7 @@
 ---
 
 ## LSS
+
 ```css
 /* Simple image */
 background: sprite(mymod:textures/gui/icon.png);
@@ -74,39 +89,43 @@ background: sprite(mymod:textures/gui/icon.png, 0, 0, 16, 16, 0, 0, 0, 0, #FF44A
 
 ---
 
-## 环绕模式
-| Value | Description |
-| ----- | ----------- |
-| `CLAMP` | The centre tile is stretched to fill the available area. Default. |
-| `REPEAT` | The centre tile is repeated (tiled). |
-| `MIRRORED_REPEAT` | The centre tile is tiled with alternating mirrors. |
+## 平铺模式
 
-环绕模式仅适用于 9 切片精灵的**中心**区域。角落和边缘总是被拉伸。
+| 值 | 描述 |
+| ----- | ----------- |
+| `CLAMP` | 中心区域拉伸填充可用空间。默认值。 |
+| `REPEAT` | 中心区域重复平铺。 |
+| `MIRRORED_REPEAT` | 中心区域以镜像方式交替平铺。 |
+
+平铺模式仅应用于九宫格精灵的**中心**区域。角落和边缘始终拉伸。
+
 ---
 
 ## 字段
-| Name | Type | Description |
+
+| 名称 | 类型 | 描述 |
 | ---- | ---- | ----------- |
-| `imageLocation` | `ResourceLocation` | Path to the PNG file. |
-| `spritePosition` | `Position` | Top-left pixel of the source region. Default: `(0, 0)`. |
-| `spriteSize` | `Size` | Width × height of the source region in pixels. `(0, 0)` = full image. |
-| `borderLT` | `Position` | Left / top 9-slice border in pixels. |
-| `borderRB` | `Position` | Right / bottom 9-slice border in pixels. |
-| `color` | `int` | ARGB colour tint. Default: `0xFFFFFFFF` (no tint). |
-| `wrapMode` | `WrapMode` | Centre tile wrap mode. Default: `CLAMP`. |
+| `imageLocation` | `ResourceLocation` | PNG 文件路径。 |
+| `spritePosition` | `Position` | 源区域的左上角像素位置。默认：`(0, 0)`。 |
+| `spriteSize` | `Size` | 源区域的宽度×高度（像素）。`(0, 0)` 表示完整图像。 |
+| `borderLT` | `Position` | 左/上九宫格边框（像素）。 |
+| `borderRB` | `Position` | 右/下九宫格边框（像素）。 |
+| `color` | `int` | ARGB 颜色着色。默认：`0xFFFFFFFF`（无着色）。 |
+| `wrapMode` | `WrapMode` | 中心区域平铺模式。默认：`CLAMP`。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `SpriteTexture.of(String)` | `SpriteTexture` | Static factory from a resource-location string. |
-| `SpriteTexture.of(ResourceLocation)` | `SpriteTexture` | Static factory from a `ResourceLocation`. |
-| `setImageLocation(ResourceLocation)` | `SpriteTexture` | Changes the source image (clears the size cache). |
-| `setSprite(int x, int y, int w, int h)` | `SpriteTexture` | Sets the sprite region within the image. |
-| `setBorder(int left, int top, int right, int bottom)` | `SpriteTexture` | Sets per-side 9-slice borders. |
-| `setBorder(int)` | `SpriteTexture` | Sets all four borders to the same value. |
-| `setColor(int)` | `SpriteTexture` | Sets the ARGB tint colour. |
-| `setWrapMode(WrapMode)` | `SpriteTexture` | Sets the centre region wrap mode. |
-| `getImageSize()` | `Size` | Returns the natural size of the loaded image (client-only). |
-| `copy()` | `SpriteTexture` | Returns a deep copy. |
+| `SpriteTexture.of(String)` | `SpriteTexture` | 从资源位置字符串创建的静态工厂方法。 |
+| `SpriteTexture.of(ResourceLocation)` | `SpriteTexture` | 从 `ResourceLocation` 创建的静态工厂方法。 |
+| `setImageLocation(ResourceLocation)` | `SpriteTexture` | 更改源图像（清除尺寸缓存）。 |
+| `setSprite(int x, int y, int w, int h)` | `SpriteTexture` | 设置图像中的精灵区域。 |
+| `setBorder(int left, int top, int right, int bottom)` | `SpriteTexture` | 设置每边的九宫格边框。 |
+| `setBorder(int)` | `SpriteTexture` | 将四边边框设置为相同值。 |
+| `setColor(int)` | `SpriteTexture` | 设置 ARGB 着色颜色。 |
+| `setWrapMode(WrapMode)` | `SpriteTexture` | 设置中心区域的平铺模式。 |
+| `getImageSize()` | `Size` | 返回已加载图像的原始尺寸（仅客户端）。 |
+| `copy()` | `SpriteTexture` | 返回深拷贝。 |

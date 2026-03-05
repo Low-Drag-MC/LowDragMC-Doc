@@ -1,39 +1,49 @@
-# 项目堆栈纹理
+﻿# ItemStackTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`ItemStackTexture` 将一个或多个 `ItemStack` 渲染为 GUI 纹理。当提供多个堆栈时，它们每 20 个周期（1 秒）自动循环一次。
-注册表名称：`item_stack_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`ItemStackTexture` 将一个或多个 `ItemStack` 渲染为 GUI 纹理。当提供多个物品堆时，它们会每 20 tick（1 秒）自动循环切换。
+
+注册名：`item_stack_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
-    // Single item
+    // 单个物品
     IGuiTexture diamondIcon = new ItemStackTexture(Items.DIAMOND);
 
-    // Multiple items — cycle every 20 ticks
+    // 多个物品 — 每 20 tick 循环一次
     IGuiTexture cycleIcon = new ItemStackTexture(
         Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT
     );
 
-    // From ItemStacks
+    // 从 ItemStack 创建
     IGuiTexture enchanted = new ItemStackTexture(
         new ItemStack(Items.DIAMOND_SWORD)
     );
 
-    // Tinted
+    // 着色
     IGuiTexture tinted = new ItemStackTexture(Items.DIAMOND)
-        .setColor(0x80FFFFFF); // 50 % opacity
+        .setColor(0x80FFFFFF); // 50% 不透明度
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val diamond = ItemStackTexture(Items.DIAMOND)
 
     val cycle = ItemStackTexture(Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT)
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let icon = new ItemStackTexture(Items.DIAMOND);
 
@@ -43,15 +53,17 @@
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `items` | `ItemStack[]` | The item stacks to display. |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `items` | `ItemStack[]` | 要显示的物品堆。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setItems(ItemStack...)` | `ItemStackTexture` | Replaces the displayed stacks and resets the cycle index. |
-| `setColor(int)` | `ItemStackTexture` | Sets an ARGB tint overlay applied over the rendered item. |
-| `copy()` | `ItemStackTexture` | Returns a deep copy. |
+## 方法
+
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
+| `setItems(ItemStack...)` | `ItemStackTexture` | 替换要显示的物品堆并重置循环索引。 |
+| `setColor(int)` | `ItemStackTexture` | 设置应用于渲染物品上的 ARGB 着色叠加层。 |
+| `copy()` | `ItemStackTexture` | 返回深拷贝。 |

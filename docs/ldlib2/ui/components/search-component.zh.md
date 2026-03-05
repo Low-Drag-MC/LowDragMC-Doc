@@ -1,12 +1,20 @@
-# 搜索组件
+﻿# SearchComponent
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`SearchComponent<T>` 是一个通用的搜索和选择小部件。它显示当前所选值的预览，单击时会打开一个浮动对话框，其中包含文本字段和匹配候选值的列表。候选者由 `ISearchUI<T>` 实现生成，该实现可以在客户端上运行或委托给服务器。
-`SearchComponent` 扩展`BindableUIElement<T>`，因此所选值与数据绑定系统集成。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`SearchComponent<T>` 是一个通用的搜索选择组件。它显示当前选中值的预览，点击后会打开一个浮动对话框，包含文本输入框和匹配候选项列表。候选项由 `ISearchUI<T>` 实现提供，可在客户端运行或委托给服务端执行。
+
+`SearchComponent` 继承自 `BindableUIElement<T>`，因此选中的值可与数据绑定系统集成。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）在此同样适用。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var search = new SearchComponent<String>();
     search.setSearchUI(new SearchComponent.ISearchUI<>() {
@@ -25,7 +33,8 @@
     parent.addChild(search);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     searchComponent<String>({
         searchUI {
@@ -40,7 +49,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let search = new SearchComponent();
     // ISearchUI must be provided programmatically.
@@ -50,86 +60,118 @@
 ---
 
 ## 内部结构
-| CSS class | Description |
+
+| CSS 类 | 描述 |
 | --------- | ----------- |
-| `.__search-component_preview__` | Preview area showing the selected value. |
-| `.__search-component_text-field__` | Text input shown when the component is open. |
-| `.__search-component_dialog__` | Floating overlay dialog containing the candidate list. |
-| `.__search-component_list-view__` | Plain list (used when candidates ≤ `max-item`). |
-| `.__search-component_scroller-view__` | Scrollable list (used when candidates > `max-item`). |
+| `.__search-component_preview__` | 显示选中值的预览区域。 |
+| `.__search-component_text-field__` | 组件打开时显示的文本输入框。 |
+| `.__search-component_dialog__` | 包含候选项列表的浮动对话框。 |
+| `.__search-component_list-view__` | 普通列表（候选项数量 ≤ `max-item` 时使用）。 |
+| `.__search-component_scroller-view__` | 可滚动列表（候选项数量 > `max-item` 时使用）。 |
 
 ---
 
-## 搜索风格
-!!!信息“”#### <p style="font-size: 1rem;">焦点覆盖</p>
-当组件悬停或聚焦时在组件上绘制的纹理。
-默认值：`Sprites.RECT_RD_T_SOLID`
-===“Java”
+## 搜索样式
+
+!!! info ""
+    #### <p style="font-size: 1rem;">focus-overlay</p>
+
+    当组件被悬停或聚焦时绘制的覆盖纹理。
+
+    默认值：`Sprites.RECT_RD_T_SOLID`
+
+    === "Java"
+
         ```java
         search.searchStyle(style -> style.focusOverlay(myTexture));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         search-component {
             focus-overlay: rect(#FFFFFF22, 2);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">最大项目</p>
-在切换到`scrollerView` 之前，平面`listView` 中显示的最大结果数。
-默认值：`5`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">max-item</p>
+
+    在切换到 `scrollerView` 之前，平铺 `listView` 中显示的最大结果数量。
+
+    默认值：`5`
+
+    === "Java"
+
         ```java
         search.searchStyle(style -> style.maxItemCount(10));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         search-component {
             max-item: 10;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">视图高度</p>
-当候选数超过`max-item`时`scrollerView`的高度。
-默认值：`50`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">view-height</p>
+
+    当候选项数量超过 `max-item` 时，`scrollerView` 的高度。
+
+    默认值：`50`
+
+    === "Java"
+
         ```java
         search.searchStyle(style -> style.scrollerViewHeight(80f));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         search-component {
             view-height: 80;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">show-overlay</p>
-是否突出显示悬停和选定的候选行。
-默认值：`true`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">show-overlay</p>
+
+    是否高亮显示悬停和选中的候选行。
+
+    默认值：`true`
+
+    === "Java"
+
         ```java
         search.searchStyle(style -> style.showOverlay(false));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         search-component {
             show-overlay: false;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">选择后关闭</p>
-选择候选人后对话框是否自动关闭。
-默认值：`true`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">close-after-select</p>
+
+    选中候选项后是否自动关闭对话框。
+
+    默认值：`true`
+
+    === "Java"
+
         ```java
         search.searchStyle(style -> style.closeAfterSelect(false));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         search-component {
             close-after-select: false;
@@ -138,8 +180,10 @@
 
 ---
 
-##`ISearchUI<T>`接口
+## `ISearchUI<T>` 接口
+
 实现此接口以提供搜索逻辑：
+
 ```java
 public interface ISearchUI<T> extends ISearch<T> {
     /** Convert a result value to its text representation. */
@@ -156,29 +200,31 @@ public interface ISearchUI<T> extends ISearch<T> {
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问修饰符 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `textField` | `TextField` | `public final` | The text input for entering search words. |
-| `preview` | `UIElement` | `public final` | Container showing the selected value's UI. |
-| `dialog` | `UIElement` | `public final` | The floating candidate dialog (attached to the root). |
-| `listView` | `UIElement` | `public final` | Flat list container (visible when ≤ `max-item` results). |
-| `scrollerView` | `ScrollerView` | `public final` | Scrollable list (visible when > `max-item` results). |
-| `searchStyle` | `SearchStyle` | `private` (getter) | Current style. |
-| `value` | `T` (nullable) | `private` (getter) | The currently selected value. |
-| `searchOnServer` | `boolean` | `private` (getter) | `true` when search is delegated to the server. |
+| `textField` | `TextField` | `public final` | 用于输入搜索词的文本输入框。 |
+| `preview` | `UIElement` | `public final` | 显示选中值 UI 的容器。 |
+| `dialog` | `UIElement` | `public final` | 浮动候选对话框（附加到根元素）。 |
+| `listView` | `UIElement` | `public final` | 平铺列表容器（结果数量 ≤ `max-item` 时可见）。 |
+| `scrollerView` | `ScrollerView` | `public final` | 可滚动列表（结果数量 > `max-item` 时可见）。 |
+| `searchStyle` | `SearchStyle` | `private`（有 getter） | 当前样式。 |
+| `value` | `T`（可空） | `private`（有 getter） | 当前选中的值。 |
+| `searchOnServer` | `boolean` | `private`（有 getter） | 为 `true` 时搜索委托给服务端执行。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setSearchUI(ISearchUI<T>)` | `SearchComponent<T>` | Sets the search logic provider. |
-| `setCandidateUIProvider(UIElementProvider<T>)` | `SearchComponent<T>` | Sets the factory that builds the UI for each candidate. |
-| `setSearchOnServer(Class<T[]>)` | `SearchComponent<T>` | Enables server-side search (RPC). |
-| `setSelected(T)` | `SearchComponent<T>` | Selects a value and notifies listeners. |
-| `setSelected(T, boolean)` | `SearchComponent<T>` | Selects a value; second param controls notification. |
-| `setOnValueChanged(Consumer<T>)` | `SearchComponent<T>` | Registers a listener for value changes. |
-| `searchStyle(Consumer<SearchStyle>)` | `SearchComponent<T>` | Configures style fluently. |
-| `show()` | `void` | Opens the candidate dialog. |
-| `hide()` | `void` | Closes the candidate dialog. |
-| `isOpen()` | `boolean` | Returns `true` when the dialog is visible. |
+| `setSearchUI(ISearchUI<T>)` | `SearchComponent<T>` | 设置搜索逻辑提供者。 |
+| `setCandidateUIProvider(UIElementProvider<T>)` | `SearchComponent<T>` | 设置为每个候选项构建 UI 的工厂。 |
+| `setSearchOnServer(Class<T[]>)` | `SearchComponent<T>` | 启用服务端搜索（RPC）。 |
+| `setSelected(T)` | `SearchComponent<T>` | 选中一个值并通知监听器。 |
+| `setSelected(T, boolean)` | `SearchComponent<T>` | 选中一个值；第二个参数控制是否通知。 |
+| `setOnValueChanged(Consumer<T>)` | `SearchComponent<T>` | 注册值变化监听器。 |
+| `searchStyle(Consumer<SearchStyle>)` | `SearchComponent<T>` | 流式配置样式。 |
+| `show()` | `void` | 打开候选对话框。 |
+| `hide()` | `void` | 关闭候选对话框。 |
+| `isOpen()` | `boolean` | 对话框可见时返回 `true`。 |

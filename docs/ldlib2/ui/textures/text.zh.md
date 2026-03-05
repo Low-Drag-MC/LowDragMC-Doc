@@ -1,12 +1,20 @@
-# 文本纹理
+﻿# TextTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`TextTexture` 将翻译后的字符串渲染为 GUI 纹理。它支持多种显示模式（居中、左对齐、滚动、悬停前隐藏）、自动换行、背景颜色和可选的实时更新供应商。
-注册表名称：`text_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`TextTexture` 将翻译后的字符串渲染为 GUI 纹理。它支持多种显示模式（居中、左对齐、滚动、悬停显示）、自动换行、背景色以及可选的实时更新供应器。
+
+注册名：`text_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Static centred text
     IGuiTexture label = new TextTexture("Hello World");
@@ -26,7 +34,8 @@
     IGuiTexture dynamic = new TextTexture(() -> "Ticks: " + level.getGameTime());
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val label = TextTexture("Hello World")
 
@@ -35,7 +44,8 @@
         .setWidth(80)
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let label = new TextTexture("Hello World");
 
@@ -45,43 +55,46 @@
 ---
 
 ## 文本类型
-| Type | Alignment | Overflow behaviour |
-| ---- | --------- | ------------------ |
-| `NORMAL` | Centre | All lines shown stacked. |
-| `LEFT` | Left | All lines shown stacked. |
-| `RIGHT` | Right | All lines shown stacked. |
-| `HIDE` | Centre | First line shown; full text scrolls when hovered. |
-| `LEFT_HIDE` | Left | First line shown; full text scrolls when hovered. |
-| `ROLL` | Centre | First line shown; scrolls when hovered and text overflows. |
-| `LEFT_ROLL` | Left | First line shown; scrolls when hovered. |
-| `ROLL_ALWAYS` | Centre | Always scrolls regardless of hover. |
-| `LEFT_ROLL_ALWAYS` | Left | Always scrolls regardless of hover. |
+
+| 类型 | 对齐方式 | 溢出行为 |
+| ---- | -------- | -------- |
+| `NORMAL` | 居中 | 所有行堆叠显示。 |
+| `LEFT` | 左对齐 | 所有行堆叠显示。 |
+| `RIGHT` | 右对齐 | 所有行堆叠显示。 |
+| `HIDE` | 居中 | 显示第一行；悬停时完整文本滚动显示。 |
+| `LEFT_HIDE` | 左对齐 | 显示第一行；悬停时完整文本滚动显示。 |
+| `ROLL` | 居中 | 显示第一行；悬停且文本溢出时滚动。 |
+| `LEFT_ROLL` | 左对齐 | 显示第一行；悬停时滚动。 |
+| `ROLL_ALWAYS` | 居中 | 始终滚动，无论是否悬停。 |
+| `LEFT_ROLL_ALWAYS` | 左对齐 | 始终滚动，无论是否悬停。 |
 
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `text` | `String` | The displayed string (translated via `LocalizationUtils`). |
-| `color` | `int` | Text colour (ARGB). Default: `-1` (white). |
-| `backgroundColor` | `int` | Background fill colour. `0` = none. |
-| `width` | `int` | Maximum line width for word-wrapping in pixels. |
-| `rollSpeed` | `float` | Scroll speed for rolling modes. Default: `1.0`. |
-| `dropShadow` | `boolean` | Whether to draw a drop shadow. Default: `false` (constructor with `String` sets it to `true`). |
-| `type` | `TextType` | Display mode. Default: `NORMAL`. |
-| `supplier` | `Supplier<String>` (nullable) | When set, `text` is updated every game tick from this supplier. |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `text` | `String` | 显示的字符串（通过 `LocalizationUtils` 翻译）。 |
+| `color` | `int` | 文本颜色（ARGB）。默认值：`-1`（白色）。 |
+| `backgroundColor` | `int` | 背景填充颜色。`0` = 无。 |
+| `width` | `int` | 自动换行的最大行宽（像素）。 |
+| `rollSpeed` | `float` | 滚动模式的滚动速度。默认值：`1.0`。 |
+| `dropShadow` | `boolean` | 是否绘制阴影。默认值：`false`（使用 `String` 的构造函数会设为 `true`）。 |
+| `type` | `TextType` | 显示模式。默认值：`NORMAL`。 |
+| `supplier` | `Supplier<String>`（可空） | 设置后，`text` 每游戏刻从此供应器更新。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setColor(int)` | `TextTexture` | Sets the text colour. |
-| `setBackgroundColor(int)` | `TextTexture` | Sets the background fill colour. |
-| `setDropShadow(boolean)` | `TextTexture` | Enables or disables drop shadow. |
-| `setWidth(int)` | `TextTexture` | Sets the word-wrap width and reflows lines. |
-| `setType(TextType)` | `TextTexture` | Sets the display mode. |
-| `setRollSpeed(float)` | `TextTexture` | Sets the scroll speed for rolling modes. |
-| `setSupplier(Supplier<String>)` | `TextTexture` | Registers a live text supplier updated each tick. |
-| `updateText(String)` | `void` | Immediately updates the text and reflows lines. |
-| `copy()` | `TextTexture` | Returns a deep copy. |
+## 方法
+
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
+| `setColor(int)` | `TextTexture` | 设置文本颜色。 |
+| `setBackgroundColor(int)` | `TextTexture` | 设置背景填充颜色。 |
+| `setDropShadow(boolean)` | `TextTexture` | 启用或禁用阴影。 |
+| `setWidth(int)` | `TextTexture` | 设置换行宽度并重排行。 |
+| `setType(TextType)` | `TextTexture` | 设置显示模式。 |
+| `setRollSpeed(float)` | `TextTexture` | 设置滚动模式的滚动速度。 |
+| `setSupplier(Supplier<String>)` | `TextTexture` | 注册每刻更新的实时文本供应器。 |
+| `updateText(String)` | `void` | 立即更新文本并重排行。 |
+| `copy()` | `TextTexture` | 返回深拷贝。 |

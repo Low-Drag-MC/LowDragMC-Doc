@@ -1,12 +1,20 @@
-# 标签视图
+# TabView
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`TabView` 是一个选项卡式面板容器。它维护一个水平可滚动的行 [`Tab`](tab.md){ data-preview } 标题和一个显示当前所选选项卡内容的内容窗格。切换选项卡会显示新内容并隐藏所有其他内容。
-只有`Tab`（及其子类）可以在编辑器中添加为子类。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`TabView` 是一个选项卡面板容器。它维护一行可水平滚动的 [`Tab`](tab.md){ data-preview } 标签头和一个显示当前选中选项卡内容的内容面板。切换选项卡时会显示新内容并隐藏其他内容。
+
+在编辑器中只能添加 `Tab`（及其子类）作为子元素。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 使用方法
+
+=== "Java"
+
     ```java
     var tabView = new TabView();
 
@@ -23,7 +31,8 @@
     parent.addChild(tabView);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     tabView({
         onTabSelected { tab -> println("Selected: $tab") }
@@ -37,7 +46,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let tv = new TabView();
     let content1 = new UIElement();
@@ -50,6 +60,7 @@
 ---
 
 ## XML
+
 ```xml
 <tab-view>
     <tab text="Settings">
@@ -65,42 +76,47 @@
 </tab-view>
 ```
 
-每个`<tab>`元素都是一个tab header；它的 `<tab-content>` 子项描述了该选项卡处于活动状态时显示的内容窗格。
+每个 `<tab>` 元素是一个选项卡头；其 `<tab-content>` 子元素描述当该选项卡激活时显示的内容面板。
+
 ---
 
 ## 内部结构
-| Index | Field | CSS class | Description |
-| ----- | ----- | --------- | ----------- |
-| `0` | `tabContentContainer` | `.__tab-view_tab_content_container__` | Pane that holds all content elements (only the active one is displayed). |
-| `1` | `tabHeaderContainer` | `.__tab-view_tab_header_container__` | Row of tab headers (contains the `tabScroller`). |
 
-`tabScroller` 是嵌套在`tabHeaderContainer` 内的`ScrollerView`：
-| Field | CSS class | Description |
+| 索引 | 字段 | CSS 类名 | 描述 |
+| ----- | ----- | --------- | ----------- |
+| `0` | `tabContentContainer` | `.__tab-view_tab_content_container__` | 容纳所有内容元素的面板（仅显示当前激活的内容）。 |
+| `1` | `tabHeaderContainer` | `.__tab-view_tab_header_container__` | 选项卡头行（包含 `tabScroller`）。 |
+
+`tabScroller` 是嵌套在 `tabHeaderContainer` 内的 `ScrollerView`：
+
+| 字段 | CSS 类名 | 描述 |
 | ----- | --------- | ----------- |
-| `tabScroller` | `.__tab-view_tab_scroller__` | Horizontally-scrollable view holding all tab headers. |
+| `tabScroller` | `.__tab-view_tab_scroller__` | 容纳所有选项卡头的水平滚动视图。 |
 
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `tabHeaderContainer` | `UIElement` | `public final` | Container for the tab header row. |
-| `tabScroller` | `ScrollerView` | `public final` | Horizontal scroller holding the tab headers. |
-| `tabContentContainer` | `UIElement` | `public final` | Container for all content panes. |
-| `tabContents` | `BiMap<Tab, UIElement>` | `private` (getter) | Bidirectional map of tab headers ↔ content panes. |
-| `selectedTab` | `Tab` | `private` (getter/nullable) | The currently-selected tab. |
+| `tabHeaderContainer` | `UIElement` | `public final` | 选项卡头行的容器。 |
+| `tabScroller` | `ScrollerView` | `public final` | 容纳选项卡头的水平滚动器。 |
+| `tabContentContainer` | `UIElement` | `public final` | 所有内容面板的容器。 |
+| `tabContents` | `BiMap<Tab, UIElement>` | `private`（有 getter） | 选项卡头 ↔ 内容面板的双向映射。 |
+| `selectedTab` | `Tab` | `private`（有 getter/可为 null） | 当前选中的选项卡。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `addTab(Tab, UIElement)` | `TabView` | Appends a new tab and its content pane. Selects it if it is the first. |
-| `addTab(Tab, UIElement, int)` | `TabView` | Inserts a tab at a specific index. |
-| `removeTab(Tab)` | `TabView` | Removes a tab and its content. Selects the next tab if the removed one was selected. |
-| `selectTab(Tab)` | `TabView` | Selects a tab, showing its content and hiding all others. |
-| `clear()` | `TabView` | Removes all tabs and content. |
-| `setOnTabSelected(Consumer<Tab>)` | — | Callback invoked when any tab is selected. |
-| `tabHeaderContainer(Consumer<UIElement>)` | `TabView` | Configures the header container. |
-| `tabScroller(Consumer<ScrollerView>)` | `TabView` | Configures the header scroller. |
-| `tabContentContainer(Consumer<UIElement>)` | `TabView` | Configures the content container. |
+| `addTab(Tab, UIElement)` | `TabView` | 添加新选项卡及其内容面板。如果是第一个则自动选中。 |
+| `addTab(Tab, UIElement, int)` | `TabView` | 在指定索引处插入选项卡。 |
+| `removeTab(Tab)` | `TabView` | 移除选项卡及其内容。如果移除的是当前选中项则选中下一个。 |
+| `selectTab(Tab)` | `TabView` | 选中指定选项卡，显示其内容并隐藏其他内容。 |
+| `clear()` | `TabView` | 移除所有选项卡和内容。 |
+| `setOnTabSelected(Consumer<Tab>)` | — | 当任意选项卡被选中时调用的回调。 |
+| `tabHeaderContainer(Consumer<UIElement>)` | `TabView` | 配置标签头容器。 |
+| `tabScroller(Consumer<ScrollerView>)` | `TabView` | 配置标签头滚动器。 |
+| `tabContentContainer(Consumer<UIElement>)` | `TabView` | 配置内容容器。 |

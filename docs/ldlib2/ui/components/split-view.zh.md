@@ -1,13 +1,23 @@
-# 分割视图
+# SplitView
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`SplitView` 是一个两窗格容器，可以拖动其分隔线来调整窗格大小。注册了两个具体变体：
-- **`split-view-horizontal`** — 用垂直分隔线左/右分割。- **`split-view-vertical`** — 使用水平分隔线进行顶部/底部分割。
-分隔线位置以**百分比** (0–100 %) 表示。拖动边框可以实时调整它。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`SplitView` 是一个双窗格容器，其分隔线可拖动以调整窗格大小。提供两个具体变体：
+
+- **`split-view-horizontal`** — 左右分割，使用垂直分隔线。
+- **`split-view-vertical`** — 上下分割，使用水平分隔线。
+
+分隔线位置以**百分比**（0–100%）表示。拖动边框可实时调整。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 基本用法
+
+=== "Java"
+
     ```java
     var split = new SplitView.Horizontal();
     split.left(leftContent);
@@ -21,7 +31,8 @@
     parent.addChild(vsplit);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     splitViewHorizontal({ split(30f) }) {
         withLeft(leftElement)
@@ -34,7 +45,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let split = new SplitViewHorizontal();
     split.left(leftContent);
@@ -46,72 +58,80 @@
 ---
 
 ## XML
+
 ```xml
 <split-view-horizontal percentage="30">
     <first>
-        <!-- left pane content -->
+        <!-- 左侧窗格内容 -->
     </first>
     <second>
-        <!-- right pane content -->
+        <!-- 右侧窗格内容 -->
     </second>
 </split-view-horizontal>
 
 <split-view-vertical percentage="50">
     <first>
-        <!-- top pane content -->
+        <!-- 顶部窗格内容 -->
     </first>
     <second>
-        <!-- bottom pane content -->
+        <!-- 底部窗格内容 -->
     </second>
 </split-view-vertical>
 ```
 
-| XML Attribute | Type | Description |
+| XML 属性 | 类型 | 描述 |
 | ------------- | ---- | ----------- |
-| `percentage` | `float` | Initial divider position (0–100). Default: `50`. |
+| `percentage` | `float` | 分隔线初始位置（0–100）。默认值：`50`。 |
 
-`<first>` 和 `<second>` 子元素配置两个窗格。
+`<first>` 和 `<second>` 子元素用于配置两个窗格。
+
 ---
 
 ## 内部结构
-| Field | CSS class | Description |
+
+| 字段 | CSS 类 | 描述 |
 | ----- | --------- | ----------- |
-| `first` | `.__split_view_first__` | First pane (left for horizontal, top for vertical). |
-| `second` | `.__split_view_second__` | Second pane (right for horizontal, bottom for vertical). |
+| `first` | `.__split_view_first__` | 第一窗格（水平布局时为左侧，垂直布局时为顶部）。 |
+| `second` | `.__split_view_second__` | 第二窗格（水平布局时为右侧，垂直布局时为底部）。 |
 
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `first` | `UIElement` | `public final` | First pane. |
-| `second` | `UIElement` | `public final` | Second pane. |
-| `borderSize` | `float` | `getter/setter` | Width of the draggable border hit area. Default: `2`. |
-| `minPercentage` | `float` | `getter/setter` | Minimum allowed divider percentage. Default: `5`. |
-| `maxPercentage` | `float` | `getter/setter` | Maximum allowed divider percentage. Default: `95`. |
+| `first` | `UIElement` | `public final` | 第一窗格。 |
+| `second` | `UIElement` | `public final` | 第二窗格。 |
+| `borderSize` | `float` | `getter/setter` | 可拖动边框的点击区域宽度。默认值：`2`。 |
+| `minPercentage` | `float` | `getter/setter` | 分隔线允许的最小百分比。默认值：`5`。 |
+| `maxPercentage` | `float` | `getter/setter` | 分隔线允许的最大百分比。默认值：`95`。 |
 
 ---
 
-＃＃ 方法
-＃＃＃ 常见的
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `first(UIElement)` | `SplitView` | Replaces the content of the first pane. |
-| `second(UIElement)` | `SplitView` | Replaces the content of the second pane. |
-| `setPercentage(float)` | `SplitView` | Sets the divider position, clamped to `[minPercentage, maxPercentage]`. |
-| `getPercentage()` | `float` | Returns the current divider position as a percentage. |
-| `setBorderSize(float)` | `SplitView` | Sets the draggable border width. |
-| `setMinPercentage(float)` | `SplitView` | Sets the lower bound for the divider. |
-| `setMaxPercentage(float)` | `SplitView` | Sets the upper bound for the divider. |
+## 方法
 
-### 仅水平
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `left(UIElement)` | `Horizontal` | Alias for `first()`. |
-| `right(UIElement)` | `Horizontal` | Alias for `second()`. |
+### 通用方法
 
-### 仅垂直
-| Method | Returns | Description |
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `top(UIElement)` | `Vertical` | Alias for `first()`. |
-| `bottom(UIElement)` | `Vertical` | Alias for `second()`. |
+| `first(UIElement)` | `SplitView` | 替换第一窗格的内容。 |
+| `second(UIElement)` | `SplitView` | 替换第二窗格的内容。 |
+| `setPercentage(float)` | `SplitView` | 设置分隔线位置，限制在 `[minPercentage, maxPercentage]` 范围内。 |
+| `getPercentage()` | `float` | 返回当前分隔线位置的百分比值。 |
+| `setBorderSize(float)` | `SplitView` | 设置可拖动边框的宽度。 |
+| `setMinPercentage(float)` | `SplitView` | 设置分隔线的下限。 |
+| `setMaxPercentage(float)` | `SplitView` | 设置分隔线的上限。 |
+
+### 水平分割专用
+
+| 方法 | 返回值 | 描述 |
+| ------ | ------- | ----------- |
+| `left(UIElement)` | `Horizontal` | `first()` 的别名。 |
+| `right(UIElement)` | `Horizontal` | `second()` 的别名。 |
+
+### 垂直分割专用
+
+| 方法 | 返回值 | 描述 |
+| ------ | ------- | ----------- |
+| `top(UIElement)` | `Vertical` | `first()` 的别名。 |
+| `bottom(UIElement)` | `Vertical` | `second()` 的别名。 |

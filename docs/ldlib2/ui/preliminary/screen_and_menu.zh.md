@@ -1,10 +1,15 @@
-# 屏幕和菜单
+# Screen 与 Menu
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`ModularUI` 是一个 UI 树——它描述了 UI 的外观以及它的行为方式。要实际向玩家显示它，它必须托管在 Minecraft **屏幕** 或 **菜单** 内。
-LDLib2 提供了两个现成的主机和一组工厂助手，以使其尽可能简单。
+
+`ModularUI` 是一棵 UI 树——它描述了 UI *长什么样* 以及 *如何交互*。要真正将其显示给玩家，必须将它托管在 Minecraft 的 **Screen** 或 **Menu** 中。
+
+LDLib2 提供了两种开箱即用的宿主和一组工厂辅助方法，让这一过程尽可能简单。
+
 ---
 
-＃＃ 概述
+## 概述
+
 ```mermaid
 graph LR
     A[ModularUI] --> B(ModularUIScreen)
@@ -14,15 +19,17 @@ graph LR
     D -- server + client --> E
 ```
 
-| Host | Sync | Use when |
+| 宿主 | 同步方式 | 适用场景 |
 | ---- | ---- | -------- |
-| `ModularUIScreen` | Client-only | Display-only overlays, HUD widgets, or editor windows that need no server data |
-| `ModularUIContainerMenu` + `ModularUIContainerScreen` | Server ↔ Client | Any UI that reads or writes server-side data (inventories, machine configs, etc.) |
+| `ModularUIScreen` | 仅客户端 | 纯展示型浮层、HUD 组件或无需服务端数据的编辑器窗口 |
+| `ModularUIContainerMenu` + `ModularUIContainerScreen` | 服务端 ↔ 客户端 | 任何需要读写服务端数据的 UI（物品栏、机器配置等） |
 
 ---
 
-## 仅限客户端屏幕
-`ModularUIScreen` 直接扩展了 Minecraft 的`Screen`。它仅在客户端 - 服务器上不会打开任何菜单，并且需要服务器同步的数据绑定将不起作用。
+## 仅客户端 Screen
+
+`ModularUIScreen` 直接继承自 Minecraft 的 `Screen`。它仅在客户端运行——不会在服务端打开 menu，依赖服务端同步的数据绑定将无法工作。
+
 ```java
 // Build your UI
 var modularUI = ModularUI.of(UI.of(root));
@@ -36,13 +43,19 @@ val modularUI = ModularUI(UI.of(root))
 Minecraft.getInstance().setScreen(ModularUIScreen(modularUI, Component.literal("My UI")))
 ```
 
-!!!笔记将 `ModularUIScreen` 用于客户端工具，例如编辑器、配置覆盖或任何不与服务器交互的 UI。
+!!! note
+    `ModularUIScreen` 适用于编辑器、配置浮层等不与服务端交互的纯客户端工具。
+
 ---
 
-## 服务器同步屏幕和菜单
-对于需要读取或写入服务器端数据的 UI，LDLib2 使用标准的 Minecraft **菜单**（容器）系统。服务器创建`ModularUIContainerMenu`，客户端自动打开配对的`ModularUIContainerScreen`。
-###`IContainerUIHolder`
-您可以通过在任何服务器端对象（块实体、项目或普通类）上实现 `IContainerUIHolder` 来描述您的 UI：
+## 服务端同步的 Screen 与 Menu
+
+对于需要读写服务端数据的 UI，LDLib2 使用标准的 Minecraft **Menu**（容器）系统。服务端创建 `ModularUIContainerMenu`，客户端自动打开配对的 `ModularUIContainerScreen`。
+
+### `IContainerUIHolder`
+
+通过在任意服务端对象（方块实体、物品或普通类）上实现 `IContainerUIHolder` 来描述你的 UI：
+
 ```java
 public class MyBlockEntity extends BlockEntity implements IContainerUIHolder {
 
@@ -79,18 +92,28 @@ class MyBlockEntity : BlockEntity(...), IContainerUIHolder {
 }
 ```
 
-!!!笔记 ””**在服务器上**调用`createUI`。然后生成的`ModularUI`会自动同步到客户端。您在其中设置的任何 `DataBindingBuilder` 绑定都将在两侧保持同步。
-### 打开菜单
-一旦您有了`IContainerUIHolder`，请使用`player.openMenu(menuProvider)` 和创建`ModularUIContainerMenu` 的标准`MenuProvider` 打开菜单。下面的[built-in factories](#built-in-menu-factories) 会为您处理所有这些。
+!!! note ""
+    `createUI` 在**服务端**调用。生成的 `ModularUI` 会自动同步到客户端。在其中设置的所有 `DataBindingBuilder` 绑定都会在两端保持同步。
+
+### 打开 menu
+
+有了 `IContainerUIHolder` 后，使用 `player.openMenu(menuProvider)` 配合创建 `ModularUIContainerMenu` 的标准 `MenuProvider` 即可打开 menu。下方的[内置工厂](#内置-menu-工厂)已帮你处理好这一切。
+
 ---
 
-## 内置菜单工厂
-LDLib2 为最常见的用例提供了三个预构建的工厂助手 - `BlockUIMenuType`、`HeldItemUIMenuType` 和 `PlayerUIMenuType`。 KubeJS 用户可以通过`LDLib2UI` 事件组和`LDLib2UIFactory` 绑定访问所有三个。
-请参阅 [UI Factory](../factory.md){ data-preview } 以获取完整文档，包括 KubeJS 示例和脚本放置指南。
+## 内置 Menu 工厂
+
+LDLib2 为最常见的场景提供了三个预构建工厂辅助类——`BlockUIMenuType`、`HeldItemUIMenuType` 和 `PlayerUIMenuType`。KubeJS 用户可通过 `LDLib2UI` 事件组和 `LDLib2UIFactory` 绑定访问这三者。
+
+完整文档（包括 KubeJS 示例和脚本放置指南）请参阅 [UI Factory](../factory.zh.md){ data-preview }。
+
 ---
 
-## 注入现有菜单
-**每次打开任何 `AbstractContainerMenu` 时，LDLib2 都会触发 `ContainerMenuEvent.Create` 事件**，包括来自原版和其他 mod 的菜单。通过处理此事件，您可以将 `ModularUI` 覆盖附加到任何现有屏幕，而无需修改其原始代码。
+## 注入到现有 Menu
+
+LDLib2 会在**任意 `AbstractContainerMenu` 打开时**触发 `ContainerMenuEvent.Create` 事件，包括原版和其他 mod 的 menu。
+通过处理该事件，你可以在不修改原始代码的情况下为任何现有界面附加 `ModularUI` 浮层。
+
 ```java
 @SubscribeEvent
 public static void onContainerMenuCreate(ContainerMenuEvent.Create event) throws Exception {
@@ -107,9 +130,14 @@ public static void onContainerMenuCreate(ContainerMenuEvent.Create event) throws
 }
 ```
 
-!!!警告 ””菜单必须实现 `IModularUIHolderMenu` 才能使注入工作。LDLib2 自动将此接口混合到所有 `AbstractContainerMenu` 子类中，因此游戏中的每个菜单都已支持它。
-### 示例：增强香草熔炉
-以下示例（取自`CommonListeners`）将显示剩余燃烧时间的覆盖标签添加到标准熔炉屏幕，并将优先级文本字段添加到 AE2 驱动器屏幕 - 两个屏幕均未直接修改：
+!!! warning ""
+    目标 menu 必须实现 `IModularUIHolderMenu` 才能进行注入。
+    LDLib2 通过 mixin 自动将此接口注入到所有 `AbstractContainerMenu` 子类，因此游戏中的每个 menu 都已支持注入。
+
+### 示例：增强原版熔炉
+
+以下示例（取自 `CommonListeners`）为标准熔炉界面添加了一个显示剩余燃烧时间的浮层标签，并为 AE2 驱动器界面添加了优先级文本框——无需直接修改这两个界面：
+
 ```java
 @SubscribeEvent
 public static void onContainerMenuCreateEvent(ContainerMenuEvent.Create event) throws Exception {
@@ -152,4 +180,5 @@ sequenceDiagram
     LDLib2->>Minecraft: renders UI overlay on top of the existing screen
 ```
 
-!!!提示这种模式非常适合向游戏中的任何屏幕添加上下文信息叠加、快速访问控件或调试面板 - 包括来自其他 mod 的屏幕。
+!!! tip
+    这种模式非常适合为游戏中的任何界面（包括其他 mod 的界面）添加上下文信息浮层、快捷操作控件或调试面板。

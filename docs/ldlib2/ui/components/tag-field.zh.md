@@ -1,12 +1,20 @@
-# 标记字段
+﻿# TagField
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`TagField` 是NBT 标签输入字段。它包装了 [`TextField`](text-field.md){ data-preview } 并提供 NBT 文本的语法突出显示渲染（绿色字符串、金色数字、紫色布尔值、浅绿色括号、灰色分隔符和紫色键）。无效输入以错误颜色显示。
-该字段的值是 `Tag`（任何 NBT 类型）。 `TagField` 扩展`BindableUIElement<Tag>`。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`TagField` 是一个 NBT 标签输入字段。它封装了 [`TextField`](text-field.md){ data-preview } 并提供 NBT 文本的语法高亮渲染（字符串显示为绿色，数字显示为金色，布尔值显示为紫色，括号显示为青色，分隔符显示为灰色，键名显示为紫色）。无效输入将以错误颜色显示。
+
+该字段的值是一个 `Tag`（任意 NBT 类型）。`TagField` 继承自 `BindableUIElement<Tag>`。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）均适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var tagField = new TagField();
     tagField.setCompoundTagOnly(); // accept only CompoundTag
@@ -17,7 +25,8 @@
     tagField.setValue(new CompoundTag(), false);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     tagField({
         onTagChanged { tag -> println("Tag: $tag") }
@@ -26,7 +35,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let field = new TagField();
     field.setCompoundTagOnly();
@@ -37,15 +47,19 @@
 ---
 
 ## 内部结构
-| Field | CSS class | Description |
+
+| 字段 | CSS 类 | 描述 |
 | ----- | --------- | ----------- |
-| `textField` | `.__tag-field_text-field__` | The underlying `TextField` with syntax-highlight formatter. |
+| `textField` | `.__tag-field_text-field__` | 底层带有语法高亮格式化器的 `TextField`。 |
 
 ---
 
 ## 值绑定
-`TagField` 扩展`BindableUIElement<Tag>`：
-===“Java”
+
+`TagField` 继承自 `BindableUIElement<Tag>`：
+
+=== "Java"
+
     ```java
     tagField.bind(DataBindingBuilder.create(
         () -> config.getNbt(),
@@ -53,23 +67,26 @@
     ).build());
     ```
 
-有关完整详细信息，请参阅[Data Bindings](../data_bindings.md){ data-preview }。
+详细信息请参阅 [数据绑定](../data_bindings.md){ data-preview }。
+
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `textField` | `TextField` | `public final` | The internal text input with NBT syntax highlighting. |
-| `value` | `Tag` | `private` (getter) | Current NBT value (`EndTag.INSTANCE` when empty). |
+| `textField` | `TextField` | `public final` | 带有 NBT 语法高亮的内部文本输入框。 |
+| `value` | `Tag` | `private` (getter) | 当前 NBT 值（为空时为 `EndTag.INSTANCE`）。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setValue(Tag, boolean)` | `TagField` | Sets the NBT value; second param controls notification. |
-| `setTagValidator(Predicate<Tag>)` | `TagField` | Sets a custom validator. Invalid input is shown in the error color. |
-| `setTagResponder(Consumer<Tag>)` | `TagField` | Registers a listener called on each valid change. |
-| `setCompoundTagOnly()` | `TagField` | Accepts only `CompoundTag`. |
-| `setListOnly()` | `TagField` | Accepts only `ListTag`. |
-| `setAny()` | `TagField` | Accepts any NBT tag type (default). |
+| `setValue(Tag, boolean)` | `TagField` | 设置 NBT 值；第二个参数控制是否触发通知。 |
+| `setTagValidator(Predicate<Tag>)` | `TagField` | 设置自定义验证器。无效输入将以错误颜色显示。 |
+| `setTagResponder(Consumer<Tag>)` | `TagField` | 注册一个监听器，在每次有效更改时调用。 |
+| `setCompoundTagOnly()` | `TagField` | 仅接受 `CompoundTag`。 |
+| `setListOnly()` | `TagField` | 仅接受 `ListTag`。 |
+| `setAny()` | `TagField` | 接受任意 NBT 标签类型（默认）。 |

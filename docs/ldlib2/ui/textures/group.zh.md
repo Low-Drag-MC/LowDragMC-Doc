@@ -1,12 +1,20 @@
-# Gui纹理组
+﻿# GuiTextureGroup
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`GuiTextureGroup` 绘制多个 `IGuiTexture` 实例，按照它们添加的顺序堆叠在一起。它对于将背景图像与叠加层组合或在填充上分层边框非常有用。
-注册表名称：`group_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`GuiTextureGroup` 按添加顺序自下而上依次绘制多个 `IGuiTexture` 实例。适用于为背景图像叠加图层，或在填充上叠加边框等场景。
+
+注册名：`group_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Layer a sprite background and a coloured border
     IGuiTexture layered = IGuiTexture.group(
@@ -21,7 +29,8 @@
     );
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val layered = IGuiTexture.group(
         SpriteTexture.of("mymod:textures/gui/bg.png"),
@@ -29,7 +38,8 @@
        )
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let layered = IGuiTexture.group(
         SpriteTexture.of("mymod:textures/gui/bg.png"),
@@ -40,6 +50,7 @@
 ---
 
 ## LSS
+
 ```css
 background: group(
     sprite(mymod:textures/gui/bg.png),
@@ -50,16 +61,18 @@ background: group(
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `textures` | `IGuiTexture[]` | The textures drawn in order (bottom to top). |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `textures` | `IGuiTexture[]` | 按顺序绘制的纹理（从底部到顶部）。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `GuiTextureGroup.of(IGuiTexture...)` | `GuiTextureGroup` | Static factory. Equivalent to `IGuiTexture.group(...)`. |
-| `setTextures(IGuiTexture...)` | `GuiTextureGroup` | Replaces all textures in the group. |
-| `setColor(int)` | `GuiTextureGroup` | Copies all textures, applies `setColor(color)` to each, and returns a new group. |
-| `copy()` | `GuiTextureGroup` | Returns a shallow copy (textures are shared). |
+## 方法
+
+| 方法 | 返回类型 | 描述 |
+| ---- | -------- | ---- |
+| `GuiTextureGroup.of(IGuiTexture...)` | `GuiTextureGroup` | 静态工厂方法，等同于 `IGuiTexture.group(...)`。 |
+| `setTextures(IGuiTexture...)` | `GuiTextureGroup` | 替换组中的所有纹理。 |
+| `setColor(int)` | `GuiTextureGroup` | 复制所有纹理，对每个纹理应用 `setColor(color)`，然后返回新的组。 |
+| `copy()` | `GuiTextureGroup` | 返回浅拷贝（纹理为共享引用）。 |

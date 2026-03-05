@@ -1,12 +1,23 @@
-# 场景
+﻿# Scene
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`Scene` 在 GUI 元素内呈现交互式 3D Minecraft 世界视图。它使用`WorldSceneRenderer`从`TrackedDummyWorld`绘制一组块。视口支持：
-- **拖动以旋转** — 左键单击并拖动以绕相机旋转。- **滚动缩放** — 鼠标滚轮可更改缩放级别。- **块交互** — 单击报告击中块的位置和面。- **FBO 模式** — 以任意分辨率渲染到帧缓冲区对象中。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`Scene` 在 GUI 元素内渲染一个可交互的 3D Minecraft 世界视图。它使用 `WorldSceneRenderer` 从 `TrackedDummyWorld` 中绘制一组方块。视口支持：
+
+- **拖拽旋转** — 左键拖拽以环绕相机。
+- **滚轮缩放** — 鼠标滚轮改变缩放级别。
+- **方块交互** — 点击时报告命中的方块位置和面。
+- **FBO 模式** — 以任意分辨率渲染到帧缓冲对象。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 使用方法
+
+=== "Java"
+
     ```java
     var scene = new Scene();
 
@@ -25,7 +36,8 @@
     parent.addChild(scene);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     scene({
         world(level)
@@ -34,7 +46,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let s = new Scene();
     s.createScene(level);
@@ -46,47 +59,49 @@
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `renderer` | `WorldSceneRenderer` (nullable) | `private` (getter, client-only) | The underlying scene renderer. |
-| `dummyWorld` | `TrackedDummyWorld` (nullable) | `private` (getter) | The virtual world holding rendered blocks. |
-| `draggable` | `boolean` | `getter/setter` | Whether the camera can be rotated by dragging. Default: `true`. |
-| `scalable` | `boolean` | `getter/setter` | Whether the mouse wheel changes the zoom. Default: `true`. |
-| `intractable` | `boolean` | `getter/setter` | Whether block clicks are reported. Default: `true`. |
-| `renderFacing` | `boolean` | `getter/setter` | Whether face highlights are drawn. Default: `true`. |
-| `renderSelect` | `boolean` | `getter/setter` | Whether selected block highlights are drawn. Default: `true`. |
-| `showHoverBlockTips` | `boolean` | `getter/setter` | Whether a tooltip is shown for the hovered block. Default: `false`. |
-| `tickWorld` | `boolean` | `getter/setter` | Whether `dummyWorld` is ticked every frame. Default: `true`. |
-| `useOrtho` | `boolean` | `private` (getter) | `true` when using orthographic projection. |
-| `useCache` | `boolean` | `private` (getter) | `true` when using a cached buffer. |
-| `autoReleased` | `boolean` | `private` (getter) | `true` to release renderer resources when removed. Default: `true`. |
-| `center` | `Vector3f` | `private` (getter) | Camera look-at target (world space). |
-| `rotationPitch` | `float` | `private` (getter) | Camera pitch in degrees. Default: `25`. |
-| `rotationYaw` | `float` | `private` (getter) | Camera yaw in degrees. Default: `-135`. |
-| `zoom` | `float` | `private` (getter) | Camera distance. Default: `5`. |
-| `onSelected` | `BiConsumer<BlockPos, Direction>` | `getter/setter` | Callback invoked when a block is clicked. |
-| `lastHoverPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The block/face currently under the mouse. |
-| `lastClickPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The block/face that was last clicked. |
-| `lastSelectedPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The last selected block/face. |
+| `renderer` | `WorldSceneRenderer`（可空） | `private`（getter，仅客户端） | 底层场景渲染器。 |
+| `dummyWorld` | `TrackedDummyWorld`（可空） | `private`（getter） | 存放渲染方块的虚拟世界。 |
+| `draggable` | `boolean` | `getter/setter` | 是否可通过拖拽旋转相机。默认值：`true`。 |
+| `scalable` | `boolean` | `getter/setter` | 是否可通过鼠标滚轮改变缩放。默认值：`true`。 |
+| `intractable` | `boolean` | `getter/setter` | 是否报告方块点击事件。默认值：`true`。 |
+| `renderFacing` | `boolean` | `getter/setter` | 是否绘制面高亮。默认值：`true`。 |
+| `renderSelect` | `boolean` | `getter/setter` | 是否绘制选中方块高亮。默认值：`true`。 |
+| `showHoverBlockTips` | `boolean` | `getter/setter` | 是否显示悬停方块的工具提示。默认值：`false`。 |
+| `tickWorld` | `boolean` | `getter/setter` | 是否每帧更新 `dummyWorld`。默认值：`true`。 |
+| `useOrtho` | `boolean` | `private`（getter） | 使用正交投影时为 `true`。 |
+| `useCache` | `boolean` | `private`（getter） | 使用缓存缓冲区时为 `true`。 |
+| `autoReleased` | `boolean` | `private`（getter） | 移除时自动释放渲染器资源时为 `true`。默认值：`true`。 |
+| `center` | `Vector3f` | `private`（getter） | 相机观察目标（世界坐标）。 |
+| `rotationPitch` | `float` | `private`（getter） | 相机俯仰角（度）。默认值：`25`。 |
+| `rotationYaw` | `float` | `private`（getter） | 相机偏航角（度）。默认值：`-135`。 |
+| `zoom` | `float` | `private`（getter） | 相机距离。默认值：`5`。 |
+| `onSelected` | `BiConsumer<BlockPos, Direction>` | `getter/setter` | 点击方块时调用的回调。 |
+| `lastHoverPosFace` | `BlockPosFace`（可空） | `private`（getter） | 当前鼠标悬停的方块/面。 |
+| `lastClickPosFace` | `BlockPosFace`（可空） | `private`（getter） | 上次点击的方块/面。 |
+| `lastSelectedPosFace` | `BlockPosFace`（可空） | `private`（getter） | 上次选中的方块/面。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `createScene(Level)` | `Scene` | Initialises the renderer with the given level (immediate mode). |
-| `createScene(Level, boolean, Size)` | `Scene` | Initialises with optional FBO rendering at the given resolution. |
-| `setRenderedCore(Collection<BlockPos>)` | `Scene` | Sets the blocks to render; auto-adjusts the camera. |
-| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook)` | `Scene` | Sets blocks with a custom render hook. |
-| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook, boolean)` | `Scene` | Sets blocks; `autoCamera` controls whether the camera is repositioned. |
-| `useCacheBuffer(boolean)` | `Scene` | Enables or disables compiled draw-call cache. |
-| `useOrtho(boolean)` | `Scene` | Switches between perspective and orthographic projection. |
-| `setOrthoRange(float)` | `Scene` | Sets the orthographic projection range (only effective when ortho is enabled). |
-| `setCenter(Vector3f)` | `Scene` | Sets the camera look-at target in world space. |
-| `setZoom(float)` | `Scene` | Sets the camera zoom distance. |
-| `setCameraYawAndPitch(float yaw, float pitch)` | `Scene` | Sets the camera yaw and pitch immediately. |
-| `setCameraYawAndPitchAnima(float yaw, float pitch, int duration)` | `Scene` | Animates the camera to the given yaw and pitch over `duration` ticks. |
-| `needCompileCache()` | `void` | Flags the cache as dirty so it is recompiled on the next frame. |
-| `releaseRendererResource()` | `void` | Releases GPU resources held by the renderer. |
-| `setBeforeWorldRender(Consumer<Scene>)` | `Scene` | Sets a hook called before each world render pass (client-only). |
-| `setAfterWorldRender(Consumer<Scene>)` | `Scene` | Sets a hook called after each world render pass. |
+| `createScene(Level)` | `Scene` | 使用给定的 Level 初始化渲染器（立即模式）。 |
+| `createScene(Level, boolean, Size)` | `Scene` | 使用可选的 FBO 渲染和指定分辨率进行初始化。 |
+| `setRenderedCore(Collection<BlockPos>)` | `Scene` | 设置要渲染的方块；自动调整相机。 |
+| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook)` | `Scene` | 设置方块并指定自定义渲染钩子。 |
+| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook, boolean)` | `Scene` | 设置方块；`autoCamera` 控制是否重新定位相机。 |
+| `useCacheBuffer(boolean)` | `Scene` | 启用或禁用编译的绘制调用缓存。 |
+| `useOrtho(boolean)` | `Scene` | 在透视投影和正交投影之间切换。 |
+| `setOrthoRange(float)` | `Scene` | 设置正交投影范围（仅在正交模式启用时生效）。 |
+| `setCenter(Vector3f)` | `Scene` | 设置相机在世界坐标中的观察目标。 |
+| `setZoom(float)` | `Scene` | 设置相机缩放距离。 |
+| `setCameraYawAndPitch(float yaw, float pitch)` | `Scene` | 立即设置相机的偏航角和俯仰角。 |
+| `setCameraYawAndPitchAnima(float yaw, float pitch, int duration)` | `Scene` | 在 `duration` tick 内将相机动画过渡到指定的偏航角和俯仰角。 |
+| `needCompileCache()` | `void` | 将缓存标记为脏，以便在下一帧重新编译。 |
+| `releaseRendererResource()` | `void` | 释放渲染器持有的 GPU 资源。 |
+| `setBeforeWorldRender(Consumer<Scene>)` | `Scene` | 设置在每次世界渲染通道之前调用的钩子（仅客户端）。 |
+| `setAfterWorldRender(Consumer<Scene>)` | `Scene` | 设置在每次世界渲染通道之后调用的钩子。 |

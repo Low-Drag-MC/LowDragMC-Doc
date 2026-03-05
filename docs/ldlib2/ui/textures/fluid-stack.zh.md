@@ -1,12 +1,20 @@
-# 流体堆栈纹理
+﻿# FluidStackTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`FluidStackTexture` 使用标准 Minecraft 流体渲染将一个或多个 `FluidStack` 渲染为 GUI 纹理。当提供多个堆栈时，它们每 20 个周期（1 秒）循环一次。
-注册表名称：`fluid_stack_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
+
+`FluidStackTexture` 使用标准 Minecraft 流体渲染将一个或多个 `FluidStack` 渲染为 GUI 纹理。当提供多个流体堆时，它们会每 20 tick（1 秒）循环切换。
+
+注册名：`fluid_stack_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Single fluid
     IGuiTexture water = new FluidStackTexture(Fluids.WATER);
@@ -26,14 +34,16 @@
         .setColor(0x8000AAFF);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val water = FluidStackTexture(Fluids.WATER)
 
     val cycle = FluidStackTexture(Fluids.WATER, Fluids.LAVA)
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let water = new FluidStackTexture(Fluids.WATER);
 
@@ -43,15 +53,17 @@
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `fluids` | `FluidStack[]` | The fluid stacks to display. |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `fluids` | `FluidStack[]` | 要显示的流体堆。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setFluids(FluidStack...)` | `FluidStackTexture` | Replaces the displayed stacks and resets the cycle index. |
-| `setColor(int)` | `FluidStackTexture` | Sets an ARGB tint applied over the rendered fluid. |
-| `copy()` | `FluidStackTexture` | Returns a deep copy. |
+## 方法
+
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
+| `setFluids(FluidStack...)` | `FluidStackTexture` | 替换显示的流体堆并重置循环索引。 |
+| `setColor(int)` | `FluidStackTexture` | 设置应用于渲染流体的 ARGB 色调。 |
+| `copy()` | `FluidStackTexture` | 返回深拷贝。 |

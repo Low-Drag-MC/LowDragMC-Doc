@@ -1,13 +1,23 @@
-# 矩形纹理
+﻿# RectTexture
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`RectTexture` 使用 CPU 端曲面细分绘制圆角矩形。对于 SDF 着色器不可用的环境，它是 [`SDFRectTexture`](sdf-rect.md) 的后备替代方案。这两个类都公开相同的属性。
-注册表名称：`rect_texture`
-!!!笔记 ””扩展`TransformTexture` — 支持`rotate()`、`scale()`、`transform()`。
-!!!提示 ””对于大多数用例，首选[`SDFRectTexture`](sdf-rect.md)，它在所有尺寸下都能提供更好的视觉质量。仅当需要CPU端渲染时才使用`RectTexture`。
+
+`RectTexture` 使用 CPU 侧曲面细分绘制圆角矩形。当 SDF 着色器不可用时，它可作为 [`SDFRectTexture`](sdf-rect.md) 的备选方案。两个类暴露相同的属性。
+
+注册名：`rect_texture`
+
+!!! note ""
+    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+
+!!! tip ""
+    大多数情况下，推荐使用 [`SDFRectTexture`](sdf-rect.md)，它在所有尺寸下都能提供更好的视觉质量。仅当需要 CPU 侧渲染时才使用 `RectTexture`。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     // Filled rounded rect
     IGuiTexture panel = new RectTexture()
@@ -25,7 +35,8 @@
     IGuiTexture simple = RectTexture.of(0xFF3A3A3A);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     val panel = RectTexture()
         .setColor(0xFF2A2A2A.toInt())
@@ -34,7 +45,8 @@
     val simple = RectTexture.of(0xFF3A3A3A.toInt())
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let panel = new RectTexture()
         .setColor(0xFF2A2A2A)
@@ -47,24 +59,26 @@
 ---
 
 ## 字段
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `color` | `int` | Fill colour (ARGB). Default: `0xFFFFFFFF`. |
-| `borderColor` | `int` | Stroke colour (ARGB). Default: `0xFF000000`. |
-| `radius` | `Vector4f` | Per-corner radii: `x` = bottom-left, `y` = bottom-right, `z` = top-right, `w` = top-left. |
-| `stroke` | `float` | Border stroke width. `0` disables the border. |
-| `cornerSegments` | `int` | Number of line segments per corner arc. Higher = smoother but more vertices. Default: `8`. |
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `color` | `int` | 填充颜色（ARGB）。默认值：`0xFFFFFFFF`。 |
+| `borderColor` | `int` | 描边颜色（ARGB）。默认值：`0xFF000000`。 |
+| `radius` | `Vector4f` | 各角的半径：`x` = 左下，`y` = 右下，`z` = 右上，`w` = 左上。 |
+| `stroke` | `float` | 边框描边宽度。`0` 表示禁用边框。 |
+| `cornerSegments` | `int` | 每个圆角弧线的线段数量。值越高越平滑，但顶点数更多。默认值：`8`。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
-| `setColor(int)` | `RectTexture` | Sets the fill colour. |
-| `setBorderColor(int)` | `RectTexture` | Sets the stroke colour. |
-| `setRadius(Vector4f)` | `RectTexture` | Sets per-corner radii. |
-| `setStroke(float)` | `RectTexture` | Sets the stroke width. |
-| `setCornerSegments(int)` | `RectTexture` | Sets the number of arc segments per corner. |
-| `copy()` | `RectTexture` | Returns a deep copy. |
-| `interpolate(IGuiTexture, float)` | `IGuiTexture` | Blends all properties toward another `RectTexture`. |
-| `RectTexture.of(int)` | `RectTexture` | Static factory — creates a rect with the given fill colour. |
+## 方法
+
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
+| `setColor(int)` | `RectTexture` | 设置填充颜色。 |
+| `setBorderColor(int)` | `RectTexture` | 设置描边颜色。 |
+| `setRadius(Vector4f)` | `RectTexture` | 设置各角的半径。 |
+| `setStroke(float)` | `RectTexture` | 设置描边宽度。 |
+| `setCornerSegments(int)` | `RectTexture` | 设置每个圆角的弧线段数量。 |
+| `copy()` | `RectTexture` | 返回深拷贝。 |
+| `interpolate(IGuiTexture, float)` | `IGuiTexture` | 将所有属性向另一个 `RectTexture` 混合。 |
+| `RectTexture.of(int)` | `RectTexture` | 静态工厂方法 — 使用给定的填充颜色创建矩形。 |

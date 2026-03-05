@@ -1,12 +1,22 @@
-# 图形视图
+﻿# GraphView
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`GraphView` 是一个可平移、可缩放的画布，用于显示节点图或任何任意 2D 内容。子元素被放置在可以平移和缩放的`contentRoot` 元素上。该视图呈现重复的网格背景并支持：
-- **平移** — 单击并拖动（在视图背景上使用左键，或在任意位置使用中键）。- **缩放** — 鼠标滚轮，固定在`[min-scale, max-scale]`。- **适合** - 帮助器居中和缩放视图以适合所有子项或给定的边界框。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`GraphView` 是一个可平移、可缩放的画布，用于显示节点图或任意 2D 内容。子元素被放置在 `contentRoot` 元素上，该元素可以进行平移和缩放变换。视图渲染重复的网格背景，并支持：
+
+- **平移** — 点击并拖拽（在视图背景上使用左键，或在任意位置使用中键）。
+- **缩放** — 鼠标滚轮，限制在 `[min-scale, max-scale]` 范围内。
+- **适应** — 辅助方法，用于将视图居中并缩放以适应所有子元素或给定的边界框。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 用法
+
+=== "Java"
+
     ```java
     var graph = new GraphView();
     graph.graphViewStyle(style -> style
@@ -24,7 +34,8 @@
     graph.fitToChildren(20f, 0.1f);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     graphView({
         graphViewStyle = {
@@ -37,7 +48,8 @@
     }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let graph = new GraphView();
     graph.graphViewStyle(style => {
@@ -51,52 +63,72 @@
 ---
 
 ## 内部结构
-| Field | CSS class | Description |
+
+| 字段 | CSS 类 | 描述 |
 | ----- | --------- | ----------- |
-| `contentRoot` | `.__graph-view_content-root__` | Absolutely-positioned element that holds all user-added children and receives the pan/zoom transform. |
+| `contentRoot` | `.__graph-view_content-root__` | 绝对定位的元素，包含所有用户添加的子元素，并接收平移/缩放变换。 |
 
 ---
 
 ## GraphView 样式
-!!!信息“”#### <p style="font-size: 1rem;">允许缩放</p>
-滚动鼠标滚轮是否会更改缩放级别。
-默认值：`true`
-===“Java”
+
+!!! info ""
+    #### <p style="font-size: 1rem;">allow-zoom</p>
+
+    是否允许滚动鼠标滚轮改变缩放级别。
+
+    默认值：`true`
+
+    === "Java"
+
         ```java
         graph.graphViewStyle(style -> style.allowZoom(false));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         graph-view {
             allow-zoom: false;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">allow-pan</p>
-单击并拖动是否平移视图。
-默认值：`true`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">allow-pan</p>
+
+    是否允许点击并拖拽来平移视图。
+
+    默认值：`true`
+
+    === "Java"
+
         ```java
         graph.graphViewStyle(style -> style.allowPan(false));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         graph-view {
             allow-pan: false;
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">最小尺度/最大尺度</p>
-缩放级别边界。
-默认值：`0.1` / `10`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">min-scale / max-scale</p>
+
+    缩放级别的边界值。
+
+    默认值：`0.1` / `10`
+
+    === "Java"
+
         ```java
         graph.graphViewStyle(style -> style.minScale(0.25f).maxScale(4f));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         graph-view {
             min-scale: 0.25;
@@ -104,30 +136,42 @@
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">网格背景</p>
-纹理平铺在背景上。默认是带有 `REPEAT` 环绕模式的内置网格精灵。
-默认值：`ldlib2:textures/gui/grid_bg.png`（重复）
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-background</p>
+
+    在背景上平铺的纹理。默认是带有 `REPEAT` 环绕模式的内置网格精灵图。
+
+    默认值：`ldlib2:textures/gui/grid_bg.png`（重复）
+
+    === "Java"
+
         ```java
         graph.graphViewStyle(style -> style.gridTexture(myGridTexture));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         graph-view {
             grid-background: sprite("mymod:textures/gui/grid.png");
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">网格大小</p>
-每个网格单元的大小（以世界空间单位表示）。
-默认值：`64`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-size</p>
+
+    每个网格单元的大小（以世界空间单位为单位）。
+
+    默认值：`64`
+
+    === "Java"
+
         ```java
         graph.graphViewStyle(style -> style.gridSize(32f));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         graph-view {
             grid-size: 32;
@@ -137,23 +181,25 @@
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `contentRoot` | `UIElement` | `public final` | The transformed canvas holding all content. |
-| `graphViewStyle` | `GraphViewStyle` | `private` (getter) | Current style. |
-| `offsetX` | `float` | `getter/setter` | Current horizontal world-space offset. |
-| `offsetY` | `float` | `getter/setter` | Current vertical world-space offset. |
-| `scale` | `float` | `private` (getter) | Current zoom level. |
+| `contentRoot` | `UIElement` | `public final` | 用于保存所有内容的变换画布。 |
+| `graphViewStyle` | `GraphViewStyle` | `private`（有 getter） | 当前样式。 |
+| `offsetX` | `float` | `getter/setter` | 当前水平世界空间偏移量。 |
+| `offsetY` | `float` | `getter/setter` | 当前垂直世界空间偏移量。 |
+| `scale` | `float` | `private`（有 getter） | 当前缩放级别。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `addContentChild(UIElement)` | `GraphView` | Adds a child to `contentRoot`. |
-| `removeContentChild(UIElement)` | `GraphView` | Removes a child from `contentRoot`. |
-| `clearAllContentChildren()` | `GraphView` | Removes all children from `contentRoot`. |
-| `graphViewStyle(Consumer<GraphViewStyle>)` | `GraphView` | Configures style fluently. |
-| `contentRoot(Consumer<UIElement>)` | `UIElement` | Configures `contentRoot`. |
-| `fitToChildren(float padding, float minScaleBound)` | `void` | Adjusts offset and scale to fit all visible children, with the given padding and minimum scale. |
-| `fit(float minX, float minY, float maxX, float maxY, float minScaleBound)` | `void` | Adjusts offset and scale to fit the given bounding box. |
+| `addContentChild(UIElement)` | `GraphView` | 向 `contentRoot` 添加子元素。 |
+| `removeContentChild(UIElement)` | `GraphView` | 从 `contentRoot` 移除子元素。 |
+| `clearAllContentChildren()` | `GraphView` | 移除 `contentRoot` 的所有子元素。 |
+| `graphViewStyle(Consumer<GraphViewStyle>)` | `GraphView` | 以流式方式配置样式。 |
+| `contentRoot(Consumer<UIElement>)` | `UIElement` | 配置 `contentRoot`。 |
+| `fitToChildren(float padding, float minScaleBound)` | `void` | 调整偏移量和缩放比例以适应所有可见子元素，使用给定的内边距和最小缩放值。 |
+| `fit(float minX, float minY, float maxX, float maxY, float minScaleBound)` | `void` | 调整偏移量和缩放比例以适应给定的边界框。 |

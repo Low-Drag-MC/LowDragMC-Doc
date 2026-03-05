@@ -1,12 +1,24 @@
-# 树列表
+﻿# TreeList
+
 {{ version_badge("2.2.1", label="Since", icon="tag") }}
-`TreeList<NODE>` 是一个通用的分层列表小部件。每个节点都实现`ITreeNode`，并且可以是分支（可扩展）或叶子。节点使用可配置的 `UIElementProvider` 进行渲染，并且可以通过箭头图标、单击或双击来展开/折叠。
-特征：- 单选和多选（使用`Shift` 和`Ctrl`）。- 动态树（默认情况下，每个刻度都会重新检查子级）或静态树。- 展平根模式可跳过显示中的根节点。- 可定制的展开/折叠图标和节点背景纹理。
-!!!笔记 ””[UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）也适用于此处。
+
+`TreeList<NODE>` 是一个通用的层级列表组件。每个节点实现 `ITreeNode` 接口，可以是分支节点（可展开）或叶子节点。节点通过可配置的 `UIElementProvider` 渲染，可通过箭头图标、单击或双击来展开/折叠。
+
+特性：
+- 支持单选和多选（使用 `Shift` 和 `Ctrl`）。
+- 动态树（默认每 tick 重新检查子节点）或静态树。
+- 扁平化根节点模式，可在显示时跳过根节点。
+- 可自定义展开/折叠图标和节点背景纹理。
+
+!!! note ""
+    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+
 ---
 
-＃＃ 用法
-===“Java”
+## 基本用法
+
+=== "Java"
+
     ```java
     var tree = new TreeList<MyNode>(rootNode);
     tree.setNodeUISupplier(TreeList.textTemplate(node -> Component.literal(node.getName())));
@@ -15,7 +27,8 @@
     parent.addChild(tree);
     ```
 
-===“科特林”
+=== "Kotlin"
+
     ```kotlin
     treeList<MyNode>(rootNode, {
         nodeUI(TreeList.textTemplate { node -> Component.literal(node.name) })
@@ -23,7 +36,8 @@
     }) { }
     ```
 
-===“KubeJS”
+=== "KubeJS"
+
     ```js
     let tree = new TreeList(rootNode);
     tree.setNodeUISupplier(TreeList.textTemplate(n => Component.literal(n.name)));
@@ -34,40 +48,58 @@
 ---
 
 ## 树列表样式
-!!!信息“”#### <p style="font-size: 1rem;">节点背景</p>
-未选定节点的背景纹理。
-默认值：无（空）
-===“Java”
+
+!!! info ""
+    #### <p style="font-size: 1rem;">node-background</p>
+
+    未选中节点的背景纹理。
+
+    默认值：无（空）
+
+    === "Java"
+
         ```java
         tree.menuStyle(style -> style.nodeTexture(myBg));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         tree-list {
             node-background: color(#00000040);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">节点悬停背景</p>
-选定（突出显示）节点的背景纹理。
-默认值：`ColorPattern.BLUE.rectTexture()`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">node-hover-background</p>
+
+    选中（高亮）节点的背景纹理。
+
+    默认值：`ColorPattern.BLUE.rectTexture()`
+
+    === "Java"
+
         ```java
         tree.menuStyle(style -> style.hoverTexture(myHighlight));
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         tree-list {
             node-hover-background: color(#4040FF80);
         }
         ```
 
-!!!信息“”#### <p style="font-size: 1rem;">折叠图标 / 展开图标</p>
-折叠或展开分支节点时显示的图标。
-默认值：`Icons.RIGHT_ARROW_NO_BAR_S_WHITE` / `Icons.DOWN_ARROW_NO_BAR_S_WHITE`
-===“Java”
+!!! info ""
+    #### <p style="font-size: 1rem;">collapse-icon / expand-icon</p>
+
+    分支节点折叠或展开时显示的图标。
+
+    默认值：`Icons.RIGHT_ARROW_NO_BAR_S_WHITE` / `Icons.DOWN_ARROW_NO_BAR_S_WHITE`
+
+    === "Java"
+
         ```java
         tree.menuStyle(style -> style
             .collapseIcon(myCollapsed)
@@ -75,7 +107,8 @@
         );
         ```
 
-===“LSS”
+    === "LSS"
+
         ```css
         tree-list {
             collapse-icon: sprite("mymod:textures/gui/arrow_right.png");
@@ -86,46 +119,50 @@
 ---
 
 ## 字段
-| Name | Type | Access | Description |
+
+| 名称 | 类型 | 访问修饰 | 描述 |
 | ---- | ---- | ------ | ----------- |
-| `treeListStyle` | `TreeListStyle` | `private` (getter) | Current style. |
-| `root` | `NODE` (nullable) | `private` (getter) | The root tree node. |
-| `hoveredNode` | `NODE` (nullable) | `private` (getter) | The node currently under the mouse. |
-| `doubleClickToExpand` | `boolean` | `setter` | Whether double-clicking expands/collapses branches. Default: `true`. |
-| `clickToExpand` | `boolean` | `setter` | Whether single-clicking expands/collapses branches. Default: `false`. |
-| `supportMultipleSelection` | `boolean` | `setter` | Whether `Ctrl+click` and `Shift+click` select multiple nodes. Default: `false`. |
-| `staticTree` | `boolean` | `setter` | When `true`, children are not rechecked every tick. Default: `false`. |
+| `treeListStyle` | `TreeListStyle` | `private`（有 getter） | 当前样式。 |
+| `root` | `NODE`（可空） | `private`（有 getter） | 根树节点。 |
+| `hoveredNode` | `NODE`（可空） | `private`（有 getter） | 当前鼠标悬停的节点。 |
+| `doubleClickToExpand` | `boolean` | `setter` | 是否双击展开/折叠分支节点。默认值：`true`。 |
+| `clickToExpand` | `boolean` | `setter` | 是否单击展开/折叠分支节点。默认值：`false`。 |
+| `supportMultipleSelection` | `boolean` | `setter` | 是否支持 `Ctrl+点击` 和 `Shift+点击` 多选节点。默认值：`false`。 |
+| `staticTree` | `boolean` | `setter` | 设为 `true` 时，不会每 tick 重新检查子节点。默认值：`false`。 |
 
 ---
 
-＃＃ 方法
-| Method | Returns | Description |
+## 方法
+
+| 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setRoot(NODE)` | `TreeList<NODE>` | Sets the root node and rebuilds the list. |
-| `setNodeUISupplier(UIElementProvider<NODE>)` | `TreeList<NODE>` | Sets the factory that creates the UI for each node. |
-| `setOnNodeUICreated(BiConsumer<NODE, UIElement>)` | `TreeList<NODE>` | Callback invoked after each node UI is created. |
-| `setOnSelectedChanged(Consumer<Set<NODE>>)` | — | Callback invoked when the selection changes. |
-| `setOnDoubleClickNode(Consumer<NODE>)` | — | Callback invoked on double-click. |
-| `setSelectableNodeFilter(Predicate<NODE>)` | — | Predicate that controls which nodes can be selected. |
-| `setFlattenRoot(boolean)` | `TreeList<NODE>` | When `true`, the root is not shown; its children become top-level items. |
-| `getSelected()` | `Set<NODE>` | Returns the currently selected nodes (unmodifiable). |
-| `setSelected(Collection<NODE>, boolean)` | `TreeList<NODE>` | Replaces the selection. |
-| `addSelected(NODE, boolean)` | `TreeList<NODE>` | Adds a node to the selection. |
-| `removeSelected(NODE, boolean)` | `TreeList<NODE>` | Removes a node from the selection. |
-| `expandNode(NODE)` | `void` | Expands a branch node. |
-| `collapseNode(NODE)` | `void` | Collapses a branch node. |
-| `expandNodeAlongPath(NODE)` | `void` | Expands all ancestors of the given node. |
-| `isNodeExpanded(NODE)` | `boolean` | Returns `true` if the node is currently expanded. |
-| `isNodeSelected(NODE)` | `boolean` | Returns `true` if the node is currently selected. |
-| `reloadList()` | `TreeList<NODE>` | Clears and rebuilds all node UIs from the current root. |
-| `menuStyle(Consumer<TreeListStyle>)` | `TreeList<NODE>` | Configures style fluently. |
+| `setRoot(NODE)` | `TreeList<NODE>` | 设置根节点并重建列表。 |
+| `setNodeUISupplier(UIElementProvider<NODE>)` | `TreeList<NODE>` | 设置为每个节点创建 UI 的工厂。 |
+| `setOnNodeUICreated(BiConsumer<NODE, UIElement>)` | `TreeList<NODE>` | 每个节点 UI 创建后调用的回调。 |
+| `setOnSelectedChanged(Consumer<Set<NODE>>)` | — | 选中项变化时调用的回调。 |
+| `setOnDoubleClickNode(Consumer<NODE>)` | — | 双击节点时调用的回调。 |
+| `setSelectableNodeFilter(Predicate<NODE>)` | — | 控制哪些节点可被选中的谓词。 |
+| `setFlattenRoot(boolean)` | `TreeList<NODE>` | 设为 `true` 时，不显示根节点；其子节点成为顶层项。 |
+| `getSelected()` | `Set<NODE>` | 返回当前选中的节点（不可修改）。 |
+| `setSelected(Collection<NODE>, boolean)` | `TreeList<NODE>` | 替换选中项。 |
+| `addSelected(NODE, boolean)` | `TreeList<NODE>` | 将节点添加到选中项。 |
+| `removeSelected(NODE, boolean)` | `TreeList<NODE>` | 从选中项中移除节点。 |
+| `expandNode(NODE)` | `void` | 展开分支节点。 |
+| `collapseNode(NODE)` | `void` | 折叠分支节点。 |
+| `expandNodeAlongPath(NODE)` | `void` | 展开给定节点的所有祖先节点。 |
+| `isNodeExpanded(NODE)` | `boolean` | 如果节点当前已展开则返回 `true`。 |
+| `isNodeSelected(NODE)` | `boolean` | 如果节点当前已选中则返回 `true`。 |
+| `reloadList()` | `TreeList<NODE>` | 清空并从当前根节点重建所有节点 UI。 |
+| `menuStyle(Consumer<TreeListStyle>)` | `TreeList<NODE>` | 流式配置样式。 |
 
 ---
 
 ## 节点 UI 模板
-常见节点 UI 布局的静态辅助方法：
-| Method | Description |
+
+用于常见节点 UI 布局的静态辅助方法：
+
+| 方法 | 描述 |
 | ------ | ----------- |
-| `textTemplate(Function<NODE, Component>)` | Creates a node UI showing only text. |
-| `iconTextTemplate(Function<NODE, IGuiTexture>, Function<NODE, Component>)` | Creates a node UI with an icon and text. |
-| `optionalIconTextTemplate(Function<NODE, IGuiTexture>, Function<NODE, Component>)` | Like `iconTextTemplate` but the icon is shown only when non-empty. |
+| `textTemplate(Function<NODE, Component>)` | 创建仅显示文本的节点 UI。 |
+| `iconTextTemplate(Function<NODE, IGuiTexture>, Function<NODE, Component>)` | 创建包含图标和文本的节点 UI。 |
+| `optionalIconTextTemplate(Function<NODE, IGuiTexture>, Function<NODE, Component>)` | 类似 `iconTextTemplate`，但仅在图标非空时显示图标。 |

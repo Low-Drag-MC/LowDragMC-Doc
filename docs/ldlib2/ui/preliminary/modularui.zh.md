@@ -1,12 +1,25 @@
-# 模块化用户界面
+﻿# ModularUI
+
 {{ version_badge("2.1.0", label="Since", icon="tag") }}
-本页介绍**LDLib2 UI系统**的核心概念。在运行时，LDLib2使用一个名为**`ModularUI`**的类来管理整个UI树。`ModularUI` 负责：
-- 管理 UI 生命周期- 处理输入事件- 应用样式和样式表- 协调渲染- 同步客户端和服务器之间的数据（与菜单一起使用时）
+
+本页介绍 **LDLib2 UI 系统** 的核心概念。
+在运行时，LDLib2 使用名为 **`ModularUI`** 的类来管理整个 UI 树。  
+`ModularUI` 负责：
+
+- 管理 UI 生命周期
+- 处理输入事件
+- 应用样式和样式表
+- 协调渲染
+- 在客户端和服务端之间同步数据（与 Menu 配合使用时）
+
 简而言之，**`ModularUI` 是 UI 实例的中央控制器**。
+
 ---
 
 ## `ModularUI` 的工作原理
-下图展示了 `ModularUI` 如何将 Minecraft 系统与 UI 树连接起来：```mermaid
+
+下图展示了 `ModularUI` 如何连接 Minecraft 系统与 UI 树：
+```mermaid
 flowchart LR
     Screen["Screen<br/>(Mouse / Keyboard Input)"]
     Menu["Menu<br/>(Server Data)"]
@@ -36,62 +49,82 @@ flowchart LR
 ---
 
 ## `ModularUI` API
-创建`ModualrUI`有两种方法：
-- `#!java ModularUI.of(ui)`- `#!java ModularUI.of(ui, player)`
-要创建一个简单的仅`client-side` UI，第一个就足够了。
-第二个需要 `Player` 作为输入，如果您的 UI 是 `menu-based` UI 并且需要客户端和服务器之间的数据同步，则这是**必需的**。
+
+创建 `ModularUI` 有两种方法：
+
+- `#!java ModularUI.of(ui)`
+- `#!java ModularUI.of(ui, player)`
+
+如果只需创建简单的 `client-side`（仅客户端）UI，使用第一种方法即可。
+
+第二种方法需要传入 `Player` 参数，这在 `menu-based`（基于菜单）UI 中是 **必需的**，因为这类 UI 需要在客户端和服务端之间同步数据。
+
 ### 通用 API
-| Method | Description |
+
+| 方法 | 描述 |
 | ---- | ----------- |
-| `shouldCloseOnEsc()` | Whether the UI should close when pressing `ESC`. |
-| `shouldCloseOnKeyInventory()` | Whether the UI should close when pressing the Inventory key (default: `E`). |
-| `getTickCounter()` | Returns how many ticks this `ModularUI` instance has been active. |
-| `getWidget()` | Returns the widget instance used by the Minecraft `Screen`. |
-| `getAllElements()` | Returns an unmodifiable list of all UI elements in the UI tree. |
+| `shouldCloseOnEsc()` | UI 是否应在按下 `ESC` 时关闭。 |
+| `shouldCloseOnKeyInventory()` | UI 是否应在按下物品栏键（默认：`E`）时关闭。 |
+| `getTickCounter()` | 返回此 `ModularUI` 实例已激活的 tick 数。 |
+| `getWidget()` | 返回 Minecraft `Screen` 使用的 widget 实例。 |
+| `getAllElements()` | 返回 UI 树中所有 UI 元素的不可修改列表。 |
 
 ---
 
 
 ### 元素查询 API（按 ID）
-| Method | Description |
+
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementById(String id)` | Finds and returns the **first** UI element with the given ID, or `null` if not found. |
-| `getElementsById(String id)` | Returns **all** UI elements with the given ID. |
-| `hasElementWithId(String id)` | Checks whether at least one element with the given ID exists. |
-| `getElementCountById(String id)` | Returns the number of elements with the given ID. |
-| `getAllElementsById()` | Returns a copy of the internal mapping from ID to UI elements. |
+| `getElementById(String id)` | 查找并返回具有指定 ID 的 **第一个** UI 元素，如果未找到则返回 `null`。 |
+| `getElementsById(String id)` | 返回具有指定 ID 的 **所有** UI 元素。 |
+| `hasElementWithId(String id)` | 检查是否存在至少一个具有指定 ID 的元素。 |
+| `getElementCountById(String id)` | 返回具有指定 ID 的元素数量。 |
+| `getAllElementsById()` | 返回从 ID 到 UI 元素的内部映射的副本。 |
 
 ---
 
-### 元素查询 API（正则表达式和模式）
-| Method | Description |
+### 元素查询 API（正则表达式与模式）
+
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementByIdRegex(String pattern)` | Finds the first element whose ID matches the given regex pattern. |
-| `getElementsByIdRegex(String pattern)` | Finds all elements whose IDs match the given regex pattern. |
-| `getElementByIdPattern(Pattern pattern)` | Same as above, but uses a precompiled `Pattern` for better performance. |
-| `getElementsByIdPattern(Pattern pattern)` | Returns all elements matching a precompiled regex pattern. |
+| `getElementByIdRegex(String pattern)` | 查找 ID 匹配给定正则表达式模式的第一个元素。 |
+| `getElementsByIdRegex(String pattern)` | 查找 ID 匹配给定正则表达式模式的所有元素。 |
+| `getElementByIdPattern(Pattern pattern)` | 同上，但使用预编译的 `Pattern` 以获得更好的性能。 |
+| `getElementsByIdPattern(Pattern pattern)` | 返回匹配预编译正则表达式模式的所有元素。 |
 
 ---
 
 ### 元素查询 API（部分匹配）
-| Method | Description |
+
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementsByIdContains(String substring)` | Finds all elements whose IDs contain the given substring. |
-| `getElementsByIdStartsWith(String prefix)` | Finds all elements whose IDs start with the given prefix. |
-| `getElementsByIdEndsWith(String suffix)` | Finds all elements whose IDs end with the given suffix. |
+| `getElementsByIdContains(String substring)` | 查找 ID 包含给定子字符串的所有元素。 |
+| `getElementsByIdStartsWith(String prefix)` | 查找 ID 以给定前缀开头的所有元素。 |
+| `getElementsByIdEndsWith(String suffix)` | 查找 ID 以给定后缀结尾的所有元素。 |
 
 ---
 
 ### 元素查询 API（按类型）
-| Method | Description |
-| ---- | ----------- |
-| `getElementsByType(Class<T> type)` | Returns all UI elements of the given type. |
-| `getAllElementsByType()` | Returns a copy of the internal mapping from element type to UI elements. |
 
-!!!笔记所有查询方法都会在适用时返回内部集合的**副本**。返回的列表可以安全修改，不会影响内部 UI 树。
+| 方法 | 描述 |
+| ---- | ----------- |
+| `getElementsByType(Class<T> type)` | 返回指定类型的所有 UI 元素。 |
+| `getAllElementsByType()` | 返回从元素类型到 UI 元素的内部映射的副本。 |
+
+!!! note
+    所有查询方法在适用时返回内部集合的 **副本**。返回的列表可以安全修改，不会影响内部 UI 树。
+
 ---
 
-## 调试你的用户界面
-在开发过程中，UI 树可能并不总是按预期运行，并且很难理解出了什么问题。
-您可以按 **`F3`** 启用 **UI 调试模式**。当调试模式处于活动状态时，LDLib2 会直接在屏幕上显示有用的信息。
-<figure markdown="span">![Debug](../assets//debug_mode.png){宽度=“80%”}</figure>
+## 调试 UI
+
+在开发过程中，UI 树可能不会总是按预期工作，  
+而且很难理解出了什么问题。
+
+你可以按 **`F3`** 启用 **UI 调试模式**。  
+当调试模式激活时，LDLib2 会直接在屏幕上显示有用的信息。
+
+<figure markdown="span">
+  ![Debug](../assets//debug_mode.png){ width="80%" }
+</figure>
