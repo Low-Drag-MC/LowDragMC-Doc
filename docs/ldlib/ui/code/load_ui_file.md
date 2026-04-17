@@ -5,14 +5,14 @@ Through creating UI by code has more flexibility, using [`UI Editor`](../ui_edit
 !!! note "before reading"
     Make sure you has basic knowledge of how to create the ui via [`UI Editor`](../ui_editor/index.md) and prepare a ui file for loading.
 
-Loading ui file is realy easy, just few lines code. We suppose you have a ui file with the location `.minecraft/ldlib/assets/ldlib/projects/ui/test_ui.ui`.
+Loading ui file is really easy, just few lines code. We suppose you have a ui file with the location `.minecraft/ldlib/assets/ldlib/projects/ui/test_ui.ui`.
 
 ![Image title](../assets/project_location.png){ width="30%" style="display: block; margin: 0 auto;" }
 
 You can get a `creator` via the method `UIProject.loadUIFromFile(location)`. `creator` caches the resources to speed up the creation process which should be stored for the same project loading.
 
 !!! warning
-    `creator` may be null if the ui file counld not be loaded.
+    `creator` may be null if the ui file could not be loaded.
 
 === "Java"
 
@@ -49,11 +49,15 @@ After loading the ui project, we should bind the functional logic for it. First,
     Do not forget to assign an `id` to the widgets you need.
     ![Image title](../assets/id_field.png){ width="70%" style="display: block; margin: 0 auto;" }
 
+!!! warning
+    Do not include the file extension in the resourceLocation of the UI File!
+    i.e. `.minecraft/ldlib/assets/ldlib/projects/ui/test_ui.ui` translates to `ldlib:test_ui`
+
 === "Java"
 
     ``` java 
     public WidgetGroup createUI() {
-        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui.ui"));
+        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui"));
         // creator caches the resources to speed up the creation process.
         // you should better store it for the same project loading.
         var root = creator.get();
@@ -73,7 +77,7 @@ After loading the ui project, we should bind the functional logic for it. First,
 
     ``` javascript
     function createUI() {
-        let creator = UIProject.loadUIFromFile("ldlib:test_ui.ui");
+        let creator = UIProject.loadUIFromFile("ldlib:test_ui");
         // creator caches the resources to speed up the creation process.
         // you should better store it for the same project loading.
         let root = creator.get();

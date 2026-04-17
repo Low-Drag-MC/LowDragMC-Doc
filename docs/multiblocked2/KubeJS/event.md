@@ -10,9 +10,9 @@ All events can be found here:
 
 # Machine Events
 Check [`MBDServerEvents`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java)
-and [`MBDClientEvents`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDClientEvents.java) for all available machien events.
+and [`MBDClientEvents`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDClientEvents.java) for all available machine events.
 
-Because events will be posted to the Forge Event Handler as well. We wrap it with a KubeJS Event. So the actually event instance are shown [here](https://github.com/Low-Drag-MC/Multiblocked2/tree/1.20.1/src/main/java/com/lowdragmc/mbd2/common/machine/definition/config/event). Please check it for detials of fields and methods.
+Because events will be posted to the Forge Event Handler as well. We wrap it with a KubeJS Event. So the actual event instance are shown [here](https://github.com/Low-Drag-MC/Multiblocked2/tree/1.20.1/src/main/java/com/lowdragmc/mbd2/common/machine/definition/config/event). Please check it for details of fields and methods.
 
 This is an example of using it.
 ```javascript

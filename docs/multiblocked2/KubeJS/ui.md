@@ -5,7 +5,7 @@ You might have used mbd2’s visual editor to create the UI, but you may have no
 Here, we implement a simple, UI-based manual lava filling machine.
 
 !!! note inline end
-    Example can be download <a href="../assets/example.zip" download>here</a>! 
+    Example can be downloaded <a href="../assets/example.zip" download>here</a>! 
     
     Put it under the `.minecraft` folder.
 
