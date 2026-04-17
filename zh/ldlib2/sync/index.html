@@ -1,0 +1,827 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/Low-Drag-MC/zh/ldlib2/sync/">
+      
+      
+      
+      
+        
+          <link rel="alternate" href="../../../ldlib2/sync/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>介绍 :material-tag: Since 2.0.0 - LowDragMC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+      <link rel="stylesheet" href="../../../css/java-enhance.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../" title="LowDragMC" class="md-header__button md-logo" aria-label="LowDragMC" data-md-component="logo">
+      
+  <img src="../../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LowDragMC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              介绍
+<span class="mdx-badge" title="Minimum version">
+  <span class="mdx-version-box">
+    <span class="mdx-badge__icon">:material-tag:</span>
+    <span class="mdx-badge__text">
+      <a href="#v2.0.0">Since 2.0.0</a>
+    </span>
+  </span>
+</span>
+        
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../ldlib2/sync/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Low-Drag-MC" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Low-Drag-MC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LDLib2
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="LowDragMC" class="md-nav__button md-logo" aria-label="LowDragMC" data-md-component="logo">
+      
+  <img src="../../../assets/icon.png" alt="logo">
+
+    </a>
+    LowDragMC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Low-Drag-MC" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Low-Drag-MC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LDLib2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#mojang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mojang 编解码系统的局限性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        简化同步和持久化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不仅仅是更少的代码行
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="不仅仅是更少的代码行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ldlib2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LDLib2 提供了更细粒度和现代的系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同步和持久化的现代方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        简化编解码器和序列化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="简化编解码器和序列化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么这样更好
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        完全 NBT 支持（无需额外代码）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">介绍</h1>
+<p><span class="mdx-badge" title="Minimum version">
+  <span class="mdx-version-box">
+    <span class="mdx-badge__icon"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 7A1.5 1.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4 1.5 1.5 0 0 1 7 5.5 1.5 1.5 0 0 1 5.5 7m15.91 4.58-9-9C12.05 2.22 11.55 2 11 2H4c-1.11 0-2 .89-2 2v7c0 .55.22 1.05.59 1.41l8.99 9c.37.36.87.59 1.42.59s1.05-.23 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.56-.23-1.06-.59-1.42"></path></svg></span></span>
+    <span class="mdx-badge__text">
+      <a href="#v2.0.0">Since 2.0.0</a>
+    </span>
+  </span>
+</span></p>
+<p>Minecraft mod 开发中最重复且最容易出错的任务之一是处理<strong>服务器和客户端之间的数据同步</strong>，以及<strong>数据持久化</strong>。
+无论您正在与：- <strong>块实体</strong>- <strong>实体</strong>- <strong>屏幕/GUI</strong>- <strong>任何你想要的物体</strong>
+...您将始终面临同样的三个问题：
+1. <strong>什么时候应该同步数据？</strong>（每个tick？变化时？打开gui？）2. <strong>应该同步哪些数据？</strong>（应该处理哪些字段？）3. <strong>应该如何序列化或保存？</strong>（nbt io？）
+!!!警告“为什么这是一个问题？”虽然同步和持久化本质上并不困难，但<strong>干净地编写它们通常需要大量的样板代码</strong>：
+    - 重复NBT读/写逻辑    - 手动网络数据包    - 重复的同步逻辑分布在各个类中    - 轻松地使客户端/服务器状态不同步    - 难以阅读和难以维护的代码    - 不必要的同步调用导致的性能问题</p>
+<hr>
+<h2 id="mojang">Mojang 编解码系统的局限性</h2>
+<p>现代 Minecraft 引入了 <code>Codec</code> 和 <code>StreamCodec</code> 系统，这极大地简化了<strong>数据结构定义</strong>。
+然而：
+!!!注意“编解码器有助于<em>格式化</em>，但不有助于<em>同步</em>”要在 mod 中实际使用 Codec，您仍然需要：
+    - 手动定义编解码器结构    - 编写编码/解码逻辑    - 显式触发同步    - 管理数据包    - 向客户端发送更新
+编解码器减少<em>格式化痛苦</em>，但<strong>不会减少同步/持久代码的数量</strong>。</p>
+<hr>
+<h2 id="_2">简化同步和持久化</h2>
+<p>为了解决这些长期存在的问题，<strong>LDLib2 提供了一个基于注释的数据管理框架</strong>，它：
+- 自动同步<code>server</code>和<code>client</code>之间的数据。- 自动处理任何类的持久性。- 检测更改并仅同步需要的内容。- 将序列化卸载到后台线程（多核友好）。- 以声明方式工作——只需注释字段，就完成了。
+目标很简单：
+!!!提示“核心思想：<em>您不应该手动编写同步或序列化代码</em>”声明字段<em>是什么</em> —LDLib2 处理同步和保存的方式。
+下面是一个最小的示例，显示了您通常会在 <code>Vanilla (forge)</code> 和 <code>LDLib2</code> 之间编写多少代码。
+（点击标签可切换代码）
+===“❌Vanilla / Forge 风格的实现”    ```java
+    public class ExampleBE extends BlockEntity {</p>
+<div class="language-text highlight"><pre><span></span><code>    private int energy = 0;
+    private String owner = "";
+
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("Energy", energy);
+        tag.putString("Owner", owner);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        energy = tag.getInt("Energy");
+        owner = tag.getString("Owner");
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        load(pkt.getTag());
+    }
+
+    protected void syncAndSave() {
+        if (!level.isClientSide) {
+            setChanged();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
+    }
+
+    public void setEnergy(int newEnergy) {
+        if (this.energy != newEnergy) {
+            this.energy = newEnergy;
+            syncAndSave();
+        }
+    }
+
+    public void setOwner(String newOwner) {
+        if (this.energy != newOwner) {
+            this.energy = newOwner;
+            syncAndSave();
+        }
+    }
+}
+```
+</code></pre></div>
+<p>===“✅ 使用 LDLib2”    ```java
+    public class ExampleBE extends BlockEntity implements ISyncPersistRPCBlockEntity {
+        @Getter
+        private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);</p>
+<div class="language-text highlight"><pre><span></span><code>    // your fields
+    @Persisted
+    @DescSynced
+    public int energy = 0;
+
+    @Persisted
+    @DescSynced
+    public String owner = "";
+}
+```
+</code></pre></div>
+<p>从比较中可以看出，<strong>LDLib2</strong> 提供的注释驱动系统比传统的普通或 Forge 风格的方法要简单得多，并且更具表现力。
+您不需要任何额外的样板。每当<code>energy</code>或<code>owner</code>发生变化时，LDLib2将自动处理：
+- 变化检测- 服务器→客户端同步- 数据持久化
+...无需您手动调用任何同步或保存功能。</p>
+<hr>
+<h2 id="_3">不仅仅是更少的代码行</h2>
+<p>使用普通 Forge 工作流程，如果您想要优化同步（例如同步<strong>仅选定的字段</strong>，或同步<strong>仅已更改的字段</strong>），您通常最终会编写更复杂的代码：
+- 手动脏标志跟踪- 自定义数据包结构- 显式服务器/客户端处理程序- 重复的读/写逻辑- 独立的持久性和同步系统- 多层条件逻辑
+如果您想要<strong>客户端 → 服务器</strong>同步，则必须创建并注册您自己的网络数据包。
+这会导致大量碎片，并使代码库更难维护。</p>
+<hr>
+<h3 id="ldlib2">LDLib2 提供了更细粒度和现代的系统</h3>
+<p>相比之下，<strong>LDLib2 的框架是细粒度的、声明性的、完全基于事件的</strong>。
+它提供：
+- <strong>自动变化检测</strong>仅同步修改的字段。- <strong>选择性同步</strong>如果需要，您仍然可以手动请求字段级同步。- <strong>自动持久化</strong>用 <code>@Persisted</code> 标记任何字段，它会自动序列化。- <strong>现代双向 RPC</strong>您可以使用 LDLib2 的内置 RPC 事件系统来代替编写数据包<strong>客户端→服务器</strong>或<strong>服务器→客户端</strong>数据传输。- <strong>后台（异步）序列化</strong>大型或复杂的数据可以在主线程之外进行序列化。- <strong>干净、一致的结构</strong>所有同步和持久性逻辑都是集中式和声明性的。
+由于这样的设计，LDLib2的系统不仅更容易使用，而且<strong>更强大</strong>，<strong>更具可扩展性</strong>，并且<strong>更容易维护</strong>。</p>
+<hr>
+<h3 id="_4">同步和持久化的现代方法</h3>
+<p>LDLib2 将模型从：</p>
+<blockquote>
+<p>“每次使用时手动同步和序列化数据。”
+到：
+“定义一次数据。&gt; LDLib2 会处理剩下的事情。”
+这导致：
+- 更少的代码- 更少的错误- 更好的表现- 一致的跨模组结构- 更容易调试- 现代 CPU 上更好的并行性
+在接下来的几页中，您将学习如何：
+- 使用<code>@Persisted</code>、<code>@DescSynced</code>等注解- 管理自定义数据结构- 创建 RPC 事件- 执行手动（可选）细粒度同步- 将 LDLib2 与 BlockEntities、实体和 GUI 系统集成
+LDLib2 旨在提供一个<strong>完整、现代且高度可定制的同步框架</strong>，适用于几乎任何模组场景。</p>
+</blockquote>
+<hr>
+<h2 id="_5">简化编解码器和序列化</h2>
+<p>虽然现代编解码器和 StreamCodec 系统无可否认地强大，并且为较新的 Minecraft 版本中的序列化带来了巨大的改进，但<strong>定义和使用编解码器仍然远非轻松</strong>。 LDLib2 提供了一种更简单的、注释驱动的方法。
+===“❌Vanilla / Forge 风格的实现”    ```java
+    public class MyObject implements INBTSerializable<compoundtag> {
+        public final static Codec<myobject> CODEC = RecordCodecBuilder.create(instance -&gt; instance.group(
+                ResourceLocation.CODEC.fieldOf("rl").forGetter(MyObject::getResourceLocation),
+                Direction.CODEC.fieldOf("enum").forGetter(MyObject::getEnumValue),
+                ItemStack.OPTIONAL_CODEC.fieldOf("item").forGetter(MyObject::getItemstack)
+        ).apply(instance, MyObject::new));</myobject></compoundtag></p>
+<div class="language-text highlight"><pre><span></span><code>    private ResourceLocation resourceLocation = LDLib2.id("test");
+    private Direction enumValue = Direction.NORTH;
+    private ItemStack itemstack = ItemStack.EMPTY;
+
+    public MyObject(ResourceLocation resourceLocation, Direction enumValue, ItemStack itemstack) {
+        this.resourceLocation = resourceLocation;
+        this.enumValue = enumValue;
+        this.itemstack = itemstack;
+    }
+
+    public ResourceLocation getResourceLocation() {
+        return resourceLocation;
+    }
+
+    public Direction getEnumValue() {
+        return enumValue;
+    }
+
+    public ItemStack getItemstack() {
+        return itemstack;
+    }
+
+    // for INBTSerializable
+    @Override
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        var tag = new CompoundTag();
+        tag.putString("rl", resourceLocation.toString());
+        tag.putString("enum", enumValue.toString());
+        tag.put("item", ItemStack.OPTIONAL_CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), itemstack).getOrThrow());
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+        resourceLocation = ResourceLocation.parse(nbt.getString("rl"));
+        enumValue = Direction.byName(nbt.getString("enum"));
+        itemstack = ItemStack.OPTIONAL_CODEC.parse(provider.createSerializationContext(NbtOps.INSTANCE), nbt.get("item")).getOrThrow();
+    }
+}
+```
+</code></pre></div>
+<p>===“✅ 使用 LDLib2”    ```java
+    public class MyObject implements IPersistedSerializable {
+        public final static Codec<myobject> CODEC = PersistedParser.createCodec(MyObject::new);</myobject></p>
+<div class="language-text highlight"><pre><span></span><code>    @Persisted(key = "rl")
+    private ResourceLocation resourceLocation = LDLib2.id("test");
+    @Persisted(key = "enum")
+    private Direction enumValue = Direction.NORTH;
+    @Persisted(key = "item")
+    private ItemStack itemstack = ItemStack.EMPTY;
+
+    // IPersistedSerializable is inherited from INBTSerializable you don't need to implement it manually
+}
+```
+</code></pre></div>
+<h3 id="_6">为什么这样更好</h3>
+<p>使用普通/Forge 编解码器时，您必须：
+- 定义编解码器中的每个字段- 手动映射 getter- 管理编码/解码错误- 应对注册表操作
+这导致样板成本较高且维护困难。
+!!!注意“LDLib2的优势”LDLib2 可以使用以下命令为您的类自动生成完整的编解码器    <code>java
+    PersistedParser.createCodec(MyObject::new)</code><br>
+您不再需要手动列出每个字段或定义它们的编码方式。
+只要某个字段用<code>@Persisted</code>注释，LDLib2就会将其包含在生成的编解码器中。</p>
+<hr>
+<h3 id="nbt">完全 NBT 支持（无需额外代码）</h3>
+<p>通过实施<code>IPersistedSerializable</code>，您的班级将获得：
+- 应对注册表操作- 自动NBT序列化- 自动NBT反序列化- 与任何期望 <code>INBTSerializable</code> 的系统完全兼容</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2019 - 2025 KilaBash
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.sections", "navigation.path", "navigation.tabs", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
