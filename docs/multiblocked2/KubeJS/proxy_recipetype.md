@@ -1,8 +1,8 @@
 # Customize Proxy RecipeTypes Transfer
 
-`Proxy Recipetype` in mbd2 doesn't always work very well. For example, if some recipes contain input types that mbd2 does not know, they cannot be translated.
+`Proxy Recipetype` in mbd2 don't always work very well. For example, if some recipes contain input types that mbd2 does not know, they cannot be translated.
 
-Furthermore, ppl may want to filter some recipes, or modify the duration, inputs, etc. 
+Furthermore, people may want to filter some recipes, or modify the duration, inputs, etc. 
 We provide an event `onTransferProxyRecipe` to allow you to take over the transfer processing.
 ```js
 MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
