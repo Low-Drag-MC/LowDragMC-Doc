@@ -1,12 +1,12 @@
 # Java Integration
 
-You can find the latest version from our [maven](https://maven.firstdarkdev.xyz/#/snapshots/com/lowdragmc).
+You can find the latest version from our [maven](https://maven.firstdark.dev/#/snapshots/com/lowdragmc).
 
 ``` c
 repositories{
     maven {
         name "firstdarkdev"
-        url "https://maven.firstdarkdev.xyz/snapshots"
+        url "https://maven.firstdark.dev/snapshots"
     }
 }
 ```

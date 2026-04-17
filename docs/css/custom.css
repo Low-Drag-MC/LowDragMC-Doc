@@ -57,4 +57,15 @@ p {
 }
 
 
+[data-md-color-scheme="default"] code:not(.md-code__content) {
+  background-color: #f5f2ff !important; /* 底色 */
+  color: #553c9a !important;            /* 前景色 */
+  border-radius: 4px !important;        /* 圆角大小 */
+  
+}
 
+[data-md-color-scheme="slate"] code:not(.md-code__content) {
+  background-color: #2b273f !important;
+  color: #d6b3ff !important;
+  border-radius: 4px !important;        /* 圆角大小 */
+}

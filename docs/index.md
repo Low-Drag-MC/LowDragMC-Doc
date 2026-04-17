@@ -18,10 +18,11 @@ In essence, this is more of a **hub** for independent projects from myself and m
 We are dedicated to developing **creative mods** that offer **customization capabilities** to users, with a particular focus on **technical and rendering aspects**.  
 
 ### **Our Mod List**:
-1. [**LDLib**](ldlib/index.md)  
-2. [**Multiblocked & Multiblockded2**](multiblocked2/index.md)
-3. [**Photon**](photon/index.md)  
-4. **Shimmer**  
+1. [**LDLib**](ldlib/index.md)
+2. [**LDLib2 (1.21+)**](ldlib2/index.md)
+3. [**Multiblocked & Multiblocked2**](multiblocked2/index.md)
+4. [**Photon & Photon2**](photon/index.md)
+5. **Shimmer**  
 
 If you encounter any issues, feel free to **submit an issue**.  
 
