@@ -1,22 +1,22 @@
-# Vertex Format
+# 顶点格式（Vertex Format）
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="添加于", icon="tag", href="/changelog/#2.0.0") }}
 
-> **Note:**  
-> In most cases, you don’t need to understand this section — Photon2 handles vertex layouts automatically.  
-> But for curious users or those with special shader needs, here’s how Photon2 processes different vertex layouts and unifies them for materials.
+> **注意：**
+> 大多数情况下，你不需要理解本节内容 —— Photon2 会自动处理顶点布局。
+> 但出于好奇，或者有特殊着色器需求的用户，可以了解 Photon2 如何处理不同的顶点布局并将其统一为材质可用的格式。
 
-Photon2 supports **three vertex layouts**:
+Photon2 支持**三种顶点布局**：
 
-- **Vanilla layout**
-- **Particle Instance**
-- **Particle Model Instance**
+- **原版布局（Vanilla layout）**
+- **粒子实例（Particle Instance）**
+- **粒子模型实例（Particle Model Instance）**
 
 ---
 
-## 📄 Vanilla Layout
+## 📄 原版布局（Vanilla Layout）
 
-Default format used when no special GPU settings are enabled.
+在未启用特殊 GPU 设置时使用的默认格式。
 
 ```glsl
 in vec3 Position;
@@ -46,10 +46,10 @@ ParticleData getParticleData() {
 
 ---
 
-## 🚀 Particle Instance
+## 🚀 粒子实例（Particle Instance）
 
-Used when **GPU Instance** is enabled in the particle emitter.  
-Add the following macro to the shader:
+在粒子发射器中启用 **GPU Instance** 时使用。
+在着色器中添加以下宏：
 
 ```glsl
 #define PARTICLE_INSTANCE
@@ -102,10 +102,10 @@ ParticleData getParticleData() {
 
 ---
 
-## 🏗 Particle Model Instance
+## 🏗 粒子模型实例（Particle Model Instance）
 
-Used when **model mode** is enabled in the emitter **and** GPU Instance is active.  
-Add the following macro to the shader:
+在发射器中启用了 **模型模式（model mode）** 且 **GPU Instance** 处于激活状态时使用。
+在着色器中添加以下宏：
 
 ```glsl
 #define PARTICLE_MODEL_INSTANCE
@@ -147,7 +147,7 @@ mat3 quatToMat(vec4 q) {
 ParticleData getParticleData() {
     ParticleData data;
     mat3 rotMat = quatToMat(iRot);
-    vec3 centeredPos = aPos - vec3(0.5); // Centered
+    vec3 centeredPos = aPos - vec3(0.5); // 居中
     data.Position = (rotMat * (centeredPos * iScale)) + iPos;
     data.Color = vec4(iColor.rgb * aBrightness, iColor.a);
     data.UV = aUV;

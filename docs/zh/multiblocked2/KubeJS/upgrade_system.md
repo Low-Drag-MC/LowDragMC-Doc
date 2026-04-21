@@ -1,9 +1,9 @@
-# Dynamic recipe on the fly
+# 动态实时配方
 
-## Upgrade System
+## 升级系统
 
-Credit: @yellowcake3d 
-For anyone in the future seeking for a way to make this sorta upgrade system, here's what I have, which is quite practically mostly from mierno, but instead I ended up using the `getTraitByName` and also had to turn on the "Always modify recipe" checkmark in the mbd editor
+致谢：@yellowcake3d 
+如果你正在寻找一种实现此类升级系统的方法，可以参考以下内容，这实际上大部分来自 mierno，但我最终使用了 `getTraitByName`，并且需要在 mbd 编辑器中勾选 "Always modify recipe"（始终修改配方）选项
 ```js
 MBDMachineEvents.onBeforeRecipeModify('mbd2:high_pressure_electrolyzer', (event) => {
     const mbdEvent = event.getEvent();
@@ -14,10 +14,10 @@ MBDMachineEvents.onBeforeRecipeModify('mbd2:high_pressure_electrolyzer', (event)
     let storage = itemTrait.storage;
     let upgradeCount = storage.getStackInSlot(0).count;
 
-    //parallel recipe modifiers, the more upgrades in the upgrade slot, the more recipes processed in parallel
+    //并行配方修改器，升级槽位中的升级物品越多，并行处理的配方数量越多
     let parallelRecipe = machine.applyParallel(recipe, upgradeCount);
     let copyRecipe = parallelRecipe.copy();
-    //speed modifier, makes recipe go 1% faster every new upgrade installed
+    //速度修改器，每安装一个新升级物品，配方速度加快1%
     let reductionFactor = Math.max(1 - 0.01 * upgradeCount, 0.1);
     copyRecipe.duration = Math.ceil(recipe.duration * reductionFactor);
 
@@ -25,26 +25,26 @@ MBDMachineEvents.onBeforeRecipeModify('mbd2:high_pressure_electrolyzer', (event)
 });
 ```
 
-## Create dynamic recipes via KubeJS recipe builder
+## 通过 KubeJS 配方构建器创建动态配方
 
-You can dynamically modify recipes by using the `onBeforeRecipeModify` event to apply a modifier and replace the original recipe. In most cases, this approach is sufficient. 
-However, there are times when you may want more flexibility—such as removing, replacing, or appending ingredients. To support this, we offer an alternative method that allows you to define recipes in a way similar to KJS recipe events.
+你可以通过使用 `onBeforeRecipeModify` 事件来应用修改器并替换原始配方，从而动态修改配方。在大多数情况下，这种方法已经足够。
+然而，有时你可能需要更大的灵活性——例如删除、替换或追加原料。为此，我们提供了一种替代方法，允许你以类似于 KJS 配方事件的方式定义配方。
 ![alt text](../assets/capability_names.png)
 ```js
 MBDMachineEvents.onBeforeRecipeModify('machine:id', (event) => {
     const mbdEvent = event.getEvent();
     const { machine, recipe } = mbdEvent;
     
-    // creat an empty builder
+    // 创建一个空构建器
     // let newEmptyRecipeBuilder = recipe.recipeType.recipeBuilder();
-    // create a builder with current recipe
+    // 使用当前配方创建构建器
     let builder = recipe.toBuilder();
 
-    builder.duration(412) // modify duration
-    builder.inputItems("apple") // append ingredient
+    builder.duration(412) // 修改持续时间
+    builder.inputItems("apple") // 追加原料
     
     let fluidCap = MBDRegistries.RECIPE_CAPABILITIES.get("fluid")
-    builder.removeOutputs(fluidCap) // remove all output fluid ingredients
+    builder.removeOutputs(fluidCap) // 移除所有输出流体原料
 
     let newRecipe = builder.buildMBDRecipe();
     mbdEvent.setRecipe(newRecipe );

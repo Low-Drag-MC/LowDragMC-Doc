@@ -1,8 +1,8 @@
-#Basic Information
+# 基本信息
 
 {{ version_badge("2.0.4", label="Since", icon="tag", href="/changelog/#2.0.4") }}
 
-## Development Maven
+## 开发 Maven
 ```c
 repositories {
     maven { url = "https://maven.firstdark.dev/snapshots" } // LDLib2, Photon2
@@ -17,7 +17,7 @@ dependencies {
     implementation("com.lowdragmc.photon:photon-neoforge-${minecraft_version}:${photon2_version}") { transitive = false }
 }
 ```
-### latest version
+### 最新版本
 [![ldlib2 maven](https://img.shields.io/badge/dynamic/xml
 ?url=https%3A%2F%2Fmaven.firstdark.dev%2Fsnapshots%2Fcom%2Flowdragmc%2Fldlib2%2Fldlib2-neoforge-1.21.1%2Fmaven-metadata.xml
 &query=%2F%2Fmetadata%2Fversioning%2Flatest
@@ -27,20 +27,20 @@ dependencies {
 
 ---
 
-## How to load and use the effect files?
+## 如何加载和使用效果文件？
 ```java
 FX fx = FXHelper.getFX(ResourceLocation.parse("photon:fire"));
-// bind it to a block
+// 绑定到一个方块
 new BlockEffectExecutor(fx, level, pos).start();
-// bind it to an entity
+// 绑定到一个实体
 new EntityEffectExecutor(fx, level, entity, AutoRotate.NONE).start();
 ```
 
 ---
 
-## Implement your own`IEffectExecutor` to manage the lifecycle of your photon effects.
-Sometimes, you wanna control the effect you have with additional logic.
-You can implement the `IEffectExecutor` and do what you want. 
+## 实现你自己的 `IEffectExecutor` 来管理 Photon 效果的生命周期。
+有时候，你想用额外的逻辑来控制你的效果。
+你可以实现 `IEffectExecutor` 并做你想做的事。
 
 === "IEffectExecutor"
 
@@ -50,19 +50,19 @@ You can implement the `IEffectExecutor` and do what you want.
         Level getLevel();
 
         /**
-         * update each FX objects during their duration, per tick. Execute low frequency logic here.
+         * 在 FX 对象持续时间内的每一 tick 更新。在这里执行低频逻辑。
          * <br>
-         * e.g., kill particle
-         * @param fxObject fx object
+         * 例如：清除粒子
+         * @param fxObject fx 对象
          */
         default void updateFXObjectTick(IFXObject fxObject) {
         }
 
         /**
-         * update each FX objects during rendering, per frame. Execute high frequency logic here.
+         * 在渲染期间每帧更新每个 FX 对象。在这里执行高频逻辑。
          * <br>
-         * e.g., update emitter position, rotation, scale
-         * @param fxObject fx object
+         * 例如：更新发射器位置、旋转、缩放
+         * @param fxObject fx 对象
          * @param partialTicks partialTicks
          */
         default void updateFXObjectFrame(IFXObject fxObject, float partialTicks) {
@@ -82,7 +82,7 @@ You can implement the `IEffectExecutor` and do what you want.
         public final FX fx;
         @Getter
         public final Level level;
-        // runtime
+        // 运行时
         @Nullable
         private FXRuntime fxRuntime;
 
@@ -105,9 +105,9 @@ You can implement the `IEffectExecutor` and do what you want.
     }
     ```
 
-    1. if you want to modify config data. use `fx.createRuntime(true)` instead.
+    1. 如果你想修改配置数据，请使用 `fx.createRuntime(true)`。
 
-Check [ExampleExecutor](#__tabbed_1_2) to see how it works.
+查看 [ExampleExecutor](#__tabbed_1_2) 了解它是如何工作的。
 ```java
 FX fx = FXHelper.getFX(ResourceLocation.parse("photon:fire"));
 var executor = new ExampleExecutor(fx, level);

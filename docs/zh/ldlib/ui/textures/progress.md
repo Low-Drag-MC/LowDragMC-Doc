@@ -1,23 +1,23 @@
 # ProgressTexture
 
-The `ProgressTexture` is used to render a progress bar texture that fills according to a specified direction. It combines an empty and a filled texture area to visually represent progress.
+`ProgressTexture` 用于渲染一个进度条纹理，它会根据指定的方向进行填充。它结合了一个空纹理区域和一个已填充纹理区域，以直观地表示进度。
 
-## Basic Properties
+## 基本属性
 
-| Field         | Description                                             |
-|---------------|---------------------------------------------------------|
-| fillDirection | The direction in which the progress fills             |
-| emptyBarArea  | Texture used for the empty portion of the progress bar  |
-| filledBarArea | Texture used for the filled portion of the progress bar |
-| progress      | The current progress value (0.0 to 1.0)                 |
+| 字段          | 说明                                 |
+|---------------|--------------------------------------|
+| fillDirection | 进度填充的方向                       |
+| emptyBarArea  | 进度条空部分使用的纹理               |
+| filledBarArea | 进度条已填充部分使用的纹理           |
+| progress      | 当前进度值（0.0 到 1.0）             |
 
 ---
 
-## APIs
+## API 接口
 
 ### setTexture
 
-Sets the progress textures. `emptyBarArea` and `filledBarArea` can any type of the [`GUi Texture`](index.md).
+设置进度纹理。`emptyBarArea` 和 `filledBarArea` 可以是任何类型的 [`GUI 纹理`](index.md)。
 
 === "Java / KubeJS"
 
@@ -29,7 +29,7 @@ Sets the progress textures. `emptyBarArea` and `filledBarArea` can any type of t
 
 ### setProgress
 
-Sets the progress value.
+设置进度值。
 
 === "Java / KubeJS"
 
@@ -41,7 +41,7 @@ Sets the progress value.
 
 ### setFillDirection
 
-Sets the fill direction for the progress bar.
+设置进度条的填充方向。
 
 === "Java / KubeJS"
 

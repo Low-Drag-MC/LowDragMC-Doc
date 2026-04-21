@@ -1,27 +1,27 @@
-# Resource Pack Integration
+# 资源包集成
 
-FX created with **Photon2** are stored in:
+使用 **Photon2** 创建的 FX 存储在：
 
 ```
 .minecraft/ldlib2/assets/...
 ```
 
-You may want to bundle these FX files into a **resource pack** or **mod** for distribution.  
-To do this, you must move all required files into your own `assets/` directory.
+你可能希望将这些 FX 文件打包到**资源包**或**模组**中进行分发。
+为此，你需要将所有必需的文件移动到你自己目录下的 `assets/` 文件夹中。
 
 ---
 
-## 📂 Required Files
+## 📂 必需文件
 
-- **FX Files**
-- **Resources** (materials, gradients, colors, etc.)
-- **Other Resources** (textures, models, shaders, etc.)
+- **FX 文件**
+- **资源**（材质、渐变、颜色等）
+- **其他资源**（纹理、模型、着色器等）
 
 ---
 
-## 1️⃣ FX Files
+## 1️⃣ FX 文件
 
-Exported FX files **must** be placed under:
+导出的 FX 文件**必须**放置在：
 
 ```
 assets/<namespace>/fx/
@@ -29,19 +29,19 @@ assets/<namespace>/fx/
 
 ---
 
-## 2️⃣ Resources
+## 2️⃣ 资源
 
-!!! warning "Minecraft resource naming rules"
-    Minecraft does **not** allow uppercase letters, spaces, or non-English characters in file paths.  
-    Before moving files, ensure all names follow the [Minecraft Resource Naming](https://minecraft.wiki/w/Resource_pack#File_naming) rules.
+!!! warning "Minecraft 资源命名规则"
+    Minecraft **不允许**在文件路径中使用大写字母、空格或非英文字符。
+    在移动文件之前，请确保所有名称符合 [Minecraft 资源命名](https://minecraft.wiki/w/Resource_pack#File_naming) 规则。
 
-All FX resource dependencies (materials, gradients, colors, etc.) must be moved from:
+所有 FX 资源依赖项（材质、渐变、颜色等）必须从：
 
 ```
 .minecraft/ldlib2/assets/ldlib2/resources/global/xxxx.material.nbt
 ```
 
-to:
+移动到：
 
 ```
 assets/ldlib2/resources/global/xxxx.material.nbt
@@ -49,31 +49,31 @@ assets/ldlib2/resources/global/xxxx.material.nbt
 
 ---
 
-## 3️⃣ Other Resources
+## 3️⃣ 其他资源
 
-Materials and meshes often reference **additional assets** such as:
+材质和网格通常引用**额外的资源**，例如：
 
-- Textures
-- Models
-- Shaders
+- 纹理
+- 模型
+- 着色器
 
-These must also be moved to their corresponding folders under your `assets/` directory.
+这些也必须移动到 `assets/` 目录下对应的文件夹中。
 
 ---
 
-## 💡 Recommended Migration Method
+## 💡 推荐的迁移方法
 
 !!! info
-    The **easiest** and most **error-proof** method is to copy **everything** under:
+    **最简单**且**最不容易出错**的方法是复制以下路径下的**所有内容**：
 
     ```
     .minecraft/ldlib2/assets/...
     ```
 
-    into:
+    到：
 
     ```
     assets/...
     ```
 
-    This ensures all dependencies are preserved and your FX works correctly after packaging.
+    这样可以确保保留所有依赖项，并且 FX 在打包后能正常工作。

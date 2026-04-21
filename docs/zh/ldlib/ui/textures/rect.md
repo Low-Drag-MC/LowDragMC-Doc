@@ -1,22 +1,22 @@
 # ColorRectTexture
 
-## Basic Properties
+## 基本属性
 
-| Field     | Description                                  |
+| 字段      | 描述                                         |
 |-----------|----------------------------------------------|
-| color     | The color applied to the rectangle           |
-| radiusLT  | Top-left corner radius                       |
-| radiusLB  | Bottom-left corner radius                    |
-| radiusRT  | Top-right corner radius                      |
-| radiusRB  | Bottom-right corner radius                   |
+| color     | 应用于矩形的颜色                             |
+| radiusLT  | 左上角圆角半径                               |
+| radiusLB  | 左下角圆角半径                               |
+| radiusRT  | 右上角圆角半径                               |
+| radiusRB  | 右下角圆角半径                               |
 
 ---
 
-## APIs
+## API
 
 ### setRadius
 
-Sets a uniform radius for all corners.
+为所有角设置统一的圆角半径。
 
 === "Java / KubeJS"
 
@@ -28,7 +28,7 @@ Sets a uniform radius for all corners.
 
 ### setLeftRadius
 
-Sets the left-side radii (top and bottom) for the rectangle.
+为矩形的左侧（顶部和底部）设置圆角半径。
 
 === "Java / KubeJS"
 
@@ -40,7 +40,7 @@ Sets the left-side radii (top and bottom) for the rectangle.
 
 ### setRightRadius
 
-Sets the right-side radii (top and bottom) for the rectangle.
+为矩形的右侧（顶部和底部）设置圆角半径。
 
 === "Java / KubeJS"
 
@@ -52,7 +52,7 @@ Sets the right-side radii (top and bottom) for the rectangle.
 
 ### setTopRadius
 
-Sets the top-side radii (left and right) for the rectangle.
+为矩形的顶部（左侧和右侧）设置圆角半径。
 
 === "Java / KubeJS"
 
@@ -64,7 +64,7 @@ Sets the top-side radii (left and right) for the rectangle.
 
 ### setBottomRadius
 
-Sets the bottom-side radii (left and right) for the rectangle.
+为矩形的底部（左侧和右侧）设置圆角半径。
 
 === "Java / KubeJS"
 

@@ -1,27 +1,27 @@
 # ColorBorderTexture
 
-## Basic Properties
+## 基本属性
 
-| Field          | Description                                        |
-|----------------|----------------------------------------------------|
-| color          | The color applied to the border                    |
-| border         | The border width                                   |
-| radiusLTInner  | Top-left inner corner radius                       |
-| radiusLBInner  | Bottom-left inner corner radius                    |
-| radiusRTInner  | Top-right inner corner radius                      |
-| radiusRBInner  | Bottom-right inner corner radius                   |
-| radiusLTOuter  | Top-left outer corner radius                       |
-| radiusLBOuter  | Bottom-left outer corner radius                    |
-| radiusRTOuter  | Top-right outer corner radius                      |
-| radiusRBOuter  | Bottom-right outer corner radius                   |
+| 字段           | 描述                       |
+|----------------|----------------------------|
+| color          | 应用于边框的颜色           |
+| border         | 边框宽度                   |
+| radiusLTInner  | 左上角内圆角半径           |
+| radiusLBInner  | 左下角内圆角半径           |
+| radiusRTInner  | 右上角内圆角半径           |
+| radiusRBInner  | 右下角内圆角半径           |
+| radiusLTOuter  | 左上角外圆角半径           |
+| radiusLBOuter  | 左下角外圆角半径           |
+| radiusRTOuter  | 右上角外圆角半径           |
+| radiusRBOuter  | 右下角外圆角半径           |
 
 ---
 
-## APIs
+## API
 
 ### setBorder
 
-Sets the border width.
+设置边框宽度。
 
 === "Java / KubeJS"
 
@@ -33,7 +33,7 @@ Sets the border width.
 
 ### setColor
 
-Sets the border color.
+设置边框颜色。
 
 === "Java / KubeJS"
 
@@ -45,7 +45,7 @@ Sets the border color.
 
 ### setRadius
 
-Sets uniform inner and outer radii based on the provided radius and current border.
+根据提供的半径和当前边框宽度，设置统一的内、外圆角半径。
 
 === "Java / KubeJS"
 
@@ -57,7 +57,7 @@ Sets uniform inner and outer radii based on the provided radius and current bord
 
 ### setLeftRadius
 
-Sets the left-side radii for both inner and outer corners.
+设置左侧内角和外角的圆角半径。
 
 === "Java / KubeJS"
 
@@ -69,7 +69,7 @@ Sets the left-side radii for both inner and outer corners.
 
 ### setRightRadius
 
-Sets the right-side radii for both inner and outer corners.
+设置右侧内角和外角的圆角半径。
 
 === "Java / KubeJS"
 
@@ -81,7 +81,7 @@ Sets the right-side radii for both inner and outer corners.
 
 ### setTopRadius
 
-Sets the top-side radii for both inner and outer corners.
+设置顶部内角和外角的圆角半径。
 
 === "Java / KubeJS"
 
@@ -93,7 +93,7 @@ Sets the top-side radii for both inner and outer corners.
 
 ### setBottomRadius
 
-Sets the bottom-side radii for both inner and outer corners.
+设置底部内角和外角的圆角半径。
 
 === "Java / KubeJS"
 

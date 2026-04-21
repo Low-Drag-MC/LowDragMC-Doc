@@ -1,20 +1,20 @@
 # ExtendedShader
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
 
-Before reading this page, make sure you understand [Minecraft Core Shader](https://minecraft.wiki/w/Shader#Core_shaders).
+在阅读本页前，请确保你已了解 [Minecraft Core Shader](https://minecraft.wiki/w/Shader#Core_shaders)。
 
-Photon2 and LDLib2 extend vanilla shaders with **ExtendedShader**, adding:
+Photon2 和 LDLib2 使用 **ExtendedShader** 扩展了原版着色器，添加了：
 
-- Geometry shader (`attach`) support  
-- Extra samplers and uniforms
+- 几何着色器 (`attach`) 支持  
+- 额外的采样器和 uniform 变量
 
 ---
 
-## 📦 How to Use
+## 📦 如何使用
 
-ExtendedShader JSON is almost the same as Vanilla.  
-Here’s an example using `Texture Material`.
+ExtendedShader JSON 与原版几乎相同。  
+这里展示一个使用 `Texture Material` 的示例。
 
 === "hdr_particle.json"
 
@@ -27,7 +27,7 @@ Here’s an example using `Texture Material`.
         "fragment": "photon:hdr_particle",
         "samplers": [
             { "name": "Sampler2" },
-            // custom samplers
+            // 自定义采样器
             { "name": "Texture" }
         ],
         "uniforms": [
@@ -38,7 +38,7 @@ Here’s an example using `Texture Material`.
             { "name": "FogEnd", "type": "float", "count": 1, "values": [1.0] },
             { "name": "FogColor", "type": "float", "count": 4, "values": [0,0,0,0] },
             { "name": "FogShape", "type": "int", "count": 1, "values": [0] },
-            // custom uniforms
+            // 自定义 uniform 变量
             { "name": "DiscardThreshold", "type": "float", "count": 1, "values": [0.01] },
             { "name": "HDR", "type": "float", "count": 4, "values": [0,0,0,1] },
             { "name": "HDRMode", "type": "int", "count": 1, "values": [0] }
@@ -46,16 +46,16 @@ Here’s an example using `Texture Material`.
     }
     ```
 
-    1. Attach geometry shader if needed.
+    1. 如有需要可附加几何着色器。
 
 === "particle.vsh"
 
     ```glsl
-    // have to use 330+
+    // 必须使用 330+ 版本
     #version 330 core
 
     #moj_import <fog.glsl>
-    // Photon2 vertex helper
+    // Photon2 顶点着色器辅助库
     #moj_import <photon:particle.glsl> 
 
     uniform sampler2D Sampler2;
@@ -115,23 +115,23 @@ Here’s an example using `Texture Material`.
     }
     ```
 
-**Difference from vanilla particle shader:**
+**与原版粒子着色器的区别：**
 
-- In [`vsh`](#__tabbed_1_2), use `#moj_import <photon:particle.glsl>` and `getParticleData()` to fetch vertex data.
-- In [`fsh`](#__tabbed_1_3), added HDR color output.
+- 在 [`vsh`](#__tabbed_1_2) 中，使用 `#moj_import <photon:particle.glsl>` 和 `getParticleData()` 获取顶点数据。
+- 在 [`fsh`](#__tabbed_1_3) 中，添加了 HDR 颜色输出。
 
 ---
 
-## 🎯 Handle Vertex Data
+## 🎯 处理顶点数据
 
-Different FX objects and renderer settings (e.g., **GPU Instance**, **Additional GPU Data**) can change vertex type and layout.  
+不同的 FX 对象和渲染器设置（如 **GPU Instance**、**Additional GPU Data**）可以改变顶点类型和布局。  
 
-Photon2 provides a helper library that, through macros, automatically parses and converts input vertex data into an accessible format.  
+Photon2 提供了一个辅助库，通过宏自动解析并转换输入顶点数据为可访问的格式。  
 
-More info: [Vertex Format](./VertexFormat.md)
+更多信息：[顶点格式](./VertexFormat.md)
 
 ```glsl
-// Requires GLSL version 330+
+// 需要 GLSL 版本 330+
 #version 330 core
 
 /*
@@ -158,44 +158,44 @@ void main() {
 }
 ```
 
-1. Internal Implementation, check [Vertex Format](./VertexFormat.md) for details.
+1. 内部实现，详见[顶点格式](./VertexFormat.md)。
 
-!!! note "Implementation Details"
-In vertex shader:
+!!! note "实现细节"
+    在顶点着色器中：
 
-1. Ensure `#version` is 330 or higher.
-2. Import Photon2 vertex library: `#moj_import <photon:particle.glsl>`
-3. Access data via `getParticleData()` — no need to handle internal layouts manually.
-4. Photon2 supports passing extra GPU vertex data (e.g., particle lifetime, velocity).
-See: [Additional GPU Data](./AdditionalGPUData.md)
+    1. 确保 `#version` 为 330 或更高。
+    2. 导入 Photon2 顶点库：`#moj_import <photon:particle.glsl>`
+    3. 通过 `getParticleData()` 访问数据——无需手动处理内部布局。
+    4. Photon2 支持传递额外的 GPU 顶点数据（例如粒子生命周期、速度）。
+    参见：[Additional GPU Data](./AdditionalGPUData.md)
 
 ---
 
-## 🎨 Extended Samplers
+## 🎨 扩展采样器
 
-Photon2 provides **extra built-in samplers** beyond vanilla.
-When declared in JSON, these samplers won’t appear in the Inspector.
+Photon2 提供了**超出原版的额外内置采样器**。  
+当在 JSON 中声明这些采样器时，它们不会显示在 Inspector 中。
 
-| Sampler Name        | Description      | Preview                                                |
-| ------------------- | ---------------- | ------------------------------------------------------ |
-| `Sampler2`          | Light Map        | ![Light Map](../../assets/LightMap.png){ width="30%" } |
-| `SamplerSceneColor` | World Color      | ![World Color](../../assets/color.png){ width="30%" }  |
-| `SamplerSceneDepth` | World Depth      | ![World Depth](../../assets/Depth.webp){ width="30%" } |
-| `SamplerCurve`      | Curve Sampler    | -                                                      |
-| `SamplerGradient`   | Gradient Sampler | -                                                      |
+| 采样器名称 | 描述 | 预览 |
+| ---------- | ---- | ---- |
+| `Sampler2` | 光照贴图 | ![光照贴图](../../assets/LightMap.png){ width="30%" } |
+| `SamplerSceneColor` | 世界颜色 | ![世界颜色](../../assets/color.png){ width="30%" } |
+| `SamplerSceneDepth` | 世界深度 | ![世界深度](../../assets/Depth.webp){ width="30%" } |
+| `SamplerCurve` | 曲线采样器 | - |
+| `SamplerGradient` | 渐变采样器 | - |
 
 ---
 
 ### 📈 SamplerCurve / SamplerGradient
 
-![Curve & Gradient](../../assets/CurveAndGradient.png){ width="30%" align=right }
+![曲线与渐变](../../assets/CurveAndGradient.png){ width="30%" align=right }
 
-Special samplers, active only if a Curve or Gradient is assigned.
-Photon2 encodes them into a **128×128 texture** for sampling in shader.
+特殊采样器，仅在分配了曲线或渐变时生效。  
+Photon2 将它们编码为 **128×128 纹理**，以便在着色器中采样。
 
 ```glsl
 #moj_import <photon:particle_utils.glsl>
-/* internal implementation
+/* 内部实现
 const float INV_TEX_SIZE = 1.0 / 128.0;
 const float MAX_U = 1.0 - 0.5 * INV_TEX_SIZE;
 
@@ -217,46 +217,46 @@ void main() {
 }
 ```
 
-Use:
+使用方法：
 
-* Import helpers:
+* 导入辅助库：
 
   ```glsl
   #moj_import <photon:particle_utils.glsl>
   ```
   
-* Call `getCurveValue()` and `getGradientValue()` to retrieve values.
+* 调用 `getCurveValue()` 和 `getGradientValue()` 获取值。
 
 ---
 
-## 🛠 Extended Uniforms
+## 🛠 扩展 Uniforms
 
-Photon2 adds more **built-in uniforms** on top of vanilla core shaders.
-
----
-
-### 📋 Vanilla Built-in Uniforms
-
-| Name             | Type  | Description                                                                      |
-| ---------------- | ----- | -------------------------------------------------------------------------------- |
-| `ModelViewMat`   | mat4  | Model-view matrix                                                                |
-| `ProjMat`        | mat4  | Orthographic projection matrix (width=window, height=window, near=0.1, far=1000) |
-| `ScreenSize`     | vec2  | Framebuffer width & height (pixels)                                              |
-| `ColorModulator` | vec4  | Final color multiplier                                                           |
-| `FogColor`       | vec4  | Fog color & density (alpha = density)                                            |
-| `FogStart`       | float | Fog start distance                                                               |
-| `FogEnd`         | float | Fog end distance                                                                 |
-| `FogShape`       | int   | Fog mode                                                                         |
-| `GameTime`       | float | Normalized day time (0–1, loops every 20min)                                     |
-| `GlintAlpha`     | float | Glint strength (0–1)                                                             |
+Photon2 在原版核心着色器的基础上添加了更多**内置 uniform 变量**。
 
 ---
 
-### 📋 Photon2 Built-in Uniforms
+### 📋 原版内置 Uniforms
 
-| Name                        | Type | Description                        |
-| --------------------------- | ---- | ---------------------------------- |
-| `U_CameraPosition`          | vec3 | Camera world position              |
-| `U_InverseProjectionMatrix` | mat4 | Precomputed inverse `ProjMat`      |
-| `U_InverseViewMatrix`       | mat4 | Precomputed inverse `ModelViewMat` |
-| `U_ViewPort`                | vec4 | ViewPort(x, y, w, h) `since 2.1.3.a` |
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `ModelViewMat` | mat4 | 模型视图矩阵 |
+| `ProjMat` | mat4 | 正交投影矩阵（宽=窗口，高=窗口，近=0.1，远=1000） |
+| `ScreenSize` | vec2 | 帧缓冲区宽度和高度（像素） |
+| `ColorModulator` | vec4 | 最终颜色乘数 |
+| `FogColor` | vec4 | 雾颜色与密度（alpha = 密度） |
+| `FogStart` | float | 雾起始距离 |
+| `FogEnd` | float | 雾结束距离 |
+| `FogShape` | int | 雾模式 |
+| `GameTime` | float | 标准化游戏时间（0–1，每 20 分钟循环一次） |
+| `GlintAlpha` | float | 闪光强度（0–1） |
+
+---
+
+### 📋 Photon2 内置 Uniforms
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+| `U_CameraPosition` | vec3 | 摄像机世界坐标 |
+| `U_InverseProjectionMatrix` | mat4 | 预计算的 `ProjMat` 逆矩阵 |
+| `U_InverseViewMatrix` | mat4 | 预计算的 `ModelViewMat` 逆矩阵 |
+| `U_ViewPort` | vec4 | 视口(x, y, w, h) `自 2.1.3.a 起` |

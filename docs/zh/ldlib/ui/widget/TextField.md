@@ -1,35 +1,34 @@
-
 # TextFieldWidget
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
     <source src="../../assets/textfield.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 
 
-The `TextFieldWidget` provides an editable text field for GUI interfaces. It supports dynamic text updates via a supplier and responder, validation through custom validators, and configurable properties such as maximum string length, border style, and text color.
+`TextFieldWidget` 为 GUI 界面提供一个可编辑的文本框。它支持通过 supplier 和 responder 进行动态文本更新，通过自定义验证器进行输入验证，以及可配置的属性，如最大字符串长度、边框样式和文本颜色。
 
-## Basic Properties
+## 基本属性
 
-| Field              | Description                                                         |
-|--------------------|---------------------------------------------------------------------|
-| currentString      | The current text displayed by the text field                        |
-| maxStringLength    | Maximum allowed length for the text                                 |
-| isBordered         | Determines whether the text field has a border                       |
-| textColor          | The color of the text (modifiable via setter)                        |
-| supplier           | A supplier for dynamic text updates                                  |
-| textResponder      | A responder that handles text changes                                |
-| wheelDur           | Duration (or step value) used for mouse wheel adjustments              |
+| 字段               | 说明                                                               |
+|--------------------|--------------------------------------------------------------------|
+| currentString      | 文本框当前显示的文本                                               |
+| maxStringLength    | 允许的最大文本长度                                                 |
+| isBordered         | 确定文本框是否显示边框                                             |
+| textColor          | 文本的颜色（可通过 setter 修改）                                   |
+| supplier           | 用于动态更新文本的 supplier                                        |
+| textResponder      | 处理文本变化的 responder                                           |
+| wheelDur           | 用于鼠标滚轮调整的持续时间（或步进值）                             |
 
 ---
 
-## APIs
+## API
 
 ### setTextSupplier
 
-Sets the supplier used to update the text dynamically.
+设置用于动态更新文本的 supplier。
 
 === "Java / KubeJS"
 
@@ -41,13 +40,13 @@ Sets the supplier used to update the text dynamically.
 
 ### setTextResponder
 
-Sets the responder to be called when the text changes.
+设置当文本发生变化时调用的 responder。
 
 === "Java / KubeJS"
 
     ``` java
     textFieldWidget.setTextResponder(newText -> {
-        // Handle text change
+        // 处理文本变化
     });
     ```
 
@@ -55,7 +54,7 @@ Sets the responder to be called when the text changes.
 
 ### setBordered
 
-Configures whether the text field should display a border.
+配置文本框是否显示边框。
 
 === "Java / KubeJS"
 
@@ -67,7 +66,7 @@ Configures whether the text field should display a border.
 
 ### setTextColor
 
-Sets the text color for the text field.
+设置文本框的文本颜色。
 
 === "Java / KubeJS"
 
@@ -79,7 +78,7 @@ Sets the text color for the text field.
 
 ### setMaxStringLength
 
-Sets the maximum number of characters allowed in the text field.
+设置文本框允许的最大字符数。
 
 === "Java / KubeJS"
 
@@ -91,7 +90,7 @@ Sets the maximum number of characters allowed in the text field.
 
 ### setValidator
 
-Assigns a custom validator function to control and sanitize text input.
+分配一个自定义验证器函数来控制和清理文本输入。
 
 === "Java / KubeJS"
 
@@ -103,7 +102,7 @@ Assigns a custom validator function to control and sanitize text input.
 
 ### setCompoundTagOnly
 
-Restricts input to valid compound tags. Displays a tooltip indicating the restriction.
+将输入限制为有效的 compound tag。会显示一个提示框指示该限制。
 
 === "Java / KubeJS"
 
@@ -115,7 +114,7 @@ Restricts input to valid compound tags. Displays a tooltip indicating the restri
 
 ### setResourceLocationOnly
 
-Restricts input to valid resource locations. Displays a tooltip indicating the restriction.
+将输入限制为有效的 resource location。会显示一个提示框指示该限制。
 
 === "Java / KubeJS"
 
@@ -127,7 +126,7 @@ Restricts input to valid resource locations. Displays a tooltip indicating the r
 
 ### setNumbersOnly
 
-Restricts input to numeric values. Overloads are available for different numeric types.
+将输入限制为数值。针对不同数值类型提供了重载方法。
 
 === "Java"
 
@@ -147,7 +146,7 @@ Restricts input to numeric values. Overloads are available for different numeric
 
 ### setWheelDur
 
-Sets the wheel duration (step value) for adjusting numbers via mouse wheel or dragging.
+设置通过鼠标滚轮或拖动调整数字时的轮步持续时间（步进值）。
 
 === "Java / KubeJS"
 

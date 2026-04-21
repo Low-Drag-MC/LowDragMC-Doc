@@ -1,11 +1,11 @@
-# Anotations
+# 注解
 
-We show all anotations and their usage in this page.
+我们在本页面展示所有注解及其用法。
 
 ### `@DescSynced`
-Annotate a field, the value of this field (server side) will be synced to the client side (specifically, `remote`)
+注解一个字段，该字段的值（服务端）会被同步到客户端（具体地，`remote`）
 
-if field also be annotated with `@LazyManaged`, you need to manually tell him when to synchronize
+如果字段同时被 `@LazyManaged` 注解，你需要手动告知它何时进行同步
 
 ``` java
 @DescSynced
@@ -14,19 +14,19 @@ int a;
 int b;
 
 public void setA(int newValue) {
-    a = newValue; // will be synced automatically, in general
+    a = newValue; // 通常会自动同步
 }
 
 public void setB(int newValue) {
     b = newValue;
-    markDirty("b"); // mannually notify chagned
+    markDirty("b"); // 手动通知已更改
 }
 ```
 
 ### `@Persisted`
-Annotate a field, the value of this field (server side) will be written/read to/from BlockEntities' nbt. 
+注解一个字段，该字段的值（服务端）会被写入/读取到 BlockEntity 的 nbt 中。
 
--`String key()` represent tag name in nbt. default -- use field name instead.
+-`String key()` 表示 nbt 中的标签名称。默认值 -- 使用字段名代替。
 
 ``` java
 @Persisted(key = "fluidAmount")
@@ -34,7 +34,7 @@ int value = 100;
 @Persisted
 boolean isWater = true;
 ```
-its nbt looks like
+其 nbt 如下所示
 
 ```json
 {
@@ -44,10 +44,10 @@ its nbt looks like
 ```
 
 ### `@DropSaved`
-Annotate a field, the value of this field will be saved to `Itemstack`'s nbt when you pick(clone) / harvest this block, and loaded from `ItemStack` when you place the block in the world.
+注解一个字段，当你拾取（克隆）/ 挖掘此方块时，该字段的值会被保存到 `ItemStack` 的 nbt 中；当你将方块放置在世界中时，会从 `ItemStack` 加载该值。
 
 ### `@RPCMethod`
-Annotate a method, you can send RPC packet between different sides. You are free to define the parameters of the methodas long as the parameters support sync, and send rpc anywhere in your class.
+注解一个方法，你可以在不同端之间发送 RPC 数据包。只要参数支持同步，你可以自由定义方法的参数，并在类中的任何位置发送 rpc。
 
 ```java
 public void update() {
@@ -61,7 +61,7 @@ public void update() {
 
 @RPCMethod
 public void rpcLogic(Direction value1, int value2) {
-    // do your logic
+    // 执行你的逻辑
     if (isRemote()) {
         System.out.println("Recipe rpc from server");
     }
@@ -71,13 +71,13 @@ public void rpcLogic(Direction value1, int value2) {
 }
 ```
 
-* `rpcToTracking`: send to all remote players if this blockentity is loaded(tracked) in their remotes.
-* `rpcToPlayer`: send to a specfic player
-* `rpcToServer`: send to server.
+* `rpcToTracking`: 如果此 blockentity 已加载（被跟踪）于所有远程玩家（remote）中，则发送给他们。
+* `rpcToPlayer`: 发送给特定玩家
+* `rpcToServer`: 发送给服务器。
 
 ### `@ReadOnlyManaged`
 
-Some class types do not support instance, and they must be `final` and cannot be changed. (e.g. class type with `ITagSerializable` is read only, they can be synchronized and persisted, but cannot modify their instance references). If you want this field not to be `finnal`, it may be `null`, and the instance may changed, you can use `@ReadOnlyManaged`.
+某些类类型不支持实例，它们必须是 `final` 且不可更改。（例如，带有 `ITagSerializable` 的类类型是只读的，它们可以被同步和持久化，但不能修改其实例引用）。如果你希望该字段不是 `final`，它可能是 `null`，并且实例可能会更改，你可以使用 `@ReadOnlyManaged`。
 
 ```java
 @DescSynced
@@ -114,10 +114,10 @@ private CoverBehavior deserializeCoverUid(CompoundTag uid) {
 }
 ```
 
-`onDirtyMethod`: if this field has changes.
+`onDirtyMethod`: 如果此字段有更改。
 
-`serializeMethod`: get a unique id of this field.
+`serializeMethod`: 获取此字段的唯一标识符。
 
-`deserializeMethod`: if field's unique id changed / set from `null` to instance. create a new instance for it.
+`deserializeMethod`: 如果字段的唯一标识符更改 / 从 `null` 设置为实例。为其创建新实例。
 
-For example, `CoverBehavior` above is a calss inherit `IManaged`(so sync annotations in CoverBehavior also works). but it's constructor need to pass `BlockEntity` into it, so SyncData system couldn't help create its instance. we can use this way to address it.
+例如，上面的 `CoverBehavior` 是一个继承 `IManaged` 的类（因此 CoverBehavior 中的同步注解也能生效）。但其构造函数需要将 `BlockEntity` 传入其中，所以 SyncData 系统无法帮助创建其实例。我们可以使用这种方式来解决这个问题。

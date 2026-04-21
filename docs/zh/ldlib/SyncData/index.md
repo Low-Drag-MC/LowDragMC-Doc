@@ -1,15 +1,16 @@
-# Introduction and Setup
+# 简介与配置
 
-Developers always feel annoying while maintain the data synchronization between the `Remote` and `Server`, as well as the data persistence. In general, dev has to write massive code about the serialization and network packet handling.
+开发者在维护 `Remote` 与 `Server` 之间的数据同步以及数据持久化时总是感到十分繁琐。通常情况下，开发者不得不编写大量关于序列化和网络数据包处理的代码。
 
-<span style="color: red;">INSTEAD:</span> LDLib provides a powerful sync/persisted system based on annotation. You can easily handle all sync/persisted logic for your `BlockEntity` without any addional code.
+<span style="color: red;">取而代之：</span>LDLib 提供了一套基于注解的强大同步/持久化系统。你可以轻松地为你的 `BlockEntity` 处理所有同步/持久化逻辑，无需任何额外代码。
 
-## Setup
+## 配置
 
-To use SyncData system for your blockentity, you can make your class implement `IManagedBlockEntity` and `IManaged`.
+若要为你的方块实体使用 SyncData 系统，可以让你的类实现 `IManagedBlockEntity` 和 `IManaged`。
 
 ### `IAsyncAutoSyncBlockEntity`
-I suggest you use `IAsyncAutoSyncBlockEntity` instead of `IManagedBlockEntity`, whihc allow you to ignore `markDirty`, everything will be done by SyncData system, you no need to care about anything else.
+
+建议你使用 `IAsyncAutoSyncBlockEntity` 替代 `IManagedBlockEntity`，它可以让你无需理会 `markDirty`，所有工作都将由 SyncData 系统自动完成，你无需关心其他任何事情。
 
 ```java
 public class MyBlockEntity extends BlockEntity implements IAsyncAutoSyncBlockEntity, IAutoPersistBlockEntity, IManaged {
@@ -37,16 +38,17 @@ public class MyBlockEntity extends BlockEntity implements IAsyncAutoSyncBlockEnt
     }
 }
 ```
-Then you can enjoy the benefits of the SyncData System!!
+然后你就可以享受 SyncData 系统带来的便利了！！
 
 ### `IAutoPersistBlockEntity`
-If you want to persisted data to nbt via `@Persisted`, also implenet this interface. 
 
-you can save `@DropSaved` fields to ItemStack:
+如果你想通过 `@Persisted` 将数据持久化到 NBT，也请实现此接口。
+
+你可以将 `@DropSaved` 字段保存到 ItemStack：
 ```java
 IAutoPersistBlockEntity.saveManagedPersistentData(tag, true);
 
-// for example, block clone
+// 例如，方块克隆
 @Override
 public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
     ItemStack itemStack = super.getCloneItemStack(level, pos, state);
@@ -55,14 +57,14 @@ public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState s
     }
     return itemStack;
 }
-``` 
+```
 
-also lead from itemStack:
+也可以从 ItemStack 加载：
 
 ```java
 IAutoPersistBlockEntity.loadManagedPersistentData(tag);
 
-//for example, place a block
+//例如，放置方块
 @Override
 public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity player, ItemStack pStack) {
     if (!pLevel.isClientSide) {
@@ -76,8 +78,9 @@ public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullabl
 }
 ```
 
-## Listen Managed Field Changes
-Sometimes you need to listen for a field changes, such as scheduling render updates when a field is synchronized to the client.
+## 监听托管字段变化
+
+有时你需要监听字段的变化，例如当某个字段同步到客户端时安排渲染更新。
 ```java
 public class MyBlockEntity extends BlockEntity implements IAsyncAutoSyncBlockEntity, IAutoPersistBlockEntity, IManaged {
     @Persisted
@@ -95,11 +98,11 @@ public class MyBlockEntity extends BlockEntity implements IAsyncAutoSyncBlockEnt
 }
 ```
 
-## Using `@Persisted` fields in initialization code
+## 在初始化代码中使用 `@Persisted` 字段
 
-Loading those fields usually happens during the chunk load, which does not guarantee a safe environment to perform any additional operations.
+这些字段的加载通常发生在区块加载期间，这并不能保证可以安全地执行任何额外操作。
 
-If the initialization logic needs to access the values of any `@Persisted` fields, it needs to be scheduled to happen on the next tick instead:
+如果初始化逻辑需要访问任何 `@Persisted` 字段的值，则需要将其安排在下一刻执行：
 
 ```java
 public void onLoad() {
@@ -109,7 +112,6 @@ public void onLoad() {
 }
 
 public void initialize() {
-    // init code here
+    // 在此编写初始化代码
 }
 ```
-

@@ -1,20 +1,20 @@
-# Introduction 
+# 简介
 
-Compass is a doucament system combine both ponder-like and quest book-like system.
+Compass 是一个结合了类 Ponder 和类任务书系统的文档系统。
 
-You can create separate compass system for your mods and projects.
+你可以为你的模组和项目创建独立的 Compass 系统。
 
-The compass is entirely file driven and requires no java code to be written.
+Compass 完全由文件驱动，无需编写 Java 代码。
 
-The compass file should be placed in `/assets/project_id/compass/...`
+Compass 文件应放置在 `/assets/project_id/compass/...`
 
-## Structure
-* `section`: The classification section in comapss, similar to the list on the left in quest. All configuration files are located at `/assets/project_id/compass/sections/..`.
-* `node`: The node in the section is similar to a task node in questbook, and there are relationship between the nodes. All configuration files are located at `/assets/project_id/compass/nodes/..`.
-* `page`: The node json file points to a page, edited using `xml`. All configuration files are located at `/assets/project_id/compass/pages/en_us/..`.
+## 结构
+* `section`：Compass 中的分类板块，类似于任务书左侧的列表。所有配置文件位于 `/assets/project_id/compass/sections/..`。
+* `node`：板块中的节点，类似于任务书中的任务节点，节点之间存在关联。所有配置文件位于 `/assets/project_id/compass/nodes/..`。
+* `page`：节点 json 文件指向一个使用 `xml` 编辑的页面。所有配置文件位于 `/assets/project_id/compass/pages/en_us/..`。
 
 ### Section
-The section configuration is as follows:
+Section 配置如下：
 ```json
 {
   "button_texture": {
@@ -29,11 +29,11 @@ The section configuration is as follows:
 }
 ```
 
-* `priority`: The lower the priority, the higher in the list.
-* `section_id`: The unique identification id of a section is determined by the path to the configuration file. For example, if a section file is located at `assets/gtceu/compass/sections/my_section.json`, then its `section_id` should be `gtceu:my_section`
+* `priority`：优先级越低，在列表中位置越靠上。
+* `section_id`：Section 的唯一标识 id，由配置文件的路径决定。例如，如果 Section 文件位于 `assets/gtceu/compass/sections/my_section.json`，则其 `section_id` 应为 `gtceu:my_section`
 
 ### Node
-The section configuration is as follows:
+Node 配置如下：
 ```json
 {
   "section": "ldlib:my_section",
@@ -54,20 +54,20 @@ The section configuration is as follows:
 }
 ```
 
-* `section`: section id. It indicates which section the node belongs to.
-* `size`: size of the node in the section view. (default by 24)
-* `position`: the relative coordinates in the section view. The actual display position in the screen is calculated by compass automatically.
-* `pre_nodes`: it refers to its parent nods. the section view will show their relations by lines. And a quick link to these relevant nodes is shown on the right panel after you open the page view.
-* `items`: Pressing `[C]` when you're looking hover toolips at specifc items for a while will quickly open the compass system.
+* `section`：Section id。它指示该节点属于哪个 Section。
+* `size`：节点在 Section 视图中的大小。（默认值为 24）
+* `position`：节点在 Section 视图中的相对坐标。实际在屏幕中的显示位置由 Compass 自动计算。
+* `pre_nodes`：指向其父节点。Section 视图将通过线条展示它们之间的关系。打开页面视图后，右侧面板会显示这些相关节点的快速链接。
+* `items`：当你将鼠标悬停在特定物品的提示框上时，按下 `[C]` 键可以快速打开 Compass 系统。
 
 ### Page
-Pages are configured using xml, you can learn it by reading the ttuto [Compass XML](xml.md). The comments detail the purpose of tags in xml.
+页面使用 xml 进行配置，你可以通过阅读教程 [Compass XML](xml.md) 来了解它。其中的注释详细说明了 xml 中标签的用途。
 
-`Localization`: You can localize xml files by placing them in different language folders. such as: 
+`本地化`：你可以通过将 xml 文件放置在不同的语言文件夹中来对其进行本地化。例如：
 
-* en_us: `assets/ldlib/compass/pages/en_us/my_page.xml`
-* zh_cn: `assets/ldlib/compass/pages/zh_cmn/my_page.xml`
+* en_us：`assets/ldlib/compass/pages/en_us/my_page.xml`
+* zh_cn：`assets/ldlib/compass/pages/zh_cmn/my_page.xml`
 
-## Example
-unzip it under the `.minecraft/ldlib/assets/...`
+## 示例
+将其解压到 `.minecraft/ldlib/assets/...` 目录下
 [example.zip](https://github.com/Low-Drag-MC/LDLib-Architectury/files/12213577/example.zip)

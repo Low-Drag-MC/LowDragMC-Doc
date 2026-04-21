@@ -1,22 +1,22 @@
 # TextTextureWidget
 
-`TextTextureWidget` is an advanced text widget compared with [`LabelWidget`](Label.md).
-It wrapper an internal [`TextTexture`](../textures/text.md), therefore, you can set the all text rendering properties by it.
+`TextTextureWidget` 是一个比 [`LabelWidget`](Label.md) 更高级的文本控件。
+它封装了一个内部的 [`TextTexture`](../textures/text.md)，因此你可以通过它来设置所有文本渲染属性。
 
-## Basic Properties
+## 基本属性
 
-| Field         | Description                                                  |
+| 字段          | 说明                                                         |
 |---------------|--------------------------------------------------------------|
-| lastComponent | The last component text displayed  `read only`                        |
-| textTexture   | Internal `TextTexture` `read only`                 |
+| lastComponent | 最后显示的组件文本  `只读`                                   |
+| textTexture   | 内部 `TextTexture` `只读`                                    |
 
 ---
 
-## APIs
+## API
 
 ### textureStyle
 
-Modifies the style of the internal text texture. see [`TextTexture`](../textures/text.md) for more details.
+修改内部文本纹理的样式。更多详情请参见 [`TextTexture`](../textures/text.md)。
 
 === "Java"
 
@@ -39,7 +39,7 @@ Modifies the style of the internal text texture. see [`TextTexture`](../textures
 
 ### `setText`
 
-Sets the text using a string.
+使用字符串设置文本。
 
 === "Java / KubeJS"
 
@@ -51,7 +51,7 @@ Sets the text using a string.
 
 ### `setText` / `setComponent`
 
-Sets the text using a Component.
+使用 Component 设置文本。
 
 === "Java"
 
@@ -69,7 +69,7 @@ Sets the text using a Component.
 
 ### `setText / setTextProvider`
 
-Sets the text using a Supplier.
+使用 Supplier 设置文本。
 
 === "Java"
 

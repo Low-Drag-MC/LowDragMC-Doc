@@ -1,30 +1,30 @@
 # UI
 
-You might have used mbd2’s visual editor to create the UI, but you may have noticed that apart from the trait widget, the other widgets don't really work. This is because we haven't set up the UI logic, such as what should happen when a button is pressed. As mentioned in the [Ldlbib UI](../../ldlib/ui/index.md), we recommend using the UI Editor to create and edit the UI layout, and using [`KubeJS`](../../ldlib/ui/code/index.md) / <del>`NodeGraph (W.I.P)`</del> to set up the interaction logic.
+你可能已经使用过 mbd2 的可视化编辑器来创建 UI，但你可能已经注意到，除了 trait widget 之外，其他 widget 实际上都无法工作。这是因为我们还没有设置 UI 逻辑，例如按下按钮时应该发生什么。正如 [LDLib UI](../../ldlib/ui/index.md) 中提到的，我们推荐使用 UI 编辑器来创建和编辑 UI 布局，并使用 [`KubeJS`](../../ldlib/ui/code/index.md) / <del>`NodeGraph (W.I.P)`</del> 来设置交互逻辑。
 
-Here, we implement a simple, UI-based manual lava filling machine.
+在这里，我们实现了一个简单的、基于 UI 的手动岩浆填充机。
 
 !!! note inline end
-    Example can be download <a href="../assets/example.zip" download>here</a>! 
+    示例可以在<a href="../assets/example.zip" download>这里</a>下载！
     
-    Put it under the `.minecraft` folder.
+    将其放在 `.minecraft` 文件夹下。
 
-First, we configure the machine to have one item trait and one fluid trait, and prepare our UI:
+首先，我们将机器配置为具有一个物品 trait 和一个流体 trait，并准备好我们的 UI：
 
-1. A UI corresponding to the trait.
-2. Two [`buttons`](../../ldlib/ui/widget/Button.md) corresponding to the filling directions.
-3. A [`TextTexture`](../../ldlib/ui/widget/TextTexture.md) to display the amount of fluid in the tank.
+1. 一个与 trait 对应的 UI。
+2. 两个与填充方向对应的 [`Button`](../../ldlib/ui/widget/Button.md)。
+3. 一个用于显示储罐中流体量的 [`TextTexture`](../../ldlib/ui/widget/TextTexture.md)。
 
 ![Image title](../assets/kjs_ui_layout.png){ width="80%" style="display: block; margin: 0 auto;" }
 
-Once you have everything set up, opening the machine's UI should look like this:
+当你完成所有设置后，打开机器的 UI 应该是这样的：
 
 ![Image title](../assets/kjs_ui_layout_2.png){ width="80%" style="display: block; margin: 0 auto;" }
 
 
-## KubeJS Control
-Next, we use KubeJS to add interaction logic to the UI.
-We provide an event [`MBDMachineEvents.onUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) for you to setup the root widget. This event is triggered after [`MBDMachineEvents.onOpenUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) and everything is prepared except the logic.
+## KubeJS 控制
+接下来，我们使用 KubeJS 为 UI 添加交互逻辑。
+我们提供了一个事件 [`MBDMachineEvents.onUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) 供你设置根 widget。该事件在 [`MBDMachineEvents.onOpenUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) 之后触发，此时除逻辑外一切均已准备就绪。
 
 ```javascript
 MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
@@ -35,23 +35,23 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
     const drain_button = root.getFirstWidgetById("drain_button") // Button
     const label = root.getFirstWidgetById("tank_label") // TextWidget
 
-    // Set label to display fluid amount
+    // 设置标签以显示流体量
     label.setTextProvider(() => Component.string(tank.fluid.amount + "mB"))
 
-    // on button click
+    // 按钮点击时
     fill_button.setOnPressCallback(clickData => {
         if (clickData.isRemote) {
-            // trigger on the remote side
-            // because everything is synced from server to client. you can do nothing on the remote side
+            // 在远程端触发
+            // 因为所有内容都从服务器同步到客户端，所以你在远程端无法执行任何操作
         } else {
             var stored = slot.item
-            // check if a lava bucket is stored
+            // 检查是否存储了岩浆桶
             if (stored && stored.id === "minecraft:lava_bucket") {
-                // check if there is enough space in the tank
+                // 检查储罐中是否有足够的空间
                 if (tank.lastTankCapacity - tank.fluid.amount >= 1000) {
-                    // remove the lava bucket
+                    // 移除岩浆桶
                     slot.item = { item: "minecraft:bucket", count: 1 }
-                    // add 1000mB of lava to the tank
+                    // 向储罐中添加 1000mB 岩浆
                     tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount + 1000 }
                 }
             }
@@ -60,11 +60,11 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
 
     drain_button.setOnPressCallback(clickData => {
         if (!clickData.isRemote) {
-            // check if there is lava in the tank
+            // 检查储罐中是否有岩浆
             if (tank.fluid.amount >= 1000 && slot.item.id === "minecraft:bucket") {
-                // remove 1000mB of lava from the tank
+                // 从储罐中移除 1000mB 岩浆
                 tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount - 1000 }
-                // add a lava bucket
+                // 添加一个岩浆桶
                 slot.item = { item: "minecraft:lava_bucket", count: 1 }
             }
         }
@@ -73,7 +73,7 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
 })
 ```
 
-Let's see our final result!
+让我们看看最终结果！
 
 <div>
   <video controls>
@@ -82,12 +82,12 @@ Let's see our final result!
   </video>
 </div>
 
-We only use four widgets here (`TextTexture`, `Button`, `Slot`, and `Tank`). For more details about other widgets please check [pages](../../ldlib/ui/widget/index.md).
+我们这里只使用了四个 widget（`TextTexture`、`Button`、`Slot` 和 `Tank`）。有关其他 widget 的更多详细信息，请查看[页面](../../ldlib/ui/widget/index.md)。
 
 
-## Display part's trait ui in the Controller / Display controller's trait ui in the Part
-MBD2 supports proxy capabilities, allowing you to use a part to proxy the capabilities of a controller. However, you might also want to display the UI of a trait defined in the controller within the part, or vice versa—display a trait from a part in the controller’s UI. This is possible, but it requires some additional setup.
+## 在控制器中显示部件的 trait UI / 在部件中显示控制器的 trait UI
+MBD2 支持代理能力，允许你使用部件来代理控制器的能力。然而，你可能还想在部件中显示在控制器中定义的 trait 的 UI，或者反过来——在控制器的 UI 中显示来自部件的 trait。这是可能的，但需要一些额外的设置。
 
-For example, suppose your part has an item trait named `item_slot` with only one slot. Its UI ID would be `ui:item_slot_0`. To display it in the controller’s UI, you need to manually add an item slot widget to the controller UI and set its ID to `part:item_slot@ui:item_slot_0`.
+例如，假设你的部件有一个名为 `item_slot` 的物品 trait，只有一个槽位。它的 UI ID 将是 `ui:item_slot_0`。要在控制器的 UI 中显示它，你需要手动向控制器 UI 添加一个物品槽位 widget，并将其 ID 设置为 `part:item_slot@ui:item_slot_0`。
 
-Similarly, let’s say your controller has a PneumaticCraft air trait named `air_handler`. To display it in the part's UI, you need to manually add a progress bar widget (you can also temporarily add a trait to auto-generate the UI, then remove the trait), and set the widget's ID to `controller:air_handler@ui:air_handler`.
+同样，假设你的控制器有一个名为 `air_handler` 的 PneumaticCraft 空气 trait。要在部件的 UI 中显示它，你需要手动添加一个进度条 widget（你也可以临时添加一个 trait 来自动生成 UI，然后移除该 trait），并将 widget 的 ID 设置为 `controller:air_handler@ui:air_handler`。

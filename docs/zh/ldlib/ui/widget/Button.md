@@ -2,24 +2,24 @@
 
 ![Image title](../assets/button.png){ width="30%" align=right }
 
-The ButtonWidget is a UI widget representing a clickable button in the GUI system
+ButtonWidget 是 GUI 系统中代表可点击按钮的 UI 控件
 
-## Basic properties
+## 基本属性
 
-All properties can be accessed via Java / KubeJS.
+所有属性都可以通过 Java / KubeJS 访问。
 
 
-| Field       | Description                          |
+| 字段       | 描述                          |
 | :---------- | :----------------------------------- |
-| `isClicked`       | is the button clicked currently |
+| `isClicked`       | 当前按钮是否被点击 |
 
 ---
 
-## APIs
+## API
 
 ### `setButtonTexture()`
 
-Equal to the [`setBackground`](index.md#setbackground).
+等同于 [`setBackground`](index.md#setbackground)。
 
 === "Java / KubeJS"
 
@@ -30,7 +30,7 @@ Equal to the [`setBackground`](index.md#setbackground).
 
 ### `setClickedTexture()`
 
-Remove child widget from it.
+移除其中的子控件。
 
 === "Java / KubeJS"
 
@@ -41,27 +41,27 @@ Remove child widget from it.
 
 ### `setOnPressCallback()`
 
-Used to bind functional logic.
+用于绑定功能逻辑。
 
-`ClickData` provides mouse state information:
+`ClickData` 提供鼠标状态信息：
 
-1. `clickData.button`: mouse button id number.
+1. `clickData.button`: 鼠标按键 ID 编号。
 
-    | button       | Description                          |
+    | 按键       | 描述                          |
     | :---------- | :----------------------------------- |
-    | `0`       | left button |
-    | `1`       | right button |
-    | `2`       | middle button |
+    | `0`       | 左键 |
+    | `1`       | 右键 |
+    | `2`       | 中键 |
 
-2. `clickData.isShiftClick`: is the shift key typed.
-3. `clickData.isCtrlClick`: is the ctrl key typed.
-3. `clickData.isRemote`: is the remote enverionment.
+2. `clickData.isShiftClick`: 是否按下了 Shift 键。
+3. `clickData.isCtrlClick`: 是否按下了 Ctrl 键。
+3. `clickData.isRemote`: 是否为远程环境。
 
 === "Java"
 
     ``` java 
     button.setOnPressCallback(clickData -> {
-        if (clickData.isRemote) { // can be used to check trigger side
+        if (clickData.isRemote) { // 可用于检测触发端
             
         }
     });
@@ -71,7 +71,7 @@ Used to bind functional logic.
 
     ``` javascript 
     button.setOnPressCallback(clickData => {
-        if (clickData.isRemote) { // can be used to check trigger side
+        if (clickData.isRemote) { // 可用于检测触发端
             
         }
     });

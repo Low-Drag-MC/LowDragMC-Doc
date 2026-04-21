@@ -1,129 +1,128 @@
 # StyleSheet
 
-You can style your UI with a `LDLib Style Sheet` (LSS). LSS files are text files inspired by CSS from HTML. USS syntax is the same as CSS syntax, but USS includes overrides and customizations to work better with LDLib2 UI.
+你可以使用 `LDLib Style Sheet`（LSS）来为 UI 设置样式。LSS 文件是受 HTML 中的 CSS 启发的文本文件。LSS 的语法与 CSS 相同，但 LSS 包含了一些覆盖和定制，以便更好地与 LDLib2 UI 配合工作。
 
-LSS allows you to separate **presentation** from **logic**, making UI code cleaner and easier to maintain.
+LSS 允许你将**表现**与**逻辑**分离，使 UI 代码更简洁、更易于维护。
 
 ---
 
-## What Is a Style in LDLib2
+## LDLib2 中的 Style 是什么
 
-Before introducing LSS itself, it is important to understand what a **Style** means in LDLib2 and how styles work internally.
+在介绍 LSS 本身之前，理解 LDLib2 中**Style**的含义以及样式在内部如何工作是至关重要的。
 
-If you are familiar with CSS, these concepts should feel natural.
+如果你熟悉 CSS，这些概念应该会让你感到很自然。
 
-A **Style** in LDLib2 refers to any visual or layout-related configuration that affects how a UI element is rendered, and **is not related to server-side logic**.  
-Examples include:
+LDLib2 中的 **Style** 指的是任何影响 UI 元素渲染方式的视觉或布局相关配置，**与服务器端逻辑无关**。示例包括：
 
-- `layout` (size, position, flex behavior)
+- `layout`（大小、位置、flex 行为）
 - `background`
-- `font-size`, `alignment`, and more
+- `font-size`、`alignment` 等等
 
-In fact, the `layout` system you already know is itself a type of **Style**.
+事实上，你已经了解的 `layout` 系统本身就是一种 **Style** 类型。
 
-Each `UIElement` may define multiple styles, and a single style property can have multiple candidate values coming from different sources.
+每个 `UIElement` 可以定义多个样式，单个样式属性可以有来自不同来源的多个候选值。
 
-Internally, every UI element maintains a **StyleBag**, which:
+在内部，每个 UI 元素维护一个 **StyleBag**，它：
 
-- Stores all style values applied to the element
-- Resolves conflicts between styles
-- Computes the final effective style used for rendering
+- 存储应用于元素的所有样式值
+- 解决样式之间的冲突
+- 计算最终用于渲染的有效样式
 
-The final style is determined by **priority**, not by application order.
+最终样式由**优先级**决定，而不是应用顺序。
 
 ---
 
-### Style Origin and Priority
+### Style Origin 与优先级
 
-Every style value has a **StyleOrigin**, which defines **where the style comes from** and **how strong it is**.
+每个样式值都有一个 **StyleOrigin**，它定义了**样式来自哪里**以及**它的强度**。
 
 ??? info "StyleOrigin"
     ```java
     public enum StyleOrigin {
         /**
-         * Default style defined by the UI component itself
+         * 由 UI 组件本身定义的默认样式
          */
         DEFAULT(0),
 
         /**
-         * Style defined in an external stylesheet (LSS)
+         * 在外部样式表（LSS）中定义的样式
          */
         STYLESHEET(2),
 
         /**
-         * Inline style set directly in code
+         * 直接在代码中设置的内联样式
          */
         INLINE(3),
 
         /**
-         * Style applied by animations
+         * 动画应用的样式
          */
         ANIMATION(4),
 
         /**
-         * Important style that overrides all others
+         * 覆盖所有其他样式的重要样式
          */
         IMPORTANT(5);
     }
     ```
 
-Styles with a higher priority override styles with a lower priority:
+优先级较高的样式会覆盖优先级较低的样式：
 
 > `DEFAULT` < `STYLESHEET` < `INLINE` < `ANIMATION` < `IMPORTANT`
 
-This design ensures that:
+这种设计确保：
 
-- Components have sensible defaults
-- Stylesheets define the global look
-- Inline styles can override stylesheets
-- Animations can temporarily override visuals
-- `IMPORTANT` styles always win
+- 组件具有合理的默认值
+- 样式表定义全局外观
+- 内联样式可以覆盖样式表
+- 动画可以临时覆盖视觉效果
+- `IMPORTANT` 样式总是优先
 
 
-### Customizable Styles
+### 可自定义的样式
 
-LDLib2 provides multiple ways to customize UI styles.
-You can freely mix these approaches depending on your needs.
+LDLib2 提供多种方式来自定义 UI 样式。
+你可以根据需要自由混合使用这些方法。
 
 !!! note inline end
-    In this page, we won't introduce all supported styles and their behaviour. Each UI component documents the styles it supports on its own wiki page.
+    在本页中，我们不会介绍所有支持的样式及其行为。每个 UI 组件在其自己的 wiki 页面上记录了它所支持的样式。
 
-Each UI component exposes the `Style` objects it supports, allowing you to configure styles directly through code.
+每个 UI 组件公开它支持的 `Style` 对象，允许你直接通过代码配置样式。
 
-For example, in [`layout`](./layout.md#setting-layout-properties), both `#layout(...)` and `#getLayout()` are based on the same underlying `Style` system.
-`layout` is a shared style available on all UI Elements.
+例如，在 [`layout`](./layout.md#setting-layout-properties) 中，`#layout(...)` 和 `#getLayout()` 都基于相同的底层 `Style` 系统。
+`layout` 是一个在所有 UI 元素上都可用的共享样式。
 
-In addition, some components provide their own specialized styles.
-For instance, `Button` exposes a `buttonStyle(...)` API for configuring button-specific visual properties.
+此外，一些组件提供自己的专用样式。
+例如，`Button` 公开了一个 `buttonStyle(...)` API，用于配置按钮特定的视觉属性。
 
 ---
 
-## Customizing Styles via Code
+## 通过代码自定义样式
 
-There are many methods to set styles.
+有许多方法可以设置样式。
 
 === "Java"
 
     ```java
     var button = new Button();
 
-    // direct call
+    // 直接调用
     button.getStyle()
-        // set background texture
+        // 设置背景纹理
         .background(SpriteTexture.of("photon:textures/icon.png"));
-        // set tooltips
+        // 设置提示文本
         .tooltips("This is my tooltips")
-        // set opacity
+        // 设置不透明度
         .opacity(0.5);
 
-    // chain call, return button itself for chain calls
+    // 链式调用，返回 button 本身以支持链式调用
     button.buttonStyle(style -> {}).style(style -> style
         .background(SpriteTexture.of("photon:textures/icon.png"));
         .tooltips("This is my tooltips")
         .opacity(0.5)
     );
 
-    // lss text
+    // lss 文本
     button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
     button.lss("tooltips", "This is my tooltips");
     button.lss("opacity", 0.5);
@@ -133,34 +132,34 @@ There are many methods to set styles.
     ```js
     let button = new Button();
 
-    // direct call
+    // 直接调用
     button.getStyle()
-        // set background texture
+        // 设置背景纹理
         .background(SpriteTexture.of("photon:textures/icon.png"));
-        // set tooltips
+        // 设置提示文本
         .tooltips("This is my tooltips")
-        // set opacity
+        // 设置不透明度
         .opacity(0.5);
 
-     // chain call, return button itself for chain calls
+     // 链式调用，返回 button 本身以支持链式调用
     button.buttonStyle(style => {}).style(style => style
         .background(SpriteTexture.of("photon:textures/icon.png"));
         .tooltips("This is my tooltips")
         .opacity(0.5)
     );
 
-    // lss text
+    // lss 文本
     button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
     button.lss("tooltips", "This is my tooltips");
     button.lss("opacity", 0.5);
     ```
 
-All of the methods above can be used to set styles, but they are **not equivalent**.
+以上所有方法都可以用来设置样式，但它们**并不等价**。
 
-* Using `getStyle()` or `style(...)` sets styles with the `INLINE` origin by default.
-* Using `lss(...)` sets styles with the `STYLESHEET` origin by default.
+* 使用 `getStyle()` 或 `style(...)` 默认设置 `INLINE` 来源的样式。
+* 使用 `lss(...)` 默认设置 `STYLESHEET` 来源的样式。
 
-If you want to assign styles using these APIs **with a different `StyleOrigin`**, you can explicitly specify the origin when applying the style, as shown below:
+如果你想使用这些 API **以不同的 `StyleOrigin`** 分配样式，可以在应用样式时显式指定来源，如下所示：
 
 === "Java"
 
@@ -169,7 +168,7 @@ If you want to assign styles using these APIs **with a different `StyleOrigin`**
         .tooltips("This is my tooltips")
     );
 
-    // lss text
+    // lss 文本
     button.lss("tooltips", "This is my tooltips", StyleOrigin.DEFAULT);
     ```
 === "KubeJS"
@@ -179,43 +178,43 @@ If you want to assign styles using these APIs **with a different `StyleOrigin`**
         .tooltips("This is my tooltips")
     );
 
-    // lss text
+    // lss 文本
     button.lss("tooltips", "This is my tooltips", "DEFAULT");
     ```
 
 ---
 
-## Customizing Styles via stylesheet
+## 通过样式表自定义样式
 
-Although styling UI elements directly in code is convenient, it quickly becomes **tedious and repetitive** when your project involves a large amount of UI design.
+虽然在代码中直接设置 UI 元素的样式很方便，但当你的项目涉及大量 UI 设计时，这很快就会变得**繁琐且重复**。
 
-In particular:
+特别是：
 
-* Applying the same styles to many UI elements requires repeated code.
-* Updating a shared style (for example, changing a background texture) may require modifying every related UI element manually.
+* 将相同样式应用于多个 UI 元素需要重复代码。
+* 更新共享样式（例如，更改背景纹理）可能需要手动修改每个相关的 UI 元素。
 
-More importantly, if you want your UI styles to be **customizable by players**—for example, allowing styles to be overridden via resource packs—managing styles purely in code becomes impractical.
+更重要的是，如果你希望你的 UI 样式可以被**玩家自定义**——例如，允许通过资源包覆盖样式——纯粹在代码中管理样式就变得不切实际。
 
-Using **stylesheets (LSS)** allows you to:
+使用**样式表（LSS）**允许你：
 
-* Centralize and reuse styles across multiple UI elements.
-* Modify the appearance of the entire UI from a single place.
-* Expose UI styling to resource packs for easy customization.
+* 在多个 UI 元素之间集中和重用样式。
+* 从单个位置修改整个 UI 的外观。
+* 将 UI 样式暴露给资源包以便于自定义。
 
-For these reasons, stylesheets are the recommended way to manage and unify UI styles for big project.
+因此，对于大型项目，样式表是管理和统一 UI 样式的推荐方式。
 
-### Syntax
-If you are familiar with CSS, you will be very familiar with the syntax of LSS.
+### 语法
+如果你熟悉 CSS，你会对 LSS 的语法非常熟悉。
 
-A LSS consists of the following:
+LSS 包括以下内容：
 
-* Style rules that include a `selector` and a `declaration block`.
-* Selectors that identify which ui element the style rule affects.
-* A declaration block, inside curly braces, that has one or more style declarations. Each style declaration has a property and a value. Each style declaration ends with a semi-colon.
+* 包含 `selector` 和 `declaration block` 的样式规则。
+* 用于识别样式规则影响哪个 UI 元素的选择器。
+* 在大括号内的声明块，包含一个或多个样式声明。每个样式声明都有一个属性和一个值。每个样式声明以分号结尾。
 
-**Style matching with rules**
+**使用规则匹配样式**
 
-The following is the general syntax of a style rule:
+以下是样式规则的一般语法：
 
 ```css
 selector {
@@ -224,9 +223,9 @@ selector {
 }
 ```
 
-When you define a stylesheet, you can apply it to the ui tree. Selectors match against elements to resolve which properties apply from the LSS. If a selector matches an element, the style declarations apply to the element.
+当你定义一个样式表时，你可以将其应用到 UI 树。选择器根据 LSS 匹配元素以确定哪些属性适用。如果选择器匹配一个元素，则样式声明适用于该元素。
 
-For example, the following rule matches any `Button` object:
+例如，以下规则匹配任何 `Button` 对象：
 ```css
 button {
   base-background: built-in(ui-mc:RECT_BORDER);
@@ -237,91 +236,91 @@ button {
 }
 ```
 
-**Supported selector types**
-LSS supports several types of simple and complex selectors that match elements based on different criteria, such as the following:
+**支持的选择器类型**
+LSS 支持多种类型的简单和复杂选择器，这些选择器基于不同的条件匹配元素，例如：
 
-- Component type name
-- An assigned `id`
-- A list of LSS `classes`
-- The element’s position in the ui tree and its relationship to other elements
+- 组件类型名称
+- 分配的 `id`
+- LSS `classes` 列表
+- 元素在 UI 树中的位置及其与其他元素的关系
 
-If an element matches more than one selector, LSS applies the styles from whichever selector takes precedence.
+如果一个元素匹配多个选择器，LSS 会应用具有更高优先级的选择器中的样式。
 
-LSS supports a set of simple selectors that are analogous, but not identical, to simple selectors in CSS. The following table provides a quick reference of LSS simple selectors.
+LSS 支持一组简单选择器，这些选择器与 CSS 中的简单选择器类似但不完全相同。下表提供了 LSS 简单选择器的快速参考。
 
-| Selector type | Syntax | Matches|
+| 选择器类型 | 语法 | 匹配目标 |
 | ---- | ----------- | ----------- |
-| Component selector | `type {...}` | Elements of a specific component type. <br> (e.g. `button`, `text-field`, `toogle`) |
-| Class selector | `.class {...}` | Elements with an assigned LSS class. <br> (e.g. `.__focused__`) |
-| ID selector | `#root {...}` | Elements with an assigned `id`. <br> (e.g. `#root`) |
-| Universal selector | `* {...}` | Any elements. |
+| 组件选择器 | `type {...}` | 特定组件类型的元素。<br>（例如 `button`、`text-field`、`toogle`） |
+| 类选择器 | `.class {...}` | 具有分配 LSS 类的元素。<br>（例如 `.__focused__`） |
+| ID 选择器 | `#root {...}` | 具有分配 `id` 的元素。<br>（例如 `#root`） |
+| 通用选择器 | `* {...}` | 任何元素。 |
 
-LSS supports a subset of CSS complex selectors. The following table provides a quick reference of LSS complex selectors.
+LSS 支持 CSS 复杂选择器的一个子集。下表提供了 LSS 复杂选择器的快速参考。
 
-| Selector type | Syntax | Matches|
+| 选择器类型 | 语法 | 匹配目标 |
 | ---- | ----------- | ----------- |
-| Not selector | `:not(selector) {...}` | Elements that not match the selector. |
-| Host selector | `selector:host {...}` | Elements that must be the `host`. |
-| Internal selector | `selector:internal {...}` | Elements that must be the `internal`. |
-| Descendant selector | `selector1 selector2 {...}` | Elements that are the descendant of another element in the ui tree. |
-| Child selector | `selector1 > selector2 {...}` | Elements that are the children of another element in the ui tree. |
-| Multiple selector | `selector1, selector2 {...}` | Elements that match all the simple selectors. |
+| Not 选择器 | `:not(selector) {...}` | 不匹配该选择器的元素。 |
+| Host 选择器 | `selector:host {...}` | 必须是 `host` 的元素。 |
+| Internal 选择器 | `selector:internal {...}` | 必须是 `internal` 的元素。 |
+| 后代选择器 | `selector1 selector2 {...}` | 在 UI 树中是另一个元素后代的元素。 |
+| 子元素选择器 | `selector1 > selector2 {...}` | 在 UI 树中是另一个元素子元素的元素。 |
+| 多个选择器 | `selector1, selector2 {...}` | 匹配所有简单选择器的元素。 |
 
-!!! info "`Host` and `Internal` Element"
-    A UI tree can contain both **host elements** and **internal elements**.
+!!! info "`Host` 和 `Internal` 元素"
+    一个 UI 树可以包含**宿主元素（host elements）**和**内部元素（internal elements）**。
 
-    Using **`button`** as an example:
+    以 **`button`** 为例：
 
-    * The `button` itself is a **host element**. It is a component that you create and interact with directly.
-    * Internally, a `button` contains other UI elements, such as a `text` used to render its label.
+    * `button` 本身是一个**宿主元素**。它是你直接创建和交互的组件。
+    * 在内部，`button` 包含其他 UI 元素，例如用于渲染其标签的 `text`。
 
     ![alt text](../assets/internal.png)
 
-    These internal elements are part of the component’s implementation and are called **internal elements**, which cannot be removed from the UI tree and diplayed in gray.
+    这些内部元素是组件实现的一部分，称为**内部元素**，它们不能从 UI 树中移除，并以灰色显示。
 
-    You normally don’t need to create or manage them manually, but they still exist in the UI tree and can participate in layout, styling, and event propagation.
+    你通常不需要手动创建或管理它们，但它们仍然存在于 UI 树中，可以参与布局、样式和事件传播。
 
-    This distinction allows LDLib2 components to be both **composable** and **customizable**, while keeping their internal structure encapsulated.
+    这种区分允许 LDLib2 组件既**可组合**又**可自定义**，同时保持其内部结构的封装。
 
 
-??? note "supported characters"
-    -  Must begin with a letter (`A–Z` or `a–z`) or an underscore (`_`).
-    - Can contain letters, digits (`0–9`), hyphens (`-`), and underscores (`_`).
-    - Selectors are case-sensitive. For example, myClass and MyClass are different.
-    - Selectors can’t start with a digit or a hyphen followed by a digit (for example, `.1class` or `.-1class`).
+??? note "支持的字符"
+    - 必须以字母（`A–Z` 或 `a–z`）或下划线（`_`）开头。
+    - 可以包含字母、数字（`0–9`）、连字符（`-`）和下划线（`_`）。
+    - 选择器区分大小写。例如，myClass 和 MyClass 是不同的。
+    - 选择器不能以数字或连字符后跟数字开头（例如，`.1class` 或 `.-1class`）。
 
-**Quiz**
+**测验**
 
-What kind of elements will be selected here?
+这里会选择什么样的元素？
 ```css
 button:host :not(.my_label#my_id > text:internal) > .my_class:host, text-field {
     // ...
 }
 ```
 
-??? info "Answer"
-    1. **All `text-field` elements**, regardless of their position in the UI tree.
+??? info "答案"
+    1. **所有 `text-field` 元素**，无论它们在 UI 树中的位置如何。
 
-    2. **Host elements with the class `my_class`**, with the following constraints:
-        - The element must be a **host element**.
-        - Its **direct parent** must **not** be an internal `text` element whose parent is an element with `my_label` class and with the ID `my_id`.
-        - The element must have a **host `button` ancestor** somewhere above it in the UI tree.
+    2. **具有 `my_class` 类的宿主元素**，具有以下约束：
+        - 该元素必须是**宿主元素**。
+        - 它的**直接父元素**必须**不是**一个内部 `text` 元素，该元素的父元素是具有 `my_label` 类且 ID 为 `my_id` 的元素。
+        - 该元素必须在 UI 树中有一个**宿主 `button` 祖先**。
 
 
-### Apply stylesheet
+### 应用样式表
 
-To apply your stylesheets, you can append them during `UI` creation.
+要应用你的样式表，你可以在创建 `UI` 时追加它们。
 
 === "Java"
 
     ```java hl_lines="30-32"
     private static ModularUI createModularUI() {
-        // set root with an ID
+        // 设置带有 ID 的根元素
         var root = new UIElement().setId("root");
         root.addChildren(
                 new Label().setText("LSS example"),
                 new Button().setText("Click Me!"),
-                // set the element with a class
+                // 为元素设置类
                 new UIElement().addClass("image")
         );
         var lss = """
@@ -345,7 +344,7 @@ To apply your stylesheets, you can append them during `UI` creation.
             }
             """;
         var stylesheet = Stylesheet.parse(lss);
-        // add stylesheets to ui
+        // 添加样式表到 UI
         var ui = UI.of(root, stylesheet);
         return ModularUI.of(ui);
     }
@@ -354,12 +353,12 @@ To apply your stylesheets, you can append them during `UI` creation.
 
     ```js hl_lines="30-32"
     function createModularUI() {
-        // set root with an ID
+        // 设置带有 ID 的根元素
         let root = new UIElement().setId("root");
         root.addChildren(
                 new Label().setText("LSS example"),
                 new Button().setText("Click Me!"),
-                // set the element with a class
+                // 为元素设置类
                 new UIElement().addClass("image")
         );
         let lss = `
@@ -383,13 +382,13 @@ To apply your stylesheets, you can append them during `UI` creation.
             }
         `;
         let stylesheet = Stylesheet.parse(lss);
-        // add stylesheets to ui
+        // 添加样式表到 UI
         let ui = UI.of(root, stylesheet);
         return ModularUI.of(ui);
     }
     ```
 
-You could also modify stylesheets at runtime.
+你也可以在运行时修改样式表。
 
 === "Java"
 
@@ -408,12 +407,12 @@ You could also modify stylesheets at runtime.
     }
     ```
 
-### Builtin Stylesheets
+### 内置样式表
 
-LDLib2 provides three builtin stylesheets `gdp`, `mc`, and `modern`, allows you to  switch themes flexibly.
-`gdp` is the default stylesheet while using LDLib2 components.
+LDLib2 提供了三个内置样式表 `gdp`、`mc` 和 `modern`，允许你灵活地切换主题。
+使用 LDLib2 组件时，`gdp` 是默认样式表。
 
-You can use `StylesheetManager` to access all registered stylesheets.
+你可以使用 `StylesheetManager` 来访问所有已注册的样式表。
 
 === "Java"
 
@@ -434,7 +433,7 @@ You can use `StylesheetManager` to access all registered stylesheets.
     }
     ```
 
-All three builtin stylesheets as below:
+所有三种内置样式表如下所示：
 
 <figure markdown="span">
     ![size](../assets/gdp_style.png)
@@ -451,24 +450,24 @@ All three builtin stylesheets as below:
     </figcaption>
 </figure>
 
-### Stylesheets from resourcepack
+### 来自资源包的样式表
 
 !!! note inline end
     ![size](../assets/lss_path.png)
 
-    Don't foget `F3 + T` to reload resource after modification at runtime.
+    在运行时修改后别忘了 `F3 + T` 重新加载资源。
 
-In practice, stylesheets can be added or overridden via resource packs.
-By placing your `LSS` files in the designated path, `StylesheetManager` will automatically discover and register them at runtime while reload resources.
+在实践中，样式表可以通过资源包添加或覆盖。
+通过将你的 `LSS` 文件放置在指定路径，`StylesheetManager` 将在重新加载资源时自动发现并注册它们。
 
-You should place your stylesheets under the path of `.assets/<namespace>/lss/<name>.lss`.
+你应该将样式表放置在 `.assets/<namespace>/lss/<name>.lss` 路径下。
 
-After register, you are able to access them by using `StylesheetManager`.
+注册后，你可以使用 `StylesheetManager` 来访问它们。
 
 === "Java"
 
     ```java
-    // replace <namespace> and <name> with your own.
+    // 将 <namespace> 和 <name> 替换为你自己的。
     StylesheetManager.INSTANCE.getStylesheetSafe(
         ResourceLocation.parse("<namespace>:lss/<name>.lss")
     );
@@ -476,7 +475,7 @@ After register, you are able to access them by using `StylesheetManager`.
 === "KubeJS"
 
     ```js
-    // replace <namespace> and <name> with your own.
+    // 将 <namespace> 和 <name> 替换为你自己的。
     StylesheetManager.INSTANCE.getStylesheetSafe(
         "<namespace>:lss/<name>.lss"
     );

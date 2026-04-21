@@ -1,47 +1,47 @@
 # Compass XML
 
-We will breifly inllustrates labels in the xml.
+我们将简要介绍 XML 中的标签。
 
-## generic attributes
+## 通用属性
 ```xml
 <page>
   <xxx top-margin="10" bottom-margin="10" left-margin="10", right-margin="10">
-  <!--margin is a generic property that represents the amount of space reserved between the previous component and the next component. The default is 0.-->
+  <!--margin 是一个通用属性，表示在前一个组件和后一个组件之间保留的空间量。默认为 0。-->
   </xxx>
 </page>
 ```
 
-## Header
+## 标题
 ```xml
 <page>
-    <h1>Title H1 <lang key="ldlib.author"/></h1> <!-- label <lang/> can be used to load text according to the lang key -->
-    <h2>Title H2</h2>
-    <h3>Title H3</h3>
-    <!-- attributes-->
-    <h1 space="2" font-size="9" isCenter="false" isShadow="true"> <!-- space: row spacing-->
+    <h1>标题 H1 <lang key="ldlib.author"/></h1> <!-- 标签 <lang/> 可以根据语言键加载文本 -->
+    <h2>标题 H2</h2>
+    <h3>标题 H3</h3>
+    <!-- 属性 -->
+    <h1 space="2" font-size="9" isCenter="false" isShadow="true"> <!-- space: 行间距 -->
 </page>
 ```
 
-## Blank
+## 空行
 ```xml
 <page>
-    <br height="20"/> <!--blank height-->
+    <br height="20"/> <!-- 空行高度 -->
 </page>
 ```
 
-## Text
+## 文本
 ```xml
 <page>
     <text>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
         <style underlined="true" link="ldlib:test_node2">
-            link to node2
+            链接到 node2
         </style>
         <style underlined="true" url-link="https://github.com/Low-Drag-MC/LDLib-Architectury">
-            link to url
+            链接到 URL
         </style>
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        <style color="#ffff0000" hover-info="hover tooltips">
+        <style color="#ffff0000" hover-info="悬浮提示">
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
             ut aliquip ex ea commodo consequat.
         </style>
@@ -49,39 +49,39 @@ We will breifly inllustrates labels in the xml.
         Duis aute irure dolor in reprehenderit
         in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     </text>
-    <!-- attributes-->
+    <!-- 属性 -->
     <text space="2" isCenter="false">
-        <br/> <!--new line-->
-        <lang key="ldlib.author"/> <!-- used to load text according to the lang key -->
+        <br/> <!-- 换行 -->
+        <lang key="ldlib.author"/> <!-- 根据语言键加载文本 -->
         <style color="#ffffffff" bold="false" italic="false" underlined="false" strikethrough="false" obfuscated="false"> 
-            <!--The style of the text in the range-->
+            <!-- 范围内的文本样式 -->
         </style>
-        <style hover-info="hover tooltips" link="ldlib:my_node_2"> 
-            <!--link will jump to the given node while click-->
+        <style hover-info="悬浮提示" link="ldlib:my_node_2"> 
+            <!-- 点击时链接会跳转到给定的节点 -->
         </style>
     </text>
 </page>
 ```
 
-## Image
+## 图片
 ```xml
 <page>
-    <image width="160" height="40" type="resource" top-margin="10" bottom-margin="10" url="gtceu:textures/gt_logo_long.png" hover-info="tooltips">
-        <!-- same as the text label here -->
-        description of the image.
+    <image width="160" height="40" type="resource" top-margin="10" bottom-margin="10" url="gtceu:textures/gt_logo_long.png" hover-info="提示">
+        <!-- 与文本标签在此处作用相同 -->
+        图片描述。
     </image>
     <image width="100" height="100" type="item" item="minecraft:stone"/>
 </page>
 ```
 
-## Recipe
+## 配方
 ```xml
 <page>
-    <recipe id="minecraft:barrel"/> <!--recipe id-->
+    <recipe id="minecraft:barrel"/> <!-- 配方 id -->
 </page>
 ```
 
-## Ingredient
+## 材料
 ```xml
 <page>
     <ingredient>
@@ -92,32 +92,32 @@ We will breifly inllustrates labels in the xml.
 </page>
 ```
 
-## Scene
+## 场景
 ```xml
 <page>
-    <scene height="300"> <!-- draggable="false" scalable="false" zoom="6" camera="perspective"  yaw="25"can also be set here-->
+    <scene height="300"> <!-- 还可以在此处设置 draggable="false" scalable="false" zoom="6" camera="perspective" yaw="25" -->
 	<page>
 	    <block pos="0 0 0" block="minecraft:glass"/>
 	    <block pos="1 0 0" block="minecraft:dirt" item-tips="true"/>
-	    <block pos="0 0 1" block="minecraft:furnace">hover info</block>
+	    <block pos="0 0 1" block="minecraft:furnace">悬浮信息</block>
 	</page>
          <page>
 	    <block pos="0 0 0" block="minecraft:redstone"/>
 	    <block pos="1 0 0" block="minecraft:wool" item-tips="true"/>
-	    <block pos="0 0 1" block="minecraft:grass">hover info</block>
+	    <block pos="0 0 1" block="minecraft:grass">悬浮信息</block>
 	</page>
     </scene>
 </page>
 ```
 
-## Storyline Scene
-Please refer to the page [Compass Scene](scene.md)
+## 故事线场景
+请参阅 [Compass Scene](scene.md) 页面
 
-## Useful command to get the nbt of the blockentity/entity.
-It's inevitable that when you're writing a scene you'll come across some blocks/entities that require nbt to be set. 
+## 获取方块实体/实体 NBT 的有用命令
+编写场景时，不可避免地会遇到一些需要设置 NBT 的方块/实体。
 
-while you can get it by `/data get block/entity` you can't copy it in the game.
+虽然你可以通过 `/data get block/entity` 获取 NBT，但你无法在游戏中复制它。
 
-Ldlib provides a command to help you get the nbt of a block/entity in your game and copy it to the clipboard.
+LDLib 提供了一个命令来帮助你在游戏中获取方块/实体的 NBT，并将其复制到剪贴板。
 
-`/ldlib copy_block_tag [pos]` / `/ldlib copy_entity_tag [entity_selector]`: chat panel will show the tag when you execute this command. and you mouse click the `[Copy to clipboard]` in the chat panel to copy to the clipboard.
+`/ldlib copy_block_tag [pos]` / `/ldlib copy_entity_tag [entity_selector]`：执行此命令时，聊天面板会显示该标签。鼠标点击聊天面板中的 `[Copy to clipboard]` 即可将其复制到剪贴板。

@@ -2,31 +2,31 @@
 
 ![Image title](../assets/tank.png){ width="30%" align=right }
 
-The `TankWidget` represents a fluid slot widget within a container GUI. It displays a fluid in a designated tank and supports fluid interactions such as filling and emptying. In addition, it integrates with external systems (JEI/REI/EMI) to show fluid ingredient details and provides configurable options for hover overlays, tooltips, and click behavior.
+`TankWidget` 表示容器 GUI 中的流体槽位部件。它在指定的储液罐中显示流体，并支持填充和排空等流体交互操作。此外，它还与外部系统（JEI/REI/EMI）集成以显示流体原料详细信息，并提供可配置的选项用于悬停覆盖层、提示框和点击行为。
 
-## Basic Properties
+## 基本属性
 
-| Field              | Description                                                                                  |
+| 字段              | 说明                                                                                  |
 |--------------------|----------------------------------------------------------------------------------------------|
-| fluidTank          | The fluid storage or transfer handler associated with this widget                            |
-| tank               | The index of the fluid tank being represented                                                |
-| showAmount         | Determines whether the fluid amount is displayed                                             |
-| allowClickFilled   | Controls whether clicking the slot when filled triggers container-filling behavior           |
-| allowClickDrained  | Controls whether clicking the slot when empty triggers container-emptying behavior           |
-| drawHoverOverlay   | Indicates if a hover overlay should be drawn when the mouse is over the widget                 |
-| drawHoverTips      | Indicates if hover tooltips should be displayed                                              |
-| fillDirection      | The direction in which the fluid fill is rendered (e.g. DOWN_TO_UP)                           |
-| lastFluidInTank      | Last fluid stored in the tank                           |
-| lastTankCapacity      | Last tank capacity                          |
+| fluidTank          | 与此部件关联的流体存储或传输处理器                                                            |
+| tank               | 所表示流体储液罐的索引                                                                      |
+| showAmount         | 确定是否显示流体数量                                                                        |
+| allowClickFilled   | 控制当槽位已填充时点击是否触发容器填充行为                                                    |
+| allowClickDrained  | 控制当槽位为空时点击是否触发容器排空行为                                                      |
+| drawHoverOverlay   | 指示当鼠标悬停在该部件上时是否绘制悬停覆盖层                                                  |
+| drawHoverTips      | 指示是否显示悬停提示框                                                                      |
+| fillDirection      | 流体填充渲染的方向（例如 DOWN_TO_UP）                                                        |
+| lastFluidInTank    | 储液罐中上一次存储的流体                                                                    |
+| lastTankCapacity   | 上一次储液罐容量                                                                            |
 
 
 ---
 
-## APIs
+## API
 
 ### setFluidTank (IFluidStorage)
 
-Associates the widget with a fluid storage and sets the tank index to 0.
+将该部件与流体存储关联，并将储液罐索引设置为 0。
 
 === "Java / KubeJS"
 
@@ -38,7 +38,7 @@ Associates the widget with a fluid storage and sets the tank index to 0.
 
 ### setFluidTank (IFluidTransfer, int)
 
-Associates the widget with a fluid transfer handler and specifies the tank index.
+将该部件与流体传输处理器关联，并指定储液罐索引。
 
 === "Java / KubeJS"
 
@@ -50,20 +50,20 @@ Associates the widget with a fluid transfer handler and specifies the tank index
 
 ### setFluid
 
-Set the internal fluidstack with/without notify.
+设置内部流体堆栈，可选择是否通知。
 
 === "Java / KubeJS"
 
     ``` java
-    tankWidget.setFluid(fluidstack); // it will also trigger the listen you set
-    tankWidget.setFluid(fluidstack, false); // it wont trigger the listen
+    tankWidget.setFluid(fluidstack); // 它还会触发你设置的监听
+    tankWidget.setFluid(fluidstack, false); // 它不会触发监听
     ```
 
 ---
 
 ### getFluid
 
-Get the internal fluidstack stored.
+获取存储的内部流体堆栈。
 
 === "Java / KubeJS"
 
@@ -74,7 +74,7 @@ Get the internal fluidstack stored.
 
 ### setChangeListener
 
-Configures additional slot location information, such as whether it belongs to the player container or hotbar. It will affect the shift move behaviour.
+配置当储罐流体内容变化时触发的监听器。
 
 === "Java"
 
@@ -88,7 +88,7 @@ Configures additional slot location information, such as whether it belongs to t
 === "KubeJS"
 
     ``` javascript
-    slotWidget.setChangeListener(() => {
+    tankWidget.setChangeListener(() => {
         let last = tankWidget.getLastFluidInTank();
         let current = tankWidget.getFluid();
     });

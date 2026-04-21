@@ -1,23 +1,23 @@
 # AnimationTexture
 
-## Basic Properties
+## 基本属性
 
-| Field         | Description                                           |
+| 字段          | 说明                                                  |
 |---------------|-------------------------------------------------------|
-| imageLocation | The resource location for the image                 |
-| cellSize      | The size of each cell in the texture grid             |
-| from          | The starting cell index for animation                |
-| to            | The ending cell index for animation                  |
-| animation     | The animation speed value                             |
-| color         | The color overlay applied to the texture             |
+| imageLocation | 图片的资源路径                                         |
+| cellSize      | 纹理网格中每个单元格的大小                             |
+| from          | 动画的起始单元格索引                                   |
+| to            | 动画的结束单元格索引                                   |
+| animation     | 动画速度值                                             |
+| color         | 应用到纹理上的颜色覆盖层                               |
 
 ---
 
-## APIs
+## API
 
 ### setTexture
 
-Sets the texture
+设置纹理
 
 === "Java / KubeJS"
 
@@ -27,7 +27,7 @@ Sets the texture
 
 ### setCellSize
 
-Sets the cell size. Refer to how many cells does the animation texture need to be divided into (side length).
+设置单元格大小。用于指定动画纹理需要被划分为多少个单元格（边长）。
 
 === "Java / KubeJS"
 
@@ -39,7 +39,7 @@ Sets the cell size. Refer to how many cells does the animation texture need to b
 
 ### setAnimation
 
-Sets the animation range `from` which cell `to` which cell.
+设置动画范围，从第几个单元格到第几个单元格。
 
 === "Java / KubeJS"
 
@@ -51,7 +51,7 @@ Sets the animation range `from` which cell `to` which cell.
 
 ### setAnimation
 
-Sets the animation speed. Tick time between cells.
+设置动画速度。单元格之间的刻时间。
 
 === "Java / KubeJS"
 
@@ -63,7 +63,7 @@ Sets the animation speed. Tick time between cells.
 
 ### setColor
 
-Sets the texture color.
+设置纹理颜色。
 
 === "Java / KubeJS"
 

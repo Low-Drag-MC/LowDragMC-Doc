@@ -1,17 +1,17 @@
-# Preliminary
+# 预备知识
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
 
-`Custom Shader Material` lets you **fully control** how rendering is performed.  
-Photon2 allows you to write materials using [Minecraft Core Shaders](https://minecraft.wiki/w/Shader#Core_shaders).  
+`Custom Shader Material`（自定义着色器材质）让你**完全控制**渲染的执行方式。
+Photon2 允许你使用 [Minecraft Core Shaders](https://minecraft.wiki/w/Shader#Core_shaders) 来编写材质。
 
 !!! warning
-    This wiki **is not** a shader programming tutorial and will not teach Minecraft shader basics.  
-    Please refer to the linked resources below for shader knowledge.
+    本维基**不是**着色器编程教程，不会讲解 Minecraft 着色器的基础知识。
+    请参考下方的相关链接获取着色器知识。
 
 ---
 
-## 📚 Related Links
+## 📚 相关链接
 
 !!! info ""
     - [Minecraft Shaders](https://minecraft.wiki/w/Shader#Core_shaders)
@@ -20,26 +20,26 @@ Photon2 allows you to write materials using [Minecraft Core Shaders](https://min
     - [Post-processing Shaders](https://minecraft.fandom.com/wiki/Shaders#Post-processing_shaders)
     - [Learn OpenGL](https://learnopengl.com/Introduction)
 
-Photon2 and LDLib2 extend **Vanilla Minecraft Shader** via [ExtendedShader](ExtendedShader.md).  
-This extension adds:
+Photon2 和 LDLib2 通过 [ExtendedShader](ExtendedShader.md) 扩展了 **原版 Minecraft Shader**。
+该扩展新增了：
 
-- Geometry shader (`attach`) support
-- Extra samplers and uniforms
+- Geometry shader（`attach`）支持
+- 额外的 sampler 和 uniform
 
-For details, see the **ExtendedShader** page.
+详情见 **ExtendedShader** 页面。
 
 ---
 
 ![Shader Material Inspector](../../assets/ShaderMaterialInspector.png){ width="30%" align=right }
 
-## How to Use
+## 使用方法
 
-- Click **`Select Shader`** to choose your shader JSON.  
-- Or specify the shader by its **resource location**.
-- After modifying your shader, click **`Reload Shader`** to recompile and reload.
+- 点击 **`Select Shader`** 来选择你的着色器 JSON。
+- 或通过其**资源路径**来指定着色器。
+- 修改着色器后，点击 **`Reload Shader`** 以重新编译并加载。
 
-!!! note "Shader Path Requirement"
-    Minecraft requires **all shader files** (GLSL + JSON) to be placed in:
+!!! note "着色器路径要求"
+    Minecraft 要求**所有着色器文件**（GLSL + JSON）必须放置在：
     ```
     assets/<namespace>/shaders/core/
     ```
@@ -48,8 +48,8 @@ For details, see the **ExtendedShader** page.
 
 ## Shader Settings
 
-The **Shader Settings** panel displays all **custom** (non-built-in) samplers and uniforms.  
-You can edit them directly via the **Inspector**.
+**Shader Settings**（着色器设置）面板会显示所有**自定义**（非内置）的 sampler 和 uniform。
+你可以直接在 **Inspector**（检查器）中编辑它们。
 
 ---
 
@@ -57,7 +57,7 @@ You can edit them directly via the **Inspector**.
 
 ![Curve & Gradient](../../assets/CurveAndGradient.png){ width="30%" align=right }
 
-Photon2 lets you pass a **Curve** or **Gradient** to the shader.  
-They are encoded into a **128×128 sampler** so you can sample them in the shader to get values.
+Photon2 允许你将 **Curve**（曲线）或 **Gradient**（渐变）传递给着色器。
+它们会被编码为一张 **128×128 的 sampler**，你可以在着色器中采样以获取数值。
 
-For details, see [ExtendedShader](ExtendedShader.md).
+详情见 [ExtendedShader](ExtendedShader.md)。

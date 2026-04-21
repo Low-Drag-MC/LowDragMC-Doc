@@ -1,5 +1,5 @@
-# Java Integration
-You can find the latest version from our [maven](https://maven.firstdark.dev/#/snapshots/com/lowdragmc).
+# Java 集成
+你可以从我们的 [maven](https://maven.firstdark.dev/#/snapshots/com/lowdragmc) 获取最新版本。
 ```gradle
 repositories{
     maven {
@@ -14,8 +14,8 @@ dependencies {
 }
 ```
 
-# Multiblocked2 Registry Event
-Multiblocked2 provides a Forge event ([`MBDRegistryEvent`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/common/event/MBDRegistryEvent.java)) for registries.
+# Multiblocked2 注册事件
+Multiblocked2 提供了一个 Forge 事件 ([`MBDRegistryEvent`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/common/event/MBDRegistryEvent.java)) 用于注册。
 
 ```java
 public class MBDEvents {
@@ -39,10 +39,10 @@ public void modInit() {
 }
 ```
 
-## Register machines via Java Code
-Instead of place projecs files under the `.minecraft/assets/ldlib/mbd2/machine_type` directly, there are two ways to register machines via code.
+## 通过 Java 代码注册机器
+除了直接将项目文件放在 `.minecraft/assets/ldlib/mbd2/machine_type` 目录下，还有两种方式可以通过代码注册机器。
 
-### 1. Create and register machines via raw code
+### 1. 通过原生代码创建并注册机器
 ```java
 @SubscribeEvent
 public void onRegisterMachine(MBDRegistryEvent.Machine event) {
@@ -61,20 +61,20 @@ public void onRegisterMachine(MBDRegistryEvent.Machine event) {
 }
 ```
 
-### 2. Register project files from your mod resource assets
-For example, you have such projects in your resource assets like this.
+### 2. 从模组资源文件中注册项目文件
+例如，你在资源文件中拥有如下项目。
 
 <img width="280" alt="image" src="https://github.com/user-attachments/assets/6ba5b196-cb83-4055-9788-db9960e05644">
 
-## Register Machine Project 
+## 注册机器项目 
 
 event.registerFromResource(`mod class`, `project type`, `project resource`)
 
-Available `project types` are below:
+可用的 `project types` 如下：
 
-* single machine project: `single_machine`
-* multiblock machine project: `multiblock`
-* create kinematic machien project: `create_machine`
+* 单机项目：`single_machine`
+* 多方块机器项目：`multiblock`
+* Create 动力机器项目：`create_machine`
 
 ```java
 @SubscribeEvent
@@ -83,7 +83,7 @@ public void onRegisterMachine(MBDRegistryEvent.Machine event) {
 }
 ```
 
-## Register Recipe Type Project 
+## 注册配方类型项目 
 
 event.registerFromResource(`mod class`, `project resource`)
 

@@ -1,18 +1,18 @@
 # GuiTextureGroup
 
-## Basic Properties
+## 基本属性
 
-| Field    | Description                                |
+| 字段     | 说明                                       |
 |----------|--------------------------------------------|
-| textures | An array of textures used in the group     |
+| textures | 组中使用的纹理数组                         |
 
 ---
 
-## APIs
+## API
 
 ### setTextures
 
-Sets the textures used in the group.
+设置组中使用的纹理。
 
 === "Java / KubeJS"
 
@@ -24,7 +24,7 @@ Sets the textures used in the group.
 
 ### setColor
 
-Sets the color for all textures in the group.
+设置组中所有纹理的颜色。
 
 === "Java / KubeJS"
 

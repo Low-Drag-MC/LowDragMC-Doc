@@ -2,23 +2,23 @@
 
 {{ version_badge("2.1.0", label="Since", icon="tag") }}
 
-This page introduces the core concepts of the **LDLib2 UI system**.
-At runtime, LDLib2 uses a class called **`ModularUI`** to manage the entire UI tree.  
-`ModularUI` is responsible for:
+本页介绍 **LDLib2 UI 系统**的核心概念。
+在运行时，LDLib2 使用一个名为 **`ModularUI`** 的类来管理整个 UI 树。
+`ModularUI` 负责：
 
-- Managing the UI lifecycle
-- Handling input events
-- Applying styles and stylesheets
-- Coordinating rendering
-- Synchronizing data between client and server (when used with Menus)
+- 管理 UI 生命周期
+- 处理输入事件
+- 应用样式和样式表
+- 协调渲染
+- 在客户端与服务器之间同步数据（与 Menu 配合使用时）
 
-In short, **`ModularUI` is the central controller of a UI instance**.
+简而言之，**`ModularUI` 是一个 UI 实例的中央控制器**。
 
 ---
 
-## How `ModularUI` Works
+## `ModularUI` 的工作原理
 
-The following diagram shows how `ModularUI` connects Minecraft systems with the UI tree:
+下图展示了 `ModularUI` 如何将 Minecraft 系统与 UI 树连接起来：
 ```mermaid
 flowchart LR
     Screen["Screen<br/>(Mouse / Keyboard Input)"]
@@ -48,82 +48,82 @@ flowchart LR
 
 ---
 
-## `ModularUI` APIs
+## `ModularUI` API
 
-There are two methods to create a `ModualrUI`:
+有两种方法可以创建 `ModularUI`：
 
 - `#!java ModularUI.of(ui)`
 - `#!java ModularUI.of(ui, player)`
 
-To create a simple `client-side` only UI, the first one is enough.
+要创建一个简单的仅`客户端` UI，使用第一种方法即可。
 
-The second one requires a `Player` as input, which is **NECESSARY** if your UI is a `menu-based` UI and requires data synchronization between client and server. 
+第二种方法需要一个 `Player` 作为输入，如果你的 UI 是`基于菜单`的 UI，并且需要在客户端与服务器之间同步数据，那么这是**必需**的。
 
-### General APIs
+### 通用 API
 
-| Method | Description |
+| 方法 | 描述 |
 | ---- | ----------- |
-| `shouldCloseOnEsc()` | Whether the UI should close when pressing `ESC`. |
-| `shouldCloseOnKeyInventory()` | Whether the UI should close when pressing the Inventory key (default: `E`). |
-| `getTickCounter()` | Returns how many ticks this `ModularUI` instance has been active. |
-| `getWidget()` | Returns the widget instance used by the Minecraft `Screen`. |
-| `getAllElements()` | Returns an unmodifiable list of all UI elements in the UI tree. |
+| `shouldCloseOnEsc()` | 按下 `ESC` 时是否关闭 UI。 |
+| `shouldCloseOnKeyInventory()` | 按下背包键（默认：`E`）时是否关闭 UI。 |
+| `getTickCounter()` | 返回此 `ModularUI` 实例已激活的刻数。 |
+| `getWidget()` | 返回供 Minecraft `Screen` 使用的控件实例。 |
+| `getAllElements()` | 返回 UI 树中所有 UI 元素的不可修改列表。 |
 
 ---
 
 
-### Element Query APIs (By ID)
+### 元素查询 API（按 ID）
 
-| Method | Description |
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementById(String id)` | Finds and returns the **first** UI element with the given ID, or `null` if not found. |
-| `getElementsById(String id)` | Returns **all** UI elements with the given ID. |
-| `hasElementWithId(String id)` | Checks whether at least one element with the given ID exists. |
-| `getElementCountById(String id)` | Returns the number of elements with the given ID. |
-| `getAllElementsById()` | Returns a copy of the internal mapping from ID to UI elements. |
+| `getElementById(String id)` | 查找并返回具有给定 ID 的**第一个** UI 元素，如果未找到则返回 `null`。 |
+| `getElementsById(String id)` | 返回具有给定 ID 的**所有** UI 元素。 |
+| `hasElementWithId(String id)` | 检查是否存在至少一个具有给定 ID 的元素。 |
+| `getElementCountById(String id)` | 返回具有给定 ID 的元素数量。 |
+| `getAllElementsById()` | 返回从 ID 到 UI 元素的内部映射的副本。 |
 
 ---
 
-### Element Query APIs (Regex & Pattern)
+### 元素查询 API（正则与模式）
 
-| Method | Description |
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementByIdRegex(String pattern)` | Finds the first element whose ID matches the given regex pattern. |
-| `getElementsByIdRegex(String pattern)` | Finds all elements whose IDs match the given regex pattern. |
-| `getElementByIdPattern(Pattern pattern)` | Same as above, but uses a precompiled `Pattern` for better performance. |
-| `getElementsByIdPattern(Pattern pattern)` | Returns all elements matching a precompiled regex pattern. |
+| `getElementByIdRegex(String pattern)` | 查找 ID 与给定正则表达式匹配的第一个元素。 |
+| `getElementsByIdRegex(String pattern)` | 查找 ID 与给定正则表达式匹配的所有元素。 |
+| `getElementByIdPattern(Pattern pattern)` | 与上相同，但使用预编译的 `Pattern` 以获得更好的性能。 |
+| `getElementsByIdPattern(Pattern pattern)` | 返回与预编译正则表达式模式匹配的所有元素。 |
 
 ---
 
-### Element Query APIs (Partial Matching)
+### 元素查询 API（部分匹配）
 
-| Method | Description |
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementsByIdContains(String substring)` | Finds all elements whose IDs contain the given substring. |
-| `getElementsByIdStartsWith(String prefix)` | Finds all elements whose IDs start with the given prefix. |
-| `getElementsByIdEndsWith(String suffix)` | Finds all elements whose IDs end with the given suffix. |
+| `getElementsByIdContains(String substring)` | 查找 ID 包含给定子字符串的所有元素。 |
+| `getElementsByIdStartsWith(String prefix)` | 查找 ID 以给定前缀开头的所有元素。 |
+| `getElementsByIdEndsWith(String suffix)` | 查找 ID 以给定后缀结尾的所有元素。 |
 
 ---
 
-### Element Query APIs (By Type)
+### 元素查询 API（按类型）
 
-| Method | Description |
+| 方法 | 描述 |
 | ---- | ----------- |
-| `getElementsByType(Class<T> type)` | Returns all UI elements of the given type. |
-| `getAllElementsByType()` | Returns a copy of the internal mapping from element type to UI elements. |
+| `getElementsByType(Class<T> type)` | 返回给定类型的所有 UI 元素。 |
+| `getAllElementsByType()` | 返回从元素类型到 UI 元素的内部映射的副本。 |
 
 !!! note
-    All query methods return **copies** of internal collections when applicable. Returned lists are safe to modify and will not affect the internal UI tree.
+    所有查询方法在适用时返回内部集合的**副本**。返回的列表可以安全修改，不会影响内部 UI 树。
 
 ---
 
-## Debug your UI
+## 调试你的 UI
 
-During development, the UI tree may not always behave as expected,  
-and it can be difficult to understand what is going wrong.
+在开发过程中，UI 树的行为可能并不总是如预期，
+而且很难理解哪里出了问题。
 
-You can press **`F3`** to enable **UI debug mode**.  
-When debug mode is active, LDLib2 displays helpful information directly on the screen.
+你可以按 **`F3`** 启用 **UI 调试模式**。
+当调试模式激活时，LDLib2 会直接在屏幕上显示有用的信息。
 
 <figure markdown="span">
   ![Debug](../assets//debug_mode.png){ width="80%" }

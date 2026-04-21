@@ -1,49 +1,49 @@
 # SlotWidget
 
-![Image title](../assets/slot.png){ width="30%" align=right }
+![图片标题](../assets/slot.png){ width="30%" align=right }
 
 
-The `SlotWidget` represents an interactive item slot within a container GUI. This widget supports configurable properties such as whether items can be taken or placed, customizable hover overlays and tooltips, and integration with JEI/REI/EMI systems for displaying ingredient details. It can be configured to represent a slot in either a standard inventory container or via an item transfer handler.
+`SlotWidget` 代表容器 GUI 中的交互式物品槽位。该控件支持可配置属性，例如是否可以取出或放入物品、自定义悬停覆盖层和工具提示，以及与 JEI/REI/EMI 系统集成以显示原料详情。它可以被配置为代表标准库存容器中的槽位或通过物品传输处理器来实现。
 
 !!! note
-    You cannot modify slot widget size.
+    你无法修改 slot 控件的尺寸。
     
 
-## Basic Properties
+## 基础属性
 
-| Field             | Description                                                                                 |
+| 字段             | 描述                                                                                 |
 |-------------------|---------------------------------------------------------------------------------------------|
-| canTakeItems      | Indicates if items can be extracted from the slot (modifiable via setter)                   |
-| canPutItems       | Indicates if items can be inserted into the slot (modifiable via setter)                    |
-| drawHoverOverlay  | Determines whether a hover overlay is drawn when the mouse is over the slot                 |
-| drawHoverTips     | Determines whether tooltips are shown when the mouse hovers over the slot                   |
-| lastItem      | Item stored in the last tick.     |
+| canTakeItems      | 指示是否可以从槽位中提取物品（可通过 setter 修改）                   |
+| canPutItems       | 指示是否可以向槽位中插入物品（可通过 setter 修改）                    |
+| drawHoverOverlay  | 决定当鼠标悬停在槽位上时是否绘制悬停覆盖层                 |
+| drawHoverTips     | 决定当鼠标悬停在槽位上时是否显示工具提示                   |
+| lastItem      | 上一 tick 存储的物品。     |
 
 ---
 
-## APIs
+## API
 
 ### setContainerSlot
 
-Associates the widget with an inventory container by specifying the slot index. e.g. player inventory.
+通过指定槽位索引将控件与库存容器关联。例如玩家物品栏。
 
 === "Java / KubeJS"
 
     ``` java
     var player = ...;
-    slotWidget.setContainerSlot(player.getInventory(), 2); // bind the player inventory of 2 index.
+    slotWidget.setContainerSlot(player.getInventory(), 2); // 绑定玩家物品栏的第 2 个索引。
     ```
 
 ---
 
 ### setHandlerSlot
 
-Configures the widget to use an item transfer handler with the specified slot index. 
+配置控件使用指定槽位索引的物品传输处理器。
 
 #### Java
 
-!!! note "For Java User !!!"
-    If you want to use the handler of `ItemStackHandler`(from forge) or `Storage<ItemVariant>`(from fabric), you need one more line. Because Forge and Fabric has different APIs, you need to convert the handler into the LDLib one, which can be found in `ItemTransferHelperImpl`.
+!!! note "Java 用户请注意！！！"
+    如果你想使用来自 Forge 的 `ItemStackHandler` 或来自 Fabric 的 `Storage<ItemVariant>` 的处理器，你需要额外添加一行代码。因为 Forge 和 Fabric 有不同的 API，你需要将处理器转换为 LDLib 的处理器，可以在 `ItemTransferHelperImpl` 中找到转换方法。
 
     === "Forge"
 
@@ -61,7 +61,7 @@ Configures the widget to use an item transfer handler with the specified slot in
 
 #### KubeJS
 
-KubeJS user do not need to do such mess. We have already convert them into a item transfer internal already.
+KubeJS 用户不需要做这些繁琐的操作。我们已经将它们转换为内部的物品传输处理器。
 
 === "KubeJS"
 
@@ -73,20 +73,20 @@ KubeJS user do not need to do such mess. We have already convert them into a ite
 
 ### setItem
 
-Set the internal itemstack with/without notify.
+设置内部物品堆叠，可选择是否通知。
 
 === "Java / KubeJS"
 
     ``` java
-    slotWidget.setItem(itemstack); // it will also trigger the listen you set
-    slotWidget.setItem(itemstack, false); // it wont trigger the listen
+    slotWidget.setItem(itemstack); // 它也会触发你设置的监听
+    slotWidget.setItem(itemstack, false); // 它不会触发监听
     ```
 
 ---
 
 ### getItem
 
-Get the internal itemstack stored.
+获取存储的内部物品堆叠。
 
 === "Java / KubeJS"
 
@@ -97,7 +97,7 @@ Get the internal itemstack stored.
 
 ### setChangeListener
 
-Configures additional slot location information, such as whether it belongs to the player container or hotbar. It will affect the shift move behaviour.
+配置当槽位内容变化时触发的监听器。
 
 === "Java"
 
@@ -121,7 +121,7 @@ Configures additional slot location information, such as whether it belongs to t
 
 ### canPutStack
 
-Whether can put stack into the slot.
+是否可以向槽位放入物品堆叠。
 
 === "Java / KubeJS"
 
@@ -133,7 +133,7 @@ Whether can put stack into the slot.
 
 ### canTakeStack
 
-Whether can take stack from the slot.
+是否可以从槽位取出物品堆叠。
 
 === "Java / KubeJS"
 
@@ -145,7 +145,7 @@ Whether can take stack from the slot.
 
 ### setLocationInfo
 
-Configures additional slot location information, such as whether it belongs to the player container or hotbar. It will affect the shift move behaviour.
+配置额外的槽位位置信息，例如它是否属于玩家容器或快捷栏。这将影响 Shift 移动行为。
 
 === "Java / KubeJS"
 

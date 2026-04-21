@@ -1,22 +1,21 @@
-# Customize Proxy RecipeTypes Transfer
+# 自定义代理配方类型的转换
 
-`Proxy Recipetype` in mbd2 doesn't always work very well. For example, if some recipes contain input types that mbd2 does not know, they cannot be translated.
+`Proxy Recipetype` 在 mbd2 中并不总是能够完美运行。例如，如果某些配方包含 mbd2 无法识别的输入类型，它们将无法被转换。
 
-Furthermore, ppl may want to filter some recipes, or modify the duration, inputs, etc. 
-We provide an event `onTransferProxyRecipe` to allow you to take over the transfer processing.
+此外，玩家可能希望过滤某些配方，或修改持续时间、输入项等。我们提供了一个事件 `onTransferProxyRecipe`，允许你接管转换处理过程。
 ```js
 MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
     let event = e.event;
     const {recipeType, proxyTypeId, proxyType, proxyRecipeId, proxyRecipe} = event;
 
-    // make sure the recipe type is correct
+    // 确保配方类型正确
     if (proxyTypeId === "create:haunting") {
-        let input = proxyRecipe.getIngredients()[0]; // we assume the ingredients has and only has one item.
+        let input = proxyRecipe.getIngredients()[0]; // 我们假设原料有且仅有一个物品。
         let output = proxyRecipe.getResultItem(null);
         console.log("input: ", input);
         console.log("output: ", output);
-        // convert it into a mbd2 recipe
-        var recipe = recipeType.recipeBuilder() // same as create recipe via kjs event
+        // 将其转换为 mbd2 配方
+        var recipe = recipeType.recipeBuilder() // 与通过 KJS 事件创建配方相同
             .id(proxyRecipeId + "_mbd2")
             .duration(400)
             .inputItems(input)
@@ -26,9 +25,9 @@ MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
             .chance(1)
             .buildMBDRecipe();
 
-        // If you want to skip this recipe
+        // 如果你想跳过此配方
         // event.mbdRecipe = null;
-        // set the result
+        // 设置结果
         event.mbdRecipe = recipe;
     }
 })

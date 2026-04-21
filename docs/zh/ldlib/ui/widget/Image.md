@@ -2,14 +2,14 @@
 
 ![Image title](../assets/image.png){ width="30%" align=right }
 
-`ImageWidget` is used to display images, which provided by a [`GUI Texture`](../textures.md).
+`ImageWidget` 用于显示由 [`GUI Texture`](../textures.md) 提供的图像。
 
-## Basic Properties
+## 基础属性
 
-| Field           | Description                                        |
-|-----------------|----------------------------------------------------|
-| border          | The border width (range: -100 to 100)              |
-| borderColor     | The color of the border                            |
+| 字段           | 说明                                        |
+|----------------|----------------------------------------------------|
+| border         | 边框宽度（范围：-100 到 100）              |
+| borderColor    | 边框颜色                            |
 
 ---
 
@@ -17,7 +17,7 @@
 
 ### setImage
 
-Sets the image texture using a texture instance.
+使用纹理实例设置图像纹理。
 
 === "Java / KubeJS"
 
@@ -29,7 +29,7 @@ Sets the image texture using a texture instance.
 
 ### setImage
 
-Sets the image texture using a supplier.
+使用 Supplier 设置图像纹理。
 
 === "Java"
 
@@ -47,7 +47,7 @@ Sets the image texture using a supplier.
 
 ### getImage
 
-Returns the current image texture.
+返回当前的图像纹理。
 
 === "Java / KubeJS"
 
@@ -61,7 +61,7 @@ Returns the current image texture.
 
 ![Image title](../assets/image_border.png){ width="20%" align=right }
 
-Sets the border width and color.
+设置边框宽度和颜色。
 
 === "Java / KubeJS"
 

@@ -1,34 +1,33 @@
-# Layout
+# 布局
 
 {{ version_badge("2.1.0", label="Since", icon="tag") }}
 
 !!! info inline end
-    Grid layout support will be introduced into Yoga in the future.
+    Grid 布局支持将在未来引入 Yoga。
 
-LDLib2 UI layout is built on top of the [Yoga layout engine](https://www.yogalayout.dev/docs/about-yoga).
+LDLib2 UI 布局构建于 [Yoga 布局引擎](https://www.yogalayout.dev/docs/about-yoga) 之上。
 
-> **Yoga** is an embeddable layout system used in popular UI frameworks such as React Native.  
-> It is **not** a UI framework and does not perform any rendering.  
-> Its sole responsibility is calculating the **size and position** of elements.
+> **Yoga** 是一个可嵌入的布局系统，被 React Native 等流行 UI 框架所使用。  
+> 它**不是** UI 框架，也不执行任何渲染。  
+> 它的唯一职责是计算元素的**大小和位置**。
 
-LDLib2 adopts a **FlexBox-based layout model**, which allows you to describe complex UI structures in a flexible and predictable way.
+LDLib2 采用 **FlexBox 布局模型**，让你能够以灵活且可预期的方式描述复杂的 UI 结构。
 
 ---
 
-## Setting Layout Properties
+## 设置布局属性
 
-Each `UIElement` owns a layout object backed by Yoga.  
-You can configure layout properties in multiple ways, depending on your preference and use case.
+每个 `UIElement` 都拥有一个由 Yoga 支持的布局对象。  
+你可以通过多种方式配置布局属性，具体取决于你的偏好和使用场景。
 
-In addition to the examples below, layout properties can also be defined through  
-[LSS (LDLib Style Sheet)](./stylesheet.md){ data-preview }, which is especially useful for separating layout logic from UI structure.
+除了下面的示例外，布局属性还可以通过 [LSS（LDLib Style Sheet）](./stylesheet.md){ data-preview } 定义，这对于将布局逻辑与 UI 结构分离尤其有用。
 
 === "Java"
 
     ```java
     var element = new UIElement();
 
-    // Set layout directly
+    // 直接设置布局
     element.getLayout()
             .flexDirection(YogaFlexDirection.ROW)
             .width(150)
@@ -36,7 +35,7 @@ In addition to the examples below, layout properties can also be defined through
             .marginAll(10)
             .paddingAll(10);
 
-    // Set layout using a chaining lambda
+    // 使用链式 lambda 设置布局
     element.layout(layout -> layout
             .flexDirection(YogaFlexDirection.ROW)
             .width(150)
@@ -45,7 +44,7 @@ In addition to the examples below, layout properties can also be defined through
             .paddingAll(10)
     );
 
-    // Set layout via stylesheet (LSS)
+    // 通过样式表 (LSS) 设置布局
     element.lss("flex-direction", "row");
     element.lss("width", 150);
     element.lss("height-percent", 100);
@@ -58,7 +57,7 @@ In addition to the examples below, layout properties can also be defined through
     ```js
     let element = new UIElement();
 
-    // Set layout directly
+    // 直接设置布局
     element.getLayout()
             .flexDirection(YogaFlexDirection.ROW)
             .width(150)
@@ -66,7 +65,7 @@ In addition to the examples below, layout properties can also be defined through
             .marginAll(10)
             .paddingAll(10);
 
-    // Set layout using a chaining lambda
+    // 使用链式 lambda 设置布局
     element.layout(layout -> layout
             .flexDirection(YogaFlexDirection.ROW)
             .width(150)
@@ -75,7 +74,7 @@ In addition to the examples below, layout properties can also be defined through
             .paddingAll(10)
     );
 
-    // Set layout via stylesheet (LSS)
+    // 通过样式表 (LSS) 设置布局
     element.lss("flex-direction", "row");
     element.lss("width", 150);
     element.lss("height-percent", 100);
@@ -85,23 +84,23 @@ In addition to the examples below, layout properties can also be defined through
 
 ---
 
-## Learning Flex Layout
+## 学习 Flex 布局
 
 !!! info
-    If you are already familiar with Flexbox, Yoga layout should feel very intuitive.  
-    If not, we recommend reading the official [Yoga documentation](https://www.yogalayout.dev/docs/about-yoga) for a complete explanation.
+    如果你已经熟悉 Flexbox，Yoga 布局应该会让你感到非常直观。  
+    如果不熟悉，我们建议阅读官方的 [Yoga 文档](https://www.yogalayout.dev/docs/about-yoga) 以获取完整说明。
 
-    For a lighter introduction, this chapter focuses on the **most commonly used Flex concepts in LDLib2 UI**.
+    作为更轻量的入门，本章重点介绍 **LDLib2 UI 中最常用的 Flex 概念**。
 
 
-## UI Elements and Hierarchy
+## UI 元素和层级
 
-In LDLib2 UI, the interface is composed of **UI elements** (`UIElement`).
+在 LDLib2 UI 中，界面由 **UI 元素**（`UIElement`）组成。
 
-- A UI element represents a visual container such as a panel, button, text field, or image.
-- UI elements can contain other UI elements, forming a **UI hierarchy** (also referred to as a *layout tree*).
+- UI 元素代表一个视觉容器，例如面板、按钮、文本框或图像。
+- UI 元素可以包含其他 UI 元素，形成 **UI 层级**（也称为*布局树*）。
 
-Complex interfaces are built by combining multiple UI elements into nested hierarchies, with layout and styling rules applied at different levels.
+复杂的界面通过将多个 UI 元素组合成嵌套层级来构建，并在不同级别应用布局和样式规则。
 
 ```mermaid
 flowchart LR
@@ -121,199 +120,199 @@ flowchart LR
 
 ---
 
-## Positioning UI Elements
+## 定位 UI 元素
 
-When designing a UI layout, think of each screen as a collection of rectangular containers arranged horizontally or vertically.
+在设计 UI 布局时，将每个屏幕视为一组水平或垂直排列的矩形容器。
 
-Break down the layout into logical sections, then refine each section using child containers to organize content.
+将布局分解为逻辑部分，然后使用子容器细化每个部分以组织内容。
 
 ---
 
-## Positioning Modes
+## 定位模式
 
-Yoga supports two primary positioning modes:
+Yoga 支持两种主要的定位模式：
 
-### Relative positioning (default)
+### 相对定位（默认）
 
-Elements participate in the Flexbox layout of their parent container.
+元素参与其父容器的 Flexbox 布局。
 
-- Child elements are arranged according to the parent’s **Flex Direction**
-- Element size and position respond dynamically to:
-    - Parent layout rules (padding, alignment, spacing)
-    - The element’s own size constraints (width, height, min/max size)
+- 子元素根据父元素的 **Flex Direction** 进行排列
+- 元素大小和位置动态响应：
+    - 父布局规则（padding、alignment、spacing）
+    - 元素自身的大小约束（width、height、min/max size）
 
-If layout constraints conflict, the layout engine resolves them automatically.  
-For example, an element wider than its container may overflow.
+如果布局约束冲突，布局引擎会自动解决它们。  
+例如，比容器更宽的元素可能会溢出。
 
-### Absolute positioning
+### 绝对定位
 
-Elements are positioned relative to their parent container, but **do not participate in Flexbox layout calculations**.
+元素相对于其父容器定位，但**不参与 Flexbox 布局计算**。
 
-- Flex properties such as Grow, Shrink, or alignment are ignored
-- Elements may overlap other content
-- Position is controlled using offsets such as `Top`, `Right`, `Bottom`, and `Left`
+- Flex 属性（如 Grow、Shrink 或 alignment）被忽略
+- 元素可能与其他内容重叠
+- 位置通过 `Top`、`Right`、`Bottom` 和 `Left` 等偏移量控制
 
 <figure markdown="span">
   ![alt text](../assets/relative.png)
   <br>
   ![alt text](../assets/absolute.png)
-  <figcaption>On the top, the blue ui element has a Relative position, with the parent element using Flex Direction: Row as the Flex setting. On the bottom, the blue ui element uses Absolute position and ignores the parent element’s Flexbox rules.</figcaption>
+  <figcaption>上方蓝色的 UI 元素采用 Relative 定位，父元素使用 Flex Direction: Row 作为 Flex 设置。下方蓝色的 UI 元素采用 Absolute 定位，并忽略父元素的 Flexbox 规则。</figcaption>
 </figure>
 
 ---
 
-## Size Settings
+## 尺寸设置
 
-UI elements are containers by default.
+UI 元素默认是容器。
 
-- Without explicit size rules, an element may expand to fill available space or collapse to the size of its content
-- `Width` and `Height` define the element’s base size
-- `Min` and `Max` values limit how much an element can grow or shrink
-- if you set an `Aspect Rate`, one dimension will be decided by the other one
-- `Overflow` controls the clipping of an element’s content. The default value is `visible`, which means the element’s content isn’t clipped to the element’s bounds. If you set overflow to hidden, the element’s content is clipped to the element’s content bounds.
-- Sizes can be expressed in pixels or percentages
+- 没有明确的尺寸规则时，元素可能会扩展以填充可用空间，或收缩为其内容的大小
+- `Width` 和 `Height` 定义元素的基础大小
+- `Min` 和 `Max` 值限制元素可以增长或收缩的程度
+- 如果设置了 `Aspect Rate`，一个维度将由另一个维度决定
+- `Overflow` 控制元素内容的裁剪。默认值为 `visible`，意味着元素内容不会被裁剪到元素的边界内。如果将 overflow 设置为 hidden，元素内容将被裁剪到元素的内容边界内。
+- 尺寸可以用像素或百分比表示
 
-These size rules interact with Flexbox settings to determine the final layout.
+这些尺寸规则与 Flexbox 设置交互以确定最终布局。
 
 
 <figure markdown="span">
   ![size](../assets/size.png)
   <br>
   ![size](../assets/overflow.png)
-  <figcaption>Size settings for a UI element.</figcaption>
+  <figcaption>UI 元素的尺寸设置。</figcaption>
 </figure>
 
 ---
 
-## Flex Settings
+## Flex 设置
 
-Flex settings affect how elements grow or shrink when using Relative positioning. It’s recommended that you experiment with elements to understand their behavior firsthand.
+Flex 设置影响使用 Relative 定位时元素如何增长或收缩。建议你亲自实验元素以了解它们的行为。
 
 ### Flex Basis
 
-Defines the initial size of an element before Grow or Shrink is applied.
+定义元素在应用 Grow 或 Shrink 之前的初始大小。
 
 ### Flex Grow
 
-- `Flex Grow > 0` allows the element to expand and take available space
-- Higher values receive a larger share of free space
-- `Flex Grow = 0` prevents expansion beyond the base size
+- `Flex Grow > 0` 允许元素扩展并占据可用空间
+- 更高的值获得更大的空闲空间份额
+- `Flex Grow = 0` 阻止超出基础大小的扩展
 
 
 ### Flex Shrink
 
-- `Flex Shrink > 0` allows the element to shrink when space is limited
-- `Flex Shrink = 0` prevents shrinking and may cause overflow
+- `Flex Shrink > 0` 允许元素在空间受限时收缩
+- `Flex Shrink = 0` 阻止收缩，可能导致溢出
 
-> Elements with fixed pixel sizes do not respond to Grow or Shrink.
+> 具有固定像素大小的元素不会响应 Grow 或 Shrink。
 
 <figure markdown="span">
     ![size](../assets/flex.png)
-    <figcaption>Basis, Grow, and Shrink settings.</figcaption>
+    <figcaption>Basis、Grow 和 Shrink 设置。</figcaption>
 </figure>
 
-The above example shows how Basis works with the Grow and Shrink options:
+上面的示例展示了 Basis 如何与 Grow 和 Shrink 选项配合工作：
 
-1. The green element with a Basis of 80% occupies 80 percent of the available space.
-2. Setting the Grow to 1 allows the green element to expand to the entire space.
-3. With a yellow element added, the elements overflow the space. The green element returns to occupying 80 percent of the space.
-4. A Shrink setting of 1 makes the green element shrink to fit the yellow element.
+1. 绿色元素的 Basis 为 80%，占据 80% 的可用空间。
+2. 将 Grow 设置为 1 允许绿色元素扩展到整个空间。
+3. 添加黄色元素后，元素溢出空间。绿色元素恢复到占据 80% 的空间。
+4. Shrink 设置为 1 使绿色元素收缩以适应黄色元素。
 
-Here, both elements have a Shrink value of 1. They shrink equally to fit in the available space.
+在这里，两个元素的 Shrink 值都为 1。它们同等收缩以适应可用空间。
 
 ### Flex
 
-`Flex = 1` equals to `Flex Grow = 1` and `Flex Shrink = 1`, which is used to set `Flex Grow` and `Flex Shrink` at the same time.
+`Flex = 1` 等同于 `Flex Grow = 1` 和 `Flex Shrink = 1`，用于同时设置 `Flex Grow` 和 `Flex Shrink`。
 
 <figure markdown="span">
     ![size](../assets/flex2.png)
     <figcaption>
-    In this example, we assume the root container `width: 200px`. 
-    The right most element set `width: 50%`. Therefore, the left space is 100px for the left most and middle elements. According to the `flex` of them, they divided the remaining space in a `2:1` ratio. 
+    在此示例中，我们假设根容器 `width: 200px`。  
+    最右侧的元素设置 `width: 50%`。因此，剩余空间为 100px，供最左侧和中间元素使用。根据它们的 `flex`，它们以 `2:1` 的比例分配剩余空间。  
     </figcaption>
 </figure>
 
 ---
 
-### 💡 How element size is calculated
+### 💡 元素尺寸如何计算
 
-When using Relative positioning, the layout engine determines element size in this order:
+使用 Relative 定位时，布局引擎按以下顺序确定元素大小：
 
-1. Compute base size from `Width` and `Height`
-2. Check whether the parent container has extra space or overflow
-3. Distribute extra space using `Flex Grow`
-4. Reduce size using `Flex Shrink` if space is insufficient
-5. Apply constraints such as `Min/Max` size and `Flex Basis`
-6. Apply the final resolved size
+1. 根据 `Width` 和 `Height` 计算基础大小
+2. 检查父容器是否有额外空间或溢出
+3. 使用 `Flex Grow` 分配额外空间
+4. 如果空间不足，使用 `Flex Shrink` 减小大小
+5. 应用诸如 `Min/Max` size 和 `Flex Basis` 之类的约束
+6. 应用最终解析的大小
 
 ---
 
-### Flex Direction and Flex Wrapping
+### Flex Direction 和 Flex Wrapping
 
-- `Flex Direction` controls whether child elements are laid out in rows or columns
-- `Flex Wrap` controls whether elements stay on a single line or wrap onto additional rows or columns
+- `Flex Direction` 控制子元素是按行还是按列排列
+- `Flex Wrap` 控制元素是保持在单行上还是换行到额外的行或列
 
-Child elements follow the order defined in the UI hierarchy.
+子元素遵循 UI 层级中定义的顺序。
 
 <figure markdown="span">
     ![size](../assets/flex_direction_wrap.png)
     <figcaption>
-    Parent and child UI element using Relative positioning and different Direction and Wrap combinations.
+    使用 Relative 定位以及不同的 Direction 和 Wrap 组合的父元素和子 UI 元素。
     </figcaption>
 </figure>
 
 ---
 
-## Alignment
+## 对齐
 
-Alignment settings control how child elements are positioned within a container.
+对齐设置控制子元素在容器内的位置。
 
 ### Align Items
 
-Aligns elements along the cross-axis (perpendicular to the Flex Direction):
+沿交叉轴（垂直于 Flex Direction）对齐元素：
 
 ### Justify Content
 
-Controls spacing along the main axis:
+沿主轴控制间距：
 
-Flex Grow and Shrink values influence how space is distributed.
+Flex Grow 和 Shrink 值影响空间的分配方式。
 
 ### Align Self
 
-Allows an individual element to override the parent’s alignment rules.
+允许单个元素覆盖父元素的对齐规则。
 
 ### Align Content
 
-Controls how **multiple rows or columns** of flex items are aligned **along the cross axis**.
+控制 flex 元素的**多行或多列**如何沿**交叉轴**对齐。
 
 !!! note
-    `Align Content` only takes effect when:
+    `Align Content` 仅在以下情况生效：
     
-    - The container allows wrapping (`flex-wrap: wrap`)
-    - There are **multiple lines** of children
+    - 容器允许换行（`flex-wrap: wrap`）
+    - 存在**多行**子元素
 
 
 <figure markdown="span">
     ![size](../assets/align_justify.png)
     <figcaption>
-    Align and Justify settings applied to a parent element with a Direction set to Row; note that other position and sizing options can affect the final output.
+    Align 和 Justify 设置应用于 Direction 设置为 Row 的父元素；请注意，其他位置和尺寸选项可能会影响最终输出。
     </figcaption>
 </figure>
 
 ---
 
-## Margin and Padding
+## Margin 和 Padding
 
-LDLib2 UI follows a box model similar to CSS:
+LDLib2 UI 遵循类似 CSS 的盒模型：
 
-- **Content**: the element’s actual content
-- **Padding**: space between content and border
-- **Border**: optional boundary around the element, (avoid use it).
-- **Margin**: space outside the element, separating it from others
+- **Content**：元素的实际内容
+- **Padding**：内容和边框之间的空间
+- **Border**：元素周围的可选边界，（避免使用）。
+- **Margin**：元素外部的空间，将其与其他元素分隔开
 
 <figure markdown="span">
     ![size](../assets/margin_padding.png)
     <figcaption>
-    A UI element with defined Size, Margin, Border, and Padding settings; elements with a fixed Width or Height can overflow the space.
+    具有定义的 Size、Margin、Border 和 Padding 设置的 UI 元素；具有固定 Width 或 Height 的元素可能会溢出空间。
     </figcaption>
 </figure>

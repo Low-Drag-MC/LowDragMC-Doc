@@ -1,6 +1,6 @@
 # PersistedParser
 
-PersistedParser 是一个工具类，用于序列化和反序列化带有 `@Persisted` 或 `@Configurable` 注解的对象的字段。
+PersistedParser 是一个工具类，用于序列化和反序列化带有 `@Persisted` 或 `@Configurable` 注解的对象字段。
 
 ## 序列化
 
@@ -39,7 +39,7 @@ true
 ```
 
 ## 创建 Codec
-PersistedParser 提供的另一个有用工具是基于注解创建 Codec。
+PersistedParser 提供的另一个实用工具是根据注解创建 Codec。
 
 ```java
  public class MyObject implements IPersistedSerializable {

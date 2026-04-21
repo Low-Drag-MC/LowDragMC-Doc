@@ -1,0 +1,580 @@
+{
+  "version": 1,
+  "last_updated": "2026-04-22T00:48:33.769479",
+  "files": {
+    "index.md": {
+      "source_path": "index.md",
+      "translated_commit": "015a97e8288d83ec56216b38ae9ba88d3fec1013",
+      "translated_at": "2026-04-22T00:48:32.972749",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/index.md": {
+      "source_path": "ldlib/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:32.977356",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/java_integration.md": {
+      "source_path": "ldlib/java_integration.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:36:25.478858",
+      "translator": "",
+      "notes": "Initialized from existing translation"
+    },
+    "ldlib/SyncData/index.md": {
+      "source_path": "ldlib/SyncData/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:32.982014",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/SyncData/type.md": {
+      "source_path": "ldlib/SyncData/type.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:32.986892",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/SyncData/Anotations.md": {
+      "source_path": "ldlib/SyncData/Anotations.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:32.992381",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/compass/xml.md": {
+      "source_path": "ldlib/compass/xml.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:32.997260",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/compass/index.md": {
+      "source_path": "ldlib/compass/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.002367",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/compass/scene.md": {
+      "source_path": "ldlib/compass/scene.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.008228",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/index.md": {
+      "source_path": "ldlib/ui/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.012665",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/border.md": {
+      "source_path": "ldlib/ui/textures/border.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.017883",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/shader.md": {
+      "source_path": "ldlib/ui/textures/shader.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.023984",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/index.md": {
+      "source_path": "ldlib/ui/textures/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.029241",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/progress.md": {
+      "source_path": "ldlib/ui/textures/progress.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.034258",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/rect.md": {
+      "source_path": "ldlib/ui/textures/rect.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.040735",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/itemstack.md": {
+      "source_path": "ldlib/ui/textures/itemstack.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.047683",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/animation.md": {
+      "source_path": "ldlib/ui/textures/animation.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.055967",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/group.md": {
+      "source_path": "ldlib/ui/textures/group.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.064429",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/resource.md": {
+      "source_path": "ldlib/ui/textures/resource.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.073657",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/text.md": {
+      "source_path": "ldlib/ui/textures/text.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.084125",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/textures/resourceborder.md": {
+      "source_path": "ldlib/ui/textures/resourceborder.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.095427",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/ui_editor/index.md": {
+      "source_path": "ldlib/ui/ui_editor/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.103342",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/ui_editor/resource.md": {
+      "source_path": "ldlib/ui/ui_editor/resource.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.114280",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/ui_editor/group_widget.md": {
+      "source_path": "ldlib/ui/ui_editor/group_widget.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.125484",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Switch.md": {
+      "source_path": "ldlib/ui/widget/Switch.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.137970",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Selector.md": {
+      "source_path": "ldlib/ui/widget/Selector.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.150395",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/index.md": {
+      "source_path": "ldlib/ui/widget/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.159967",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/PlantomSlot.md": {
+      "source_path": "ldlib/ui/widget/PlantomSlot.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.170825",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/TextTexture.md": {
+      "source_path": "ldlib/ui/widget/TextTexture.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.182644",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/progress.md": {
+      "source_path": "ldlib/ui/widget/progress.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.194807",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Image.md": {
+      "source_path": "ldlib/ui/widget/Image.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.207679",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Label.md": {
+      "source_path": "ldlib/ui/widget/Label.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.220990",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/WidgetGroup.md": {
+      "source_path": "ldlib/ui/widget/WidgetGroup.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.230679",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Button.md": {
+      "source_path": "ldlib/ui/widget/Button.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.240854",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/PlantomTank.md": {
+      "source_path": "ldlib/ui/widget/PlantomTank.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.251294",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Tank.md": {
+      "source_path": "ldlib/ui/widget/Tank.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.263512",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/TextField.md": {
+      "source_path": "ldlib/ui/widget/TextField.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.274834",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/widget/Slot.md": {
+      "source_path": "ldlib/ui/widget/Slot.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.287656",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/code/index.md": {
+      "source_path": "ldlib/ui/code/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.300220",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib/ui/code/load_ui_file.md": {
+      "source_path": "ldlib/ui/code/load_ui_file.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.313086",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/index.md": {
+      "source_path": "ldlib2/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.325150",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/java_integration.md": {
+      "source_path": "ldlib2/java_integration.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.334384",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/xml.md": {
+      "source_path": "ldlib2/ui/xml.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.344447",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/index.md": {
+      "source_path": "ldlib2/ui/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.354695",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/factory.md": {
+      "source_path": "ldlib2/ui/factory.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.365593",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/kjs_support.md": {
+      "source_path": "ldlib2/ui/kjs_support.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.377640",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/xei_support.md": {
+      "source_path": "ldlib2/ui/xei_support.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:36:25.961784",
+      "translator": "",
+      "notes": "Initialized from existing translation"
+    },
+    "ldlib2/ui/editor.md": {
+      "source_path": "ldlib2/ui/editor.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.389973",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/getting_start.md": {
+      "source_path": "ldlib2/ui/getting_start.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.399345",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/modularui.md": {
+      "source_path": "ldlib2/ui/preliminary/modularui.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.408815",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/index.md": {
+      "source_path": "ldlib2/ui/preliminary/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.418813",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/layout.md": {
+      "source_path": "ldlib2/ui/preliminary/layout.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.429649",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/stylesheet.md": {
+      "source_path": "ldlib2/ui/preliminary/stylesheet.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.441558",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/event.md": {
+      "source_path": "ldlib2/ui/preliminary/event.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.454265",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/data_bindings.md": {
+      "source_path": "ldlib2/ui/preliminary/data_bindings.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.466767",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/preliminary/screen_and_menu.md": {
+      "source_path": "ldlib2/ui/preliminary/screen_and_menu.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.478124",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/components/element.md": {
+      "source_path": "ldlib2/ui/components/element.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.489670",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/textures/lss.md": {
+      "source_path": "ldlib2/ui/textures/lss.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.496501",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/ui/textures/index.md": {
+      "source_path": "ldlib2/ui/textures/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:36:26.063082",
+      "translator": "",
+      "notes": "Initialized from existing translation"
+    },
+    "ldlib2/sync/types_support.md": {
+      "source_path": "ldlib2/sync/types_support.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:36:26.073696",
+      "translator": "",
+      "notes": "Initialized from existing translation"
+    },
+    "ldlib2/sync/rpc_packet.md": {
+      "source_path": "ldlib2/sync/rpc_packet.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.509622",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/sync/annotations.md": {
+      "source_path": "ldlib2/sync/annotations.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.523022",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/sync/index.md": {
+      "source_path": "ldlib2/sync/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.533915",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/sync/PersistedParser.md": {
+      "source_path": "ldlib2/sync/PersistedParser.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.543691",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "ldlib2/sync/blockentity.md": {
+      "source_path": "ldlib2/sync/blockentity.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.554027",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/index.md": {
+      "source_path": "multiblocked2/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.566082",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/java_integration.md": {
+      "source_path": "multiblocked2/java_integration.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.578226",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/recipe.md": {
+      "source_path": "multiblocked2/KubeJS/recipe.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.589980",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/upgrade_system.md": {
+      "source_path": "multiblocked2/KubeJS/upgrade_system.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.602160",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/proxy_recipetype.md": {
+      "source_path": "multiblocked2/KubeJS/proxy_recipetype.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.614329",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/event.md": {
+      "source_path": "multiblocked2/KubeJS/event.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.628860",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/trait.md": {
+      "source_path": "multiblocked2/KubeJS/trait.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.641943",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "multiblocked2/KubeJS/ui.md": {
+      "source_path": "multiblocked2/KubeJS/ui.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.654855",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/index.md": {
+      "source_path": "photon2/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.667491",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/resourcepack.md": {
+      "source_path": "photon2/resourcepack.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.680328",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/commands.md": {
+      "source_path": "photon2/commands.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.692994",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Java Integration/index.md": {
+      "source_path": "photon2/Java Integration/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.705773",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Materials/index.md": {
+      "source_path": "photon2/Materials/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.718527",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Materials/CustomShaderMaterial/index.md": {
+      "source_path": "photon2/Materials/CustomShaderMaterial/index.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.731157",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Materials/CustomShaderMaterial/ExtendedShader.md": {
+      "source_path": "photon2/Materials/CustomShaderMaterial/ExtendedShader.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.743972",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Materials/CustomShaderMaterial/VertexFormat.md": {
+      "source_path": "photon2/Materials/CustomShaderMaterial/VertexFormat.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.756644",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    },
+    "photon2/Materials/CustomShaderMaterial/AdditionalGPUData.md": {
+      "source_path": "photon2/Materials/CustomShaderMaterial/AdditionalGPUData.md",
+      "translated_commit": "e1e47b3d2478f64ed4d5b895df9c14cd51ace125",
+      "translated_at": "2026-04-22T00:48:33.769277",
+      "translator": "",
+      "notes": "Updated via translation_tracker.py"
+    }
+  }
+}

@@ -1,33 +1,33 @@
 # Compass Scene
 
-Compass Scene is inspired by the ponder. The difference is that you don't need to write code, and all scenes can be implemented through `xml`. This page details how to configure a scene.
+Compass Scene 的设计灵感来源于 Ponder。不同之处在于，你无需编写代码，所有场景都可以通过 `xml` 来实现。本页详细介绍如何配置场景。
 
 ***
 ### `<compass/>`
-Prepare your scene settings:
-* `scene`: only use the scene (disable the information above)
-* `height`: scene height
-* `zoom`: zoom intial value
-* `range`: plane range intial value
-* `draggable`: whether the scene is draggable
-* `scalable`: whether the scene is scalable
-* `camera`: camera mode, `perspective` or `ortho`
-* `yaw`: yad intial value
-* `tick-scene`: should the scene try to call objects' tick functions, such as blockentities, entities, particles.
+准备你的场景设置：
+* `scene`：仅使用场景视图（禁用上方信息栏）
+* `height`：场景高度
+* `zoom`：初始缩放值
+* `range`：初始平面范围
+* `draggable`：场景是否可拖拽
+* `scalable`：场景是否可缩放
+* `camera`：摄像机模式，`perspective`（透视）或 `ortho`（正交）
+* `yaw`：初始偏航值
+* `tick-scene`：场景是否尝试调用对象的 tick 函数，例如 BlockEntity、实体、粒子
 ```xml
 <page>
     <compass tick-scene="true"> 
-    <!-- scene="true" height="250" zoom="28" range="5" draggable="false" scalable="false" camera="perspective" yaw="25" tick-scene="false" can also be set here-->
+    <!-- 这里也可以设置 scene="true" height="250" zoom="28" range="5" draggable="false" scalable="false" camera="perspective" yaw="25" tick-scene="false" -->
     </compass>
 </page>
 ```
 
 ### `<frame/>`
-The compass scene consists of many `<frame>`. `<frame>` refers to a chapter/section of the scene animation.
+Compass Scene 由多个 `<frame>` 组成。`<frame>` 代表场景动画中的一个章节/片段。
 
-The user can jump back and forth between frames, but not to a specific moment of animation within the frame.
+用户可以在不同帧之间来回跳转，但无法跳转到某一帧内的具体时刻。
 
-`<description/>`: Describes the frame, shows it on hover tooltips, and has the same syntax as the `<text/>` label.
+`<description/>`：描述该帧，鼠标悬停时显示提示，语法与 `<text/>` 标签相同。
 ```xml
 <page>
     <compass>
@@ -50,12 +50,13 @@ The user can jump back and forth between frames, but not to a specific moment of
 
 
 ### Actions
-Actions are used under the `<frame/>` tag.
-There are two types of built-in actions `<information/>` and `<scene/>`. You can register custom actions via Java if you want.
+Actions 在 `<frame/>` 标签下使用。
 
-Actions are executed sequentially, and the next action is executed if and only if the last action is completed, but this can be adjusted using the following attributes, similar to ppt animation:
- - delay: delay time after last action finish. (tick)
- - start-before-last: start this action while the last one is performing.
+内置的 Actions 有两种：`<information/>` 和 `<scene/>`。你也可以通过 Java 注册自定义 Actions。
+
+Actions 按顺序依次执行，只有当前一个 Action 完成后，下一个才会执行，但可以通过以下属性进行调整，类似于 PPT 动画：
+ - `delay`：上一个 Action 完成后的延迟时间（单位为 tick）
+ - `start-before-last`：在上一个 Action 执行期间同时开始此 Action
 ```xml
 <frame>
     <information type="item" url="minecraft:apple">
@@ -73,7 +74,7 @@ Actions are executed sequentially, and the next action is executed if and only i
 
 ***
 ### `<information/>`
-Action information: display text and images on top
+信息 Action：在顶部显示文字与图片
 ```xml
 <information>
     <style bold="true" color="#ffff0000"><lang key="ldlib.author"/></style>
@@ -89,19 +90,19 @@ Action information: display text and images on top
 </information>
 ```
 ### `<scene/>`
-Action scene: Animate the scene. **Notice that all the operations under the `<scene/>` are performing simultaneously**. More than one `<scene/>` label should be used when the operation is sequential.
+场景 Action：为场景添加动画。**请注意，`<scene/>` 下的所有操作是同时进行的**。若需要按顺序执行，应使用多个 `<scene/>` 标签。
 
-Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity/>`, `<remoge-entity/>`, `<rotation/>`, `<highlight/>`, `<tooltip/>`
+操作包括：`<add/>`、`<remove/>`、`<modify/>`、`<add-entity/>`、`<modify-entity/>`、`<remoge-entity/>`、`<rotation/>`、`<highlight/>`、`<tooltip/>`
 
 #### `<add/>`
 ```xml
-<!--add block to the scene with animation-->
+<!-- 将方块以动画形式添加到场景中 -->
 <add pos="0 0 0" block="minecraft:glass"/>
-<!--add block with properties-->
+<!-- 添加带有属性的方块 -->
 <add pos="1 1 0" block="minecraft:campfire">
     <properties name="lit" value="false"/>
 </add>
-<!--add block with nbt for blockentity-->
+<!-- 添加带有 NBT 数据的方块，用于 BlockEntity -->
 <add pos="3 0 1" block="minecraft:chest">
     <nbt>
         {
@@ -115,17 +116,17 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
         }
     </nbt>
 </add>
-<!--offset: animation offset, duration: animation duration-->
+<!-- offset: 动画偏移量, duration: 动画持续时间 -->
 <add pos="0 1 0" offset="3 1 0" duration="40" block="minecraft:glass"/>
 ```
 #### `<remove/>`
 ```xml
-<!--remove block from the scene with animation-->
+<!-- 将方块以动画形式从场景中移除 -->
 <remove pos="0 0 0" offset="3 1 0" duration="40"/>
 ```
 #### `<modify/>`
 ```xml
-<!--modify a block, its kinda similar to the add label but without animation -->
+<!-- 修改一个方块，与 add 标签类似，但没有动画 -->
 <modify pos="1 1 0" block="minecraft:campfire">
     <properties name="lit" value="true"/>
     <nbt>
@@ -136,9 +137,9 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
 ```
 #### `<add-entity/>`
 ```xml
-<!-- add entities by its type name. You have to allocate it an id, or a random id will be generated-->
+<!-- 通过类型名称添加实体。你必须为其分配一个 id，否则将生成随机 id -->
 <add-entity pos="0 1 0" type="minecraft:player" id="12"/>
-<!-- add entities with tag-->
+<!-- 添加带有标签的实体 -->
 <add-entity pos="0.5 3 0.5" type="minecraft:item" id="2">
     <nbt>
         {
@@ -152,12 +153,12 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
 ```
 #### `<remove-entity/>`
 ```xml
-<!-- remove entity by id-->
+<!-- 通过 id 移除实体 -->
 <remove-entity id="12" force="true"/>
 ```
 #### `<modify-entity/>`
 ```xml
-<!-- modify entity's tag and position by id-->
+<!-- 通过 id 修改实体的标签和位置 -->
 <modify-entity pos="3 0 3" id="12">
     <nbt>
         {
@@ -182,62 +183,62 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
 ```
 #### `<rotation/>`
 ```xml
-<!--rotate the scene view-->
+<!-- 旋转场景视角 -->
 <rotation degree="90"/>
 ```
 #### `<hightlight/>`
 ```xml
-<!--hightlight a block or a face of the block-->
+<!-- 高亮显示一个方块或其某个面 -->
 <highlight pos="0 0 0" duration="70"/>
 <highlight pos="0 0 0" face="UP" duration="70"/>
 ```
 #### `<tooltip/>`
 ```xml
-<!--Point to a location in the scene and provide a description-->
+<!-- 指向场景中的某个位置并提供描述 -->
 <tooltip pos="1.5 1.5 0.5" screen-offset="0.6 0.5" duration = "60" item="minecraft:flint_and_steel">
-    <!--pos: position in the scene, screen-offset: description positon in the compass view-->
+    <!-- pos: 在场景中的位置, screen-offset: 描述在 Compass 视图中的位置 -->
     lit = <style color="0xff00ff00">true</style>
 </tooltip>
 ```
 ***
 ### Example
-Now lets review the compass structure:
+现在我们来回顾一下 Compass 的结构：
 
 <img width="1399" alt="WechatIMG44" src="https://github.com/Low-Drag-MC/LDLib-Architectury/assets/18493855/1d82ec46-a924-4b0f-a3f6-031bf6843829">
 
-Lets check how do the aboves actions look like!!
+让我们看看上述 Actions 的实际效果！！
 
 ![demo2](https://github.com/Low-Drag-MC/LDLib-Architectury/assets/18493855/b7cc80c2-bd2e-405a-8b51-8ccbf0fdff86)
 
 ```xml
 <page>
-    <compass tick-scene="true"> <!-- scene="true" height="250" zoom="28" range="5" draggable="false" scalable="false" camera="perspective" yaw="25" tick-scene="false" can also be set here-->
-        <!-- Frames divide the animation into different parts, similar to how the animation is segmented in a ponder. Frames are executed sequentially.-->
+    <compass tick-scene="true"> <!-- 这里也可以设置 scene="true" height="250" zoom="28" range="5" draggable="false" scalable="false" camera="perspective" yaw="25" tick-scene="false" -->
+        <!-- Frames 将动画分割为不同的部分，类似于 Ponder 中的分段。Frames 按顺序执行。-->
         <frame> <!-- duration="-1" delay="0"-->
             <description>
-                <!-- Describes the frame, shows it on hovertooltips, and has the same syntax as the text label-->
+                <!-- 描述该帧，鼠标悬停时显示提示，语法与 text 标签相同 -->
                 section 1.
             </description>
             <!--actions-->
-            <!--Actions are executed sequentially, and the next action is executed if and only if the last action is completed, but this can be adjusted using the following attributes, similar to ppt animation.
+            <!--Actions 按顺序执行，只有前一个完成后，下一个才会执行，但可以通过以下属性进行调整，类似于 PPT 动画。
                 delay="0"
                 start-before-last="false"
             -->
 
-            <!--Action information: display text and images on top-->
+            <!-- 信息 Action：在顶部显示文字和图片 -->
             <information type="item" url="minecraft:apple">
                 <style bold="true" color="#ffff0000"><lang key="ldlib.author"/></style>
             </information>
 
-            <!--Action scene: Animate the scene. Notice that all the operations under the <scene/> are happening simultaneously. More than one <scene/> label should be used when the operation is sequential-->
+            <!-- 场景 Action：为场景添加动画。请注意，<scene/> 下的所有操作是同时进行的。若需要按顺序执行，应使用多个 <scene/> 标签 -->
             <scene start-before-last="true">
-                <!--add block to the scene with animation-->
+                <!-- 将方块以动画形式添加到场景中 -->
                 <add pos="0 0 0" block="minecraft:glass"/>
-                <!--add block with properties-->
+                <!-- 添加带有属性的方块 -->
                 <add pos="1 1 0" block="minecraft:campfire">
                     <properties name="lit" value="false"/>
                 </add>
-                <!--add block with nbt for blockentity-->
+                <!-- 添加带有 NBT 数据的方块，用于 BlockEntity -->
                 <add pos="3 0 1" block="minecraft:chest">
                     <nbt>
                         {
@@ -252,44 +253,44 @@ Lets check how do the aboves actions look like!!
                     </nbt>
                 </add>
                 <add pos="0 1 0" offset="3 1 0" duration="40" block="minecraft:glass"/>
-                <!--offset: animation offset, duration: animation duration-->
+                <!-- offset: 动画偏移量, duration: 动画持续时间 -->
             </scene>
             <scene>
-                <!--modify a block, its kinda similar to the add label but without animation -->
+                <!-- 修改一个方块，与 add 标签类似，但没有动画 -->
                 <modify pos="1 1 0" block="minecraft:campfire">
                     <properties name="lit" value="true"/>
                 </modify>
             </scene>
             <scene>
-                <!--remove block from the scene with animation-->
+                <!-- 将方块以动画形式从场景中移除 -->
                 <remove pos="0 0 0" offset="3 1 0" duration="40"/>
             </scene>
             <scene>
-                <!--Point to a location in the scene and provide a description-->
+                <!-- 指向场景中的某个位置并提供描述 -->
                 <tooltip pos="1.5 1.5 0.5" screen-offset="0.6 0.5" duration = "60" item="minecraft:flint_and_steel">
-                    <!--pos: position in the scene, screen-offset: description positon in the compass view-->
+                    <!-- pos: 在场景中的位置, screen-offset: 描述在 Compass 视图中的位置 -->
                     lit = <style color="0xff00ff00">true</style>
                 </tooltip>
             </scene>
             <scene>
-                <!--hightlight a block or a face of the block-->
+                <!-- 高亮显示一个方块或其某个面 -->
                 <highlight pos="0 0 0" duration="70"/>
                 <highlight pos="0 0 0" face="UP" duration="70"/>
             </scene>
             <scene>
-                <!--rotate the scene view-->
+                <!-- 旋转场景视角 -->
                 <rotation degree="90"/>
             </scene>
         </frame>
         <frame>
             <description>
-                <!-- Describes the frame, shows it on hovertooltips, and has the same syntax as the text label-->
+                <!-- 描述该帧，鼠标悬停时显示提示，语法与 text 标签相同 -->
                 section 2.
             </description>
             <scene>
-                <!-- add entities by its type name. You have to allocate it an id, or a random id will be generated-->
+                <!-- 通过类型名称添加实体。你必须为其分配一个 id，否则将生成随机 id -->
                 <add-entity pos="0 1 0" type="minecraft:player" id="12"/>
-                <!-- add entities with tag-->
+                <!-- 添加带有标签的实体 -->
                 <add-entity pos="0.5 3 0.5" type="minecraft:item" id="2">
                     <nbt>
                         {
@@ -304,11 +305,11 @@ Lets check how do the aboves actions look like!!
         </frame>
         <frame delay="40">
             <description>
-                <!-- Describes the frame, shows it on hovertooltips, and has the same syntax as the text label-->
+                <!-- 描述该帧，鼠标悬停时显示提示，语法与 text 标签相同 -->
                 section 3.
             </description>
             <scene>
-                <!-- modify entity's tag and position by id-->
+                <!-- 通过 id 修改实体的标签和位置 -->
                 <modify-entity pos="3 0 3" id="12">
                     <nbt>
                         {
@@ -338,7 +339,7 @@ Lets check how do the aboves actions look like!!
                 </tooltip>
             </scene>
             <scene>
-                <!-- remove entity by id-->
+                <!-- 通过 id 移除实体 -->
                 <remove-entity id="12" force="true"/>
             </scene>
         </frame>

@@ -853,7 +853,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 | `hasClass(...)`  | `boolean`                               | 检查类是否存在。                             |
 | `transform(...)` | `UIElement transform(Consumer<Transform2D>)` | 应用 2D 变换。                          |
 | `animation()`    | `StyleAnimation`                        | 开始一个以此元素为目标的样式动画。           |
-| `animation(a -> {})`| `StyleAnimation`                    | 开始一个以此元素为目标的样式动画。（当 `ModularUI` 有效时总是可用） |
+| `animation(a -> {})`    | `StyleAnimation`                    | 开始一个以此元素为目标的样式动画。（当 `ModularUI` 有效时总是可用） |
 
 ---
 
@@ -898,5 +898,5 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 | 方法                       | 签名 | 描述                            |
 | -------------------------- | ---- | ------------------------------- |
 | `isDisplayed()`            | `boolean` | 如果 display 不是 `NONE`，则返回 true。 |
-| `isRendered()`            | `boolean` | 如果元素当前被渲染，则返回 true。 |
-| `isDragged()`             | `boolean` | 如果元素当前正被拖拽，则返回 true。 |
+| `isRendered()`             | `boolean` | 如果元素当前被渲染，则返回 true。 |
+| `isDragged()`              | `boolean` | 如果元素当前正被拖拽，则返回 true。 |

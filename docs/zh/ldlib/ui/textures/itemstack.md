@@ -1,21 +1,21 @@
 # ItemStackTexture
 
-`ItemStackTexture` will display items in a loop.
+`ItemStackTexture` 会以循环方式显示物品。
 
-## Basic Properties
+## 基本属性
 
-| Field     | Description                                                     |
-|-----------|-----------------------------------------------------------------|
-| items     | Array of item stacks used by the texture                        |
-| color     | Color overlay applied to the item stack texture                 |
+| 字段      | 描述                                             |
+|-----------|-------------------------------------------------|
+| items     | 该纹理使用的物品堆数组                            |
+| color     | 应用到物品堆纹理上的颜色覆盖层                     |
 
 ---
 
-## APIs
+## API
 
 ### setItems
 
-Sets the items.
+设置物品。
 
 === "Java / KubeJS"
 
@@ -27,7 +27,7 @@ Sets the items.
 
 ### setColor
 
-Sets the color overlay for the item stack texture.
+设置物品堆纹理的颜色覆盖层。
 
 === "Java / KubeJS"
 

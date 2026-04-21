@@ -1,32 +1,31 @@
-
 # PhantomTankWidget
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
     <source src="../../assets/phantom_tank.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 
-The `PhantomTankWidget` is a **ghost fluid slot** that allows setting fluid content without actual transfer mechanics. It's useful for defining **recipe inputs** or **fluid placeholders**.
+`PhantomTankWidget` 是一个**幽灵流体槽**，它允许设置流体内容而不涉及实际的传输机制。它适用于定义**配方输入**或**流体占位符**。
 
 ---
 
-## Features
+## 特性
 
-- **Phantom fluid storage** – Doesn't actually consume or provide fluids.
-- **Supports drag-and-drop** – Accepts fluid items from JEI, EMI, or REI.
-- **Custom event handling** – Updates an external state when fluid changes.
+- **幽灵流体存储** – 不会实际消耗或提供流体。
+- **支持拖拽** – 接受来自 JEI、EMI 或 REI 的流体物品。
+- **自定义事件处理** – 当流体变化时更新外部状态。
 
 ---
 
-## APIs
+## API
 
-It owns all APIs from [`TankWidget`](Tank.md), and you can get or set item by its APIs.
+它拥有 [`TankWidget`](Tank.md) 的所有 API，你可以通过其 API 获取或设置物品。
 
 ### setIFluidStackUpdater
 
-Registers a callback to track fluid changes.
+注册一个回调函数以追踪流体变化。
 
 === "Java"
 

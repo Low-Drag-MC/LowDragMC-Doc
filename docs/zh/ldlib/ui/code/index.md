@@ -1,35 +1,35 @@
-# Get Started
+# 快速入门
 
-Creating UI using `Java` and `KubeJS` is mostly the same. This page will introduce the basic workflow of creating and using a UI.  
+使用 `Java` 和 `KubeJS` 创建 UI 的方式基本相同。本页将介绍创建和使用 UI 的基本流程。
 
-The entire **UI creation and usage pipeline** consists of the following steps:
+整个 **UI 创建与使用流程** 包含以下步骤：
 
-1. Create UI widget and layout (1)
+1. 创建 UI 组件与布局 (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Create `buttons` and `item slots`, set their positions...
+    1.  :material-hexagon-multiple: 创建 `buttons` 和 `item slots`，设置它们的位置……
 
-2. Bind UI functional logic (1)
+2. 绑定 UI 功能逻辑 (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Add logic to be executed when a `button` is clicked, bind `inventory` to `item slots`...
+    1.  :material-hexagon-multiple: 添加 `button` 被点击时执行的逻辑，将 `inventory` 绑定到 `item slots`……
 
-3. Display the UI (1)
+3. 显示 UI (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Open the `GUI` when `right-clicking` an item, open the `GUI` when `right-clicking` a block...
+    1.  :material-hexagon-multiple: `right-clicking` 物品时打开 `GUI`，`right-clicking` 方块时打开 `GUI`……
 
-Technically, the `UI function binding` and `UI widget creation` processes happen simultaneously, as many controls provide constructors that bind functions at the same time.  
+从技术上讲，`UI 功能绑定` 和 `UI 组件创建` 过程是同时进行的，因为许多控件都提供了在创建时就绑定功能的构造函数。
 
-On this page, we **separate step 1 and step 2** in the code examples to provide a clearer understanding of how the `UI` works.
+在本页中，为了更清晰地展示 `UI` 的工作原理，我们**将步骤 1 和步骤 2** 在代码示例中分开讲解。
 
 ---
 
-## Create `UI` Widgets and Layout
+## 创建 `UI` 组件与布局
     
-Let's begin with a [`WigetGroup`](../widget/WidgetGroup.md), which is a container of child widgtes. Therefore, we create a `WidgetGroup` as a root widget. Check all widgets [`here`](../widget/index.md).
+让我们从 [`WigetGroup`](../widget/WidgetGroup.md) 开始，它是一个用于容纳子组件的容器。因此，我们创建一个 `WidgetGroup` 作为根组件。在 [`此处`](../widget/index.md) 查看所有组件。
 
-Then, we add a `Label` and a `Button` into it.
+然后，我们向其中添加一个 `Label` 和一个 `Button`。
 
 === "Java"
 
@@ -92,7 +92,7 @@ Then, we add a `Label` and a `Button` into it.
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/root.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 
@@ -101,9 +101,9 @@ Then, we add a `Label` and a `Button` into it.
 ---
 
 
-## Bind UI functional logic
+## 绑定 UI 功能逻辑
 
-After the creation of the ui, we should implement the logic of the ui. For example, we want to **click the button to change the label text**.
+创建 UI 后，我们需要实现其逻辑。例如，我们希望**点击按钮以更改标签文本**。
 
 
 === "Java"
@@ -144,17 +144,17 @@ After the creation of the ui, we should implement the logic of the ui. For examp
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/counter.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 
 ---
 
-## Display the UI
+## 显示 UI
 
-Now, let's display the ui we create! We need to specify a `UI Factory` to display the ui, which maintains the lifecycle of the ui. 
+现在，让我们显示我们创建的 UI！我们需要指定一个 `UI Factory` 来显示 UI，它负责管理 UI 的生命周期。
 
-There are four steps:
+共有四个步骤：
 
 1. `open ui`
 2. `create UI in server side`
@@ -171,29 +171,29 @@ sequenceDiagram
 
 ```
 
-`UI Factory` will help handle the `step 3`. Therefore, user should define **WHEN** to trigger `step 1`, and **WHAT** to be createed in `step 2` and `step 4`. In general, the UI created on the server side and the remote side is the same in most cases.
+`UI Factory` 将协助处理 `step 3`。因此，用户需要定义**何时**触发 `step 1`，以及在 `step 2` 和 `step 4` 中**创建什么**。通常情况下，服务端和远程端创建的 UI 在大多数情况中都是相同的。
 
-LDLib provides two built-in factories:
+LDLib 提供了两种内置工厂：
 
 1. Block Entity UI Factory
 2. Held Item UI Factory
 
 ### Block Entity UI Factory
 
-This factory allows user to open the ui from a block.
+此工厂允许用户从方块打开 UI。
 
 #### Java
 
-1. Java user should implement [`IUIHolder.Block`](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/gui/modular/IUIHolder.java) for your own `BlockEntity` and implement the method `createUI(Player entityPlayer)`.
+1. Java 用户应为自己的 `BlockEntity` 实现 [`IUIHolder.Block`](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/gui/modular/IUIHolder.java)，并实现 `createUI(Player entityPlayer)` 方法。
 
-2. Call the method `BlockEntityUIFactory.INSTANCE.openUI()` when you want to open the ui.
+2. 在想要打开 UI 时，调用 `BlockEntityUIFactory.INSTANCE.openUI()` 方法。
 
 #### KubeJS
 
-KubeJS user can do the same thing in an easy way. User can even open the ui for the block (without entity), but less accessibility compared with Java.
+KubeJS 用户可以用更简单的方式实现同样的功能。用户甚至可以为方块（无实体）打开 UI，但相比 Java 可访问性较低。
 
-1. KubeJS user should use `LDLibUI.block(ui_name, e => {})` to create the ui by the given `ui_name`.
-2. Call the method `BlockUIFactory.INSTANCE.openUI(player, pos, ui_name)` when you want to open the ui.
+1. KubeJS 用户应使用 `LDLibUI.block(ui_name, e => {})` 根据给定的 `ui_name` 创建 UI。
+2. 在想要打开 UI 时，调用 `BlockUIFactory.INSTANCE.openUI(player, pos, ui_name)` 方法。
 
 === "Java"
 
@@ -248,20 +248,20 @@ KubeJS user can do the same thing in an easy way. User can even open the ui for 
 
 ### Held Item UI Factory
 
-This factory allows user to open the ui from the held item.
+此工厂允许用户从手持物品打开 UI。
 
 #### Java
 
-1. Java user should implement [`IUIHolder.Item`](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/gui/modular/IUIHolder.java) for your own `Item` and implement the method `createUI(Player entityPlayer, HeldItemUIFactory.HeldItemHolder holder)`.
+1. Java 用户应为自己的 `Item` 实现 [`IUIHolder.Item`](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/gui/modular/IUIHolder.java)，并实现 `createUI(Player entityPlayer, HeldItemUIFactory.HeldItemHolder holder)` 方法。
 
-2. Call the method `HeldItemUIFactory.INSTANCE.openUI()` when you want to open the ui.
+2. 在想要打开 UI 时，调用 `HeldItemUIFactory.INSTANCE.openUI()` 方法。
 
 #### KubeJS
 
-KubeJS user can do the same thing in an easy way. User can even open the ui for the block (without entity), but less accessibility compared with Java.
+KubeJS 用户可以用更简单的方式实现同样的功能。用户甚至可以为方块（无实体）打开 UI，但相比 Java 可访问性较低。
 
-1. KubeJS user should use `LDLibUI.item(ui_name, e => {})` to create the ui by the given `ui_name`.
-2. Call the method `ItemUIFactory.INSTANCE.openUI(player, hand, ui_name)` when you want to open the ui.
+1. KubeJS 用户应使用 `LDLibUI.item(ui_name, e => {})` 根据给定的 `ui_name` 创建 UI。
+2. 在想要打开 UI 时，调用 `ItemUIFactory.INSTANCE.openUI(player, hand, ui_name)` 方法。
 
 === "Java"
 
@@ -316,6 +316,6 @@ KubeJS user can do the same thing in an easy way. User can even open the ui for 
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/display.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>

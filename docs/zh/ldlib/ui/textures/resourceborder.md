@@ -1,22 +1,22 @@
 # ResourceBorderTexture
 
-The `ResourceBorderTexture` class extends `ResourceTexture` to render textures with configurable borders. It calculates relative sizes for corners, edges, and the central area, enabling detailed customization for UI backgrounds and buttons.
+`ResourceBorderTexture` 类继承自 `ResourceTexture`，用于渲染带有可配置边框的纹理。它会计算角部、边缘和中心区域的相对尺寸，从而支持对 UI 背景和按钮进行精细的自定义。
 
-## Basic Properties
+## 基本属性
 
-| Field         | Description                                                       |
-|---------------|-------------------------------------------------------------------|
-| boderSize     | The size of the border corners      |
-| imageSize     | The overall size of the texture image   |
-| imageLocation | The resource location of the texture image                        |
+| 字段          | 说明                                     |
+|---------------|------------------------------------------|
+| boderSize     | 边框角的大小                               |
+| imageSize     | 纹理图像的整体尺寸                          |
+| imageLocation | 纹理图像的资源路径（resource location）     |
 
 ---
 
-## APIs
+## API
 
 ### setBoderSize
 
-Sets the size of the border corners.
+设置边框角的大小。
 
 === "Java / KubeJS"
 
@@ -28,7 +28,7 @@ Sets the size of the border corners.
 
 ### setImageSize
 
-Sets the overall size of the texture image.
+设置纹理图像的整体尺寸。
 
 === "Java / KubeJS"
 

@@ -3,34 +3,34 @@
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
     <source src="../../assets/selector.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 
-The `SelectorWidget` is a **dropdown-style selection widget** that allows users to pick an option from a predefined list. It supports dynamically updating the selection list, displaying a configurable UI, and handling selection changes efficiently.
+`SelectorWidget` 是一个**下拉式选择控件**，允许用户从预定义的列表中选择选项。它支持动态更新选项列表、显示可配置的 UI，以及高效处理选择变化。
 
 ---
 
-## Features
+## 功能特性
 
-- **Dropdown selection** – Expands to show available choices.
-- **Event handling** – Fires callbacks when the selection changes.
+- **下拉选择** – 展开以显示可用选项。
+- **事件处理** – 当选择变化时触发回调。
 
 ---
 
-## Properties
+## 属性
 
-| Field           | Type                      | Description |
+| 字段           | 类型                      | 描述 |
 |----------------|--------------------------|-------------|
-| `currentValue` | `String`                  | Currently selected option. |
+| `currentValue` | `String`                  | 当前选中的选项。 |
 
 ---
 
-## APIs
+## API
 
 ### setCandidates
 
-Updates the list of selectable options.
+更新可选选项列表。
 
 === "Java"
 
@@ -44,13 +44,13 @@ Updates the list of selectable options.
     selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
     ```
 
-- Triggers a UI update to reflect the new options.
+- 触发 UI 更新以反映新选项。
 
 ---
 
 ### setValue
 
-Sets the currently selected value.
+设置当前选中的值。
 
 === "Java / KubeJS"
 
@@ -58,13 +58,13 @@ Sets the currently selected value.
     selectorWidget.setValue("OptionA");
     ```
 
-- If the value is **not found** in `candidates`, it remains unchanged.
+- 如果该值在 `candidates` 中**未找到**，则保持不变。
 
 ---
 
 ### setMaxCount
 
-Defines how many options should be visible **before scrolling**.
+定义在滚动前可见的选项数量。
 
 === "Java / KubeJS"
 
@@ -72,25 +72,25 @@ Defines how many options should be visible **before scrolling**.
     selectorWidget.setMaxCount(3);
     ```
 
-- If there are **more** than `maxCount` options, a **scrollbar** is added.
+- 如果选项数量**超过** `maxCount`，则会添加**滚动条**。
 
 ---
 
 ### setFontColor
 
-Changes the color of option text.
+更改选项文本的颜色。
 
 === "Java / KubeJS"
 
     ```java
-    selectorWidget.setFontColor(0xFFFFFF); // White text
+    selectorWidget.setFontColor(0xFFFFFF); // 白色文本
     ```
 
 ---
 
 ### setButtonBackground
 
-Sets the background texture for the button area.
+设置按钮区域的背景纹理。
 
 === "Java / KubeJS"
 
@@ -102,7 +102,7 @@ Sets the background texture for the button area.
 
 ### setOnChanged
 
-Registers a callback to handle selection changes.
+注册一个回调函数来处理选择变化。
 
 === "Java"
 
@@ -120,13 +120,13 @@ Registers a callback to handle selection changes.
     });
     ```
 
-- This is useful for **updating UI state** or triggering **game logic**.
+- 这对于**更新 UI 状态**或触发**游戏逻辑**非常有用。
 
 ---
 
 ### setCandidatesSupplier
 
-Automatically updates the option list from a dynamic source.
+从动态源自动更新选项列表。
 
 === "Java"
 
@@ -140,17 +140,17 @@ Automatically updates the option list from a dynamic source.
     selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
     ```
 
-- The widget **polls** this function to refresh the list.
-- Useful when **candidates change based on external conditions**.
+- 控件会**轮询**此函数来刷新列表。
+- 适用于**选项基于外部条件变化**的情况。
 
 ---
 
 ### setShow
 
-Manually toggles the dropdown visibility.
+手动切换下拉列表的可见性。
 
 === "Java / KubeJS"
 
     ```java
-    selectorWidget.setShow(true); // Opens dropdown
+    selectorWidget.setShow(true); // 打开下拉列表
     ```

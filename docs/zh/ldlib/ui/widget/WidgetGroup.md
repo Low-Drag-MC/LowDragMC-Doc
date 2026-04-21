@@ -1,28 +1,28 @@
-# WidgetGroup 
+# WidgetGroup
 
 [ :material-tag: `WidgetGroup`](WidgetGroup.md)
 
-`WidgetGroup` is a container which can add child widgets. Widget inherints from `WidgetGroup` can add child widgets as well. 
+`WidgetGroup` 是一个容器，可以添加子组件。继承自 `WidgetGroup` 的组件也可以添加子组件。
 
 !!! note
-    We will add a [ :material-tag: `WidgetGroup`](WidgetGroup.md) for all widget inherints from it.
+    我们会为所有继承自它的组件添加一个 [ :material-tag: `WidgetGroup`](WidgetGroup.md)。
 
 ---
 
-## Basic properties
+## 基本属性
 
-All properties can be accessed via Java / KubeJS.
+所有属性均可通过 Java / KubeJS 访问。
 
 
-| Field       | Description                          |
+| 字段       | 描述                          |
 | :---------- | :----------------------------------- |
-| `widgets`       | all child widgets  |
-| `layout`       | layout of child widgets |
-| `layoutPadding`       | padding offset |
+| `widgets`       | 所有子组件  |
+| `layout`       | 子组件的布局 |
+| `layoutPadding`       | 内边距偏移 |
 
 === "Java"
 
-    ``` java 
+    ``` java
     for (var child in group.widgets) {
 
     }
@@ -32,24 +32,24 @@ All properties can be accessed via Java / KubeJS.
 
     ``` javascript
     for (let child of group.widgets) {
-        
+
     }
     ```
 
 !!! warning
-    **DO NOT** add widget to the `group.widgets` directly!! please check below methods.
+    **请勿**直接向 `group.widgets` 添加组件！！请查看下方的方法。
 
 ---
 
-## APIs
+## API
 
 ### `addWidgets()`
 
-Add child widgets to it **in order**.
+按顺序向其添加子组件。
 
 === "Java / KubeJS"
 
-    ``` java 
+    ``` java
     var button = ...;
     var label = ...;
     group.addWidgets(button, label);
@@ -58,11 +58,11 @@ Add child widgets to it **in order**.
 
 ### `removeWidget() / clearAllWidgets()`
 
-Remove child widget from it.
+从中移除子组件。
 
 === "Java / KubeJS"
 
-    ``` java 
+    ``` java
     var child = group.getFirstWidgetById("button_id");
     group.removeWidget(child);
     group.clearAllWidget();
@@ -71,4 +71,4 @@ Remove child widget from it.
 
 ### `waitToAdded() / waitToRemoved()`
 
-Basically equals to the `addWidgets()` and `removeWidget()`. However, these two methods is useful for iteration and multi-thread. It handles widget in the next tick (in main thread).
+基本等同于 `addWidgets()` 和 `removeWidget()`。不过，这两个方法在遍历和多线程场景下非常有用。它会在下一 tick（在主线程中）处理组件。

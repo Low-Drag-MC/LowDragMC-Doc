@@ -1,23 +1,23 @@
-# Preliminary
+# 初步介绍
 
-`GUI Texture` is widely used for background setup, image dispaly, etc. LDLib provides lots of different textures. Textures have some generic functions.
+`GUI Texture` 广泛应用于背景设置、图像显示等场景。LDLib 提供了多种不同的纹理。纹理具备一些通用功能。
 
-## Basic Properties
+## 基本属性
 
-| Field    | Description                      |
-|----------|----------------------------------|
-| xOffset  | Horizontal offset                |
-| yOffset  | Vertical offset                  |
-| scale    | Scale factor (default is 1)      |
-| rotation | Rotation angle in degrees        |
+| 字段      | 描述           |
+|-----------|----------------|
+| xOffset   | 水平偏移       |
+| yOffset   | 垂直偏移       |
+| scale     | 缩放系数（默认为 1） |
+| rotation  | 旋转角度（单位为度） |
 
 ---
 
-## APIs
+## API
 
 ### rotate
 
-Sets the rotation angle.
+设置旋转角度。
 
 === "Java / KubeJS"
 
@@ -29,7 +29,7 @@ texture.rotate(45);
 
 ### scale
 
-Sets the scale factor.
+设置缩放系数。
 
 === "Java / KubeJS"
 
@@ -41,7 +41,7 @@ texture.scale(1.5);
 
 ### transform
 
-Sets the horizontal and vertical offset.
+设置水平和垂直偏移。
 
 === "Java / KubeJS"
 
@@ -53,7 +53,7 @@ texture.transform(10, 20);
 
 ### copy
 
-Creates a copy of the texture.
+创建纹理的副本。
 
 === "Java / KubeJS"
 

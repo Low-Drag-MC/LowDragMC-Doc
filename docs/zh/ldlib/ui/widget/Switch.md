@@ -1,43 +1,43 @@
 # SwitchWidget
 
-The `SwitchWidget` is a **toggle button** that switches between an ON and OFF state. It supports **custom textures**, **event callbacks**, and **dynamic state updates**.
+`SwitchWidget` 是一个**切换按钮**，用于在 ON 与 OFF 状态之间切换。它支持**自定义纹理**、**事件回调**和**动态状态更新**。
 
 ---
 
-## Features
+## 特性
 
-- **Toggle button behavior** – Click to switch between ON and OFF.
-- **Event handling** – Fires callbacks when the switch state changes.
+- **切换按钮行为** —— 点击即可在 ON 与 OFF 之间切换。
+- **事件处理** —— 当开关状态改变时触发回调。
 
 ---
 
-## Properties
+## 属性
 
-| Field             | Type                      | Description |
+| 字段             | 类型                      | 描述 |
 |------------------|--------------------------|-------------|
-| `isPressed`      | `boolean` _(default: false)_ | Current switch state. |
+| `isPressed`      | `boolean` _(默认值：false)_ | 当前开关状态。 |
 
 ---
 
-## APIs
+## API
 
 ### setPressed
 
-Sets the **ON/OFF** state of the switch.
+设置开关的 **ON/OFF** 状态。
 
 === "Java / KubeJS"
 
     ```java
-    switchWidget.setPressed(true); // Turns ON
+    switchWidget.setPressed(true); // 打开（ON）
     ```
 
-- Triggers **UI updates** and event callbacks.
+- 触发 **UI 更新** 与事件回调。
 
 ---
 
 ### setOnPressCallback
 
-Registers a callback when the switch is clicked.
+注册当开关被点击时的回调。
 
 === "Java"
 
@@ -59,7 +59,7 @@ Registers a callback when the switch is clicked.
 
 ### setSupplier
 
-Automatically syncs with an **external state**.
+与**外部状态**自动同步。
 
 === "Java"
 
@@ -73,4 +73,4 @@ Automatically syncs with an **external state**.
     switchWidget.setSupplier(() => getCurrentState()); // bool
     ```
 
-- Updates **dynamically** when `getCurrentState()` changes.
+- 当 `getCurrentState()` 变化时**动态**更新。

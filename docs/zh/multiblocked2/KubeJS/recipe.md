@@ -1,6 +1,6 @@
-# Recipe Creation
+# 配方创建
 
-Add recipes to the recipe type (`id = mbd2:blender`).
+将配方添加到配方类型（`id = mbd2:blender`）。
 
 ```javascript
 // server script
@@ -111,4 +111,4 @@ ServerEvents.recipes((event) => {
 })
 ```
 
-More apis and details can be found here: [MBDRecipeSchema](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/recipe/MBDRecipeSchema.java)
+更多 API 和详情可在此处查看：[MBDRecipeSchema](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/recipe/MBDRecipeSchema.java)

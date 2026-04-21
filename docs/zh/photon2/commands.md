@@ -1,58 +1,58 @@
-# Commands
+# 命令
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
 
-Photon2 does not manage when, where, or how VFX are used. While Photon provides some built-in commands, these are primarily for testing purposes.
+Photon2 不管理 VFX 何时、何地以及如何使用。虽然 Photon 提供了一些内置命令，但这些主要用于测试目的。
 
-## ✨ Basic Commands
+## ✨ 基础命令
 
-| Command                          | Description                                   |
+| 命令                             | 描述                                          |
 | -------------------------------- | --------------------------------------------- |
-| `/photon particle_editor`        | Open the visual particle editor               |
-| `/photon_client clear_particles` | Remove all Photon particles                   |
-| `/photon_client clear_fx_cache`  | Clear FX cache (run after changing .fx files) |
+| `/photon particle_editor`        | 打开可视化粒子编辑器                          |
+| `/photon_client clear_particles` | 移除所有 Photon 粒子                          |
+| `/photon_client clear_fx_cache`  | 清除 FX 缓存（修改 .fx 文件后运行）           |
 
 ---
 
-## 📦 FX Binding & Emitting
+## 📦 FX 绑定与发射
 
-Photon2 lets you **bind effects to blocks or entities**, or emit them at specific positions with full parameter control.
+Photon2 允许你**将效果绑定到方块或实体**，或在指定位置发射它们，并具有完整的参数控制。
 
-### Command Format
+### 命令格式
 
 ```shell
 /photon fx <fxFile> <type> ... [offset] [rotation] [scale] [delay] [force death] [allow multi] ...
 ```
 
-* `<fxFile>`: Resource location of the FX file (e.g., `mod_id:filename` for `assets/mod_id/fx/filename.fx`)
-* `<type>`: `block` or `entity`
-* See parameter table below for details
+* `<fxFile>`：FX 文件的资源位置（例如 `mod_id:filename` 对应 `assets/mod_id/fx/filename.fx`）
+* `<type>`：`block` 或 `entity`
+* 详见下方参数表
 
-| Parameter   | Required | Default | Description                                                              |
-| ----------- | -------- | ------- | ------------------------------------------------------------------------ |
-| fxFile      | Yes      | -       | FX file resource name, e.g. `photon:fire`                                |
-| type        | Yes      | -       | `block` or `entity`                                                      |
-| offset      | No       | 0 0 0   | Position offset (x y z)                                                  |
-| rotation    | No       | 0 0 0   | Rotation (Euler angles: x y z)                                           |
-| scale       | No       | 1 1 1   | Scale (x y z)                                                            |
-| delay       | No       | 0       | Emit delay (ticks)                                                       |
-| force death | No       | false   | Immediately remove all particles if the target becomes invalid           |
-| allow multi | No       | false   | Allow multiple effects with the same name to be bound to the same object |
+| 参数        | 必需 | 默认值  | 描述                                                                     |
+| ----------- | ---- | ------- | ------------------------------------------------------------------------ |
+| fxFile      | 是   | -       | FX 文件资源名称，例如 `photon:fire`                                      |
+| type        | 是   | -       | `block` 或 `entity`                                                      |
+| offset      | 否   | 0 0 0   | 位置偏移 (x y z)                                                         |
+| rotation    | 否   | 0 0 0   | 旋转 (欧拉角: x y z)                                                     |
+| scale       | 否   | 1 1 1   | 缩放 (x y z)                                                             |
+| delay       | 否   | 0       | 发射延迟 (ticks)                                                         |
+| force death | 否   | false   | 如果目标变为无效，立即移除所有粒子                                       |
+| allow multi | 否   | false   | 允许相同名称的多个效果绑定到同一对象                                     |
 
 ---
 
-### 🟦 Bind FX to a Block
+### 🟦 绑定 FX 到方块
 
-**Format:**
+**格式：**
 
 ```shell
 /photon fx <fxFile> block <position(x y z)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [check state]
 ```
 
-* `position`: Required, block coordinates (x y z)
-* `check state`: If `false` (default), effect is removed if the block changes. If `true`, also removed if the blockstate changes.
+* `position`：必需，方块坐标 (x y z)
+* `check state`：如果为 `false`（默认），方块改变时效果被移除。如果为 `true`，方块状态改变时也会被移除。
 
-**Example:**
+**示例：**
 
 ```shell
 /photon fx photon:fire block ~ ~ ~ 0 0 0 0 0 0 1 1 1 0 false false false
@@ -60,23 +60,23 @@ Photon2 lets you **bind effects to blocks or entities**, or emit them at specifi
 
 ---
 
-### 🟩 Bind FX to Entities
+### 🟩 绑定 FX 到实体
 
-**Format:**
+**格式：**
 
 ```shell
 /photon fx <fxFile> entity <entities(selector)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [auto rotation]
 ```
 
-* `entities`: Required, entity selector
-* `auto rotation`:
+* `entities`：必需，实体选择器
+* `auto rotation`：
 
-  * `none` (default): No rotation
-  * `forward`: Forward direction
-  * `look`: Head look direction
-  * `xrot`: Body rotation direction
+  * `none`（默认）：无旋转
+  * `forward`：前进方向
+  * `look`：头部朝向方向
+  * `xrot`：身体旋转方向
 
-**Example:**
+**示例：**
 
 ```shell
 /photon fx photon:fire entity @e[type=minecraft:minecart, distance=..1] 0 0.5 0 0 0 0 1 1 1 0 false false look
@@ -84,34 +84,34 @@ Photon2 lets you **bind effects to blocks or entities**, or emit them at specifi
 
 ---
 
-## ❌ Remove FX Commands
+## ❌ 移除 FX 命令
 
-| Command Format                                                     | Example                                 |
+| 命令格式                                                           | 示例                                    |
 | ------------------------------------------------------------------ | --------------------------------------- |
 | `/photon fx remove block <position(x y z)> [force] [location]`     | `/photon fx remove block ~ ~ ~ true`    |
 | `/photon fx remove entity <entities(selector)> [force] [location]` | `/photon fx remove entity @e[type=pig]` |
 
-* `force`: Remove all particles immediately if the object becomes invalid (`true`), or wait for natural death (`false`)
-* `location`: Specify FX resource location (optional)
+* `force`：对象变为无效时立即移除所有粒子（`true`），或等待自然消失（`false`）
+* `location`：指定 FX 资源位置（可选）
 
 ---
 
-## 📋 Parameter Notes & Tips
+## 📋 参数说明与技巧
 
-* Position, rotation, and scale are always three numbers (x y z)
-* FX file path is usually `assets/<mod_id>/fx/your_fx_name.fx`
-* After changing any .fx file, always run `/photon_client clear_fx_cache` to refresh!
+* 位置、旋转和缩放始终为三个数字 (x y z)
+* FX 文件路径通常为 `assets/<mod_id>/fx/your_fx_name.fx`
+* 修改任何 .fx 文件后，务必运行 `/photon_client clear_fx_cache` 以刷新缓存！
 
 ---
 
-## 🌈 Advanced Usage Examples
+## 🌈 高级用法示例
 
-!!! example "Bind an effect to your feet"
-`shell
+!!! example "将效果绑定到你的脚下"
+    ```shell
     /photon fx photon:smoke block ~ ~-1 ~
-    `
+    ```
 
-!!! example "Bind explosion FX to all pigs nearby"
-`shell
+!!! example "将爆炸 FX 绑定到附近的所有 pig"
+    ```shell
     /photon fx photon:explosion entity @e[type=minecraft:pig, distance=..10]
-    `
+    ```

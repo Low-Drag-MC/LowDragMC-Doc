@@ -1,25 +1,25 @@
 # ShaderTexture
 
-The `ShaderTexture` class extends `TransformTexture` to render textures using custom shaders. It supports dynamic shader updates, setting uniform values, and binding textures for advanced visual effects. The class provides methods for creating shader-based textures from resource locations or raw shader code, along with caching and disposal mechanisms. 
+`ShaderTexture` 类继承自 `TransformTexture`，用于使用自定义着色器渲染纹理。它支持动态着色器更新、设置统一变量值以及绑定纹理以实现高级视觉效果。该类提供了从资源路径或原始着色器代码创建基于着色器的纹理的方法，并包含缓存和释放机制。
 
-!!! warning "IMPORTANT!!!"
-    If you are using raw shader, DO NOT forget to release the texture after using.
+!!! warning "重要提示！！！"
+    如果你正在使用原始着色器，使用后请勿忘记释放纹理。
 
-## Basic Properties
+## 基本属性
 
-| Field      | Description                                                           |
+| 字段       | 描述                                                           |
 |------------|-----------------------------------------------------------------------|
-| location   | The resource location of the shader                                 |
-| resolution | The shader resolution factor (affects the iResolution uniform)        |
-| color      | Color overlay applied to the shader texture                           |
+| location   | 着色器的资源路径                                               |
+| resolution | 着色器分辨率因子（影响 iResolution 统一变量）                      |
+| color      | 应用于着色器纹理的颜色覆盖层                             |
 
 ---
 
-## APIs
+## API
 
 ### dispose
 
-Dispose shader.
+释放着色器。
 
 === "Java / KubeJS"
 
@@ -31,7 +31,7 @@ Dispose shader.
 
 ### updateShader
 
-Updates the shader using a new resource location.
+使用新的资源路径更新着色器。
 
 === "Java / KubeJS"
 
@@ -43,7 +43,7 @@ Updates the shader using a new resource location.
 
 ### updateRawShader
 
-Updates the shader using raw shader code.
+使用原始着色器代码更新着色器。
 
 === "Java / KubeJS"
 
@@ -55,7 +55,7 @@ Updates the shader using raw shader code.
 
 ### setUniformCache
 
-Sets a uniform cache consumer to update additional shader uniforms.
+设置统一变量缓存消费者以更新额外的着色器统一变量。
 
 === "Java / KubeJS"
 
@@ -69,7 +69,7 @@ Sets a uniform cache consumer to update additional shader uniforms.
 
 ### setResolution
 
-Sets the resolution factor used in the shader.
+设置着色器中使用的分辨率因子。
 
 === "Java / KubeJS"
 
