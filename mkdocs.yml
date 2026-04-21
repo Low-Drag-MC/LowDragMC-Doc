@@ -9,12 +9,8 @@ theme:
   icon:
     favicon: assets/icon.png
     touchicon: assets/icon.png
-  language: en 
   pygments_style: friendly
   features:
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.instant.progress
     - navigation.sections
     - navigation.path
     - navigation.tabs
@@ -41,22 +37,30 @@ theme:
         name: Switch to light mode
 extra:
   generator: false
-  alternate:
-    - name: English
-      link: ./en/ 
-      lang: en
-    - name: 中文
-      link: ./zh/
-      lang: zh
+
 extra_css:
   - css/custom.css
   - css/java-enhance.css
+
 plugins:
   - search
   - macros
   - glightbox
   - tags
   - awesome-pages
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: zh
+          name: 中文
+          build: true
 markdown_extensions:
   - attr_list
   - tables
