@@ -253,8 +253,22 @@ LSS supports a set of simple selectors that are analogous, but not identical, to
 | ---- | ----------- | ----------- |
 | Component selector | `type {...}` | Elements of a specific component type. <br> (e.g. `button`, `text-field`, `toogle`) |
 | Class selector | `.class {...}` | Elements with an assigned LSS class. <br> (e.g. `.__focused__`) |
+| Built-in state selector | `:state {...}` | Elements in a built-in runtime state. <br> `:xxx` maps to `.__xxx__` (e.g. `:disabled` = `.__disabled__`, `:focused` = `.__focused__`, `:hover` = `.__hovered__`). |
 | ID selector | `#root {...}` | Elements with an assigned `id`. <br> (e.g. `#root`) |
 | Universal selector | `* {...}` | Any elements. |
+
+Built-in state selectors can be combined with component selectors for CSS-like readability:
+
+```css
+button:disabled {
+}
+
+button:focused {
+}
+
+button:hover {
+}
+```
 
 LSS supports a subset of CSS complex selectors. The following table provides a quick reference of LSS complex selectors.
 
@@ -399,6 +413,7 @@ You could also modify stylesheets at runtime.
         mui.getStyleEngine().addStylesheet(stylesheet);
     }
     ```
+
 === "KubeJS"
 
     ```js
@@ -406,6 +421,38 @@ You could also modify stylesheets at runtime.
     if (mui != null) {
         mui.getStyleEngine().addStylesheet(stylesheet);
     }
+    ```
+
+### Local Stylesheet (Subtree Scope)
+
+Besides global stylesheets on `UI`, you can attach a **local stylesheet** to a specific `UIElement`.
+
+Local stylesheets only affect:
+
+* the element itself
+* all of its descendants
+
+They do not affect parent elements or sibling subtrees.
+
+=== "Java"
+
+    ```java
+    var panel = new UIElement().setId("panel");
+    panel.addLocalStylesheet("""
+        button {
+            width: 80;
+        }
+    """);
+    ```
+=== "KubeJS"
+
+    ```js
+    let panel = new UIElement().setId("panel");
+    panel.addLocalStylesheet(`
+        button {
+            width: 80;
+        }
+    `);
     ```
 
 ### Builtin Stylesheets

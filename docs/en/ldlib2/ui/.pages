@@ -6,7 +6,10 @@ nav:
   - factory.md
   - xml.md
   - editor.md
+  - kotlin_support.md
   - components
   - textures
+  - hud.md
   - kjs_support.md
   - ...
+  - agent_guide.md

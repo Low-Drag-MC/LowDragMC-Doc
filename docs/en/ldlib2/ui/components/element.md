@@ -1,6 +1,6 @@
 # UIElement
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="Since", icon="tag") }}
 
 `UIElement` is the most fundamental and commonly used UI component in LDLib2.
 All UI components inherit from it.
@@ -21,7 +21,27 @@ Because of that, everything introduced in this page also applies to all other UI
     element.layout(layout -> layout.width(40).height(40));
     element.setFocusable(true)
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
+    element.addClass("add-class")
+    element.removeClass("add-class")
     root.addChild(element);
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    val root = element root@{
+        element({
+            layout = { size(40.px) }
+            style = { background(MCSprites.RECT) }
+            focusable = true
+            cls = {
+                +"add-class"
+                -"remove-class"
+            }
+        }) {
+            events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
+        }
+    }
     ```
 
 === "KubeJS"
@@ -32,6 +52,8 @@ Because of that, everything introduced in this page also applies to all other UI
     element.layout(layout => layout.width(40).height(40));
     element.setFocusable(true)
     element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
+    element.addClass("add-class")
+    element.removeClass("add-class")
     root.addChild(element);
     ```
 ---
@@ -62,6 +84,22 @@ UIElement styles (include layouts) can be accessed as below:
     element.getLayout().width(...);
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    element({
+        layout = { width(20.pct) }
+        style = { background(MCSprites.RECT) }
+    }) { }
+
+    element.layoutDsl { 
+        width(20.pct)
+    }
+    element.styleDsl { 
+        background(MCSprites.RECT)
+    }
+    ```
+
 === "KubeJS"
 
     ```js
@@ -77,13 +115,23 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">display</p>
 
-    Controls whether the element participates in layout. `FLEX` enables normal layout, `NONE` removes the element from layout calculation. `CONTENTS` doesn't affect layout but render its children.
+    Controls whether the element participates in layout. `FLEX` enables flex layout, `GRID` enables grid layout, `NONE` removes the element from layout calculation, and `CONTENTS` doesn't affect layout but renders its children.
 
     === "Java"
 
         ```java
-        layout.display(YogaDisplay.FLEX);
-        element.setDisplay(false); // equals to layout.display(YogaDisplay.NONE);
+        layout.display(TaffyDisplay.FLEX);
+        layout.display(TaffyDisplay.GRID); // enable grid layout
+        element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            display(false)
+            display(TaffyDisplay.GRID)
+        }
         ```
 
     === "LSS"
@@ -91,6 +139,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```css
         element {
             display: flex;
+            display: grid;
         }
         ```
 
@@ -102,9 +151,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.layoutDirection(YogaDirection.LTR);
+        layout.layoutDirection(TaffyDirection.LTR);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            direction(TaffyDirection.LTR)
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -124,6 +181,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexBasis(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexBasis(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -143,6 +208,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flex(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flex(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -162,6 +235,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexGrow(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexGrow(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -181,6 +262,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.flexShrink(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexShrink(1)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -197,9 +286,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.flexDirection(YogaFlexDirection.ROW);
+        layout.flexDirection(FlexDirection.ROW);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            flexDirection(FlexDirection.ROW)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -216,9 +313,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.flexWrap(YogaWrap.WRAP);
+        layout.wrap(FlexWrap.WRAP);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            wrap(FlexWrap.WRAP)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -235,9 +340,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.position(YogaPositionType.ABSOLUTE);
+        layout.positionType(TaffyPosition.ABSOLUTE);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout {
+            position(TaffyPosition.ABSOLUTE)
+        }
+        ```
+      
     === "LSS"
 
         ```css
@@ -257,6 +370,18 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.top(10);
         layout.leftPercent(30); // 30%
         layout.allAuto()
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            pos {
+                top(10.px)
+                left(10.px)
+                bottom(auto)
+            }
+        }
         ```
 
     === "LSS"
@@ -283,6 +408,17 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.marginAll(3);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            margin {
+                top(5.px)
+                all(3.px)
+            }
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -305,6 +441,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.paddingLeft(8);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            padding { left(8) }
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -316,7 +460,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">gap-*</p>
 
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+    `*`: row / column / all
 
     Sets spacing between children in flex layouts.
 
@@ -326,11 +470,19 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.rowGap(6);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            gap { row(6) }
+        }
+        ```
+
     === "LSS"
 
         ```css
         element {
-            row-gap: 6;
+            gap-row: 6;
         }
         ```
 
@@ -346,6 +498,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.widthPercent(20); // 20%
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            width(100)
+            width(20.pct) // 20%
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -366,6 +527,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.height(50);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            widheightth(100)
+            height(20.pct) // 20%
+        }
+        ```
+        
     === "LSS"
 
         ```css
@@ -383,6 +553,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.minWidth(20);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            minWidth(20);
+        }
         ```
 
     === "LSS"
@@ -404,6 +582,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.maxHeight(200);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            maxHeight(200);
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -423,31 +609,19 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.aspectRate(1);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            aspectRate(1);
+        }
+        ```
+
     === "LSS"
 
         ```css
         element {
             aspect-rate: 1;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow</p>
-
-    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
-
-    === "Java"
-
-        ```java
-        layout.overflow(YogaOverflow.HIDDEN);
-        element.setOverflowVisible(false); // equals to layout.overflow(YogaOverflow.HIDDEN);
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            overflow: hidden;
         }
         ```
 
@@ -459,7 +633,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignItems(YogaAlign.CENTER);
+        layout.alignItems(AlignItems.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignItems(AlignItems.CENTER)
+        }
         ```
 
     === "LSS"
@@ -478,7 +660,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.justifyContent(YogaJustify.CENTER);
+        layout.justifyContent(AlignContent.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            justifyContent(AlignContent.CENTER)
+        }
         ```
 
     === "LSS"
@@ -497,7 +687,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignSelf(YogaAlign.CENTER);
+        layout.alignSelf(AlignItems.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignSelf(AlignItems.CENTER)
+        }
         ```
 
     === "LSS"
@@ -516,7 +714,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.alignContent(YogaAlign.CENTER);
+        layout.alignContent(AlignContent.CENTER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            alignContent(AlignContent.CENTER)
+        }
         ```
 
     === "LSS"
@@ -524,6 +730,291 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```css
         element {
             align-content: center;
+        }
+        ```
+
+---
+
+### Grid Properties
+
+!!! note ""
+    To use grid layout, set `display(TaffyDisplay.GRID)` on the container element. Template properties define the grid structure on the **container**, while `grid-row` and `grid-column` are placed on **child** elements to control their positions.
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-rows</p>
+
+    Defines the explicit row tracks of a grid container.
+
+    Supported track sizes: `Npx` (fixed pixels), `N%` (percent), `Nfr` (fractional unit), `auto`, `min-content`, `max-content`, `minmax(min, max)`, `fit-content(limit)`, `repeat(count, size)`, `[name]` (named line). Multiple tracks are space-separated.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
+        layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
+        layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
+        layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateRows("1fr 1fr 1fr")
+                templateRows("repeat(3, 100px)")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: repeat(3, 100px);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-columns</p>
+
+    Defines the explicit column tracks of a grid container. Uses the same track sizing syntax as `grid-template-rows`.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
+        layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
+        layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateColumns("10px 1fr 10px")
+                templateColumns("repeat(3, 1fr)")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-columns: 10px 1fr 10px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-template-areas</p>
+
+    Assigns named areas to grid cells. Each quoted string represents a row; words within it name the cells in that row. Use `.` for empty cells. All rows must have the same number of cells.
+
+    === "Java"
+
+        ```java
+        layout.display(TaffyDisplay.GRID);
+        layout.gridTemplateColumns("1fr 1fr 1fr");
+        layout.gridTemplateRows("auto 1fr auto");
+        layout.gridTemplateAreas(
+            "\"header header header\" \"sidebar content content\" \"footer footer footer\""
+        );
+        // Children reference areas via gridRow/gridColumn by area name
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid {
+                templateColumns("1fr 1fr 1fr")
+                templateRows("auto 1fr auto")
+                templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
+            }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-rows</p>
+
+    Sets the row track size for implicitly created rows — those not covered by `grid-template-rows`.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoRows("auto");
+        layout.gridAutoRows("minmax(50px, auto)");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoRows("minmax(50px, auto)") }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-rows: minmax(50px, auto);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-columns</p>
+
+    Sets the column track size for implicitly created columns.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoColumns("auto");
+        layout.gridAutoColumns("100px");
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoColumns("100px") }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-columns: 100px;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-auto-flow</p>
+
+    Controls how auto-placed items fill the grid. `ROW` fills rows first (default); `COLUMN` fills columns first. `ROW_DENSE` / `COLUMN_DENSE` back-fill earlier gaps.
+
+    === "Java"
+
+        ```java
+        layout.gridAutoFlow(GridAutoFlow.ROW);
+        layout.gridAutoFlow(GridAutoFlow.COLUMN);
+        layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        layout = {
+            display(TaffyDisplay.GRID)
+            grid { autoFlow(GridAutoFlow.COLUMN) }
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            display: grid;
+            grid-auto-flow: column;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-row</p>
+
+    Controls a **child** element's row placement within the grid container. Set this on the child, not the container.
+
+    Placement values: `"1"` (line number), `"1 / 3"` (start / end lines), `"span 2"` (span N rows), `"1 / span 2"` (start + span), `"header"` (named area row), `"-1"` (last line).
+
+    === "Java"
+
+        ```java
+        child.layout(layout -> layout.gridRow("1"));          // row 1
+        child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1–3
+        child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
+        child.layout(layout -> layout.gridRow("header"));     // named area row
+        child.layout(layout -> layout.gridRow("-1"));         // last row line
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        element({
+            layout = {
+                grid { row("1 / span 2") }
+            }
+        }) { }
+        ```
+
+    === "LSS"
+
+        ```css
+        child {
+            grid-row: 1;
+            grid-row: 1 / 3;
+            grid-row: span 2;
+            grid-row: header;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">grid-column</p>
+
+    Controls a **child** element's column placement within the grid container. Uses the same placement syntax as `grid-row`.
+
+    === "Java"
+
+        ```java
+        child.layout(layout -> layout.gridColumn("2"));
+        child.layout(layout -> layout.gridColumn("1 / span 3"));
+        child.layout(layout -> layout.gridColumn("sidebar"));
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        element({
+            layout = {
+                grid { column("1 / span 2") }
+            }
+        }) { }
+        ```
+
+    === "LSS"
+
+        ```css
+        child {
+            grid-column: 2;
+            grid-column: 1 / span 3;
+            grid-column: sidebar;
         }
         ```
 
@@ -543,6 +1034,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.background(MCSprites.BORDER);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            background(MCSprites.BORDER)
+        }
+        ```
+
     === "LSS"
         Check [Texture in LSS](../textures/lss.md) for lss supports.
 
@@ -551,6 +1050,35 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
             background: #FFF;
             background: rect(#2ff, 3);
             background: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+
+!!! info ""
+    #### <p style="font-size: 1rem;">overflow</p>
+
+    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
+
+    === "Java"
+
+        ```java
+        style.overflow(YogaOverflow.HIDDEN);
+        element.setOverflowVisible(false); // equals to style.overflow(YogaOverflow.HIDDEN);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overflowVisible(false)
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            overflow: hidden;
         }
         ```
 
@@ -563,6 +1091,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.overlay(...);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overlay(MCSprites.BORDER)
+        }
         ```
 
     === "LSS"
@@ -588,6 +1124,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.appendTooltips("tips.2");
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            tooltips("tips.0"， "tips.1")
+        }
+        ```
+
     === "LSS"
 
         ```css
@@ -605,6 +1149,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```java
         layout.zIndex(1);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            zIndex(1)
+        }
         ```
 
     === "LSS"
@@ -626,11 +1178,47 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.opacity(0.8f);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            opacity(0.8)
+        }
+        ```
+
     === "LSS"
 
         ```css
         element {
             opacity: 0.8;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;">color</p>
+
+    Tints the current element's `background` and `overlay` textures using an ARGB multiplier.
+    This tint is applied only to the current element and does not affect child elements.
+
+    === "Java"
+
+        ```java
+        style.color(0x80FF8080);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            color(0x80FF8080.toInt())
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            color: #80FF8080;
         }
         ```
 
@@ -653,6 +1241,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         layout.overflowClip(true);
         ```
 
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            overflowClip(true)
+        }
+        ```
+
     === "LSS"
         Check [Texture in LSS](../textures/lss.md) for lss supports.
 
@@ -672,6 +1268,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```java
         layout.transform2D(Transform2D.identity().scale(0.5f));
         element.transform(transform -> transform.translate(10, 0))
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            transform2D(Transform2D.identity().scale(0.5f))
+        }
         ```
 
     === "LSS"
@@ -698,7 +1302,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.transition(new Transition(Map.of(YogaProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+        layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
+        }
         ```
 
     === "LSS"
@@ -731,7 +1343,13 @@ When `isActive` is set to `false`, the element may lose its interactive behavior
     selector.__disabled__ {
     }
 
+    selector:disabled {
+    }
+
     selector:not(.__disabled__) {
+    }
+
+    selector:not(:disabled) {
     }
     ```
 
@@ -747,9 +1365,27 @@ Only when `focusable` is set to `true` can an element be focused via `focus()` o
     selector.__focused__ {
     }
 
+    selector:focused {
+    }
+
     selector:not(.__focused__) {
     }
+
+    selector:not(:focused) {
+    }
     ```
+
+### `hover state`
+When an element is hovered, a `__hovered__` class is automatically added.  
+For CSS compatibility, you can use `:hover` as selector sugar, which is equivalent to `.__hovered__`.
+
+```css
+selector.__hovered__ {
+}
+
+selector:hover {
+}
+```
 
 ### `isInternalUI`
 This is a special state that indicates whether an element is an internal part of a component.  
@@ -795,7 +1431,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `styleBag`     | `StyleBag`    | private (getter)        | Stores resolved style candidates and computed styles.    |
 | `styles`       | `List<Style>` | private (getter)        | Inline styles attached to this element.                  |
 | `layoutStyle`  | `LayoutStyle` | private (getter)        | Layout-related style wrapper (Yoga-based).               |
-| `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, opacity, zIndex, etc.). |
+| `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, overlay tint color, opacity, zIndex, etc.). |
 | `isVisible`    | `boolean`     | private (getter/setter) | Whether the element is visible.                          |
 | `isActive`     | `boolean`     | private (getter/setter) | Whether the element participates in logic and events.    |
 | `focusable`    | `boolean`     | private (getter/setter) | Whether the element can receive focus.                   |
@@ -850,9 +1486,14 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `addClass(...)`    | `UIElement addClass(String)`                 | Adds a CSS-like class.                              |
 | `removeClass(...)` | `UIElement removeClass(String)`              | Removes a class.                                    |
 | `hasClass(...)`    | `boolean`                                    | Checks if the class exists.                         |
+| `getLocalStylesheets()` | `List<Stylesheet>`                       | Returns local stylesheets attached to this element. |
+| `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(Stylesheet)` | Adds a local stylesheet (self + descendants only).  |
+| `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(String)`     | Parses and adds local stylesheet from LSS text.     |
+| `removeLocalStylesheet(...)` | `UIElement removeLocalStylesheet(Stylesheet)` | Removes a local stylesheet from this element scope. |
+| `clearLocalStylesheets()` | `UIElement`                              | Removes all local stylesheets attached to this element. |
 | `transform(...)`   | `UIElement transform(Consumer<Transform2D>)` | Applies a 2D transform.                             |
-| `animation()`      | `StyleAnimation`                             | Starts a style animation targeting this element.    |
-| `animation(a -> {})`| `StyleAnimation`                            | Starts a style animation targeting this element. (always works, when the `ModularUI` valid)    |
+| `animation()`      | `StyleAnimation`                             | Creates a style animation targeting this element. See [StyleAnimation](../preliminary/style_animation.md){ data-preview }. |
+| `animation(a -> {})`| `StyleAnimation`                            | Runs animation setup immediately if `ModularUI` is valid, or once on `MUI_CHANGED` when it becomes valid. |
 
 ---
 
@@ -878,6 +1519,89 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `removeEventListener(...)`           | `void`                                                         | Removes an event listener.               |
 | `stopInteractionEventsPropagation()` | `UIElement`                                                    | Stops mouse & drag event propagation.    |
 
+#### Usage
+
+=== "Java"
+
+    ```java
+    // Bubble-phase listener (default): fires after children handle the event
+    element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
+        event.currentElement.focus();
+    });
+
+    // Capture-phase listener: fires before children handle the event
+    element.addEventListener(UIEvents.CLICK, event -> {
+        event.stopPropagation(); // prevent children from seeing this event
+    }, true);
+
+    // Removing a specific listener
+    UIEventListener listener = event -> { /* ... */ };
+    element.addEventListener(UIEvents.CLICK, listener);
+    element.removeEventListener(UIEvents.CLICK, listener);
+
+    // Stop all mouse/drag events from bubbling to parent elements
+    element.stopInteractionEventsPropagation();
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element {
+        // Bubble events (default)
+        events {
+            UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
+            UIEvents.CLICK on { event -> /* handle click */ }
+        }
+        // Capture events
+        events(capture = true) {
+            UIEvents.CLICK on { it.stopPropagation() }
+        }
+    }
+    ```
+
+=== "KubeJS"
+
+    ```js
+    element.addEventListener(UIEvents.MOUSE_DOWN, event => {
+        event.currentElement.focus();
+    });
+    ```
+
+#### Available Events
+
+| Event | Description |
+| ----- | ----------- |
+| `UIEvents.MOUSE_DOWN` | Mouse button pressed over the element |
+| `UIEvents.MOUSE_UP` | Mouse button released |
+| `UIEvents.CLICK` | Mouse clicked (pressed and released on the same element) |
+| `UIEvents.DOUBLE_CLICK` | Mouse double-clicked |
+| `UIEvents.MOUSE_MOVE` | Mouse moved while over the element |
+| `UIEvents.MOUSE_ENTER` | Mouse pointer entered the element's bounds |
+| `UIEvents.MOUSE_LEAVE` | Mouse pointer left the element's bounds |
+| `UIEvents.MOUSE_WHEEL` | Mouse wheel scrolled |
+| `UIEvents.DRAG_ENTER` | A drag operation entered this element |
+| `UIEvents.DRAG_LEAVE` | A drag operation left this element |
+| `UIEvents.DRAG_UPDATE` | Drag target position updated |
+| `UIEvents.DRAG_SOURCE_UPDATE` | Drag source position updated |
+| `UIEvents.DRAG_PERFORM` | Item was dropped on this element |
+| `UIEvents.DRAG_END` | Drag operation ended |
+| `UIEvents.FOCUS` | Element gained keyboard focus |
+| `UIEvents.BLUR` | Element lost keyboard focus |
+| `UIEvents.FOCUS_IN` | Focus moved into this element's subtree |
+| `UIEvents.FOCUS_OUT` | Focus moved out of this element's subtree |
+| `UIEvents.KEY_DOWN` | Keyboard key pressed |
+| `UIEvents.KEY_UP` | Keyboard key released |
+| `UIEvents.CHAR_TYPED` | A printable character was typed |
+| `UIEvents.HOVER_TOOLTIPS` | Tooltip collection when hovering |
+| `UIEvents.VALIDATE_COMMAND` | Slash command validation |
+| `UIEvents.EXECUTE_COMMAND` | Slash command execution |
+| `UIEvents.LAYOUT_CHANGED` | Layout was recalculated |
+| `UIEvents.STYLE_CHANGED` | Styles were recomputed |
+| `UIEvents.REMOVED` | Element was removed from its parent |
+| `UIEvents.ADDED` | Element was added to a parent |
+| `UIEvents.MUI_CHANGED` | `ModularUI` association changed |
+| `UIEvents.TICK` | Periodic client-side tick |
+
 ---
 
 ### Client–Server Sync & RPC
@@ -886,9 +1610,92 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | -------------------------- | ----------- | ------------------------------------------ |
 | `addSyncValue(...)`        | `UIElement` | Registers a synced value.                  |
 | `removeSyncValue(...)`     | `UIElement` | Unregisters a synced value.                |
-| `addRPCEvent(...)`         | `UIElement` | Registers an RPC event.                    |
+| `addRPCEvent(...)`         | `RPCEmitter` | Registers an RPC event.                    |
 | `sendEvent(...)`           | `void`      | Sends an RPC event to server.              |
 | `sendEvent(..., callback)` | `<T> void`  | Sends an RPC event with response callback. |
+
+#### Server Events
+
+Server-side event listeners run on the **server** instead of the client. They use the same `UIEvents` type constants and support both bubble and capture phases. They are automatically synchronized via an internal RPC mechanism.
+
+=== "Java"
+
+    ```java
+    // Runs on the server when UIEvents.TICK fires
+    element.addServerEventListener(UIEvents.TICK, event -> {
+        // server-side tick logic
+    });
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element {
+        serverEvents {
+            UIEvents.TICK on { event ->
+                // server-side logic
+            }
+        }
+        // Capture phase on server
+        serverEvents(capture = true) {
+            UIEvents.CLICK on { it.stopPropagation() }
+        }
+    }
+    ```
+
+#### RPC Events
+
+RPC (Remote Procedure Call) events let the client explicitly invoke logic on the server and optionally receive a response.
+
+=== "Java"
+
+    ```java
+    // Register an RPC event during element initialization
+    RPCEmitter emitter = element.addRPCEvent(ele ->
+        RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
+            // This runs on the server
+            ServerPlayer player = e.modularUI.player;
+            player.sendSystemMessage(Component.literal("Hello from server!"));
+        })
+    );
+
+    // Trigger the RPC from client (e.g., inside a client event listener)
+    element.addEventListener(UIEvents.CLICK, event ->
+        element.sendEvent(emitter.event())
+    );
+    ```
+
+#### Data Bindings
+
+Data bindings automatically synchronize values between server and client. Use `addSyncValue` in Java, or the `bind*` DSL helpers in Kotlin.
+
+=== "Java"
+
+    ```java
+    // Bidirectional: synced server <-> client
+    element.addSyncValue(new SyncValue<>(Integer.class,
+        () -> myData.count,
+        v  -> myData.count = v
+    ));
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    element({}) {
+        // Bidirectional (server <-> client)
+        bind({ myData.count }, { myData.count = it })
+
+        // Server → client only
+        bindS2C({ myData.count })
+
+        // Client → server only
+        bindC2S({ v -> myData.count = v })
+
+        // Bind a mutable property directly (bidirectional)
+        bind(myData::count)
+    }
+    ```
 
 ---
 

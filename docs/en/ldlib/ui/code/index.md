@@ -226,7 +226,7 @@ KubeJS user can do the same thing in an easy way. User can even open the ui for 
 
     BlockEvents.rightClicked('test_block_ui', event => { 
         // step 1 here.
-        BlockUIFactory.INSTANCE.openUI(event.player, event.block.pos);
+        BlockUIFactory.INSTANCE.openUI(event.player, event.block.pos, "test_block_ui");
     })
 
     function createUI() {

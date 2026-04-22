@@ -2,12 +2,17 @@
 
 {{ version_badge("2.1.5", label="Since", icon="tag") }}
 
-Before learning **Data Bindings** and **RPCEvent**, it is important to understand  
+Before learning **Data Bindings** and **RPCEvent**, it is important to understand
 the relationship between **UI components** and **data**.
 
 ---
 
 ## Data bindings on the client side
+
+!!! info "Client-side only"
+    `bindDataSource` and `bindObserver` are **purely client-side** mechanisms.
+    They wire up data flow between UI components and local variables — no network packets are involved.
+    For synchronization between the **server and client**, see [Data Bindings Between Client and Server](#data-bindings-between-client-and-server) below.
 
 If a UI component is data-driven, its role in the data model usually falls into one of the following categories:
 
@@ -18,10 +23,10 @@ If a UI component is data-driven, its role in the data model usually falls into 
 
 ### **Data consumer** with `IDataConsumer<T>`
 
-Components that **passively receive data** implement the `IDataConsumer<T>` interface,  
+Components that **passively receive data** implement the `IDataConsumer<T>` interface,
 such as `Label` and `ProgressBar`.
 
-This interface allows you to bind an `IDataProvider<T>`,  
+This interface allows you to bind an `IDataProvider<T>`,
 which is responsible for **supplying updated data values**.
 
 This is useful when you want to display **dynamic text** or **changing progress values**.
@@ -32,16 +37,31 @@ This is useful when you want to display **dynamic text** or **changing progress 
     ```java
     var valueHolder = new AtomicInteger(0);
     // bind a DataSource to notify the value changes for label and progress bar
-    new Label().bindDataSource(SupplierDataSource.of(() -> 
+    new Label().bindDataSource(SupplierDataSource.of(() ->
         Component.literal("Binding: ").append(String.valueOf(valueHolder.get())))),
     new ProgressBar()
             .bindDataSource(SupplierDataSource.of(() -> valueHolder.get() / 100f))
-            .label(label -> label.bindDataSource(SupplierDataSource.of(() -> 
+            .label(label -> label.bindDataSource(SupplierDataSource.of(() ->
                 Component.literal("Progress: ").append(String.valueOf(valueHolder.get())))))
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    var value = 0
+
+    // Direct API (outside a DSL builder)
+    Label().bindDataSource(SupplierDataSource.of {
+        Component.literal("Binding: $value")
+    })
+
+    // Kotlin DSL (inside a UIContainer init block)
+    label { dataSource({ Component.literal("Binding: $value") }) }
+    progressBar { dataSource({ value / 100f }) }
+    ```
+
 === "KubeJS"
-   
+
     ```js
     let valueHolder = {
         "value": 0
@@ -58,7 +78,7 @@ Components that produce changeable data implement the `IObservable<T>` interface
 Most data-driven components fall into this category, such as `Toggle`, `TextField`, `Selector`
 
 This interface allows you to bind an `IObserver<T>`,
-which is notified whenever the component’s value changes.
+which is notified whenever the component's value changes.
 
 For example, to observe changes from a `TextField`:
 
@@ -76,8 +96,26 @@ For example, to observe changes from a `TextField`:
         //.setTextResponder(value -> valueHolder.set(Integer.parseInt(value)))
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    var value = 0
+
+    // Direct API
+    TextField()
+        .setNumbersOnlyInt(0, 100)
+        .setValue(value.toString())
+        .bindObserver { value = it.toIntOrNull() ?: value }
+
+    // Kotlin DSL (inside a UIContainer init block)
+    textField {
+        observer { value = it.toIntOrNull() ?: value }
+        dataSource { value.toString() }
+    }.setNumbersOnlyInt(0, 100)
+    ```
+
 === "KubeJS"
-   
+
     ```js
     let valueHolder = {
         "value": 0
@@ -97,14 +135,46 @@ For example, to observe changes from a `TextField`:
     `IDataConsumer<T>` and `IObservable<T>`,
     because they are responsible for displaying data and modifying it at the same time.
 
+### `TrackData<T>` — Reactive Value (Kotlin)
+
+`TrackData<T>` is a Kotlin-friendly reactive holder that implements **both** `IDataProvider<T>` and `IObserver<T>`. You can bind it to a component on both sides simultaneously: the component both reads from it and writes back to it.
+
+In Kotlin, `TrackData` supports **property delegation** with `by`, so you can read and write the held value as if it were a plain variable.
+
+```kotlin
+// Create a reactive string value
+val trackData = TrackData("10.4")
+
+// Delegate a typed property to a mapped view of it
+var trackNumber by trackData.map(
+    { it.toFloatOrNull() ?: 1f },   // String -> Float
+    { it.toString() }               // Float -> String
+)
+
+// Bind a text field: the field displays trackData and writes back to it
+textField {
+    observer(trackData)    // field changes update trackData
+    dataSource(trackData)  // trackData changes push to the field
+}.asNumeric(0.3f, 100f)
+
+// Modifying trackNumber notifies the text field automatically
+button({
+    text("track data + 10")
+    onClick = { trackNumber += 10f }
+})
+```
+
+!!! note ""
+    `TrackData` is a **client-side** tool. Like `bindDataSource`/`bindObserver`, it carries no network sync. Use [`bind`](#simple-bidirectional-binding) for server–client synchronization.
+
 ---
 
 ## Data Bindings Between Client and Server
 
-If your UI works **only on the client**, `IDataConsumer<T>` and `IObservable<T>` are usually sufficient.  
+If your UI works **only on the client**, `IDataConsumer<T>` and `IObservable<T>` are usually sufficient.
 They cover most needs for observing and updating local data.
 
-However, many UIs are **container-based UIs**, where the actual data is stored on the **server**.  
+However, many UIs are **container-based UIs**, where the actual data is stored on the **server**.
 In this case, you typically want:
 
 - To **display server-side data** in client UI components.
@@ -127,7 +197,7 @@ sequenceDiagram
 
 ```
 
-This may sound complex, but LDLib2 fully abstracts this process. 
+This may sound complex, but LDLib2 fully abstracts this process.
 
 ---
 
@@ -158,6 +228,23 @@ You only describe:
 
     new ItemSlot()
         .bind(DataBindingBuilder.itemStack(() -> item, stack -> item = stack).build());
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    // Server-side values stored as class fields:
+    // private var bool = true
+    // private var string = "hello"
+    // private var item = ItemStack(Items.APPLE)
+
+    // Most concise: bind a Kotlin property reference directly
+    switch { bind(::bool) }
+    textField { bind(::string) }
+    itemSlot { bind(::item) }
+
+    // Equivalent with explicit getter/setter
+    switch { bind({ bool }, { bool = it }) }
     ```
 
 === "KubeJS"
@@ -220,6 +307,21 @@ LDLib2 allows you to explicitly control sync strategies.
     );
     ```
 
+=== "Kotlin"
+
+    ```kotlin
+    // bindS2C shorthand — server → client only
+    label { bindS2C({ Component.literal(data) }) }
+
+    // Client → server only
+    textField { bindC2S({ newValue -> serverData = newValue }) }
+
+    // With explicit strategy via bindings() helper
+    label {
+        bind({ Component.literal(data) })
+    }
+    ```
+
 === "KubeJS"
 
     ```js
@@ -243,17 +345,30 @@ LDLib2 allows you to explicitly control sync strategies.
 `DataBindingBuilder<T>` provides built-in bindings for common data types.
 For custom types (for example, `int[]`), you can create your own binding.
 
-```java
-// Server-side value
-// int[] data = new int[]{1, 2, 3};
+=== "Java"
 
-new BindableValue<int[]>().bind(
-    DataBindingBuilder.create(
-        () -> data,
-        v -> data = v
-    ).build()
-);
-```
+    ```java
+    // Server-side value
+    // int[] data = new int[]{1, 2, 3};
+
+    new BindableValue<int[]>().bind(
+        DataBindingBuilder.create(
+            () -> data,
+            v -> data = v
+        ).build()
+    );
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    // bindings() is the Kotlin DSL equivalent of DataBindingBuilder.create()
+    // It infers the sync type automatically from the reified type parameter
+    // int[] data = intArrayOf(1, 2, 3)
+
+    // Inside a UIContainer init block:
+    bind({ data }, { data = it })
+    ```
 
 !!! warning inline end
     Not all types are supported by default.
@@ -267,33 +382,49 @@ If a type is **read-only** (see [Type Support](../../sync/types_support.md){ dat
 
 Example with `INBTSerializable`:
 
-```java
-// Server-side value
-// INBTSerializable<CompoundTag> data = ...;
+=== "Java"
 
-new BindableValue<INBTSerializable>().bind(
-    DataBindingBuilder.create(
-        () -> data,
-        v -> {
-            // Instance already updated, just react here
-        }
-    )
-    .initialValue(data).syncType(INBTSerializable.class)
-    .build()
-);
-```
+    ```java
+    // Server-side value
+    // INBTSerializable<CompoundTag> data = ...;
+
+    new BindableValue<INBTSerializable>().bind(
+        DataBindingBuilder.create(
+            () -> data,
+            v -> {
+                // Instance already updated, just react here
+            }
+        )
+        .initialValue(data).syncType(INBTSerializable.class)
+        .build()
+    );
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    // INBTSerializable data = ...
+    bind({ data }, data))
+    ```
 
 This ensures correct synchronization and avoids ambiguity for read-only objects.
 
 ### `Getter` and `Setter` on the client
+
 You may be wondering why we only define getter and setter logic on the server side, but not on the client side.
 
-This is because all components that support the bind method inherit from `IBindable<T>`.
-For these components, LDLib2 automatically sets up the corresponding client-side getter and setter logic for data synchronization.
+This is because all components that support the `bind` method extend `IBindable<T>`.
+**By default**, LDLib2 uses the component's own `IBindable` implementation to automatically wire up the client side:
 
-In most cases, this default behavior is sufficient and requires no additional configuration.
+- When the server syncs data to the client, it calls **`bindDataSource`** on the component, so the component's display updates automatically.
+- When the component's value changes on the client, it calls **`bindObserver`** back, so the change is sent to the server.
 
-However, if you want full control over how the client processes incoming data, or what data it sends back to the server, you can manually define your own client-side getter and setter logic.
+In most cases this default behavior is all you need — you only describe where the data lives on the server, and LDLib2 handles the rest.
+
+!!! warning "When `remoteGetter` / `remoteSetter` are set"
+    If you provide a `remoteGetter` or `remoteSetter` on the builder, LDLib2 **will not** call `bindDataSource`/`bindObserver` automatically.
+    You take full responsibility for how the client reads or applies the data.
+    Use this only when you need custom client-side logic, such as forwarding a synced value to a separate element that is not itself `IBindable`.
 
 === "Java"
 
@@ -307,6 +438,28 @@ However, if you want full control over how the client processes incoming data, o
             .remoteSetter(block -> label.setText(block.getDescriptionId())).build()
     );
     ```
+
+=== "Kotlin"
+
+    ```kotlin
+    // Server-side value: Block data = ...
+
+    // api {} gives access to the raw element inside the DSL
+    var labelElement: Label? = null
+    label { api { labelElement = this } }
+
+    dsl({ BindableValue<Block>() }) {
+        api {
+            bind(
+                bindings({ data }) { /* c2s no-op */ }
+                    .c2sStrategy(SyncStrategy.NONE)
+                    .remoteSetter { block -> labelElement?.setText(block.descriptionId) }
+                    .build()
+            )
+        }
+    }
+    ```
+
 === "KubeJS"
 
     ```js
@@ -330,7 +483,7 @@ This means it can both **display data** and **produce data changes**, while supp
 
 If you want to implement your own UI component and support bidirectional data binding between the client and server, you can simply extend this class.
 For components that do **not** implement `IBindable<T>`—such as the base `UIElement`—you can still achieve data bindings by attaching a `BindableValue<T>` internally.
-The example below shows how to sync server-side data to the client and use it to control an element’s width:
+The example below shows how to sync server-side data to the client and use it to control an element's width:
 
 === "Java"
 
@@ -340,11 +493,31 @@ The example below shows how to sync server-side data to the client and use it to
 
     var element = new UIElement();
     element.addChildren(
-        new BindableValue<Float>().bind(DataBindingBuilder.floatS2C(() -> widthOnTheServer)
+        new BindableValue<Float>().bind(DataBindingBuilder.floatValS2C(() -> widthOnTheServer)
             .remoteSetter(width -> element.getLayout().width(width))
             .build())
     );
     ```
+
+=== "Kotlin"
+
+    ```kotlin
+    // Server-side value: var widthOnTheServer = 100f
+
+    element({}) {
+        dsl({ BindableValue<Float>() }) {
+            api {
+                bind(
+                    bindings({ widthOnTheServer }) { /* c2s no-op */ }
+                        .c2sStrategy(SyncStrategy.NONE)
+                        .remoteSetter { width -> element.layout.width(width) }
+                        .build()
+                )
+            }
+        }
+    }
+    ```
+
 === "KubeJS"
 
     ```js
@@ -353,7 +526,7 @@ The example below shows how to sync server-side data to the client and use it to
 
     let element = new UIElement();
     element.addChildren(
-        new BindableValue().bind(DataBindingBuilder.floatS2C(() => widthOnTheServer)
+        new BindableValue().bind(DataBindingBuilder.floatValS2C(() => widthOnTheServer)
             .remoteSetter(width => element.getLayout().width(width))
             .build())
     );
@@ -434,29 +607,60 @@ This mechanism is called **`UI RPCEvent`**.
 Taking a button as an example, if you have read the [UI Event](./event.md#register-event-listeners) section, you already know that UI events can be sent to the server and trigger logic.
 Internally, this is implemented using `RPCEvent`.
 
-```java
-// trigger ui event on the server
-var button = new UIElement().addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
-    // do something on the server
-});
-```
+=== "Java"
 
-```java
-// equivalent implementation using RPCEvent
+    ```java
+    // trigger ui event on the server
+    var button = new UIElement().addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
+        // do something on the server
+    });
+    ```
 
-var clickEvent = RPCEventBuilder.simple(UIEvent.class, event -> {
-    // do something on the server
-});
+=== "Kotlin"
 
-new UIElement().addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    e.currentElement.sendEvent(clickEvent, e);
-}).addRPCEvent(clickEvent);
-```
+    ```kotlin
+    button {
+        serverEvents {
+            UIEvents.MOUSE_DOWN on { event ->
+                // do something on the server
+            }
+        }
+    }
+    ```
+
+The equivalent implementation using `RPCEvent` directly:
+
+=== "Java"
+
+    ```java
+    var clickEvent = RPCEventBuilder.simple(UIEvent.class, event -> {
+        // do something on the server
+    });
+    var emitter = element.addRPCEvent(clickEvent);
+
+    element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+       emitter.send(clickEvent, e);
+    });
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    button {
+        // element.rpcEvent { ... } is the Kotlin shorthand
+        val rpcEvent = element.rpcEvent { event: UIEvent ->
+            // do something on the server
+        }
+        events {
+            UIEvents.MOUSE_DOWN on { rpcEvent.send(it) }
+        }
+    }
+    ```
 
 You can use `RPCEventBuilder` to construct an `RPCEvent` and send data to the server when needed.
 
 !!! note
-    When sending RPC events, **the parameters passed to `sendEvent` must exactly match the parameters defined in the `RPCEventBuilder`**, including their order and types, and don't forget to `addRPCEvent` them. 
+    When sending RPC events, **the parameters passed to `RPCEmitter#send` must exactly match the parameters defined in the `RPCEventBuilder`**, including their order and types, and don't forget to `addRPCEvent` them.
     Otherwise, the event will not be dispatched correctly.
 
 
@@ -469,17 +673,19 @@ var queryAdd = RPCEventBuilder.simple(int.class, int.class, int.class, (a, b) ->
     // calculate the result and return on the server
     return a + b;
 });
+var emitter = element.addRPCEvent(queryAdd);
 
-new UIElement().addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    e.currentElement.<Integer>sendEvent(queryAdd, result -> {
+element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    emitter.<Integer>send(queryAdd, result -> {
         // receive the result on the client
         assert result == 2;
     }, 1, 2);
-}).addRPCEvent(queryAdd);
+})
+
 ```
 
 ### Send event to the client
-In practice, **UI RPC events are designed primarily for client → server communication**, with optional responses sent back to the client.  
+In practice, **UI RPC events are designed primarily for client → server communication**, with optional responses sent back to the client.
 This matches most real-world use cases, where the **server owns the data and logic**, and the client only sends interaction requests.
 
 LDLib2 therefore does **not** provide a dedicated UI-level API for server → client RPC events.
@@ -500,19 +706,19 @@ public static void rpcPacketTest(RPCSender sender, String message, boolean messa
             uiHolderMenu.getModularUI().select("#my_element").findFirst().ifPresent(element -> {
                 // do something on the client side with your element.
             });
-        } 
+        }
     }
 }
 
-// send pacet to the remote/server 
+// send pacet to the remote/server
 RPCPacketDistributor.rpcToAllPlayers("rpcEventToClient", "Hello from server!", false)
 ```
 
 This approach gives you full control over server-initiated client logic, while keeping the UI RPC system simple and focused on interaction-driven workflows.
 
 !!! tip
-    When using **`FluidSlot`** with container bindings, the implementation already uses  
+    When using **`FluidSlot`** with container bindings, the implementation already uses
     **server → client (s→c) read-only data syncing** combined with **RPC events** for interactions.
 
-    You don’t need to handle sync strategies yourself.  
+    You don't need to handle sync strategies yourself.
     The `FluidSlot.bind(...)` implementation is also a good reference for learning how data syncing and RPC-based interactions work together.

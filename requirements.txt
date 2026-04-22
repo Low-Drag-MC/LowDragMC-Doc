@@ -3,3 +3,4 @@ mkdocs-awesome-pages-plugin
 mkdocs-glightbox
 mkdocs-macros-plugin
 mkdocs-static-i18n
+deep-translator
