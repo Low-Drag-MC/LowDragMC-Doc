@@ -1,6 +1,6 @@
 # 简介
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
 
 **Materials 系统** 为粒子系统中的渲染材质提供了一个灵活且可扩展的框架。
 它提供了多种具有不同渲染功能的材质类型，从简单的纹理到具有 HDR 支持和高级效果的复杂自定义着色器：
@@ -17,8 +17,8 @@
 
 所有材质共享以下设置：
 
-| Property       | Type         | Description | Default |
-| -------------- | ------------ | ----------- | ------- |
+| 属性       | 类型         | 描述 | 默认值 |
+| ---------- | ------------ | ---- | ------ |
 | `material`     | `IMaterial`  | 特定的材质实现 | 内置圆形纹理 |
 | `blendMode`    | `BlendMode`  | 控制粒子与背景的混合方式 | - |
 | `cull`         | `boolean`    | 启用/禁用面剔除 | `true` |
@@ -34,8 +34,8 @@
 
     **配置参数：**
 
-    | Property             | Type              | Description |
-    | -------------------- | ----------------- | ----------- |
+    | 属性             | 类型              | 描述 |
+    | ---------------- | ----------------- | ---- |
     | `Texture`            | `ResourceLocation`| 纹理文件的路径 |
     | `Discard Threshold`  | `float`           | Alpha 剔除阈值 |
     | `HDR`                | `Vector4f`        | HDR 颜色向量 |

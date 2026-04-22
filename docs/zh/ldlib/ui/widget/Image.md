@@ -2,7 +2,7 @@
 
 ![Image title](../assets/image.png){ width="30%" align=right }
 
-`ImageWidget` 用于显示由 [`GUI Texture`](../textures.md) 提供的图像。
+`ImageWidget` 用于显示由 [`GUI Texture`](../textures/index.md) 提供的图像。
 
 ## 基础属性
 

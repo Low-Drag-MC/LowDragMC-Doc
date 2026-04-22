@@ -249,7 +249,7 @@
     ).build());
     ```
 
-更多详情请参见[数据绑定](../preliminary/data_bindings.md){ data-preview }。
+更多详情请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 

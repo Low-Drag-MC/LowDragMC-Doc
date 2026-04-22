@@ -5,7 +5,7 @@
 `FluidSlot` renders a `FluidStack` inside a slot with a directional fill visualisation. Clicking the slot with a fluid container in hand fills or drains it via the vanilla `FluidUtil` API. It also hooks into JEI, REI, and EMI when those mods are present.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -193,7 +193,7 @@
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

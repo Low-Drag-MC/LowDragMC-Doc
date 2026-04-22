@@ -561,4 +561,4 @@ private static ModularUI createModularUI(Player player) {
 
 ## Ending
 
-This is far from over. Why not give the powerful [UI editor](./ui_editor/index.md){ data-preview } a try?
+This is far from over. Why not give the powerful [UI editor](./editor.md){ data-preview } a try?

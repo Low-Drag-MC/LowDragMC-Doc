@@ -11,7 +11,7 @@ Features:
 - Customisable expand/collapse icons and node background textures.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

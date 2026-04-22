@@ -10,7 +10,7 @@
 The divider position is expressed as a **percentage** (0–100 %). Dragging the border adjusts it in real time.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

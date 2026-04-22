@@ -1,6 +1,6 @@
 # 基本信息
 
-{{ version_badge("2.0.4", label="Since", icon="tag", href="/changelog/#2.0.4") }}
+{{ version_badge("2.0.4", label="自", icon="tag", href="/changelog/#2.0.4") }}
 
 ## 开发 Maven
 ```c

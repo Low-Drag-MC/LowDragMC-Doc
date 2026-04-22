@@ -5,7 +5,7 @@
 `ItemSlot` is a Minecraft item slot that integrates with the vanilla container system. It renders the held `ItemStack`, shows a hover highlight, and registers itself with the open `AbstractContainerMenu` for standard click-to-transfer behaviour. It also hooks into JEI, REI, and EMI when those mods are present.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -210,7 +210,7 @@
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

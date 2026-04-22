@@ -5,7 +5,7 @@
 `InventorySlots` is a pre-built player inventory widget. It renders the standard 3-row main inventory and a 9-slot hotbar, and automatically binds them to the player's `Inventory` when a `ModularUI` is opened.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

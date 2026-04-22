@@ -18,7 +18,8 @@
 !!! note
     参数类型应在 [类型支持](./types_support.md){ data-preview } 中受到支持。
 
-RPCPacketDistributor
+## RPCPacketDistributor
+
 提供工具方法，用于向服务端、所有玩家或特定目标发送 RPC 调用。
 
 ```java

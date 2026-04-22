@@ -1,6 +1,6 @@
 # 简介
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
 
 !!! warning
     本 Wiki 仅适用于 Photon `2.x` 版本。如需查看 `1.x` 版本，请访问此[链接](https://github.com/Low-Drag-MC/Photon/wiki)

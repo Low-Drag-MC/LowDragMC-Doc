@@ -7,7 +7,7 @@
 `BindableValue` extends `BindableUIElement<T>` and inherits the full data-binding and event system.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -62,7 +62,7 @@
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

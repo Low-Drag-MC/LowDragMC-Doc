@@ -57,22 +57,22 @@
 <fluid-slot capacity="4000" allow-xei-Lookup="false"/>
 ```
 
-| XML Attribute | Type | Description |
-| ------------- | ---- | ----------- |
+| XML 属性 | 类型 | 描述 |
+| ---------- | ---- | ---- |
 | `capacity` | `int` | 悬停提示中显示的储罐容量。默认值：`0`。 |
 | `allow-xei-Lookup` | `boolean` | 悬停时是否触发 XEI 配方查找。默认值：`true`。 |
 
 ---
 
-## Internal Structure
+## 内部结构
 
-| Field | CSS class | Description |
-| ----- | --------- | ----------- |
+| 字段 | CSS 类 | 描述 |
+| ---- | ------ | ---- |
 | `amountLabel` | `.__fluid-slot_amount-label__` | 右下角显示流体数量的 `Label`（例如 `1.5B`）。 |
 
 ---
 
-## Slot Style
+## 槽位样式
 
 !!! info ""
     #### <p style="font-size: 1rem;">fill-direction</p>
@@ -161,7 +161,7 @@
 !!! info ""
     #### <p style="font-size: 1rem;">show-fluid-tooltips</p>
 
-    悬停时是否显示流体名称、数量/容量、温度和状态提示。
+    悬停时是否显示流体名称、数量/容量、温度和状态悬停提示。
 
     默认值：`true`
 
@@ -181,7 +181,7 @@
 
 ---
 
-## Value Binding
+## 值绑定
 
 `FluidSlot` 继承自 `BindableUIElement<FluidStack>`：
 
@@ -193,27 +193,27 @@
     ).build());
     ```
 
-详情请参见 [Data Bindings](../preliminary/data_bindings.md){ data-preview }。
+详情请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 
-## Fields
+## 字段
 
-| Name | Type | Access | Description |
-| ---- | ---- | ------ | ----------- |
+| 名称 | 类型 | 访问权限 | 描述 |
+| ---- | ---- | -------- | ---- |
 | `amountLabel` | `Label` | `public final` | 显示精简流体数量的标签。 |
 | `slotStyle` | `SlotStyle` | `private` (getter) | 当前槽位样式。 |
 | `fluid` | `FluidStack` | `private` (getter) | 当前显示的流体。 |
-| `capacity` | `int` | `getter/setter` | 用于填充计算和提示的储罐容量。 |
+| `capacity` | `int` | `getter/setter` | 用于填充计算和悬停提示的储罐容量。 |
 | `allowClickFilled` | `boolean` | `getter/setter` | 手持容器点击时是否从储罐填充容器。默认值：`true`。 |
 | `allowClickDrained` | `boolean` | `getter/setter` | 手持容器点击时是否向储罐排空容器。默认值：`true`。 |
 
 ---
 
-## Methods
+## 方法
 
-| Method | Returns | Description |
-| ------ | ------- | ----------- |
+| 方法 | 返回值 | 描述 |
+| ---- | ------ | ---- |
 | `bind(IFluidHandler, int)` | `FluidSlot` | 绑定到指定储罐索引的流体处理器。同步流体和容量。 |
 | `setFluid(FluidStack)` | `FluidSlot` | 设置显示的流体并通知监听器。 |
 | `setFluid(FluidStack, boolean)` | `FluidSlot` | 设置流体；第二个参数控制是否通知。 |
@@ -223,4 +223,4 @@
 | `xeiRecipeSlot()` | `FluidSlot` | 标记为配方槽位，默认 `IngredientIO.NONE`。 |
 | `xeiRecipeSlot(IngredientIO, float)` | `FluidSlot` | 以给定的 I/O 类型和概率标记为配方槽位。 |
 | `getFluidAmountText()` | `Component` | 返回 `amountLabel` 中显示的精简数量文本。 |
-| `getFullTooltipTexts()` | `List<Component>` | 返回合并后的流体和自定义提示文本行。 |
+| `getFullTooltipTexts()` | `List<Component>` | 返回合并后的流体和自定义悬停提示文本行。 |

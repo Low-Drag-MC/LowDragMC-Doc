@@ -5,7 +5,7 @@
 `Inspector` is a property-editor panel. It accepts any `IConfigurable` object and renders its configurable properties inside a [`ScrollerView`](scroller-view.md){ data-preview }. Changes to properties are optionally recorded in an undo/redo history stack.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

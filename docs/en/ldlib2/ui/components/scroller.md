@@ -12,7 +12,7 @@ Both expose a `head` button (scroll up/left), a `tail` button (scroll down/right
 `Scroller` is primarily used as an **internal component** inside [`ScrollerView`](scroller-view.md){ data-preview } and [`TextArea`](text-area.md){ data-preview }, but it can also be used standalone.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

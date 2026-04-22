@@ -5,7 +5,7 @@
 `Tab` is a single tab header element. It displays a text label and changes its background texture depending on whether it is idle, hovered, or selected. Tabs are normally managed inside a [`TabView`](tab-view.md){ data-preview }, which handles the selection logic.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

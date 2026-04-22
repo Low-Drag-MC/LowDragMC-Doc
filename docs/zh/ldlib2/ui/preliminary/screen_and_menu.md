@@ -97,7 +97,7 @@ class MyBlockEntity : BlockEntity(...), IContainerUIHolder {
 
 ### 打开 Menu
 
-一旦你拥有了 `IContainerUIHolder`，就可以使用 `player.openMenu(menuProvider)` 配合一个创建 `ModularUIContainerMenu` 的标准 `MenuProvider` 来打开菜单。下方的[内置工厂](#built-in-menu-factories)可以帮你处理所有这些操作。
+一旦你拥有了 `IContainerUIHolder`，就可以使用 `player.openMenu(menuProvider)` 配合一个创建 `ModularUIContainerMenu` 的标准 `MenuProvider` 来打开菜单。下方的[内置工厂](#menu)可以帮你处理所有这些操作。
 
 ---
 

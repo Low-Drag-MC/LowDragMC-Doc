@@ -287,7 +287,7 @@ toggle > label.__toggle_label__ {
     ).build());
     ```
 
-详细信息请参阅 [Data Bindings](../preliminary/data_bindings.md){ data-preview }。
+详细信息请参阅 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 
@@ -306,7 +306,7 @@ toggle > label.__toggle_label__ {
 
 ## 方法
 
-| 方法 | 返回类型 | 描述 |
+| 方法 | 返回 | 描述 |
 | ---- | -------- | ---- |
 | `setOn(boolean)` | `Toggle` | 设置 on/off 状态并通知监听器。 |
 | `setToggleGroup(ToggleGroup)` | `Toggle` | 加入一个 `ToggleGroup`。传入 `null` 以离开分组。 |

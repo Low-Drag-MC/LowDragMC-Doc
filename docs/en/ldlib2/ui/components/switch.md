@@ -7,7 +7,7 @@
 Internally, `Switch` is a horizontal flex row containing a **flex spacer** (`placeholder`) and a **square indicator** (`markIcon`). The spacer grows from `flex: 0` to `flex: 1` on toggle, pushing the indicator to the far side.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -198,7 +198,7 @@ Switch contains two internal elements:
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

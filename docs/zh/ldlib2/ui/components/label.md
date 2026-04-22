@@ -91,7 +91,7 @@
     label.unbindDataSource(binding);
     ```
 
-详见 [Data Bindings](../preliminary/data_bindings.md){ data-preview } 了解完整的绑定 API。
+详见 [数据绑定](../preliminary/data_bindings.md){ data-preview } 了解完整的绑定 API。
 
 ---
 

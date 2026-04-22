@@ -102,7 +102,7 @@
 
 ## 已注册的 Texture 类型
 
-| 注册名称 | 类 | LSS 函数 | 描述 |
+| 注册名 | 类 | LSS 函数 | 描述 |
 | ------------- | ----- | ------------ | ----------- |
 | `color_rect_texture` | [`ColorRectTexture`](color-rect.md) | `color(#RGBA)` 或十六进制字面量 | 纯色填充矩形。 |
 | `color_border_texture` | [`ColorBorderTexture`](color-border.md) | `border(size, #RGBA)` | 仅边框矩形（无填充）。 |

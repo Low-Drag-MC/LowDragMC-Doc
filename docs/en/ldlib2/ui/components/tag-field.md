@@ -7,7 +7,7 @@
 The field's value is a `Tag` (any NBT type). `TagField` extends `BindableUIElement<Tag>`.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -67,7 +67,7 @@ The field's value is a `Tag` (any NBT type). `TagField` extends `BindableUIEleme
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

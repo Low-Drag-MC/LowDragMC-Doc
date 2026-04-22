@@ -15,7 +15,7 @@ Additional shortcuts over `TextArea`:
 Everything from [`TextArea`](text-area.md){ data-preview } (styles, value binding, validators, scrollers, etc.) applies here too.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

@@ -9,7 +9,7 @@
 - **环绕模式** —— 用于平铺或镜像中心区域。
 - **颜色着色** —— 通过 `setColor(int)` 实现。
 
-注册名称：`sprite_texture`
+注册名：`sprite_texture`
 
 !!! note ""
     继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。

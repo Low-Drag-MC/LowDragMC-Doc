@@ -4,7 +4,7 @@
 
 `UIResourceTexture` 是对保存在 LDLib2 编辑器资源系统中的纹理资源的引用。它会在绘制时从 `TexturesResource` 注册表中延迟解析实际的 `IGuiTexture`，因此适用于编辑器管理的数据驱动纹理。
 
-注册表名称：`ui_resource_texture`
+注册名：`ui_resource_texture`
 
 !!! note ""
     继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。

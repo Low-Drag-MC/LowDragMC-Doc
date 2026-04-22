@@ -1,6 +1,6 @@
 # ModularUI
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.1.0", label="自", icon="tag") }}
 
 本页介绍 **LDLib2 UI 系统**的核心概念。
 在运行时，LDLib2 使用一个名为 **`ModularUI`** 的类来管理整个 UI 树。

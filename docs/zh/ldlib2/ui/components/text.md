@@ -17,7 +17,7 @@
 
     ```java
     var text = new TextElement();
-    text.setText("my.translation.key", true);  // translated
+    text.setText("my.translation.key", true);  // 可翻译
     text.textStyle(style -> style
         .fontSize(12)
         .textColor(0xFFFF00)

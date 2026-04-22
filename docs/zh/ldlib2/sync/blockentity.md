@@ -29,12 +29,12 @@ public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEn
 
     @RPCMethod
     public void rpcMsg(String msg) {
-    if (level.isClient) { // 接收 
-        LDLib2.LOGGER.info("Received RPC from server: {}", message);
-    } else { // 发送
-        rpcToTracking("rpcMsg", msg)
+        if (level.isClient) { // 接收 
+            LDLib2.LOGGER.info("Received RPC from server: {}", message);
+        } else { // 发送
+            rpcToTracking("rpcMsg", msg)
+        }
     }
-}
 ```
 
 !!! note

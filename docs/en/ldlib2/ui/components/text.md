@@ -7,7 +7,7 @@
 Most use cases are better served by [`Label`](label.md){ data-preview } (which adds data binding) or the built-in text labels inside [`Button`](button.md){ data-preview }, [`Toggle`](toggle.md){ data-preview }, etc.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

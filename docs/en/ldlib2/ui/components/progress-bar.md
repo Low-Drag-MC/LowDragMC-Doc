@@ -7,7 +7,7 @@
 `ProgressBar` implements `IBindable<Float>` and `IDataConsumer<Float>`, so its value can be driven by a data provider and kept in sync with the server automatically.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -201,7 +201,7 @@ The bar uses `Sprites.PROGRESS_CONTAINER` for the outer container and `Sprites.P
     bar.unbindDataSource(binding); // when done
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for the full binding API.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for the full binding API.
 
 ---
 

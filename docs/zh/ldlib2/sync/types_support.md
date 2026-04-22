@@ -5,7 +5,7 @@ LDLib2 已经为同步和持久化提供了大量的类型支持。
 
 ## 内置支持
 !!! note inline end
-    请查看 [github](https://github.com/Low-Drag-MC/LDLib2/blob/1.21/src/main/java/com/lowdragmc/lowdraglib2/syncdata/AccessorRegistries.java) 以获取最新的支持列表。
+    请查看 [GitHub](https://github.com/Low-Drag-MC/LDLib2/blob/1.21/src/main/java/com/lowdragmc/lowdraglib2/syncdata/AccessorRegistries.java) 以获取最新的支持列表。
 
 - Java 中的原生类型（数字、布尔值、字符串、枚举等）
 

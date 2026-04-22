@@ -7,7 +7,7 @@
 The field becomes editable when it is focused (clicked). Keyboard shortcuts follow standard Minecraft conventions: `Ctrl+A` select all, `Ctrl+C/X/V` copy/cut/paste, `Ctrl+←/→` word navigation, `Home`/`End`.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -249,7 +249,7 @@ Number fields support:
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

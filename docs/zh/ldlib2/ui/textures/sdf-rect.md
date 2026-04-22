@@ -4,7 +4,7 @@
 
 `SDFRectTexture` 使用 SDF（Signed Distance Field，有符号距离场）GPU Shader 绘制圆角矩形。它能在任意尺寸下生成锐利且抗锯齿的边缘。支持逐角半径、可选的描边边框以及平滑的 CSS 过渡插值。
 
-注册名称：`sdf_rect_texture`  
+注册名：`sdf_rect_texture`  
 LSS 函数：`rect(...)` / `sdf(...)`
 
 !!! note ""

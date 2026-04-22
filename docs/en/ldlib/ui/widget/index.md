@@ -74,7 +74,7 @@ Used to define the tooltips while the mouse hovered. It support both `string` an
 
 !!! info inline end Textures
 
-    LDLib provides massive different types of textures, choose what you want:). See [`GUI Textures`](../textures.md) to check supported textures.
+    LDLib provides massive different types of textures, choose what you want:). See [`GUI Textures`](../textures/index.md) to check supported textures.
 
 ### `setBackground()`
 

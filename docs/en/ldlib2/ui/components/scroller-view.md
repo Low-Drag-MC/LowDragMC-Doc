@@ -5,7 +5,7 @@
 `ScrollerView` is a scrollable container. It wraps a `viewContainer` inside a `viewPort` and provides optional horizontal and vertical scroll bars that appear automatically when content overflows. Children added to a `ScrollerView` in code or XML are placed inside `viewContainer`.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 

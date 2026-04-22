@@ -5,7 +5,7 @@
 `ToggleGroupElement` is a layout container that automatically manages a [`Toggle.ToggleGroup`](toggle.md#toggle-group) for all [`Toggle`](toggle.md){ data-preview } children added to it. You do not need to call `toggle.setToggleGroup(group)` manually — the element does it for you when children are added or removed.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -97,6 +97,6 @@
 
 ## Methods
 
-> Inherits all methods from [UIElement](../element.md#methods){ data-preview }.
+> Inherits all methods from [UIElement](element.md#methods){ data-preview }.
 
 When you call `addChild` / `removeChild`, `ToggleGroupElement` overrides those methods to automatically register / unregister any `Toggle` children with the internal `ToggleGroup`.

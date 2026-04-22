@@ -112,7 +112,7 @@
 
 ### 通用
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回 | 描述 |
 | ------ | ------- | ----------- |
 | `first(UIElement)` | `SplitView` | 替换第一个面板的内容。 |
 | `second(UIElement)` | `SplitView` | 替换第二个面板的内容。 |
@@ -124,14 +124,14 @@
 
 ### 仅水平方向
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回 | 描述 |
 | ------ | ------- | ----------- |
 | `left(UIElement)` | `Horizontal` | `first()` 的别名。 |
 | `right(UIElement)` | `Horizontal` | `second()` 的别名。 |
 
 ### 仅垂直方向
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回 | 描述 |
 | ------ | ------- | ----------- |
 | `top(UIElement)` | `Vertical` | `first()` 的别名。 |
 | `bottom(UIElement)` | `Vertical` | `second()` 的别名。 |

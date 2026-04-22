@@ -149,28 +149,28 @@ public void setB(int value) {
 ```mermaid
 flowchart LR
 
-    A[Start: Check read-only field] --> B{UID == previous snapshot?}
+    A[开始：检查只读字段] --> B{UID 与之前快照相等？}
 
     %% Step 1
-    B -- No --> C[Mark field as dirty<br/>Store latest snapshot] --> D[Sync UID + Value<br/>Notify remote update]
-    B -- Yes --> E{Value dirty?}
+    B -- No --> C[标记字段为脏<br/>存储最新快照] --> D[同步 UID 和值<br/>通知远程端更新]
+    B -- Yes --> E{值已变脏？}
 
     %% Step 2
-    E -- No --> Z[End]
-    E -- Yes --> F{Has onDirtyMethod?}
+    E -- No --> Z[结束]
+    E -- Yes --> F{存在 onDirtyMethod？}
 
-    F -- Yes --> G[Use custom method<br/>to check dirty]
-    F -- No --> H[Use registered read-only type<br/>to check dirty]
+    F -- Yes --> G[使用自定义方法<br/>检查是否变脏]
+    F -- No --> H[使用已注册的只读类型<br/>检查是否变脏]
 
     %% Step 3
-    G --> I[Field is dirty] --> D
+    G --> I[字段已变脏] --> D
     H --> I
 
     %% Remote side
-    D --> R[Remote receives update] --> S{UID equal?}
+    D --> R[远程端接收更新] --> S{UID 相等？}
 
     %% Step 4
-    S -- No --> T[Create new instance<br/>via deserializeMethod] --> U[Update value via read-only type] --> Z
+    S -- No --> T[通过 deserializeMethod<br/>创建新实例] --> U[通过只读类型更新值] --> Z
     S -- Yes --> U --> Z
 ```
 
@@ -220,7 +220,7 @@ public List<TestGroup> testGroupDeserialize(IntTag tag) {
 ---
 
 ### `@RPCMethod`
-用于注解一个方法，您可以在服务端和远程之间发送 RPC 数据包。只要参数支持同步，您就可以自由定义方法的参数，并在类中的任何位置发送 rpc。
+用于注解一个方法，您可以在服务端和远程端之间发送 RPC 数据包。只要参数支持同步，您就可以自由定义方法的参数，并在类中的任何位置发送 rpc。
 这对于传播事件（`c->s` / `s->c`）非常有用。
 !!! note
     如果 `RPCSender` 被定义为方法的第一个参数。LDLib2 将提供发送者信息。

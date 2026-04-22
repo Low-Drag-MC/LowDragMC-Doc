@@ -1,5 +1,5 @@
 # 简介
-{{ version_badge("2.0.0", label="起始版本", icon="tag") }}
+{{ version_badge("2.0.0", label="自", icon="tag") }}
 
 LDLib2 是对原版 LDLib 的完全重写，从头开始重新设计，以支持现代版本的 Minecraft。
 它在模组开发的多个领域提供了先进的高级解决方案，显著降低了开发复杂度和长期维护成本。

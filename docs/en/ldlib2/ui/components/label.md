@@ -7,7 +7,7 @@
 Default size: inherits width from layout; height defaults to **9 px** (one line at the default font size).
 
 !!! note ""
-    Everything documented on [TextElement](text.md){ data-preview } (text styles, wrapping, alignment) and [UIElement](../element.md){ data-preview } (layout, events, etc.) applies here too.
+    Everything documented on [TextElement](text.md){ data-preview } (text styles, wrapping, alignment) and [UIElement](element.md){ data-preview } (layout, events, etc.) applies here too.
 
 ---
 
@@ -91,7 +91,7 @@ Label accepts the same text content syntax as `TextElement` — see [TextElement
     label.unbindDataSource(binding);
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for the full binding API.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for the full binding API.
 
 ---
 

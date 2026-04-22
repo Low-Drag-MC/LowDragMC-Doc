@@ -62,7 +62,7 @@
     ).build());
     ```
 
-详情请参阅 [Data Bindings](../preliminary/data_bindings.md){ data-preview }。
+详情请参阅 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 

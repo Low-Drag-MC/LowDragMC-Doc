@@ -4,7 +4,7 @@
 
 `FluidStackTexture` 使用 Minecraft 标准流体渲染将一个或多个 `FluidStack` 渲染为 GUI 纹理。当提供多个堆叠时，它们每 20 tick（1 秒）循环一次。
 
-注册名称：`fluid_stack_texture`
+注册名：`fluid_stack_texture`
 
 !!! note ""
     继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。

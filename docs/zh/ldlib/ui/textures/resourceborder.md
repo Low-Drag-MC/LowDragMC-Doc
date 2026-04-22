@@ -6,7 +6,7 @@
 
 | 字段          | 说明                                     |
 |---------------|------------------------------------------|
-| boderSize     | 边框角的大小                               |
+| borderSize    | 边框角的大小                               |
 | imageSize     | 纹理图像的整体尺寸                          |
 | imageLocation | 纹理图像的资源路径（resource location）     |
 

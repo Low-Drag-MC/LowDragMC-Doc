@@ -1,4 +1,4 @@
-# Data Bindings and RPCEvent
+# 数据绑定与 RPCEvent
 
 {{ version_badge("2.1.5", label="自", icon="tag") }}
 
@@ -11,7 +11,7 @@
 !!! info "仅客户端"
     `bindDataSource` 和 `bindObserver` 是**纯客户端**机制。
     它们在 UI 组件与本地变量之间连接数据流——不涉及网络数据包。
-    有关**服务端和客户端**之间的同步，请参阅下面的[客户端与服务端之间的数据绑定](#客户端与服务端之间的数据绑定)。
+    有关**服务端和客户端**之间的同步，请参阅下面的[客户端与服务端之间的数据绑定](#_2)。
 
 如果 UI 组件是数据驱动的，它在数据模型中的角色通常属于以下几类之一：
 
@@ -165,7 +165,7 @@ button({
 ```
 
 !!! note ""
-    `TrackData` 是一个**客户端**工具。与 `bindDataSource`/`bindObserver` 一样，它不进行网络同步。请使用 [`bind`](#简单的双向绑定) 进行服务端–客户端同步。
+    `TrackData` 是一个**客户端**工具。与 `bindDataSource`/`bindObserver` 一样，它不进行网络同步。请使用 [`bind`](./data_bindings.md) 进行服务端–客户端同步。
 
 ---
 
@@ -480,7 +480,7 @@ LDLib2 允许你显式控制同步策略。
 这意味着它既可以**显示数据**又可以**产生数据更改**，同时支持**客户端–服务端同步**。
 
 ??? info inline end
-    `BindableValue<T>` 实际上是一个工具组件，并设置 `dispaly: CONTENTS;`，这意味着在它存在期间不会影响布局。
+    `BindableValue<T>` 实际上是一个工具组件，并设置 `display: CONTENTS;`，这意味着在它存在期间不会影响布局。
 
 如果你想实现自己的 UI 组件并支持客户端与服务端之间的双向数据绑定，你可以简单地继承这个类。
 对于**不**实现 `IBindable<T>` 的组件——例如基础的 `UIElement`——你仍然可以通过在内部附加一个 `BindableValue<T>` 来实现数据绑定。

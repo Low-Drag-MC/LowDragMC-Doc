@@ -7,7 +7,7 @@
 Internally, `Toggle` is a horizontal flex row containing a **`Button`** (the clickable box with the mark icon inside) and a **`Label`** (the text label). Both are **internal** children.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -287,7 +287,7 @@ Controls the label displayed to the right of the toggle box.
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

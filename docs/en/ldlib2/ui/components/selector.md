@@ -5,7 +5,7 @@
 `Selector<T>` is a generic dropdown picker. Clicking it opens a floating list of candidate items; clicking an item selects it and optionally closes the dropdown. Each candidate is rendered by a configurable `UIElementProvider<T>`. When the candidate count exceeds [`max-item`](#max-item), the list switches to a scrollable `ScrollerView`.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
@@ -249,7 +249,7 @@ The following children are nested inside the internal structure and can be targe
     ).build());
     ```
 
-See [Data Bindings](../data_bindings.md){ data-preview } for full details.
+See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
 
 ---
 

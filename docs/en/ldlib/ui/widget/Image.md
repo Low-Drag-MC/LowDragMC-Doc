@@ -2,7 +2,7 @@
 
 ![Image title](../assets/image.png){ width="30%" align=right }
 
-`ImageWidget` is used to display images, which provided by a [`GUI Texture`](../textures.md).
+`ImageWidget` is used to display images, which provided by a [`GUI Texture`](../textures/index.md).
 
 ## Basic Properties
 

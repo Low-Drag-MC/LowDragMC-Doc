@@ -137,7 +137,7 @@
 
 === "KubeJS"
 
-    ``` java
+    ``` javascript
     textFieldWidget.setNumbersOnlyInt(0, 100); // int
     textFieldWidget.setNumbersOnlyFloat(0, 100); // float
     ```

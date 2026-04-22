@@ -8,7 +8,7 @@
 - 单选和多选（配合 `Shift` 和 `Ctrl`）。
 - 动态树（默认每 tick 重新检查子节点）或静态树。
 - Flatten-root 模式，在显示中跳过根节点。
-- 可自定义展开/折叠图标和节点背景 Texture。
+- 可自定义展开/折叠图标和节点背景纹理。
 
 !!! note ""
     [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
@@ -52,7 +52,7 @@
 !!! info ""
     #### <p style="font-size: 1rem;">node-background</p>
 
-    未选中节点的背景 Texture。
+    未选中节点的背景纹理。
 
     默认值：无（空）
 
@@ -73,7 +73,7 @@
 !!! info ""
     #### <p style="font-size: 1rem;">node-hover-background</p>
 
-    选中（高亮）节点的背景 Texture。
+    选中（高亮）节点的背景纹理。
 
     默认值：`ColorPattern.BLUE.rectTexture()`
 

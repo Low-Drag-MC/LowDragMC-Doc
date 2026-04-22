@@ -1,5 +1,5 @@
 # 快速开始
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.1.0", label="自", icon="tag") }}
 
 在本节中，我们将逐步为您提供一些示例。
 

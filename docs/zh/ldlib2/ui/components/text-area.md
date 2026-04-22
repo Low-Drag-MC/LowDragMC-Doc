@@ -284,7 +284,7 @@ Line 3</text-area>
 
 ## 方法
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回 | 描述 |
 | ------ | ------- | ----------- |
 | `setValue(String[])` | `TextArea` | 设置所有行并通知监听器。 |
 | `setValue(String[], boolean)` | `TextArea` | 设置所有行；第二个参数控制是否通知。 |

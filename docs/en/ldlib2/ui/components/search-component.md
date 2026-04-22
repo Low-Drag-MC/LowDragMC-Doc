@@ -7,7 +7,7 @@
 `SearchComponent` extends `BindableUIElement<T>`, so the selected value integrates with the data-binding system.
 
 !!! note ""
-    Everything documented on [UIElement](../element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
 
 ---
 
