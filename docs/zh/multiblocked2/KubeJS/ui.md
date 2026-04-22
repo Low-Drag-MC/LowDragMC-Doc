@@ -6,7 +6,7 @@
 
 !!! note inline end
     示例可以在<a href="../assets/example.zip" download>这里</a>下载！
-    
+
     将其放在 `.minecraft` 文件夹下。
 
 首先，我们将机器配置为具有一个物品 trait 和一个流体 trait，并准备好我们的 UI：
@@ -42,16 +42,16 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
     fill_button.setOnPressCallback(clickData => {
         if (clickData.isRemote) {
             // 在远程端触发
-            // 因为所有内容都从服务器同步到客户端，所以你在远程端无法执行任何操作
+            // 因为所有内容都从服务端同步到客户端，所以你在远程端无法执行任何操作
         } else {
             var stored = slot.item
-            // 检查是否存储了岩浆桶
+            // 检查是否存储了 Lava Bucket
             if (stored && stored.id === "minecraft:lava_bucket") {
                 // 检查储罐中是否有足够的空间
                 if (tank.lastTankCapacity - tank.fluid.amount >= 1000) {
-                    // 移除岩浆桶
+                    // 移除 Lava Bucket
                     slot.item = { item: "minecraft:bucket", count: 1 }
-                    // 向储罐中添加 1000mB 岩浆
+                    // 向储罐中添加 1000mB Lava
                     tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount + 1000 }
                 }
             }
@@ -60,11 +60,11 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
 
     drain_button.setOnPressCallback(clickData => {
         if (!clickData.isRemote) {
-            // 检查储罐中是否有岩浆
+            // 检查储罐中是否有 Lava
             if (tank.fluid.amount >= 1000 && slot.item.id === "minecraft:bucket") {
-                // 从储罐中移除 1000mB 岩浆
+                // 从储罐中移除 1000mB Lava
                 tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount - 1000 }
-                // 添加一个岩浆桶
+                // 添加一个 Lava Bucket
                 slot.item = { item: "minecraft:lava_bucket", count: 1 }
             }
         }
@@ -78,7 +78,7 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
 <div>
   <video controls>
     <source src="../../assets/kjs_ui_result.mp4" type="video/mp4">
-    Your browser does not support video.
+    您的浏览器不支持视频播放。
   </video>
 </div>
 

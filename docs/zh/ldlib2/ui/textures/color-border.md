@@ -1,8 +1,8 @@
-﻿# ColorBorderTexture
+# ColorBorderTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`ColorBorderTexture` 仅在矩形周围绘制彩色边框，不进行填充。正的 `border` 值在元素边界外部绘制；负值在内部绘制。
+`ColorBorderTexture` 仅在矩形周围绘制彩色边框，不进行填充。正值的 `border` 会在元素边界外绘制；负值则在边界内绘制。
 
 注册名：`color_border_texture`
 
@@ -53,16 +53,16 @@ background: border(-1, #800000FF);
 
 | 名称 | 类型 | 描述 |
 | ---- | ---- | ---- |
-| `border` | `int` | 边框粗细（像素）。正值 = 外部，负值 = 内部。 |
-| `color` | `int` | 打包的 ARGB 颜色值。 |
+| `border` | `int` | 边框厚度，单位为像素。正值 = 外部，负值 = 内部。 |
+| `color` | `int` | 打包后的 ARGB 颜色。 |
 
 ---
 
 ## 方法
 
-| 方法 | 返回值 | 描述 |
-| ---- | ------ | ---- |
-| `setBorder(int)` | `ColorBorderTexture` | 设置边框粗细。 |
-| `setColor(int)` | `ColorBorderTexture` | 设置打包的 ARGB 颜色值。 |
-| `copy()` | `ColorBorderTexture` | 返回深拷贝。 |
+| 方法 | 返回 | 描述 |
+| ------ | ------- | ----------- |
+| `setBorder(int)` | `ColorBorderTexture` | 设置边框厚度。 |
+| `setColor(int)` | `ColorBorderTexture` | 设置打包后的 ARGB 颜色。 |
+| `copy()` | `ColorBorderTexture` | 返回一个深拷贝。 |
 | `interpolate(IGuiTexture, float)` | `IGuiTexture` | 将边框和颜色向另一个 `ColorBorderTexture` 混合。 |

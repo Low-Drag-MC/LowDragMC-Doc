@@ -1,8 +1,8 @@
-﻿# GuiTextureGroup
+# GuiTextureGroup
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`GuiTextureGroup` 按添加顺序自下而上依次绘制多个 `IGuiTexture` 实例。适用于为背景图像叠加图层，或在填充上叠加边框等场景。
+`GuiTextureGroup` 按照添加的顺序将多个 `IGuiTexture` 实例堆叠绘制。它适用于将背景图像与覆盖层组合，或在填充层上叠加边框。
 
 注册名：`group_texture`
 
@@ -16,13 +16,13 @@
 === "Java"
 
     ```java
-    // Layer a sprite background and a coloured border
+    // 将精灵背景与彩色边框分层叠加
     IGuiTexture layered = IGuiTexture.group(
         SpriteTexture.of("mymod:textures/gui/bg.png"),
         new ColorBorderTexture(1, 0xFFFFFFFF)
     );
 
-    // Equivalent static factory
+    // 等效的静态工厂方法
     IGuiTexture same = GuiTextureGroup.of(
         SpriteTexture.of("mymod:textures/gui/bg.png"),
         new ColorBorderTexture(1, 0xFFFFFFFF)
@@ -35,7 +35,7 @@
     val layered = IGuiTexture.group(
         SpriteTexture.of("mymod:textures/gui/bg.png"),
         ColorBorderTexture(1, 0xFFFFFFFF.toInt())
-       )
+    )
     ```
 
 === "KubeJS"
@@ -64,15 +64,15 @@ background: group(
 
 | 名称 | 类型 | 描述 |
 | ---- | ---- | ---- |
-| `textures` | `IGuiTexture[]` | 按顺序绘制的纹理（从底部到顶部）。 |
+| `textures` | `IGuiTexture[]` | 按顺序绘制的纹理（从下到上）。 |
 
 ---
 
 ## 方法
 
-| 方法 | 返回类型 | 描述 |
-| ---- | -------- | ---- |
-| `GuiTextureGroup.of(IGuiTexture...)` | `GuiTextureGroup` | 静态工厂方法，等同于 `IGuiTexture.group(...)`。 |
-| `setTextures(IGuiTexture...)` | `GuiTextureGroup` | 替换组中的所有纹理。 |
-| `setColor(int)` | `GuiTextureGroup` | 复制所有纹理，对每个纹理应用 `setColor(color)`，然后返回新的组。 |
-| `copy()` | `GuiTextureGroup` | 返回浅拷贝（纹理为共享引用）。 |
+| 方法 | 返回 | 描述 |
+| ------ | ------- | ----------- |
+| `GuiTextureGroup.of(IGuiTexture...)` | `GuiTextureGroup` | 静态工厂。等效于 `IGuiTexture.group(...)`。 |
+| `setTextures(IGuiTexture...)` | `GuiTextureGroup` | 替换组内的所有纹理。 |
+| `setColor(int)` | `GuiTextureGroup` | 复制所有纹理，对每个纹理应用 `setColor(color)`，并返回一个新组。 |
+| `copy()` | `GuiTextureGroup` | 返回浅拷贝（纹理共享）。 |

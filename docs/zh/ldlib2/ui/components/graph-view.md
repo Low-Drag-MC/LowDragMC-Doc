@@ -1,6 +1,6 @@
-﻿# GraphView
+# GraphView
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `GraphView` 是一个可平移、可缩放的画布，用于显示节点图或任意 2D 内容。子元素被放置在 `contentRoot` 元素上，该元素可以进行平移和缩放变换。视图渲染重复的网格背景，并支持：
 
@@ -9,7 +9,7 @@
 - **适应** — 辅助方法，用于将视图居中并缩放以适应所有子元素或给定的边界框。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+    [UIElement](element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
 
 ---
 
@@ -30,7 +30,7 @@
     graph.addContentChild(node);
     parent.addChild(graph);
 
-    // Fit the view after adding children:
+    // 添加子元素后适应视图：
     graph.fitToChildren(20f, 0.1f);
     ```
 

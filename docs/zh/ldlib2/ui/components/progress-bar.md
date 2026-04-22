@@ -1,17 +1,17 @@
-﻿# ProgressBar
+# ProgressBar
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`ProgressBar` 在可配置的 `[min, max]` 范围内以部分填充的进度条形式显示数值。填充方向、插值动画和内部纹理均可配置。还可选择在进度条上叠加一个居中的 `Label`。
+`ProgressBar` 在可配置的 `[min, max]` 范围内将数值显示为部分填充的进度条。填充方向、插值动画和内部纹理均可配置。可选的居中 `Label` 可以覆盖在进度条上方。
 
-`ProgressBar` 实现了 `IBindable<Float>` 和 `IDataConsumer<Float>`，因此其值可由数据提供者驱动，并自动与服务器保持同步。
+`ProgressBar` 实现了 `IBindable<Float>` 和 `IDataConsumer<Float>`，因此其数值可以由数据提供器驱动，并自动与服务端保持同步。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
 
 ---
 
-## 使用方法
+## 用法
 
 === "Java"
 
@@ -21,7 +21,7 @@
     bar.setProgress(75f);
     parent.addChild(bar);
 
-    // Data-bound (server → client, ticks every tick)
+    // 数据绑定（服务端 → 客户端，每 tick 同步）
     bar.bindDataSource(DataBindingBuilder.floatValS2C(
         () -> machine.getProgress() / (float) machine.getMaxProgress()
     ).build());
@@ -55,19 +55,19 @@
 ## XML
 
 ```xml
-<!-- Basic progress bar at 50 % -->
+<!-- 基础进度条，当前值 50% -->
 <progress-bar min-value="0" max-value="100" value="50"/>
 
-<!-- With a centered text label -->
+<!-- 带居中文字标签 -->
 <progress-bar min-value="0" max-value="200" value="100" text="my.progress.key"/>
 ```
 
 | XML 属性 | 类型 | 描述 |
-| ------------- | ---- | ----------- |
+| --------- | ---- | ----------- |
 | `min-value` | `float` | 最小值。默认值：`0`。 |
 | `max-value` | `float` | 最大值。默认值：`1`。 |
 | `value` | `float` | 当前值。默认值：`0`。 |
-| `text` | `string` | 设置叠加标签（已翻译）。 |
+| `text` | `string` | 设置覆盖层标签（会被翻译）。 |
 
 ---
 
@@ -82,26 +82,26 @@
 | 字段 | CSS 类 | 描述 |
 | ----- | --------- | ----------- |
 | `bar` | `.__progress-bar_bar__` | 进度条的填充部分。 |
-| `label` | `.__progress-bar_label__` | 可选的叠加 `Label`（绝对定位，居中）。 |
+| `label` | `.__progress-bar_label__` | 可选的覆盖层 `Label`（绝对定位，居中）。 |
 
 ---
 
-## Progress Bar 样式
+## 进度条样式
 
 !!! info ""
     #### <p style="font-size: 1rem;">fill-direction</p>
 
-    进度条随数值增加时的填充方向。
+    随着数值增加，进度条填充的方向。
 
     默认值：`LEFT_TO_RIGHT`
 
     | 值 | 描述 |
     | ----- | ----------- |
-    | `LEFT_TO_RIGHT` | 进度条从左边缘增长。 |
-    | `RIGHT_TO_LEFT` | 进度条从右边缘增长。 |
-    | `UP_TO_DOWN` | 进度条从上边缘增长。 |
-    | `DOWN_TO_UP` | 进度条从下边缘增长。 |
-    | `ALWAYS_FULL` | 无论数值如何，进度条始终完全显示。 |
+    | `LEFT_TO_RIGHT` | 进度条从左边缘开始增长。 |
+    | `RIGHT_TO_LEFT` | 进度条从右边缘开始增长。 |
+    | `UP_TO_DOWN` | 进度条从上边缘开始增长。 |
+    | `DOWN_TO_UP` | 进度条从下边缘开始增长。 |
+    | `ALWAYS_FULL` | 无论数值如何，进度条始终完全可见。 |
 
     === "Java"
 
@@ -120,7 +120,7 @@
 !!! info ""
     #### <p style="font-size: 1rem;">interpolate</p>
 
-    当设为 `true` 时，进度条会在每个 tick 以动画形式逐渐过渡到目标值，而不是直接跳变。
+    当为 `true` 时，进度条会在每个 tick 视觉上动画过渡到目标值，而不是直接跳变。
 
     默认值：`true`
 
@@ -141,14 +141,14 @@
 !!! info ""
     #### <p style="font-size: 1rem;">interpolate-step</p>
 
-    插值过程中每个 tick 移动的总范围（`max - min`）比例。负值使用 partial-tick lerp 以获得更平滑的效果。
+    插值过程中每个 tick 移动的总范围（`max - min`）比例。负值使用 partial-tick lerp 以实现更平滑的动画。
 
     默认值：`0.1`
 
     === "Java"
 
         ```java
-        bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // slower animation
+        bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // 更慢的动画
         bar.progressBarStyle(style -> style.interpolateStep(-1f));    // partial-tick lerp
         ```
 
@@ -164,7 +164,7 @@
 
 ## 自定义进度条纹理
 
-进度条使用 `Sprites.PROGRESS_CONTAINER` 作为外部容器，使用 `Sprites.PROGRESS_BAR` 作为填充。可通过样式或 DSL 覆盖这些设置：
+进度条的外部容器使用 `Sprites.PROGRESS_CONTAINER`，填充部分使用 `Sprites.PROGRESS_BAR`。可以通过样式或 DSL 覆盖这些纹理：
 
 === "Java"
 
@@ -188,7 +188,7 @@
 
 ## 数据绑定
 
-`ProgressBar` 订阅 `IDataProvider<Float>` 以实现自动值更新。
+`ProgressBar` 订阅 `IDataProvider<Float>` 以自动更新数值。
 
 === "Java"
 
@@ -198,10 +198,10 @@
     ).build();
 
     bar.bindDataSource(binding);
-    bar.unbindDataSource(binding); // when done
+    bar.unbindDataSource(binding); // 完成时取消绑定
     ```
 
-详见 [数据绑定](../data_bindings.md){ data-preview }。
+完整的绑定 API 请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 
@@ -210,27 +210,27 @@
 | 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
 | `barContainer` | `UIElement` | `public final` | 外部容器元素。 |
-| `bar` | `UIElement` | `public final` | 填充进度条元素。 |
-| `label` | `Label` | `public final` | 叠加标签元素。 |
-| `progressBarStyle` | `ProgressBarStyle` | `private`（有 getter） | 当前进度条样式。 |
-| `minValue` | `float` | `private`（有 getter） | 范围最小值。 |
-| `maxValue` | `float` | `private`（有 getter） | 范围最大值。 |
+| `bar` | `UIElement` | `public final` | 填充条元素。 |
+| `label` | `Label` | `public final` | 覆盖层标签元素。 |
+| `progressBarStyle` | `ProgressBarStyle` | `private` (getter) | 当前进度条样式。 |
+| `minValue` | `float` | `private` (getter) | 范围最小值。 |
+| `maxValue` | `float` | `private` (getter) | 范围最大值。 |
 
 ---
 
 ## 方法
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回类型 | 描述 |
 | ------ | ------- | ----------- |
-| `setProgress(float)` | `ProgressBar` | 设置当前值（会被限制在 `[min, max]` 范围内）。 |
-| `setRange(float, float)` | `ProgressBar` | 设置 `[min, max]` 范围并重新计算当前值。 |
+| `setProgress(float)` | `ProgressBar` | 设置当前值（限制在 `[min, max]` 范围内）。 |
+| `setRange(float, float)` | `ProgressBar` | 设置 `[min, max]` 范围并重新评估当前值。 |
 | `setMinValue(float)` | `ProgressBar` | 设置最小值。 |
 | `setMaxValue(float)` | `ProgressBar` | 设置最大值。 |
 | `progressBarStyle(Consumer<ProgressBarStyle>)` | `ProgressBar` | 以流式方式配置 `ProgressBarStyle`。 |
-| `bar(Consumer<UIElement>)` | `ProgressBar` | 配置填充进度条元素。 |
+| `bar(Consumer<UIElement>)` | `ProgressBar` | 配置填充条元素。 |
 | `barContainer(Consumer<UIElement>)` | `ProgressBar` | 配置外部容器元素。 |
-| `label(Consumer<Label>)` | `ProgressBar` | 配置叠加标签。 |
-| `bindDataSource(IDataProvider<Float>)` | `ProgressBar` | 订阅数据提供者。 |
-| `unbindDataSource(IDataProvider<Float>)` | `ProgressBar` | 取消订阅数据提供者。 |
+| `label(Consumer<Label>)` | `ProgressBar` | 配置覆盖层标签。 |
+| `bindDataSource(IDataProvider<Float>)` | `ProgressBar` | 订阅数据提供器。 |
+| `unbindDataSource(IDataProvider<Float>)` | `ProgressBar` | 取消订阅数据提供器。 |
 | `getValue()` | `Float` | 返回当前值。 |
 | `getNormalizedValue()` | `float` | 返回归一化到 `[0, 1]` 的当前值。 |

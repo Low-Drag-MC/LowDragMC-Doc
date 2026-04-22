@@ -1,13 +1,13 @@
 # Label
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`Label` 继承自 [`TextElement`](text.md){ data-preview }，并支持**数据绑定**功能。它实现了 `IBindable<Component>` 和 `IDataConsumer<Component>` 接口，因此其文本可以由服务端到客户端或客户端侧的数据提供者驱动，当值发生变化时自动更新显示的文本。
+`Label` 继承自 [`TextElement`](text.md){ data-preview }，并支持**数据绑定**。它实现了 `IBindable<Component>` 和 `IDataConsumer<Component>`，因此其文本可以由服务端到客户端或客户端的数据提供器驱动，并在数值变化时自动更新显示的文本。
 
-默认尺寸：宽度从布局继承；高度默认为 **9 px**（默认字体大小下的一行高度）。
+默认尺寸：宽度继承自布局；高度默认为 **9 px**（默认字体大小的一行高度）。
 
 !!! note ""
-    [TextElement](text.md){ data-preview } 中记录的所有内容（文本样式、换行、对齐）以及 [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、事件等）在此处同样适用。
+    [TextElement](text.md){ data-preview } 中记录的所有内容（文本样式、自动换行、对齐方式）以及 [UIElement](element.md){ data-preview } 中记录的所有内容（布局、事件等）同样适用于此处。
 
 ---
 
@@ -16,11 +16,11 @@
 === "Java"
 
     ```java
-    // Static text
+    // 静态文本
     var label = new Label();
     label.setText("my.translation.key", true);
 
-    // Data-bound text (server → client)
+    // 数据绑定文本（服务端 → 客户端）
     label.bind(DataBindingBuilder.componentS2C(
         () -> Component.literal("Value: " + someObject.getValue())
     ).build());
@@ -31,15 +31,15 @@
 === "Kotlin"
 
     ```kotlin
-    // Static label
+    // 静态 label
     label({
         text("my.translation.key")
         textStyle { textColor(0xFFFFFF).fontSize(10f) }
-    }) { 
+    }) {
         bindS2C({Component.literal("Value: $value")})
     }
 
-    // Data-bound
+    // 数据绑定
     val lbl = Label()
     lbl.bind(DataBindingBuilder.componentS2C { Component.literal("Value: $value") }.build())
     ```
@@ -51,7 +51,7 @@
     label.setText(Component.literal("Hello"));
     parent.addChild(label);
 
-    // Data-bound via binding system:
+    // 通过绑定系统进行数据绑定：
     label.bind(DataBindingBuilder.componentS2C(() =>
         Component.literal("Tick: " + tickCount)
     ).build());
@@ -62,52 +62,52 @@
 ## XML
 
 ```xml
-<!-- Literal text in element content -->
+<!-- 元素内容中的字面文本 -->
 <label>Hello World</label>
 
-<!-- Translatable text -->
+<!-- 可翻译文本 -->
 <label><translate key="my.translation.key"/></label>
 ```
 
-Label 接受与 `TextElement` 相同的文本内容语法——详见 [TextElement § XML](text.md#xml)。
+`Label` 接受与 `TextElement` 相同的文本内容语法 —— 详见 [TextElement § XML](text.md#xml)。
 
 ---
 
 ## 数据绑定
 
-`Label` 可以订阅一个或多个数据提供者。每个订阅会一直保持活跃，直到调用 `unbindDataSource` 或元素被移除。
+`Label` 可以订阅一个或多个数据提供器。每个订阅将保持活跃，直到调用 `unbindDataSource` 或该元素被移除。
 
 === "Java"
 
     ```java
-    // Server-to-client binding: updates on each server tick
+    // 服务端到客户端绑定：在每个服务端 tick 时更新
     var binding = DataBindingBuilder.componentS2C(() ->
         Component.literal("Burn time: " + furnaceData.get(2) + " t")
     ).build();
 
     label.bindDataSource(binding);
 
-    // Unsubscribe when no longer needed
+    // 不再需要时取消订阅
     label.unbindDataSource(binding);
     ```
 
-完整的绑定 API 请参阅 [数据绑定](../data_bindings.md){ data-preview }。
+详见 [Data Bindings](../preliminary/data_bindings.md){ data-preview } 了解完整的绑定 API。
 
 ---
 
 ## 字段
 
-> 继承自 [TextElement § 字段](text.md#fields){ data-preview } 的所有字段。
+> 继承 [TextElement § 字段](text.md#fields){ data-preview } 中的所有字段。
 
 ---
 
 ## 方法
 
-> 继承自 [TextElement § 方法](text.md#methods){ data-preview } 的所有方法。
+> 继承 [TextElement § 方法](text.md#methods){ data-preview } 中的所有方法。
 
-| 方法 | 返回值 | 描述 |
+| 方法 | 返回 | 描述 |
 | ------ | ------- | ----------- |
-| `bindDataSource(IDataProvider<Component>)` | `Label` | 订阅数据提供者；文本会自动更新。 |
-| `unbindDataSource(IDataProvider<Component>)` | `Label` | 取消订阅先前绑定的数据提供者。 |
+| `bindDataSource(IDataProvider<Component>)` | `Label` | 订阅数据提供器；文本自动更新。 |
+| `unbindDataSource(IDataProvider<Component>)` | `Label` | 取消订阅先前绑定的数据提供器。 |
 | `setValue(Component)` | `Label` | 直接设置文本（与 `setText(Component)` 相同）。 |
 | `getValue()` | `Component` | 返回当前文本 `Component`。 |

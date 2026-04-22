@@ -1,5 +1,5 @@
 # 类型支持
-{{ version_badge("2.0.0", label="Since", icon="tag") }}
+{{ version_badge("2.0.0", label="自", icon="tag") }}
 
 LDLib2 已经为同步和持久化提供了大量的类型支持。
 
@@ -26,7 +26,7 @@ LDLib2 已经为同步和持久化提供了大量的类型支持。
 | `T[]`                          | `-1`     | 取决于 `T` |
 | `Collection<?>`                | `-1`     | ✅     |
 
-- Minecraft 中的类型（方块、物品、流体等）
+- Minecraft 中的类型（Block、Item、Fluid 等）
 
 | 类型                            | 优先级   | 只读 |
 | ------------------------------- | -------- | ----- |
@@ -86,7 +86,7 @@ LDLib2 已经为同步和持久化提供了大量的类型支持。
 
 | 方法             | 是否可选 | 说明 |
 | ---------------- | -------- | ---- |
-| `codec`          | 必需     | 提供用于持久化的编解码器 |
+| `codec`          | 必需     | 提供用于持久化的 codec |
 | `streamCodec`    | 必需     | 提供用于同步的 StreamCodec |
 | `customMark`     | 可选     | 提供获取和比较 mark 的函数 |
 | `copyMark`       | 可选     | 从值中复制 mark。这将使用 `Objects#equals(Object, Object)` 来比较 mark。请确保对象支持 `Object#equals(Object)`。 |

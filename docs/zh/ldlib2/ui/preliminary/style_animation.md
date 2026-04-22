@@ -1,6 +1,6 @@
-﻿# StyleAnimation
+# StyleAnimation
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `StyleAnimation` 是用于 `UIElement` 的运行时样式动画器。  
 当你需要在代码中直接为样式属性添加动画时（例如点击、悬停或自定义事件），可以使用它，而不是仅依赖被动的 `transition`。
@@ -134,7 +134,7 @@ Kotlin DSL 通常不需要额外处理 `start()`：
 === "KubeJS"
 
     ```js
-    // KubeJS commonly uses single target values:
+    // KubeJS 通常使用单个目标值：
     target.animation()
         .duration(2)
         .style(PropertyRegistry.OPACITY, 0)

@@ -27,7 +27,7 @@ var data = PersistedParser.deserialize(JsonOps.INSTANCE, output, newInstance, pr
 System.out.println(newInstance.equals(instance));
 ```
 
-控制台输出应为
+控制台日志应为
 
 ```json
 {

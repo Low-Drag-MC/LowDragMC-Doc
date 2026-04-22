@@ -43,7 +43,7 @@ background: rgb(255, 123, 0);
 
 ### `sprite(...)`
 
-使用来自纹理图集或资源位置的精灵。
+使用来自纹理图集或资源位置的 sprite。
 
 ```css
 background: sprite(ldlib2:textures/gui/icon.png);
@@ -54,7 +54,7 @@ background: sprite(ldlib2:textures/gui/icon.png);
 ```css
 background: sprite(
     ldlib2:textures/gui/icon.png,
-    0, 0, 16, 16,          /* 精灵区域（可选） */
+    0, 0, 16, 16,          /* sprite 区域（可选） */
     2, 2, 2, 2,            /* 边框（可选） */
     #FFFFFF                /* 颜色色调（可选） */
 );
@@ -117,7 +117,7 @@ background: group(
 
 ### `shader(...)`
 
-使用自定义着色器纹理。
+使用自定义 shader 纹理。
 
 ```css
 background: shader(ldlib2:fbm);
@@ -127,7 +127,7 @@ background: shader(ldlib2:fbm);
 
 ### 基于资源的纹理
 
-如果函数名与已注册的**资源提供程序类型**匹配，它将自动被解析：
+如果函数名与已注册的**资源提供器类型**匹配，它将自动被解析：
 
 ```css
 background: builtin(ui-gdp:BORDER);

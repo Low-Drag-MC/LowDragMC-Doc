@@ -1,5 +1,5 @@
 # 注解
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.1.0", label="自", icon="tag") }}
 
 本页面展示所有注解及其使用方法。
 
@@ -93,7 +93,7 @@ public static class TestContainer {
 ---
 
 ### `@LazyManaged`
-一个将字段标记为延迟管理的注解。这意味着该字段只会被手动标记为脏（dirty）。
+一个将字段标记为延迟管理的注解。这意味着该字段只会被手动标记为脏（dirty），而非自动标记。
 此注解适用于不经常更新的字段，或批量更新的字段。
 
 ``` java
@@ -103,7 +103,7 @@ int a;
 
 @DescSynced 
 @Persisted
-@LayzManaged
+@LazyManaged
 int b;
 
 public void setA(int value) {
@@ -149,29 +149,29 @@ public void setB(int value) {
 ```mermaid
 flowchart LR
 
-    A[开始：检查只读字段] --> B{UID == 之前的快照？}
+    A[Start: Check read-only field] --> B{UID == previous snapshot?}
 
     %% Step 1
-    B -- 否 --> C[将字段标记为脏<br/>存储最新快照] --> D[同步 UID + 值<br/>通知远程更新]
-    B -- 是 --> E{值是否已脏？}
+    B -- No --> C[Mark field as dirty<br/>Store latest snapshot] --> D[Sync UID + Value<br/>Notify remote update]
+    B -- Yes --> E{Value dirty?}
 
     %% Step 2
-    E -- 否 --> Z[结束]
-    E -- 是 --> F{是否有 onDirtyMethod？}
+    E -- No --> Z[End]
+    E -- Yes --> F{Has onDirtyMethod?}
 
-    F -- 是 --> G[使用自定义方法<br/>检查是否脏]
-    F -- 否 --> H[使用已注册的只读类型<br/>检查是否脏]
+    F -- Yes --> G[Use custom method<br/>to check dirty]
+    F -- No --> H[Use registered read-only type<br/>to check dirty]
 
     %% Step 3
-    G --> I[字段已脏] --> D
+    G --> I[Field is dirty] --> D
     H --> I
 
     %% Remote side
-    D --> R[远程接收更新] --> S{UID 是否相等？}
+    D --> R[Remote receives update] --> S{UID equal?}
 
     %% Step 4
-    S -- 否 --> T[通过 deserializeMethod<br/>创建新实例] --> U[通过只读类型更新值] --> Z
-    S -- 是 --> U --> Z
+    S -- No --> T[Create new instance<br/>via deserializeMethod] --> U[Update value via read-only type] --> Z
+    S -- Yes --> U --> Z
 ```
 
 1. 为了检查 `read-only` 字段是否有内部更改，LDLib2 首先会检查唯一 id 是否与之前的快照相等。
@@ -189,7 +189,7 @@ flowchart LR
 
 ```java
 @Persisted
-@DescSync
+@DescSynced
 @ReadOnlyManaged(serializeMethod = "testGroupSerialize", deserializeMethod = "testGroupDeserialize")
 private final List<TestGroup> groupList = new ArrayList<>();
 
@@ -398,7 +398,7 @@ public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEn
 ```java
 public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEntity {
     @Persisted
-    @DescSync
+    @DescSynced
     @RequireRerender
     private int color = -1;
 }
@@ -407,7 +407,7 @@ public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEn
 ```java
 public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEntity {
     @Persisted
-    @DescSync
+    @DescSynced
     private int color = -1;
 
     public MyBlockEntity(BlockPos pos, BlockState state) {

@@ -1,5 +1,5 @@
 # 管理 BlockEntity
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+{{ version_badge("2.1.0", label="自", icon="tag") }}
 
 通过实现 `ISyncPersistRPCBlockEntity`，你可以将所有同步和持久化代码委托给 LDLib2。
 你不需要任何额外的代码，只需设置 `syncStorage` 和注解即可。
@@ -29,9 +29,9 @@ public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEn
 
     @RPCMethod
     public void rpcMsg(String msg) {
-    if (level.isClient) { // receive 
+    if (level.isClient) { // 接收 
         LDLib2.LOGGER.info("Received RPC from server: {}", message);
-    } else { // send
+    } else { // 发送
         rpcToTracking("rpcMsg", msg)
     }
 }

@@ -1,13 +1,13 @@
 # TextElement
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `TextElement` 是一个底层文本渲染元素。它显示一个 `Component`（Minecraft 富文本对象），支持配置字体、大小、颜色、对齐方式、换行和滚动行为。
 
 大多数场景下，建议使用 [`Label`](label.md){ data-preview }（支持数据绑定）或 [`Button`](button.md){ data-preview }、[`Toggle`](toggle.md){ data-preview } 等控件内置的文本标签。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）也适用于此元素。
+    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）也适用于此元素。
 
 ---
 

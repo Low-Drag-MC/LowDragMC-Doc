@@ -1,6 +1,6 @@
 # ColorSelector
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `ColorSelector` 是一个功能完善的 HSB（色相–饱和度–亮度）颜色选择器。它继承自 `BindableUIElement<Integer>`，其值为所选颜色的 ARGB 压缩整数。包含以下功能：
 
@@ -11,7 +11,7 @@
 - 剪贴板复制支持。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
 
 ---
 
@@ -21,7 +21,7 @@
 
     ```java
     var picker = new ColorSelector();
-    picker.setValue(0xFF4080FF, false); // initial ARGB color
+    picker.setValue(0xFF4080FF, false); // 初始 ARGB 颜色
     picker.registerValueListener(color -> System.out.printf("Color: #%08X%n", color));
     parent.addChild(picker);
     ```
@@ -73,7 +73,7 @@
     ).build());
     ```
 
-详见 [数据绑定](../data_bindings.md){ data-preview }。
+详见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 

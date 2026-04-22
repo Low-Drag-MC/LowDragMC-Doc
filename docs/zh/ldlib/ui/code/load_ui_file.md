@@ -49,11 +49,15 @@
     别忘了为需要的控件分配 `id`。
     ![Image title](../assets/id_field.png){ width="70%" style="display: block; margin: 0 auto;" }
 
+!!! warning
+    不要在 UI 文件的 ResourceLocation 中包含文件扩展名！
+    例如 `.minecraft/ldlib/assets/ldlib/projects/ui/test_ui.ui` 应写为 `ldlib:test_ui`
+
 === "Java"
 
     ``` java 
     public WidgetGroup createUI() {
-        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui.ui"));
+        var creator = UIProject.loadUIFromFile(new ResourceLocation("ldlib:test_ui"));
         // creator 会缓存资源以加速创建过程。
         // 对于同一项目的加载，你最好将其存储起来。
         var root = creator.get();
@@ -73,7 +77,7 @@
 
     ``` javascript
     function createUI() {
-        let creator = UIProject.loadUIFromFile("ldlib:test_ui.ui");
+        let creator = UIProject.loadUIFromFile("ldlib:test_ui");
         // creator 会缓存资源以加速创建过程。
         // 对于同一项目的加载，你最好将其存储起来。
         let root = creator.get();

@@ -1,11 +1,11 @@
 # ToggleGroup
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`ToggleGroupElement` 是一个布局容器，可自动为添加到其中的所有 [`Toggle`](toggle.md){ data-preview } 子元素管理 [`Toggle.ToggleGroup`](toggle.md#toggle-group)。你无需手动调用 `toggle.setToggleGroup(group)`——当子元素被添加或移除时，该元素会自动处理。
+`ToggleGroupElement` 是一个布局容器，会自动为添加到其中的所有 [`Toggle`](toggle.md){ data-preview } 子元素管理一个 [`Toggle.ToggleGroup`](toggle.md#toggle-group)。你无需手动调用 `toggle.setToggleGroup(group)` —— 当子元素被添加或移除时，该元素会自动完成这一操作。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）在此同样适用。
+    在 [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
 
 ---
 
@@ -21,7 +21,7 @@
     group.addChild(new Toggle().setText("Option B", true));
     group.addChild(new Toggle().setText("Option C", true));
 
-    // Retrieve the currently-active toggle
+    // 获取当前激活的 Toggle
     Toggle active = group.getToggleGroup().getCurrentToggle();
     ```
 
@@ -56,7 +56,7 @@
 ```
 
 !!! warning ""
-    在 XML 编辑器中，只能添加 `Toggle`（及其子类）作为子元素。其他元素类型会被拒绝。
+    在 XML 编辑器中，只有 `Toggle`（及其子类）可以作为子元素添加。其他元素类型将被拒绝。
 
 ---
 
@@ -64,8 +64,8 @@
 
 | 属性 | 默认值 | 描述 |
 | -------- | ------- | ----------- |
-| `allowEmpty` | `false` | 当为 `false` 时，始终至少有一个开关处于激活状态。当为 `true` 时，所有开关都可以关闭。 |
-| `currentToggle` | 可为空 | 当前选中的 `Toggle`，或当 `allowEmpty = true` 且没有选中项时为 `null`。 |
+| `allowEmpty` | `false` | 为 `false` 时，始终至少有一个 Toggle 处于激活状态。为 `true` 时，所有 Toggle 都可以关闭。 |
+| `currentToggle` | nullable | 当前选中的 `Toggle`，当 `allowEmpty = true` 且未选中任何项时为 `null`。 |
 
 === "Java"
 
@@ -73,7 +73,7 @@
     var group = new ToggleGroupElement();
     group.getToggleGroup().setAllowEmpty(true);
 
-    Toggle current = group.getToggleGroup().getCurrentToggle(); // may be null
+    Toggle current = group.getToggleGroup().getCurrentToggle(); // 可能为 null
     ```
 
 === "Kotlin"
@@ -89,7 +89,7 @@
 
 ## 字段
 
-| 名称 | 类型 | 访问修饰符 | 描述 |
+| 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | ------ | ----------- |
 | `toggleGroup` | `Toggle.ToggleGroup` | `public final` | 共享的 `ToggleGroup` 实例。 |
 
@@ -97,6 +97,6 @@
 
 ## 方法
 
-> 继承 [UIElement](../element.md#methods){ data-preview } 的所有方法。
+> 继承自 [UIElement](element.md#methods){ data-preview } 的所有方法。
 
-当你调用 `addChild` / `removeChild` 时，`ToggleGroupElement` 会重写这些方法，自动将任何 `Toggle` 子元素注册到内部的 `ToggleGroup` 或从中注销。
+当你调用 `addChild` / `removeChild` 时，`ToggleGroupElement` 会重写这些方法，以自动将任何 `Toggle` 子元素注册 / 注销到内部的 `ToggleGroup` 中。

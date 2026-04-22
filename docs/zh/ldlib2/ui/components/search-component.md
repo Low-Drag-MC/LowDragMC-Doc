@@ -1,13 +1,13 @@
-﻿# SearchComponent
+# SearchComponent
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `SearchComponent<T>` 是一个通用的搜索选择组件。它显示当前选中值的预览，点击后会打开一个浮动对话框，包含文本输入框和匹配候选项列表。候选项由 `ISearchUI<T>` 实现提供，可在客户端运行或委托给服务端执行。
 
 `SearchComponent` 继承自 `BindableUIElement<T>`，因此选中的值可与数据绑定系统集成。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）在此同样适用。
+    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
 
 ---
 
@@ -53,7 +53,7 @@
 
     ```js
     let search = new SearchComponent();
-    // ISearchUI must be provided programmatically.
+    // ISearchUI 必须通过代码提供。
     parent.addChild(search);
     ```
 
@@ -186,13 +186,13 @@
 
 ```java
 public interface ISearchUI<T> extends ISearch<T> {
-    /** Convert a result value to its text representation. */
+    /** 将结果值转换为其文本表示。 */
     String resultText(T value);
 
-    /** Called when the user selects a candidate. */
+    /** 用户选择候选项时调用。 */
     void onResultSelected(@Nullable T value);
 
-    /** Perform the search; call find.handle(result) for each match. */
+    /** 执行搜索；为每个匹配项调用 find.handle(result)。 */
     void search(String word, IResultHandler<T> find);
 }
 ```

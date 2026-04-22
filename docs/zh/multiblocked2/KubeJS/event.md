@@ -19,7 +19,7 @@
 MBDMachineEvents.onOpenUI("mbd2:machine_id", e => {
     let event = e.event; // 注意！你必须使用它来获取实际的事件实例。
     let machine = event.machine;
-    let machineID = machine.getDefinition().id();
-    console.log("Open UI!! id: " + machineID)
+    let machienID = machine.getDefinition().id();
+    console.log("Open UI!! id: " + machienID)
 })
 ```

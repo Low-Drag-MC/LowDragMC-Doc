@@ -1,8 +1,8 @@
-﻿# ShaderTexture
+# ShaderTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
-`ShaderTexture` 使用自定义 GLSL 着色器渲染 GUI 区域。着色器会自动接收元素的屏幕矩形和鼠标位置作为 Uniform，便于创建动画或交互效果。
+`ShaderTexture` 使用自定义 GLSL Shader 渲染 GUI 区域。Shader 会自动接收元素的屏幕矩形和鼠标位置作为 automatic uniform，便于创建动画或交互效果。
 
 注册名: `shader_texture`
 
@@ -19,10 +19,10 @@
 === "Java"
 
     ```java
-    // Load a shader from assets/mymod/shaders/core/my_effect.json
+    // 从 assets/mymod/shaders/core/my_effect.json 加载 Shader
     IGuiTexture effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
 
-    // Tinted shader (vertex colour passed to the shader)
+    // 着色后的 Shader（顶点颜色将传递给 Shader）
     IGuiTexture tinted = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
         .setColor(0xFF44AAFF);
     ```
@@ -54,7 +54,7 @@ background: shader(mymod:my_effect);
 
 ## 自动 Uniform
 
-以下 Uniform 在每次绘制调用时自动设置：
+以下 uniform 在每次绘制调用时自动设置：
 
 | Uniform | 类型 | 描述 |
 | ------- | ---- | ---- |
@@ -63,7 +63,7 @@ background: shader(mymod:my_effect);
 
 顶点颜色（`setColor`）作为标准顶点颜色属性传递。
 
-可以通过着色器 JSON 暴露额外的 Uniform，并在 UI 编辑器中通过 `LDShaderHolder` 进行编辑。
+可以通过 shader JSON 暴露额外的 uniform，并在 UI 编辑器中通过 `LDShaderHolder` 进行编辑。
 
 ---
 

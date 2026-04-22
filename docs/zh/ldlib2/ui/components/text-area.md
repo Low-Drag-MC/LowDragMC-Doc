@@ -1,17 +1,17 @@
-﻿# TextArea
+# TextArea
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `TextArea` 是多行文本编辑器。其值为 `String[]` —— 每行一个元素。它内置了水平和垂直滚动条、用于错误高亮的文本**验证器**，以及完整的键盘支持（方向键、`Home`/`End`、`PageUp`/`PageDown`、`Ctrl+←/→` 按词导航、选择、复制/剪切/粘贴、撤销/重做）。
 
 当编辑器获得焦点（被点击）时，即可进行编辑。双击可选中一个单词。
 
 !!! note ""
-    [UIElement](../element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
 
 ---
 
-## 使用方法
+## 用法
 
 === "Java"
 
@@ -19,7 +19,7 @@
     var area = new TextArea();
     area.setValue(new String[] { "Line 1", "Line 2", "Line 3" });
     area.setLinesResponder(lines -> {
-        // called on each valid edit
+        // 每次有效编辑时调用
         System.out.println("Lines: " + Arrays.toString(lines));
     });
     parent.addChild(area);
@@ -52,7 +52,7 @@
 ## XML
 
 ```xml
-<!-- Pre-populated text (lines split by \n in source) -->
+    <!-- 预填充文本（在源码中以 \n 分隔行） -->
 <text-area>Line 1
 Line 2
 Line 3</text-area>
@@ -264,7 +264,7 @@ Line 3</text-area>
     ).build());
     ```
 
-详见 [数据绑定](../data_bindings.md){ data-preview }。
+详见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
 
 ---
 

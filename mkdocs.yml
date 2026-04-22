@@ -43,28 +43,6 @@ extra_css:
 
 plugins:
   - i18n:
-      docs_structure: suffix
-      fallback_to_default: true
-      reconfigure_material: true
-      languages:
-        - locale: en
-          name: English
-          default: true
-          build: true
-          link: /en/
-        - locale: zh
-          name: 中文
-          build: true
-          link: /zh/
-          nav:
-            - 首页: index.zh.md
-            - LDLib2: ldlib2/index.zh.md
-  - search
-  - macros
-  - glightbox
-  - tags
-  - awesome-pages
-  - i18n:
       docs_structure: folder
       fallback_to_default: true
       reconfigure_material: true
@@ -77,6 +55,11 @@ plugins:
         - locale: zh
           name: 中文
           build: true
+  - search
+  - macros
+  - glightbox
+  - tags
+  - awesome-pages
 markdown_extensions:
   - attr_list
   - tables

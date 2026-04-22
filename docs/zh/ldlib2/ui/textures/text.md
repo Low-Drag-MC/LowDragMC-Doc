@@ -1,6 +1,6 @@
-﻿# TextTexture
+# TextTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 `TextTexture` 将翻译后的字符串渲染为 GUI 纹理。它支持多种显示模式（居中、左对齐、滚动、悬停显示）、自动换行、背景色以及可选的实时更新供应器。
 

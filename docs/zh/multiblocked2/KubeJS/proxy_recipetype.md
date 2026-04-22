@@ -2,7 +2,8 @@
 
 `Proxy Recipetype` 在 mbd2 中并不总是能够完美运行。例如，如果某些配方包含 mbd2 无法识别的输入类型，它们将无法被转换。
 
-此外，玩家可能希望过滤某些配方，或修改持续时间、输入项等。我们提供了一个事件 `onTransferProxyRecipe`，允许你接管转换处理过程。
+此外，玩家可能希望过滤某些配方，或修改持续时间、输入项等。
+我们提供了一个事件 `onTransferProxyRecipe`，允许你接管转换处理过程。
 ```js
 MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
     let event = e.event;

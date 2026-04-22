@@ -1,6 +1,6 @@
 # Kotlin 支持
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+{{ version_badge("2.2.1", label="自", icon="tag") }}
 
 LDLib2 提供了类型安全的 Kotlin DSL 用于构建 UI 树。它通过构建器模式、嵌套 lambda 和运算符重载包装 Java API，使 UI 构建更加简洁和结构化。
 
@@ -40,10 +40,10 @@ element {
 spec block 是一个 `ElementSpec` 接收器。它公开以下属性：
 
 | 属性 | 类型 | 描述 |
-| -------- | ---- | ----------- |
-| `id` | `String?` | 设置选择器和查询使用的元素 ID。 |
+| ---- | ---- | ---- |
+| `id` | `String?` | 设置元素 ID，供选择器和查询使用。 |
 | `focusable` | `Boolean?` | 元素是否可以接收键盘焦点。 |
-| `visible` | `Boolean?` | 元素是否被渲染。 |
+| `visible` | `Boolean?` | 元素是否渲染。 |
 | `active` | `Boolean?` | 元素是否参与事件和 tick。 |
 | `layout` | `TaffyLayoutStyleDsl.() -> Unit` | 布局配置块。 |
 | `style` | `BasicStyle.() -> Unit` | 视觉样式配置块。 |
@@ -70,8 +70,8 @@ element({
     }
 
     cls = {
-        +"active"     // adds the class "active"
-        -"disabled"   // removes the class "disabled"
+        +"active"     // 添加类 "active"
+        -"disabled"   // 移除类 "disabled"
     }
 }) { }
 ```
@@ -82,10 +82,10 @@ element({
 
 ```kotlin
 layout = {
-    size(200.px)           // width and height
+    size(200.px)           // 宽度和高度
     width(50.pct)          // 50%
-    height(auto)           // auto
-    flex(1)                // grow/shrink
+    height(auto)           // 自动
+    flex(1)                // 增长/收缩
     gap { all(4.px) }
     padding { all(8.px) }
     margin { top(2.px) }
@@ -111,8 +111,8 @@ layout = {
 
 ```kotlin
 cls = {
-    +"selected"     // element.addClass("selected")
-    -"hidden"       // element.removeClass("hidden")
+    +"selected"     // 添加类 "selected"
+    -"hidden"       // 移除类 "hidden"
 }
 ```
 
@@ -165,20 +165,20 @@ column {
 ```kotlin
 element({ layout = { size(50.px) } }) {
     events { e ->
-        // += operator: add a listener
+        // += 运算符：添加监听器
         UIEvents.CLICK += UIEventListener { event ->
             e.animation().duration(0.3f).style(PropertyRegistry.OPACITY, 0f).start()
         }
 
-        // on infix: concise single-expression form
+        // on 中缀：简洁的单表达式形式
         UIEvents.MOUSE_ENTER on { event -> event.currentElement.addClass("hover") }
         UIEvents.MOUSE_LEAVE on { event -> event.currentElement.removeClass("hover") }
 
-        // -= operator: remove a previously registered listener
+        // -= 运算符：移除先前注册的监听器
         UIEvents.CLICK -= myStoredListener
     }
 
-    // Capture phase: fires before children see the event
+    // 捕获阶段：在子元素看到事件之前触发
     events(capture = true) {
         UIEvents.CLICK on { it.stopPropagation() }
     }
@@ -198,7 +198,7 @@ element({ layout = { size(50.px) } }) {
 button {
     serverEvents {
         UIEvents.MOUSE_DOWN += {
-            // runs on the server
+            // 在服务端运行
             fluidTank.setFluid(FluidStack(Fluids.WATER, 1000))
         }
     }
@@ -225,12 +225,12 @@ serverEvents(capture = true) {
 ### `bind` — 双向绑定
 
 ```kotlin
-// Bind a mutable Kotlin property reference (most concise)
+// 绑定可变 Kotlin 属性引用（最简洁）
 switch { bind(::myBool) }
 textField { bind(::myString) }
 scrollerHorizontal({ layout = { width(100.pct) } }) { bind(::myFloat) }
 
-// Bind with explicit getter and setter
+// 使用显式 getter 和 setter 绑定
 switch { bind({ myData.enabled }, { myData.enabled = it }) }
 ```
 
@@ -274,12 +274,12 @@ textField {
 
 ```kotlin
 button {
-    // Declare the RPC: the lambda runs on the server when triggered
+    // 声明 RPC：触发时在服务端运行 lambda
     val rpcEvent = element.rpcEvent { value: String ->
         string = value
     }
 
-    // Trigger from the client
+    // 从客户端触发
     events {
         UIEvents.MOUSE_DOWN += { rpcEvent.send("rpc") }
     }
@@ -300,7 +300,7 @@ button {
 element({}) {
     api {
         setFocusable(true)
-        setEnforceFocus { /* lost-focus handler */ }
+        setEnforceFocus { /* 失去焦点处理器 */ }
         stopInteractionEventsPropagation()
     }
 }
@@ -349,7 +349,7 @@ class TestDSL : IScreenTest {
                 style = { background(Sprites.RECT) }
                 cls = { +"cla" }
             }) {
-                // Click to animate: shrink + fade out, then restore
+                // 点击触发动画：缩小 + 淡出，然后恢复
                 element({
                     layout = { size(30.px) }
                     style = { background(Sprites.RECT_SOLID).tooltips("animation") }
@@ -372,24 +372,24 @@ class TestDSL : IScreenTest {
                     }
                 }
 
-                // Label bound to a local variable
+                // 绑定到局部变量的 Label
                 var value = "hello"
                 label { dataSource({ Component.literal(value) }) }
 
-                // Button toggles the value
+                // 按钮切换值
                 button({
                     text("hello <-> world")
                     onClick = { value = if (value == "hello") "world" else "hello" }
                 })
 
-                // Numeric text field (client-side only)
+                // 数字文本框（仅客户端）
                 var number = 10.4f
                 textField {
                     observer { number = it.toFloatOrNull() ?: number }
                     dataSource { number.toString() }
                 }.asNumeric(0.3f, 100f)
 
-                // Row with slots and controls
+                // 包含槽位和控件的 Row
                 row({ layout = { gap { all(2.px) } } }) {
                     fluidSlot()
                     itemSlot({ item = Items.APPLE.defaultInstance })
@@ -428,7 +428,7 @@ class TestMenuDSL : IMenuTest {
         val root = element({ cls = { +"panel_bg" } }) {
             label({ text("Data Between Screen and Menu") })
 
-            // Slots with bound inventory/tank
+            // 绑定了物品栏/储罐的槽位
             row({ layout = { gap { all(2.px) } } }) {
                 itemSlot({ bind(itemHandler, 0) })
                 itemSlot({ bind(ItemHandlerSlot(itemHandler, 1).setCanTake({ false })) })
@@ -436,12 +436,12 @@ class TestMenuDSL : IMenuTest {
             }
 
             element({ layout = { gap { all(2.px) } } }) {
-                // Bidirectional sync via Kotlin property references
+                // 通过 Kotlin 属性引用实现双向同步
                 switch { bind(::bool) }
                 textField { bind(::string) }
                 scrollerHorizontal({ layout = { width(100.pct) } }) { bind(::number) }
 
-                // Server-to-client read-only: always reflects server state
+                // 仅服务端到客户端的只读绑定：始终反映服务端状态
                 label {
                     bindS2C({
                         Component.literal("s->c only: ")
@@ -452,7 +452,7 @@ class TestMenuDSL : IMenuTest {
                 }
 
                 button {
-                    // Server-side event: runs on server when the button is clicked
+                    // 服务端事件：按钮点击时在服务端运行
                     serverEvents {
                         UIEvents.MOUSE_DOWN += {
                             fluidTank.setFluid(
@@ -463,7 +463,7 @@ class TestMenuDSL : IMenuTest {
                             )
                         }
                     }
-                    // RPC event: client sends a string value to the server
+                    // RPC 事件：客户端向服务端发送字符串值
                     val rpcEvent = element.rpcEvent { clickValue: String -> string = clickValue }
                     events {
                         UIEvents.MOUSE_DOWN += { rpcEvent.send("rpc") }

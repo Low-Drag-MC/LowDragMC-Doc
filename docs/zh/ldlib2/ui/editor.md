@@ -1,6 +1,6 @@
 # UI 编辑器
 
-{{ version_badge("2.1.5", label="自版本", icon="tag") }}
+{{ version_badge("2.1.5", label="自", icon="tag") }}
 
 !!! warning inline end
     该命令只能在 `单人游戏` 世界中使用。
@@ -137,7 +137,7 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
         let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
 
         // 基于资源位置
-        // let ui = createUIFromUIResource("file(ldlib2:resources/global/modern_styles.ui.nbt)")
+        // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
 
         // 查找元素并在此处进行数据绑定或逻辑设置
         let buttons = ui.select(".button_container > button").toList(); // 通过选择器
