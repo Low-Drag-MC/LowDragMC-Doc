@@ -19,10 +19,10 @@ Because of that, everything introduced in this page also applies to all other UI
     var element = new UIElement();
     element.style(style -> style.background(MCSprites.RECT));
     element.layout(layout -> layout.width(40).height(40));
-    element.setFocusable(true)
+    element.setFocusable(true);
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
-    element.addClass("add-class")
-    element.removeClass("add-class")
+    element.addClass("add-class");
+    element.removeClass("add-class");
     root.addChild(element);
     ```
 
@@ -50,10 +50,10 @@ Because of that, everything introduced in this page also applies to all other UI
     let element = new UIElement();
     element.style(style => style.background(MCSprites.RECT));
     element.layout(layout => layout.width(40).height(40));
-    element.setFocusable(true)
+    element.setFocusable(true);
     element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
-    element.addClass("add-class")
-    element.removeClass("add-class")
+    element.addClass("add-class");
+    element.removeClass("add-class");
     root.addChild(element);
     ```
 ---
@@ -103,7 +103,7 @@ UIElement styles (include layouts) can be accessed as below:
 === "KubeJS"
 
     ```js
-    element.style(style -=> style.background(...));
+    element.style(style => style.background(...));
     element.layout(layout => layout.width(...));
     element.getStyle().background(...);
     element.getLayout().width(...);
@@ -531,7 +531,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```kotlin
         layout = {
-            widheightth(100)
+            width(100)
             height(20.pct) // 20%
         }
         ```
@@ -1025,13 +1025,13 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">background</p>
 
-    Sets the background rendering of below the element, such as color, rect, image.
+    Sets the texture rendered behind the element, such as a solid color, rect sprite, or image.
 
 
     === "Java"
 
         ```java
-        layout.background(MCSprites.BORDER);
+        style.background(MCSprites.BORDER);
         ```
 
     === "Kotlin"
@@ -1057,13 +1057,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">overflow</p>
 
-    Controls how overflowing content is handled. If 'hidden', the content beyond the boundary will be hidden.
+    Controls how overflowing content is handled. `overflow` is a layout property, but `BasicStyle` and `UIElement` also provide convenient `overflowVisible(...)` helpers.
 
     === "Java"
 
         ```java
-        style.overflow(YogaOverflow.HIDDEN);
-        element.setOverflowVisible(false); // equals to style.overflow(YogaOverflow.HIDDEN);
+        layout.overflow(YogaOverflow.HIDDEN);
+        style.overflowVisible(false);
+        element.setOverflowVisible(false); // helper on UIElement
         ```
 
     === "Kotlin"
@@ -1090,7 +1091,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.overlay(...);
+        style.overlay(...);
         ```
 
     === "Kotlin"
@@ -1120,15 +1121,15 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.tooltips("tips.0"， "tips.1");
-        layout.appendTooltips("tips.2");
+        style.tooltips("tips.0", "tips.1");
+        style.appendTooltipsString("tips.2");
         ```
 
     === "Kotlin"
 
         ```kotlin
         style = {
-            tooltips("tips.0"， "tips.1")
+            tooltips("tips.0", "tips.1")
         }
         ```
 
@@ -1148,7 +1149,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.zIndex(1);
+        style.zIndex(1);
         ```
 
     === "Kotlin"
@@ -1175,7 +1176,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.opacity(0.8f);
+        style.opacity(0.8f);
         ```
 
     === "Kotlin"
@@ -1226,7 +1227,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">overflow-clip</p>
 
-    If element's overflow is set `hidden`, clips elements rendering based on given texture's red channel. 
+    If the element's `overflow` is hidden, clips child rendering using the given texture's red channel mask.
 
     <div style="text-align: center;">
         <video controls>
@@ -1238,14 +1239,14 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.overflowClip(true);
+        style.overflowClip(MCSprites.BORDER);
         ```
 
     === "Kotlin"
 
         ```kotlin
         style = {
-            overflowClip(true)
+            overflowClip(MCSprites.BORDER)
         }
         ```
 
@@ -1266,7 +1267,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
     === "Java"
 
         ```java
-        layout.transform2D(Transform2D.identity().scale(0.5f));
+        style.transform2D(Transform2D.identity().scale(0.5f));
         element.transform(transform -> transform.translate(10, 0))
         ```
 
@@ -1282,7 +1283,7 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 
         ```css
         element {
-            transform: translate(10, 20) rotate(45) scale(2， 2) pivot(0.5, 0.5);
+            transform: translate(10, 20) rotate(45) scale(2, 2) pivot(0.5, 0.5);
             transform: translateX(10) scale(0.5);
         }
         ```
@@ -1424,13 +1425,14 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 
 | Name           | Type          | Access                  | Description                                              |
 | -------------- | ------------- | ----------------------- | -------------------------------------------------------- |
-| `layoutNode`   | `YogaNode`    | protected (getter)      | Underlying Yoga node used for layout calculation.        |
+| `taffyStyle`   | `TaffyLayoutStyle` | protected (getter) | Underlying Taffy style bridge used for layout calculation. |
+| `nodeId`       | `NodeId`      | protected (getter)      | Node handle registered in the `TaffyTree`.              |
 | `modularUI`    | `ModularUI`   | private (getter)        | The `ModularUI` instance this element belongs to.        |
 | `id`           | `String`      | private (getter/setter) | Element ID, used by selectors and queries.               |
 | `classes`      | `Set<String>` | private (getter)        | CSS-like class list applied to this element.             |
 | `styleBag`     | `StyleBag`    | private (getter)        | Stores resolved style candidates and computed styles.    |
 | `styles`       | `List<Style>` | private (getter)        | Inline styles attached to this element.                  |
-| `layoutStyle`  | `LayoutStyle` | private (getter)        | Layout-related style wrapper (Yoga-based).               |
+| `layoutStyle`  | `LayoutStyle` | private (getter)        | Layout-related style wrapper for layout properties.      |
 | `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, overlay tint color, opacity, zIndex, etc.). |
 | `isVisible`    | `boolean`     | private (getter/setter) | Whether the element is visible.                          |
 | `isActive`     | `boolean`     | private (getter/setter) | Whether the element participates in logic and events.    |
@@ -1447,7 +1449,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | ----------------------------- | ----------------------------------------- | -------------------------------------------------------- |
 | `getLayout()`                 | `LayoutStyle`                             | Returns the layout style controller.                     |
 | `layout(...)`                 | `UIElement layout(Consumer<LayoutStyle>)` | Modify layout properties fluently.                       |
-| `node(...)`                   | `UIElement node(Consumer<YogaNode>)`      | Directly modify the underlying Yoga node.                |
+| `getTaffyLayout()`            | `Layout`                                  | Returns the resolved Taffy layout result for this element. |
 | `getPositionX()`              | `float`                                   | Absolute X position on screen.                           |
 | `getPositionY()`              | `float`                                   | Absolute Y position on screen.                           |
 | `getSizeWidth()`              | `float`                                   | Computed width of the element.                           |

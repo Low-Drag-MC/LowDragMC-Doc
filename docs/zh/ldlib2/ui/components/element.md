@@ -19,10 +19,10 @@
     var element = new UIElement();
     element.style(style -> style.background(MCSprites.RECT));
     element.layout(layout -> layout.width(40).height(40));
-    element.setFocusable(true)
+    element.setFocusable(true);
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
-    element.addClass("add-class")
-    element.removeClass("add-class")
+    element.addClass("add-class");
+    element.removeClass("add-class");
     root.addChild(element);
     ```
 
@@ -50,10 +50,10 @@
     let element = new UIElement();
     element.style(style => style.background(MCSprites.RECT));
     element.layout(layout => layout.width(40).height(40));
-    element.setFocusable(true)
+    element.setFocusable(true);
     element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
-    element.addClass("add-class")
-    element.removeClass("add-class")
+    element.addClass("add-class");
+    element.removeClass("add-class");
     root.addChild(element);
     ```
 ---
@@ -103,7 +103,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 === "KubeJS"
 
     ```js
-    element.style(style -=> style.background(...));
+    element.style(style => style.background(...));
     element.layout(layout => layout.width(...));
     element.getStyle().background(...);
     element.getLayout().width(...);
@@ -531,7 +531,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 
         ```kotlin
         layout = {
-            widheightth(100)
+            width(100)
             height(20.pct) // 20%
         }
         ```
@@ -1025,13 +1025,13 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 !!! info ""
     #### <p style="font-size: 1rem;">background</p>
 
-    设置在元素内容下方的背景渲染，例如颜色、矩形、图像。
+    设置绘制在元素后方的纹理，例如纯色、矩形精灵或图片。
 
 
     === "Java"
 
         ```java
-        layout.background(MCSprites.BORDER);
+        style.background(MCSprites.BORDER);
         ```
 
     === "Kotlin"
@@ -1057,13 +1057,14 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 !!! info ""
     #### <p style="font-size: 1rem;">overflow</p>
 
-    控制如何处理溢出内容。如果设为 'hidden'，边界之外的内容将被隐藏。
+    控制如何处理溢出内容。`overflow` 本身是布局属性，但 `BasicStyle` 和 `UIElement` 也提供了便捷的 `overflowVisible(...)` 辅助方法。
 
     === "Java"
 
         ```java
-        style.overflow(YogaOverflow.HIDDEN);
-        element.setOverflowVisible(false); // equals to style.overflow(YogaOverflow.HIDDEN);
+        layout.overflow(YogaOverflow.HIDDEN);
+        style.overflowVisible(false);
+        element.setOverflowVisible(false); // UIElement 上的辅助方法
         ```
 
     === "Kotlin"
@@ -1090,7 +1091,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.overlay(...);
+        style.overlay(...);
         ```
 
     === "Kotlin"
@@ -1120,8 +1121,8 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.tooltips("tips.0", "tips.1");
-        layout.appendTooltips("tips.2");
+        style.tooltips("tips.0", "tips.1");
+        style.appendTooltipsString("tips.2");
         ```
 
     === "Kotlin"
@@ -1148,7 +1149,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.zIndex(1);
+        style.zIndex(1);
         ```
 
     === "Kotlin"
@@ -1175,7 +1176,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.opacity(0.8f);
+        style.opacity(0.8f);
         ```
 
     === "Kotlin"
@@ -1226,7 +1227,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 !!! info ""
     #### <p style="font-size: 1rem;">overflow-clip</p>
 
-    如果元素的 overflow 设为 `hidden`，则根据给定纹理的红色通道裁剪元素渲染。
+    当元素的 `overflow` 为隐藏时，会使用给定纹理的红色通道作为遮罩来裁剪子元素渲染。
 
     <div style="text-align: center;">
         <video controls>
@@ -1238,14 +1239,14 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.overflowClip(true);
+        style.overflowClip(MCSprites.BORDER);
         ```
 
     === "Kotlin"
 
         ```kotlin
         style = {
-            overflowClip(true)
+            overflowClip(MCSprites.BORDER)
         }
         ```
 
@@ -1266,7 +1267,7 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
     === "Java"
 
         ```java
-        layout.transform2D(Transform2D.identity().scale(0.5f));
+        style.transform2D(Transform2D.identity().scale(0.5f));
         element.transform(transform -> transform.translate(10, 0))
         ```
 
@@ -1424,13 +1425,14 @@ selector:hover {
 
 | 名称           | 类型          | 访问权限                 | 描述                                              |
 | -------------- | ------------- | ------------------------ | ------------------------------------------------- |
-| `layoutNode`   | `YogaNode`    | protected (getter)       | 用于布局计算的基础 Yoga 节点。                    |
+| `taffyStyle`   | `TaffyLayoutStyle` | protected (getter) | 用于布局计算的底层 Taffy 样式桥接对象。          |
+| `nodeId`       | `NodeId`      | protected (getter)       | 注册在 `TaffyTree` 中的节点句柄。                 |
 | `modularUI`    | `ModularUI`   | private (getter)         | 此元素所属的 `ModularUI` 实例。                   |
 | `id`           | `String`      | private (getter/setter)  | 元素 ID，用于选择器和查询。                       |
 | `classes`      | `Set<String>` | private (getter)         | 应用于此元素的类似 CSS 的类列表。                 |
 | `styleBag`     | `StyleBag`    | private (getter)         | 存储已解析的样式候选值和计算后的样式。            |
 | `styles`       | `List<Style>` | private (getter)         | 附加到此元素的内联样式。                          |
-| `layoutStyle`  | `LayoutStyle` | private (getter)         | 布局相关样式的包装器（基于 Yoga）。               |
+| `layoutStyle`  | `LayoutStyle` | private (getter)         | 布局属性对应的样式包装器。                        |
 | `style`        | `BasicStyle`  | private (getter)         | 基础视觉样式（background、overlay 着色、opacity、zIndex 等）。 |
 | `isVisible`    | `boolean`     | private (getter/setter)  | 元素是否可见。                                    |
 | `isActive`     | `boolean`     | private (getter/setter)  | 元素是否参与逻辑和事件。                          |
@@ -1447,7 +1449,7 @@ selector:hover {
 | --------------------------- | --------------------------------------- | ------------------------------------------------ |
 | `getLayout()`               | `LayoutStyle`                           | 返回布局样式控制器。                             |
 | `layout(...)`               | `UIElement layout(Consumer<LayoutStyle>)` | 以流式方式修改布局属性。                         |
-| `node(...)`                 | `UIElement node(Consumer<YogaNode>)`    | 直接修改底层的 Yoga 节点。                       |
+| `getTaffyLayout()`          | `Layout`                                | 返回该元素解析后的 Taffy 布局结果。              |
 | `getPositionX()`            | `float`                                 | 屏幕上的绝对 X 坐标。                            |
 | `getPositionY()`            | `float`                                 | 屏幕上的绝对 Y 坐标。                            |
 | `getSizeWidth()`            | `float`                                 | 元素的计算宽度。                                 |

@@ -1,8 +1,8 @@
-# Data Bindings and RPCEvent
+# Data Bindings, RPCEvent, and Message
 
-{{ version_badge("2.1.5", label="Since", icon="tag") }}
+{{ version_badge("2.2.7", label="Since", icon="tag") }}
 
-Before learning **Data Bindings** and **RPCEvent**, it is important to understand
+Before learning **Data Bindings**, **RPCEvent**, and **message**, it is important to understand
 the relationship between **UI components** and **data**.
 
 ---
@@ -604,6 +604,14 @@ If the client is allowed to modify the value, it can easily send malicious packe
 In short, we need a mechanism to send interaction data between client and server.
 This mechanism is called **`UI RPCEvent`**.
 
+`RPCEvent` is now **bidirectional**:
+
+- If you call `send(...)` on the **client**, the event is sent **client → server**.
+- If you call `send(...)` on the **server**, the event is sent **server → client**.
+- If the event defines a return type, the response goes back to the caller automatically.
+
+So the direction is determined by **where the event is emitted from**, not by the event definition itself.
+
 Taking a button as an example, if you have read the [UI Event](./event.md#register-event-listeners) section, you already know that UI events can be sent to the server and trigger logic.
 Internally, this is implemented using `RPCEvent`.
 
@@ -639,7 +647,7 @@ The equivalent implementation using `RPCEvent` directly:
     var emitter = element.addRPCEvent(clickEvent);
 
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-       emitter.send(clickEvent, e);
+       emitter.send(e);
     });
     ```
 
@@ -657,7 +665,7 @@ The equivalent implementation using `RPCEvent` directly:
     }
     ```
 
-You can use `RPCEventBuilder` to construct an `RPCEvent` and send data to the server when needed.
+You can use `RPCEventBuilder` to construct an `RPCEvent` and send data whenever needed.
 
 !!! note
     When sending RPC events, **the parameters passed to `RPCEmitter#send` must exactly match the parameters defined in the `RPCEventBuilder`**, including their order and types, and don't forget to `addRPCEvent` them.
@@ -665,7 +673,7 @@ You can use `RPCEventBuilder` to construct an `RPCEvent` and send data to the se
 
 
 ### RPCEvent with return
-Sometimes you may want to send a request to the server to query data, and expect the server to return a result.
+Sometimes you may want to send a request to the other side and expect a result back.
 For example, to ask the server to perform an addition and return the result, you can define it like this:
 
 ```java
@@ -676,45 +684,132 @@ var queryAdd = RPCEventBuilder.simple(int.class, int.class, int.class, (a, b) ->
 var emitter = element.addRPCEvent(queryAdd);
 
 element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    emitter.<Integer>send(queryAdd, result -> {
+    emitter.<Integer>send(result -> {
         // receive the result on the client
         assert result == 2;
     }, 1, 2);
-})
+});
 
 ```
 
 ### Send event to the client
-In practice, **UI RPC events are designed primarily for client → server communication**, with optional responses sent back to the client.
-This matches most real-world use cases, where the **server owns the data and logic**, and the client only sends interaction requests.
+Server-initiated UI events are now supported directly by `RPCEvent`.
 
-LDLib2 therefore does **not** provide a dedicated UI-level API for server → client RPC events.
-
-However, **if you really need to actively send events from the server to the client**, you can achieve this by using the generic [RPC Packet](../../sync/rpc_packet.md) system.
-
-Below is an example showing how the server sends an RPC packet to clients, and how the client locates and operates on a specific UI element.
+The following example is adapted from `TestSync.java`: the server toggles a fluid tank, then pushes the new fluid to the client button text through a UI RPC event.
 
 ```java
-var element = new UIElement().setId("my_element");
+var button = new Button();
 
-// annotate your packet method anywhere you want
-@RPCPacket("rpcEventToClient")
-public static void rpcPacketTest(RPCSender sender, String message, boolean message2) {
-    if (sender.isRemote()) {
-        var player = Minecraft.getInstance().player;
-        if (player != null && player.containerMenu instanceof IModularUIHolderMenu uiHolderMenu) {
-            uiHolderMenu.getModularUI().select("#my_element").findFirst().ifPresent(element -> {
-                // do something on the client side with your element.
-            });
-        }
+// This executor runs on the receiving side.
+// In this flow, the server sends and the client receives.
+var s2cEvent = button.addRPCEvent(RPCEventBuilder.simple(Fluid.class, fluid -> {
+    assert LDLib2.isRemote();
+    button.setText(fluid.getFluidType().getDescription());
+}));
+
+button.addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
+    if (fluidTank.getFluid().getFluid() == Fluids.WATER) {
+        fluidTank.setFluid(new FluidStack(Fluids.LAVA, fluidTank.getFluid().getAmount()));
+        s2cEvent.send(Fluids.LAVA); // server -> client
+    } else {
+        fluidTank.setFluid(new FluidStack(Fluids.WATER, fluidTank.getFluid().getAmount()));
+        s2cEvent.send(Fluids.WATER); // server -> client
     }
-}
-
-// send pacet to the remote/server
-RPCPacketDistributor.rpcToAllPlayers("rpcEventToClient", "Hello from server!", false)
+});
 ```
 
-This approach gives you full control over server-initiated client logic, while keeping the UI RPC system simple and focused on interaction-driven workflows.
+This is the preferred UI-level approach in `2.2.7`.
+
+!!! note "Before 2.2.6"
+    In versions before `2.2.6`, a common workaround for server-initiated UI actions was to use the generic [RPC Packet](../../sync/rpc_packet.md){ data-preview } system and then manually locate the target UI on the client.
+    That approach is no longer necessary for normal UI RPC workflows, although `RPCPacket` is still valid for non-UI or global networking tasks.
+
+### Choosing between bindings and RPCEvent
+
+- Use **data bindings** for persistent synchronized state.
+- Use **RPCEvent** for interactions, commands, queries, and actions that should run on the other side.
+- Combine them when needed: RPC handles the action, bindings reflect the resulting state.
+
+## UI Message
+
+For many UI workflows, defining a dedicated typed `RPCEvent` can still feel a bit heavy, especially in KubeJS or for quick named packets.
+
+LDLib2 therefore also provides **message**, a lightweight wrapper built internally on top of `RPCEvent`.
+
+- Register receivers with `UIElement.onMessage(...)`
+- Send packets with `UIElement.sendMessage(...)`
+- Direction still depends on the sender side:
+  - client call -> client → server
+  - server call -> server → client
+- The payload type is always `CompoundTag`
+
+This is especially convenient in **KubeJS**, because you can pass around named messages plus NBT-like payloads without defining a custom typed event each time.
+
+### Basic message usage
+
+=== "Java"
+
+    ```java
+    var button = new Button()
+        .setOnServerClick(e -> {
+            e.currentElement.sendMessage(
+                "test_message",
+                TagBuilder.compound().add("text", "Message from server!").build()
+            );
+        })
+        .onMessage("test_message", (self, message) -> {
+            assert LDLib2.isRemote();
+            ((Button) self).setText(message.getString("text"));
+        });
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    button {
+        api {
+            setOnServerClick { event ->
+                event.currentElement.sendMessage(
+                    "test_message",
+                    TagBuilder.compound()
+                        .add("text", "Message from server!")
+                        .build()
+                )
+            }
+            onMessage("test_message") { _, message ->
+                setText(message.getString("text"))
+            }
+        }
+    }
+    ```
+
+=== "KubeJS"
+
+    ```js
+    let button = new Button()
+        .onMessage("test_message", (self, message) => {
+            self.setText(message.getString("text"));
+        });
+
+    // send from whichever side currently owns the logic
+    button.sendMessage("test_message", TagBuilder.compound()
+        .add("text", "Hello from the other side!")
+        .build());
+    ```
+
+### When to use `message`
+
+Use `message` when:
+
+- you want a quick named packet between the two UI sides
+- the payload naturally fits in a `CompoundTag`
+- you are working in KubeJS and want a low-friction sync primitive
+
+Use a custom `RPCEvent` when:
+
+- you want strict typed arguments and return values
+- you want the event signature to document itself explicitly
+- the flow is part of a larger typed API
 
 !!! tip
     When using **`FluidSlot`** with container bindings, the implementation already uses

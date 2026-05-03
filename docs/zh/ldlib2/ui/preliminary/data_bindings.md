@@ -1,8 +1,8 @@
-# 数据绑定与 RPCEvent
+# 数据绑定、RPCEvent 与 Message
 
-{{ version_badge("2.1.5", label="自", icon="tag") }}
+{{ version_badge("2.2.7", label="自", icon="tag") }}
 
-在学习 **Data Bindings** 和 **RPCEvent** 之前，重要的是理解 **UI 组件**与**数据**之间的关系。
+在学习 **Data Bindings**、**RPCEvent** 和 **message** 之前，重要的是理解 **UI 组件**与**数据**之间的关系。
 
 ---
 
@@ -606,6 +606,14 @@ root.addChildren(selector1, selector2);
 简而言之，我们需要一种在客户端和服务端之间发送交互数据的机制。
 这种机制被称为 **`UI RPCEvent`**。
 
+现在的 `RPCEvent` 是**双向**的：
+
+- 如果你在**客户端**调用 `send(...)`，事件会以 **客户端 → 服务端** 的方向发送。
+- 如果你在**服务端**调用 `send(...)`，事件会以 **服务端 → 客户端** 的方向发送。
+- 如果该事件定义了返回值，响应会自动返回给调用方。
+
+也就是说，方向由**事件从哪一端发出**决定，而不是由事件定义本身决定。
+
 以按钮为例，如果你已经阅读了 [UI 事件](./event.md#register-event-listeners) 部分，你已经知道 UI 事件可以发送到服务端并触发逻辑。
 在内部，这是使用 `RPCEvent` 实现的。
 
@@ -641,7 +649,7 @@ root.addChildren(selector1, selector2);
     var emitter = element.addRPCEvent(clickEvent);
 
     element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-       emitter.send(clickEvent, e);
+       emitter.send(e);
     });
     ```
 
@@ -659,7 +667,7 @@ root.addChildren(selector1, selector2);
     }
     ```
 
-你可以使用 `RPCEventBuilder` 来构造一个 `RPCEvent`，并在需要时将数据发送到服务端。
+你可以使用 `RPCEventBuilder` 来构造一个 `RPCEvent`，并在需要时发送数据。
 
 !!! note
     发送 RPC 事件时，**传递给 `RPCEmitter#send` 的参数必须与 `RPCEventBuilder` 中定义的参数完全匹配**，包括它们的顺序和类型，并且不要忘记 `addRPCEvent`。
@@ -668,7 +676,7 @@ root.addChildren(selector1, selector2);
 
 ### 带返回值的 RPCEvent
 
-有时你可能想向服务端发送请求以查询数据，并期望服务端返回结果。
+有时你可能想向另一端发送一个请求，并期望得到返回结果。
 例如，要求服务端执行加法并返回结果，你可以这样定义：
 
 ```java
@@ -679,46 +687,132 @@ var queryAdd = RPCEventBuilder.simple(int.class, int.class, int.class, (a, b) ->
 var emitter = element.addRPCEvent(queryAdd);
 
 element.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-    emitter.<Integer>send(queryAdd, result -> {
+    emitter.<Integer>send(result -> {
         // 在客户端上接收结果
         assert result == 2;
     }, 1, 2);
-})
+});
 
 ```
 
 ### 向客户端发送事件
+现在已经可以直接用 `RPCEvent` 支持**服务端主动发送 UI 事件**。
 
-在实践中，**UI RPC 事件主要用于客户端 → 服务端通信**，可选地将响应发送回客户端。
-这符合大多数实际用例，其中**服务端拥有数据和逻辑**，客户端只发送交互请求。
-
-因此，LDLib2 **没有**为服务端 → 客户端 RPC 事件提供专门的 UI 级 API。
-
-但是，**如果你确实需要主动从服务端向客户端发送事件**，你可以通过使用通用的 [RPC 数据包](../../sync/rpc_packet.md) 系统来实现。
-
-下面是一个示例，展示了服务端如何向客户端发送 RPC 数据包，以及客户端如何定位并操作特定的 UI 元素。
+下面这个例子改编自 `TestSync.java`：服务端切换流体槽中的流体，然后通过一个 UI RPC 事件把新流体推送到客户端按钮文本。
 
 ```java
-var element = new UIElement().setId("my_element");
+var button = new Button();
 
-// 在你想要的任何地方注解你的数据包方法
-@RPCPacket("rpcEventToClient")
-public static void rpcPacketTest(RPCSender sender, String message, boolean message2) {
-    if (sender.isRemote()) {
-        var player = Minecraft.getInstance().player;
-        if (player != null && player.containerMenu instanceof IModularUIHolderMenu uiHolderMenu) {
-            uiHolderMenu.getModularUI().select("#my_element").findFirst().ifPresent(element -> {
-                // 在客户端上对元素执行某些操作。
-            });
-        }
+// 这个执行器运行在接收端。
+// 在这个流程里，是服务端发送，客户端接收。
+var s2cEvent = button.addRPCEvent(RPCEventBuilder.simple(Fluid.class, fluid -> {
+    assert LDLib2.isRemote();
+    button.setText(fluid.getFluidType().getDescription());
+}));
+
+button.addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
+    if (fluidTank.getFluid().getFluid() == Fluids.WATER) {
+        fluidTank.setFluid(new FluidStack(Fluids.LAVA, fluidTank.getFluid().getAmount()));
+        s2cEvent.send(Fluids.LAVA); // server -> client
+    } else {
+        fluidTank.setFluid(new FluidStack(Fluids.WATER, fluidTank.getFluid().getAmount()));
+        s2cEvent.send(Fluids.WATER); // server -> client
     }
-}
-
-// 向远程/服务端发送数据包
-RPCPacketDistributor.rpcToAllPlayers("rpcEventToClient", "Hello from server!", false)
+});
 ```
 
-这种方法让你可以完全控制服务端发起的客户端逻辑，同时保持 UI RPC 系统简单且专注于交互驱动的工作流。
+这是 `2.2.7` 中更推荐的 UI 层做法。
+
+!!! note "在 2.2.6 之前"
+    在 `2.2.6` 之前，如果想让服务端主动驱动客户端 UI，常见的变通做法是使用通用的 [RPC 数据包](../../sync/rpc_packet.md){ data-preview } 系统，然后在客户端手动定位目标 UI。
+    对于正常的 UI RPC 工作流，这种做法现在已经不再必要；不过对于非 UI 或更全局的网络任务，`RPCPacket` 仍然是有效方案。
+
+### 如何在数据绑定与 RPCEvent 之间选择
+
+- 对于持续存在的同步状态，使用**数据绑定**。
+- 对于交互、命令、查询以及需要在另一端执行的动作，使用 **RPCEvent**。
+- 需要时可以组合使用：RPC 负责触发动作，数据绑定负责回显结果状态。
+
+## UI Message
+
+在很多 UI 场景里，专门定义一个带类型签名的 `RPCEvent` 还是会显得有点重，尤其是在 KubeJS 里，或者只是想快速发一个命名数据包时。
+
+因此 LDLib2 还提供了 **message**，这是一个内部构建在 `RPCEvent` 之上的轻量封装。
+
+- 使用 `UIElement.onMessage(...)` 注册接收器
+- 使用 `UIElement.sendMessage(...)` 发送数据包
+- 方向同样取决于发送端：
+  - 从客户端调用 -> 客户端 → 服务端
+  - 从服务端调用 -> 服务端 → 客户端
+- 负载类型固定为 `CompoundTag`
+
+这在 **KubeJS** 中尤其方便，因为你可以直接使用“消息名 + NBT 负载”的形式同步数据，而不必每次都定义一个自定义的强类型事件。
+
+### message 基础用法
+
+=== "Java"
+
+    ```java
+    var button = new Button()
+        .setOnServerClick(e -> {
+            e.currentElement.sendMessage(
+                "test_message",
+                TagBuilder.compound().add("text", "Message from server!").build()
+            );
+        })
+        .onMessage("test_message", (self, message) -> {
+            assert LDLib2.isRemote();
+            ((Button) self).setText(message.getString("text"));
+        });
+    ```
+
+=== "Kotlin"
+
+    ```kotlin
+    button {
+        api {
+            setOnServerClick { event ->
+                event.currentElement.sendMessage(
+                    "test_message",
+                    TagBuilder.compound()
+                        .add("text", "Message from server!")
+                        .build()
+                )
+            }
+            onMessage("test_message") { _, message ->
+                setText(message.getString("text"))
+            }
+        }
+    }
+    ```
+
+=== "KubeJS"
+
+    ```js
+    let button = new Button()
+        .onMessage("test_message", (self, message) => {
+            self.setText(message.getString("text"));
+        });
+
+    // 从当前拥有逻辑的一端发送
+    button.sendMessage("test_message", TagBuilder.compound()
+        .add("text", "Hello from the other side!")
+        .build());
+    ```
+
+### 什么时候使用 `message`
+
+在以下场景使用 `message`：
+
+- 你只想在 UI 两端之间快速发送一个命名数据包
+- 你的负载天然适合用 `CompoundTag`
+- 你正在使用 KubeJS，并希望有一个低成本的同步原语
+
+在以下场景使用自定义 `RPCEvent`：
+
+- 你希望参数和返回值都是强类型的
+- 你希望事件签名本身就能明确表达用途
+- 这套流程本身属于更大型的强类型 API 的一部分
 
 !!! tip
     在使用 **`FluidSlot`** 与容器绑定时，实现已经使用了
