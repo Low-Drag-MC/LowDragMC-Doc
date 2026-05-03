@@ -1,6 +1,6 @@
 site_name: LowDragMC
 copyright: Copyright &copy; 2019 - 2025 KilaBash
-site_url: https://github.com/Low-Drag-MC
+site_url: https://low-drag-mc.github.io/LowDragMC-Doc/
 repo_url: https://github.com/Low-Drag-MC
 repo_name: Low-Drag-MC
 theme:
@@ -9,12 +9,8 @@ theme:
   icon:
     favicon: assets/icon.png
     touchicon: assets/icon.png
-  language: en 
   pygments_style: friendly
   features:
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.instant.progress
     - navigation.sections
     - navigation.path
     - navigation.tabs
@@ -44,24 +40,21 @@ extra:
 extra_css:
   - css/custom.css
   - css/java-enhance.css
+
 plugins:
   - i18n:
-      docs_structure: suffix
+      docs_structure: folder
       fallback_to_default: true
       reconfigure_material: true
+      reconfigure_search: true
       languages:
         - locale: en
-          name: English
           default: true
+          name: English
           build: true
-          link: /en/
         - locale: zh
           name: 中文
           build: true
-          link: /zh/
-          nav:
-            - 首页: index.zh.md
-            - LDLib2: ldlib2/index.zh.md
   - search
   - macros
   - glightbox
