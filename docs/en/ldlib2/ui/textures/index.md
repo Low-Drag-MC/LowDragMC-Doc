@@ -109,6 +109,7 @@ Most concrete texture types extend the abstract `TransformTexture`, which wraps 
 | `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `rect(color, radius?, stroke?, borderColor?)` | GPU SDF rounded rect with optional stroke. |
 | `rect_texture` | [`RectTexture`](rect.md) | — | CPU-rendered rounded rect (no shader required). |
 | `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` | PNG image with optional 9-slice and wrap mode. |
+| `vanilla_sprite_texture` | [`VanillaSpriteTexture`](vanilla-sprite.md) | `vanilla-sprite(id)` | Registered vanilla GUI atlas sprite. |
 | `text_texture` | [`TextTexture`](text.md) | — | Rendered text with scrolling modes. |
 | `animation_texture` | [`AnimationTexture`](animation.md) | — | Sprite-sheet frame animation. |
 | `item_stack_texture` | [`ItemStackTexture`](item-stack.md) | — | One or more `ItemStack`s cycling every 20 ticks. |

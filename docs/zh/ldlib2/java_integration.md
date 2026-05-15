@@ -7,7 +7,13 @@
 ?url=https%3A%2F%2Fmaven.firstdark.dev%2Fsnapshots%2Fcom%2Flowdragmc%2Fldlib2%2Fldlib2-neoforge-1.21.1%2Fmaven-metadata.xml
 &query=%2F%2Fmetadata%2Fversioning%2Flatest
 &label=ldlib2-neoforge-1.21.1
-&cacheSeconds=300)](https://maven.firstdar.kdev/#/snapshots/com/lowdragmc/ldlib2/ldlib2-neoforge-1.21.1)
+&cacheSeconds=300)](https://maven.firstdark.dev/#/snapshots/com/lowdragmc/ldlib2/ldlib2-neoforge-1.21.1)
+
+[![ldlib2 maven](https://img.shields.io/badge/dynamic/xml
+?url=https%3A%2F%2Fmaven.firstdark.dev%2Fsnapshots%2Fcom%2Flowdragmc%2Fldlib2%2Fldlib2-neoforge-26.1%2Fmaven-metadata.xml
+&query=%2F%2Fmetadata%2Fversioning%2Flatest
+&label=ldlib2-neoforge-26.1
+&cacheSeconds=300)](https://maven.firstdark.dev/#/snapshots/com/lowdragmc/ldlib2/ldlib2-neoforge-26.1)
 
 {{ version_badge("2.2.1", label="自", icon="tag") }}
 ``` c

@@ -119,11 +119,17 @@ The second one requires a `Player` as input, which is **NECESSARY** if your UI i
 
 ## Debug your UI
 
-During development, the UI tree may not always behave as expected,  
+During development, the UI tree may not always behave as expected,
 and it can be difficult to understand what is going wrong.
 
-You can press **`F3`** to enable **UI debug mode**.  
-When debug mode is active, LDLib2 displays helpful information directly on the screen.
+LDLib2 provides a **Debug Panel**, similar to the debug tools in Chrome. The panel lets you inspect the live UI hierarchy, view computed style and layout information, and select elements while the UI is running.
+
+!!! note "{{ version_badge("mc26.1", label="Since", icon="tag") }}"
+    
+
+    Press **`F12`** to open or close the Debug Panel. In older 1.21 builds, the debug shortcut was **`F3`**.
+
+After opening the Debug Panel, press **`F1`** to toggle **Look Up** mode. In Look Up mode, hover an element in the target UI and click it to jump to that `UIElement` in the Debug Panel's hierarchy and inspector.
 
 <figure markdown="span">
   ![Debug](../assets//debug_mode.png){ width="80%" }

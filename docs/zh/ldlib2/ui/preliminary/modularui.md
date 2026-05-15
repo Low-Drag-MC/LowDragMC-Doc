@@ -122,8 +122,14 @@ flowchart LR
 在开发过程中，UI 树的行为可能并不总是如预期，
 而且很难理解哪里出了问题。
 
-你可以按 **`F3`** 启用 **UI 调试模式**。
-当调试模式激活时，LDLib2 会直接在屏幕上显示有用的信息。
+LDLib2 提供了一个类似 Chrome 调试工具的 **Debug Panel**。你可以通过它检查实时 UI 层级、查看计算后的样式和布局信息，并在 UI 运行时选择元素。
+
+!!! note
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+
+    按 **`F12`** 可以打开或关闭 Debug Panel。在较早的 1.21 构建中，调试快捷键是 **`F3`**。
+
+打开 Debug Panel 后，按 **`F1`** 可以切换 **Look Up** 模式。在 Look Up 模式下，将鼠标悬停在目标 UI 的元素上并点击，即可跳转到 Debug Panel 的层级树和检查器中的对应 `UIElement`。
 
 <figure markdown="span">
   ![Debug](../assets//debug_mode.png){ width="80%" }

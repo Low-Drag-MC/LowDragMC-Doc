@@ -7,16 +7,16 @@ def define_env(env):
         icon_markup = f":material-{icon}:"
         version_link = href or f"#v{version}"
 
-        return f'''
-<span class="mdx-badge" title="{tooltip}">
-  <span class="mdx-version-box">
-    <span class="mdx-badge__icon">{icon_markup}</span>
-    <span class="mdx-badge__text">
-      <a href="{version_link}">{label} {version}</a>
-    </span>
-  </span>
-</span>
-        '''
+        return (
+            f'<span class="mdx-badge" title="{tooltip}">'
+            f'<span class="mdx-version-box">'
+            f'<span class="mdx-badge__icon">{icon_markup}</span>'
+            f'<span class="mdx-badge__text">'
+            f'<a href="{version_link}">{label} {version}</a>'
+            f'</span>'
+            f'</span>'
+            f'</span>'
+        )
     env.macro(version_badge)
 
 

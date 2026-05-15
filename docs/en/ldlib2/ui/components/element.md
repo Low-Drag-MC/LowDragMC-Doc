@@ -1057,7 +1057,9 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">overflow</p>
 
-    Controls how overflowing content is handled. `overflow` is a layout property, but `BasicStyle` and `UIElement` also provide convenient `overflowVisible(...)` helpers.
+    **Deprecated, 1.21 API only.** Use [`clip`](#clip) in 26.1 and newer.
+
+    In the 1.21 API, `overflow` controlled how overflowing content was handled. `overflow` was a layout property, with convenience helpers such as `overflowVisible(...)` and `setOverflowVisible(...)`. In 26.1+, `UIElement#setOverflowVisible(false)` maps to `Clip.SCISSOR`.
 
     === "Java"
 
@@ -1080,6 +1082,91 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
         ```css
         element {
             overflow: hidden;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;" id="clip">clip</p>
+
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+
+    Controls whether and how the element's subtree is clipped. `clip` replaces the old 1.21 `overflow` / `overflow-clip` API. Any mode other than `NONE` also prevents hit testing outside the element's content bounds.
+
+    | Mode | Description |
+    | --- | --- |
+    | `NONE` | No clipping. This is the default. |
+    | `SCISSOR` | Clips rendering to the element's content bounds. Use this as the 26.1+ replacement for `overflow: hidden` or `setOverflowVisible(false)`. |
+    | `MASK` | Clips rendering with the texture set by [`mask`](#mask). Use this for a static mask texture. |
+    | `DYNAMIC_MASK` | Same as `MASK`, but the mask is refreshed every frame. Use this for animated or otherwise changing masks. |
+
+    === "Java"
+
+        ```java
+        style.clip(Clip.SCISSOR);
+        style.clip(Clip.MASK).mask(MCSprites.BORDER);
+        style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            clip(Clip.SCISSOR)
+            clip(Clip.MASK)
+            mask(MCSprites.BORDER)
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            clip: scissor;
+        }
+
+        element.masked {
+            clip: mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
+        }
+
+        element.animated-mask {
+            clip: dynamic-mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;" id="mask">mask</p>
+
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+
+    Defines the texture used by `clip: mask` and `clip: dynamic-mask`. The mask is drawn over the element's bounds and multiplies the rendered subtree's color and alpha by the sampled mask factor.
+
+    Opaque grayscale masks use the texture luminance: white keeps content visible and black hides it. Alpha-encoded masks use the alpha channel, which is useful for transparent PNG masks and soft edges. The `mask` property has no visible effect unless `clip` is `MASK` or `DYNAMIC_MASK`.
+
+    === "Java"
+
+        ```java
+        style.clip(Clip.MASK);
+        style.mask(MCSprites.BORDER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            clip(Clip.MASK)
+            mask(MCSprites.BORDER)
+        }
+        ```
+
+    === "LSS"
+        Check [Texture in LSS](../textures/lss.md) for lss supports.
+
+        ```css
+        element {
+            clip: mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
         }
         ```
 
@@ -1227,7 +1314,9 @@ You'd better read [Layout](../preliminary/layout.md){ data-preview } before usin
 !!! info ""
     #### <p style="font-size: 1rem;">overflow-clip</p>
 
-    If the element's `overflow` is hidden, clips child rendering using the given texture's red channel mask.
+    **Deprecated, 1.21 API only.** Use [`clip: mask`](#clip) with [`mask`](#mask) in 26.1 and newer.
+
+    In the 1.21 API, when the element's `overflow` was hidden, `overflow-clip` clipped child rendering using the given texture's red channel as a mask. In 26.1+, set `clip` to `MASK` or `DYNAMIC_MASK`, then set the mask texture with `mask`.
 
     <div style="text-align: center;">
         <video controls>

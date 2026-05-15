@@ -3,6 +3,7 @@ nav:
   - index.md
   - lss.md
   - sprite.md
+  - vanilla-sprite.md
   - color-rect.md
   - color-border.md
   - sdf-rect.md

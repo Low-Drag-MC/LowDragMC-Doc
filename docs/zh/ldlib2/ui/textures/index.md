@@ -109,6 +109,7 @@
 | `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `rect(color, radius?, stroke?, borderColor?)` | GPU SDF 圆角矩形，可选描边。 |
 | `rect_texture` | [`RectTexture`](rect.md) | — | CPU 渲染圆角矩形（无需 Shader）。 |
 | `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` | PNG 图像，可选 9-slice 和环绕模式。 |
+| `vanilla_sprite_texture` | [`VanillaSpriteTexture`](vanilla-sprite.md) | `vanilla-sprite(id)` | 已注册的原版 GUI 图集 sprite。 |
 | `text_texture` | [`TextTexture`](text.md) | — | 渲染文本，支持滚动模式。 |
 | `animation_texture` | [`AnimationTexture`](animation.md) | — | 精灵表帧动画。 |
 | `item_stack_texture` | [`ItemStackTexture`](item-stack.md) | — | 一个或多个 `ItemStack`，每 20 tick 循环。 |

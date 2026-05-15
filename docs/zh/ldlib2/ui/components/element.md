@@ -1057,7 +1057,9 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 !!! info ""
     #### <p style="font-size: 1rem;">overflow</p>
 
-    控制如何处理溢出内容。`overflow` 本身是布局属性，但 `BasicStyle` 和 `UIElement` 也提供了便捷的 `overflowVisible(...)` 辅助方法。
+    **已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip`](#clip)。
+
+    在 1.21 API 中，`overflow` 用于控制如何处理溢出内容。`overflow` 本身是布局属性，同时也有 `overflowVisible(...)` 和 `setOverflowVisible(...)` 等便捷辅助方法。在 26.1+ 中，`UIElement#setOverflowVisible(false)` 会映射为 `Clip.SCISSOR`。
 
     === "Java"
 
@@ -1080,6 +1082,91 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
         ```css
         element {
             overflow: hidden;
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;" id="clip">clip</p>
+
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+
+    控制元素子树是否被裁剪，以及以何种方式裁剪。`clip` 用于替代旧的 1.21 `overflow` / `overflow-clip` API。除 `NONE` 以外的所有模式也会阻止元素内容边界外的命中测试。
+
+    | 模式 | 描述 |
+    | --- | --- |
+    | `NONE` | 不裁剪。这是默认值。 |
+    | `SCISSOR` | 将渲染裁剪到元素的内容边界内。可作为 26.1+ 中 `overflow: hidden` 或 `setOverflowVisible(false)` 的替代方案。 |
+    | `MASK` | 使用 [`mask`](#mask) 设置的纹理裁剪渲染。适用于静态遮罩纹理。 |
+    | `DYNAMIC_MASK` | 与 `MASK` 相同，但每帧都会刷新遮罩。适用于动画遮罩或会动态变化的遮罩。 |
+
+    === "Java"
+
+        ```java
+        style.clip(Clip.SCISSOR);
+        style.clip(Clip.MASK).mask(MCSprites.BORDER);
+        style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            clip(Clip.SCISSOR)
+            clip(Clip.MASK)
+            mask(MCSprites.BORDER)
+        }
+        ```
+
+    === "LSS"
+
+        ```css
+        element {
+            clip: scissor;
+        }
+
+        element.masked {
+            clip: mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
+        }
+
+        element.animated-mask {
+            clip: dynamic-mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
+        }
+        ```
+
+!!! info ""
+    #### <p style="font-size: 1rem;" id="mask">mask</p>
+
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+
+    定义 `clip: mask` 和 `clip: dynamic-mask` 使用的纹理。遮罩会绘制在元素边界上，并使用采样得到的遮罩系数乘到已渲染子树的颜色和 alpha 上。
+
+    不透明的灰度遮罩使用纹理亮度：白色保留内容可见，黑色隐藏内容。使用 alpha 编码的遮罩会使用 alpha 通道，这适合透明 PNG 遮罩和柔和边缘。除非 `clip` 为 `MASK` 或 `DYNAMIC_MASK`，否则 `mask` 属性不会产生可见效果。
+
+    === "Java"
+
+        ```java
+        style.clip(Clip.MASK);
+        style.mask(MCSprites.BORDER);
+        ```
+
+    === "Kotlin"
+
+        ```kotlin
+        style = {
+            clip(Clip.MASK)
+            mask(MCSprites.BORDER)
+        }
+        ```
+
+    === "LSS"
+        查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
+
+        ```css
+        element {
+            clip: mask;
+            mask: sprite(ldlib2:textures/gui/icon.png);
         }
         ```
 
@@ -1227,7 +1314,9 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 !!! info ""
     #### <p style="font-size: 1rem;">overflow-clip</p>
 
-    当元素的 `overflow` 为隐藏时，会使用给定纹理的红色通道作为遮罩来裁剪子元素渲染。
+    **已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip: mask`](#clip) 和 [`mask`](#mask)。
+
+    在 1.21 API 中，当元素的 `overflow` 为隐藏时，`overflow-clip` 会使用给定纹理的红色通道作为遮罩来裁剪子元素渲染。在 26.1+ 中，请将 `clip` 设置为 `MASK` 或 `DYNAMIC_MASK`，然后使用 `mask` 设置遮罩纹理。
 
     <div style="text-align: center;">
         <video controls>
