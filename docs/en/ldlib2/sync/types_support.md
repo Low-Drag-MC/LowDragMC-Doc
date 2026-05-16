@@ -25,6 +25,14 @@ LDLib2 has provided massive types support for synchronization and persistence al
 | `UUID`                       | `100`    | -         |
 | `T[]`                        | `-1`     | depeends on `T` |
 | `Collection<?>`              | `-1`     | ✅         |
+| `Map<K, V>`                  | `-1`     | ✅         |
+
+!!! note "Map support"
+    {{ version_badge("2.2.8", label="Since", icon="tag") }}
+
+    Since **2.2.8**, LDLib2 supports `Map<K, V>` for synchronization and persistence. Both `K` and `V` are resolved through their own accessors, so the key and value types must also be supported types.
+
+    Maps are managed as read-only containers. When both key and value accessors are direct, LDLib2 can clear and rebuild the map during deserialization. If the key or value type is read-only, the map structure must already match on both sides, or the field should use `@ReadOnlyManaged` to serialize and rebuild the structure.
 
 - types in minecraft (Block, Item, Fluid, etc)
 

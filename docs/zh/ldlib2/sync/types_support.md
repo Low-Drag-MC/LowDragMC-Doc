@@ -25,6 +25,14 @@ LDLib2 已经为同步和持久化提供了大量的类型支持。
 | `UUID`                         | `100`    | -     |
 | `T[]`                          | `-1`     | 取决于 `T` |
 | `Collection<?>`                | `-1`     | ✅     |
+| `Map<K, V>`                    | `-1`     | ✅     |
+
+!!! note "Map 支持"
+    {{ version_badge("2.2.8", label="自", icon="tag") }}
+
+    从 **2.2.8** 起，LDLib2 支持对 `Map<K, V>` 进行同步和持久化。`K` 和 `V` 都会通过各自的 accessor 处理，因此 key 和 value 的类型本身也必须是受支持的类型。
+
+    Map 会作为只读容器管理。当 key 和 value 的 accessor 都是 direct 时，LDLib2 可以在反序列化时清空并重建 map。如果 key 或 value 类型是 read-only，则两侧的 map 结构必须已经匹配，或者在字段上使用 `@ReadOnlyManaged` 来序列化并重建结构。
 
 - Minecraft 中的类型（Block、Item、Fluid 等）
 
