@@ -24,8 +24,10 @@ repositories {
 }
 
 dependencies {
-    // LDLib2
+    // for LDLib2 1.21
     implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all")
+    // for LDLib2 26.1+
+    implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}")
 }
 ```
 
