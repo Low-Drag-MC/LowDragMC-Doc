@@ -30,5 +30,5 @@ Provides more stable and stable integration for mainstream mods such as JEI, Kub
 * [LDLib2 UI](./ui/index.md){ data-preview } 
 * Shaders
 * Model Rendering
-* In-game Editor
+* [In-game Editor](./editor/index.md){ data-preview }
 

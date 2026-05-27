@@ -2,17 +2,20 @@
 
 {{ version_badge("2.1.5", label="Since", icon="tag") }}
 
+!!! note
+    This page covers the built-in UI Editor. To build your own LDLib2-based editor, see [Editor Framework](../editor/index.md){ data-preview }.
+
 !!! warning inline end
     This command can only be used under the `single player` world.
 
-LDLib2 provides a visual editor to support UI creatiom. Use command to open the UI Editor.
+LDLib2 provides a visual editor to support UI creation. Use this command to open the UI Editor.
 
 ```shell
 /ldlib2_ui_editor
 ```
 
 <figure markdown="span">
-  ![Editor apperance](./assets/editor_01.png){ width="80%" }
+  ![Editor appearance](./assets/editor_01.png){ width="80%" }
 </figure>
 
 The UI Editor supports two ways of creating UIs through visualization:
@@ -94,8 +97,8 @@ For components with special configuration options, refer to their individual doc
 ### Load UI Template and setup
 There are two methods to load and use your template for your UI.
 
-1. you could also move it to your assets and loaed it by a `ResourceLoaction`.
-2. if the resrouce is under the ldlib2 folder, you can right click the resource to obtain the resource path and load it.
+1. You can move it to your assets and load it by a `ResourceLocation`.
+2. If the resource is under the ldlib2 folder, you can right-click the resource to obtain the resource path and load it.
 
 <figure markdown="span">
   ![Editor appearance](./assets/template_path.png){ width="100%" }
@@ -108,7 +111,7 @@ There are two methods to load and use your template for your UI.
     public ModularUI createUI(Player player) {
         var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
                 // resource location based
-                .getResource(new FilePath(ResourceLoaction.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
+                .getResource(new FilePath(ResourceLocation.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
 
                 // file based
                 //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
@@ -116,7 +119,7 @@ There are two methods to load and use your template for your UI.
                 .map(UITemplate::createUI)
                 .orElseGet(UI::empty);
 
-        // find elemetns and do data bindings or logic setup here
+        // find elements and do data bindings or logic setup here
         var buttons = ui.select(".button_container > button").toList(); // by selector
         var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
 

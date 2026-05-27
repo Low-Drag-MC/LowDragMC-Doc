@@ -124,8 +124,8 @@ and it can be difficult to understand what is going wrong.
 
 LDLib2 provides a **Debug Panel**, similar to the debug tools in Chrome. The panel lets you inspect the live UI hierarchy, view computed style and layout information, and select elements while the UI is running.
 
-!!! note "{{ version_badge("mc26.1", label="Since", icon="tag") }}"
-    
+!!! note
+    {{ version_badge("mc26.1", label="Since", icon="tag") }}
 
     Press **`F12`** to open or close the Debug Panel. In older 1.21 builds, the debug shortcut was **`F3`**.
 

@@ -4,5 +4,7 @@ nav:
   - java_integration.md
   - migration
   - ui
+  - editor
+  - configurable
   - sync
   - ...
