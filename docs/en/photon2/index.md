@@ -11,6 +11,13 @@
 **Photon2** is a powerful Minecraft VFX creation mod inspired by Unity’s particle system.
 It brings modern, flexible, and highly customizable visual effects into Minecraft, making it possible to design stunning in-game VFX with a workflow familiar to Unity developers.
 
+<figure markdown="span">
+    ![Photon Editor](./assets/photonn_editor.png)
+    <figcaption>
+    Photon Editor: build and preview in-game visual effects.
+    </figcaption>
+</figure>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---

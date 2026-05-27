@@ -22,6 +22,13 @@ The built-in UI Editor is built with this framework. It uses the same project sy
     </figcaption>
 </figure>
 
+<figure markdown="span">
+    ![Photon Editor](./assets/photonn_editor.png)
+    <figcaption>
+    Built with the Editor framework: Photon Editor
+    </figcaption>
+</figure>
+
 You can use it for tools such as shop editors, visual scripting editors, UI builders, node graph editors, scene/object editors, resource managers, or any in-game tool that feels closer to Unity, Blender, Blockbench, or Adobe-style software than to a normal Minecraft screen.
 
 ## Modules

@@ -11,6 +11,13 @@
 **Photon2** 是一款受 Unity 粒子系统启发的强大 Minecraft VFX 创作模组。
 它将现代、灵活且高度可定制的视觉特效引入 Minecraft，让熟悉 Unity 工作流程的开发者能够设计出惊艳的游戏内 VFX。
 
+<figure markdown="span">
+    ![Photon Editor](./assets/photonn_editor.png)
+    <figcaption>
+    Photon Editor：制作并预览游戏内视觉特效。
+    </figcaption>
+</figure>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
