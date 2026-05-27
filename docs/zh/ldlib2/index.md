@@ -31,4 +31,4 @@ LDLib2 包含详细的文档、注释和示例代码，解决了 LDLib 长期以
 * 着色器（Shaders）
 * 模型渲染
 * [游戏内编辑器](./editor/index.md){ data-preview }
-* [Configurable](./configurable/index.md){ data-preview }
+* [可配置系统](./configurable/index.md){ data-preview }

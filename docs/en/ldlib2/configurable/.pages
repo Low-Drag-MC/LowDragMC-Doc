@@ -1,3 +1,9 @@
 title: Configurable
 nav:
   - index.md
+  - getting_start.md
+  - annotations.md
+  - accessors.md
+  - configurator-ui.md
+  - inspector-and-history.md
+  - examples.md

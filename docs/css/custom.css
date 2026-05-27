@@ -69,3 +69,12 @@ p {
   color: #d6b3ff !important;
   border-radius: 4px !important;        /* 圆角大小 */
 }
+
+.ldlib-limited-code .highlight {
+  max-height: 34rem;
+  overflow: auto;
+}
+
+.ldlib-limited-code .highlight pre {
+  margin-bottom: 0;
+}

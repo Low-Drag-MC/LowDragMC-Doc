@@ -31,4 +31,5 @@ Provides more stable and stable integration for mainstream mods such as JEI, Kub
 * Shaders
 * Model Rendering
 * [In-game Editor](./editor/index.md){ data-preview }
+* [Configurable](./configurable/index.md){ data-preview }
 
