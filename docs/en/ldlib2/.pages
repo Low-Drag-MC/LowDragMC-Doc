@@ -5,6 +5,7 @@ nav:
   - migration
   - ui
   - editor
+  - node-graph-toolkit
   - configurable
   - sync
   - ...
