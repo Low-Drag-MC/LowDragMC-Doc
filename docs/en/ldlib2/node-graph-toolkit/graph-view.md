@@ -10,7 +10,7 @@ It contains a header, a pannable canvas, graph elements, the item library, black
 <figure markdown="span">
     ![GraphView panels](./assets/ngt-graph-view-placeholder.png)
     <figcaption>
-    Placeholder: replace with a screenshot showing the canvas, blackboard, inspector, and preview panels.
+    GraphView / GraphEditorView panels with the canvas, blackboard, inspector, preview, and graph log.
     </figcaption>
 </figure>
 
