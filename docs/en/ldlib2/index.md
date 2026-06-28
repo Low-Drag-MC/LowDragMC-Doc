@@ -28,6 +28,7 @@ Provides more stable and stable integration for mainstream mods such as JEI, Kub
 
 * [Data Synchronization and Persistence](./sync/index.md) 
 * [LDLib2 UI](./ui/index.md) 
+* [Node Graph Toolkit](./node-graph-toolkit/index.md)
 * Shaders
 * Model Rendering
 * [In-game Editor](./editor/index.md)

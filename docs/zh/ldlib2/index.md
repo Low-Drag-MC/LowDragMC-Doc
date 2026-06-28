@@ -28,6 +28,7 @@ LDLib2 包含详细的文档、注释和示例代码，解决了 LDLib 长期以
 
 * [数据同步与持久化](./sync/index.md) 
 * [LDLib2 UI](./ui/index.md) 
+* [节点图工具包](./node-graph-toolkit/index.md)
 * 着色器（Shaders）
 * 模型渲染
 * [游戏内编辑器](./editor/index.md)
