@@ -67,6 +67,13 @@
   box-shadow: 0 2px 0 var(--ld-stone-edge);
 }
 
+.vp-doc img[src*="img.shields.io"] {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  vertical-align: middle;
+}
+
 .vp-doc iframe {
   max-width: 100%;
 }

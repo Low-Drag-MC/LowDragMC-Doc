@@ -28,3 +28,12 @@ test('theme draws the sidebar edge without changing sidebar width', () => {
   assert.doesNotMatch(cssBlock('.VPSidebar'), /border-right\s*:/);
   assert.match(cssBlock('.VPSidebar'), /box-shadow\s*:\s*inset\s+-2px\s+0\s+0\s+var\(--vp-c-divider\)/);
 });
+
+test('theme leaves shields.io badges visually unframed', () => {
+  const block = cssBlock('.vp-doc img[src*="img.shields.io"]');
+
+  assert.match(block, /border\s*:\s*0/);
+  assert.match(block, /box-shadow\s*:\s*none/);
+  assert.match(block, /background\s*:\s*transparent/);
+  assert.match(block, /vertical-align\s*:\s*middle/);
+});
