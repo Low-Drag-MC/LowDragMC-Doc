@@ -11,6 +11,6 @@ test('VitePress language switch only exposes real locales', () => {
 });
 
 test('edit links use VitePress relative paths without duplicating locale folders', () => {
-  assert.match(configSource, /edit\/main\/docs\/:path/);
-  assert.doesNotMatch(configSource, /edit\/main\/docs\/\$\{locale\}\/:path/);
+  assert.match(configSource, /edit\/v2\/docs\/:path/);
+  assert.doesNotMatch(configSource, /edit\/v2\/docs\/\$\{locale\}\/:path/);
 });

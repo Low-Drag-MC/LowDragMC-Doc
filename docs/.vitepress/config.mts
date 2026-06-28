@@ -43,7 +43,7 @@ function localeTheme(locale: 'en' | 'zh') {
     nav: buildLocaleNav(docsRoot, locale, DEFAULT_MODS),
     sidebar: buildSidebars(docsRoot, locale, DEFAULT_MODS),
     editLink: {
-      pattern: 'https://github.com/Low-Drag-MC/LowDragMC-Doc/edit/main/docs/:path',
+      pattern: 'https://github.com/Low-Drag-MC/LowDragMC-Doc/edit/v2/docs/:path',
       text: isZh ? '在 GitHub 上编辑此页' : 'Edit this page on GitHub'
     },
     outline: {
