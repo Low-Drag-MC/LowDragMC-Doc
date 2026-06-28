@@ -6,11 +6,11 @@
 
 `InspectorView` 包装了 LDLib2 的 `Inspector` 组件，默认放在右侧面板。
 
-<figure markdown="span">
-    ![Inspector editing an AnimationTexture](../assets/editor_inspector.png){ width="45%" }
-    <figcaption>
-    Inspector 正在编辑一个 `AnimationTexture`。
-    </figcaption>
+<figure>
+<img src="../assets/editor_inspector.png" alt="Inspector editing an AnimationTexture" width="45%">
+<figcaption>
+Inspector 正在编辑一个 &lt;code&gt;AnimationTexture&lt;/code&gt;。
+</figcaption>
 </figure>
 
 当当前选中对象需要暴露可编辑属性时，使用它：
@@ -34,7 +34,7 @@ editor.inspectorView.inspect(
 
 Inspector 已经共享 Editor 的 `HistoryView`，因此属性修改可以参与 undo / redo。
 
-本页只介绍如何在编辑器中使用 Inspector。Configurable / Configurator 系统见 [Configurable](../../configurable/index.md){ data-preview }。
+本页只介绍如何在编辑器中使用 Inspector。Configurable / Configurator 系统见 [Configurable](../../configurable/index.md)。
 
 ## HistoryView
 

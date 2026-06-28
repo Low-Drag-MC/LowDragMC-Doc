@@ -4,14 +4,15 @@
 
 It contains a header, a pannable canvas, graph elements, the item library, blackboard, inspector, preview panel, history stack, command handling, and diagnostics footer.
 
-!!! tip ""
-    Prefer `GraphEditorView` for real graph editors. It wraps `GraphView` and adds save handling, dirty state, breadcrumbs, subgraph dive, and external subgraph editing support.
+::: tip
+Prefer `GraphEditorView` for real graph editors. It wraps `GraphView` and adds save handling, dirty state, breadcrumbs, subgraph dive, and external subgraph editing support.
+:::
 
-<figure markdown="span">
-    ![GraphView panels](./assets/ngt-graph-view-placeholder.png)
-    <figcaption>
-    GraphView / GraphEditorView panels with the canvas, blackboard, inspector, preview, and graph log.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphView panels">
+<figcaption>
+GraphView / GraphEditorView panels with the canvas, blackboard, inspector, preview, and graph log.
+</figcaption>
 </figure>
 
 ## Direct Loading

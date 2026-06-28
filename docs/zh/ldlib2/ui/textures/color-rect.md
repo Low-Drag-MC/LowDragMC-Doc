@@ -1,45 +1,51 @@
 # ColorRectTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ColorRectTexture` 绘制一个纯色的 ARGB 填充矩形。它是最简单的纹理类型——无圆角、无边框，仅仅是平坦的颜色。
 
 注册名：`color_rect_texture`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 不透明深色背景
-    IGuiTexture bg = new ColorRectTexture(0xFF1A1A1A);
+```java
+// 不透明深色背景
+IGuiTexture bg = new ColorRectTexture(0xFF1A1A1A);
 
-    // 半透明覆盖层
-    IGuiTexture overlay = new ColorRectTexture(0x80FFFFFF);
+// 半透明覆盖层
+IGuiTexture overlay = new ColorRectTexture(0x80FFFFFF);
 
-    // 从 java.awt.Color 创建
-    IGuiTexture red = new ColorRectTexture(java.awt.Color.RED);
-    ```
+// 从 java.awt.Color 创建
+IGuiTexture red = new ColorRectTexture(java.awt.Color.RED);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val bg = ColorRectTexture(0xFF1A1A1A.toInt())
-    val overlay = ColorRectTexture(0x80FFFFFF.toInt())
-    ```
+```kotlin
+val bg = ColorRectTexture(0xFF1A1A1A.toInt())
+val overlay = ColorRectTexture(0x80FFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let bg = new ColorRectTexture(0xFF1A1A1A);
-    let overlay = new ColorRectTexture(0x80FFFFFF);
-    ```
+```js
+let bg = new ColorRectTexture(0xFF1A1A1A);
+let overlay = new ColorRectTexture(0x80FFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

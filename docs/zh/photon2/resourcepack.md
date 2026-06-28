@@ -31,9 +31,10 @@ assets/<namespace>/fx/
 
 ## 2️⃣ 资源
 
-!!! warning "Minecraft 资源命名规则"
-    Minecraft **不允许**在文件路径中使用大写字母、空格或非英文字符。
-    在移动文件之前，请确保所有名称符合 [Minecraft 资源命名](https://minecraft.wiki/w/Resource_pack#File_naming) 规则。
+::: warning Minecraft 资源命名规则
+Minecraft **不允许**在文件路径中使用大写字母、空格或非英文字符。
+在移动文件之前，请确保所有名称符合 [Minecraft 资源命名](https://minecraft.wiki/w/Resource_pack#File_naming) 规则。
+:::
 
 所有 FX 资源依赖项（材质、渐变、颜色等）必须从：
 
@@ -63,17 +64,18 @@ assets/ldlib2/resources/global/xxxx.material.nbt
 
 ## 💡 推荐的迁移方法
 
-!!! info
-    **最简单**且**最不容易出错**的方法是复制以下路径下的**所有内容**：
+::: info
+**最简单**且**最不容易出错**的方法是复制以下路径下的**所有内容**：
 
-    ```
-    .minecraft/ldlib2/assets/...
-    ```
+```
+.minecraft/ldlib2/assets/...
+```
 
-    到：
+到：
 
-    ```
-    assets/...
-    ```
+```
+assets/...
+```
 
-    这样可以确保保留所有依赖项，并且 FX 在打包后能正常工作。
+这样可以确保保留所有依赖项，并且 FX 在打包后能正常工作。
+:::

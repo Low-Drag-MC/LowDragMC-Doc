@@ -4,11 +4,11 @@ Context nodes hold ordered block nodes.
 
 Use them when one graph element needs global settings plus a configurable list of child operations. This is useful for shader stages, render passes, state definitions, rule groups, clauses, or any node that is better edited as a small stack of composable blocks than as many separate top-level nodes.
 
-<figure markdown="span">
-    ![Context and block nodes](./assets/ngt-context-block-placeholder.png)
-    <figcaption>
-    A shader-style context node. The context represents a vertex shader stage, and its blocks configure parts of that stage.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-context-block-placeholder.png" alt="Context and block nodes">
+<figcaption>
+A shader-style context node. The context represents a vertex shader stage, and its blocks configure parts of that stage.
+</figcaption>
 </figure>
 
 ## Relationship

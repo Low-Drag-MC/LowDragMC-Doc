@@ -3,7 +3,7 @@
 Compass Scene is inspired by the ponder. The difference is that you don't need to write code, and all scenes can be implemented through `xml`. This page details how to configure a scene.
 
 ***
-### `<compass/>`
+### `&lt;compass/&gt;`
 Prepare your scene settings:
 * `scene`: only use the scene (disable the information above)
 * `height`: scene height
@@ -22,12 +22,12 @@ Prepare your scene settings:
 </page>
 ```
 
-### `<frame/>`
-The compass scene consists of many `<frame>`. `<frame>` refers to a chapter/section of the scene animation.
+### `&lt;frame/&gt;`
+The compass scene consists of many `&lt;frame&gt;`. `&lt;frame&gt;` refers to a chapter/section of the scene animation.
 
 The user can jump back and forth between frames, but not to a specific moment of animation within the frame.
 
-`<description/>`: Describes the frame, shows it on hover tooltips, and has the same syntax as the `<text/>` label.
+`&lt;description/&gt;`: Describes the frame, shows it on hover tooltips, and has the same syntax as the `&lt;text/&gt;` label.
 ```xml
 <page>
     <compass>
@@ -50,8 +50,8 @@ The user can jump back and forth between frames, but not to a specific moment of
 
 
 ### Actions
-Actions are used under the `<frame/>` tag.
-There are two types of built-in actions `<information/>` and `<scene/>`. You can register custom actions via Java if you want.
+Actions are used under the `&lt;frame/&gt;` tag.
+There are two types of built-in actions `&lt;information/&gt;` and `&lt;scene/&gt;`. You can register custom actions via Java if you want.
 
 Actions are executed sequentially, and the next action is executed if and only if the last action is completed, but this can be adjusted using the following attributes, similar to ppt animation:
  - delay: delay time after last action finish. (tick)
@@ -72,7 +72,7 @@ Actions are executed sequentially, and the next action is executed if and only i
 <img width="529" alt="image" src="https://github.com/Low-Drag-MC/LDLib-Architectury/assets/18493855/bf2492a8-1479-4762-bbdb-71c47f19b2d1">
 
 ***
-### `<information/>`
+### `&lt;information/&gt;`
 Action information: display text and images on top
 ```xml
 <information>
@@ -88,12 +88,12 @@ Action information: display text and images on top
     shader
 </information>
 ```
-### `<scene/>`
-Action scene: Animate the scene. **Notice that all the operations under the `<scene/>` are performing simultaneously**. More than one `<scene/>` label should be used when the operation is sequential.
+### `&lt;scene/&gt;`
+Action scene: Animate the scene. **Notice that all the operations under the `&lt;scene/&gt;` are performing simultaneously**. More than one `&lt;scene/&gt;` label should be used when the operation is sequential.
 
-Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity/>`, `<remoge-entity/>`, `<rotation/>`, `<highlight/>`, `<tooltip/>`
+Operations: `&lt;add/&gt;`, `&lt;remove/&gt;`, `&lt;modify/&gt;`, `&lt;add-entity/&gt;`, `&lt;modify-entity/&gt;`, `&lt;remoge-entity/&gt;`, `&lt;rotation/&gt;`, `&lt;highlight/&gt;`, `&lt;tooltip/&gt;`
 
-#### `<add/>`
+#### `&lt;add/&gt;`
 ```xml
 <!--add block to the scene with animation-->
 <add pos="0 0 0" block="minecraft:glass"/>
@@ -118,12 +118,12 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
 <!--offset: animation offset, duration: animation duration-->
 <add pos="0 1 0" offset="3 1 0" duration="40" block="minecraft:glass"/>
 ```
-#### `<remove/>`
+#### `&lt;remove/&gt;`
 ```xml
 <!--remove block from the scene with animation-->
 <remove pos="0 0 0" offset="3 1 0" duration="40"/>
 ```
-#### `<modify/>`
+#### `&lt;modify/&gt;`
 ```xml
 <!--modify a block, its kinda similar to the add label but without animation -->
 <modify pos="1 1 0" block="minecraft:campfire">
@@ -134,7 +134,7 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
     </nbt>
 </modify>
 ```
-#### `<add-entity/>`
+#### `&lt;add-entity/&gt;`
 ```xml
 <!-- add entities by its type name. You have to allocate it an id, or a random id will be generated-->
 <add-entity pos="0 1 0" type="minecraft:player" id="12"/>
@@ -150,12 +150,12 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
     </nbt>
 </add-entity>
 ```
-#### `<remove-entity/>`
+#### `&lt;remove-entity/&gt;`
 ```xml
 <!-- remove entity by id-->
 <remove-entity id="12" force="true"/>
 ```
-#### `<modify-entity/>`
+#### `&lt;modify-entity/&gt;`
 ```xml
 <!-- modify entity's tag and position by id-->
 <modify-entity pos="3 0 3" id="12">
@@ -180,18 +180,18 @@ Operations: `<add/>`, `<remove/>`, `<modify/>`, `<add-entity/>`, `<modify-entity
     </nbt>
 </modify-entity>
 ```
-#### `<rotation/>`
+#### `&lt;rotation/&gt;`
 ```xml
 <!--rotate the scene view-->
 <rotation degree="90"/>
 ```
-#### `<hightlight/>`
+#### `&lt;hightlight/&gt;`
 ```xml
 <!--hightlight a block or a face of the block-->
 <highlight pos="0 0 0" duration="70"/>
 <highlight pos="0 0 0" face="UP" duration="70"/>
 ```
-#### `<tooltip/>`
+#### `&lt;tooltip/&gt;`
 ```xml
 <!--Point to a location in the scene and provide a description-->
 <tooltip pos="1.5 1.5 0.5" screen-offset="0.6 0.5" duration = "60" item="minecraft:flint_and_steel">

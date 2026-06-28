@@ -1,6 +1,6 @@
 # Scroller
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `Scroller` is a scroll bar control that holds a value in a `[min, max]` range. Two concrete variants are registered:
 
@@ -9,52 +9,58 @@
 
 Both expose a `head` button (scroll up/left), a `tail` button (scroll down/right), a drag-handle `scrollBar`, and a `scrollContainer` track. Clicking the track jumps the value to the clicked position. Scrolling the mouse wheel also changes the value.
 
-`Scroller` is primarily used as an **internal component** inside [`ScrollerView`](scroller-view.md){ data-preview } and [`TextArea`](text-area.md){ data-preview }, but it can also be used standalone.
+`Scroller` is primarily used as an **internal component** inside [`ScrollerView`](scroller-view.md) and [`TextArea`](text-area.md), but it can also be used standalone.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Vertical scroll bar
-    var scroller = new Scroller.Vertical();
-    scroller.setRange(0, 100f);
-    scroller.setValue(50f);
-    scroller.setOnValueChanged(value -> System.out.println("Scroll: " + value));
-    parent.addChild(scroller);
+```java
+// Vertical scroll bar
+var scroller = new Scroller.Vertical();
+scroller.setRange(0, 100f);
+scroller.setValue(50f);
+scroller.setOnValueChanged(value -> System.out.println("Scroll: " + value));
+parent.addChild(scroller);
 
-    // Horizontal scroll bar
-    var hScroller = new Scroller.Horizontal();
-    hScroller.setRange(0, 1f);
-    ```
+// Horizontal scroll bar
+var hScroller = new Scroller.Horizontal();
+hScroller.setRange(0, 1f);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    scrollerVertical({
-        layout { height(100) }
-    }) {
-        api {
-            setRange(0f, 100f)
-            setOnValueChanged { v -> println("Scroll: $v") }
-        }
+```kotlin
+scrollerVertical({
+    layout { height(100) }
+}) {
+    api {
+        setRange(0f, 100f)
+        setOnValueChanged { v -> println("Scroll: $v") }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let scroller = new ScrollerVertical();
-    scroller.setRange(0, 100);
-    scroller.setValue(50);
-    parent.addChild(scroller);
-    ```
+```js
+let scroller = new ScrollerVertical();
+scroller.setRange(0, 100);
+scroller.setValue(50);
+parent.addChild(scroller);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -88,65 +94,80 @@ Both expose a `head` button (scroll up/left), a `tail` button (scroll down/right
 
 ## Scroller Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroll-delta</p>
+::: info
+#### <p style="font-size: 1rem;">scroll-delta</p>
 
-    Fraction of the total range moved per head/tail button click or mouse-wheel tick.
+Fraction of the total range moved per head/tail button click or mouse-wheel tick.
 
-    Default: `0.1` (10 %)
+Default: `0.1` (10 %)
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        scroller.scrollerStyle(style -> style.scrollDelta(0.05f));
-        ```
+```java
+scroller.scrollerStyle(style -> style.scrollDelta(0.05f));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        scroller-vertical {
-            scroll-delta: 0.05;
-        }
-        ```
+```css
+scroller-vertical {
+    scroll-delta: 0.05;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroll-bar-size</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Size of the drag handle as a percentage of the track length. 100 means the handle fills the whole track.
+::: info
+#### <p style="font-size: 1rem;">scroll-bar-size</p>
 
-    Default: `20` (%)
+Size of the drag handle as a percentage of the track length. 100 means the handle fills the whole track.
 
-    === "Java"
+Default: `20` (%)
 
-        ```java
-        scroller.setScrollBarSize(30f);
-        // or:
-        scroller.scrollerStyle(style -> style.scrollBarSize(30f));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+scroller.setScrollBarSize(30f);
+// or:
+scroller.scrollerStyle(style -> style.scrollBarSize(30f));
+```
 
-        ```css
-        scroller-vertical {
-            scroll-bar-size: 30;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
+
+```css
+scroller-vertical {
+    scroll-bar-size: 30;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`Scroller` extends `BindableUIElement<Float>`, so it supports data binding:
+`Scroller` extends `BindableUIElement&lt;Float&gt;`, so it supports data binding:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    scroller.bind(DataBindingBuilder.floatVal(
-        () -> state.getScrollPosition(),
-        v -> state.setScrollPosition(v)
-    ).build());
-    ```
+```java
+scroller.bind(DataBindingBuilder.floatVal(
+    () -> state.getScrollPosition(),
+    v -> state.setScrollPosition(v)
+).build());
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Fields
@@ -174,9 +195,9 @@ Both expose a `head` button (scroll up/left), a `tail` button (scroll down/right
 | `setValue(Float)` | `Scroller` | Sets the current value (clamped to range). |
 | `setOnValueChanged(FloatConsumer)` | `Scroller` | Registers a listener for value changes. |
 | `setScrollBarSize(float)` | `Scroller` | Sets the scroll bar thumb size (0–100 %). |
-| `scrollerStyle(Consumer<ScrollerStyle>)` | `Scroller` | Configures style fluently. |
+| `scrollerStyle(Consumer&lt;ScrollerStyle&gt;)` | `Scroller` | Configures style fluently. |
 | `getNormalizedValue()` | `float` | Returns the current value normalized to `[0, 1]`. |
-| `headButton(Consumer<Button>)` | `Scroller` | Configures the head arrow button. |
-| `tailButton(Consumer<Button>)` | `Scroller` | Configures the tail arrow button. |
-| `scrollContainer(Consumer<UIElement>)` | `Scroller` | Configures the track element. |
-| `scrollBar(Consumer<Button>)` | `Scroller` | Configures the drag handle button. |
+| `headButton(Consumer&lt;Button&gt;)` | `Scroller` | Configures the head arrow button. |
+| `tailButton(Consumer&lt;Button&gt;)` | `Scroller` | Configures the tail arrow button. |
+| `scrollContainer(Consumer&lt;UIElement&gt;)` | `Scroller` | Configures the track element. |
+| `scrollBar(Consumer&lt;Button&gt;)` | `Scroller` | Configures the drag handle button. |

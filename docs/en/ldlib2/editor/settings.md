@@ -2,11 +2,11 @@
 
 Editor settings are persistent preferences for the editor UI and behavior.
 
-<figure markdown="span">
-    ![Editor settings panel](./assets/editor_setting.png)
-    <figcaption>
-    Editor settings panel: setting groups on the left, editable settings on the right.
-    </figcaption>
+<figure>
+<img src="./assets/editor_setting.png" alt="Editor settings panel">
+<figcaption>
+Editor settings panel: setting groups on the left, editable settings on the right.
+</figcaption>
 </figure>
 
 `Settings` is the unit of configuration:

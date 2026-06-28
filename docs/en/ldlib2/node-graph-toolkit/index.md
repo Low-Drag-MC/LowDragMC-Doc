@@ -4,11 +4,11 @@ Node Graph Toolkit is LDLib2's framework for building in-game graph editors.
 
 It provides the graph data model, node and port definitions, wires, variables, subgraphs, a blackboard, editor panels, undoable commands, and resource-backed graph editing.
 
-<figure markdown="span">
-    ![Node Graph Toolkit overview](./assets/ngt-overview-placeholder.png)
-    <figcaption>
-    Node Graph Toolkit overview.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-overview-placeholder.png" alt="Node Graph Toolkit overview">
+<figcaption>
+Node Graph Toolkit overview.
+</figcaption>
 </figure>
 
 ## Main Pieces
@@ -44,24 +44,24 @@ flowchart TD
 
 ## Chapter Map
 
-[Getting Started](./getting-started.md){ data-preview } builds a small graph and opens it through `GraphEditorView`.
+[Getting Started](./getting-started.md) builds a small graph and opens it through `GraphEditorView`.
 
-[Graph Definition](./graph-definition.md){ data-preview } covers `Graph`, `GraphNodeRegistry`, supported nodes, supported types, and validation hooks.
+[Graph Definition](./graph-definition.md) covers `Graph`, `GraphNodeRegistry`, supported nodes, supported types, and validation hooks.
 
-[Nodes and Ports](./nodes-and-ports.md){ data-preview } covers `Node`, node options, input/output ports, orientation, and previews.
+[Nodes and Ports](./nodes-and-ports.md) covers `Node`, node options, input/output ports, orientation, and previews.
 
-[Variables and Blackboard](./variables-and-blackboard.md){ data-preview } covers graph variables, blackboard usage, variable inspectors, and subgraph input/output ports.
+[Variables and Blackboard](./variables-and-blackboard.md) covers graph variables, blackboard usage, variable inspectors, and subgraph input/output ports.
 
-[Type Handles](./type-handles.md){ data-preview } covers `TypeHandle`, built-in types, custom type registration, constants, default values, icons, colors, and configurators.
+[Type Handles](./type-handles.md) covers `TypeHandle`, built-in types, custom type registration, constants, default values, icons, colors, and configurators.
 
-[GraphView](./graph-view.md){ data-preview } covers the low-level graph UI used by `GraphEditorView`.
+[GraphView](./graph-view.md) covers the low-level graph UI used by `GraphEditorView`.
 
-[Editor Resources](./editor-resources.md){ data-preview } covers `GraphResource`, `GraphEditorView`, save callbacks, and resource-panel editing.
+[Editor Resources](./editor-resources.md) covers `GraphResource`, `GraphEditorView`, save callbacks, and resource-panel editing.
 
-[Subgraphs](./subgraphs.md){ data-preview } covers local and external subgraphs.
+[Subgraphs](./subgraphs.md) covers local and external subgraphs.
 
-[Context and Block Nodes](./context-and-block-nodes.md){ data-preview } covers context nodes that own ordered block lists.
+[Context and Block Nodes](./context-and-block-nodes.md) covers context nodes that own ordered block lists.
 
-[Commands and Customization](./commands-and-customization.md){ data-preview } covers command interception, capabilities, diagnostics, and UI customization points.
+[Commands and Customization](./commands-and-customization.md) covers command interception, capabilities, diagnostics, and UI customization points.
 
-[Glossary](./glossary.md){ data-preview } defines the common model and UI terms.
+[Glossary](./glossary.md) defines the common model and UI terms.

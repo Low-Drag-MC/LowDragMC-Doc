@@ -1,52 +1,58 @@
 # GuiTextureGroup
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `GuiTextureGroup` 按照添加的顺序将多个 `IGuiTexture` 实例堆叠绘制。它适用于将背景图像与覆盖层组合，或在填充层上叠加边框。
 
 注册名：`group_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 将精灵背景与彩色边框分层叠加
-    IGuiTexture layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
+```java
+// 将精灵背景与彩色边框分层叠加
+IGuiTexture layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
 
-    // 等效的静态工厂方法
-    IGuiTexture same = GuiTextureGroup.of(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
-    ```
+// 等效的静态工厂方法
+IGuiTexture same = GuiTextureGroup.of(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        ColorBorderTexture(1, 0xFFFFFFFF.toInt())
-    )
-    ```
+```kotlin
+val layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    ColorBorderTexture(1, 0xFFFFFFFF.toInt())
+)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
-    ```
+```js
+let layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

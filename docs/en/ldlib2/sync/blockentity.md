@@ -1,5 +1,5 @@
 # Manage BlockEntity
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 By implementing `ISyncPersistRPCBlockEntity`, you are able to delegate all synchronization and persistence code to LDLib2. 
 You don't need any additional code, just setup `syncStorage` and annotations.
@@ -37,11 +37,13 @@ public class MyBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEn
 }
 ```
 
-!!! note
-    Actually, `ISyncPersistRPCBlockEntity` is consisted of `ISyncBlockEntity`, `IRPCBlockEntity`, `IPersistManagedHolder`, `IBlockEntityManaged`.
-    You can choose partial of them if nonly few features are necessary or you want to fine-grained control.
+::: info
+Actually, `ISyncPersistRPCBlockEntity` is consisted of `ISyncBlockEntity`, `IRPCBlockEntity`, `IPersistManagedHolder`, `IBlockEntityManaged`.
+You can choose partial of them if nonly few features are necessary or you want to fine-grained control.
+:::
 
-!!! warning
-    If you have `useAsyncThread()` enabled (return ture by default). You have to be careful of thread safe issue. For example, `notifyPersistence()` will be triggered in a thread.
-    In general, you don't need to worry it, LDLib2 will handle all cases.
+::: warning
+If you have `useAsyncThread()` enabled (return ture by default). You have to be careful of thread safe issue. For example, `notifyPersistence()` will be triggered in a thread.
+In general, you don't need to worry it, LDLib2 will handle all cases.
+:::
 

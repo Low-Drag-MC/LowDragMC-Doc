@@ -1,6 +1,6 @@
 # SpriteTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `SpriteTexture` renders a PNG image file from the `assets/` directory. It supports:
 
@@ -11,64 +11,70 @@
 
 Registry name: `sprite_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Whole image, stretched
-    IGuiTexture icon = SpriteTexture.of("mymod:textures/gui/icon.png");
+```java
+// Whole image, stretched
+IGuiTexture icon = SpriteTexture.of("mymod:textures/gui/icon.png");
 
-    // 9-slice panel: 4 px border on all sides
-    IGuiTexture panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4);
+// 9-slice panel: 4 px border on all sides
+IGuiTexture panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4);
 
-    // 9-slice with different left/top/right/bottom borders
-    IGuiTexture fancy = SpriteTexture.of("mymod:textures/gui/fancy.png")
-        .setBorder(4, 4, 4, 4); // left, top, right, bottom
+// 9-slice with different left/top/right/bottom borders
+IGuiTexture fancy = SpriteTexture.of("mymod:textures/gui/fancy.png")
+    .setBorder(4, 4, 4, 4); // left, top, right, bottom
 
-    // Sub-region of a sprite sheet (x, y, width, height in pixels)
-    IGuiTexture frame = SpriteTexture.of("mymod:textures/gui/sheet.png")
-        .setSprite(0, 0, 16, 16);
+// Sub-region of a sprite sheet (x, y, width, height in pixels)
+IGuiTexture frame = SpriteTexture.of("mymod:textures/gui/sheet.png")
+    .setSprite(0, 0, 16, 16);
 
-    // Tiling background
-    IGuiTexture tile = SpriteTexture.of("mymod:textures/gui/tile.png")
-        .setWrapMode(SpriteTexture.WrapMode.REPEAT);
+// Tiling background
+IGuiTexture tile = SpriteTexture.of("mymod:textures/gui/tile.png")
+    .setWrapMode(SpriteTexture.WrapMode.REPEAT);
 
-    // Tinted
-    IGuiTexture tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .setColor(0xFF44AAFF);
-    ```
+// Tinted
+IGuiTexture tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val icon = SpriteTexture.of("mymod:textures/gui/icon.png")
+```kotlin
+val icon = SpriteTexture.of("mymod:textures/gui/icon.png")
 
-    val panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4)
+val panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4)
 
-    val tile = SpriteTexture.of("mymod:textures/gui/tile.png")
-        .setWrapMode(SpriteTexture.WrapMode.REPEAT)
-    ```
+val tile = SpriteTexture.of("mymod:textures/gui/tile.png")
+    .setWrapMode(SpriteTexture.WrapMode.REPEAT)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let icon = SpriteTexture.of("mymod:textures/gui/icon.png");
+```js
+let icon = SpriteTexture.of("mymod:textures/gui/icon.png");
 
-    let panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4);
+let panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4);
 
-    let tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .setColor(0xFF44AAFF);
-    ```
+let tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .setColor(0xFF44AAFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

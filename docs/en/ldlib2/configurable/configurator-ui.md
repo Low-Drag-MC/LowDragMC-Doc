@@ -2,11 +2,11 @@
 
 A configurator is a small UI component for one editable value or one group of values. Accessors create configurators, inspectors display them, and editors listen to their change events.
 
-<figure markdown="span">
-    ![Configurator UI structure](./assets/configurator_ui.png){ width="52%" }
-    <figcaption>
-    Configurator UI structure: 1. `ConfiguratorGroup`, 2. `ArrayConfiguratorGroup`, 3. regular `ValueConfigurator` rows.
-    </figcaption>
+<figure>
+<img src="./assets/configurator_ui.png" alt="Configurator UI structure" width="52%">
+<figcaption>
+Configurator UI structure: 1. &lt;code&gt;ConfiguratorGroup&lt;/code&gt;, 2. &lt;code&gt;ArrayConfiguratorGroup&lt;/code&gt;, 3. regular &lt;code&gt;ValueConfigurator&lt;/code&gt; rows.
+</figcaption>
 </figure>
 
 The three marked areas are the pieces most custom editors reuse. A `ConfiguratorGroup` creates collapsible sections, an `ArrayConfiguratorGroup` edits arrays or collections, and a `ValueConfigurator` row edits one value through one inline control.
@@ -44,7 +44,7 @@ That event is what `Inspector` uses to run listeners and record history.
 
 ## ValueConfigurator
 
-`ValueConfigurator<T>` is the core base class for most editable property rows. It connects one UI control to one value.
+`ValueConfigurator&lt;T&gt;` is the core base class for most editable property rows. It connects one UI control to one value.
 
 Constructor arguments:
 
@@ -91,7 +91,7 @@ It also provides copy/paste and drag-drop hooks:
 * `canDropObject(...)`
 * `onDropObject(...)`
 
-Most simple custom configurators should extend `ValueConfigurator<T>`, not `Configurator` directly.
+Most simple custom configurators should extend `ValueConfigurator&lt;T&gt;`, not `Configurator` directly.
 
 ## ConfiguratorGroup
 
@@ -151,7 +151,7 @@ Do not start with manual UI for every field. Let annotations and accessors handl
 
 Create a custom configurator when one value needs a special widget. The pattern is:
 
-1. extend `ValueConfigurator<T>`;
+1. extend `ValueConfigurator&lt;T&gt;`;
 2. create the UI control and add it to `inlineContainer`;
 3. when the user changes the control, call `updateValueActively(value)`;
 4. override `onValueUpdatePassively(...)` to refresh the control when the model changes;

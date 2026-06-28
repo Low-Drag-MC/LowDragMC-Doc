@@ -1,9 +1,10 @@
 # Introduction
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
-!!! warning
-    This Wiki is only available for Photon `2.x`. For `1.x`, check this [link](https://github.com/Low-Drag-MC/Photon/wiki)
+::: warning
+This Wiki is only available for Photon `2.x`. For `1.x`, check this [link](https://github.com/Low-Drag-MC/Photon/wiki)
+:::
 
 
 ## Overview
@@ -11,11 +12,11 @@
 **Photon2** is a powerful Minecraft VFX creation mod inspired by Unity’s particle system.
 It brings modern, flexible, and highly customizable visual effects into Minecraft, making it possible to design stunning in-game VFX with a workflow familiar to Unity developers.
 
-<figure markdown="span">
-    ![Photon Editor](./assets/photonn_editor.png)
-    <figcaption>
-    Photon Editor: build and preview in-game visual effects.
-    </figcaption>
+<figure>
+<img src="./assets/photonn_editor.png" alt="Photon Editor">
+<figcaption>
+Photon Editor: build and preview in-game visual effects.
+</figcaption>
 </figure>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -54,7 +55,7 @@ It brings modern, flexible, and highly customizable visual effects into Minecraf
 3. **Export FX files** and apply them via command or your own triggers
 4. **Explore advanced features:** custom shaders, mesh-based animation, depth-based highlights, and more
 
-> For details, see: [Getting Started](./getting_started.md), [Shader Guide](./shader_guide.md), [Advanced Tips](./advanced.md)
+> For details, see: [Commands](./commands.md), [Materials](./Materials/index.md), and [Java Integration](./Java%20Integration/index.md).
 
 ---
 

@@ -1,6 +1,6 @@
 # Scene
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `Scene` renders an interactive 3D Minecraft world view inside a GUI element. It uses a `WorldSceneRenderer` to draw a set of blocks from a `TrackedDummyWorld`. The viewport supports:
 
@@ -9,53 +9,59 @@
 - **Block interaction** — clicking reports the hit block position and face.
 - **FBO mode** — render at arbitrary resolution into a framebuffer object.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var scene = new Scene();
+```java
+var scene = new Scene();
 
-    // Create the scene from a level:
-    scene.createScene(level); // or createScene(level, useFBO, size)
+// Create the scene from a level:
+scene.createScene(level); // or createScene(level, useFBO, size)
 
-    // Populate blocks to render:
-    var blocks = List.of(BlockPos.ZERO, new BlockPos(1, 0, 0));
-    scene.setRenderedCore(blocks);
+// Populate blocks to render:
+var blocks = List.of(BlockPos.ZERO, new BlockPos(1, 0, 0));
+scene.setRenderedCore(blocks);
 
-    // Listen for clicks:
-    scene.setOnSelected((pos, face) ->
-        System.out.println("Clicked " + pos + " face " + face)
-    );
+// Listen for clicks:
+scene.setOnSelected((pos, face) ->
+    System.out.println("Clicked " + pos + " face " + face)
+);
 
-    parent.addChild(scene);
-    ```
+parent.addChild(scene);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    scene({
-        world(level)
-        blocks(BlockPos.ZERO)
-        onSelect { pos, face -> println("Clicked $pos $face") }
-    }) { }
-    ```
+```kotlin
+scene({
+    world(level)
+    blocks(BlockPos.ZERO)
+    onSelect { pos, face -> println("Clicked $pos $face") }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let s = new Scene();
-    s.createScene(level);
-    s.setRenderedCore([BlockPos.ZERO]);
-    s.setOnSelected((pos, face) => { /* ... */ });
-    parent.addChild(s);
-    ```
+```js
+let s = new Scene();
+s.createScene(level);
+s.setRenderedCore([BlockPos.ZERO]);
+s.setOnSelected((pos, face) => { /* ... */ });
+parent.addChild(s);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Fields
@@ -78,7 +84,7 @@
 | `rotationPitch` | `float` | `private` (getter) | Camera pitch in degrees. Default: `25`. |
 | `rotationYaw` | `float` | `private` (getter) | Camera yaw in degrees. Default: `-135`. |
 | `zoom` | `float` | `private` (getter) | Camera distance. Default: `5`. |
-| `onSelected` | `BiConsumer<BlockPos, Direction>` | `getter/setter` | Callback invoked when a block is clicked. |
+| `onSelected` | `BiConsumer&lt;BlockPos, Direction&gt;` | `getter/setter` | Callback invoked when a block is clicked. |
 | `lastHoverPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The block/face currently under the mouse. |
 | `lastClickPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The block/face that was last clicked. |
 | `lastSelectedPosFace` | `BlockPosFace` (nullable) | `private` (getter) | The last selected block/face. |
@@ -91,9 +97,9 @@
 | ------ | ------- | ----------- |
 | `createScene(Level)` | `Scene` | Initialises the renderer with the given level (immediate mode). |
 | `createScene(Level, boolean, Size)` | `Scene` | Initialises with optional FBO rendering at the given resolution. |
-| `setRenderedCore(Collection<BlockPos>)` | `Scene` | Sets the blocks to render; auto-adjusts the camera. |
-| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook)` | `Scene` | Sets blocks with a custom render hook. |
-| `setRenderedCore(Collection<BlockPos>, ISceneBlockRenderHook, boolean)` | `Scene` | Sets blocks; `autoCamera` controls whether the camera is repositioned. |
+| `setRenderedCore(Collection&lt;BlockPos&gt;)` | `Scene` | Sets the blocks to render; auto-adjusts the camera. |
+| `setRenderedCore(Collection&lt;BlockPos&gt;, ISceneBlockRenderHook)` | `Scene` | Sets blocks with a custom render hook. |
+| `setRenderedCore(Collection&lt;BlockPos&gt;, ISceneBlockRenderHook, boolean)` | `Scene` | Sets blocks; `autoCamera` controls whether the camera is repositioned. |
 | `useCacheBuffer(boolean)` | `Scene` | Enables or disables compiled draw-call cache. |
 | `useOrtho(boolean)` | `Scene` | Switches between perspective and orthographic projection. |
 | `setOrthoRange(float)` | `Scene` | Sets the orthographic projection range (only effective when ortho is enabled). |
@@ -103,5 +109,5 @@
 | `setCameraYawAndPitchAnima(float yaw, float pitch, int duration)` | `Scene` | Animates the camera to the given yaw and pitch over `duration` ticks. |
 | `needCompileCache()` | `void` | Flags the cache as dirty so it is recompiled on the next frame. |
 | `releaseRendererResource()` | `void` | Releases GPU resources held by the renderer. |
-| `setBeforeWorldRender(Consumer<Scene>)` | `Scene` | Sets a hook called before each world render pass (client-only). |
-| `setAfterWorldRender(Consumer<Scene>)` | `Scene` | Sets a hook called after each world render pass. |
+| `setBeforeWorldRender(Consumer&lt;Scene&gt;)` | `Scene` | Sets a hook called before each world render pass (client-only). |
+| `setAfterWorldRender(Consumer&lt;Scene&gt;)` | `Scene` | Sets a hook called after each world render pass. |

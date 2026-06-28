@@ -1,6 +1,6 @@
 # Screen and Menu
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 A `ModularUI` is a UI tree — it describes *what* the UI looks like and *how* it behaves. To actually display it to the player, it must be hosted inside a Minecraft **Screen** or **Menu**.
 
@@ -43,8 +43,9 @@ val modularUI = ModularUI(UI.of(root))
 Minecraft.getInstance().setScreen(ModularUIScreen(modularUI, Component.literal("My UI")))
 ```
 
-!!! note
-    Use `ModularUIScreen` for client-side tools like editors, configuration overlays, or any UI that does not interact with the server.
+::: info
+Use `ModularUIScreen` for client-side tools like editors, configuration overlays, or any UI that does not interact with the server.
+:::
 
 ---
 
@@ -92,8 +93,9 @@ class MyBlockEntity : BlockEntity(...), IContainerUIHolder {
 }
 ```
 
-!!! note ""
-    `createUI` is called **on the server**. The resulting `ModularUI` is then synchronized to the client automatically. Any `DataBindingBuilder` bindings you set up inside it will be kept in sync between the two sides.
+::: info
+`createUI` is called **on the server**. The resulting `ModularUI` is then synchronized to the client automatically. Any `DataBindingBuilder` bindings you set up inside it will be kept in sync between the two sides.
+:::
 
 ### Opening the menu
 
@@ -105,7 +107,7 @@ Once you have an `IContainerUIHolder`, open the menu using `player.openMenu(menu
 
 LDLib2 provides three pre-built factory helpers — `BlockUIMenuType`, `HeldItemUIMenuType`, and `PlayerUIMenuType` — for the most common use cases. KubeJS users can access all three through the `LDLib2UI` event group and `LDLib2UIFactory` bindings.
 
-See [UI Factory](../factory.md){ data-preview } for full documentation, including KubeJS examples and script placement guidance.
+See [UI Factory](../factory.md) for full documentation, including KubeJS examples and script placement guidance.
 
 ---
 
@@ -130,9 +132,10 @@ public static void onContainerMenuCreate(ContainerMenuEvent.Create event) throws
 }
 ```
 
-!!! warning ""
-    The menu must implement `IModularUIHolderMenu` for injection to work.
-    LDLib2 automatically mixins this interface onto all `AbstractContainerMenu` subclasses, so every menu in the game already supports it.
+::: warning
+The menu must implement `IModularUIHolderMenu` for injection to work.
+LDLib2 automatically mixins this interface onto all `AbstractContainerMenu` subclasses, so every menu in the game already supports it.
+:::
 
 ### Example: Augmenting the Vanilla Furnace
 
@@ -180,5 +183,6 @@ sequenceDiagram
     LDLib2->>Minecraft: renders UI overlay on top of the existing screen
 ```
 
-!!! tip
-    This pattern is powerful for adding contextual information overlays, quick-access controls, or debugging panels to any screen in the game — including those from other mods.
+::: tip
+This pattern is powerful for adding contextual information overlays, quick-access controls, or debugging panels to any screen in the game — including those from other mods.
+:::

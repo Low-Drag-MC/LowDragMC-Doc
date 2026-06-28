@@ -1,11 +1,12 @@
 # WidgetGroup
 
-[ :material-tag: `WidgetGroup`](WidgetGroup.md)
+[ <DocIcon name="material-tag" /> `WidgetGroup`](WidgetGroup.md)
 
 `WidgetGroup` 是一个容器，可以添加子组件。继承自 `WidgetGroup` 的组件也可以添加子组件。
 
-!!! note
-    我们会为所有继承自它的组件添加一个 [ :material-tag: `WidgetGroup`](WidgetGroup.md)。
+::: info
+我们会为所有继承自它的组件添加一个 [ <DocIcon name="material-tag" /> `WidgetGroup`](WidgetGroup.md)。
+:::
 
 ---
 
@@ -20,24 +21,29 @@
 | `layout`       | 子组件的布局 |
 | `layoutPadding`       | 内边距偏移 |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    for (var child in group.widgets) {
+``` java
+for (var child in group.widgets) {
 
-    }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    for (let child of group.widgets) {
+``` javascript
+for (let child of group.widgets) {
 
-    }
-    ```
+}
+```
 
-!!! warning
-    **请勿**直接向 `group.widgets` 添加组件！！请查看下方的方法。
+</DocTab>
+</DocTabs>
+::: warning
+**请勿**直接向 `group.widgets` 添加组件！！请查看下方的方法。
+:::
 
 ---
 
@@ -47,26 +53,34 @@
 
 按顺序向其添加子组件。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var button = ...;
-    var label = ...;
-    group.addWidgets(button, label);
-    ```
+``` java
+var button = ...;
+var label = ...;
+group.addWidgets(button, label);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `removeWidget() / clearAllWidgets()`
 
 从中移除子组件。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var child = group.getFirstWidgetById("button_id");
-    group.removeWidget(child);
-    group.clearAllWidget();
-    ```
+``` java
+var child = group.getFirstWidgetById("button_id");
+group.removeWidget(child);
+group.clearAllWidget();
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `waitToAdded() / waitToRemoved()`

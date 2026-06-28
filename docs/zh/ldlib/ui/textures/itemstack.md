@@ -17,22 +17,28 @@
 
 设置物品。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    itemStackTexture.setItems(item1, item2);
-    ```
+``` java
+itemStackTexture.setItems(item1, item2);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 设置物品堆纹理的颜色覆盖层。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    itemStackTexture.setColor(0xffff00ff);
-    ```
+``` java
+itemStackTexture.setColor(0xffff00ff);
+```
 
+</DocTab>
+</DocTabs>
 ---

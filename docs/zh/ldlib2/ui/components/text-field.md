@@ -1,60 +1,66 @@
 # TextField
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `TextField` 是一种单行文本输入元素。它支持多种输入**模式**（自由字符串、数字、ResourceLocation、复合 NBT 标签），数字字段支持拖拽调整数值、用于高亮无效输入的文本**校验器**、用于自定义显示的**格式化器**，以及通过 `Ctrl+Z` / `Ctrl+Y` 实现的撤销/重做功能。
 
 字段在获得焦点（点击）时变为可编辑状态。键盘快捷键遵循 Minecraft 的标准惯例：`Ctrl+A` 全选，`Ctrl+C/X/V` 复制/剪切/粘贴，`Ctrl+←/→` 按单词导航，`Home`/`End` 行首/行尾。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 自由字符串输入
-    var field = new TextField();
-    field.setTextResponder(text -> System.out.println("Typed: " + text));
-    parent.addChild(field);
+```java
+// 自由字符串输入
+var field = new TextField();
+field.setTextResponder(text -> System.out.println("Typed: " + text));
+parent.addChild(field);
 
-    // 带有范围限制的整数输入
-    var intField = new TextField();
-    intField.setNumbersOnlyInt(0, 100);
-    intField.setText("50");
-    intField.setTextResponder(raw -> config.setValue(Integer.parseInt(raw)));
+// 带有范围限制的整数输入
+var intField = new TextField();
+intField.setNumbersOnlyInt(0, 100);
+intField.setText("50");
+intField.setTextResponder(raw -> config.setValue(Integer.parseInt(raw)));
 
-    // ResourceLocation 输入
-    var rlField = new TextField();
-    rlField.setResourceLocationOnly();
-    ```
+// ResourceLocation 输入
+var rlField = new TextField();
+rlField.setResourceLocationOnly();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    textField({
-        layout { height(14) }
-    }) {
-        api {
-            setNumbersOnlyInt(0, 100)
-            setText("50")
-            setTextResponder { raw -> config.value = raw.toInt() }
-        }
+```kotlin
+textField({
+    layout { height(14) }
+}) {
+    api {
+        setNumbersOnlyInt(0, 100)
+        setText("50")
+        setTextResponder { raw -> config.value = raw.toInt() }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let field = new TextField();
-    field.setText("Hello");
-    field.setTextResponder(text => { console.log("Input: " + text); });
-    parent.addChild(field);
-    ```
+```js
+let field = new TextField();
+field.setText("Hello");
+field.setTextResponder(text => { console.log("Input: " + text); });
+parent.addChild(field);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -104,152 +110,190 @@
 
 ## TextField 样式
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    当字段被悬停或获得焦点时绘制在其上方的 Texture。
+当字段被悬停或获得焦点时绘制在其上方的 Texture。
 
-    默认值：`Sprites.RECT_RD_T_SOLID`
+默认值：`Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        field.textFieldStyle(style -> style.focusOverlay(myHighlight));
-        ```
+```java
+field.textFieldStyle(style -> style.focusOverlay(myHighlight));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text-field {
-            focus-overlay: rect(#FFFFFF22, 2);
-        }
-        ```
+```css
+text-field {
+    focus-overlay: rect(#FFFFFF22, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font / font-size</p>
+</DocTab>
+</DocTabs>
+:::
 
-    渲染文本的字体和大小。
+::: info
+#### <p style="font-size: 1rem;">font / font-size</p>
 
-    默认值：原版默认字体 / `9`
+渲染文本的字体和大小。
 
-    === "Java"
+默认值：原版默认字体 / `9`
 
-        ```java
-        field.textFieldStyle(style -> style
-            .font(ResourceLocation.parse("minecraft:uniform"))
-            .fontSize(10)
-        );
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+field.textFieldStyle(style -> style
+    .font(ResourceLocation.parse("minecraft:uniform"))
+    .fontSize(10)
+);
+```
 
-        ```css
-        text-field {
-            font: "minecraft:uniform";
-            font-size: 10;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-color / error-color</p>
+```css
+text-field {
+    font: "minecraft:uniform";
+    font-size: 10;
+}
+```
 
-    有效文本和校验失败文本的颜色。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`0xFFFFFF`（白色）/ `0xFF0000`（红色）
+::: info
+#### <p style="font-size: 1rem;">text-color / error-color</p>
 
-    === "Java"
+有效文本和校验失败文本的颜色。
 
-        ```java
-        field.textFieldStyle(style -> style
-            .textColor(0xFFFFFF)
-            .errorColor(0xFF4444)
-        );
-        ```
+默认值：`0xFFFFFF`（白色）/ `0xFF0000`（红色）
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text-field {
-            text-color: #FFFFFF;
-            error-color: #FF4444;
-        }
-        ```
+```java
+field.textFieldStyle(style -> style
+    .textColor(0xFFFFFF)
+    .errorColor(0xFF4444)
+);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">cursor-color</p>
+</DocTab>
+<DocTab title="LSS">
 
-    闪烁光标的颜色。
+```css
+text-field {
+    text-color: #FFFFFF;
+    error-color: #FF4444;
+}
+```
 
-    默认值：`0xEEEEEE`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">cursor-color</p>
 
-        ```java
-        field.textFieldStyle(style -> style.cursorColor(0xFFFFFF));
-        ```
+闪烁光标的颜色。
 
-    === "LSS"
+默认值：`0xEEEEEE`
 
-        ```css
-        text-field {
-            cursor-color: #FFFFFF;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-shadow</p>
+```java
+field.textFieldStyle(style -> style.cursorColor(0xFFFFFF));
+```
 
-    是否在文本下方绘制投影。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`true`
+```css
+text-field {
+    cursor-color: #FFFFFF;
+}
+```
 
-    === "LSS"
+</DocTab>
+</DocTabs>
+:::
 
-        ```css
-        text-field {
-            text-shadow: false;
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">text-shadow</p>
 
-!!! info ""
-    #### <p style="font-size: 1rem;">placeholder</p>
+是否在文本下方绘制投影。
 
-    当字段为空时显示的占位文本。
+默认值：`true`
 
-    默认值：可翻译键 `text_field.empty`
+<DocTabs>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text-field {
+    text-shadow: false;
+}
+```
 
-        ```java
-        field.textFieldStyle(style -> style
-            .placeholder(Component.literal("Enter value…"))
-        );
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">placeholder</p>
 
-        ```css
-        text-field {
-            placeholder: "Enter value…";
-        }
-        ```
+当字段为空时显示的占位文本。
+
+默认值：可翻译键 `text_field.empty`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+field.textFieldStyle(style -> style
+    .placeholder(Component.literal("Enter value…"))
+);
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text-field {
+    placeholder: "Enter value…";
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## 数据绑定
 
-`TextField` 继承自 `BindableUIElement<String>`，因此支持标准的数据绑定系统：
+`TextField` 继承自 `BindableUIElement&lt;String&gt;`，因此支持标准的数据绑定系统：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    field.bind(DataBindingBuilder.string(
-        () -> config.getName(),
-        name -> config.setName(name)
-    ).build());
-    ```
+```java
+field.bind(DataBindingBuilder.string(
+    () -> config.getName(),
+    name -> config.setName(name)
+).build());
+```
 
-更多详情请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+更多详情请参见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -262,7 +306,7 @@
 | `rawText` | `String` | `private`（getter） | 当前显示的文本（可能尚未通过校验）。 |
 | `mode` | `Mode` | `private`（getter） | 当前输入模式。 |
 | `isError` | `boolean` | `private`（getter） | 当 `rawText` 未通过校验器时为 `true`。 |
-| `formatter` | `Function<String, Component>` | `private`（getter/setter/nullable） | 可选函数，用于将 `rawText` 渲染为格式化的 `Component`。 |
+| `formatter` | `Function&lt;String, Component&gt;` | `private`（getter/setter/nullable） | 可选函数，用于将 `rawText` 渲染为格式化的 `Component`。 |
 | `wheelDur` | `float` | `private`（getter） | 数字字段中鼠标滚轮/拖拽的步长。 |
 | `cursorPos` | `int` | `private`（getter） | `rawText` 中的当前光标位置。 |
 | `selectionStart` | `int` | `private`（getter） | `rawText` 中的选择起始位置。 |
@@ -284,12 +328,12 @@
 | `setNumbersOnlyDouble(double, double)` | `TextField` | 双精度浮点数模式，范围 `[min, max]`。 |
 | `setNumbersOnlyShort(short, short)` | `TextField` | 短整数模式，范围 `[min, max]`。 |
 | `setNumbersOnlyByte(byte, byte)` | `TextField` | 字节模式，范围 `[min, max]`。 |
-| `setTextValidator(Predicate<String>)` | `TextField` | 自定义校验器；无效文本将以 `error-color` 显示。 |
+| `setTextValidator(Predicate&lt;String&gt;)` | `TextField` | 自定义校验器；无效文本将以 `error-color` 显示。 |
 | `setTextRegexValidator(String)` | `TextField` | 便捷方法，编译正则表达式并用作校验器。 |
-| `setCharValidator(Predicate<Character>)` | `TextField` | 在字符插入前对其进行过滤。 |
-| `setTextResponder(Consumer<String>)` | `TextField` | 注册监听器，在每次有效文本更改时调用。 |
+| `setCharValidator(Predicate&lt;Character&gt;)` | `TextField` | 在字符插入前对其进行过滤。 |
+| `setTextResponder(Consumer&lt;String&gt;)` | `TextField` | 注册监听器，在每次有效文本更改时调用。 |
 | `setWheelDur(float)` | `TextField` | 设置数字字段的滚动/拖拽步长。 |
-| `textFieldStyle(Consumer<TextFieldStyle>)` | `TextField` | 以流式接口配置样式。 |
+| `textFieldStyle(Consumer&lt;TextFieldStyle&gt;)` | `TextField` | 以流式接口配置样式。 |
 | `getValue()` | `String` | 返回最后通过校验的文本。 |
 | `getRawText()` | `String` | 返回当前显示的文本（可能未通过校验）。 |
 | `isEditable()` | `boolean` | 当获得焦点、处于激活状态、可见且已显示时为 `true`。 |

@@ -4,14 +4,15 @@
 
 它包含 header、可平移画布、图元素、Item Library、Blackboard、Inspector、Preview 面板、history stack、命令处理和诊断 footer。
 
-!!! tip ""
-    实际图编辑器优先使用 `GraphEditorView`。它包装 `GraphView`，并提供保存、dirty 状态、面包屑路径、子图 dive 和外部子图编辑支持。
+::: tip
+实际图编辑器优先使用 `GraphEditorView`。它包装 `GraphView`，并提供保存、dirty 状态、面包屑路径、子图 dive 和外部子图编辑支持。
+:::
 
-<figure markdown="span">
-    ![GraphView panels](./assets/ngt-graph-view-placeholder.png)
-    <figcaption>
-    GraphView / GraphEditorView 中的画布、Blackboard、Inspector、Preview 和日志区域。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphView panels">
+<figcaption>
+GraphView / GraphEditorView 中的画布、Blackboard、Inspector、Preview 和日志区域。
+</figcaption>
 </figure>
 
 ## 直接加载

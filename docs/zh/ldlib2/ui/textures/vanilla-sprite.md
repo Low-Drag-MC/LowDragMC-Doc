@@ -1,6 +1,6 @@
 # VanillaSpriteTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `VanillaSpriteTexture` 用于渲染已经注册在 Minecraft 原版 GUI 图集中的 sprite。适合绘制配方书 toast 图标，或其他由原版 GUI atlas 提供的界面部件。
 
@@ -10,43 +10,50 @@ Sprite 标识符遵循 Minecraft `blitSprite` 的约定：路径相对于 `textu
 
 注册名：`vanilla_sprite_texture`
 
-!!! note ""
-    继承自 `TransformTexture` - 支持 `rotate()`、`scale()`、`transform()` 和颜色着色。
+::: info
+继承自 `TransformTexture` - 支持 `rotate()`、`scale()`、`transform()` 和颜色着色。
+:::
 
-!!! tip ""
-    如果要使用自己的图片文件，请使用 [`SpriteTexture`](sprite.md)。如果图片来自 Minecraft 的 GUI 图集，请使用 `VanillaSpriteTexture`。
+::: tip
+如果要使用自己的图片文件，请使用 [`SpriteTexture`](sprite.md)。如果图片来自 Minecraft 的 GUI 图集，请使用 `VanillaSpriteTexture`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    IGuiTexture toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
+```java
+IGuiTexture toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
 
-    IGuiTexture tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44);
-    ```
+IGuiTexture tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+```kotlin
+val toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
 
-    val tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44.toInt())
-    ```
+val tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
+```js
+let toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
 
-    let tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44);
-    ```
+let tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

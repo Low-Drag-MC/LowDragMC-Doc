@@ -2,7 +2,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/phantom_slot.mp4" type="video/mp4">
+    <source src="../assets/phantom_slot.mp4" type="video/mp4">
     您的浏览器不支持视频播放。
   </video>
 </div>
@@ -35,24 +35,30 @@
 
 配置右键点击槽位时是否清除其内容。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    phantomSlot.setClearSlotOnRightClick(true);
-    ```
+```java
+phantomSlot.setClearSlotOnRightClick(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setMaxStackSize
 
 设置幽灵槽位中允许的最大堆叠数量。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    phantomSlot.setMaxStackSize(64);
-    ```
+```java
+phantomSlot.setMaxStackSize(64);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 鼠标交互

@@ -1,6 +1,6 @@
 # UI Factory
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 LDLib2 provides three pre-built factory helpers for the most common use cases. Each factory handles menu registration, client–server routing, and lifecycle validation automatically.
 
@@ -18,72 +18,77 @@ KubeJS users can open any of these via the **`LDLib2UIFactory`** bindings and re
 
 Use this when a block (or block entity) opens a UI on right-click.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    Implement `BlockUIMenuType.BlockUI` on your `Block` class:
+Implement `BlockUIMenuType.BlockUI` on your `Block` class:
 
-    ```java
-    public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
+```java
+public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
 
-        @Override
-        public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                                Player player, BlockHitResult hit) {
-            if (!level.isClientSide) {
-                BlockUIMenuType.openUI((ServerPlayer) player, pos);
-            }
-            return InteractionResult.SUCCESS;
+    @Override
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
+                                            Player player, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            BlockUIMenuType.openUI((ServerPlayer) player, pos);
         }
-
-        @Override
-        public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-            return ModularUI.of(UI.of(
-                // build your element tree here
-            ), holder.player);
-        }
+        return InteractionResult.SUCCESS;
     }
-    ```
 
-=== "Kotlin"
-
-    ```kotlin
-    class MyBlock : Block(...), BlockUIMenuType.BlockUI {
-
-        override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos,
-                                    player: Player, hit: BlockHitResult): InteractionResult {
-            if (!level.isClientSide) {
-                BlockUIMenuType.openUI(player as ServerPlayer, pos)
-            }
-            return InteractionResult.SUCCESS
-        }
-
-        override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
-            val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
-            return ModularUI.of(UI.of(root), holder.player)
-        }
+    @Override
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
+        return ModularUI.of(UI.of(
+            // build your element tree here
+        ), holder.player);
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="Kotlin">
 
-    Trigger the UI open from a server-side block event:
+```kotlin
+class MyBlock : Block(...), BlockUIMenuType.BlockUI {
 
-    ```javascript
-    // server_scripts/main.js
-    BlockEvents.rightClicked('minecraft:glass', event => {
-        LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
-    })
-    ```
+    override fun useWithoutItem(state: BlockState, level: Level, pos: BlockPos,
+                                player: Player, hit: BlockHitResult): InteractionResult {
+        if (!level.isClientSide) {
+            BlockUIMenuType.openUI(player as ServerPlayer, pos)
+        }
+        return InteractionResult.SUCCESS
+    }
 
-    Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
+    override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
+        val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
+        return ModularUI.of(UI.of(root), holder.player)
+    }
+}
+```
 
-    ```javascript
-    LDLib2UI.block("mymod:my_block_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(
-            new UIElement().addClass("panel_bg")
-        ), event.player);
-    })
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+Trigger the UI open from a server-side block event:
+
+```javascript
+// server_scripts/main.js
+BlockEvents.rightClicked('minecraft:glass', event => {
+    LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
+})
+```
+
+Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
+
+```javascript
+LDLib2UI.block("mymod:my_block_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(
+        new UIElement().addClass("panel_bg")
+    ), event.player);
+})
+```
+
+</DocTab>
+</DocTabs>
 The context object passed to `createUI` / available in the event:
 
 | Field | Type | Description |
@@ -98,70 +103,75 @@ The context object passed to `createUI` / available in the event:
 
 Use this when a held item opens a UI (e.g. a portable device, a wrench, or a scanner).
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    Implement `HeldItemUIMenuType.HeldItemUI` on your `Item` class:
+Implement `HeldItemUIMenuType.HeldItemUI` on your `Item` class:
 
-    ```java
-    public class MyItem extends Item implements HeldItemUIMenuType.HeldItemUI {
+```java
+public class MyItem extends Item implements HeldItemUIMenuType.HeldItemUI {
 
-        @Override
-        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-            if (!level.isClientSide) {
-                HeldItemUIMenuType.openUI((ServerPlayer) player, hand);
-            }
-            return InteractionResultHolder.success(player.getItemInHand(hand));
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide) {
+            HeldItemUIMenuType.openUI((ServerPlayer) player, hand);
         }
-
-        @Override
-        public ModularUI createUI(HeldItemUIMenuType.HeldItemUIHolder holder) {
-            return ModularUI.of(UI.of(
-                // build your element tree here
-            ), holder.player);
-        }
+        return InteractionResultHolder.success(player.getItemInHand(hand));
     }
-    ```
 
-=== "Kotlin"
-
-    ```kotlin
-    class MyItem : Item(...), HeldItemUIMenuType.HeldItemUI {
-
-        override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
-            if (!level.isClientSide) {
-                HeldItemUIMenuType.openUI(player as ServerPlayer, hand)
-            }
-            return InteractionResultHolder.success(player.getItemInHand(hand))
-        }
-
-        override fun createUI(holder: HeldItemUIMenuType.HeldItemUIHolder): ModularUI {
-            val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
-            return ModularUI.of(UI.of(root), holder.player)
-        }
+    @Override
+    public ModularUI createUI(HeldItemUIMenuType.HeldItemUIHolder holder) {
+        return ModularUI.of(UI.of(
+            // build your element tree here
+        ), holder.player);
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="Kotlin">
 
-    Trigger the UI open when the player right-clicks with the item:
+```kotlin
+class MyItem : Item(...), HeldItemUIMenuType.HeldItemUI {
 
-    ```javascript
-    // server_scripts/main.js
-    ItemEvents.firstRightClicked('minecraft:stick', event => {
-        LDLib2UIFactory.openHeldItemUI(event.player, event.hand, "mymod:my_item_ui");
-    })
-    ```
+    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
+        if (!level.isClientSide) {
+            HeldItemUIMenuType.openUI(player as ServerPlayer, hand)
+        }
+        return InteractionResultHolder.success(player.getItemInHand(hand))
+    }
 
-    Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
+    override fun createUI(holder: HeldItemUIMenuType.HeldItemUIHolder): ModularUI {
+        val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
+        return ModularUI.of(UI.of(root), holder.player)
+    }
+}
+```
 
-    ```javascript
-    LDLib2UI.item("mymod:my_item_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(
-            new UIElement().addClass("panel_bg")
-        ), event.player);
-    })
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+Trigger the UI open when the player right-clicks with the item:
+
+```javascript
+// server_scripts/main.js
+ItemEvents.firstRightClicked('minecraft:stick', event => {
+    LDLib2UIFactory.openHeldItemUI(event.player, event.hand, "mymod:my_item_ui");
+})
+```
+
+Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
+
+```javascript
+LDLib2UI.item("mymod:my_item_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(
+        new UIElement().addClass("panel_bg")
+    ), event.player);
+})
+```
+
+</DocTab>
+</DocTabs>
 The context object passed to `createUI` / available in the event:
 
 | Field | Type | Description |
@@ -176,68 +186,74 @@ The context object passed to `createUI` / available in the event:
 
 Use this to open a UI that is not tied to a specific block or item — for example from a command, a keybind, or any arbitrary server-side trigger.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    Register a holder factory with a unique ID, then call `openUI` when needed:
+Register a holder factory with a unique ID, then call `openUI` when needed:
 
-    ```java
-    // Register once (e.g. during mod init)
-    var MY_UI_ID = ResourceLocation.fromNamespaceAndPath("mymod", "my_ui");
+```java
+// Register once (e.g. during mod init)
+var MY_UI_ID = ResourceLocation.fromNamespaceAndPath("mymod", "my_ui");
 
-    PlayerUIMenuType.register(MY_UI_ID, player -> {
-        return p -> ModularUI.of(UI.of(
-            // build your element tree here
-        ), p);
-    });
+PlayerUIMenuType.register(MY_UI_ID, player -> {
+    return p -> ModularUI.of(UI.of(
+        // build your element tree here
+    ), p);
+});
 
-    // Open it later (server side)
-    PlayerUIMenuType.openUI(serverPlayer, MY_UI_ID);
-    ```
+// Open it later (server side)
+PlayerUIMenuType.openUI(serverPlayer, MY_UI_ID);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val MY_UI_ID = ResourceLocation.fromNamespaceAndPath("mymod", "my_ui")
+```kotlin
+val MY_UI_ID = ResourceLocation.fromNamespaceAndPath("mymod", "my_ui")
 
-    // Register during init
-    PlayerUIMenuType.register(MY_UI_ID) { player ->
-        PlayerUIHolder { p ->
-            val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
-            ModularUI.of(UI.of(root), p)
-        }
+// Register during init
+PlayerUIMenuType.register(MY_UI_ID) { player ->
+    PlayerUIHolder { p ->
+        val root = element({ cls = { +"panel_bg" } }) { /* ... */ }
+        ModularUI.of(UI.of(root), p)
     }
+}
 
-    // Open later (server side)
-    PlayerUIMenuType.openUI(serverPlayer, MY_UI_ID)
-    ```
+// Open later (server side)
+PlayerUIMenuType.openUI(serverPlayer, MY_UI_ID)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    Open the UI from any server-side trigger (command, keybind callback, etc.):
+Open the UI from any server-side trigger (command, keybind callback, etc.):
 
-    ```javascript
-    // server_scripts/main.js
-    LDLib2UIFactory.openPlayerUI(player, "mymod:my_player_ui");
-    ```
+```javascript
+// server_scripts/main.js
+LDLib2UIFactory.openPlayerUI(player, "mymod:my_player_ui");
+```
 
-    Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
+Register the UI builder (**must run on both sides** — see [Script Placement](#kubejs-script-placement)):
 
-    ```javascript
-    LDLib2UI.player("mymod:my_player_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(
-            new UIElement().addClass("panel_bg")
-        ), event.player);
-    })
-    ```
+```javascript
+LDLib2UI.player("mymod:my_player_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(
+        new UIElement().addClass("panel_bg")
+    ), event.player);
+})
+```
 
+</DocTab>
+</DocTabs>
 The context object available in the event:
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
 | `player` | `Player` | The player for whom the UI is opened |
 
-!!! note ""
-    `LDLib2UIFactory.openPlayerUI` must be called from the **server side**. The UI is always considered valid since there is no block or item to validate against.
+::: info
+`LDLib2UIFactory.openPlayerUI` must be called from the **server side**. The UI is always considered valid since there is no block or item to validate against.
+:::
 
 ---
 
@@ -285,19 +301,20 @@ LDLib2UI.block("mymod:my_block_ui", event => {
 })
 ```
 
-!!! warning "Do not create UI eagerly in startup scripts"
-    Minecraft resources (stylesheets, textures, etc.) are **not yet loaded** when startup scripts run.
-    Always create the UI **inside the event handler lambda**, which runs at UI-open time — not at script load time.
+::: warning Do not create UI eagerly in startup scripts
+Minecraft resources (stylesheets, textures, etc.) are **not yet loaded** when startup scripts run.
+Always create the UI **inside the event handler lambda**, which runs at UI-open time — not at script load time.
 
-    ```javascript
-    // ❌ WRONG — built at startup, before resources are ready
-    const myUI = ModularUI.of(UI.of(new UIElement()), null);
-    LDLib2UI.block("mymod:my_block_ui", event => {
-        event.modularUI = myUI; // stale; resources were not loaded yet
-    })
+```javascript
+// ❌ WRONG — built at startup, before resources are ready
+const myUI = ModularUI.of(UI.of(new UIElement()), null);
+LDLib2UI.block("mymod:my_block_ui", event => {
+    event.modularUI = myUI; // stale; resources were not loaded yet
+})
 
-    // ✅ CORRECT — built lazily when the player opens the UI
-    LDLib2UI.block("mymod:my_block_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(new UIElement()), event.player);
-    })
-    ```
+// ✅ CORRECT — built lazily when the player opens the UI
+LDLib2UI.block("mymod:my_block_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(new UIElement()), event.player);
+})
+```
+:::

@@ -1,42 +1,48 @@
 # UITemplateElement
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`UITemplateElement` 会加载一个已保存的 [`UITemplate`](../ui_template.md){ data-preview } 资源，并在运行时将它的子元素和样式表插入到自身中。它用于复用在编辑器中创建的 UI 布局，而无需重复编写代码。
+`UITemplateElement` 会加载一个已保存的 [`UITemplate`](../editor.md) 资源，并在运行时将它的子元素和样式表插入到自身中。它用于复用在编辑器中创建的 UI 布局，而无需重复编写代码。
 
 循环模板引用会被检测并记录为错误。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var tmpl = new UITemplateElement(IResourcePath.parse("mymod:my_panel"));
-    parent.addChild(tmpl);
+```java
+var tmpl = new UITemplateElement(IResourcePath.parse("mymod:my_panel"));
+parent.addChild(tmpl);
 
-    // 在运行时更换模板：
-    tmpl.setTemplate(IResourcePath.parse("mymod:other_panel"));
-    ```
+// 在运行时更换模板：
+tmpl.setTemplate(IResourcePath.parse("mymod:other_panel"));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    uiTemplate("mymod:my_panel") { }
-    ```
+```kotlin
+uiTemplate("mymod:my_panel") { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let tmpl = new UITemplateElement();
-    tmpl.setTemplate(IResourcePath.parse("mymod:my_panel"));
-    parent.addChild(tmpl);
-    ```
+```js
+let tmpl = new UITemplateElement();
+tmpl.setTemplate(IResourcePath.parse("mymod:my_panel"));
+parent.addChild(tmpl);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML

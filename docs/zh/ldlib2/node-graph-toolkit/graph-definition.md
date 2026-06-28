@@ -51,7 +51,7 @@ public class AddNode extends Node {
 
 ## 支持的类型
 
-`getSupportTypes()` 控制常量和变量可用的类型句柄。Type API 和注册辅助方法见 [Type Handles](./type-handles.md){ data-preview }。
+`getSupportTypes()` 控制常量和变量可用的类型句柄。Type API 和注册辅助方法见 [Type Handles](./type-handles.md)。
 
 ```java
 @Override

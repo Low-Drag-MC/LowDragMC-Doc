@@ -31,9 +31,10 @@ assets/<namespace>/fx/
 
 ## 2️⃣ Resources
 
-!!! warning "Minecraft resource naming rules"
-    Minecraft does **not** allow uppercase letters, spaces, or non-English characters in file paths.  
-    Before moving files, ensure all names follow the [Minecraft Resource Naming](https://minecraft.wiki/w/Resource_pack#File_naming) rules.
+::: warning Minecraft resource naming rules
+Minecraft does **not** allow uppercase letters, spaces, or non-English characters in file paths.  
+Before moving files, ensure all names follow the [Minecraft Resource Naming](https://minecraft.wiki/w/Resource_pack#File_naming) rules.
+:::
 
 All FX resource dependencies (materials, gradients, colors, etc.) must be moved from:
 
@@ -63,17 +64,18 @@ These must also be moved to their corresponding folders under your `assets/` dir
 
 ## 💡 Recommended Migration Method
 
-!!! info
-    The **easiest** and most **error-proof** method is to copy **everything** under:
+::: info
+The **easiest** and most **error-proof** method is to copy **everything** under:
 
-    ```
-    .minecraft/ldlib2/assets/...
-    ```
+```
+.minecraft/ldlib2/assets/...
+```
 
-    into:
+into:
 
-    ```
-    assets/...
-    ```
+```
+assets/...
+```
 
-    This ensures all dependencies are preserved and your FX works correctly after packaging.
+This ensures all dependencies are preserved and your FX works correctly after packaging.
+:::

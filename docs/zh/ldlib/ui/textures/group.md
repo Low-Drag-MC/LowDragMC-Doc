@@ -14,20 +14,27 @@
 
 设置组中使用的纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    guiTextureGroup.setTextures(texture1, texture2);
-    ```
+``` java
+guiTextureGroup.setTextures(texture1, texture2);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 设置组中所有纹理的颜色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    guiTextureGroup.setColor(0xff00ff);
-    ```
+``` java
+guiTextureGroup.setColor(0xff00ff);
+```
+
+</DocTab>
+</DocTabs>

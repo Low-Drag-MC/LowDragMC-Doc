@@ -1,6 +1,6 @@
 # UIElement
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `UIElement` 是 LDLib2 中最基础且最常用的 UI 组件。
 所有 UI 组件都继承自它。
@@ -13,49 +13,55 @@
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var element = new UIElement();
-    element.style(style -> style.background(MCSprites.RECT));
-    element.layout(layout -> layout.width(40).height(40));
-    element.setFocusable(true);
-    element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
-    element.addClass("add-class");
-    element.removeClass("add-class");
-    root.addChild(element);
-    ```
+```java
+var element = new UIElement();
+element.style(style -> style.background(MCSprites.RECT));
+element.layout(layout -> layout.width(40).height(40));
+element.setFocusable(true);
+element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
+element.addClass("add-class");
+element.removeClass("add-class");
+root.addChild(element);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val root = element root@{
-        element({
-            layout = { size(40.px) }
-            style = { background(MCSprites.RECT) }
-            focusable = true
-            cls = {
-                +"add-class"
-                -"remove-class"
-            }
-        }) {
-            events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
+```kotlin
+val root = element root@{
+    element({
+        layout = { size(40.px) }
+        style = { background(MCSprites.RECT) }
+        focusable = true
+        cls = {
+            +"add-class"
+            -"remove-class"
         }
+    }) {
+        events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let element = new UIElement();
-    element.style(style => style.background(MCSprites.RECT));
-    element.layout(layout => layout.width(40).height(40));
-    element.setFocusable(true);
-    element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
-    element.addClass("add-class");
-    element.removeClass("add-class");
-    root.addChild(element);
-    ```
+```js
+let element = new UIElement();
+element.style(style => style.background(MCSprites.RECT));
+element.layout(layout => layout.width(40).height(40));
+element.setFocusable(true);
+element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
+element.addClass("add-class");
+element.removeClass("add-class");
+root.addChild(element);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ## Xml
@@ -71,1347 +77,1653 @@
 
 ## 样式
 
-!!! note "布局"
-    布局属性实际上也是样式。
+::: info 布局
+布局属性实际上也是样式。
+:::
 
 UIElement 的样式（包括布局）可以通过以下方式访问：
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    element.style(style -> style.background(...));
-    element.layout(layout -> layout.width(...));
-    element.getStyle().background(...);
-    element.getLayout().width(...);
-    ```
+```java
+element.style(style -> style.background(...));
+element.layout(layout -> layout.width(...));
+element.getStyle().background(...);
+element.getLayout().width(...);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element({
-        layout = { width(20.pct) }
-        style = { background(MCSprites.RECT) }
-    }) { }
+```kotlin
+element({
+    layout = { width(20.pct) }
+    style = { background(MCSprites.RECT) }
+}) { }
 
-    element.layoutDsl { 
-        width(20.pct)
-    }
-    element.styleDsl { 
-        background(MCSprites.RECT)
-    }
-    ```
+element.layoutDsl { 
+    width(20.pct)
+}
+element.styleDsl { 
+    background(MCSprites.RECT)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    element.style(style => style.background(...));
-    element.layout(layout => layout.width(...));
-    element.getStyle().background(...);
-    element.getLayout().width(...);
-    ```
+```js
+element.style(style => style.background(...));
+element.layout(layout => layout.width(...));
+element.getStyle().background(...);
+element.getLayout().width(...);
+```
+
+</DocTab>
+</DocTabs>
 ### 布局属性
 
-使用前最好先阅读 [布局](../preliminary/layout.md){ data-preview }。
+使用前最好先阅读 [布局](../preliminary/layout.md)。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">display</p>
+::: info
+#### <p style="font-size: 1rem;">display</p>
 
-    控制元素是否参与布局。`FLEX` 启用 flex 布局，`GRID` 启用 grid 布局，`NONE` 将元素从布局计算中移除，`CONTENTS` 不影响布局但会渲染其子元素。
+控制元素是否参与布局。`FLEX` 启用 flex 布局，`GRID` 启用 grid 布局，`NONE` 将元素从布局计算中移除，`CONTENTS` 不影响布局但会渲染其子元素。
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        layout.display(TaffyDisplay.FLEX);
-        layout.display(TaffyDisplay.GRID); // enable grid layout
-        element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
-        ```
+```java
+layout.display(TaffyDisplay.FLEX);
+layout.display(TaffyDisplay.GRID); // enable grid layout
+element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        layout {
-            display(false)
-            display(TaffyDisplay.GRID)
-        }
-        ```
+```kotlin
+layout {
+    display(false)
+    display(TaffyDisplay.GRID)
+}
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            display: flex;
-            display: grid;
-        }
-        ```
+```css
+element {
+    display: flex;
+    display: grid;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">layout-direction</p>
+</DocTab>
+</DocTabs>
+:::
 
-    设置布局方向。通常从父元素继承。
+::: info
+#### <p style="font-size: 1rem;">layout-direction</p>
 
-    === "Java"
+设置布局方向。通常从父元素继承。
 
-        ```java
-        layout.layoutDirection(TaffyDirection.LTR);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+layout.layoutDirection(TaffyDirection.LTR);
+```
 
-        ```kotlin
-        layout {
-            direction(TaffyDirection.LTR)
-        }
-        ```
-        
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            layout-direction: ltr;
-        }
-        ```
+```kotlin
+layout {
+    direction(TaffyDirection.LTR)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-basis</p>
+</DocTab>
+<DocTab title="LSS">
 
-    设置在 flex 增长/收缩之前的主轴初始大小。支持 **点**、**百分比** 和 **自动** 模式。
+```css
+element {
+    layout-direction: ltr;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        layout.flexBasis(1);
-        ```
+::: info
+#### <p style="font-size: 1rem;">flex-basis</p>
 
-    === "Kotlin"
+设置在 flex 增长/收缩之前的主轴初始大小。支持 **点**、**百分比** 和 **自动** 模式。
 
-        ```kotlin
-        layout {
-            flexBasis(1)
-        }
-        ```
-      
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            flex-basis: 1;
-        }
-        ```
+```java
+layout.flexBasis(1);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    使元素沿主轴灵活伸缩。
+```kotlin
+layout {
+    flexBasis(1)
+}
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        layout.flex(1);
-        ```
+```css
+element {
+    flex-basis: 1;
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        layout {
-            flex(1)
-        }
-        ```
-      
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">flex</p>
 
-        ```css
-        element {
-            flex: 1;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-grow</p>
+使元素沿主轴灵活伸缩。
 
-    控制当有额外空间时，元素的增长程度。
-
-    === "Java"
-
-        ```java
-        layout.flexGrow(1);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexGrow(1)
-        }
-        ```
-      
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            flex-grow: 1;
-        }
-        ```
+```java
+layout.flex(1);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-shrink</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    控制当空间不足时，元素的收缩程度。
-
-    === "Java"
-
-        ```java
-        layout.flexShrink(1);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexShrink(1)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-shrink: 1;
-        }
-        ```
+```kotlin
+layout {
+    flex(1)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-direction</p>
-
-    定义主轴方向，例如 `ROW` 或 `COLUMN`。
-
-    === "Java"
-
-        ```java
-        layout.flexDirection(FlexDirection.ROW);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexDirection(FlexDirection.ROW)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-direction: row;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-wrap</p>
-
-    控制子元素是否换行。
-
-    === "Java"
-
-        ```java
-        layout.wrap(FlexWrap.WRAP);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            wrap(FlexWrap.WRAP)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-wrap: wrap;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">position</p>
-
-    设置定位模式。`RELATIVE` 参与布局，`ABSOLUTE` 不影响兄弟元素。
-
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        layout.positionType(TaffyPosition.ABSOLUTE);
-        ```
+```css
+element {
+    flex: 1;
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        layout {
-            position(TaffyPosition.ABSOLUTE)
-        }
-        ```
-      
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">flex-grow</p>
 
-        ```css
-        element {
-            position: absolute;
-        }
-        ```
+控制当有额外空间时，元素的增长程度。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">top / right / bottom / left / start / end / horizontal / vertical / all</p>
+<DocTabs>
+<DocTab title="Java">
 
-    当 `position` 为 `RELATIVE` 或 `ABSOLUTE` 时使用的偏移量。
+```java
+layout.flexGrow(1);
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```java
-        layout.top(10);
-        layout.leftPercent(30); // 30%
-        layout.allAuto()
-        ```
+```kotlin
+layout {
+    flexGrow(1)
+}
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="LSS">
 
-        ```kotlin
-        layout = {
-            pos {
-                top(10.px)
-                left(10.px)
-                bottom(auto)
-            }
-        }
-        ```
+```css
+element {
+    flex-grow: 1;
+}
+```
 
-    === "LSS"
+</DocTab>
+</DocTabs>
+:::
 
-        ```css
-        element {
-            top: 10;
-            left: 30%;
-            all: auto;
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">flex-shrink</p>
 
-!!! info ""
-    #### <p style="font-size: 1rem;">margin-*</p> 
-    
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+控制当空间不足时，元素的收缩程度。
 
-    设置元素周围的外边距。
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.flexShrink(1);
+```
 
-        ```java
-        layout.marginTop(5);
-        layout.marginAll(3);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    flexShrink(1)
+}
+```
 
-        ```kotlin
-        layout = {
-            margin {
-                top(5.px)
-                all(3.px)
-            }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-shrink: 1;
+}
+```
 
-        ```css
-        element {
-            margin-top: 5;
-            margin-all: 3;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">padding-*</p>
+::: info
+#### <p style="font-size: 1rem;">flex-direction</p>
 
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+定义主轴方向，例如 `ROW` 或 `COLUMN`。
 
-    设置边框与内容之间的内边距。
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.flexDirection(FlexDirection.ROW);
+```
 
-        ```java
-        layout.paddingLeft(8);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    flexDirection(FlexDirection.ROW)
+}
+```
 
-        ```kotlin
-        layout = {
-            padding { left(8) }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-direction: row;
+}
+```
 
-        ```css
-        element {
-            padding-left: 8;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">gap-*</p>
+::: info
+#### <p style="font-size: 1rem;">flex-wrap</p>
 
-    `*`: row / column / all
+控制子元素是否换行。
 
-    设置 flex 布局中子元素之间的间距。
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.wrap(FlexWrap.WRAP);
+```
 
-        ```java
-        layout.rowGap(6);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    wrap(FlexWrap.WRAP)
+}
+```
 
-        ```kotlin
-        layout = {
-            gap { row(6) }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-wrap: wrap;
+}
+```
 
-        ```css
-        element {
-            gap-row: 6;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">width</p>
+::: info
+#### <p style="font-size: 1rem;">position</p>
 
-    设置元素宽度。支持 **点**、**百分比** 和 **自动** 模式。
+设置定位模式。`RELATIVE` 参与布局，`ABSOLUTE` 不影响兄弟元素。
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        layout.width(100);
-        layout.widthPercent(20); // 20%
-        ```
+```java
+layout.positionType(TaffyPosition.ABSOLUTE);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        layout = {
-            width(100)
-            width(20.pct) // 20%
-        }
-        ```
-        
-    === "LSS"
+```kotlin
+layout {
+    position(TaffyPosition.ABSOLUTE)
+}
+```
 
-        ```css
-        element {
-            width: 100;
-            width: 20%;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">height</p>
+```css
+element {
+    position: absolute;
+}
+```
 
-    设置元素高度。支持 **点**、**百分比** 和 **自动** 模式。
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">top / right / bottom / left / start / end / horizontal / vertical / all</p>
 
-        ```java
-        layout.height(50);
-        ```
+当 `position` 为 `RELATIVE` 或 `ABSOLUTE` 时使用的偏移量。
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        layout = {
-            width(100)
-            height(20.pct) // 20%
-        }
-        ```
-        
-    === "LSS"
+```java
+layout.top(10);
+layout.leftPercent(30); // 30%
+layout.allAuto()
+```
 
-        ```css
-        element {
-            height: 50;
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">min-width / min-height</p>
+```kotlin
+layout = {
+    pos {
+        top(10.px)
+        left(10.px)
+        bottom(auto)
+    }
+}
+```
 
-    设置最小尺寸约束。
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+element {
+    top: 10;
+    left: 30%;
+    all: auto;
+}
+```
 
-        ```java
-        layout.minWidth(20);
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "Kotlin"
+::: info
+#### <p style="font-size: 1rem;">margin-*</p> 
 
-        ```kotlin
-        layout = {
-            minWidth(20);
-        }
-        ```
+`*`: top / right / bottom / left / start / end / horizontal / vertical / all
 
-    === "LSS"
+设置元素周围的外边距。
 
-        ```css
-        element {
-            min-width: 20;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-width / max-height</p>
+```java
+layout.marginTop(5);
+layout.marginAll(3);
+```
 
-    设置最大尺寸约束。
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Java"
+```kotlin
+layout = {
+    margin {
+        top(5.px)
+        all(3.px)
+    }
+}
+```
 
-        ```java
-        layout.maxHeight(200);
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "Kotlin"
+```css
+element {
+    margin-top: 5;
+    margin-all: 3;
+}
+```
 
-        ```kotlin
-        layout = {
-            maxHeight(200);
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">padding-*</p>
 
-        ```css
-        element {
-            max-height: 200;
-        }
-        ```
+`*`: top / right / bottom / left / start / end / horizontal / vertical / all
 
-!!! info ""
-    #### <p style="font-size: 1rem;">aspect-rate</p>
+设置边框与内容之间的内边距。
 
-    锁定宽高比。对于方形或图标元素很有用。
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.paddingLeft(8);
+```
 
-        ```java
-        layout.aspectRate(1);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout = {
+    padding { left(8) }
+}
+```
 
-        ```kotlin
-        layout = {
-            aspectRate(1);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    padding-left: 8;
+}
+```
 
-        ```css
-        element {
-            aspect-rate: 1;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-items</p>
+::: info
+#### <p style="font-size: 1rem;">gap-*</p>
 
-    沿交叉轴对齐子元素（容器属性）。
+`*`: row / column / all
 
-    === "Java"
+设置 flex 布局中子元素之间的间距。
 
-        ```java
-        layout.alignItems(AlignItems.CENTER);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+layout.rowGap(6);
+```
 
-        ```kotlin
-        layout = {
-            alignItems(AlignItems.CENTER)
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+layout = {
+    gap { row(6) }
+}
+```
 
-        ```css
-        element {
-            align-items: center;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">justify-content</p>
+```css
+element {
+    gap-row: 6;
+}
+```
 
-    沿主轴对齐子元素（容器属性）。
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">width</p>
 
-        ```java
-        layout.justifyContent(AlignContent.CENTER);
-        ```
+设置元素宽度。支持 **点**、**百分比** 和 **自动** 模式。
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        layout = {
-            justifyContent(AlignContent.CENTER)
-        }
-        ```
+```java
+layout.width(100);
+layout.widthPercent(20); // 20%
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            justify-content: center;
-        }
-        ```
+```kotlin
+layout = {
+    width(100)
+    width(20.pct) // 20%
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-self</p>
+</DocTab>
+<DocTab title="LSS">
 
-    覆盖单个元素的交叉轴对齐方式。
+```css
+element {
+    width: 100;
+    width: 20%;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        layout.alignSelf(AlignItems.CENTER);
-        ```
+::: info
+#### <p style="font-size: 1rem;">height</p>
 
-    === "Kotlin"
+设置元素高度。支持 **点**、**百分比** 和 **自动** 模式。
 
-        ```kotlin
-        layout = {
-            alignSelf(AlignItems.CENTER)
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+layout.height(50);
+```
 
-        ```css
-        element {
-            align-self: center;
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-content</p>
+```kotlin
+layout = {
+    width(100)
+    height(20.pct) // 20%
+}
+```
 
-    当启用 `flex-wrap` 时，对齐换行后的行。
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+element {
+    height: 50;
+}
+```
 
-        ```java
-        layout.alignContent(AlignContent.CENTER);
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "Kotlin"
+::: info
+#### <p style="font-size: 1rem;">min-width / min-height</p>
 
-        ```kotlin
-        layout = {
-            alignContent(AlignContent.CENTER)
-        }
-        ```
+设置最小尺寸约束。
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            align-content: center;
-        }
-        ```
+```java
+layout.minWidth(20);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    minWidth(20);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    min-width: 20;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">max-width / max-height</p>
+
+设置最大尺寸约束。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.maxHeight(200);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    maxHeight(200);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    max-height: 200;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">aspect-rate</p>
+
+锁定宽高比。对于方形或图标元素很有用。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.aspectRate(1);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    aspectRate(1);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    aspect-rate: 1;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-items</p>
+
+沿交叉轴对齐子元素（容器属性）。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignItems(AlignItems.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignItems(AlignItems.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-items: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">justify-content</p>
+
+沿主轴对齐子元素（容器属性）。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.justifyContent(AlignContent.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    justifyContent(AlignContent.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    justify-content: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-self</p>
+
+覆盖单个元素的交叉轴对齐方式。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignSelf(AlignItems.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignSelf(AlignItems.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-self: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-content</p>
+
+当启用 `flex-wrap` 时，对齐换行后的行。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignContent(AlignContent.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignContent(AlignContent.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-content: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ### Grid 属性
 
-!!! note ""
-    要使用 grid 布局，请在容器元素上设置 `display(TaffyDisplay.GRID)`。模板属性在**容器**上定义 grid 结构，而 `grid-row` 和 `grid-column` 放在**子元素**上以控制其位置。
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-rows</p>
-
-    定义 grid 容器的显式行轨道。
-
-    支持的轨道大小：`Npx`（固定像素）、`N%`（百分比）、`Nfr`（分数单位）、`auto`、`min-content`、`max-content`、`minmax(min, max)`、`fit-content(limit)`、`repeat(count, size)`、`[name]`（命名线）。多个轨道以空格分隔。
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
-        layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
-        layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
-        layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateRows("1fr 1fr 1fr")
-                templateRows("repeat(3, 100px)")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-rows: repeat(3, 100px);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-columns</p>
-
-    定义 grid 容器的显式列轨道。使用与 `grid-template-rows` 相同的轨道尺寸语法。
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
-        layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
-        layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateColumns("10px 1fr 10px")
-                templateColumns("repeat(3, 1fr)")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-columns: 10px 1fr 10px;
-            grid-template-columns: repeat(3, 1fr);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-areas</p>
-
-    为 grid 单元格分配命名区域。每个引号字符串代表一行；其中的单词命名该行中的单元格。使用 `.` 表示空单元格。所有行必须具有相同数量的单元格。
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateColumns("1fr 1fr 1fr");
-        layout.gridTemplateRows("auto 1fr auto");
-        layout.gridTemplateAreas(
-            "\"header header header\" \"sidebar content content\" \"footer footer footer\""
-        );
-        // Children reference areas via gridRow/gridColumn by area name
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateColumns("1fr 1fr 1fr")
-                templateRows("auto 1fr auto")
-                templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-rows</p>
-
-    为隐式创建的行设置行轨道大小——即未被 `grid-template-rows` 覆盖的行。
-
-    === "Java"
-
-        ```java
-        layout.gridAutoRows("auto");
-        layout.gridAutoRows("minmax(50px, auto)");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoRows("minmax(50px, auto)") }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-rows: minmax(50px, auto);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-columns</p>
-
-    为隐式创建的列设置列轨道大小。
-
-    === "Java"
-
-        ```java
-        layout.gridAutoColumns("auto");
-        layout.gridAutoColumns("100px");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoColumns("100px") }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-columns: 100px;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-flow</p>
-
-    控制自动放置的元素如何填充 grid。`ROW` 优先填充行（默认）；`COLUMN` 优先填充列。`ROW_DENSE` / `COLUMN_DENSE` 会回填之前的空隙。
-
-    === "Java"
-
-        ```java
-        layout.gridAutoFlow(GridAutoFlow.ROW);
-        layout.gridAutoFlow(GridAutoFlow.COLUMN);
-        layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoFlow(GridAutoFlow.COLUMN) }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-flow: column;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-row</p>
-
-    控制**子元素**在 grid 容器中的行位置。请在子元素上设置，而不是容器上。
-
-    位置值：`"1"`（行号）、`"1 / 3"`（起始/结束行）、`"span 2"`（跨越 N 行）、`"1 / span 2"`（起始 + 跨越）、`"header"`（命名区域行）、`"-1"`（最后一行）。
-
-    === "Java"
-
-        ```java
-        child.layout(layout -> layout.gridRow("1"));          // row 1
-        child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1-3
-        child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
-        child.layout(layout -> layout.gridRow("header"));     // named area row
-        child.layout(layout -> layout.gridRow("-1"));         // last row line
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        element({
-            layout = {
-                grid { row("1 / span 2") }
-            }
-        }) { }
-        ```
-
-    === "LSS"
-
-        ```css
-        child {
-            grid-row: 1;
-            grid-row: 1 / 3;
-            grid-row: span 2;
-            grid-row: header;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-column</p>
-
-    控制**子元素**在 grid 容器中的列位置。使用与 `grid-row` 相同的位置语法。
-
-    === "Java"
-
-        ```java
-        child.layout(layout -> layout.gridColumn("2"));
-        child.layout(layout -> layout.gridColumn("1 / span 3"));
-        child.layout(layout -> layout.gridColumn("sidebar"));
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        element({
-            layout = {
-                grid { column("1 / span 2") }
-            }
-        }) { }
-        ```
-
-    === "LSS"
-
-        ```css
-        child {
-            grid-column: 2;
-            grid-column: 1 / span 3;
-            grid-column: sidebar;
-        }
-        ```
+::: info
+要使用 grid 布局，请在容器元素上设置 `display(TaffyDisplay.GRID)`。模板属性在**容器**上定义 grid 结构，而 `grid-row` 和 `grid-column` 放在**子元素**上以控制其位置。
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-rows</p>
+
+定义 grid 容器的显式行轨道。
+
+支持的轨道大小：`Npx`（固定像素）、`N%`（百分比）、`Nfr`（分数单位）、`auto`、`min-content`、`max-content`、`minmax(min, max)`、`fit-content(limit)`、`repeat(count, size)`、`[name]`（命名线）。多个轨道以空格分隔。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
+layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
+layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
+layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateRows("1fr 1fr 1fr")
+        templateRows("repeat(3, 100px)")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 100px);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-columns</p>
+
+定义 grid 容器的显式列轨道。使用与 `grid-template-rows` 相同的轨道尺寸语法。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
+layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
+layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateColumns("10px 1fr 10px")
+        templateColumns("repeat(3, 1fr)")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-areas</p>
+
+为 grid 单元格分配命名区域。每个引号字符串代表一行；其中的单词命名该行中的单元格。使用 `.` 表示空单元格。所有行必须具有相同数量的单元格。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateColumns("1fr 1fr 1fr");
+layout.gridTemplateRows("auto 1fr auto");
+layout.gridTemplateAreas(
+    "\"header header header\" \"sidebar content content\" \"footer footer footer\""
+);
+// Children reference areas via gridRow/gridColumn by area name
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateColumns("1fr 1fr 1fr")
+        templateRows("auto 1fr auto")
+        templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-rows</p>
+
+为隐式创建的行设置行轨道大小——即未被 `grid-template-rows` 覆盖的行。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoRows("auto");
+layout.gridAutoRows("minmax(50px, auto)");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoRows("minmax(50px, auto)") }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-rows: minmax(50px, auto);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-columns</p>
+
+为隐式创建的列设置列轨道大小。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoColumns("auto");
+layout.gridAutoColumns("100px");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoColumns("100px") }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-columns: 100px;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-flow</p>
+
+控制自动放置的元素如何填充 grid。`ROW` 优先填充行（默认）；`COLUMN` 优先填充列。`ROW_DENSE` / `COLUMN_DENSE` 会回填之前的空隙。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoFlow(GridAutoFlow.ROW);
+layout.gridAutoFlow(GridAutoFlow.COLUMN);
+layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoFlow(GridAutoFlow.COLUMN) }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-flow: column;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-row</p>
+
+控制**子元素**在 grid 容器中的行位置。请在子元素上设置，而不是容器上。
+
+位置值：`"1"`（行号）、`"1 / 3"`（起始/结束行）、`"span 2"`（跨越 N 行）、`"1 / span 2"`（起始 + 跨越）、`"header"`（命名区域行）、`"-1"`（最后一行）。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+child.layout(layout -> layout.gridRow("1"));          // row 1
+child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1-3
+child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
+child.layout(layout -> layout.gridRow("header"));     // named area row
+child.layout(layout -> layout.gridRow("-1"));         // last row line
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+element({
+    layout = {
+        grid { row("1 / span 2") }
+    }
+}) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+child {
+    grid-row: 1;
+    grid-row: 1 / 3;
+    grid-row: span 2;
+    grid-row: header;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-column</p>
+
+控制**子元素**在 grid 容器中的列位置。使用与 `grid-row` 相同的位置语法。
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+child.layout(layout -> layout.gridColumn("2"));
+child.layout(layout -> layout.gridColumn("1 / span 3"));
+child.layout(layout -> layout.gridColumn("sidebar"));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+element({
+    layout = {
+        grid { column("1 / span 2") }
+    }
+}) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+child {
+    grid-column: 2;
+    grid-column: 1 / span 3;
+    grid-column: sidebar;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ### 基本属性
 
-!!! info ""
-    #### <p style="font-size: 1rem;">background</p>
+::: info
+#### <p style="font-size: 1rem;">background</p>
 
-    设置绘制在元素后方的纹理，例如纯色、矩形精灵或图片。
+设置绘制在元素后方的纹理，例如纯色、矩形精灵或图片。
 
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.background(MCSprites.BORDER);
-        ```
+```java
+style.background(MCSprites.BORDER);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            background(MCSprites.BORDER)
-        }
-        ```
+```kotlin
+style = {
+    background(MCSprites.BORDER)
+}
+```
 
-    === "LSS"
-        查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            background: #FFF;
-            background: rect(#2ff, 3);
-            background: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
 
+```css
+element {
+    background: #FFF;
+    background: rect(#2ff, 3);
+    background: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow</p>
+</DocTab>
+</DocTabs>
+:::
 
-    **已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip`](#clip)。
 
-    在 1.21 API 中，`overflow` 用于控制如何处理溢出内容。`overflow` 本身是布局属性，同时也有 `overflowVisible(...)` 和 `setOverflowVisible(...)` 等便捷辅助方法。在 26.1+ 中，`UIElement#setOverflowVisible(false)` 会映射为 `Clip.SCISSOR`。
+::: info
+#### <p style="font-size: 1rem;">overflow</p>
 
-    === "Java"
+**已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip`](#clip)。
 
-        ```java
-        layout.overflow(YogaOverflow.HIDDEN);
-        style.overflowVisible(false);
-        element.setOverflowVisible(false); // UIElement 上的辅助方法
-        ```
+在 1.21 API 中，`overflow` 用于控制如何处理溢出内容。`overflow` 本身是布局属性，同时也有 `overflowVisible(...)` 和 `setOverflowVisible(...)` 等便捷辅助方法。在 26.1+ 中，`UIElement#setOverflowVisible(false)` 会映射为 `Clip.SCISSOR`。
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        style = {
-            overflowVisible(false)
-        }
-        ```
+```java
+layout.overflow(YogaOverflow.HIDDEN);
+style.overflowVisible(false);
+element.setOverflowVisible(false); // UIElement 上的辅助方法
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            overflow: hidden;
-        }
-        ```
+```kotlin
+style = {
+    overflowVisible(false)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;" id="clip">clip</p>
+</DocTab>
+<DocTab title="LSS">
 
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+```css
+element {
+    overflow: hidden;
+}
+```
 
-    控制元素子树是否被裁剪，以及以何种方式裁剪。`clip` 用于替代旧的 1.21 `overflow` / `overflow-clip` API。除 `NONE` 以外的所有模式也会阻止元素内容边界外的命中测试。
+</DocTab>
+</DocTabs>
+:::
 
-    | 模式 | 描述 |
-    | --- | --- |
-    | `NONE` | 不裁剪。这是默认值。 |
-    | `SCISSOR` | 将渲染裁剪到元素的内容边界内。可作为 26.1+ 中 `overflow: hidden` 或 `setOverflowVisible(false)` 的替代方案。 |
-    | `MASK` | 使用 [`mask`](#mask) 设置的纹理裁剪渲染。适用于静态遮罩纹理。 |
-    | `DYNAMIC_MASK` | 与 `MASK` 相同，但每帧都会刷新遮罩。适用于动画遮罩或会动态变化的遮罩。 |
+::: info
+#### <p style="font-size: 1rem;" id="clip">clip</p>
 
-    === "Java"
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-        ```java
-        style.clip(Clip.SCISSOR);
-        style.clip(Clip.MASK).mask(MCSprites.BORDER);
-        style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
-        ```
+控制元素子树是否被裁剪，以及以何种方式裁剪。`clip` 用于替代旧的 1.21 `overflow` / `overflow-clip` API。除 `NONE` 以外的所有模式也会阻止元素内容边界外的命中测试。
 
-    === "Kotlin"
+| 模式 | 描述 |
+| --- | --- |
+| `NONE` | 不裁剪。这是默认值。 |
+| `SCISSOR` | 将渲染裁剪到元素的内容边界内。可作为 26.1+ 中 `overflow: hidden` 或 `setOverflowVisible(false)` 的替代方案。 |
+| `MASK` | 使用 [`mask`](#mask) 设置的纹理裁剪渲染。适用于静态遮罩纹理。 |
+| `DYNAMIC_MASK` | 与 `MASK` 相同，但每帧都会刷新遮罩。适用于动画遮罩或会动态变化的遮罩。 |
 
-        ```kotlin
-        style = {
-            clip(Clip.SCISSOR)
-            clip(Clip.MASK)
-            mask(MCSprites.BORDER)
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+style.clip(Clip.SCISSOR);
+style.clip(Clip.MASK).mask(MCSprites.BORDER);
+style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
+```
 
-        ```css
-        element {
-            clip: scissor;
-        }
+</DocTab>
+<DocTab title="Kotlin">
 
-        element.masked {
-            clip: mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
+```kotlin
+style = {
+    clip(Clip.SCISSOR)
+    clip(Clip.MASK)
+    mask(MCSprites.BORDER)
+}
+```
 
-        element.animated-mask {
-            clip: dynamic-mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;" id="mask">mask</p>
+```css
+element {
+    clip: scissor;
+}
 
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+element.masked {
+    clip: mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
 
-    定义 `clip: mask` 和 `clip: dynamic-mask` 使用的纹理。遮罩会绘制在元素边界上，并使用采样得到的遮罩系数乘到已渲染子树的颜色和 alpha 上。
+element.animated-mask {
+    clip: dynamic-mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-    不透明的灰度遮罩使用纹理亮度：白色保留内容可见，黑色隐藏内容。使用 alpha 编码的遮罩会使用 alpha 通道，这适合透明 PNG 遮罩和柔和边缘。除非 `clip` 为 `MASK` 或 `DYNAMIC_MASK`，否则 `mask` 属性不会产生可见效果。
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;" id="mask">mask</p>
 
-        ```java
-        style.clip(Clip.MASK);
-        style.mask(MCSprites.BORDER);
-        ```
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-    === "Kotlin"
+定义 `clip: mask` 和 `clip: dynamic-mask` 使用的纹理。遮罩会绘制在元素边界上，并使用采样得到的遮罩系数乘到已渲染子树的颜色和 alpha 上。
 
-        ```kotlin
-        style = {
-            clip(Clip.MASK)
-            mask(MCSprites.BORDER)
-        }
-        ```
+不透明的灰度遮罩使用纹理亮度：白色保留内容可见，黑色隐藏内容。使用 alpha 编码的遮罩会使用 alpha 通道，这适合透明 PNG 遮罩和柔和边缘。除非 `clip` 为 `MASK` 或 `DYNAMIC_MASK`，否则 `mask` 属性不会产生可见效果。
 
-    === "LSS"
-        查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            clip: mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+```java
+style.clip(Clip.MASK);
+style.mask(MCSprites.BORDER);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overlay</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    控制在元素内容上方绘制的覆盖层渲染。
+```kotlin
+style = {
+    clip(Clip.MASK)
+    mask(MCSprites.BORDER)
+}
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        style.overlay(...);
-        ```
+查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
 
-    === "Kotlin"
+```css
+element {
+    clip: mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-        ```kotlin
-        style = {
-            overlay(MCSprites.BORDER)
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
-        查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
+::: info
+#### <p style="font-size: 1rem;">overlay</p>
 
-        ```css
-        element {
-            overlay: #FFF;
-            overlay: rect(#2ff, 3);
-            overlay: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+控制在元素内容上方绘制的覆盖层渲染。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">tooltips</p>
+<DocTabs>
+<DocTab title="Java">
 
-    定义当鼠标悬停在元素上时显示的悬停提示内容。
+```java
+style.overlay(...);
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```java
-        style.tooltips("tips.0", "tips.1");
-        style.appendTooltipsString("tips.2");
-        ```
+```kotlin
+style = {
+    overlay(MCSprites.BORDER)
+}
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="LSS">
 
-        ```kotlin
-        style = {
-            tooltips("tips.0", "tips.1")
-        }
-        ```
+查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
 
-    === "LSS"
+```css
+element {
+    overlay: #FFF;
+    overlay: rect(#2ff, 3);
+    overlay: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-        ```css
-        element {
-            tooltips: this is my tooltips;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">z-index</p>
+::: info
+#### <p style="font-size: 1rem;">tooltips</p>
 
-    控制元素的堆叠顺序。数值较大的元素显示在数值较小的元素之上。
+定义当鼠标悬停在元素上时显示的悬停提示内容。
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.zIndex(1);
-        ```
+```java
+style.tooltips("tips.0", "tips.1");
+style.appendTooltipsString("tips.2");
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            zIndex(1)
-        }
-        ```
+```kotlin
+style = {
+    tooltips("tips.0", "tips.1")
+}
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            z-index: 1;
-        }
-        ```
+```css
+element {
+    tooltips: this is my tooltips;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">opacity</p>
+</DocTab>
+</DocTabs>
+:::
 
-    设置元素的透明度等级。`0` 为完全透明，`1` 为完全不透明。
+::: info
+#### <p style="font-size: 1rem;">z-index</p>
 
-    === "Java"
+控制元素的堆叠顺序。数值较大的元素显示在数值较小的元素之上。
 
-        ```java
-        style.opacity(0.8f);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+style.zIndex(1);
+```
 
-        ```kotlin
-        style = {
-            opacity(0.8)
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+style = {
+    zIndex(1)
+}
+```
 
-        ```css
-        element {
-            opacity: 0.8;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">color</p>
+```css
+element {
+    z-index: 1;
+}
+```
 
-    使用 ARGB 乘数对当前元素的 `background` 和 `overlay` 纹理进行着色。
-    此着色仅应用于当前元素，不会影响子元素。
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">opacity</p>
 
-        ```java
-        style.color(0x80FF8080);
-        ```
+设置元素的透明度等级。`0` 为完全透明，`1` 为完全不透明。
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        style = {
-            color(0x80FF8080.toInt())
-        }
-        ```
+```java
+style.opacity(0.8f);
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            color: #80FF8080;
-        }
-        ```
+```kotlin
+style = {
+    opacity(0.8)
+}
+```
 
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow-clip</p>
+```css
+element {
+    opacity: 0.8;
+}
+```
 
-    **已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip: mask`](#clip) 和 [`mask`](#mask)。
+</DocTab>
+</DocTabs>
+:::
 
-    在 1.21 API 中，当元素的 `overflow` 为隐藏时，`overflow-clip` 会使用给定纹理的红色通道作为遮罩来裁剪子元素渲染。在 26.1+ 中，请将 `clip` 设置为 `MASK` 或 `DYNAMIC_MASK`，然后使用 `mask` 设置遮罩纹理。
+::: info
+#### <p style="font-size: 1rem;">color</p>
 
-    <div style="text-align: center;">
-        <video controls>
-        <source src="../../assets/overflow-clip.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-        </video>
-    </div>
+使用 ARGB 乘数对当前元素的 `background` 和 `overlay` 纹理进行着色。
+此着色仅应用于当前元素，不会影响子元素。
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.overflowClip(MCSprites.BORDER);
-        ```
+```java
+style.color(0x80FF8080);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            overflowClip(MCSprites.BORDER)
-        }
-        ```
+```kotlin
+style = {
+    color(0x80FF8080.toInt())
+}
+```
 
-    === "LSS"
-        查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            overflow-clip: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+```css
+element {
+    color: #80FF8080;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">transform-2d</p>
+</DocTab>
+</DocTabs>
+:::
 
-    应用 2D 变换，例如平移、缩放或旋转。
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">overflow-clip</p>
 
-        ```java
-        style.transform2D(Transform2D.identity().scale(0.5f));
-        element.transform(transform -> transform.translate(10, 0))
-        ```
+**已过时，仅适用于 1.21 API。** 在 26.1 及更新版本中请使用 [`clip: mask`](#clip) 和 [`mask`](#mask)。
 
-    === "Kotlin"
+在 1.21 API 中，当元素的 `overflow` 为隐藏时，`overflow-clip` 会使用给定纹理的红色通道作为遮罩来裁剪子元素渲染。在 26.1+ 中，请将 `clip` 设置为 `MASK` 或 `DYNAMIC_MASK`，然后使用 `mask` 设置遮罩纹理。
 
-        ```kotlin
-        style = {
-            transform2D(Transform2D.identity().scale(0.5f))
-        }
-        ```
+<div style="text-align: center;">
+    <video controls>
+    <source src="../assets/overflow-clip.mp4" type="video/mp4">
+    您的浏览器不支持视频播放。
+    </video>
+</div>
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            transform: translate(10, 20) rotate(45) scale(2, 2) pivot(0.5, 0.5);
-            transform: translateX(10) scale(0.5);
-        }
-        ```
+```java
+style.overflowClip(MCSprites.BORDER);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">transition</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    定义属性变化之间的动画过渡效果。
+```kotlin
+style = {
+    overflowClip(MCSprites.BORDER)
+}
+```
 
-    <div style="text-align: center;">
-        <video controls>
-        <source src="../../assets/transition.mp4" type="video/mp4">
-        您的浏览器不支持视频播放。
-        </video>
-    </div>
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+查看 [LSS 中的纹理](../textures/lss.md) 了解 lss 支持。
 
-        ```java
-        layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
-        ```
+```css
+element {
+    overflow-clip: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        style = {
-            transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">transform-2d</p>
 
-    === "LSS"
+应用 2D 变换，例如平移、缩放或旋转。
 
-        ```css
-        element {
-            transition: width 1;
-            transition: background 0.8 quad_in_out,
-                        transform 0.3;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
+
+```java
+style.transform2D(Transform2D.identity().scale(0.5f));
+element.transform(transform -> transform.translate(10, 0))
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+style = {
+    transform2D(Transform2D.identity().scale(0.5f))
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    transform: translate(10, 20) rotate(45) scale(2, 2) pivot(0.5, 0.5);
+    transform: translateX(10) scale(0.5);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">transition</p>
+
+定义属性变化之间的动画过渡效果。
+
+<div style="text-align: center;">
+    <video controls>
+    <source src="../assets/transition.mp4" type="video/mp4">
+    您的浏览器不支持视频播放。
+    </video>
+</div>
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+style = {
+    transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    transition: width 1;
+    transition: background 0.8 quad_in_out,
+                transform 0.3;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 
 ---
@@ -1425,45 +1737,47 @@ UIElement 的样式（包括布局）可以通过以下方式访问：
 ### `isActive`
 当 `isActive` 设置为 `false` 时，元素可能会失去其交互行为——例如，按钮无法再被点击——并且元素将不再接收 `tick` 事件。
 
-!!! note
-    当 `isActive` 设置为 `false` 时，会自动向元素添加一个 `__disabled__` 类。
-    你可以使用以下 LSS 选择器来设置活动和非活动状态的样式：
+::: info
+当 `isActive` 设置为 `false` 时，会自动向元素添加一个 `__disabled__` 类。
+你可以使用以下 LSS 选择器来设置活动和非活动状态的样式：
 
-    ```css
-    selector.__disabled__ {
-    }
+```css
+selector.__disabled__ {
+}
 
-    selector:disabled {
-    }
+selector:disabled {
+}
 
-    selector:not(.__disabled__) {
-    }
+selector:not(.__disabled__) {
+}
 
-    selector:not(:disabled) {
-    }
-    ```
+selector:not(:disabled) {
+}
+```
+:::
 
 ### `focusable`
 元素默认是 `focusable: false`。有些组件（如 `TextField`）在设计上是可聚焦的，但你仍然可以手动更改元素的可聚焦状态。
 只有当 `focusable` 设置为 `true` 时，元素才能通过 `focus()` 或鼠标交互获得焦点。
 
-!!! note
-    当元素处于 `focused`（已聚焦）状态时，会自动添加一个 `__focused__` 类。
-    你可以使用以下 LSS 选择器来设置已聚焦和未聚焦状态的样式：
+::: info
+当元素处于 `focused`（已聚焦）状态时，会自动添加一个 `__focused__` 类。
+你可以使用以下 LSS 选择器来设置已聚焦和未聚焦状态的样式：
 
-    ```css
-    selector.__focused__ {
-    }
+```css
+selector.__focused__ {
+}
 
-    selector:focused {
-    }
+selector:focused {
+}
 
-    selector:not(.__focused__) {
-    }
+selector:not(.__focused__) {
+}
 
-    selector:not(:focused) {
-    }
-    ```
+selector:not(:focused) {
+}
+```
+:::
 
 ### `hover state`
 当元素被悬停时，会自动添加一个 `__hovered__` 类。
@@ -1485,7 +1799,7 @@ selector:hover {
 但是，你仍然可以通过编辑器或 XML 编辑它们的样式并管理它们的子元素。
 在编辑器中，内部元素在层级视图中显示为灰色。
 
-在 XML 中，你可以使用 `#!xml <internal index="..."/>` 标签访问内部元素，其中 `index` 指定要引用的内部元素：
+在 XML 中，你可以使用 `#!xml &lt;internal index="..."/&gt;` 标签访问内部元素，其中 `index` 指定要引用的内部元素：
 
 ```xml
 <button>
@@ -1494,18 +1808,19 @@ selector:hover {
     </internal>
 </button>
 ```
-!!! note ""
-    在 LSS 中，你可以使用 :host 和 :internal 来明确指定宿主元素或内部元素。默认情况下，选择器会匹配两者，除非加以限制。
-    ```css
-    button > text {
-    }
+::: info
+在 LSS 中，你可以使用 :host 和 :internal 来明确指定宿主元素或内部元素。默认情况下，选择器会匹配两者，除非加以限制。
+```css
+button > text {
+}
 
-    button > text:internal {
-    }
+button > text:internal {
+}
 
-    button > text:host {
-    }
-    ```
+button > text:host {
+}
+```
+:::
 ---
 
 ## 字段
@@ -1518,9 +1833,9 @@ selector:hover {
 | `nodeId`       | `NodeId`      | protected (getter)       | 注册在 `TaffyTree` 中的节点句柄。                 |
 | `modularUI`    | `ModularUI`   | private (getter)         | 此元素所属的 `ModularUI` 实例。                   |
 | `id`           | `String`      | private (getter/setter)  | 元素 ID，用于选择器和查询。                       |
-| `classes`      | `Set<String>` | private (getter)         | 应用于此元素的类似 CSS 的类列表。                 |
+| `classes`      | `Set&lt;String&gt;` | private (getter)         | 应用于此元素的类似 CSS 的类列表。                 |
 | `styleBag`     | `StyleBag`    | private (getter)         | 存储已解析的样式候选值和计算后的样式。            |
-| `styles`       | `List<Style>` | private (getter)         | 附加到此元素的内联样式。                          |
+| `styles`       | `List&lt;Style&gt;` | private (getter)         | 附加到此元素的内联样式。                          |
 | `layoutStyle`  | `LayoutStyle` | private (getter)         | 布局属性对应的样式包装器。                        |
 | `style`        | `BasicStyle`  | private (getter)         | 基础视觉样式（background、overlay 着色、opacity、zIndex 等）。 |
 | `isVisible`    | `boolean`     | private (getter/setter)  | 元素是否可见。                                    |
@@ -1537,7 +1852,7 @@ selector:hover {
 | 方法                        | 签名                                    | 描述                                             |
 | --------------------------- | --------------------------------------- | ------------------------------------------------ |
 | `getLayout()`               | `LayoutStyle`                           | 返回布局样式控制器。                             |
-| `layout(...)`               | `UIElement layout(Consumer<LayoutStyle>)` | 以流式方式修改布局属性。                         |
+| `layout(...)`               | `UIElement layout(Consumer&lt;LayoutStyle&gt;)` | 以流式方式修改布局属性。                         |
 | `getTaffyLayout()`          | `Layout`                                | 返回该元素解析后的 Taffy 布局结果。              |
 | `getPositionX()`            | `float`                                 | 屏幕上的绝对 X 坐标。                            |
 | `getPositionY()`            | `float`                                 | 屏幕上的绝对 Y 坐标。                            |
@@ -1557,14 +1872,14 @@ selector:hover {
 | 方法               | 签名                             | 描述                                       |
 | ------------------ | -------------------------------- | ------------------------------------------ |
 | `getParent()`      | `UIElement`                      | 返回父元素，或 `null`。                    |
-| `getChildren()`    | `List<UIElement>`                | 返回一个不可修改的子元素列表。             |
+| `getChildren()`    | `List&lt;UIElement&gt;`                | 返回一个不可修改的子元素列表。             |
 | `addChild(...)`    | `UIElement addChild(UIElement)`  | 添加一个子元素。                           |
 | `addChildren(...)` | `UIElement addChildren(UIElement...)` | 添加多个子元素。                     |
 | `removeChild(...)` | `boolean removeChild(UIElement)` | 移除一个子元素。                           |
 | `removeSelf()`     | `boolean`                        | 从其父元素中移除此元素。                   |
 | `clearAllChildren()` | `void`                         | 移除所有子元素。                           |
 | `isAncestorOf(...)`| `boolean`                        | 检查此元素是否是另一个元素的祖先。         |
-| `getStructurePath()` | `ImmutableList<UIElement>`     | 从根元素到此元素的路径。                   |
+| `getStructurePath()` | `ImmutableList&lt;UIElement&gt;`     | 从根元素到此元素的路径。                   |
 
 ---
 
@@ -1572,18 +1887,18 @@ selector:hover {
 
 | 方法             | 签名                                    | 描述                                         |
 | ---------------- | --------------------------------------- | -------------------------------------------- |
-| `style(...)`     | `UIElement style(Consumer<BasicStyle>)` | 修改内联视觉样式。                           |
+| `style(...)`     | `UIElement style(Consumer&lt;BasicStyle&gt;)` | 修改内联视觉样式。                           |
 | `lss(...)`       | `UIElement lss(String, Object)`         | 以编程方式应用样式表风格的属性。             |
 | `addClass(...)`  | `UIElement addClass(String)`            | 添加一个类似 CSS 的类。                      |
 | `removeClass(...)` | `UIElement removeClass(String)`       | 移除一个类。                                 |
 | `hasClass(...)`  | `boolean`                               | 检查类是否存在。                             |
-| `getLocalStylesheets()` | `List<Stylesheet>`                       | 返回附加到此元素的本地样式表。 |
+| `getLocalStylesheets()` | `List&lt;Stylesheet&gt;`                       | 返回附加到此元素的本地样式表。 |
 | `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(Stylesheet)` | 添加本地样式表（仅自身 + 后代）。  |
 | `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(String)`     | 从 LSS 文本解析并添加本地样式表。     |
 | `removeLocalStylesheet(...)` | `UIElement removeLocalStylesheet(Stylesheet)` | 从此元素作用域中移除本地样式表。 |
 | `clearLocalStylesheets()` | `UIElement`                              | 移除附加到此元素的所有本地样式表。 |
-| `transform(...)`   | `UIElement transform(Consumer<Transform2D>)` | 应用 2D 变换。                          |
-| `animation()`      | `StyleAnimation`                             | 创建一个以此元素为目标的样式动画。查看 [StyleAnimation](../preliminary/style_animation.md){ data-preview }。 |
+| `transform(...)`   | `UIElement transform(Consumer&lt;Transform2D&gt;)` | 应用 2D 变换。                          |
+| `animation()`      | `StyleAnimation`                             | 创建一个以此元素为目标的样式动画。查看 [StyleAnimation](../preliminary/style_animation.md)。 |
 | `animation(a -> {})`| `StyleAnimation`                            | 如果 `ModularUI` 有效则立即运行动画设置，或在变为有效时通过 `MUI_CHANGED` 运行一次。 |
 
 ---
@@ -1612,52 +1927,57 @@ selector:hover {
 
 #### 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Bubble-phase listener (default): fires after children handle the event
-    element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
-        event.currentElement.focus();
-    });
+```java
+// Bubble-phase listener (default): fires after children handle the event
+element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
+    event.currentElement.focus();
+});
 
-    // Capture-phase listener: fires before children handle the event
-    element.addEventListener(UIEvents.CLICK, event -> {
-        event.stopPropagation(); // prevent children from seeing this event
-    }, true);
+// Capture-phase listener: fires before children handle the event
+element.addEventListener(UIEvents.CLICK, event -> {
+    event.stopPropagation(); // prevent children from seeing this event
+}, true);
 
-    // Removing a specific listener
-    UIEventListener listener = event -> { /* ... */ };
-    element.addEventListener(UIEvents.CLICK, listener);
-    element.removeEventListener(UIEvents.CLICK, listener);
+// Removing a specific listener
+UIEventListener listener = event -> { /* ... */ };
+element.addEventListener(UIEvents.CLICK, listener);
+element.removeEventListener(UIEvents.CLICK, listener);
 
-    // Stop all mouse/drag events from bubbling to parent elements
-    element.stopInteractionEventsPropagation();
-    ```
+// Stop all mouse/drag events from bubbling to parent elements
+element.stopInteractionEventsPropagation();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element {
-        // Bubble events (default)
-        events {
-            UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
-            UIEvents.CLICK on { event -> /* handle click */ }
-        }
-        // Capture events
-        events(capture = true) {
-            UIEvents.CLICK on { it.stopPropagation() }
-        }
+```kotlin
+element {
+    // Bubble events (default)
+    events {
+        UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
+        UIEvents.CLICK on { event -> /* handle click */ }
     }
-    ```
+    // Capture events
+    events(capture = true) {
+        UIEvents.CLICK on { it.stopPropagation() }
+    }
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    element.addEventListener(UIEvents.MOUSE_DOWN, event => {
-        event.currentElement.focus();
-    });
-    ```
+```js
+element.addEventListener(UIEvents.MOUSE_DOWN, event => {
+    event.currentElement.focus();
+});
+```
 
+</DocTab>
+</DocTabs>
 #### 可用事件
 
 | 事件 | 描述 |
@@ -1703,91 +2023,102 @@ selector:hover {
 | `removeSyncValue(...)`   | `UIElement` | 注销一个同步值。                    |
 | `addRPCEvent(...)`       | `RPCEmitter` | 注册一个 RPC 事件。                 |
 | `sendEvent(...)`         | `void` | 向服务端发送一个 RPC 事件。         |
-| `sendEvent(..., callback)` | `<T> void` | 发送一个带有响应回调的 RPC 事件。 |
+| `sendEvent(..., callback)` | `&lt;T&gt; void` | 发送一个带有响应回调的 RPC 事件。 |
 
 #### 服务端事件
 
 服务端事件监听器在**服务端**而不是客户端上运行。它们使用相同的 `UIEvents` 类型常量，并支持冒泡和捕获阶段。它们通过内部 RPC 机制自动同步。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Runs on the server when UIEvents.TICK fires
-    element.addServerEventListener(UIEvents.TICK, event -> {
-        // server-side tick logic
-    });
-    ```
+```java
+// Runs on the server when UIEvents.TICK fires
+element.addServerEventListener(UIEvents.TICK, event -> {
+    // server-side tick logic
+});
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element {
-        serverEvents {
-            UIEvents.TICK on { event ->
-                // server-side logic
-            }
-        }
-        // Capture phase on server
-        serverEvents(capture = true) {
-            UIEvents.CLICK on { it.stopPropagation() }
+```kotlin
+element {
+    serverEvents {
+        UIEvents.TICK on { event ->
+            // server-side logic
         }
     }
-    ```
+    // Capture phase on server
+    serverEvents(capture = true) {
+        UIEvents.CLICK on { it.stopPropagation() }
+    }
+}
+```
 
+</DocTab>
+</DocTabs>
 #### RPC 事件
 
 RPC（远程过程调用）事件允许客户端显式调用服务端逻辑，并可选择接收响应。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Register an RPC event during element initialization
-    RPCEmitter emitter = element.addRPCEvent(ele ->
-        RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
-            // This runs on the server
-            ServerPlayer player = e.modularUI.player;
-            player.sendSystemMessage(Component.literal("Hello from server!"));
-        })
-    );
+```java
+// Register an RPC event during element initialization
+RPCEmitter emitter = element.addRPCEvent(ele ->
+    RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
+        // This runs on the server
+        ServerPlayer player = e.modularUI.player;
+        player.sendSystemMessage(Component.literal("Hello from server!"));
+    })
+);
 
-    // Trigger the RPC from client (e.g., inside a client event listener)
-    element.addEventListener(UIEvents.CLICK, event ->
-        element.sendEvent(emitter.event())
-    );
-    ```
+// Trigger the RPC from client (e.g., inside a client event listener)
+element.addEventListener(UIEvents.CLICK, event ->
+    element.sendEvent(emitter.event())
+);
+```
 
+</DocTab>
+</DocTabs>
 #### 数据绑定
 
 数据绑定自动在服务端和客户端之间同步数值。在 Java 中使用 `addSyncValue`，或在 Kotlin 中使用 `bind*` DSL 辅助函数。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Bidirectional: synced server <-> client
-    element.addSyncValue(new SyncValue<>(Integer.class,
-        () -> myData.count,
-        v  -> myData.count = v
-    ));
-    ```
+```java
+// Bidirectional: synced server <-> client
+element.addSyncValue(new SyncValue<>(Integer.class,
+    () -> myData.count,
+    v  -> myData.count = v
+));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element({}) {
-        // Bidirectional (server <-> client)
-        bind({ myData.count }, { myData.count = it })
+```kotlin
+element({}) {
+    // Bidirectional (server <-> client)
+    bind({ myData.count }, { myData.count = it })
 
-        // Server -> client only
-        bindS2C({ myData.count })
+    // Server -> client only
+    bindS2C({ myData.count })
 
-        // Client -> server only
-        bindC2S({ v -> myData.count = v })
+    // Client -> server only
+    bindC2S({ v -> myData.count = v })
 
-        // Bind a mutable property directly (bidirectional)
-        bind(myData::count)
-    }
-    ```
+    // Bind a mutable property directly (bidirectional)
+    bind(myData::count)
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 渲染

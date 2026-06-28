@@ -1,5 +1,5 @@
 # 简介
-{{ version_badge("2.1.0", label="自", icon="tag") }}
+<VersionBadge version="2.1.0" label="自" icon="tag" />
 
 LDLib2 提供了基于 [`Taffy`](https://taffylayout.com/) 布局引擎的强大 UI 库。
 如果你在 GUI 开发中遇到困难，LDLib2 绝对是你最好的选择之一。与 LDLib 相比，LDLib2 进行了彻底的重构：

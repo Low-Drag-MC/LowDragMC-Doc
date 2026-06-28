@@ -7,17 +7,17 @@ The entire **UI creation and usage pipeline** consists of the following steps:
 1. Create UI widget and layout (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Create `buttons` and `item slots`, set their positions...
+    1.  <DocIcon name="material-hexagon-multiple" /> Create `buttons` and `item slots`, set their positions...
 
 2. Bind UI functional logic (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Add logic to be executed when a `button` is clicked, bind `inventory` to `item slots`...
+    1.  <DocIcon name="material-hexagon-multiple" /> Add logic to be executed when a `button` is clicked, bind `inventory` to `item slots`...
 
 3. Display the UI (1)
     { .annotate }
 
-    1.  :material-hexagon-multiple: Open the `GUI` when `right-clicking` an item, open the `GUI` when `right-clicking` a block...
+    1.  <DocIcon name="material-hexagon-multiple" /> Open the `GUI` when `right-clicking` an item, open the `GUI` when `right-clicking` a block...
 
 Technically, the `UI function binding` and `UI widget creation` processes happen simultaneously, as many controls provide constructors that bind functions at the same time.  
 
@@ -31,64 +31,68 @@ Let's begin with a [`WigetGroup`](../widget/WidgetGroup.md), which is a containe
 
 Then, we add a `Label` and a `Button` into it.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    public WidgetGroup createUI() {
-        // create a root container
-        var root = new WidgetGroup();
-        root.setSize(100, 100);
-        root.setBackground(ResourceBorderTexture.BORDERED_BACKGROUND);
+``` java 
+public WidgetGroup createUI() {
+    // create a root container
+    var root = new WidgetGroup();
+    root.setSize(100, 100);
+    root.setBackground(ResourceBorderTexture.BORDERED_BACKGROUND);
 
-        // create a label and a button
-        var label = new LabelWidget();
-        label.setSelfPosition(20, 20);
-        label.setText("Hello, World!");
-        var button = new ButtonWidget();
-        button.setSelfPosition(20, 60);
-        button.setSize(60, 20);
-        // prepare button textures
-        var backgroundImage = ResourceBorderTexture.BUTTON_COMMON;
-        var hoverImage = backgroundImage.copy().setColor(ColorPattern.CYAN.color);
-        var textAbove = new TextTexture("Click me!");
-        button.setButtonTexture(backgroundImage, textAbove);
-        button.setClickedTexture(hoverImage, textAbove);
+    // create a label and a button
+    var label = new LabelWidget();
+    label.setSelfPosition(20, 20);
+    label.setText("Hello, World!");
+    var button = new ButtonWidget();
+    button.setSelfPosition(20, 60);
+    button.setSize(60, 20);
+    // prepare button textures
+    var backgroundImage = ResourceBorderTexture.BUTTON_COMMON;
+    var hoverImage = backgroundImage.copy().setColor(ColorPattern.CYAN.color);
+    var textAbove = new TextTexture("Click me!");
+    button.setButtonTexture(backgroundImage, textAbove);
+    button.setClickedTexture(hoverImage, textAbove);
 
-        // add the label and button to the root container
-        root.addWidgets(label, button);
-        return root;
-    }
-    ```
+    // add the label and button to the root container
+    root.addWidgets(label, button);
+    return root;
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    function createUI() {
-        // create a root container
-        let root = new WidgetGroup();
-        root.setSize(100, 100);
-        root.setBackground(ResourceBorderTexture.BORDERED_BACKGROUND);
+``` javascript
+function createUI() {
+    // create a root container
+    let root = new WidgetGroup();
+    root.setSize(100, 100);
+    root.setBackground(ResourceBorderTexture.BORDERED_BACKGROUND);
 
-        // create a label and a button
-        let label = new LabelWidget();
-        label.setSelfPosition(20, 20);
-        label.setText("Hello, World!");
-        let button = new ButtonWidget();
-        button.setSelfPosition(20, 60);
-        button.setSize(60, 20);
-        // prepare button textures
-        let backgroundImage = ResourceBorderTexture.BUTTON_COMMON;
-        let hoverImage = backgroundImage.copy().setColor(ColorPattern.CYAN.color);
-        let textAbove = new TextTexture("Click me!");
-        button.setButtonTexture(backgroundImage, textAbove);
-        button.setClickedTexture(hoverImage, textAbove);
+    // create a label and a button
+    let label = new LabelWidget();
+    label.setSelfPosition(20, 20);
+    label.setText("Hello, World!");
+    let button = new ButtonWidget();
+    button.setSelfPosition(20, 60);
+    button.setSize(60, 20);
+    // prepare button textures
+    let backgroundImage = ResourceBorderTexture.BUTTON_COMMON;
+    let hoverImage = backgroundImage.copy().setColor(ColorPattern.CYAN.color);
+    let textAbove = new TextTexture("Click me!");
+    button.setButtonTexture(backgroundImage, textAbove);
+    button.setClickedTexture(hoverImage, textAbove);
 
-        // add the label and button to the root container
-        root.addWidgets(label, button);
-        return root;
-    }
-    ```
+    // add the label and button to the root container
+    root.addWidgets(label, button);
+    return root;
+}
+```
 
+</DocTab>
+</DocTabs>
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/root.mp4" type="video/mp4">
@@ -96,7 +100,7 @@ Then, we add a `Label` and a `Button` into it.
   </video>
 </div>
 
- <!-- ![Image title](../images/root.png){ width="80%" style="display: block; margin: 0 auto;" } -->
+ <!-- <img src="../images/root.png" alt="Image title" width="80%" class="md-img-center"> -->
 
 ---
 
@@ -106,41 +110,45 @@ Then, we add a `Label` and a `Button` into it.
 After the creation of the ui, we should implement the logic of the ui. For example, we want to **click the button to change the label text**.
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    public WidgetGroup createUI() {
-        // creation of the ui
-        // ....
+``` java 
+public WidgetGroup createUI() {
+    // creation of the ui
+    // ....
 
-        // click logic
-        AtomicInteger counter = new AtomicInteger(0);
-        button.setOnPressCallback(clickData -> {
-            label.setText("Clicked " + counter.incrementAndGet() + " times!");
-        });
+    // click logic
+    AtomicInteger counter = new AtomicInteger(0);
+    button.setOnPressCallback(clickData -> {
+        label.setText("Clicked " + counter.incrementAndGet() + " times!");
+    });
 
-        return root;
-    }
-    ```
+    return root;
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    function createUI() {
-        // creation of the ui
-        // ....
+``` javascript
+function createUI() {
+    // creation of the ui
+    // ....
 
-        // click logic
-        let counter = 0;
-        button.setOnPressCallback(clickData => {
-            counter++;
-            label.setText("Clicked " + counter + " times!");
-        });
+    // click logic
+    let counter = 0;
+    button.setOnPressCallback(clickData => {
+        counter++;
+        label.setText("Clicked " + counter + " times!");
+    });
 
-        return root;
-    }
-    ```
+    return root;
+}
+```
 
+</DocTab>
+</DocTabs>
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/counter.mp4" type="video/mp4">
@@ -195,57 +203,61 @@ KubeJS user can do the same thing in an easy way. User can even open the ui for 
 1. KubeJS user should use `LDLibUI.block(ui_name, e => {})` to create the ui by the given `ui_name`.
 2. Call the method `BlockUIFactory.INSTANCE.openUI(player, pos, ui_name)` when you want to open the ui.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    public class TestBlockEntity extends BlockEntity implements IUIHolder {
-        
-        public void onPlayerUse(Player player) {
-            // step 1 here.
-            if (player instanceof ServerPlayer serverPlayer) {
-                BlockEntityUIFactory.INSTANCE.openUI(this, serverPlayer);
-            }
-        }
+``` java 
+public class TestBlockEntity extends BlockEntity implements IUIHolder {
 
-        private WidgetGroup createUI() {
-            // ....
-        }
-
-        @Override
-        public ModularUI createUI(Player entityPlayer) {
-            // step 2 and step 4 here 
-            return new ModularUI(createUI(), this, entityPlayer);
+    public void onPlayerUse(Player player) {
+        // step 1 here.
+        if (player instanceof ServerPlayer serverPlayer) {
+            BlockEntityUIFactory.INSTANCE.openUI(this, serverPlayer);
         }
     }
-    ```
 
-=== "KubeJS"
-
-    ``` javascript
-    // server script
-
-    BlockEvents.rightClicked('test_block_ui', event => { 
-        // step 1 here.
-        BlockUIFactory.INSTANCE.openUI(event.player, event.block.pos, "test_block_ui");
-    })
-
-    function createUI() {
+    private WidgetGroup createUI() {
         // ....
     }
 
-    LDLibUI.block("test_block_ui", e => { 
+    @Override
+    public ModularUI createUI(Player entityPlayer) {
         // step 2 and step 4 here 
+        return new ModularUI(createUI(), this, entityPlayer);
+    }
+}
+```
 
-        // let level = e.level
-        // let pos = e.pos
-        // let block = e.block
-        // let player = e.player
+</DocTab>
+<DocTab title="KubeJS">
 
-        var ui = createUI();
-        e.success(ui);
-    })
-    ```
+``` javascript
+// server script
 
+BlockEvents.rightClicked('test_block_ui', event => { 
+    // step 1 here.
+    BlockUIFactory.INSTANCE.openUI(event.player, event.block.pos, "test_block_ui");
+})
+
+function createUI() {
+    // ....
+}
+
+LDLibUI.block("test_block_ui", e => { 
+    // step 2 and step 4 here 
+
+    // let level = e.level
+    // let pos = e.pos
+    // let block = e.block
+    // let player = e.player
+
+    var ui = createUI();
+    e.success(ui);
+})
+```
+
+</DocTab>
+</DocTabs>
 ### Held Item UI Factory
 
 This factory allows user to open the ui from the held item.
@@ -263,56 +275,61 @@ KubeJS user can do the same thing in an easy way. User can even open the ui for 
 1. KubeJS user should use `LDLibUI.item(ui_name, e => {})` to create the ui by the given `ui_name`.
 2. Call the method `ItemUIFactory.INSTANCE.openUI(player, hand, ui_name)` when you want to open the ui.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    public class TestItem implements IUIHolder.Item {
-        @Override
-        public InteractionResult useOn(UseOnContext context) {
-            // step 1 here.
-            if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
-                HeldItemUIFactory.INSTANCE.openUI(serverPlayer, context.getHand());
-            }
-            return InteractionResult.SUCCESS;
-        }
-
-        private WidgetGroup createUI() {
-            // ....
-        }
-
-        @Override
-        public ModularUI createUI(Player entityPlayer, HeldItemUIFactory.HeldItemHolder holder) {
-            // step 2 and step 4
-            return new ModularUI(createUI(), holder, entityPlayer);
-        }
-    }
-    ```
-
-=== "KubeJS"
-
-    ``` javascript
-    // server script
-
-    ItemEvents.firstRightClicked('minecraft:stick', event => {
+``` java 
+public class TestItem implements IUIHolder.Item {
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
         // step 1 here.
-        ItemUIFactory.INSTANCE.openUI(event.player, event.hand, "test_item_ui");
-    })
+        if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
+            HeldItemUIFactory.INSTANCE.openUI(serverPlayer, context.getHand());
+        }
+        return InteractionResult.SUCCESS;
+    }
 
-    function createUI() {
+    private WidgetGroup createUI() {
         // ....
     }
 
-    LDLibUI.item("test_item_ui", e => {
+    @Override
+    public ModularUI createUI(Player entityPlayer, HeldItemUIFactory.HeldItemHolder holder) {
         // step 2 and step 4
+        return new ModularUI(createUI(), holder, entityPlayer);
+    }
+}
+```
 
-        // let player = e.player
-        // let hand = e.hand
-        // let held = e.held
+</DocTab>
+<DocTab title="KubeJS">
 
-        var ui = createUI();
-        e.success(ui);
-    })
-    ```
+``` javascript
+// server script
+
+ItemEvents.firstRightClicked('minecraft:stick', event => {
+    // step 1 here.
+    ItemUIFactory.INSTANCE.openUI(event.player, event.hand, "test_item_ui");
+})
+
+function createUI() {
+    // ....
+}
+
+LDLibUI.item("test_item_ui", e => {
+    // step 2 and step 4
+
+    // let player = e.player
+    // let hand = e.hand
+    // let held = e.held
+
+    var ui = createUI();
+    e.success(ui);
+})
+```
+
+</DocTab>
+</DocTabs>
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/display.mp4" type="video/mp4">

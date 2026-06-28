@@ -1,6 +1,6 @@
 # GraphView
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `GraphView` is a pannable, zoomable canvas for displaying node graphs or any arbitrary 2D content. Children are placed on a `contentRoot` element that can be translated and scaled. The view renders a repeating grid background and supports:
 
@@ -8,58 +8,64 @@
 - **Zoom** — mouse wheel, clamped to `[min-scale, max-scale]`.
 - **Fit** — helpers to centre and scale the view to fit all children or a given bounding box.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var graph = new GraphView();
-    graph.graphViewStyle(style -> style
-        .allowZoom(true)
-        .allowPan(true)
-        .minScale(0.2f)
-        .maxScale(5f)
-    );
+```java
+var graph = new GraphView();
+graph.graphViewStyle(style -> style
+    .allowZoom(true)
+    .allowPan(true)
+    .minScale(0.2f)
+    .maxScale(5f)
+);
 
-    var node = new UIElement();
-    graph.addContentChild(node);
-    parent.addChild(graph);
+var node = new UIElement();
+graph.addContentChild(node);
+parent.addChild(graph);
 
-    // Fit the view after adding children:
-    graph.fitToChildren(20f, 0.1f);
-    ```
+// Fit the view after adding children:
+graph.fitToChildren(20f, 0.1f);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    graphView({
-        graphViewStyle = {
-            allowZoom(true)
-            minScale(0.2f)
-            maxScale(5f)
-        }
-    }) {
-        content(myNodeElement)
+```kotlin
+graphView({
+    graphViewStyle = {
+        allowZoom(true)
+        minScale(0.2f)
+        maxScale(5f)
     }
-    ```
+}) {
+    content(myNodeElement)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let graph = new GraphView();
-    graph.graphViewStyle(style => {
-        style.allowZoom(true);
-        style.minScale(0.2);
-    });
-    graph.addContentChild(myNode);
-    parent.addChild(graph);
-    ```
+```js
+let graph = new GraphView();
+graph.graphViewStyle(style => {
+    style.allowZoom(true);
+    style.minScale(0.2);
+});
+graph.addContentChild(myNode);
+parent.addChild(graph);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Internal Structure
@@ -72,111 +78,141 @@
 
 ## GraphView Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">allow-zoom</p>
+::: info
+#### <p style="font-size: 1rem;">allow-zoom</p>
 
-    Whether scrolling the mouse wheel changes the zoom level.
+Whether scrolling the mouse wheel changes the zoom level.
 
-    Default: `true`
+Default: `true`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        graph.graphViewStyle(style -> style.allowZoom(false));
-        ```
+```java
+graph.graphViewStyle(style -> style.allowZoom(false));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        graph-view {
-            allow-zoom: false;
-        }
-        ```
+```css
+graph-view {
+    allow-zoom: false;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">allow-pan</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Whether clicking and dragging pans the view.
+::: info
+#### <p style="font-size: 1rem;">allow-pan</p>
 
-    Default: `true`
+Whether clicking and dragging pans the view.
 
-    === "Java"
+Default: `true`
 
-        ```java
-        graph.graphViewStyle(style -> style.allowPan(false));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+graph.graphViewStyle(style -> style.allowPan(false));
+```
 
-        ```css
-        graph-view {
-            allow-pan: false;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">min-scale / max-scale</p>
+```css
+graph-view {
+    allow-pan: false;
+}
+```
 
-    Zoom level bounds.
+</DocTab>
+</DocTabs>
+:::
 
-    Defaults: `0.1` / `10`
+::: info
+#### <p style="font-size: 1rem;">min-scale / max-scale</p>
 
-    === "Java"
+Zoom level bounds.
 
-        ```java
-        graph.graphViewStyle(style -> style.minScale(0.25f).maxScale(4f));
-        ```
+Defaults: `0.1` / `10`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        graph-view {
-            min-scale: 0.25;
-            max-scale: 4;
-        }
-        ```
+```java
+graph.graphViewStyle(style -> style.minScale(0.25f).maxScale(4f));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-background</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Texture tiled across the background. The default is a built-in grid sprite with `REPEAT` wrap mode.
+```css
+graph-view {
+    min-scale: 0.25;
+    max-scale: 4;
+}
+```
 
-    Default: `ldlib2:textures/gui/grid_bg.png` (repeat)
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">grid-background</p>
 
-        ```java
-        graph.graphViewStyle(style -> style.gridTexture(myGridTexture));
-        ```
+Texture tiled across the background. The default is a built-in grid sprite with `REPEAT` wrap mode.
 
-    === "LSS"
+Default: `ldlib2:textures/gui/grid_bg.png` (repeat)
 
-        ```css
-        graph-view {
-            grid-background: sprite("mymod:textures/gui/grid.png");
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-size</p>
+```java
+graph.graphViewStyle(style -> style.gridTexture(myGridTexture));
+```
 
-    Size (in world-space units) of each grid cell.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `64`
+```css
+graph-view {
+    grid-background: sprite("mymod:textures/gui/grid.png");
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        graph.graphViewStyle(style -> style.gridSize(32f));
-        ```
+::: info
+#### <p style="font-size: 1rem;">grid-size</p>
 
-    === "LSS"
+Size (in world-space units) of each grid cell.
 
-        ```css
-        graph-view {
-            grid-size: 32;
-        }
-        ```
+Default: `64`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+graph.graphViewStyle(style -> style.gridSize(32f));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+graph-view {
+    grid-size: 32;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -199,7 +235,7 @@
 | `addContentChild(UIElement)` | `GraphView` | Adds a child to `contentRoot`. |
 | `removeContentChild(UIElement)` | `GraphView` | Removes a child from `contentRoot`. |
 | `clearAllContentChildren()` | `GraphView` | Removes all children from `contentRoot`. |
-| `graphViewStyle(Consumer<GraphViewStyle>)` | `GraphView` | Configures style fluently. |
-| `contentRoot(Consumer<UIElement>)` | `UIElement` | Configures `contentRoot`. |
+| `graphViewStyle(Consumer&lt;GraphViewStyle&gt;)` | `GraphView` | Configures style fluently. |
+| `contentRoot(Consumer&lt;UIElement&gt;)` | `UIElement` | Configures `contentRoot`. |
 | `fitToChildren(float padding, float minScaleBound)` | `void` | Adjusts offset and scale to fit all visible children, with the given padding and minimum scale. |
 | `fit(float minX, float minY, float maxX, float maxY, float minScaleBound)` | `void` | Adjusts offset and scale to fit the given bounding box. |

@@ -19,56 +19,71 @@
 
 Sets the texture
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setTexture("ldlib:textures/gui/particles.png");
-    ```
+``` java
+animationTexture.setTexture("ldlib:textures/gui/particles.png");
+```
 
+</DocTab>
+</DocTabs>
 ### setCellSize
 
 Sets the cell size. Refer to how many cells does the animation texture need to be divided into (side length).
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setCellSize(8);
-    ```
+``` java
+animationTexture.setCellSize(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAnimation
 
 Sets the animation range `from` which cell `to` which cell.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setAnimation(32, 44);
-    ```
+``` java
+animationTexture.setAnimation(32, 44);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAnimation
 
 Sets the animation speed. Tick time between cells.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setAnimation(1);
-    ```
+``` java
+animationTexture.setAnimation(1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 Sets the texture color.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setColor(0xff000000);
-    ```
+``` java
+animationTexture.setColor(0xff000000);
+```
 
+</DocTab>
+</DocTabs>
 ---

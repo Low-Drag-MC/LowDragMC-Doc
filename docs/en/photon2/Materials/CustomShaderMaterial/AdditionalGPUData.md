@@ -1,6 +1,6 @@
 # Additional GPU Data
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
 Photon2 lets you send **extra per-particle vertex attributes** to the GPU — such as `age`, `T`, or velocity.  
 
@@ -13,7 +13,7 @@ Photon2 lets you send **extra per-particle vertex attributes** to the GPU — su
 
 ## Particle Emitter
 
-![Additional GPU Data](../../assets/GPUData.png){ width="30%" align=right }
+<img src="../../assets/GPUData.png" alt="Additional GPU Data" width="30%" class="md-img-right">
 
 In the `Particle Emitter` **Inspector**, enable **Additional GPU Data** and select the data fields you need.
 
@@ -40,7 +40,7 @@ In the `Particle Emitter` **Inspector**, enable **Additional GPU Data** and sele
 Extra attributes are **appended sequentially** after the default vertex layout in the **vertex shader (vsh)**.  
 
 > **⚠ Warning:**  
-> - Always place new attribute declarations **after** `#moj_import <photon:particle.glsl>`.  
+> - Always place new attribute declarations **after** `#moj_import &lt;photon:particle.glsl&gt;`.  
 > - GPU & driver behavior may vary; sequential layouts may not always be reliable — use `layout(location = x)` to explicitly bind attributes when needed.
 
 **Example:** If you enable **`T`** and **`Velocity`**, add them to your shader:

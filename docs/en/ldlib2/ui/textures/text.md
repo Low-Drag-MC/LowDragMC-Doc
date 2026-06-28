@@ -1,57 +1,63 @@
 # TextTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `TextTexture` renders a translated string as a GUI texture. It supports multiple display modes (centred, left-aligned, scrolling, hidden-until-hover), word-wrapping, a background colour, and an optional live-update supplier.
 
 Registry name: `text_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Static centred text
-    IGuiTexture label = new TextTexture("Hello World");
+```java
+// Static centred text
+IGuiTexture label = new TextTexture("Hello World");
 
-    // Left-aligned, coloured, with shadow
-    IGuiTexture info = new TextTexture("Info", 0xFFFFDD44)
-        .setType(TextTexture.TextType.LEFT)
-        .setDropShadow(true);
+// Left-aligned, coloured, with shadow
+IGuiTexture info = new TextTexture("Info", 0xFFFFDD44)
+    .setType(TextTexture.TextType.LEFT)
+    .setDropShadow(true);
 
-    // Scrolling text, word-wrap at 80 px
-    IGuiTexture scroll = new TextTexture("Long description that scrolls…")
-        .setType(TextTexture.TextType.ROLL_ALWAYS)
-        .setWidth(80)
-        .setRollSpeed(1.5f);
+// Scrolling text, word-wrap at 80 px
+IGuiTexture scroll = new TextTexture("Long description that scrolls…")
+    .setType(TextTexture.TextType.ROLL_ALWAYS)
+    .setWidth(80)
+    .setRollSpeed(1.5f);
 
-    // Dynamic — updates every game tick
-    IGuiTexture dynamic = new TextTexture(() -> "Ticks: " + level.getGameTime());
-    ```
+// Dynamic — updates every game tick
+IGuiTexture dynamic = new TextTexture(() -> "Ticks: " + level.getGameTime());
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val label = TextTexture("Hello World")
+```kotlin
+val label = TextTexture("Hello World")
 
-    val scroll = TextTexture("Long description…")
-        .setType(TextTexture.TextType.ROLL_ALWAYS)
-        .setWidth(80)
-    ```
+val scroll = TextTexture("Long description…")
+    .setType(TextTexture.TextType.ROLL_ALWAYS)
+    .setWidth(80)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let label = new TextTexture("Hello World");
+```js
+let label = new TextTexture("Hello World");
 
-    let dynamic = new TextTexture(() => "Ticks: " + level.getGameTime());
-    ```
+let dynamic = new TextTexture(() => "Ticks: " + level.getGameTime());
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Text Types
@@ -81,7 +87,7 @@ Registry name: `text_texture`
 | `rollSpeed` | `float` | Scroll speed for rolling modes. Default: `1.0`. |
 | `dropShadow` | `boolean` | Whether to draw a drop shadow. Default: `false` (constructor with `String` sets it to `true`). |
 | `type` | `TextType` | Display mode. Default: `NORMAL`. |
-| `supplier` | `Supplier<String>` (nullable) | When set, `text` is updated every game tick from this supplier. |
+| `supplier` | `Supplier&lt;String&gt;` (nullable) | When set, `text` is updated every game tick from this supplier. |
 
 ---
 
@@ -95,6 +101,6 @@ Registry name: `text_texture`
 | `setWidth(int)` | `TextTexture` | Sets the word-wrap width and reflows lines. |
 | `setType(TextType)` | `TextTexture` | Sets the display mode. |
 | `setRollSpeed(float)` | `TextTexture` | Sets the scroll speed for rolling modes. |
-| `setSupplier(Supplier<String>)` | `TextTexture` | Registers a live text supplier updated each tick. |
+| `setSupplier(Supplier&lt;String&gt;)` | `TextTexture` | Registers a live text supplier updated each tick. |
 | `updateText(String)` | `void` | Immediately updates the text and reflows lines. |
 | `copy()` | `TextTexture` | Returns a deep copy. |

@@ -1,6 +1,6 @@
 # Accessors
 
-`IConfiguratorAccessor<T>` is the bridge between a Java type and a configurator UI. When `ConfiguratorParser` finds a normal `@Configurable` field, it asks:
+`IConfiguratorAccessor&lt;T&gt;` is the bridge between a Java type and a configurator UI. When `ConfiguratorParser` finds a normal `@Configurable` field, it asks:
 
 ```java
 IConfiguratorAccessor accessor = ConfiguratorAccessors.findByType(field.getGenericType());
@@ -22,7 +22,7 @@ Built-in support:
 | String | `String`, `String[]` | `String[]` is edited as multiple string rows. |
 | Enum | any enum type | Supports `@ConfigSelector`; `StringRepresentable` names are used when available. |
 | Text | `Component` | Component text configurator. |
-| Minecraft registry values | `Block`, `Item`, `Fluid`, `EntityType<?>` | Usually backed by registry search/selector UI. |
+| Minecraft registry values | `Block`, `Item`, `Fluid`, `EntityType&lt;?&gt;` | Usually backed by registry search/selector UI. |
 | Resource IDs | `ResourceLocation` | Supports `@ConfigRL` for font and tag-key modes. |
 | Item and fluid stacks | `ItemStack`, `FluidStack` | Uses item/fluid oriented configurators. |
 | NBT | `Tag` | Edits raw NBT/tag data. |
@@ -32,7 +32,7 @@ Built-in support:
 | Scene references | `TransformRef` | Used by scene-editor related data. |
 | Render/UI resources | `IGuiTexture`, `IRenderer` | Lets users choose registered implementations and edit their configurable data. |
 | Arrays | `T[]` | Dynamic wrapper around the child type's accessor. |
-| Collections | `Collection<T>`, usually `List<T>` or `Set<T>` | Dynamic wrapper around the child type's accessor; supports `@ConfigList`. |
+| Collections | `Collection&lt;T&gt;`, usually `List&lt;T&gt;` or `Set&lt;T&gt;` | Dynamic wrapper around the child type's accessor; supports `@ConfigList`. |
 
 Arrays and collections are handled dynamically. LDLib2 finds the child accessor first, then wraps it in `ArrayConfiguratorAccessor` or `CollectionConfiguratorAccessor`.
 

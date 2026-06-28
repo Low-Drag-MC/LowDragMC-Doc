@@ -3,7 +3,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/progress.mp4" type="video/mp4">
+    <source src="../assets/progress.mp4" type="video/mp4">
     您的浏览器不支持视频播放。
   </video>
 </div>
@@ -32,30 +32,41 @@
 
 设置一个从 0 到 1 的进度提供器。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    progressWidget.setProgressSupplier(() -> 0.3);
-    ```
-=== "KubeJS"
+```java
+progressWidget.setProgressSupplier(() -> 0.3);
+```
 
-    ```javascript
-    progressWidget.setProgressSupplier(() => 0.3);
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+```javascript
+progressWidget.setProgressSupplier(() => 0.3);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### setDynamicHoverTips
 
 根据进度值设置动态悬停提示。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    progressWidget.setDynamicHoverTips(progress -> "current progress is %.f%".format(progress * 100));
-    ```
-=== "KubeJS"
+```java
+progressWidget.setDynamicHoverTips(progress -> "current progress is %.f%".format(progress * 100));
+```
 
-    ```javascript
-    progressWidget.setDynamicHoverTips(progress => `current progress is ${progress * 100}%` );
-    ```
+</DocTab>
+<DocTab title="KubeJS">
+
+```javascript
+progressWidget.setDynamicHoverTips(progress => `current progress is ${progress * 100}%` );
+```
+
+</DocTab>
+</DocTabs>

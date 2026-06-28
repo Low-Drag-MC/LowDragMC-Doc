@@ -1,42 +1,48 @@
 # ColorBorderTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `ColorBorderTexture` draws only a coloured border around a rectangle — no fill. A positive `border` value draws outside the element bounds; a negative value draws inside.
 
 Registry name: `color_border_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 2 px outside border, white
-    IGuiTexture outline = new ColorBorderTexture(2, 0xFFFFFFFF);
+```java
+// 2 px outside border, white
+IGuiTexture outline = new ColorBorderTexture(2, 0xFFFFFFFF);
 
-    // 1 px inside border, semi-transparent blue
-    IGuiTexture inset = new ColorBorderTexture(-1, 0x800000FF);
-    ```
+// 1 px inside border, semi-transparent blue
+IGuiTexture inset = new ColorBorderTexture(-1, 0x800000FF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val outline = ColorBorderTexture(2, 0xFFFFFFFF.toInt())
-    val inset = ColorBorderTexture(-1, 0x800000FF.toInt())
-    ```
+```kotlin
+val outline = ColorBorderTexture(2, 0xFFFFFFFF.toInt())
+val inset = ColorBorderTexture(-1, 0x800000FF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let outline = new ColorBorderTexture(2, 0xFFFFFFFF);
-    let inset = new ColorBorderTexture(-1, 0x800000FF);
-    ```
+```js
+let outline = new ColorBorderTexture(2, 0xFFFFFFFF);
+let inset = new ColorBorderTexture(-1, 0x800000FF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

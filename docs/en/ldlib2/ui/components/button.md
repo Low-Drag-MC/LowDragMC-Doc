@@ -1,56 +1,62 @@
 # Button
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `Button` is a clickable UI component with a built-in text label, state-reactive textures (normal / hover / pressed), and optional leading or trailing icon decorations.
 
 Internally, `Button` is a horizontal flex row that owns a single **internal** [`TextElement`](#text) as its label. Because it is a regular `UIElement` container, you can add extra children alongside the label — most commonly via [`addPreIcon`](#icon-decorations) and [`addPostIcon`](#icon-decorations).
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var button = new Button();
-    button.setText("my.button.label", true); // translated label
-    button.setOnClick(event -> {
-        // runs on the client when left-clicked
-    });
-    button.setOnServerClick(event -> {
-        // runs on the server when left-clicked
-    });
-    parent.addChild(button);
-    ```
+```java
+var button = new Button();
+button.setText("my.button.label", true); // translated label
+button.setOnClick(event -> {
+    // runs on the client when left-clicked
+});
+button.setOnServerClick(event -> {
+    // runs on the server when left-clicked
+});
+parent.addChild(button);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({
-        text("my.button.label")
-        onClick = { event -> /* client-side */ }
-        onServerClick = { event -> /* server-side */ }
-    }) {
-        // add extra children if needed
-    }
-    ```
+```kotlin
+button({
+    text("my.button.label")
+    onClick = { event -> /* client-side */ }
+    onServerClick = { event -> /* server-side */ }
+}) {
+    // add extra children if needed
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let button = new Button();
-    button.setText(Component.literal("Click me"));   // literal
-    button.setText("my.key", true);                  // translated
-    button.setOnClick(e => {
-        // client-side click handler
-    });
-    parent.addChild(button);
-    ```
+```js
+let button = new Button();
+button.setText(Component.literal("Click me"));   // literal
+button.setText("my.key", true);                  // translated
+button.setOnClick(e => {
+    // client-side click handler
+});
+parent.addChild(button);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -102,206 +108,246 @@ button > text:internal {
 
 Controls the label text displayed inside the button.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.setText("my.translation.key", true);  // translated
-    button.setText("Literal label", false);       // literal
-    button.noText();                              // hide the label
-    button.enableText();                          // show it again
-    ```
+```java
+button.setText("my.translation.key", true);  // translated
+button.setText("Literal label", false);       // literal
+button.noText();                              // hide the label
+button.enableText();                          // show it again
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({
-        text("my.translation.key")   // translated (default)
-        // or assign a Component directly:
-        // text = Component.literal("Literal label")
-        noText()                     // hides the text element
-    }) { }
-    ```
+```kotlin
+button({
+    text("my.translation.key")   // translated (default)
+    // or assign a Component directly:
+    // text = Component.literal("Literal label")
+    noText()                     // hides the text element
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.setText(Component.literal("Literal label"));
-    button.setText("my.key", true);   // translated
-    button.noText();
-    button.enableText();
-    ```
+```js
+button.setText(Component.literal("Literal label"));
+button.setText("my.key", true);   // translated
+button.noText();
+button.enableText();
+```
 
+</DocTab>
+</DocTabs>
 ### `textStyle`
 
 Fluently configure the internal `TextElement`'s text rendering:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.textStyle(style -> style
-        .textColor(0xFFFFFF)
-        .fontSize(9)
-        .textShadow(true)
-    );
-    ```
+```java
+button.textStyle(style -> style
+    .textColor(0xFFFFFF)
+    .fontSize(9)
+    .textShadow(true)
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    // Access the internal TextElement directly after build
-    button.text.textStyle {
-        textColor(0xFFFFFF)
-        fontSize(9f)
-        textShadow(true)
-    }
-    ```
+```kotlin
+// Access the internal TextElement directly after build
+button.text.textStyle {
+    textColor(0xFFFFFF)
+    fontSize(9f)
+    textShadow(true)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.textStyle(style => style
-        .textColor(0xFFFFFF)
-        .fontSize(9)
-        .textShadow(true)
-    );
-    ```
+```js
+button.textStyle(style => style
+    .textColor(0xFFFFFF)
+    .fontSize(9)
+    .textShadow(true)
+);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Icon Decorations
 
 Add a texture icon before or after the label. Each icon is sized to match the button height and maintains its aspect ratio.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.addPreIcon(Sprites.ICON_WRENCH);    // icon before text
-    button.addPostIcon(Sprites.ICON_WRENCH);   // icon after text
-    ```
+```java
+button.addPreIcon(Sprites.ICON_WRENCH);    // icon before text
+button.addPostIcon(Sprites.ICON_WRENCH);   // icon after text
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button.addPreIcon(Sprites.ICON_WRENCH)
-    button.addPostIcon(Sprites.ICON_WRENCH)
-    ```
+```kotlin
+button.addPreIcon(Sprites.ICON_WRENCH)
+button.addPostIcon(Sprites.ICON_WRENCH)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.addPreIcon(Sprites.ICON_WRENCH);
-    button.addPostIcon(Sprites.ICON_WRENCH);
-    ```
+```js
+button.addPreIcon(Sprites.ICON_WRENCH);
+button.addPostIcon(Sprites.ICON_WRENCH);
+```
 
+</DocTab>
+</DocTabs>
 To create an icon-only button, call `noText()` together with `addPreIcon`:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    new Button()
-        .noText()
-        .addPreIcon(myIcon)
-        .layout(l -> l.size(14));
-    ```
+```java
+new Button()
+    .noText()
+    .addPreIcon(myIcon)
+    .layout(l -> l.size(14));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({ noText(); buttonStyle = { /* ... */ } }) {
-        api { addPreIcon(myIcon) }
-    }
-    ```
+```kotlin
+button({ noText(); buttonStyle = { /* ... */ } }) {
+    api { addPreIcon(myIcon) }
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Button Style
 
 `ButtonStyle` holds three state-dependent background textures. The active texture changes automatically based on the current [interaction state](#state).
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    The texture rendered in the `DEFAULT` (idle) state, and also when the button is inactive (`isActive = false`).
+The texture rendered in the `DEFAULT` (idle) state, and also when the button is inactive (`isActive = false`).
 
-    Default: `Sprites.RECT_RD`
+Default: `Sprites.RECT_RD`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        button.buttonStyle(style -> style.baseTexture(myTexture));
-        // or:
-        button.getButtonStyle().baseTexture(myTexture);
-        ```
+```java
+button.buttonStyle(style -> style.baseTexture(myTexture));
+// or:
+button.getButtonStyle().baseTexture(myTexture);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        button({ buttonStyle = { baseTexture(myTexture) } }) { }
-        // or after build:
-        button.buttonStyleDsl { baseTexture(myTexture) }
-        ```
+```kotlin
+button({ buttonStyle = { baseTexture(myTexture) } }) { }
+// or after build:
+button.buttonStyleDsl { baseTexture(myTexture) }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        button {
-            base-background: rect(#4a4a4a, 2);
-        }
-        ```
+```css
+button {
+    base-background: rect(#4a4a4a, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    The texture rendered in the `HOVERED` state.
+::: info
+#### <p style="font-size: 1rem;">hover-background</p>
 
-    Default: `Sprites.RECT_RD_LIGHT`
+The texture rendered in the `HOVERED` state.
 
-    === "Java"
+Default: `Sprites.RECT_RD_LIGHT`
 
-        ```java
-        button.buttonStyle(style -> style.hoverTexture(myTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+button.buttonStyle(style -> style.hoverTexture(myTexture));
+```
 
-        ```kotlin
-        button({ buttonStyle = { hoverTexture(myTexture) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+button({ buttonStyle = { hoverTexture(myTexture) } }) { }
+```
 
-        ```css
-        button {
-            hover-background: rect(#5a5a5a, 2);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+```css
+button {
+    hover-background: rect(#5a5a5a, 2);
+}
+```
 
-    The texture rendered in the `PRESSED` state (while the mouse button is held down).
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `Sprites.RECT_RD_DARK`
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    === "Java"
+The texture rendered in the `PRESSED` state (while the mouse button is held down).
 
-        ```java
-        button.buttonStyle(style -> style.pressedTexture(myTexture));
-        ```
+Default: `Sprites.RECT_RD_DARK`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        button({ buttonStyle = { pressedTexture(myTexture) } }) { }
-        ```
+```java
+button.buttonStyle(style -> style.pressedTexture(myTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        button {
-            pressed-background: rect(#3a3a3a, 2);
-        }
-        ```
+```kotlin
+button({ buttonStyle = { pressedTexture(myTexture) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+button {
+    pressed-background: rect(#3a3a3a, 2);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -314,56 +360,62 @@ Button provides two convenience setters on top of the standard event system from
 | `setOnClick(UIEventListener)` | Client | `MOUSE_DOWN` with left button (button 0) |
 | `setOnServerClick(UIEventListener)` | Server | `MOUSE_DOWN` with left button (button 0) |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.setOnClick(event -> {
-        // called on the client immediately on mouse-down
-        System.out.println("clicked on client");
-    });
+```java
+button.setOnClick(event -> {
+    // called on the client immediately on mouse-down
+    System.out.println("clicked on client");
+});
 
-    button.setOnServerClick(event -> {
-        // called on the server when the player clicks
-        player.sendSystemMessage(Component.literal("clicked!"));
-    });
-    ```
+button.setOnServerClick(event -> {
+    // called on the server when the player clicks
+    player.sendSystemMessage(Component.literal("clicked!"));
+});
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    // Via ButtonSpec (recommended)
-    button({
-        onClick = { event -> /* client-side */ }
-        onServerClick = { event -> /* server-side */ }
-    }) { }
+```kotlin
+// Via ButtonSpec (recommended)
+button({
+    onClick = { event -> /* client-side */ }
+    onServerClick = { event -> /* server-side */ }
+}) { }
 
-    // Or via standard events block
-    button {
-        events {
-            UIEvents.MOUSE_DOWN += { event ->
-                if (event.button == 0) { /* ... */ }
-            }
-        }
-        serverEvents {
-            UIEvents.MOUSE_DOWN += { event -> /* ... */ }
+// Or via standard events block
+button {
+    events {
+        UIEvents.MOUSE_DOWN += { event ->
+            if (event.button == 0) { /* ... */ }
         }
     }
-    ```
+    serverEvents {
+        UIEvents.MOUSE_DOWN += { event -> /* ... */ }
+    }
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.setOnClick(e => {
-        console.log("clicked on client");
-    });
-    // Server-side via event listener:
-    button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
-        // runs on server
-    });
-    ```
+```js
+button.setOnClick(e => {
+    console.log("clicked on client");
+});
+// Server-side via event listener:
+button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
+    // runs on server
+});
+```
 
-!!! note ""
-    `setOnClick` fires only for **left** mouse button clicks (`event.button == 0`). For other mouse buttons, use `addEventListener(UIEvents.MOUSE_DOWN, ...)` directly.
+</DocTab>
+</DocTabs>
+::: info
+`setOnClick` fires only for **left** mouse button clicks (`event.button == 0`). For other mouse buttons, use `addEventListener(UIEvents.MOUSE_DOWN, ...)` directly.
+:::
 
 ---
 
@@ -385,7 +437,7 @@ You can read the current state in Java / Kotlin via `button.getState()`. You can
 
 ## Fields
 
-> Fields specific to `Button`. See [UIElement § Fields](element.md#fields){ data-preview } for the base fields.
+> Fields specific to `Button`. See [UIElement § Fields](element.md#fields) for the base fields.
 
 | Name | Type | Access | Description |
 | ---- | ---- | ------ | ----------- |
@@ -397,17 +449,17 @@ You can read the current state in Java / Kotlin via `button.getState()`. You can
 
 ## Methods
 
-> Methods specific to `Button`. See [UIElement § Methods](element.md#methods){ data-preview } for the full base API.
+> Methods specific to `Button`. See [UIElement § Methods](element.md#methods) for the full base API.
 
 | Method | Returns | Description |
 | ------ | ------- | ----------- |
 | `setText(String, boolean)` | `Button` | Sets label text. `true` = translatable, `false` = literal. |
 | `noText()` | `Button` | Hides the internal `TextElement`. |
 | `enableText()` | `Button` | Shows the internal `TextElement` again. |
-| `textStyle(Consumer<TextStyle>)` | `Button` | Configures the internal text style fluently. |
+| `textStyle(Consumer&lt;TextStyle&gt;)` | `Button` | Configures the internal text style fluently. |
 | `addPreIcon(IGuiTexture)` | `Button` | Inserts a square icon element before the text. |
 | `addPostIcon(IGuiTexture)` | `Button` | Appends a square icon element after the text. |
-| `buttonStyle(Consumer<ButtonStyle>)` | `Button` | Configures `ButtonStyle` fluently. |
+| `buttonStyle(Consumer&lt;ButtonStyle&gt;)` | `Button` | Configures `ButtonStyle` fluently. |
 | `getButtonStyle()` | `ButtonStyle` | Returns the `ButtonStyle` instance directly. |
 | `setOnClick(UIEventListener)` | `Button` | Sets the client-side click handler (replaces previous). |
 | `setOnServerClick(UIEventListener)` | `Button` | Adds a server-side click listener. |

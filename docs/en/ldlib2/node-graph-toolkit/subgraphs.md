@@ -4,20 +4,20 @@ A subgraph node represents another graph inside the current graph.
 
 The subgraph node's ports are generated from the inner graph's exposed variables.
 
-<figure markdown="span">
-    ![Subgraph node](./assets/ngt-subgraph-node.png)
-    <figcaption>
-    A subgraph node in the parent graph. Double-click the node to dive into its inner graph.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-subgraph-node.png" alt="Subgraph node">
+<figcaption>
+A subgraph node in the parent graph. Double-click the node to dive into its inner graph.
+</figcaption>
 </figure>
 
 Use `GraphEditorView` when users need to enter subgraphs. The double-click action is handled by the subgraph node element and asks the nearest `GraphEditorView` to open the inner graph as a new breadcrumb level.
 
-<figure markdown="span">
-    ![Inner subgraph graph](./assets/ngt-inner-graph.png)
-    <figcaption>
-    Inside a subgraph. Use exposed variables to define the subgraph node ports, and use the breadcrumb path to return to the parent graph.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-inner-graph.png" alt="Inner subgraph graph">
+<figcaption>
+Inside a subgraph. Use exposed variables to define the subgraph node ports, and use the breadcrumb path to return to the parent graph.
+</figcaption>
 </figure>
 
 Inside the subgraph, ports are not edited directly on the subgraph node. Define variables in the blackboard, then set their flow direction in the inspector:
@@ -26,7 +26,7 @@ Inside the subgraph, ports are not edited directly on the subgraph node. Define 
 * `Output` creates an output port on the parent-facing subgraph node.
 * `Input + Output` creates both ports.
 
-See [Variables and Blackboard](./variables-and-blackboard.md#direction-and-subgraph-ports){ data-preview } for the exact direction mapping.
+See [Variables and Blackboard](./variables-and-blackboard.md#direction-and-subgraph-ports) for the exact direction mapping.
 
 ## Local Subgraphs
 

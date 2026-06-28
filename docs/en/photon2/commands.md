@@ -1,6 +1,6 @@
 # Commands
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
 Photon2 does not manage when, where, or how VFX are used. While Photon provides some built-in commands, these are primarily for testing purposes.
 
@@ -24,8 +24,8 @@ Photon2 lets you **bind effects to blocks or entities**, or emit them at specifi
 /photon fx <fxFile> <type> ... [offset] [rotation] [scale] [delay] [force death] [allow multi] ...
 ```
 
-* `<fxFile>`: Resource location of the FX file (e.g., `mod_id:filename` for `assets/mod_id/fx/filename.fx`)
-* `<type>`: `block` or `entity`
+* `&lt;fxFile&gt;`: Resource location of the FX file (e.g., `mod_id:filename` for `assets/mod_id/fx/filename.fx`)
+* `&lt;type&gt;`: `block` or `entity`
 * See parameter table below for details
 
 | Parameter   | Required | Default | Description                                                              |
@@ -88,8 +88,8 @@ Photon2 lets you **bind effects to blocks or entities**, or emit them at specifi
 
 | Command Format                                                     | Example                                 |
 | ------------------------------------------------------------------ | --------------------------------------- |
-| `/photon fx remove block <position(x y z)> [force] [location]`     | `/photon fx remove block ~ ~ ~ true`    |
-| `/photon fx remove entity <entities(selector)> [force] [location]` | `/photon fx remove entity @e[type=pig]` |
+| `/photon fx remove block &lt;position(x y z)&gt; [force] [location]`     | `/photon fx remove block ~ ~ ~ true`    |
+| `/photon fx remove entity &lt;entities(selector)&gt; [force] [location]` | `/photon fx remove entity @e[type=pig]` |
 
 * `force`: Remove all particles immediately if the object becomes invalid (`true`), or wait for natural death (`false`)
 * `location`: Specify FX resource location (optional)
@@ -99,19 +99,21 @@ Photon2 lets you **bind effects to blocks or entities**, or emit them at specifi
 ## 📋 Parameter Notes & Tips
 
 * Position, rotation, and scale are always three numbers (x y z)
-* FX file path is usually `assets/<mod_id>/fx/your_fx_name.fx`
+* FX file path is usually `assets/&lt;mod_id&gt;/fx/your_fx_name.fx`
 * After changing any .fx file, always run `/photon_client clear_fx_cache` to refresh!
 
 ---
 
 ## 🌈 Advanced Usage Examples
 
-!!! example "Bind an effect to your feet"
+::: info Bind an effect to your feet
+:::
 `shell
     /photon fx photon:smoke block ~ ~-1 ~
     `
 
-!!! example "Bind explosion FX to all pigs nearby"
+::: info Bind explosion FX to all pigs nearby
+:::
 `shell
     /photon fx photon:explosion entity @e[type=minecraft:pig, distance=..10]
     `

@@ -1,52 +1,58 @@
 # TextArea
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `TextArea` is a multi-line text editor. Its value is a `String[]` — one element per line. It has built-in horizontal and vertical scrollers, a text **validator** for error highlighting, and full keyboard support (arrows, `Home`/`End`, `PageUp`/`PageDown`, `Ctrl+←/→` word navigation, selection, copy/cut/paste, undo/redo).
 
 The editor becomes editable when focused (clicked). Double-click to select a word.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var area = new TextArea();
-    area.setValue(new String[] { "Line 1", "Line 2", "Line 3" });
-    area.setLinesResponder(lines -> {
-        // called on each valid edit
-        System.out.println("Lines: " + Arrays.toString(lines));
-    });
-    parent.addChild(area);
-    ```
+```java
+var area = new TextArea();
+area.setValue(new String[] { "Line 1", "Line 2", "Line 3" });
+area.setLinesResponder(lines -> {
+    // called on each valid edit
+    System.out.println("Lines: " + Arrays.toString(lines));
+});
+parent.addChild(area);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    textArea({
-        layout { width(200).height(80) }
-    }) {
-        api {
-            setValue(arrayOf("Line 1", "Line 2"))
-            setLinesResponder { lines -> println(lines.joinToString("\n")) }
-        }
+```kotlin
+textArea({
+    layout { width(200).height(80) }
+}) {
+    api {
+        setValue(arrayOf("Line 1", "Line 2"))
+        setLinesResponder { lines -> println(lines.joinToString("\n")) }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let area = new TextArea();
-    area.setValue(["Line 1", "Line 2"]);
-    area.setLinesResponder(lines => { /* ... */ });
-    parent.addChild(area);
-    ```
+```js
+let area = new TextArea();
+area.setValue(["Line 1", "Line 2"]);
+area.setLinesResponder(lines => { /* ... */ });
+parent.addChild(area);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -58,8 +64,9 @@ Line 2
 Line 3</text-area>
 ```
 
-!!! note ""
-    `TextArea` cannot have layout children added in XML — only text content.
+::: info
+`TextArea` cannot have layout children added in XML — only text content.
+:::
 
 ---
 
@@ -75,196 +82,252 @@ Line 3</text-area>
 
 ## Text Area Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    Texture drawn over the content view when it is hovered or focused.
+Texture drawn over the content view when it is hovered or focused.
 
-    Default: `Sprites.RECT_RD_T_SOLID`
+Default: `Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        area.textAreaStyle(style -> style.focusOverlay(myHighlight));
-        ```
+```java
+area.textAreaStyle(style -> style.focusOverlay(myHighlight));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text-area {
-            focus-overlay: rect(#FFFFFF22, 2);
-        }
-        ```
+```css
+text-area {
+    focus-overlay: rect(#FFFFFF22, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font / font-size</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Font and size used for all lines.
+::: info
+#### <p style="font-size: 1rem;">font / font-size</p>
 
-    Defaults: vanilla default font / `9`
+Font and size used for all lines.
 
-    === "LSS"
+Defaults: vanilla default font / `9`
 
-        ```css
-        text-area {
-            font: "minecraft:uniform";
-            font-size: 9;
-        }
-        ```
+<DocTabs>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-color / error-color</p>
+```css
+text-area {
+    font: "minecraft:uniform";
+    font-size: 9;
+}
+```
 
-    Text color when valid / when the validator rejects the content.
+</DocTab>
+</DocTabs>
+:::
 
-    Defaults: `0xFFFFFF` / `0xFF0000`
+::: info
+#### <p style="font-size: 1rem;">text-color / error-color</p>
 
-    === "LSS"
+Text color when valid / when the validator rejects the content.
 
-        ```css
-        text-area {
-            text-color: #EEEEEE;
-            error-color: #FF4444;
-        }
-        ```
+Defaults: `0xFFFFFF` / `0xFF0000`
 
-!!! info ""
-    #### <p style="font-size: 1rem;">cursor-color</p>
+<DocTabs>
+<DocTab title="LSS">
 
-    Color of the blinking caret.
+```css
+text-area {
+    text-color: #EEEEEE;
+    error-color: #FF4444;
+}
+```
 
-    Default: `0xEEEEEE`
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">cursor-color</p>
 
-        ```css
-        text-area {
-            cursor-color: #FFFFFF;
-        }
-        ```
+Color of the blinking caret.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-shadow</p>
+Default: `0xEEEEEE`
 
-    Whether to draw text with a drop shadow.
+<DocTabs>
+<DocTab title="LSS">
 
-    Default: `true`
+```css
+text-area {
+    cursor-color: #FFFFFF;
+}
+```
 
-    === "LSS"
+</DocTab>
+</DocTabs>
+:::
 
-        ```css
-        text-area {
-            text-shadow: false;
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">text-shadow</p>
 
-!!! info ""
-    #### <p style="font-size: 1rem;">placeholder</p>
+Whether to draw text with a drop shadow.
 
-    Ghost text shown when all lines are empty.
+Default: `true`
 
-    Default: translatable key `text_field.empty`
+<DocTabs>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text-area {
+    text-shadow: false;
+}
+```
 
-        ```java
-        area.textAreaStyle(style -> style
-            .placeholder(Component.literal("Enter code…"))
-        );
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">line-spacing</p>
+::: info
+#### <p style="font-size: 1rem;">placeholder</p>
 
-    Extra pixels added between lines.
+Ghost text shown when all lines are empty.
 
-    Default: `1`
+Default: translatable key `text_field.empty`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text-area {
-            line-spacing: 2;
-        }
-        ```
+```java
+area.textAreaStyle(style -> style
+    .placeholder(Component.literal("Enter code…"))
+);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-mode</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Which scroll axes are enabled. Values: `HORIZONTAL`, `VERTICAL`, `BOTH`.
+::: info
+#### <p style="font-size: 1rem;">line-spacing</p>
 
-    Default: `BOTH`
+Extra pixels added between lines.
 
-    === "Java"
+Default: `1`
 
-        ```java
-        area.textAreaStyle(style -> style.viewMode(ScrollerMode.VERTICAL));
-        ```
+<DocTabs>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+text-area {
+    line-spacing: 2;
+}
+```
 
-        ```css
-        text-area {
-            scroller-view-mode: VERTICAL;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
+::: info
+#### <p style="font-size: 1rem;">scroller-view-mode</p>
 
-    Visibility policy for each scroll bar. Values: `AUTO` (show only when content overflows), `ALWAYS`, `NEVER`.
+Which scroll axes are enabled. Values: `HORIZONTAL`, `VERTICAL`, `BOTH`.
 
-    Default: `AUTO`
+Default: `BOTH`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        area.textAreaStyle(style -> style
-            .verticalScrollDisplay(ScrollDisplay.ALWAYS)
-            .horizontalScrollDisplay(ScrollDisplay.NEVER)
-        );
-        ```
+```java
+area.textAreaStyle(style -> style.viewMode(ScrollerMode.VERTICAL));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text-area {
-            scroller-vertical-display: ALWAYS;
-            scroller-horizontal-display: NEVER;
-        }
-        ```
+```css
+text-area {
+    scroller-view-mode: VERTICAL;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-margin</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Right margin of the horizontal scroller when the vertical scroller is visible.
+::: info
+#### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
 
-    Default: `5`
+Visibility policy for each scroll bar. Values: `AUTO` (show only when content overflows), `ALWAYS`, `NEVER`.
 
-    === "LSS"
+Default: `AUTO`
 
-        ```css
-        text-area {
-            scroller-view-margin: 5;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
+
+```java
+area.textAreaStyle(style -> style
+    .verticalScrollDisplay(ScrollDisplay.ALWAYS)
+    .horizontalScrollDisplay(ScrollDisplay.NEVER)
+);
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text-area {
+    scroller-vertical-display: ALWAYS;
+    scroller-horizontal-display: NEVER;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">scroller-view-margin</p>
+
+Right margin of the horizontal scroller when the vertical scroller is visible.
+
+Default: `5`
+
+<DocTabs>
+<DocTab title="LSS">
+
+```css
+text-area {
+    scroller-view-margin: 5;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`TextArea` extends `BindableUIElement<String[]>`, so it integrates with the data-binding system:
+`TextArea` extends `BindableUIElement&lt;String[]&gt;`, so it integrates with the data-binding system:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    area.bind(DataBindingBuilder.create(
-        () -> config.getLines(),
-        lines -> config.setLines(lines)
-    ).build());
-    ```
+```java
+area.bind(DataBindingBuilder.create(
+    () -> config.getLines(),
+    lines -> config.setLines(lines)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -288,11 +351,11 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | ------ | ------- | ----------- |
 | `setValue(String[])` | `TextArea` | Sets all lines and notifies listeners. |
 | `setValue(String[], boolean)` | `TextArea` | Sets all lines; second param controls notification. |
-| `setLines(List<String>)` | `TextArea` | Convenience for `setValue(list.toArray(...))`. |
-| `setLinesResponder(Consumer<String[]>)` | `TextArea` | Registers a listener called on each valid edit. |
-| `setTextValidator(Predicate<String[]>)` | `TextArea` | Custom validator; invalid content is shown in `error-color`. |
-| `setCharValidator(Predicate<Character>)` | `TextArea` | Filters characters before they are inserted. |
-| `textAreaStyle(Consumer<TextAreaStyle>)` | `TextArea` | Configures style fluently. |
+| `setLines(List&lt;String&gt;)` | `TextArea` | Convenience for `setValue(list.toArray(...))`. |
+| `setLinesResponder(Consumer&lt;String[]&gt;)` | `TextArea` | Registers a listener called on each valid edit. |
+| `setTextValidator(Predicate&lt;String[]&gt;)` | `TextArea` | Custom validator; invalid content is shown in `error-color`. |
+| `setCharValidator(Predicate&lt;Character&gt;)` | `TextArea` | Filters characters before they are inserted. |
+| `textAreaStyle(Consumer&lt;TextAreaStyle&gt;)` | `TextArea` | Configures style fluently. |
 | `getValue()` | `String[]` | Returns the last validated line array. |
 | `isEditable()` | `boolean` | `true` when focused, active, visible and displayed. |
 | `hasSelection()` | `boolean` | `true` if there is an active text selection. |

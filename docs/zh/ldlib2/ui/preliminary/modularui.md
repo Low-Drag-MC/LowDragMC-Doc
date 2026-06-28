@@ -1,6 +1,6 @@
 # ModularUI
 
-{{ version_badge("2.1.0", label="自", icon="tag") }}
+<VersionBadge version="2.1.0" label="自" icon="tag" />
 
 本页介绍 **LDLib2 UI 系统**的核心概念。
 在运行时，LDLib2 使用一个名为 **`ModularUI`** 的类来管理整个 UI 树。
@@ -109,11 +109,12 @@ flowchart LR
 
 | 方法 | 描述 |
 | ---- | ----------- |
-| `getElementsByType(Class<T> type)` | 返回给定类型的所有 UI 元素。 |
+| `getElementsByType(Class&lt;T&gt; type)` | 返回给定类型的所有 UI 元素。 |
 | `getAllElementsByType()` | 返回从元素类型到 UI 元素的内部映射的副本。 |
 
-!!! note
-    所有查询方法在适用时返回内部集合的**副本**。返回的列表可以安全修改，不会影响内部 UI 树。
+::: info
+所有查询方法在适用时返回内部集合的**副本**。返回的列表可以安全修改，不会影响内部 UI 树。
+:::
 
 ---
 
@@ -124,13 +125,14 @@ flowchart LR
 
 LDLib2 提供了一个类似 Chrome 调试工具的 **Debug Panel**。你可以通过它检查实时 UI 层级、查看计算后的样式和布局信息，并在 UI 运行时选择元素。
 
-!!! note
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+::: info
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-    按 **`F12`** 可以打开或关闭 Debug Panel。在较早的 1.21 构建中，调试快捷键是 **`F3`**。
+按 **`F12`** 可以打开或关闭 Debug Panel。在较早的 1.21 构建中，调试快捷键是 **`F3`**。
+:::
 
 打开 Debug Panel 后，按 **`F1`** 可以切换 **Look Up** 模式。在 Look Up 模式下，将鼠标悬停在目标 UI 的元素上并点击，即可跳转到 Debug Panel 的层级树和检查器中的对应 `UIElement`。
 
-<figure markdown="span">
-  ![Debug](../assets//debug_mode.png){ width="80%" }
+<figure>
+<img src="../assets//debug_mode.png" alt="Debug" width="80%">
 </figure>

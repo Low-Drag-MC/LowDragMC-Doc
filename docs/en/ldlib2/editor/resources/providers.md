@@ -1,6 +1,6 @@
 # Providers and Paths
 
-`IResourceProvider<T>` is a source of resources. It can add, remove, rename, edit, copy, list, and reload resources.
+`IResourceProvider&lt;T&gt;` is a source of resources. It can add, remove, rename, edit, copy, list, and reload resources.
 
 Important provider hooks:
 
@@ -93,6 +93,6 @@ public class ShopRegistryProviderType extends ResourceProviderType {
 
 Register the provider type in the LDLib2 resource provider type registry used by your environment.
 
-Your provider should implement `IResourceProvider<T>` or extend `ResourceProvider<T>`. Override permission methods such as `canEdit`, `canRemove`, `canRename`, and `supportAdd` to match the source.
+Your provider should implement `IResourceProvider&lt;T&gt;` or extend `ResourceProvider&lt;T&gt;`. Override permission methods such as `canEdit`, `canRemove`, `canRename`, and `supportAdd` to match the source.
 
 Use `checkAndUpdateResourceProvider()` when the source can change outside the editor.

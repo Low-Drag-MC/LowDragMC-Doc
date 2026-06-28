@@ -4,20 +4,20 @@
 
 子图节点的端口由内部图的暴露变量生成。
 
-<figure markdown="span">
-    ![Subgraph node](./assets/ngt-subgraph-node.png)
-    <figcaption>
-    父图中的子图节点。双击节点可以 dive into，进入内部图。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-subgraph-node.png" alt="Subgraph node">
+<figcaption>
+父图中的子图节点。双击节点可以 dive into，进入内部图。
+</figcaption>
 </figure>
 
 当用户需要进入子图时，使用 `GraphEditorView`。双击动作由子图节点元素处理，并请求最近的 `GraphEditorView` 将内部图作为新的面包屑层级打开。
 
-<figure markdown="span">
-    ![Inner subgraph graph](./assets/ngt-inner-graph.png)
-    <figcaption>
-    子图内部。使用暴露变量定义子图节点端口，并通过面包屑路径返回父图。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-inner-graph.png" alt="Inner subgraph graph">
+<figcaption>
+子图内部。使用暴露变量定义子图节点端口，并通过面包屑路径返回父图。
+</figcaption>
 </figure>
 
 在子图内部，不直接编辑子图节点上的端口。应该在 Blackboard 中定义变量，然后在 Inspector 中设置它们的 flow direction：
@@ -26,7 +26,7 @@
 * `Output` 会在面向父图的子图节点上创建输出端口。
 * `Input + Output` 会创建两个方向的端口。
 
-准确的方向映射见 [Variables and Blackboard](./variables-and-blackboard.md#direction-and-subgraph-ports){ data-preview }。
+准确的方向映射见 [Variables and Blackboard](./variables-and-blackboard.md#direction-and-subgraph-ports)。
 
 ## 本地子图
 

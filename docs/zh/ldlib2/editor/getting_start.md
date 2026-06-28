@@ -6,11 +6,11 @@
 
 一个编辑器界面通常由三块可见区域组成：
 
-<figure markdown="span">
-    ![Editor composition](./assets/editor_composite.png)
-    <figcaption>
-    典型编辑器界面：菜单、View、资源。
-    </figcaption>
+<figure>
+<img src="./assets/editor_composite.png" alt="Editor composition">
+<figcaption>
+典型编辑器界面：菜单、View、资源。
+</figcaption>
 </figure>
 
 1. **Menu**  
@@ -26,11 +26,11 @@
 
 编辑器工作区默认被划分为几个区域。这些区域底层是 `ViewContainer`，也就是用来展示 `View` 的标签容器。
 
-<figure markdown="span">
-    ![Editor window layout](./assets/editor_window_layout.png)
-    <figcaption>
-    默认编辑器工作区。
-    </figcaption>
+<figure>
+<img src="./assets/editor_window_layout.png" alt="Editor window layout">
+<figcaption>
+默认编辑器工作区。
+</figcaption>
 </figure>
 
 1. **`leftWindow`**  
@@ -186,5 +186,6 @@ PlayerUIMenuType.register(ShopEditor.WINDOW_ID, ignored -> player -> {
 PlayerUIMenuType.openUI(serverPlayer, ShopEditor.WINDOW_ID);
 ```
 
-!!! tip "XEI 拖拽设置"
-    如果你的编辑器需要支持 XEI 拖拽设置功能，应通过 menu 打开。纯客户端 screen 适合快速工具，但 menu-backed 打开方式会提供这些集成所需的 container context。
+::: tip XEI 拖拽设置
+如果你的编辑器需要支持 XEI 拖拽设置功能，应通过 menu 打开。纯客户端 screen 适合快速工具，但 menu-backed 打开方式会提供这些集成所需的 container context。
+:::

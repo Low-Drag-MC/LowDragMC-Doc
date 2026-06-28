@@ -1,6 +1,6 @@
 # 事件
 
-{{ version_badge("2.1.0", label="自", icon="tag") }}
+<VersionBadge version="2.1.0" label="自" icon="tag" />
 
 LDLib2 UI 提供了用于将用户操作或通知传递给 UI 元素的事件系统。该系统使用与 [HTML 事件](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events#what_is_an_event) 相同的术语和事件命名。
 
@@ -22,9 +22,9 @@ LDLib2 UI 提供了用于将用户操作或通知传递给 UI 元素的事件系
 2. 事件目标接收到事件。
 3. 事件然后向上朝向根元素冒泡。这是向上冒泡阶段。
 
-<figure markdown="span" style="width: 60%">
-  ![alt text](../assets/event_phase.png)
-  <figcaption>传播路径</figcaption>
+<figure style="width: 60%">
+<img src="../assets/event_phase.png" alt="alt text">
+<figcaption>传播路径</figcaption>
 </figure>
 
 大多数事件会沿着传播路径发送给所有元素。有些事件会跳过冒泡阶段，有些事件则仅发送给事件目标。
@@ -63,98 +63,112 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 使用 `addEventListener(eventType, listener)` 注册一个 **冒泡阶段** 监听器：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var root = new UIElement().setId("root");
-    var button = new UIElement().setId("button");
-    root.addChild(button);
+```java
+var root = new UIElement().setId("root");
+var button = new UIElement().setId("button");
+root.addChild(button);
 
-    // UIEvents.CLICK == "mouseClick"（鼠标点击）
-    button.addEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Bubble listener: current={}, target={}",
-                e.currentElement.getId(), e.target.getId());
-    });
-    ```
+// UIEvents.CLICK == "mouseClick"（鼠标点击）
+button.addEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Bubble listener: current={}, target={}",
+            e.currentElement.getId(), e.target.getId());
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let root = new UIElement().setId("root");
-    let button = new UIElement().setId("button");
-    root.addChild(button);
+```js
+let root = new UIElement().setId("root");
+let button = new UIElement().setId("button");
+root.addChild(button);
 
-    // UIEvents.CLICK == "mouseClick"（鼠标点击）
-    button.addEventListener(UIEvents.CLICK, e => {
-        console.log(`Bubble listener: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
-    });
-    ```
+// UIEvents.CLICK == "mouseClick"（鼠标点击）
+button.addEventListener(UIEvents.CLICK, e => {
+    console.log(`Bubble listener: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
+});
+```
 
+</DocTab>
+</DocTabs>
 要注册捕获阶段监听器，将 true 作为第三个参数传递：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    root.addEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Capture: current={}, target={}",
-                e.currentElement.getId(), e.target.getId());
-    }, true);
-    ```
+```java
+root.addEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Capture: current={}, target={}",
+            e.currentElement.getId(), e.target.getId());
+}, true);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    root.addEventListener(UIEvents.CLICK, e => {
-        console.log(`Capture: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
-    }, true);
-    ```
+```js
+root.addEventListener(UIEvents.CLICK, e => {
+    console.log(`Capture: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
+}, true);
+```
 
-    我们还提供了允许您在 `server` 上监听事件的方法。事件在客户端触发并同步到服务器。并非所有事件都支持服务器监听器，请查看下面的 [事件参考](#_4)。
+我们还提供了允许您在 `server` 上监听事件的方法。事件在客户端触发并同步到服务器。并非所有事件都支持服务器监听器，请查看下面的 [事件参考](#_4)。
 
 
-=== "Java"
+</DocTab>
+<DocTab title="Java">
 
-    ```java
-    root.addServerEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Triggered on the server";
-    });
-    ```
+```java
+root.addServerEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Triggered on the server";
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    root.addServerEventListener(UIEvents.CLICK, e => {
-        console.log("Triggered on the server");
-    });
-    ```
+```js
+root.addServerEventListener(UIEvents.CLICK, e => {
+    console.log("Triggered on the server");
+});
+```
 
+</DocTab>
+</DocTabs>
 要移除监听器，调用 `removeEventListener(...)`。
 确保 useCapture 标志与监听器注册时的方式匹配：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    UIEventListener onClick = e -> LDLib2.LOGGER.info("clicked!");
+```java
+UIEventListener onClick = e -> LDLib2.LOGGER.info("clicked!");
 
-    button.addEventListener(UIEvents.CLICK, onClick);       // 冒泡
-    root.addEventListener(UIEvents.CLICK, onClick, true);   // 捕获
+button.addEventListener(UIEvents.CLICK, onClick);       // 冒泡
+root.addEventListener(UIEvents.CLICK, onClick, true);   // 捕获
 
-    button.removeEventListener(UIEvents.CLICK, onClick);          // 移除冒泡监听器
-    root.removeEventListener(UIEvents.CLICK, onClick, true);      // 移除捕获监听器
-    ```
+button.removeEventListener(UIEvents.CLICK, onClick);          // 移除冒泡监听器
+root.removeEventListener(UIEvents.CLICK, onClick, true);      // 移除捕获监听器
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let onClick = UIEventListener.create(e => LDLib2.LOGGER.info("clicked!"));
+```js
+let onClick = UIEventListener.create(e => LDLib2.LOGGER.info("clicked!"));
 
-    button.addEventListener(UIEvents.CLICK, onClick);       // 冒泡
-    root.addEventListener(UIEvents.CLICK, onClick, true);   // 捕获
+button.addEventListener(UIEvents.CLICK, onClick);       // 冒泡
+root.addEventListener(UIEvents.CLICK, onClick, true);   // 捕获
 
-    button.removeEventListener(UIEvents.CLICK, onClick);          // 移除冒泡监听器
-    root.removeEventListener(UIEvents.CLICK, onClick, true);      // 移除捕获监听器
-    ```
+button.removeEventListener(UIEvents.CLICK, onClick);          // 移除冒泡监听器
+root.removeEventListener(UIEvents.CLICK, onClick, true);      // 移除捕获监听器
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 事件参考
@@ -165,8 +179,9 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 在这里，我们列出了所有 UI 元素可用的常见事件。选择下面列出的任何事件类型以获取有关该事件的更多信息以及 API 文档的链接。
 
-!!! note
-    我们建议使用 `UIEvents.xxx` 而不是事件类型字符串。
+::: info
+我们建议使用 `UIEvents.xxx` 而不是事件类型字符串。
+:::
 
 
 ### 鼠标事件
@@ -195,22 +210,26 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.DOUBLE_CLICK, e -> {
-        LDLib2.LOGGER.info("double click {} with button {}", e.target, e.button)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.DOUBLE_CLICK, e -> {
+    LDLib2.LOGGER.info("double click {} with button {}", e.target, e.button)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
-        console.log(`double click ${e.target} with button ${e.button}`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
+    console.log(`double click ${e.target} with button ${e.button}`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 拖放事件
@@ -253,37 +272,42 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 - `dragTexture`：用于视觉上表示拖拽操作的纹理
 - `dragSource`：作为拖拽操作源的 `UIElement`
 
-!!! note
-    `dragSourceUpdate` 和 `dragEnd` 仅派发给拖拽源。
+::: info
+`dragSourceUpdate` 和 `dragEnd` 仅派发给拖拽源。
+:::
 
 你也可以使用 `UIElement.startDrag` 来开始拖拽，它可以帮助你直接传递 `dragSource`。
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // 当鼠标按下时开始拖拽
-        elem.startDrag(null, null);
-    });
-    elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e -> {
-        LDLib2.LOGGER.info("{} dragged ({}, {})", e.target, e.deltaX, e.deltaY)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // 当鼠标按下时开始拖拽
+    elem.startDrag(null, null);
+});
+elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e -> {
+    LDLib2.LOGGER.info("{} dragged ({}, {})", e.target, e.deltaX, e.deltaY)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // 当鼠标按下时开始拖拽
-        elem.startDrag(null, null);
-    });
-    elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
-        console.log(`${e.target} dragged (${e.deltaX}, ${e.deltaY})`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // 当鼠标按下时开始拖拽
+    elem.startDrag(null, null);
+});
+elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
+    console.log(`${e.target} dragged (${e.deltaX}, ${e.deltaY})`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 焦点事件
@@ -301,38 +325,43 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 | ----- | ----------- | --------------- |
 | `relatedTarget` | 对于 `focusIn` 和 `focus`，指上一个获得焦点的元素。 <br> 对于 `focusOut` 和 `blur`，指上一个失去焦点的元素。 | 全部 |
 
-!!! note
-    - `focusIn` 和 `focusOut` **不会发送到服务器**。
-    - `relatedTarget` 表示正在失去或获得焦点的元素。
+::: info
+- `focusIn` 和 `focusOut` **不会发送到服务器**。
+- `relatedTarget` 表示正在失去或获得焦点的元素。
+:::
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.FOCUS, e -> {
-        LDLib2.LOGGER.info("{} gained the focus", elem);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.FOCUS, e -> {
+    LDLib2.LOGGER.info("{} gained the focus", elem);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.FOCUS, e => {
-        console.log(`${elem} gained the focus`);
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.FOCUS, e => {
+    console.log(`${elem} gained the focus`);
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 键盘事件
@@ -353,32 +382,36 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.KEY_DOWN, e -> {
-        LDLib2.LOGGER.info("key {} pressed", e.keyCode);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.KEY_DOWN, e -> {
+    LDLib2.LOGGER.info("key {} pressed", e.keyCode);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.KEY_DOWN, e => {
-        console.log(`key ${e.keyCode} pressed`)
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.KEY_DOWN, e => {
+    console.log(`key ${e.keyCode} pressed`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 文本输入事件
@@ -396,31 +429,36 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.CHAR_TYPED, e -> {
-        LDLib2.LOGGER.info("key {} pressed", e.codePoint);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.CHAR_TYPED, e -> {
+    LDLib2.LOGGER.info("key {} pressed", e.codePoint);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // 请求焦点
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.CHAR_TYPED, e => {
-        console.log(`key ${e.codePoint} pressed`)
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // 请求焦点
+    elem.focus();
+});
+elem.addEventListener(UIEvents.CHAR_TYPED, e => {
+    console.log(`key ${e.codePoint} pressed`)
+});
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### 悬停提示事件
@@ -436,40 +474,46 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 | ----- | ----------- | --------------- |
 | `hoverTooltips` | 设置您要显示的悬停提示 | 全部 |
 
-!!! info "TooltipComponent"
-    ![size](../assets/tooltipcomponent.png){ align=right width="200" }
-    `hoverTooltips` 允许您在文本组件后追加 `TooltipComponent`。您可以使用 `ModularUITooltipComponent` 将 LDLib2 UI 附加到提示中。
-    
+::: info TooltipComponent
+<img src="../assets/tooltipcomponent.png" alt="size" width="200" class="md-img-right">
+`hoverTooltips` 允许您在文本组件后追加 `TooltipComponent`。您可以使用 `ModularUITooltipComponent` 将 LDLib2 UI 附加到提示中。
+:::
+
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e -> {
-        e.hoverTooltips = HoverTooltips.empty()
-            // 添加文本悬停提示
-            .append(Component.literal("Hello"), Component.literal("World"))
-            // 添加图片
-            .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout -> {
-                layout.width(100).height(100);
-            }).style(style -> style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e -> {
+    e.hoverTooltips = HoverTooltips.empty()
+        // 添加文本悬停提示
+        .append(Component.literal("Hello"), Component.literal("World"))
+        // 添加图片
+        .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout -> {
+            layout.width(100).height(100);
+        }).style(style -> style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
-        e.hoverTooltips = HoverTooltips.empty()
-            // 添加文本悬停提示
-            .append("Hello", "World");
-            // 添加图片
-            .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout => {
-                layout.width(100).height(100);
-            }).style(style => style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
+    e.hoverTooltips = HoverTooltips.empty()
+        // 添加文本悬停提示
+        .append("Hello", "World");
+        // 添加图片
+        .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout => {
+            layout.width(100).height(100);
+        }).style(style => style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
+});
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### 命令事件
@@ -503,45 +547,50 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 | `save` | ctrl + s |
 
 
-!!! note
-    如果检测到命令输入。命令事件将首先发送给 `focus` 元素（如果存在）。如果它没有被消费，它将被发送给 UI 树元素，直到某个元素消费它为止。
+::: info
+如果检测到命令输入。命令事件将首先发送给 `focus` 元素（如果存在）。如果它没有被消费，它将被发送给 UI 树元素，直到某个元素消费它为止。
+:::
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
-        if (CommandEvents.COPY.equals(event.command)) {
-            // 通知消费
-            event.stopPropagation();
-        }
-    });
+```java
+elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
+    if (CommandEvents.COPY.equals(event.command)) {
+        // 通知消费
+        event.stopPropagation();
+    }
+});
 
-    elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
-        if (CommandEvents.COPY.equals(event.command)) {
-            ClipboardManager.copyDirect("data");
-        }
-    });
-    ```
+elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
+    if (CommandEvents.COPY.equals(event.command)) {
+        ClipboardManager.copyDirect("data");
+    }
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
-        if (CommandEvents.COPY == event.command) {
-            // 通知消费
-            event.stopPropagation();
-        }
-    });
+```js
+elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
+    if (CommandEvents.COPY == event.command) {
+        // 通知消费
+        event.stopPropagation();
+    }
+});
 
-    elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
-        if (CommandEvents.COPY == event.command) {
-            ClipboardManager.copyDirect("data");
-        }
-    });
-    ```
+elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
+    if (CommandEvents.COPY == event.command) {
+        ClipboardManager.copyDirect("data");
+    }
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 布局事件
@@ -555,22 +604,26 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.LAYOUT_CHANGED, e -> {
-        LDLib2.LOGGER.info("{} layout changed", e.target)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.LAYOUT_CHANGED, e -> {
+    LDLib2.LOGGER.info("{} layout changed", e.target)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
-        console.log(`${e.target} layout changed`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
+    console.log(`${e.target} layout changed`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 生命周期事件
@@ -583,27 +636,32 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 | `removed`    | 当元素从 UI 树中移除时触发。    | ❌            | ❌          | ❌ |
 | `muiChanged` | 当元素的 `ModularUI` 实例更改时触发。 | ❌            | ❌          | ❌ |
 
-!!! note
-    `removed` 不仅在元素移除时发送，UI 关闭时也会发送。你可以使用此事件来释放资源。
+::: info
+`removed` 不仅在元素移除时发送，UI 关闭时也会发送。你可以使用此事件来释放资源。
+:::
 
 **用法**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.REMOVED, e -> {
-        // 在此安全地释放资源
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.REMOVED, e -> {
+    // 在此安全地释放资源
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.REMOVED, e => {
-        // 在此安全地释放资源
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.REMOVED, e => {
+    // 在此安全地释放资源
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### 刻事件
@@ -614,20 +672,26 @@ LDLib2 使用 **类 DOM 事件模型**：事件在 UI 树中传播，可以为�
 | ------ | ----------------------------------------------------- | :----------: | :----------: | :----------: |
 | `tick` | 当元素处于活动并显示状态时，每刻触发一次。 | ❌ | ❌ | ✅ |
 
-!!! note
-    - `tick` 不会自动发送到服务器。
-    - 如果需要，您仍然可以在服务器端监听它。
+::: info
+- `tick` 不会自动发送到服务器。
+- 如果需要，您仍然可以在服务器端监听它。
+:::
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.TICK, e -> {
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.TICK, e -> {
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.TICK, e => {
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.TICK, e => {
+});
+```
+
+</DocTab>
+</DocTabs>

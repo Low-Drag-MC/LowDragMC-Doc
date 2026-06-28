@@ -51,7 +51,7 @@ Useful option builder methods:
 | `withDefaultValue(Object)` | Initial value. |
 | `showInInspectorOnly()` | Hide from node header. |
 | `withConfigurable(ITypeConfigurable)` | Override editor UI for this option. |
-| `withCodec(Codec<?>)` | Override serialization. |
+| `withCodec(Codec&lt;?&gt;)` | Override serialization. |
 | `withoutSerialization()` | Keep the type id, skip value persistence. |
 | `withoutConfigurator()` | Store the value without exposing a UI row. |
 
@@ -85,7 +85,7 @@ Useful port builder methods:
 | `withOrientation(PortOrientation)` | Horizontal side port or vertical top/bottom port. |
 | `withDefaultValue(Object)` | Initial embedded constant. |
 | `withConfigurable(ITypeConfigurable)` | Input only: override editor UI. |
-| `withCodec(Codec<?>)` | Input only: override constant serialization. |
+| `withCodec(Codec&lt;?&gt;)` | Input only: override constant serialization. |
 | `withoutSerialization()` | Input only: non-persistent value. |
 | `withoutConfigurator()` | Input only: hide constant editor. |
 
@@ -101,11 +101,11 @@ context.addInputPort("flow", TypeHandles.EXECUTION_FLOW)
 
 Vertical input ports hide their inline configurator by default. Override `GraphModel.showVerticalPortConfigurator()` if a graph type needs visible vertical port values.
 
-<figure markdown="span">
-    ![Node anatomy](./assets/ngt-node-anatomy-placeholder.png)
-    <figcaption>
-    Standard node layout.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-node-anatomy-placeholder.png" alt="Node anatomy">
+<figcaption>
+Standard node layout.
+</figcaption>
 </figure>
 
 ## Node Anatomy
@@ -124,11 +124,11 @@ The marked areas in the screenshot are:
 4. **Preview**  
    Shows the optional preview panel created by `hasNodePreview()` and `onBuildNodePreview(...)`. Use it for nodes that need visual feedback, such as color, texture, shader, or procedural result nodes.
 
-<figure markdown="span">
-    ![Node types](./assets/ngt-node-types.png)
-    <figcaption>
-    Common node types in Node Graph Toolkit.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-node-types.png" alt="Node types">
+<figcaption>
+Common node types in Node Graph Toolkit.
+</figcaption>
 </figure>
 
 ## Node Types
@@ -136,25 +136,25 @@ The marked areas in the screenshot are:
 The graph editor uses several node model types. They share the same canvas and wire system, but they are created and used differently.
 
 1. **Variable Node**  
-   Reads from or writes to a graph variable. Create variables in the blackboard, then create variable nodes from that declaration. Variables are covered in [Variables and Blackboard](./variables-and-blackboard.md){ data-preview }.
+   Reads from or writes to a graph variable. Create variables in the blackboard, then create variable nodes from that declaration. Variables are covered in [Variables and Blackboard](./variables-and-blackboard.md).
 
 2. **Constant Node**  
-   Provides a fixed value as an output port. Use it when a value should be visible as a node instead of an inline input-port constant. Constant values use `TypeHandle` support and the same configurable system as port values. See [Type Handles](./type-handles.md){ data-preview }.
+   Provides a fixed value as an output port. Use it when a value should be visible as a node instead of an inline input-port constant. Constant values use `TypeHandle` support and the same configurable system as port values. See [Type Handles](./type-handles.md).
 
 3. **Node**  
    A normal user-defined node created by extending `Node` and registering it with `@NodeAttribute`. Define its editable options in `onDefineOptions(...)` and its ports in `onDefinePorts(...)`.
 
 4. **Context Node**  
-   A node that owns an ordered list of child block nodes. Use it for structures such as sequences, branches, states, or grouped operations. See [Context and Block Nodes](./context-and-block-nodes.md){ data-preview }.
+   A node that owns an ordered list of child block nodes. Use it for structures such as sequences, branches, states, or grouped operations. See [Context and Block Nodes](./context-and-block-nodes.md).
 
 5. **Block Node**  
-   A child node that lives inside a context node instead of directly on the graph canvas. Create block node classes by extending `BlockNode` and binding them to compatible contexts with `@UseWithContext`. See [Context and Block Nodes](./context-and-block-nodes.md){ data-preview }.
+   A child node that lives inside a context node instead of directly on the graph canvas. Create block node classes by extending `BlockNode` and binding them to compatible contexts with `@UseWithContext`. See [Context and Block Nodes](./context-and-block-nodes.md).
 
 6. **Subgraph Node**  
-   Represents another graph. Its ports are generated from the inner graph's exposed variables. Use it to reuse graph logic or edit nested graphs through `GraphEditorView`'s breadcrumb. See [Subgraphs](./subgraphs.md){ data-preview }.
+   Represents another graph. Its ports are generated from the inner graph's exposed variables. Use it to reuse graph logic or edit nested graphs through `GraphEditorView`'s breadcrumb. See [Subgraphs](./subgraphs.md).
 
 7. **Wire Portal Node**  
-   Routes a wire through a named portal pair, useful when long wires make a graph hard to read. Create portals from wire commands or graph context actions. See [Commands and Customization](./commands-and-customization.md){ data-preview }.
+   Routes a wire through a named portal pair, useful when long wires make a graph hard to read. Create portals from wire commands or graph context actions. See [Commands and Customization](./commands-and-customization.md).
 
 ## Node Preview
 

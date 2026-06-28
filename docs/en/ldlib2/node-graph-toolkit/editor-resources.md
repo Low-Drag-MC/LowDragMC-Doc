@@ -84,4 +84,4 @@ The resolver can:
 
 This is required for external subgraph nodes to rebuild their port shape from the referenced graph.
 
-Graph resources can also be dragged from the resource panel onto an open graph canvas. `GraphView` imports the dropped resource as an external subgraph node that stores the resource path. See [Subgraphs](./subgraphs.md#import-external-subgraphs-from-resources){ data-preview }.
+Graph resources can also be dragged from the resource panel onto an open graph canvas. `GraphView` imports the dropped resource as an external subgraph node that stores the resource path. See [Subgraphs](./subgraphs.md#import-external-subgraphs-from-resources).

@@ -1,61 +1,68 @@
 # RectTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `RectTexture` 使用 CPU 端曲面细分绘制圆角矩形。在无法使用 SDF `Shader` 的环境中，它可作为 [`SDFRectTexture`](sdf-rect.md) 的备用方案。两个类公开的属性完全相同。
 
 注册名：`rect_texture`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
-!!! tip ""
-    对于大多数用例，建议优先使用 [`SDFRectTexture`](sdf-rect.md)，它在所有尺寸下都能提供更好的视觉效果。仅在需要 CPU 端渲染时使用 `RectTexture`。
+::: tip
+对于大多数用例，建议优先使用 [`SDFRectTexture`](sdf-rect.md)，它在所有尺寸下都能提供更好的视觉效果。仅在需要 CPU 端渲染时使用 `RectTexture`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 填充圆角矩形
-    IGuiTexture panel = new RectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(new Vector4f(6, 6, 6, 6));
+```java
+// 填充圆角矩形
+IGuiTexture panel = new RectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(new Vector4f(6, 6, 6, 6));
 
-    // 带描边
-    IGuiTexture bordered = new RectTexture()
-        .setColor(0xFF1A1A1A)
-        .setRadius(new Vector4f(4, 4, 4, 4))
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF);
+// 带描边
+IGuiTexture bordered = new RectTexture()
+    .setColor(0xFF1A1A1A)
+    .setRadius(new Vector4f(4, 4, 4, 4))
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF);
 
-    // 静态工厂方法
-    IGuiTexture simple = RectTexture.of(0xFF3A3A3A);
-    ```
+// 静态工厂方法
+IGuiTexture simple = RectTexture.of(0xFF3A3A3A);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val panel = RectTexture()
-        .setColor(0xFF2A2A2A.toInt())
-        .setRadius(Vector4f(6f, 6f, 6f, 6f))
+```kotlin
+val panel = RectTexture()
+    .setColor(0xFF2A2A2A.toInt())
+    .setRadius(Vector4f(6f, 6f, 6f, 6f))
 
-    val simple = RectTexture.of(0xFF3A3A3A.toInt())
-    ```
+val simple = RectTexture.of(0xFF3A3A3A.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let panel = new RectTexture()
-        .setColor(0xFF2A2A2A)
-        .setStroke(1)
-        .setBorderColor(0xFFFFFFFF);
+```js
+let panel = new RectTexture()
+    .setColor(0xFF2A2A2A)
+    .setStroke(1)
+    .setBorderColor(0xFFFFFFFF);
 
-    let simple = RectTexture.of(0xFF3A3A3A);
-    ```
+let simple = RectTexture.of(0xFF3A3A3A);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 字段

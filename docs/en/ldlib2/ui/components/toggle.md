@@ -1,52 +1,58 @@
 # Toggle
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `Toggle` is a checkable UI component — a square button with a mark icon and an optional label. Clicking toggles its `on/off` state. Multiple toggles can be linked into a [`ToggleGroup`](#toggle-group) for exclusive (radio-button-like) selection.
 
 Internally, `Toggle` is a horizontal flex row containing a **`Button`** (the clickable box with the mark icon inside) and a **`Label`** (the text label). Both are **internal** children.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var toggle = new Toggle();
-    toggle.setText("my.toggle.label", true); // translated
-    toggle.setOn(true);
-    toggle.setOnToggleChanged(isOn -> {
-        // called whenever the state changes
-    });
-    parent.addChild(toggle);
-    ```
+```java
+var toggle = new Toggle();
+toggle.setText("my.toggle.label", true); // translated
+toggle.setOn(true);
+toggle.setOnToggleChanged(isOn -> {
+    // called whenever the state changes
+});
+parent.addChild(toggle);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    toggle({
-        text("my.toggle.label")
-        isOn = true
-        onToggle { isOn -> /* state changed */ }
-    }) {
-        // add extra children if needed
-    }
-    ```
+```kotlin
+toggle({
+    text("my.toggle.label")
+    isOn = true
+    onToggle { isOn -> /* state changed */ }
+}) {
+    // add extra children if needed
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let toggle = new Toggle();
-    toggle.setText("my.toggle.label", true);
-    toggle.setOn(true);
-    toggle.setOnToggleChanged(isOn => { /* ... */ });
-    parent.addChild(toggle);
-    ```
+```js
+let toggle = new Toggle();
+toggle.setText("my.toggle.label", true);
+toggle.setOn(true);
+toggle.setOnToggleChanged(isOn => { /* ... */ });
+parent.addChild(toggle);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -109,93 +115,114 @@ toggle > label.__toggle_label__ {
 
 `ToggleStyle` controls both the box button textures and the mark/unmark icon.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background / hover-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background / hover-background</p>
 
-    Textures for the inner `Button` in idle and hovered states (delegated to `ButtonStyle`).
+Textures for the inner `Button` in idle and hovered states (delegated to `ButtonStyle`).
 
-    Default: `Sprites.RECT_DARK` / `Sprites.RECT_DARK` + white border
+Default: `Sprites.RECT_DARK` / `Sprites.RECT_DARK` + white border
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        toggle.toggleStyle(style -> {
-            style.baseTexture(myIdleTexture);   // sets both base & pressed
-            style.hoverTexture(myHoverTexture);
-        });
-        ```
+```java
+toggle.toggleStyle(style -> {
+    style.baseTexture(myIdleTexture);   // sets both base & pressed
+    style.hoverTexture(myHoverTexture);
+});
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        toggle({ toggleStyle = {
-            baseTexture(myIdleTexture)
-            hoverTexture(myHoverTexture)
-        } }) { }
-        ```
+```kotlin
+toggle({ toggleStyle = {
+    baseTexture(myIdleTexture)
+    hoverTexture(myHoverTexture)
+} }) { }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        toggle > button.__toggle_button__ {
-            base-background: rect(#4a4a4a, 2);
-            hover-background: rect(#5a5a5a, 2);
-        }
-        ```
+```css
+toggle > button.__toggle_button__ {
+    base-background: rect(#4a4a4a, 2);
+    hover-background: rect(#5a5a5a, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">unmark-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    The icon displayed inside the box when the toggle is **off**.
+::: info
+#### <p style="font-size: 1rem;">unmark-background</p>
 
-    Default: none (transparent)
+The icon displayed inside the box when the toggle is **off**.
 
-    === "Java"
+Default: none (transparent)
 
-        ```java
-        toggle.toggleStyle(style -> style.unmarkTexture(myUncheckedIcon));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+toggle.toggleStyle(style -> style.unmarkTexture(myUncheckedIcon));
+```
 
-        ```kotlin
-        toggle({ toggleStyle = { unmarkTexture(myUncheckedIcon) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+toggle({ toggleStyle = { unmarkTexture(myUncheckedIcon) } }) { }
+```
 
-        ```css
-        toggle {
-            unmark-background: sprite("mymod:textures/gui/unchecked.png");
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">mark-background</p>
+```css
+toggle {
+    unmark-background: sprite("mymod:textures/gui/unchecked.png");
+}
+```
 
-    The icon displayed inside the box when the toggle is **on**.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `Icons.CHECK_SPRITE`
+::: info
+#### <p style="font-size: 1rem;">mark-background</p>
 
-    === "Java"
+The icon displayed inside the box when the toggle is **on**.
 
-        ```java
-        toggle.toggleStyle(style -> style.markTexture(myCheckedIcon));
-        ```
+Default: `Icons.CHECK_SPRITE`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        toggle({ toggleStyle = { markTexture(myCheckedIcon) } }) { }
-        ```
+```java
+toggle.toggleStyle(style -> style.markTexture(myCheckedIcon));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        toggle {
-            mark-background: sprite("mymod:textures/gui/checked.png");
-        }
-        ```
+```kotlin
+toggle({ toggleStyle = { markTexture(myCheckedIcon) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+toggle {
+    mark-background: sprite("mymod:textures/gui/checked.png");
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -203,39 +230,45 @@ toggle > label.__toggle_label__ {
 
 A `ToggleGroup` links multiple `Toggle` instances so that only one can be active at a time (like a radio button group). When `allowEmpty` is `false` (default), at least one toggle is always active.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var group = new Toggle.ToggleGroup();
-    // group.setAllowEmpty(true); // allow all toggles to be off
+```java
+var group = new Toggle.ToggleGroup();
+// group.setAllowEmpty(true); // allow all toggles to be off
 
-    var t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
-    var t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
-    var t3 = new Toggle().setText("Option C", true).setToggleGroup(group);
+var t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
+var t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
+var t3 = new Toggle().setText("Option C", true).setToggleGroup(group);
 
-    group.getCurrentToggle(); // the currently active Toggle (or null if allowEmpty)
-    ```
+group.getCurrentToggle(); // the currently active Toggle (or null if allowEmpty)
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val group = Toggle.ToggleGroup()
+```kotlin
+val group = Toggle.ToggleGroup()
 
-    val t1 = toggle({ text("Option A"); toggleGroup = group }) { }
-    val t2 = toggle({ text("Option B"); toggleGroup = group }) { }
-    val t3 = toggle({ text("Option C"); toggleGroup = group }) { }
-    ```
+val t1 = toggle({ text("Option A"); toggleGroup = group }) { }
+val t2 = toggle({ text("Option B"); toggleGroup = group }) { }
+val t3 = toggle({ text("Option C"); toggleGroup = group }) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let group = new Toggle.ToggleGroup();
-    let t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
-    let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
-    ```
+```js
+let group = new Toggle.ToggleGroup();
+let t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
+let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
+```
 
-!!! tip ""
-    Use [`ToggleGroupElement`](toggle-group.md){ data-preview } to manage the group automatically through the XML / editor — it registers children as they are added and unregisters them when removed.
+</DocTab>
+</DocTabs>
+::: tip
+Use [`ToggleGroupElement`](toggle-group.md) to manage the group automatically through the XML / editor — it registers children as they are added and unregisters them when removed.
+:::
 
 ---
 
@@ -245,49 +278,57 @@ A `ToggleGroup` links multiple `Toggle` instances so that only one can be active
 
 Controls the label displayed to the right of the toggle box.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    toggle.setText("my.translation.key", true);  // translated
-    toggle.setText("Literal label", false);        // literal
-    toggle.noText();                               // hide the label
-    toggle.enableText();                           // show it again
-    ```
+```java
+toggle.setText("my.translation.key", true);  // translated
+toggle.setText("Literal label", false);        // literal
+toggle.noText();                               // hide the label
+toggle.enableText();                           // show it again
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    toggle({
-        text("my.translation.key")   // translated (default)
-        noText()                      // hides the label
-    }) { }
-    ```
+```kotlin
+toggle({
+    text("my.translation.key")   // translated (default)
+    noText()                      // hides the label
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    toggle.setText(Component.literal("Literal label"));
-    toggle.setText("my.key", true);
-    toggle.noText();
-    toggle.enableText();
-    ```
+```js
+toggle.setText(Component.literal("Literal label"));
+toggle.setText("my.key", true);
+toggle.noText();
+toggle.enableText();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Value Binding
 
-`Toggle` extends `BindableUIElement<Boolean>`, so it integrates with the data-binding system:
+`Toggle` extends `BindableUIElement&lt;Boolean&gt;`, so it integrates with the data-binding system:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    toggle.bind(DataBindingBuilder.bool(
-        () -> myState.isEnabled(),
-        val -> myState.setEnabled(val)
-    ).build());
-    ```
+```java
+toggle.bind(DataBindingBuilder.bool(
+    () -> myState.isEnabled(),
+    val -> myState.setEnabled(val)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -314,8 +355,8 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | `setText(String, boolean)` | `Toggle` | Sets label text. `true` = translatable. |
 | `noText()` | `Toggle` | Hides the label. |
 | `enableText()` | `Toggle` | Shows the label. |
-| `toggleStyle(Consumer<ToggleStyle>)` | `Toggle` | Configures `ToggleStyle` fluently. |
-| `toggleButton(Consumer<Button>)` | `Toggle` | Configures the inner `Button` directly. |
-| `toggleLabel(Consumer<Label>)` | `Toggle` | Configures the label directly. |
-| `markIcon(Consumer<UIElement>)` | `Toggle` | Configures the mark icon element directly. |
+| `toggleStyle(Consumer&lt;ToggleStyle&gt;)` | `Toggle` | Configures `ToggleStyle` fluently. |
+| `toggleButton(Consumer&lt;Button&gt;)` | `Toggle` | Configures the inner `Button` directly. |
+| `toggleLabel(Consumer&lt;Label&gt;)` | `Toggle` | Configures the label directly. |
+| `markIcon(Consumer&lt;UIElement&gt;)` | `Toggle` | Configures the mark icon element directly. |
 | `getValue()` | `Boolean` | Returns the current on/off state. |

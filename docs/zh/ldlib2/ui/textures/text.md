@@ -1,57 +1,63 @@
 # TextTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `TextTexture` 将翻译后的字符串渲染为 GUI 纹理。它支持多种显示模式（居中、左对齐、滚动、悬停显示）、自动换行、背景色以及可选的实时更新供应器。
 
 注册名：`text_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Static centred text
-    IGuiTexture label = new TextTexture("Hello World");
+```java
+// Static centred text
+IGuiTexture label = new TextTexture("Hello World");
 
-    // Left-aligned, coloured, with shadow
-    IGuiTexture info = new TextTexture("Info", 0xFFFFDD44)
-        .setType(TextTexture.TextType.LEFT)
-        .setDropShadow(true);
+// Left-aligned, coloured, with shadow
+IGuiTexture info = new TextTexture("Info", 0xFFFFDD44)
+    .setType(TextTexture.TextType.LEFT)
+    .setDropShadow(true);
 
-    // Scrolling text, word-wrap at 80 px
-    IGuiTexture scroll = new TextTexture("Long description that scrolls…")
-        .setType(TextTexture.TextType.ROLL_ALWAYS)
-        .setWidth(80)
-        .setRollSpeed(1.5f);
+// Scrolling text, word-wrap at 80 px
+IGuiTexture scroll = new TextTexture("Long description that scrolls…")
+    .setType(TextTexture.TextType.ROLL_ALWAYS)
+    .setWidth(80)
+    .setRollSpeed(1.5f);
 
-    // Dynamic — updates every game tick
-    IGuiTexture dynamic = new TextTexture(() -> "Ticks: " + level.getGameTime());
-    ```
+// Dynamic — updates every game tick
+IGuiTexture dynamic = new TextTexture(() -> "Ticks: " + level.getGameTime());
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val label = TextTexture("Hello World")
+```kotlin
+val label = TextTexture("Hello World")
 
-    val scroll = TextTexture("Long description…")
-        .setType(TextTexture.TextType.ROLL_ALWAYS)
-        .setWidth(80)
-    ```
+val scroll = TextTexture("Long description…")
+    .setType(TextTexture.TextType.ROLL_ALWAYS)
+    .setWidth(80)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let label = new TextTexture("Hello World");
+```js
+let label = new TextTexture("Hello World");
 
-    let dynamic = new TextTexture(() => "Ticks: " + level.getGameTime());
-    ```
+let dynamic = new TextTexture(() => "Ticks: " + level.getGameTime());
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 文本类型
@@ -81,7 +87,7 @@
 | `rollSpeed` | `float` | 滚动模式的滚动速度。默认值：`1.0`。 |
 | `dropShadow` | `boolean` | 是否绘制阴影。默认值：`false`（使用 `String` 的构造函数会设为 `true`）。 |
 | `type` | `TextType` | 显示模式。默认值：`NORMAL`。 |
-| `supplier` | `Supplier<String>`（可空） | 设置后，`text` 每游戏刻从此供应器更新。 |
+| `supplier` | `Supplier&lt;String&gt;`（可空） | 设置后，`text` 每游戏刻从此供应器更新。 |
 
 ---
 
@@ -95,6 +101,6 @@
 | `setWidth(int)` | `TextTexture` | 设置换行宽度并重排行。 |
 | `setType(TextType)` | `TextTexture` | 设置显示模式。 |
 | `setRollSpeed(float)` | `TextTexture` | 设置滚动模式的滚动速度。 |
-| `setSupplier(Supplier<String>)` | `TextTexture` | 注册每刻更新的实时文本供应器。 |
+| `setSupplier(Supplier&lt;String&gt;)` | `TextTexture` | 注册每刻更新的实时文本供应器。 |
 | `updateText(String)` | `void` | 立即更新文本并重排行。 |
 | `copy()` | `TextTexture` | 返回深拷贝。 |

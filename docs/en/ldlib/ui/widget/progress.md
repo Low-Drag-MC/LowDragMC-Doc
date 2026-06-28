@@ -3,7 +3,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/progress.mp4" type="video/mp4">
+    <source src="../assets/progress.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 </div>
@@ -32,30 +32,41 @@ The `ProgressWidget` is a UI component that visually represents progress using a
 
 Sets a progress supplier from 0 to 1.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    progressWidget.setProgressSupplier(() -> 0.3);
-    ```
-=== "KubeJS"
+```java
+progressWidget.setProgressSupplier(() -> 0.3);
+```
 
-    ```javascript
-    progressWidget.setProgressSupplier(() => 0.3);
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+```javascript
+progressWidget.setProgressSupplier(() => 0.3);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### setDynamicHoverTips
 
 Sets a dynamic hovertips based on the progress value.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    progressWidget.setDynamicHoverTips(progress -> "current progress is %.f%".format(progress * 100));
-    ```
-=== "KubeJS"
+```java
+progressWidget.setDynamicHoverTips(progress -> "current progress is %.f%".format(progress * 100));
+```
 
-    ```javascript
-    progressWidget.setDynamicHoverTips(progress => `current progress is ${progress * 100}%` );
-    ```
+</DocTab>
+<DocTab title="KubeJS">
+
+```javascript
+progressWidget.setDynamicHoverTips(progress => `current progress is ${progress * 100}%` );
+```
+
+</DocTab>
+</DocTabs>

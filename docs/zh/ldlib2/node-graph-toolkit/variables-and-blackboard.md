@@ -17,11 +17,11 @@ graph.graphModel.createVariable("speed", Float.class, 1f, VariableKind.LOCAL);
 
 Blackboard 是图变量的内置 UI。
 
-<figure markdown="span">
-    ![Blackboard](./assets/ngt-blackboard-placeholder.png)
-    <figcaption>
-    Blackboard 中的变量声明。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-blackboard-placeholder.png" alt="Blackboard">
+<figcaption>
+Blackboard 中的变量声明。
+</figcaption>
 </figure>
 
 每一行都是一个变量声明。行中显示变量名，并可以展开查看类型和默认值。选中变量后，Inspector 会显示完整可编辑状态。
@@ -30,11 +30,11 @@ Blackboard 是图变量的内置 UI。
 
 ## Variable Inspector
 
-<figure markdown="span">
-    ![Variable inspector](./assets/ngt-variable-inspector.png)
-    <figcaption>
-    选中图变量时的 Inspector。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-variable-inspector.png" alt="Variable inspector">
+<figcaption>
+选中图变量时的 Inspector。
+</figcaption>
 </figure>
 
 Inspector 让变量声明成为真正可编辑的数据：
@@ -71,7 +71,7 @@ Input 变量表示父图可以向子图传入一个值。
 
 Output 变量表示子图可以向父图发布一个值。
 
-暴露变量如何变成 `SubgraphNodeModel` 端口，见 [Subgraphs](./subgraphs.md){ data-preview }。
+暴露变量如何变成 `SubgraphNodeModel` 端口，见 [Subgraphs](./subgraphs.md)。
 
 ## 在代码中创建变量
 
@@ -123,4 +123,4 @@ public @Nullable List<TypeHandle> getVariableSupportTypes() {
 
 返回 `null` 时复用 `getSupportTypes()`。
 
-内置 handle、自定义注册、图标、默认值和 configurator 见 [Type Handles](./type-handles.md){ data-preview }。
+内置 handle、自定义注册、图标、默认值和 configurator 见 [Type Handles](./type-handles.md)。

@@ -1,11 +1,12 @@
 # WidgetGroup 
 
-[ :material-tag: `WidgetGroup`](WidgetGroup.md)
+[ <DocIcon name="material-tag" /> `WidgetGroup`](WidgetGroup.md)
 
 `WidgetGroup` is a container which can add child widgets. Widget inherints from `WidgetGroup` can add child widgets as well. 
 
-!!! note
-    We will add a [ :material-tag: `WidgetGroup`](WidgetGroup.md) for all widget inherints from it.
+::: info
+We will add a [ <DocIcon name="material-tag" /> `WidgetGroup`](WidgetGroup.md) for all widget inherints from it.
+:::
 
 ---
 
@@ -20,24 +21,29 @@ All properties can be accessed via Java / KubeJS.
 | `layout`       | layout of child widgets |
 | `layoutPadding`       | padding offset |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    for (var child in group.widgets) {
+``` java 
+for (var child in group.widgets) {
 
-    }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    for (let child of group.widgets) {
-        
-    }
-    ```
+``` javascript
+for (let child of group.widgets) {
 
-!!! warning
-    **DO NOT** add widget to the `group.widgets` directly!! please check below methods.
+}
+```
+
+</DocTab>
+</DocTabs>
+::: warning
+**DO NOT** add widget to the `group.widgets` directly!! please check below methods.
+:::
 
 ---
 
@@ -47,26 +53,34 @@ All properties can be accessed via Java / KubeJS.
 
 Add child widgets to it **in order**.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    var button = ...;
-    var label = ...;
-    group.addWidgets(button, label);
-    ```
+``` java 
+var button = ...;
+var label = ...;
+group.addWidgets(button, label);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `removeWidget() / clearAllWidgets()`
 
 Remove child widget from it.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    var child = group.getFirstWidgetById("button_id");
-    group.removeWidget(child);
-    group.clearAllWidget();
-    ```
+``` java 
+var child = group.getFirstWidgetById("button_id");
+group.removeWidget(child);
+group.clearAllWidget();
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `waitToAdded() / waitToRemoved()`

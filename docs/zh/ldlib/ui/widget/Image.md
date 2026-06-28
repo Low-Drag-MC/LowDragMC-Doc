@@ -1,6 +1,6 @@
 # ImageWidget
 
-![Image title](../assets/image.png){ width="30%" align=right }
+<img src="../assets/image.png" alt="Image title" width="30%" class="md-img-right">
 
 `ImageWidget` 用于显示由 [`GUI Texture`](../textures/index.md) 提供的图像。
 
@@ -19,54 +19,67 @@
 
 使用纹理实例设置图像纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    imageWidget.setImage(new ResourceTexture("ldlib:textures/gui/icon.png"));
-    ```
+``` java
+imageWidget.setImage(new ResourceTexture("ldlib:textures/gui/icon.png"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setImage
 
 使用 Supplier 设置图像纹理。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    imageWidget.setImage(() -> new ResourceTexture("ldlib:textures/gui/icon.png"));
-    ```
+``` java
+imageWidget.setImage(() -> new ResourceTexture("ldlib:textures/gui/icon.png"));
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    imageWidget.setImage(() => new ResourceTexture("ldlib:textures/gui/icon.png"));
-    ```
+``` javascript
+imageWidget.setImage(() => new ResourceTexture("ldlib:textures/gui/icon.png"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### getImage
 
 返回当前的图像纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var texture = imageWidget.getImage();
-    ```
+``` java
+var texture = imageWidget.getImage();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBorder
 
-![Image title](../assets/image_border.png){ width="20%" align=right }
+<img src="../assets/image_border.png" alt="Image title" width="20%" class="md-img-right">
 
 设置边框宽度和颜色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    imageWidget.setBorder(2, 0xFFFFFFFF); // ARGB
-    ```
+``` java
+imageWidget.setBorder(2, 0xFFFFFFFF); // ARGB
+```
 
+</DocTab>
+</DocTabs>
 ---

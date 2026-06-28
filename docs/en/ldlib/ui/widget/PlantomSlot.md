@@ -2,7 +2,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/phantom_slot.mp4" type="video/mp4">
+    <source src="../assets/phantom_slot.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 </div>
@@ -35,24 +35,30 @@ It owns all APIs from [`SlotWidget`](Slot.md), and you can get or set item by it
 
 Configures whether right-clicking on the slot clears its contents.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    phantomSlot.setClearSlotOnRightClick(true);
-    ```
+```java
+phantomSlot.setClearSlotOnRightClick(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setMaxStackSize
 
 Sets the maximum allowed stack size in the phantom slot.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    phantomSlot.setMaxStackSize(64);
-    ```
+```java
+phantomSlot.setMaxStackSize(64);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Mouse Interactions

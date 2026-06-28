@@ -1,13 +1,14 @@
 # 介绍
 
-{{ version_badge("2.1.5", label="自", icon="tag") }}
+<VersionBadge version="2.1.5" label="自" icon="tag" />
 
 Configurable 是 LDLib2 基于注解的属性编辑系统。它可以把普通 Java 对象转换成可编辑 UI，让编辑器工具能够 inspect 当前选中的对象、修改字段，并把修改记录进 history，而不需要为每个属性面板手写 UI。
 
 UI Editor 的元素属性、贴图、渲染器、样式对象、编辑器设置，以及大量 inspector 面板，都是通过这套系统实现的。对于自定义编辑器来说，Configurable 通常就是暴露“当前选中对象属性”的方式。
 
-!!! tip "IDE 支持"
-    推荐安装 IDEA 插件 [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool)。它为 LDLib2 项目提供代码高亮、语法检查、跳转、补全和注解支持。参考 [Java Integration](../java_integration.md){ data-preview }。
+::: tip IDE 支持
+推荐安装 IDEA 插件 [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool)。它为 LDLib2 项目提供代码高亮、语法检查、跳转、补全和注解支持。参考 [Java Integration](../java_integration.md)。
+:::
 
 例如，`TestConfigurators` 本质上只是一个带注解字段和少量辅助方法的普通数据对象。这里省略了 `package/import`，但结构与测试源码一致：
 
@@ -197,11 +198,11 @@ public class TestConfigurators implements IConfigurable, IPersistedSerializable 
 
 调用 `buildConfigurator(group)` 后，LDLib2 会把这些字段转换成可编辑面板：
 
-<figure markdown="span">
-    ![Configurator examples](./assets/configurator_example.png){ width="48%" }
-    <figcaption>
-    `TestConfigurators` 生成的 configurator 面板。
-    </figcaption>
+<figure>
+<img src="./assets/configurator_example.png" alt="Configurator examples" width="48%">
+<figcaption>
+&lt;code&gt;TestConfigurators&lt;/code&gt; 生成的 configurator 面板。
+</figcaption>
 </figure>
 
 ```mermaid
@@ -215,17 +216,17 @@ flowchart LR
 
 ## 章节导航
 
-[快速开始](./getting_start.md){ data-preview } 介绍如何把几个字段暴露到 editor inspector。
+[快速开始](./getting_start.md) 介绍如何把几个字段暴露到 editor inspector。
 
-[注解](./annotations.md){ data-preview } 介绍 `@Configurable` 以及用于名称、提示、范围、选择器、列表、搜索字段、setter 和资源路径的辅助注解。
+[注解](./annotations.md) 介绍 `@Configurable` 以及用于名称、提示、范围、选择器、列表、搜索字段、setter 和资源路径的辅助注解。
 
-[Accessors](./accessors.md){ data-preview } 介绍 LDLib2 如何根据 Java 类型选择 UI 控件，以及如何为自己的类型注册支持。
+[Accessors](./accessors.md) 介绍 LDLib2 如何根据 Java 类型选择 UI 控件，以及如何为自己的类型注册支持。
 
-[Configurator UI](./configurator-ui.md){ data-preview } 介绍 accessors 创建的实际 UI 节点：`Configurator`、`ConfiguratorGroup`、数组/列表组、事件和复制粘贴行为。
+[Configurator UI](./configurator-ui.md) 介绍 accessors 创建的实际 UI 节点：`Configurator`、`ConfiguratorGroup`、数组/列表组、事件和复制粘贴行为。
 
-[Inspector 与 History](./inspector-and-history.md){ data-preview } 介绍 editor 的 `InspectorView` 如何展示 `IConfigurable`、监听变更并记录 undo/redo。
+[Inspector 与 History](./inspector-and-history.md) 介绍 editor 的 `InspectorView` 如何展示 `IConfigurable`、监听变更并记录 undo/redo。
 
-[源码示例](./examples.md){ data-preview } 给出建议阅读的源码入口。
+[源码示例](./examples.md) 给出建议阅读的源码入口。
 
 ## 什么时候使用
 
@@ -233,4 +234,4 @@ flowchart LR
 
 如果属性面板主要是普通字段，给字段加注解并让 `ConfiguratorParser` 构建 UI。如果面板需要自定义布局、条件行或者特殊控件，重写 `buildConfigurator(...)` 并手动添加 configurators。
 
-`@Configurable` 字段默认会持久化。`PersistedParser` 会像处理 `@Persisted` 字段一样处理它们，除非使用 `@Configurable(persisted = false)`。序列化部分见 [PersistedParser](../sync/PersistedParser.md){ data-preview }。
+`@Configurable` 字段默认会持久化。`PersistedParser` 会像处理 `@Persisted` 字段一样处理它们，除非使用 `@Configurable(persisted = false)`。序列化部分见 [PersistedParser](../sync/PersistedParser.md)。

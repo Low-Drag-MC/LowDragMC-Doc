@@ -23,87 +23,107 @@
 
 设置一个供应器，用于提供动态文本更新。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textTexture.setSupplier(() -> "Updated dynamic text");
-    ```
+``` java
+textTexture.setSupplier(() -> "Updated dynamic text");
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    textTexture.setSupplier(() => "Updated dynamic text");
-    ```
+``` javascript
+textTexture.setSupplier(() => "Updated dynamic text");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### updateText
 
 更新显示的文本。此方法会通过供应器自动调用，也可以直接调用。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.updateText("New Text Content");
-    ```
+``` java
+textTexture.updateText("New Text Content");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBackgroundColor
 
 设置文本背后的背景色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setBackgroundColor(0xffff0000);
-    ```
+``` java
+textTexture.setBackgroundColor(0xffff0000);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setDropShadow
 
 启用或禁用文本上的投影阴影效果。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setDropShadow(true);
-    ```
+``` java
+textTexture.setDropShadow(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setWidth
 
 设置文本区域的最大宽度。此方法还会根据新宽度重新计算文本换行。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setWidth(100);
-    ```
+``` java
+textTexture.setWidth(100);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setType
 
 设置文本显示类型（例如 NORMAL、ROLL、LEFT_HIDE）。
 
-!!! info "TextType"
-    * `NORMAL`: 居中，在下方添加新行
-    * `HIDE`: 居中，隐藏冗余文字
-    * `ROLL`: 居中，隐藏冗余文字，悬停时滚动文字
-    * `ROLL_ALWAYS`: 居中，存在冗余文字时始终滚动
-    * `LEFT`: 与 NORMAL 相同，但左对齐
-    * `RIGHT`: 与 NORMAL 相同，但右对齐
-    * `LEFT_HIDE`: 与 HIDE 相同，但左对齐
-    * `LEFT_ROLL`: 与 ROLL 相同，但左对齐
-    * `LEFT_ROLL_ALWAYS`: 与 ROLL_ALWAYS 相同，但左对齐
+::: info TextType
+* `NORMAL`: 居中，在下方添加新行
+* `HIDE`: 居中，隐藏冗余文字
+* `ROLL`: 居中，隐藏冗余文字，悬停时滚动文字
+* `ROLL_ALWAYS`: 居中，存在冗余文字时始终滚动
+* `LEFT`: 与 NORMAL 相同，但左对齐
+* `RIGHT`: 与 NORMAL 相同，但右对齐
+* `LEFT_HIDE`: 与 HIDE 相同，但左对齐
+* `LEFT_ROLL`: 与 ROLL 相同，但左对齐
+* `LEFT_ROLL_ALWAYS`: 与 ROLL_ALWAYS 相同，但左对齐
+:::
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setType(TextType.ROLL);
-    ```
+``` java
+textTexture.setType(TextType.ROLL);
+```
 
+</DocTab>
+</DocTabs>
 ---

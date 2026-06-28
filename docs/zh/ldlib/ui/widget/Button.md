@@ -1,6 +1,6 @@
 # ButtonWidget
 
-![Image title](../assets/button.png){ width="30%" align=right }
+<img src="../assets/button.png" alt="Image title" width="30%" class="md-img-right">
 
 ButtonWidget 是 GUI 系统中代表可点击按钮的 UI 控件
 
@@ -21,22 +21,30 @@ ButtonWidget 是 GUI 系统中代表可点击按钮的 UI 控件
 
 等同于 [`setBackground`](index.md#setbackground)。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    button.setButtonTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Button"));
-    ```
+``` java 
+button.setButtonTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Button"));
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `setClickedTexture()`
 
 移除其中的子控件。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    button.setClickedTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Clicked"));
-    ```
+``` java 
+button.setClickedTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Clicked"));
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `setOnPressCallback()`
@@ -57,24 +65,28 @@ ButtonWidget 是 GUI 系统中代表可点击按钮的 UI 控件
 3. `clickData.isCtrlClick`: 是否按下了 Ctrl 键。
 3. `clickData.isRemote`: 是否为远程环境。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    button.setOnPressCallback(clickData -> {
-        if (clickData.isRemote) { // 可用于检测触发端
-            
-        }
-    });
-    ```
+``` java 
+button.setOnPressCallback(clickData -> {
+    if (clickData.isRemote) { // 可用于检测触发端
 
-=== "KubeJS"
+    }
+});
+```
 
-    ``` javascript 
-    button.setOnPressCallback(clickData => {
-        if (clickData.isRemote) { // 可用于检测触发端
-            
-        }
-    });
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+``` javascript 
+button.setOnPressCallback(clickData => {
+    if (clickData.isRemote) { // 可用于检测触发端
+
+    }
+});
+```
+
+</DocTab>
+</DocTabs>
 ---

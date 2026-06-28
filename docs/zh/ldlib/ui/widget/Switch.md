@@ -25,12 +25,15 @@
 
 设置开关的 **ON/OFF** 状态。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    switchWidget.setPressed(true); // 打开（ON）
-    ```
+```java
+switchWidget.setPressed(true); // 打开（ON）
+```
 
+</DocTab>
+</DocTabs>
 - 触发 **UI 更新** 与事件回调。
 
 ---
@@ -39,38 +42,46 @@
 
 注册当开关被点击时的回调。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    switchWidget.setOnPressCallback((clickData, state) -> {
-        System.out.println("Switch is now: " + state);
-    });
-    ```
+```java
+switchWidget.setOnPressCallback((clickData, state) -> {
+    System.out.println("Switch is now: " + state);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    switchWidget.setOnPressCallback((clickData, state) => {
-        console.log("Switch is now: " + state);
-    });
-    ```
+```javascript
+switchWidget.setOnPressCallback((clickData, state) => {
+    console.log("Switch is now: " + state);
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setSupplier
 
 与**外部状态**自动同步。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    switchWidget.setSupplier(() -> getCurrentState()); // bool
-    ```
+```java
+switchWidget.setSupplier(() -> getCurrentState()); // bool
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    switchWidget.setSupplier(() => getCurrentState()); // bool
-    ```
+```javascript
+switchWidget.setSupplier(() => getCurrentState()); // bool
+```
 
+</DocTab>
+</DocTabs>
 - 当 `getCurrentState()` 变化时**动态**更新。

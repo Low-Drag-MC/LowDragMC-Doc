@@ -1,9 +1,10 @@
 # 简介
 
-{{ version_badge("2.0.0", label="自", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="自" icon="tag" href="/changelog/#2.0.0" />
 
-!!! warning
-    本 Wiki 仅适用于 Photon `2.x` 版本。如需查看 `1.x` 版本，请访问此[链接](https://github.com/Low-Drag-MC/Photon/wiki)
+::: warning
+本 Wiki 仅适用于 Photon `2.x` 版本。如需查看 `1.x` 版本，请访问此[链接](https://github.com/Low-Drag-MC/Photon/wiki)
+:::
 
 
 ## 概述
@@ -11,11 +12,11 @@
 **Photon2** 是一款受 Unity 粒子系统启发的强大 Minecraft VFX 创作模组。
 它将现代、灵活且高度可定制的视觉特效引入 Minecraft，让熟悉 Unity 工作流程的开发者能够设计出惊艳的游戏内 VFX。
 
-<figure markdown="span">
-    ![Photon Editor](./assets/photonn_editor.png)
-    <figcaption>
-    Photon Editor：制作并预览游戏内视觉特效。
-    </figcaption>
+<figure>
+<img src="./assets/photonn_editor.png" alt="Photon Editor">
+<figcaption>
+Photon Editor：制作并预览游戏内视觉特效。
+</figcaption>
 </figure>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -54,7 +55,7 @@
 3. **导出 FX 文件**并通过指令或你自己的触发器来应用它们
 4. **探索高级功能：** 自定义着色器、基于模型的动画、基于深度的高亮等
 
-> 详情请见：[入门指南](./getting_started.md)、[着色器指南](./shader_guide.md)、[高级技巧](./advanced.md)
+> 详情请见：[命令](./commands.md)、[材质](./Materials/index.md) 和 [Java 集成](./Java%20Integration/index.md)。
 
 ---
 

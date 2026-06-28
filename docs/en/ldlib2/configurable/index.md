@@ -1,13 +1,14 @@
 # Introduction
 
-{{ version_badge("2.1.5", label="Since", icon="tag") }}
+<VersionBadge version="2.1.5" label="Since" icon="tag" />
 
 Configurable is LDLib2's annotation-based property editing system. It turns Java objects into editable UI, so editor tools can inspect a selected object, edit its fields, and record the change into history without hand-building every property panel.
 
 The UI Editor uses this system for element properties, textures, renderers, style objects, editor settings, and many inspector panels. For a custom editor, Configurable is the usual way to expose "selected object properties" to the user.
 
-!!! tip "IDE support"
-    LDLib annotations are easier to read with the [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool) IDEA plugin. It adds highlighting, syntax checks, navigation, completion, and annotation support for LDLib2 projects. See [Java Integration](../java_integration.md){ data-preview }.
+::: tip IDE support
+LDLib annotations are easier to read with the [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool) IDEA plugin. It adds highlighting, syntax checks, navigation, completion, and annotation support for LDLib2 projects. See [Java Integration](../java_integration.md).
+:::
 
 For example, `TestConfigurators` is just a normal data object with annotated fields and a few helper methods. The imports are omitted here, but the shape is the same as the test source:
 
@@ -197,11 +198,11 @@ public class TestConfigurators implements IConfigurable, IPersistedSerializable 
 
 After `buildConfigurator(group)` runs, LDLib2 turns those fields into an editable panel:
 
-<figure markdown="span">
-    ![Configurator examples](./assets/configurator_example.png){ width="48%" }
-    <figcaption>
-    Generated configurators from `TestConfigurators`.
-    </figcaption>
+<figure>
+<img src="./assets/configurator_example.png" alt="Configurator examples" width="48%">
+<figcaption>
+Generated configurators from &lt;code&gt;TestConfigurators&lt;/code&gt;.
+</figcaption>
 </figure>
 
 ```mermaid
@@ -215,17 +216,17 @@ flowchart LR
 
 ## Chapter Map
 
-Start with [Getting Start](./getting_start.md){ data-preview } if you only want to expose a few fields in an editor inspector.
+Start with [Getting Start](./getting_start.md) if you only want to expose a few fields in an editor inspector.
 
-[Annotations](./annotations.md){ data-preview } covers `@Configurable` and the helper annotations that tune names, tips, ranges, selectors, lists, search fields, setters, and resource locations.
+[Annotations](./annotations.md) covers `@Configurable` and the helper annotations that tune names, tips, ranges, selectors, lists, search fields, setters, and resource locations.
 
-[Accessors](./accessors.md){ data-preview } explains how LDLib2 chooses a UI control from a Java type, and how to register support for your own type.
+[Accessors](./accessors.md) explains how LDLib2 chooses a UI control from a Java type, and how to register support for your own type.
 
-[Configurator UI](./configurator-ui.md){ data-preview } covers the actual UI nodes created by accessors: `Configurator`, `ConfiguratorGroup`, array/list groups, events, and copy-paste behavior.
+[Configurator UI](./configurator-ui.md) covers the actual UI nodes created by accessors: `Configurator`, `ConfiguratorGroup`, array/list groups, events, and copy-paste behavior.
 
-[Inspector and History](./inspector-and-history.md){ data-preview } explains how the editor `InspectorView` displays an `IConfigurable`, listens for changes, and records undo/redo actions.
+[Inspector and History](./inspector-and-history.md) explains how the editor `InspectorView` displays an `IConfigurable`, listens for changes, and records undo/redo actions.
 
-[Examples](./examples.md){ data-preview } points to source files worth reading after you understand the flow.
+[Examples](./examples.md) points to source files worth reading after you understand the flow.
 
 ## When To Use It
 
@@ -233,4 +234,4 @@ Use Configurable when your object has editor-facing properties: a shop entry, an
 
 If the property panel is mostly regular fields, annotate the fields and let `ConfiguratorParser` build the UI. If the panel needs custom layout, conditional rows, or custom controls, override `buildConfigurator(...)` and add configurators manually.
 
-`@Configurable` fields are persisted by default. `PersistedParser` treats them like `@Persisted` fields unless `@Configurable(persisted = false)` is used. See [PersistedParser](../sync/PersistedParser.md){ data-preview } for the serialization side.
+`@Configurable` fields are persisted by default. `PersistedParser` treats them like `@Persisted` fields unless `@Configurable(persisted = false)` is used. See [PersistedParser](../sync/PersistedParser.md) for the serialization side.

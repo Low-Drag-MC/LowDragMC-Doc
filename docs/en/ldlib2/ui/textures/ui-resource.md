@@ -1,43 +1,50 @@
 # UIResourceTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `UIResourceTexture` is a reference to a texture asset saved in the LDLib2 editor resource system. It resolves the actual `IGuiTexture` lazily from the `TexturesResource` registry at draw time, making it suitable for editor-managed, data-driven textures.
 
 Registry name: `ui_resource_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
-!!! tip ""
-    This texture type is primarily used by the in-game editor. For code-driven textures, prefer one of the other concrete types.
+::: tip
+This texture type is primarily used by the in-game editor. For code-driven textures, prefer one of the other concrete types.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Reference a texture saved under the built-in path "MY_BG"
-    IGuiTexture ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
+```java
+// Reference a texture saved under the built-in path "MY_BG"
+IGuiTexture ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
 
-    // Reference a file-based resource
-    IGuiTexture file = new UIResourceTexture(IResourcePath.parse("file:mymod:ui/panel"));
-    ```
+// Reference a file-based resource
+IGuiTexture file = new UIResourceTexture(IResourcePath.parse("file:mymod:ui/panel"));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val ref = UIResourceTexture(BuiltinPath("MY_BG"))
-    ```
+```kotlin
+val ref = UIResourceTexture(BuiltinPath("MY_BG"))
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
-    ```
+```js
+let ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

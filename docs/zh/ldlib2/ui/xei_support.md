@@ -1,6 +1,6 @@
 # XEI 集成
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 LDLib2 为三种最流行的配方查看器 Mod 提供了一流的支持：
 
@@ -18,12 +18,12 @@ LDLib2 为三种最流行的配方查看器 Mod 提供了一流的支持：
 
 ### 注册配方类别
 
-继承 `ModularUIRecipeCategory<T>`，其中 `T` 是你的配方类型。基类会自动处理缓存、渲染和事件分发。你只需提供：
+继承 `ModularUIRecipeCategory&lt;T&gt;`，其中 `T` 是你的配方类型。基类会自动处理缓存、渲染和事件分发。你只需提供：
 
-- **`getRecipeType()`** — `RecipeType<T>` 标识符。
+- **`getRecipeType()`** — `RecipeType&lt;T&gt;` 标识符。
 - **`getTitle()`** — 在 JEI 的类别列表中显示的标题。
 - **`getWidth()` / `getHeight()`** — 配方视图的像素尺寸。
-- **构造参数** — 一个 `IModularUIProvider<T>`（即 `T -> ModularUI`），用于为给定配方构建 UI。
+- **构造参数** — 一个 `IModularUIProvider&lt;T&gt;`（即 `T -> ModularUI`），用于为给定配方构建 UI。
 
 然后在带有 `@JeiPlugin` 注解的类中注册类别和配方：
 
@@ -71,9 +71,9 @@ public class MyJEIPlugin implements IModPlugin {
 }
 ```
 
-#### `IModularUIProvider<T>`
+#### `IModularUIProvider&lt;T&gt;`
 
-`IModularUIProvider<T>` 是一个等价于 `Function<T, ModularUI>` 的函数式接口。最简单的实现方式是方法引用：
+`IModularUIProvider&lt;T&gt;` 是一个等价于 `Function&lt;T, ModularUI&gt;` 的函数式接口。最简单的实现方式是方法引用：
 
 ```java
 // 引用实例方法：
@@ -102,7 +102,7 @@ Provider 对每个配方调用一次，结果会缓存 10 秒。`ModularUI.init(
 | 常量 (`JEIUIEvents.*`) | 触发时机 | `event.customData` 类型 |
 | ---------------------- | -------- | ----------------------- |
 | `CLICKABLE_INGREDIENT` | 用户在活动界面中悬停/点击元素时 | `IClickableIngredientFactory` |
-| `GHOST_INGREDIENT` | 用户从 JEI 开始拖拽原料时 | `JEITargetsTypedHandler<I>` |
+| `GHOST_INGREDIENT` | 用户从 JEI 开始拖拽原料时 | `JEITargetsTypedHandler&lt;I&gt;` |
 | `RECIPE_INGREDIENT` | JEI 收集用于聚焦注册的原料时 | `JEIRecipeIngredientHandler` |
 | `RECIPE_WIDGET` | JEI 收集用于悬停/提示的槽位 Widget 时 | `JEIRecipeWidgetHandler` |
 
@@ -310,7 +310,7 @@ LDLibJEIPlugin.clickableIngredient(myDisplayElement, () -> {
 
 ### 注册配方类别
 
-继承 `ModularUIDisplayCategory<T>`，其中 `T` 实现了 `ModularUIDisplay` 标记接口。结构与 JEI 类似，但有两个关键区别：
+继承 `ModularUIDisplayCategory&lt;T&gt;`，其中 `T` 实现了 `ModularUIDisplay` 标记接口。结构与 JEI 类似，但有两个关键区别：
 
 - REI 中的配方对象称为 **display**；它实现 `ModularUIDisplay`，而不是一个普通类。
 - 宽度方法接收 display 作为参数：`getDisplayWidth(T display)`。
@@ -434,7 +434,7 @@ LDLibREIPlugin.acceptDraggableStack(
 
 #### `recipeIngredient` — 提供聚焦原料
 
-与 JEI 的等价方法用途相同，但 Provider 返回 `List<EntryIngredient>`：
+与 JEI 的等价方法用途相同，但 Provider 返回 `List&lt;EntryIngredient&gt;`：
 
 ```java
 LDLibREIPlugin.recipeIngredient(inputSlot, IngredientIO.INPUT, () ->
@@ -475,7 +475,7 @@ LDLibREIPlugin.recipeSlot(
 
 ### 注册配方
 
-为你的配方类继承 `ModularUIEMIRecipe`。`EmiRecipeCategory` 是标准的 EMI 类型 —— 类别本身不需要 LDLib 包装器。你的配方向 `super()` 构造器传递一个 `IModularUIProvider<ModularUIEMIRecipe>`。
+为你的配方类继承 `ModularUIEMIRecipe`。`EmiRecipeCategory` 是标准的 EMI 类型 —— 类别本身不需要 LDLib 包装器。你的配方向 `super()` 构造器传递一个 `IModularUIProvider&lt;ModularUIEMIRecipe&gt;`。
 
 ```java
 // MyEmiRecipe.java
@@ -580,7 +580,7 @@ LDLibEMIPlugin.dropStackHandler(
 
 #### `recipeIngredient` — 提供输入/输出/催化剂
 
-Provider 返回 `List<EmiIngredient>`：
+Provider 返回 `List&lt;EmiIngredient&gt;`：
 
 ```java
 LDLibEMIPlugin.recipeIngredient(inputSlot, IngredientIO.INPUT, () ->

@@ -1,54 +1,60 @@
 # TextElement
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `TextElement` is a low-level text rendering element. It displays a `Component` (a Minecraft rich-text object) with configurable font, size, color, alignment, wrapping, and scrolling behaviour.
 
-Most use cases are better served by [`Label`](label.md){ data-preview } (which adds data binding) or the built-in text labels inside [`Button`](button.md){ data-preview }, [`Toggle`](toggle.md){ data-preview }, etc.
+Most use cases are better served by [`Label`](label.md) (which adds data binding) or the built-in text labels inside [`Button`](button.md), [`Toggle`](toggle.md), etc.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var text = new TextElement();
-    text.setText("my.translation.key", true);  // translated
-    text.textStyle(style -> style
-        .fontSize(12)
-        .textColor(0xFFFF00)
-        .textShadow(false)
-        .textAlignHorizontal(Horizontal.CENTER)
-    );
-    parent.addChild(text);
-    ```
+```java
+var text = new TextElement();
+text.setText("my.translation.key", true);  // translated
+text.textStyle(style -> style
+    .fontSize(12)
+    .textColor(0xFFFF00)
+    .textShadow(false)
+    .textAlignHorizontal(Horizontal.CENTER)
+);
+parent.addChild(text);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    text({
-        layout { width(80).height(18) }
-        textStyle {
-            fontSize(12f)
-            textColor(0xFFFF00)
-            textAlignHorizontal(Horizontal.CENTER)
-        }
-    }) { }
-    ```
+```kotlin
+text({
+    layout { width(80).height(18) }
+    textStyle {
+        fontSize(12f)
+        textColor(0xFFFF00)
+        textAlignHorizontal(Horizontal.CENTER)
+    }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let text = new TextElement();
-    text.setText(Component.literal("Hello world"));
-    text.textStyle(style => style.fontSize(12).textColor(0xFFFF00));
-    parent.addChild(text);
-    ```
+```js
+let text = new TextElement();
+text.setText(Component.literal("Hello world"));
+text.textStyle(style => style.fontSize(12).textColor(0xFFFF00));
+parent.addChild(text);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -66,8 +72,9 @@ Text content is read from the element's child nodes using Minecraft's component 
 <text>Prefix: <translate key="my.key"/></text>
 ```
 
-!!! note ""
-    `TextElement` cannot have layout children added in XML — only text content.
+::: info
+`TextElement` cannot have layout children added in XML — only text content.
+:::
 
 ---
 
@@ -75,244 +82,310 @@ Text content is read from the element's child nodes using Minecraft's component 
 
 `TextStyle` controls all visual aspects of the rendered text.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font-size</p>
+::: info
+#### <p style="font-size: 1rem;">font-size</p>
 
-    Height of each line of text in pixels.
+Height of each line of text in pixels.
 
-    Default: `9`
+Default: `9`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        text.textStyle(style -> style.fontSize(12));
-        ```
+```java
+text.textStyle(style -> style.fontSize(12));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text {
-            font-size: 12;
-        }
-        ```
+```css
+text {
+    font-size: 12;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-color</p>
+</DocTab>
+</DocTabs>
+:::
 
-    ARGB colour of the text. Use `0xRRGGBB` (alpha defaults to full opacity).
+::: info
+#### <p style="font-size: 1rem;">text-color</p>
 
-    Default: `0xFFFFFF` (white)
+ARGB colour of the text. Use `0xRRGGBB` (alpha defaults to full opacity).
 
-    === "Java"
+Default: `0xFFFFFF` (white)
 
-        ```java
-        text.textStyle(style -> style.textColor(0xFFFF00));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+text.textStyle(style -> style.textColor(0xFFFF00));
+```
 
-        ```css
-        text {
-            text-color: #FFFF00;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-shadow</p>
+```css
+text {
+    text-color: #FFFF00;
+}
+```
 
-    Whether to draw a drop-shadow under the text.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `true`
+::: info
+#### <p style="font-size: 1rem;">text-shadow</p>
 
-    === "Java"
+Whether to draw a drop-shadow under the text.
 
-        ```java
-        text.textStyle(style -> style.textShadow(false));
-        ```
+Default: `true`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text {
-            text-shadow: false;
-        }
-        ```
+```java
+text.textStyle(style -> style.textShadow(false));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Resource location of the font to use.
+```css
+text {
+    text-shadow: false;
+}
+```
 
-    Default: Vanilla default font (`minecraft:default`)
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">font</p>
 
-        ```java
-        text.textStyle(style -> style.font(ResourceLocation.parse("minecraft:uniform")));
-        ```
+Resource location of the font to use.
 
-    === "LSS"
+Default: Vanilla default font (`minecraft:default`)
 
-        ```css
-        text {
-            font: "minecraft:uniform";
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">horizontal-align</p>
+```java
+text.textStyle(style -> style.font(ResourceLocation.parse("minecraft:uniform")));
+```
 
-    Horizontal alignment of text lines within the element. Values: `LEFT`, `CENTER`, `RIGHT`.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `LEFT`
+```css
+text {
+    font: "minecraft:uniform";
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        text.textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER));
-        ```
+::: info
+#### <p style="font-size: 1rem;">horizontal-align</p>
 
-    === "LSS"
+Horizontal alignment of text lines within the element. Values: `LEFT`, `CENTER`, `RIGHT`.
 
-        ```css
-        text {
-            horizontal-align: CENTER;
-        }
-        ```
+Default: `LEFT`
 
-!!! info ""
-    #### <p style="font-size: 1rem;">vertical-align</p>
+<DocTabs>
+<DocTab title="Java">
 
-    Vertical alignment of the text block within the element. Values: `TOP`, `CENTER`, `BOTTOM`.
+```java
+text.textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER));
+```
 
-    Default: `TOP`
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text {
+    horizontal-align: CENTER;
+}
+```
 
-        ```java
-        text.textStyle(style -> style.textAlignVertical(Vertical.CENTER));
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">vertical-align</p>
 
-        ```css
-        text {
-            vertical-align: CENTER;
-        }
-        ```
+Vertical alignment of the text block within the element. Values: `TOP`, `CENTER`, `BOTTOM`.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-wrap</p>
+Default: `TOP`
 
-    Controls how text behaves when it exceeds the element width.
+<DocTabs>
+<DocTab title="Java">
 
-    Default: `NONE`
+```java
+text.textStyle(style -> style.textAlignVertical(Vertical.CENTER));
+```
 
-    | Value | Behaviour |
-    | ----- | --------- |
-    | `NONE` | No wrapping; text is displayed on one line and may overflow. |
-    | `WRAP` | Text wraps onto multiple lines. |
-    | `ROLL` | Text scrolls horizontally in a continuous loop. |
-    | `HOVER_ROLL` | Text scrolls horizontally only when the mouse hovers over the element. |
-    | `HIDE` | Text is clipped to one line; overflow is hidden. |
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text {
+    vertical-align: CENTER;
+}
+```
 
-        ```java
-        text.textStyle(style -> style.textWrap(TextWrap.WRAP));
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">text-wrap</p>
 
-        ```css
-        text {
-            text-wrap: WRAP;
-        }
-        ```
+Controls how text behaves when it exceeds the element width.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">roll-speed</p>
+Default: `NONE`
 
-    Speed multiplier for `ROLL` / `HOVER_ROLL` scrolling. Higher values scroll faster.
+| Value | Behaviour |
+| ----- | --------- |
+| `NONE` | No wrapping; text is displayed on one line and may overflow. |
+| `WRAP` | Text wraps onto multiple lines. |
+| `ROLL` | Text scrolls horizontally in a continuous loop. |
+| `HOVER_ROLL` | Text scrolls horizontally only when the mouse hovers over the element. |
+| `HIDE` | Text is clipped to one line; overflow is hidden. |
 
-    Default: `1.0`
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+text.textStyle(style -> style.textWrap(TextWrap.WRAP));
+```
 
-        ```java
-        text.textStyle(style -> style.rollSpeed(2f));
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+text {
+    text-wrap: WRAP;
+}
+```
 
-        ```css
-        text {
-            roll-speed: 2;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">line-spacing</p>
+::: info
+#### <p style="font-size: 1rem;">roll-speed</p>
 
-    Extra pixels of space added between lines when text wraps.
+Speed multiplier for `ROLL` / `HOVER_ROLL` scrolling. Higher values scroll faster.
 
-    Default: `1`
+Default: `1.0`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        text.textStyle(style -> style.lineSpacing(3f));
-        ```
+```java
+text.textStyle(style -> style.rollSpeed(2f));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text {
-            line-spacing: 3;
-        }
-        ```
+```css
+text {
+    roll-speed: 2;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-height</p>
+</DocTab>
+</DocTabs>
+:::
 
-    When `true`, the element's height is set automatically to fit all text lines.
+::: info
+#### <p style="font-size: 1rem;">line-spacing</p>
 
-    Default: `false`
+Extra pixels of space added between lines when text wraps.
 
-    === "Java"
+Default: `1`
 
-        ```java
-        text.textStyle(style -> style.adaptiveHeight(true));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+text.textStyle(style -> style.lineSpacing(3f));
+```
 
-        ```css
-        text {
-            adaptive-height: true;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-width</p>
+```css
+text {
+    line-spacing: 3;
+}
+```
 
-    When `true`, the element's width is set automatically to fit the first line's text.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `false`
+::: info
+#### <p style="font-size: 1rem;">adaptive-height</p>
 
-    === "Java"
+When `true`, the element's height is set automatically to fit all text lines.
 
-        ```java
-        text.textStyle(style -> style.adaptiveWidth(true));
-        ```
+Default: `false`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text {
-            adaptive-width: true;
-        }
-        ```
+```java
+text.textStyle(style -> style.adaptiveHeight(true));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text {
+    adaptive-height: true;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">adaptive-width</p>
+
+When `true`, the element's width is set automatically to fit the first line's text.
+
+Default: `false`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+text.textStyle(style -> style.adaptiveWidth(true));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text {
+    adaptive-width: true;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -331,6 +404,6 @@ Text content is read from the element's child nodes using Minecraft's component 
 | ------ | ------- | ----------- |
 | `setText(String, boolean)` | `TextElement` | Sets text. `true` = translatable, `false` = literal. |
 | `setText(Component)` | `TextElement` | Sets text from a `Component` directly. |
-| `textStyle(Consumer<TextStyle>)` | `TextElement` | Configures `TextStyle` fluently. |
+| `textStyle(Consumer&lt;TextStyle&gt;)` | `TextElement` | Configures `TextStyle` fluently. |
 | `recompute()` | `void` | Forces a re-layout of the text lines (called automatically on style or size changes). |
 | `getText()` | `Component` | Returns the current text. |

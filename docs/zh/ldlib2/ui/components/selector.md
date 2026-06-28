@@ -1,71 +1,81 @@
 # Selector
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`Selector<T>` 是一个通用的下拉选择器。点击它会弹出一个悬浮的候选项目列表；点击某个项目即可选中它，并可选择关闭下拉列表。每个候选项目都由可配置的 `UIElementProvider<T>` 渲染。当候选数量超过 [`max-item`](#max-item) 时，列表会切换为可滚动的 `ScrollerView`。
+`Selector&lt;T&gt;` 是一个通用的下拉选择器。点击它会弹出一个悬浮的候选项目列表；点击某个项目即可选中它，并可选择关闭下拉列表。每个候选项目都由可配置的 `UIElementProvider&lt;T&gt;` 渲染。当候选数量超过 [`max-item`](#max-item) 时，列表会切换为可滚动的 `ScrollerView`。
 
-!!! note ""
-    所有在 [UIElement](element.md){ data-preview } 中记录的内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+所有在 [UIElement](element.md) 中记录的内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var selector = new Selector<String>();
-    selector.setCandidates(List.of("Alpha", "Beta", "Gamma"));
-    selector.setSelected("Alpha");
-    selector.setOnValueChanged(value -> {
-        System.out.println("Selected: " + value);
-    });
-    parent.addChild(selector);
-    ```
+```java
+var selector = new Selector<String>();
+selector.setCandidates(List.of("Alpha", "Beta", "Gamma"));
+selector.setSelected("Alpha");
+selector.setOnValueChanged(value -> {
+    System.out.println("Selected: " + value);
+});
+parent.addChild(selector);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    selector<String>({
-        candidates("Alpha", "Beta", "Gamma")
-        selected("Alpha")
-        onChange { value -> println("Selected: $value") }
-    }) { }
-    ```
+```kotlin
+selector<String>({
+    candidates("Alpha", "Beta", "Gamma")
+    selected("Alpha")
+    onChange { value -> println("Selected: $value") }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let sel = new Selector();
-    sel.setCandidates(["Alpha", "Beta", "Gamma"]);
-    sel.setSelected("Alpha");
-    sel.setOnValueChanged(v => { console.log("Selected: " + v); });
-    parent.addChild(sel);
-    ```
+```js
+let sel = new Selector();
+sel.setCandidates(["Alpha", "Beta", "Gamma"]);
+sel.setSelected("Alpha");
+sel.setOnValueChanged(v => { console.log("Selected: " + v); });
+parent.addChild(sel);
+```
 
+</DocTab>
+</DocTabs>
 ### 自定义候选项目 UI
 
 默认情况下，每个候选项目以其 `toString()` 文本显示。你可以提供自定义 provider 来按任意方式渲染项目：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selector.setCandidateUIProvider(candidate ->
-        new UIElement()
-            .addChild(new Label().setText(candidate.displayName(), false))
-    );
-    ```
+```java
+selector.setCandidateUIProvider(candidate ->
+    new UIElement()
+        .addChild(new Label().setText(candidate.displayName(), false))
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    selector<MyItem>({
-        candidateUI { item ->
-            element { /* build custom row for item */ }
-        }
-    }) { }
-    ```
+```kotlin
+selector<MyItem>({
+    candidateUI { item ->
+        element { /* build custom row for item */ }
+    }
+}) { }
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -85,7 +95,7 @@
 
 | XML 子元素 | 描述 |
 | --------- | ----------- |
-| `<candidate>` | 向列表中添加一个字符串候选项目。元素的文本内容用作值。 |
+| `&lt;candidate&gt;` | 向列表中添加一个字符串候选项目。元素的文本内容用作值。 |
 
 ---
 
@@ -111,145 +121,181 @@
 
 `SelectorStyle` 控制下拉覆盖层的外观和行为。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    当 Selector 被悬停或获得焦点时，绘制在其上方的纹理。
+当 Selector 被悬停或获得焦点时，绘制在其上方的纹理。
 
-    默认值：`Sprites.RECT_RD_T_SOLID`
+默认值：`Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        selector.selectorStyle(style -> style.focusOverlay(myHighlight));
-        ```
+```java
+selector.selectorStyle(style -> style.focusOverlay(myHighlight));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        selector {
-            focus-overlay: rect(#FFFFFF33, 2);
-        }
-        ```
+```css
+selector {
+    focus-overlay: rect(#FFFFFF33, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-item</p>
+</DocTab>
+</DocTabs>
+:::
 
-    在平面 `listView` 中渲染的最大项目数。当候选列表更长时，将改用 `ScrollerView`。
+::: info
+#### <p style="font-size: 1rem;">max-item</p>
 
-    默认值：`5`
+在平面 `listView` 中渲染的最大项目数。当候选列表更长时，将改用 `ScrollerView`。
 
-    === "Java"
+默认值：`5`
 
-        ```java
-        selector.selectorStyle(style -> style.maxItemCount(8));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+selector.selectorStyle(style -> style.maxItemCount(8));
+```
 
-        ```kotlin
-        selector<String>({ }) { withMaxItems(8) }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+selector<String>({ }) { withMaxItems(8) }
+```
 
-        ```css
-        selector {
-            max-item: 8;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">view-height</p>
+```css
+selector {
+    max-item: 8;
+}
+```
 
-    当候选数量超过 `max-item` 时，`ScrollerView` 的高度。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`50`
+::: info
+#### <p style="font-size: 1rem;">view-height</p>
 
-    === "Java"
+当候选数量超过 `max-item` 时，`ScrollerView` 的高度。
 
-        ```java
-        selector.selectorStyle(style -> style.scrollerViewHeight(80f));
-        ```
+默认值：`50`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        selector<String>({ }) { withScrollHeight(80f) }
-        ```
+```java
+selector.selectorStyle(style -> style.scrollerViewHeight(80f));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        selector {
-            view-height: 80;
-        }
-        ```
+```kotlin
+selector<String>({ }) { withScrollHeight(80f) }
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-overlay</p>
+</DocTab>
+<DocTab title="LSS">
 
-    悬停和选中的候选项目是否以半透明覆盖层高亮显示。
+```css
+selector {
+    view-height: 80;
+}
+```
 
-    默认值：`true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-overlay</p>
 
-        ```java
-        selector.selectorStyle(style -> style.showOverlay(false));
-        ```
+悬停和选中的候选项目是否以半透明覆盖层高亮显示。
 
-    === "LSS"
+默认值：`true`
 
-        ```css
-        selector {
-            show-overlay: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">close-after-select</p>
+```java
+selector.selectorStyle(style -> style.showOverlay(false));
+```
 
-    玩家选择项目后，下拉列表是否自动关闭。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`true`
+```css
+selector {
+    show-overlay: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        selector.selectorStyle(style -> style.closeAfterSelect(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">close-after-select</p>
 
-    === "Kotlin"
+玩家选择项目后，下拉列表是否自动关闭。
 
-        ```kotlin
-        selector<String>({ }) { closeOnSelect() }
-        ```
+默认值：`true`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        selector {
-            close-after-select: false;
-        }
-        ```
+```java
+selector.selectorStyle(style -> style.closeAfterSelect(false));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+selector<String>({ }) { closeOnSelect() }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+selector {
+    close-after-select: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## 值绑定
 
-`Selector<T>` 继承自 `BindableUIElement<T>`，因此支持标准的数据绑定 API：
+`Selector&lt;T&gt;` 继承自 `BindableUIElement&lt;T&gt;`，因此支持标准的数据绑定 API：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selector.bind(DataBindingBuilder.string(
-        () -> config.getMode(),
-        mode -> config.setMode(mode)
-    ).build());
-    ```
+```java
+selector.bind(DataBindingBuilder.string(
+    () -> config.getMode(),
+    mode -> config.setMode(mode)
+).build());
+```
 
-详见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+详见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -264,7 +310,7 @@
 | `listView` | `UIElement` | `public final` | 用于短候选列表的平面列表。 |
 | `scrollerView` | `ScrollerView` | `public final` | 用于长候选列表的可滚动列表。 |
 | `selectorStyle` | `SelectorStyle` | `private` (getter) | 当前 Selector 样式。 |
-| `candidates` | `List<T>` | `private` (getter) | 当前候选列表。 |
+| `candidates` | `List&lt;T&gt;` | `private` (getter) | 当前候选列表。 |
 | `value` | `T` | `private` (getter/nullable) | 当前选中的值。 |
 
 ---
@@ -273,11 +319,11 @@
 
 | 方法 | 返回类型 | 描述 |
 | ------ | ------- | ----------- |
-| `setCandidates(List<T>)` | `Selector<T>` | 替换候选列表并重建下拉菜单。 |
-| `setCandidateUIProvider(UIElementProvider<T>)` | `Selector<T>` | 设置用于渲染每个候选项目的自定义工厂。 |
-| `setSelected(T)` | `Selector<T>` | 选择一个值并通知监听器。 |
-| `setOnValueChanged(Consumer<T>)` | `Selector<T>` | 注册一个值变化监听器。 |
-| `selectorStyle(Consumer<SelectorStyle>)` | `Selector<T>` | 流畅地配置 `SelectorStyle`。 |
+| `setCandidates(List&lt;T&gt;)` | `Selector&lt;T&gt;` | 替换候选列表并重建下拉菜单。 |
+| `setCandidateUIProvider(UIElementProvider&lt;T&gt;)` | `Selector&lt;T&gt;` | 设置用于渲染每个候选项目的自定义工厂。 |
+| `setSelected(T)` | `Selector&lt;T&gt;` | 选择一个值并通知监听器。 |
+| `setOnValueChanged(Consumer&lt;T&gt;)` | `Selector&lt;T&gt;` | 注册一个值变化监听器。 |
+| `selectorStyle(Consumer&lt;SelectorStyle&gt;)` | `Selector&lt;T&gt;` | 流畅地配置 `SelectorStyle`。 |
 | `show()` | `void` | 打开下拉菜单。 |
 | `hide()` | `void` | 关闭下拉菜单。 |
 | `isOpen()` | `boolean` | 如果下拉菜单当前处于打开状态，则返回 `true`。 |

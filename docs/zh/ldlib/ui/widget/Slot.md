@@ -1,13 +1,14 @@
 # SlotWidget
 
-![图片标题](../assets/slot.png){ width="30%" align=right }
+<img src="../assets/slot.png" alt="图片标题" width="30%" class="md-img-right">
 
 
 `SlotWidget` 代表容器 GUI 中的交互式物品槽位。该控件支持可配置属性，例如是否可以取出或放入物品、自定义悬停覆盖层和悬停提示，以及与 JEI/REI/EMI 系统集成以显示原料详情。它可以被配置为代表标准库存容器中的槽位或通过物品传输处理器来实现。
 
-!!! note
-    你无法修改 slot 控件的尺寸。
-    
+::: info
+你无法修改 slot 控件的尺寸。
+:::
+
 
 ## 基础属性
 
@@ -27,13 +28,16 @@
 
 通过指定槽位索引将控件与物品栏关联。例如玩家物品栏。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var player = ...;
-    slotWidget.setContainerSlot(player.getInventory(), 2); // 绑定玩家物品栏的第 2 个索引。
-    ```
+``` java
+var player = ...;
+slotWidget.setContainerSlot(player.getInventory(), 2); // 绑定玩家物品栏的第 2 个索引。
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setHandlerSlot
@@ -42,115 +46,144 @@
 
 #### Java
 
-!!! note "Java 用户请注意！！！"
-    如果你想使用来自 Forge 的 `ItemStackHandler` 或来自 Fabric 的 `Storage<ItemVariant>` 的处理器，你需要额外添加一行代码。因为 Forge 和 Fabric 有不同的 API，你需要将处理器转换为 LDLib 的处理器，可以在 `ItemTransferHelperImpl` 中找到转换方法。
+::: info Java 用户请注意！！！
+如果你想使用来自 Forge 的 `ItemStackHandler` 或来自 Fabric 的 `Storage&lt;ItemVariant&gt;` 的处理器，你需要额外添加一行代码。因为 Forge 和 Fabric 有不同的 API，你需要将处理器转换为 LDLib 的处理器，可以在 `ItemTransferHelperImpl` 中找到转换方法。
 
-    === "Forge"
+<DocTabs>
+<DocTab title="Forge">
 
-        ``` java
-        var itemHandler = ...;
-        var itemTransfer = ItemTransferHelperImpl.toItemTransfer(itemHandler);
-        ```
+``` java
+var itemHandler = ...;
+var itemTransfer = ItemTransferHelperImpl.toItemTransfer(itemHandler);
+```
 
-    === "Fabric"
+</DocTab>
+<DocTab title="Fabric">
 
-        ``` java
-        var storage = ...;
-        var itemTransfer = ItemTransferHelperImpl.toItemTransfer(storage);
-        ```
+``` java
+var storage = ...;
+var itemTransfer = ItemTransferHelperImpl.toItemTransfer(storage);
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 #### KubeJS
 
 KubeJS 用户不需要做这些繁琐的操作。我们已经将它们转换为内部的物品传输处理器。
 
-=== "KubeJS"
+<DocTabs>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    slotWidget.setHandlerSlot(itemTransfer, 0);
-    ```
+``` javascript
+slotWidget.setHandlerSlot(itemTransfer, 0);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setItem
 
 设置内部物品堆叠，可选择是否通知。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    slotWidget.setItem(itemstack); // 它也会触发你设置的监听
-    slotWidget.setItem(itemstack, false); // 它不会触发监听
-    ```
+``` java
+slotWidget.setItem(itemstack); // 它也会触发你设置的监听
+slotWidget.setItem(itemstack, false); // 它不会触发监听
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### getItem
 
 获取存储的内部物品堆叠。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var itemstack = slotWidget.getItem();
-    ```
+``` java
+var itemstack = slotWidget.getItem();
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### setChangeListener
 
 配置当槽位内容变化时触发的监听器。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    slotWidget.setChangeListener(() -> {
-        var last = slotWidget.getLastItem();
-        var current = slotWidget.getItem();
-    });
-    ```
+``` java
+slotWidget.setChangeListener(() -> {
+    var last = slotWidget.getLastItem();
+    var current = slotWidget.getItem();
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    slotWidget.setChangeListener(() => {
-        let last = slotWidget.getLastItem();
-        let current = slotWidget.getItem();
-    });
-    ```
+``` javascript
+slotWidget.setChangeListener(() => {
+    let last = slotWidget.getLastItem();
+    let current = slotWidget.getItem();
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### canPutStack
 
 是否可以向槽位放入物品堆叠。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    slotWidget.canPutStack(true);
-    ```
+``` java
+slotWidget.canPutStack(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### canTakeStack
 
 是否可以从槽位取出物品堆叠。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    slotWidget.canTakeStack(true);
-    ```
+``` java
+slotWidget.canTakeStack(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setLocationInfo
 
 配置额外的槽位位置信息，例如它是否属于玩家容器或快捷栏。这将影响 Shift 移动行为。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    slotWidget.setLocationInfo(true, false); // (isPlayerContainer isPlayerHotBar)
-    ```
+``` java
+slotWidget.setLocationInfo(true, false); // (isPlayerContainer isPlayerHotBar)
+```
 
+</DocTab>
+</DocTabs>
 ---

@@ -1,6 +1,6 @@
 # IGuiTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `IGuiTexture` is the base interface for all drawable textures in LDLib2. Every style property that accepts visual appearance (e.g. `background`, `focus-overlay`, `mark-background`) takes an `IGuiTexture`.
 
@@ -29,33 +29,38 @@ Most concrete texture types extend the abstract `TransformTexture`, which wraps 
 | `transform(float xOffset, float yOffset)` | Translates by the given offset in GUI pixels. |
 | `setColor(int argb)` | Tints the texture. Exact effect depends on subtype. |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    IGuiTexture tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45f)
-        .scale(0.8f)
-        .setColor(0x80FFFFFF); // 50 % opacity white tint
-    ```
+```java
+IGuiTexture tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45f)
+    .scale(0.8f)
+    .setColor(0x80FFFFFF); // 50 % opacity white tint
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45f)
-        .scale(0.8f)
-        .setColor(0x80FFFFFF.toInt())
-    ```
+```kotlin
+val tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45f)
+    .scale(0.8f)
+    .setColor(0x80FFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45)
-        .scale(0.8)
-        .setColor(0x80FFFFFF);
-    ```
+```js
+let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45)
+    .scale(0.8)
+    .setColor(0x80FFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Interface Methods
@@ -74,30 +79,35 @@ Most concrete texture types extend the abstract `TransformTexture`, which wraps 
 
 ## Static Factory Helpers
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Layer multiple textures (drawn in order)
-    IGuiTexture layered = IGuiTexture.group(background, overlay);
+```java
+// Layer multiple textures (drawn in order)
+IGuiTexture layered = IGuiTexture.group(background, overlay);
 
-    // Lazy / dynamic texture resolved every frame
-    IGuiTexture dynamic = IGuiTexture.dynamic(() -> currentTexture);
-    ```
+// Lazy / dynamic texture resolved every frame
+IGuiTexture dynamic = IGuiTexture.dynamic(() -> currentTexture);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val layered = IGuiTexture.group(background, overlay)
-    val dynamic = IGuiTexture.dynamic { currentTexture }
-    ```
+```kotlin
+val layered = IGuiTexture.group(background, overlay)
+val dynamic = IGuiTexture.dynamic { currentTexture }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let layered = IGuiTexture.group(background, overlay);
-    let dynamic = IGuiTexture.dynamic(() => currentTexture);
-    ```
+```js
+let layered = IGuiTexture.group(background, overlay);
+let dynamic = IGuiTexture.dynamic(() => currentTexture);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Registered Texture Types

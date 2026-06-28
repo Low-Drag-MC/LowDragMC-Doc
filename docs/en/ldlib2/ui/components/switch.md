@@ -1,47 +1,53 @@
 # Switch
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`Switch` is an animated on/off toggle that looks like a sliding pill. When toggled, the inner indicator slides from one end to the other with a smooth CSS transition. It has no text label — use a [`Label`](label.md){ data-preview } or [`Toggle`](toggle.md){ data-preview } if you need descriptive text.
+`Switch` is an animated on/off toggle that looks like a sliding pill. When toggled, the inner indicator slides from one end to the other with a smooth CSS transition. It has no text label — use a [`Label`](label.md) or [`Toggle`](toggle.md) if you need descriptive text.
 
 Internally, `Switch` is a horizontal flex row containing a **flex spacer** (`placeholder`) and a **square indicator** (`markIcon`). The spacer grows from `flex: 0` to `flex: 1` on toggle, pushing the indicator to the far side.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var sw = new Switch();
-    sw.setOn(true);
-    sw.setOnSwitchChanged(isOn -> {
-        // called whenever the state changes
-    });
-    parent.addChild(sw);
-    ```
+```java
+var sw = new Switch();
+sw.setOn(true);
+sw.setOnSwitchChanged(isOn -> {
+    // called whenever the state changes
+});
+parent.addChild(sw);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    switch({
-        isOn = true
-        onSwitch { isOn -> /* state changed */ }
-    }) { }
-    ```
+```kotlin
+switch({
+    isOn = true
+    onSwitch { isOn -> /* state changed */ }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let sw = new Switch();
-    sw.setOn(true);
-    sw.setOnSwitchChanged(isOn => { /* ... */ });
-    parent.addChild(sw);
-    ```
+```js
+let sw = new Switch();
+sw.setOn(true);
+sw.setOnSwitchChanged(isOn => { /* ... */ });
+parent.addChild(sw);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -75,130 +81,161 @@ Switch contains two internal elements:
 
 `SwitchStyle` controls four textures: the container background in each state and the indicator texture in each state.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    Container background when the switch is **off**.
+Container background when the switch is **off**.
 
-    Default: `Sprites.RECT_RD_DARK`
+Default: `Sprites.RECT_RD_DARK`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        sw.switchStyle(style -> style.baseTexture(myOffBg));
-        ```
+```java
+sw.switchStyle(style -> style.baseTexture(myOffBg));
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        switch({ switchStyle = { baseTexture(myOffBg) } }) { }
-        ```
+```kotlin
+switch({ switchStyle = { baseTexture(myOffBg) } }) { }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        switch {
-            base-background: rect(#3a3a3a, 4);
-        }
-        ```
+```css
+switch {
+    base-background: rect(#3a3a3a, 4);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Container background when the switch is **on**.
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    Default: `Sprites.RECT_RD_T`
+Container background when the switch is **on**.
 
-    === "Java"
+Default: `Sprites.RECT_RD_T`
 
-        ```java
-        sw.switchStyle(style -> style.pressedTexture(myOnBg));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+sw.switchStyle(style -> style.pressedTexture(myOnBg));
+```
 
-        ```kotlin
-        switch({ switchStyle = { pressedTexture(myOnBg) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+switch({ switchStyle = { pressedTexture(myOnBg) } }) { }
+```
 
-        ```css
-        switch {
-            pressed-background: rect(#3d7a4f, 4);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">unmark-background</p>
+```css
+switch {
+    pressed-background: rect(#3d7a4f, 4);
+}
+```
 
-    Texture of the sliding indicator when the switch is **off**.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `Sprites.RECT_RD`
+::: info
+#### <p style="font-size: 1rem;">unmark-background</p>
 
-    === "Java"
+Texture of the sliding indicator when the switch is **off**.
 
-        ```java
-        sw.switchStyle(style -> style.unmarkTexture(myOffIndicator));
-        ```
+Default: `Sprites.RECT_RD`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        switch({ switchStyle = { unmarkTexture(myOffIndicator) } }) { }
-        ```
+```java
+sw.switchStyle(style -> style.unmarkTexture(myOffIndicator));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        switch {
-            unmark-background: rect(#888888, 3);
-        }
-        ```
+```kotlin
+switch({ switchStyle = { unmarkTexture(myOffIndicator) } }) { }
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">mark-background</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Texture of the sliding indicator when the switch is **on**.
+```css
+switch {
+    unmark-background: rect(#888888, 3);
+}
+```
 
-    Default: `Sprites.RECT_RD`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">mark-background</p>
 
-        ```java
-        sw.switchStyle(style -> style.markTexture(myOnIndicator));
-        ```
+Texture of the sliding indicator when the switch is **on**.
 
-    === "Kotlin"
+Default: `Sprites.RECT_RD`
 
-        ```kotlin
-        switch({ switchStyle = { markTexture(myOnIndicator) } }) { }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+sw.switchStyle(style -> style.markTexture(myOnIndicator));
+```
 
-        ```css
-        switch {
-            mark-background: rect(#FFFFFF, 3);
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+switch({ switchStyle = { markTexture(myOnIndicator) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+switch {
+    mark-background: rect(#FFFFFF, 3);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`Switch` extends `BindableUIElement<Boolean>`, so it integrates with the data-binding system:
+`Switch` extends `BindableUIElement&lt;Boolean&gt;`, so it integrates with the data-binding system:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    sw.bind(DataBindingBuilder.bool(
-        () -> config.isEnabled(),
-        val -> config.setEnabled(val)
-    ).build());
-    ```
+```java
+sw.bind(DataBindingBuilder.bool(
+    () -> config.isEnabled(),
+    val -> config.setEnabled(val)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -219,5 +256,5 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | ------ | ------- | ----------- |
 | `setOn(boolean)` | `Switch` | Sets the on/off state and notifies listeners. |
 | `setOnSwitchChanged(BooleanConsumer)` | `Switch` | Registers a listener for state changes. |
-| `switchStyle(Consumer<SwitchStyle>)` | `Switch` | Configures `SwitchStyle` fluently. |
+| `switchStyle(Consumer&lt;SwitchStyle&gt;)` | `Switch` | Configures `SwitchStyle` fluently. |
 | `getValue()` | `Boolean` | Returns the current on/off state. |

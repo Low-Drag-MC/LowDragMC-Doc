@@ -6,11 +6,11 @@ This page builds the smallest useful editor: an editor window, one project type,
 
 An editor screen is usually made of three visible parts:
 
-<figure markdown="span">
-    ![Editor composition](./assets/editor_composite.png)
-    <figcaption>
-    A typical editor screen: menu, views, and resources.
-    </figcaption>
+<figure>
+<img src="./assets/editor_composite.png" alt="Editor composition">
+<figcaption>
+A typical editor screen: menu, views, and resources.
+</figcaption>
 </figure>
 
 1. **Menu**  
@@ -26,11 +26,11 @@ An editor screen is usually made of three visible parts:
 
 The editor workspace is split into several default areas. These areas are backed by `ViewContainer`s, which are tabbed containers used to display `View`s.
 
-<figure markdown="span">
-    ![Editor window layout](./assets/editor_window_layout.png)
-    <figcaption>
-    Default editor workspace areas.
-    </figcaption>
+<figure>
+<img src="./assets/editor_window_layout.png" alt="Editor window layout">
+<figcaption>
+Default editor workspace areas.
+</figcaption>
 </figure>
 
 1. **`leftWindow`**  
@@ -186,5 +186,6 @@ Open it later:
 PlayerUIMenuType.openUI(serverPlayer, ShopEditor.WINDOW_ID);
 ```
 
-!!! tip "XEI drag-and-drop"
-    If your editor should support XEI drag setting features, open it through a menu. A plain client-only screen is fine for quick tools, but menu-backed opening gives the editor the container context needed by those integrations.
+::: tip XEI drag-and-drop
+If your editor should support XEI drag setting features, open it through a menu. A plain client-only screen is fine for quick tools, but menu-backed opening gives the editor the container context needed by those integrations.
+:::

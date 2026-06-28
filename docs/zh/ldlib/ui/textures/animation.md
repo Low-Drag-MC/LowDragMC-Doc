@@ -19,56 +19,71 @@
 
 设置纹理
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setTexture("ldlib:textures/gui/particles.png");
-    ```
+``` java
+animationTexture.setTexture("ldlib:textures/gui/particles.png");
+```
 
+</DocTab>
+</DocTabs>
 ### setCellSize
 
 设置单元格大小。用于指定动画纹理需要被划分为多少个单元格（边长）。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setCellSize(8);
-    ```
+``` java
+animationTexture.setCellSize(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAnimation
 
 设置动画范围，从第几个单元格到第几个单元格。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setAnimation(32, 44);
-    ```
+``` java
+animationTexture.setAnimation(32, 44);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAnimation
 
 设置动画速度。单元格之间的刻时间。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setAnimation(1);
-    ```
+``` java
+animationTexture.setAnimation(1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 设置纹理颜色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    animationTexture.setColor(0xff000000);
-    ```
+``` java
+animationTexture.setColor(0xff000000);
+```
 
+</DocTab>
+</DocTabs>
 ---

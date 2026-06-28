@@ -1,12 +1,14 @@
 # UI Editor
 
-{{ version_badge("2.1.5", label="Since", icon="tag") }}
+<VersionBadge version="2.1.5" label="Since" icon="tag" />
 
-!!! note
-    This page covers the built-in UI Editor. To build your own LDLib2-based editor, see [Editor Framework](../editor/index.md){ data-preview }.
+::: info
+This page covers the built-in UI Editor. To build your own LDLib2-based editor, see [Editor Framework](../editor/index.md).
+:::
 
-!!! warning inline end
-    This command can only be used under the `single player` world.
+::: warning
+This command can only be used under the `single player` world.
+:::
 
 LDLib2 provides a visual editor to support UI creation. Use this command to open the UI Editor.
 
@@ -14,8 +16,8 @@ LDLib2 provides a visual editor to support UI creation. Use this command to open
 /ldlib2_ui_editor
 ```
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_01.png){ width="80%" }
+<figure>
+<img src="./assets/editor_01.png" alt="Editor appearance" width="80%">
 </figure>
 
 The UI Editor supports two ways of creating UIs through visualization:
@@ -30,19 +32,20 @@ The UI Editor supports two ways of creating UIs through visualization:
 Click **`File → New → UI XML File`** to create a new UI XML file.  
 You can also click **`Open`** to load an existing XML file.
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_new_xml.png){ width="80%" }
+<figure>
+<img src="./assets/editor_new_xml.png" alt="Editor appearance" width="80%">
 </figure>
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_xml.png){ width="80%" }
+<figure>
+<img src="./assets/editor_xml.png" alt="Editor appearance" width="80%">
 </figure>
 
-Once opened, you can edit the XML and see a **real-time preview** of your UI directly in the editor. For more xml details, check [UI Xml](./xml.md){ data-preview }
+Once opened, you can edit the XML and see a **real-time preview** of your UI directly in the editor. For more xml details, check [UI Xml](./xml.md)
 
-!!! tip
-    You can also edit the XML file using an external IDE (such as VS Code or IntelliJ IDEA).  
-    The preview will automatically update when you save your changes.
+::: tip
+You can also edit the XML file using an external IDE (such as VS Code or IntelliJ IDEA).  
+The preview will automatically update when you save your changes.
+:::
 
 ---
 
@@ -59,8 +62,8 @@ The key differences are:
 Unlike UI XML files, **UI Templates are managed by LDLib2’s resource system**.  
 To create one, use the **Resource Panel**:
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_template.png){ width="100%" }
+<figure>
+<img src="./assets/editor_template.png" alt="Editor appearance" width="100%">
 </figure>
 
 **Steps:**
@@ -73,8 +76,8 @@ To create one, use the **Resource Panel**:
 
 After opening a UI Template, you will see the following editor interface:
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_view.png){ width="100%" }
+<figure>
+<img src="./assets/editor_view.png" alt="Editor appearance" width="100%">
 </figure>
 
 1. **Style Configurator**  
@@ -100,55 +103,59 @@ There are two methods to load and use your template for your UI.
 1. You can move it to your assets and load it by a `ResourceLocation`.
 2. If the resource is under the ldlib2 folder, you can right-click the resource to obtain the resource path and load it.
 
-<figure markdown="span">
-  ![Editor appearance](./assets/template_path.png){ width="100%" }
+<figure>
+<img src="./assets/template_path.png" alt="Editor appearance" width="100%">
 </figure>
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    @Override
-    public ModularUI createUI(Player player) {
-        var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
-                // resource location based
-                .getResource(new FilePath(ResourceLocation.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
+```java
+@Override
+public ModularUI createUI(Player player) {
+    var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
+            // resource location based
+            .getResource(new FilePath(ResourceLocation.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
 
-                // file based
-                //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
+            // file based
+            //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
 
-                .map(UITemplate::createUI)
-                .orElseGet(UI::empty);
+            .map(UITemplate::createUI)
+            .orElseGet(UI::empty);
 
-        // find elements and do data bindings or logic setup here
-        var buttons = ui.select(".button_container > button").toList(); // by selector
-        var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+    // find elements and do data bindings or logic setup here
+    var buttons = ui.select(".button_container > button").toList(); // by selector
+    var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
 
-        return ModularUI.of(ui, player);
-    }
-    ```
+    return ModularUI.of(ui, player);
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    function createUIFromUIResource(path) {
-        return UIResource.INSTANCE.getResourceInstance().getResource(path).createUI();
-    }
+```js
+function createUIFromUIResource(path) {
+    return UIResource.INSTANCE.getResourceInstance().getResource(path).createUI();
+}
 
-    function createUI(player) {
-        // file based
-        let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
+function createUI(player) {
+    // file based
+    let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
 
-        // resource location based
-        // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
+    // resource location based
+    // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
 
-        // find elemetns and do data bindings or logic setup here
-        let buttons = ui.select(".button_container > button").toList(); // by selector
-        let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+    // find elemetns and do data bindings or logic setup here
+    let buttons = ui.select(".button_container > button").toList(); // by selector
+    let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
 
-        return ModularUI.of(ui, player)
-    }
-    ```
+    return ModularUI.of(ui, player)
+}
+```
 
+</DocTab>
+</DocTabs>
 ### Loading Event
 
 A saved **UI Template** only defines the visual structure and styles — it does not include runtime logic by default.  
@@ -174,6 +181,6 @@ public static void onUICreated(UITemplate.CreateUI event) {
 Click the **green Play button** at the top of the editor to enter **simulation mode**.  
 This allows you to interact with the UI and verify its behavior.
 
-<figure markdown="span">
-  ![Editor appearance](./assets/editor_simulation.png){ width="100%" }
+<figure>
+<img src="./assets/editor_simulation.png" alt="Editor appearance" width="100%">
 </figure>

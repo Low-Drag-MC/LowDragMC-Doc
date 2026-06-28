@@ -113,11 +113,11 @@ editorView.loadGraph(createTestGraph(), savedTag -> {});
 return new ModularUI(UI.of(editorView), player);
 ```
 
-<figure markdown="span">
-    ![GraphEditorView with a loaded graph](./assets/ngt-graph-view-placeholder.png)
-    <figcaption>
-    `GraphEditorView` with the built-in graph tools.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphEditorView with a loaded graph">
+<figcaption>
+&lt;code&gt;GraphEditorView&lt;/code&gt; with the built-in graph tools.
+</figcaption>
 </figure>
 
 ## Editor Layout
@@ -125,10 +125,10 @@ return new ModularUI(UI.of(editorView), player);
 The marked areas in the screenshot are:
 
 1. **Subgraph breadcrumb**  
-   Shows the current graph path. Use it to see whether you are editing the root graph or a nested subgraph. See [Subgraphs](./subgraphs.md){ data-preview }.
+   Shows the current graph path. Use it to see whether you are editing the root graph or a nested subgraph. See [Subgraphs](./subgraphs.md).
 
 2. **Blackboard**  
-   Defines graph variables. Variables can be local to the graph or exposed as subgraph input/output ports. See [Variables and Blackboard](./variables-and-blackboard.md){ data-preview }.
+   Defines graph variables. Variables can be local to the graph or exposed as subgraph input/output ports. See [Variables and Blackboard](./variables-and-blackboard.md).
 
 3. **Inspector**  
    Shows settings for the selected object, such as a variable, node, port, placemat, or sticky note.
@@ -140,7 +140,7 @@ The marked areas in the screenshot are:
    Shows a layout preview / LOD-style thumbnail of the graph, useful for navigating large graphs.
 
 6. **Graph log**  
-   Shows graph diagnostics emitted by `Graph.onGraphChanged(GraphLogger)`, such as errors, warnings, and info messages. See [GraphView Diagnostics Footer](./graph-view.md#diagnostics-footer){ data-preview } and [Graph Definition](./graph-definition.md#graph-hooks){ data-preview }.
+   Shows graph diagnostics emitted by `Graph.onGraphChanged(GraphLogger)`, such as errors, warnings, and info messages. See [GraphView Diagnostics Footer](./graph-view.md#diagnostics-footer) and [Graph Definition](./graph-definition.md#graph-hooks).
 
 ## Low-Level GraphView
 
@@ -153,4 +153,4 @@ graphView.loadGraph(createTestGraph());
 
 Do not use direct `GraphView` as the default editor entry. It does not provide the full `GraphEditorView` workflow, including subgraph dive and resource-level external subgraph editing.
 
-For resource-backed graph assets, use `GraphResource` so the Editor opens `GraphEditorView` automatically. See [Editor Resources](./editor-resources.md){ data-preview }.
+For resource-backed graph assets, use `GraphResource` so the Editor opens `GraphEditorView` automatically. See [Editor Resources](./editor-resources.md).

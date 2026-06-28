@@ -1,55 +1,61 @@
 # ItemStackTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ItemStackTexture` 可将一个或多个 `ItemStack` 渲染为 GUI 纹理。当提供多个堆叠时，它们会每 20 tick（1 秒）自动循环切换。
 
 注册名：`item_stack_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 单个物品
-    IGuiTexture diamondIcon = new ItemStackTexture(Items.DIAMOND);
+```java
+// 单个物品
+IGuiTexture diamondIcon = new ItemStackTexture(Items.DIAMOND);
 
-    // 多个物品 — 每 20 tick 循环一次
-    IGuiTexture cycleIcon = new ItemStackTexture(
-        Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT
-    );
+// 多个物品 — 每 20 tick 循环一次
+IGuiTexture cycleIcon = new ItemStackTexture(
+    Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT
+);
 
-    // 从 ItemStack 创建
-    IGuiTexture enchanted = new ItemStackTexture(
-        new ItemStack(Items.DIAMOND_SWORD)
-    );
+// 从 ItemStack 创建
+IGuiTexture enchanted = new ItemStackTexture(
+    new ItemStack(Items.DIAMOND_SWORD)
+);
 
-    // 着色
-    IGuiTexture tinted = new ItemStackTexture(Items.DIAMOND)
-        .setColor(0x80FFFFFF); // 50 % 不透明度
-    ```
+// 着色
+IGuiTexture tinted = new ItemStackTexture(Items.DIAMOND)
+    .setColor(0x80FFFFFF); // 50 % 不透明度
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val diamond = ItemStackTexture(Items.DIAMOND)
+```kotlin
+val diamond = ItemStackTexture(Items.DIAMOND)
 
-    val cycle = ItemStackTexture(Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT)
-    ```
+val cycle = ItemStackTexture(Items.DIAMOND, Items.EMERALD, Items.GOLD_INGOT)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let icon = new ItemStackTexture(Items.DIAMOND);
+```js
+let icon = new ItemStackTexture(Items.DIAMOND);
 
-    let cycle = new ItemStackTexture(Items.DIAMOND, Items.EMERALD);
-    ```
+let cycle = new ItemStackTexture(Items.DIAMOND, Items.EMERALD);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 字段

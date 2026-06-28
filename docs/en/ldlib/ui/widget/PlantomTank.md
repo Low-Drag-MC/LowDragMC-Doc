@@ -3,7 +3,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/phantom_tank.mp4" type="video/mp4">
+    <source src="../assets/phantom_tank.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 </div>
@@ -28,18 +28,23 @@ It owns all APIs from [`TankWidget`](Tank.md), and you can get or set item by it
 
 Registers a callback to track fluid changes.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    phantomTank.setIFluidStackUpdater(fluid -> {
-        System.out.println("New phantom fluid: " + fluid);
-    });
-    ```
+```java
+phantomTank.setIFluidStackUpdater(fluid -> {
+    System.out.println("New phantom fluid: " + fluid);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    phantomTank.setIFluidStackUpdater(fluid => {
-        console.log("New phantom fluid: " + fluid);
-    });
-    ```
+```javascript
+phantomTank.setIFluidStackUpdater(fluid => {
+    console.log("New phantom fluid: " + fluid);
+});
+```
+
+</DocTab>
+</DocTabs>

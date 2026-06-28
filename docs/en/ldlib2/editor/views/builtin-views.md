@@ -6,11 +6,11 @@
 
 `InspectorView` wraps LDLib2's `Inspector` component and is placed in the right-side panel by default.
 
-<figure markdown="span">
-    ![Inspector editing an AnimationTexture](../assets/editor_inspector.png){ width="45%" }
-    <figcaption>
-    Inspector editing an `AnimationTexture`.
-    </figcaption>
+<figure>
+<img src="../assets/editor_inspector.png" alt="Inspector editing an AnimationTexture" width="45%">
+<figcaption>
+Inspector editing an &lt;code&gt;AnimationTexture&lt;/code&gt;.
+</figcaption>
 </figure>
 
 Use it when the current selection should expose editable properties:
@@ -34,7 +34,7 @@ editor.inspectorView.inspect(
 
 The inspector already shares the editor's `HistoryView`, so property changes can participate in undo and redo.
 
-This page only covers how to use the inspector inside an editor. The Configurable / Configurator system is covered separately in [Configurable](../../configurable/index.md){ data-preview }.
+This page only covers how to use the inspector inside an editor. The Configurable / Configurator system is covered separately in [Configurable](../../configurable/index.md).
 
 ## HistoryView
 

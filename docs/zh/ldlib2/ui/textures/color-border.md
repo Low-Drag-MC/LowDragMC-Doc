@@ -1,42 +1,48 @@
 # ColorBorderTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ColorBorderTexture` 仅在矩形周围绘制彩色边框，不进行填充。正值的 `border` 会在元素边界外绘制；负值则在边界内绘制。
 
 注册名：`color_border_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 2 像素外边框，白色
-    IGuiTexture outline = new ColorBorderTexture(2, 0xFFFFFFFF);
+```java
+// 2 像素外边框，白色
+IGuiTexture outline = new ColorBorderTexture(2, 0xFFFFFFFF);
 
-    // 1 像素内边框，半透明蓝色
-    IGuiTexture inset = new ColorBorderTexture(-1, 0x800000FF);
-    ```
+// 1 像素内边框，半透明蓝色
+IGuiTexture inset = new ColorBorderTexture(-1, 0x800000FF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val outline = ColorBorderTexture(2, 0xFFFFFFFF.toInt())
-    val inset = ColorBorderTexture(-1, 0x800000FF.toInt())
-    ```
+```kotlin
+val outline = ColorBorderTexture(2, 0xFFFFFFFF.toInt())
+val inset = ColorBorderTexture(-1, 0x800000FF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let outline = new ColorBorderTexture(2, 0xFFFFFFFF);
-    let inset = new ColorBorderTexture(-1, 0x800000FF);
-    ```
+```js
+let outline = new ColorBorderTexture(2, 0xFFFFFFFF);
+let inset = new ColorBorderTexture(-1, 0x800000FF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

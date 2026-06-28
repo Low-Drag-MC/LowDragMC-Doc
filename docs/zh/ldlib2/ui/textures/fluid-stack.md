@@ -1,55 +1,61 @@
 # FluidStackTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `FluidStackTexture` 使用 Minecraft 标准流体渲染将一个或多个 `FluidStack` 渲染为 GUI 纹理。当提供多个堆叠时，它们每 20 tick（1 秒）循环一次。
 
 注册名：`fluid_stack_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 单个流体
-    IGuiTexture water = new FluidStackTexture(Fluids.WATER);
+```java
+// 单个流体
+IGuiTexture water = new FluidStackTexture(Fluids.WATER);
 
-    // 多个流体 — 每 20 tick 循环一次
-    IGuiTexture cycle = new FluidStackTexture(
-        Fluids.WATER, Fluids.LAVA
-    );
+// 多个流体 — 每 20 tick 循环一次
+IGuiTexture cycle = new FluidStackTexture(
+    Fluids.WATER, Fluids.LAVA
+);
 
-    // 使用 FluidStack（自定义数量）
-    IGuiTexture exact = new FluidStackTexture(
-        new FluidStack(Fluids.WATER, 1000)
-    );
+// 使用 FluidStack（自定义数量）
+IGuiTexture exact = new FluidStackTexture(
+    new FluidStack(Fluids.WATER, 1000)
+);
 
-    // 着色
-    IGuiTexture tinted = new FluidStackTexture(Fluids.WATER)
-        .setColor(0x8000AAFF);
-    ```
+// 着色
+IGuiTexture tinted = new FluidStackTexture(Fluids.WATER)
+    .setColor(0x8000AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val water = FluidStackTexture(Fluids.WATER)
+```kotlin
+val water = FluidStackTexture(Fluids.WATER)
 
-    val cycle = FluidStackTexture(Fluids.WATER, Fluids.LAVA)
-    ```
+val cycle = FluidStackTexture(Fluids.WATER, Fluids.LAVA)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let water = new FluidStackTexture(Fluids.WATER);
+```js
+let water = new FluidStackTexture(Fluids.WATER);
 
-    let cycle = new FluidStackTexture(Fluids.WATER, Fluids.LAVA);
-    ```
+let cycle = new FluidStackTexture(Fluids.WATER, Fluids.LAVA);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 字段

@@ -1,6 +1,6 @@
 # TankWidget
 
-![Image title](../assets/tank.png){ width="30%" align=right }
+<img src="../assets/tank.png" alt="Image title" width="30%" class="md-img-right">
 
 `TankWidget` 表示容器 GUI 中的流体槽位部件。它在指定的储液罐中显示流体，并支持填充和排空等流体交互操作。此外，它还与外部系统（JEI/REI/EMI）集成以显示流体原料详细信息，并提供可配置的选项用于悬停覆盖层、提示框和点击行为。
 
@@ -28,70 +28,87 @@
 
 将该部件与流体存储关联，并将储液罐索引设置为 0。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluidTank(fluidStorage);
-    ```
+``` java
+tankWidget.setFluidTank(fluidStorage);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFluidTank (IFluidTransfer, int)
 
 将该部件与流体传输处理器关联，并指定储液罐索引。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluidTank(fluidTransfer, 1);
-    ```
+``` java
+tankWidget.setFluidTank(fluidTransfer, 1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFluid
 
 设置内部流体堆栈，可选择是否通知。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluid(fluidstack); // 它还会触发你设置的监听
-    tankWidget.setFluid(fluidstack, false); // 它不会触发监听
-    ```
+``` java
+tankWidget.setFluid(fluidstack); // 它还会触发你设置的监听
+tankWidget.setFluid(fluidstack, false); // 它不会触发监听
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### getFluid
 
 获取存储的内部流体堆栈。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var fluidstack = tankWidget.getFluid();
-    ```
+``` java
+var fluidstack = tankWidget.getFluid();
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### setChangeListener
 
 配置当储罐流体内容变化时触发的监听器。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    tankWidget.setChangeListener(() -> {
-        var last = tankWidget.getLastFluidInTank();
-        var current = tankWidget.getFluid();
-    });
-    ```
+``` java
+tankWidget.setChangeListener(() -> {
+    var last = tankWidget.getLastFluidInTank();
+    var current = tankWidget.getFluid();
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    tankWidget.setChangeListener(() => {
-        let last = tankWidget.getLastFluidInTank();
-        let current = tankWidget.getFluid();
-    });
-    ```
+``` javascript
+tankWidget.setChangeListener(() => {
+    let last = tankWidget.getLastFluidInTank();
+    let current = tankWidget.getFluid();
+});
+```
 
+</DocTab>
+</DocTabs>
 ---

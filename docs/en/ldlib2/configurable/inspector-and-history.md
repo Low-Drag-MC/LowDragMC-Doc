@@ -95,4 +95,4 @@ public IConfigurableHistory createHistoryRecorder() {
 
 Use automatic history for serializable data models. Use manual history for objects that edit external state, temporary editor state, or data that cannot be snapshotted with NBT.
 
-The editor-side Inspector usage is covered in [Built-in Views](../editor/views/builtin-views.md#inspectorview){ data-preview }.
+The editor-side Inspector usage is covered in [Built-in Views](../editor/views/builtin-views.md#inspectorview).

@@ -1,6 +1,6 @@
 # 基础
 
-{{ version_badge("2.1.0", label="自", icon="tag") }}
+<VersionBadge version="2.1.0" label="自" icon="tag" />
 
 LDLib2 UI 遵循与 **Web UI**、**UI Toolkits** 和 **fluent-style APIs** 相似的理念。  
 所有 UI 对象都构建自一个名为 **`UIElement`** 的单一基类型。  

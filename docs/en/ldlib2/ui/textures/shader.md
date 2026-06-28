@@ -1,47 +1,54 @@
 # ShaderTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `ShaderTexture` renders a region of the GUI using a custom GLSL shader. The shader receives the element's screen rectangle and mouse position as automatic uniforms, making it straightforward to create animated or interactive effects.
 
 Registry name: `shader_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
-!!! warning ""
-    `ShaderTexture` holds a GPU resource (`LDShaderHolder`) and implements `AutoCloseable`. Call `close()` when the texture is no longer needed, or ensure it is managed by the editor.
+::: warning
+`ShaderTexture` holds a GPU resource (`LDShaderHolder`) and implements `AutoCloseable`. Call `close()` when the texture is no longer needed, or ensure it is managed by the editor.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Load a shader from assets/mymod/shaders/core/my_effect.json
-    IGuiTexture effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
+```java
+// Load a shader from assets/mymod/shaders/core/my_effect.json
+IGuiTexture effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
 
-    // Tinted shader (vertex colour passed to the shader)
-    IGuiTexture tinted = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
-        .setColor(0xFF44AAFF);
-    ```
+// Tinted shader (vertex colour passed to the shader)
+IGuiTexture tinted = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val effect = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+```kotlin
+val effect = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
 
-    val tinted = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
-        .setColor(0xFF44AAFF.toInt())
-    ```
+val tinted = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+    .setColor(0xFF44AAFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
-    ```
+```js
+let effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

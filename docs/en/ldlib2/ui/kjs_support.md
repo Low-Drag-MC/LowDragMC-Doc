@@ -1,6 +1,6 @@
 # KubeJS Integration
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 LDLib2 exposes its full UI system to KubeJS scripts — no Java or Kotlin required. You can open UIs, build element trees, apply stylesheets, and wire up data bindings entirely from `.js` files.
 

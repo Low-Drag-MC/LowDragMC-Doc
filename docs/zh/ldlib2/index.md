@@ -1,14 +1,14 @@
 # 简介
-{{ version_badge("2.0.0", label="自", icon="tag") }}
+<VersionBadge version="2.0.0" label="自" icon="tag" />
 
 LDLib2 是对原版 LDLib 的完全重写，从头开始重新设计，以支持现代版本的 Minecraft。
 它在模组开发的多个领域提供了先进的高级解决方案，显著降低了开发复杂度和长期维护成本。
 
 LDLib2 拥有庞大且结构良好的代码库，为 UI 系统、着色器（shader）、模型渲染、数据同步与持久化以及游戏内视觉编辑器提供了强大的基础设施，使开发者能够更高效地构建复杂系统。
 
-:simple-discord: [加入我们的 Discord](https://discord.com/invite/sDdf2yD9bh)  
+<DocIcon name="simple-discord" /> [加入我们的 Discord](https://discord.com/invite/sDdf2yD9bh)  
 
-:simple-github: [LDLib2 仓库](https://github.com/Low-Drag-MC/LDLib2)
+<DocIcon name="simple-github" /> [LDLib2 仓库](https://github.com/Low-Drag-MC/LDLib2)
 
 ---
 
@@ -26,9 +26,9 @@ LDLib2 包含详细的文档、注释和示例代码，解决了 LDLib 长期以
 
 ## 核心模块
 
-* [数据同步与持久化](./sync/index.md){ data-preview } 
-* [LDLib2 UI](./ui/index.md){ data-preview } 
+* [数据同步与持久化](./sync/index.md) 
+* [LDLib2 UI](./ui/index.md) 
 * 着色器（Shaders）
 * 模型渲染
-* [游戏内编辑器](./editor/index.md){ data-preview }
-* [可配置系统](./configurable/index.md){ data-preview }
+* [游戏内编辑器](./editor/index.md)
+* [可配置系统](./configurable/index.md)

@@ -1,6 +1,6 @@
 # SplitView
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `SplitView` 是一个双面板容器，其分隔条可以通过拖拽来调整两个面板的大小。目前注册了两种具体的变体：
 
@@ -9,52 +9,58 @@
 
 分隔条的位置以**百分比**（0–100%）表示。拖拽分隔条可实时调整其位置。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var split = new SplitView.Horizontal();
-    split.left(leftContent);
-    split.right(rightContent);
-    split.setPercentage(30f);
-    parent.addChild(split);
+```java
+var split = new SplitView.Horizontal();
+split.left(leftContent);
+split.right(rightContent);
+split.setPercentage(30f);
+parent.addChild(split);
 
-    var vsplit = new SplitView.Vertical();
-    vsplit.top(topContent);
-    vsplit.bottom(bottomContent);
-    parent.addChild(vsplit);
-    ```
+var vsplit = new SplitView.Vertical();
+vsplit.top(topContent);
+vsplit.bottom(bottomContent);
+parent.addChild(vsplit);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    splitViewHorizontal({ split(30f) }) {
-        withLeft(leftElement)
-        withRight(rightElement)
-    }
+```kotlin
+splitViewHorizontal({ split(30f) }) {
+    withLeft(leftElement)
+    withRight(rightElement)
+}
 
-    splitViewVertical {
-        withTop(topElement)
-        withBottom(bottomElement)
-    }
-    ```
+splitViewVertical {
+    withTop(topElement)
+    withBottom(bottomElement)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let split = new SplitViewHorizontal();
-    split.left(leftContent);
-    split.right(rightContent);
-    split.setPercentage(30);
-    parent.addChild(split);
-    ```
+```js
+let split = new SplitViewHorizontal();
+split.left(leftContent);
+split.right(rightContent);
+split.setPercentage(30);
+parent.addChild(split);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -83,7 +89,7 @@
 | ------------- | ---- | ----------- |
 | `percentage` | `float` | 初始分隔条位置（0–100）。默认值：`50`。 |
 
-`<first>` 和 `<second>` 子元素用于配置两个面板。
+`&lt;first&gt;` 和 `&lt;second&gt;` 子元素用于配置两个面板。
 
 ---
 

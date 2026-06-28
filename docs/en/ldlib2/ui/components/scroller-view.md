@@ -1,48 +1,54 @@
 # ScrollerView
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `ScrollerView` is a scrollable container. It wraps a `viewContainer` inside a `viewPort` and provides optional horizontal and vertical scroll bars that appear automatically when content overflows. Children added to a `ScrollerView` in code or XML are placed inside `viewContainer`.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var sv = new ScrollerView();
-    sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
-    for (int i = 0; i < 20; i++) {
-        sv.addScrollViewChild(new Label().setText("Item " + i, false));
+```java
+var sv = new ScrollerView();
+sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
+for (int i = 0; i < 20; i++) {
+    sv.addScrollViewChild(new Label().setText("Item " + i, false));
+}
+parent.addChild(sv);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+scrollerView({ scrollerViewStyle { mode(ScrollerMode.VERTICAL) } }) {
+    for (i in 0 until 20) {
+        label { api { setText("Item $i", false) } }
     }
-    parent.addChild(sv);
-    ```
+}
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```kotlin
-    scrollerView({ scrollerViewStyle { mode(ScrollerMode.VERTICAL) } }) {
-        for (i in 0 until 20) {
-            label { api { setText("Item $i", false) } }
-        }
-    }
-    ```
+```js
+let sv = new ScrollerView();
+sv.scrollerStyle(style => style.mode(ScrollerMode.VERTICAL));
+for (let i = 0; i < 20; i++) {
+    sv.addScrollViewChild(new Label().setText("Item " + i, false));
+}
+parent.addChild(sv);
+```
 
-=== "KubeJS"
-
-    ```js
-    let sv = new ScrollerView();
-    sv.scrollerStyle(style => style.mode(ScrollerMode.VERTICAL));
-    for (let i = 0; i < 20; i++) {
-        sv.addScrollViewChild(new Label().setText("Item " + i, false));
-    }
-    parent.addChild(sv);
-    ```
-
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -73,109 +79,138 @@ Direct XML children are placed inside `viewContainer`.
 
 ## ScrollerView Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-mode</p>
+::: info
+#### <p style="font-size: 1rem;">scroller-view-mode</p>
 
-    Which scroll axes are enabled. Values: `HORIZONTAL`, `VERTICAL`, `BOTH`.
+Which scroll axes are enabled. Values: `HORIZONTAL`, `VERTICAL`, `BOTH`.
 
-    Default: `BOTH`
+Default: `BOTH`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
-        ```
+```java
+sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        scroller-view {
-            scroller-view-mode: VERTICAL;
-        }
-        ```
+```css
+scroller-view {
+    scroller-view-mode: VERTICAL;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Visibility policy for each scroll bar. Values: `AUTO` (show only when content overflows), `ALWAYS`, `NEVER`.
+::: info
+#### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
 
-    Default: `AUTO`
+Visibility policy for each scroll bar. Values: `AUTO` (show only when content overflows), `ALWAYS`, `NEVER`.
 
-    === "Java"
+Default: `AUTO`
 
-        ```java
-        sv.scrollerStyle(style -> style
-            .verticalScrollDisplay(ScrollDisplay.ALWAYS)
-            .horizontalScrollDisplay(ScrollDisplay.NEVER)
-        );
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+sv.scrollerStyle(style -> style
+    .verticalScrollDisplay(ScrollDisplay.ALWAYS)
+    .horizontalScrollDisplay(ScrollDisplay.NEVER)
+);
+```
 
-        ```css
-        scroller-view {
-            scroller-vertical-display: ALWAYS;
-            scroller-horizontal-display: NEVER;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-margin</p>
+```css
+scroller-view {
+    scroller-vertical-display: ALWAYS;
+    scroller-horizontal-display: NEVER;
+}
+```
 
-    Right margin reserved for the horizontal scroller when the vertical scroller is also visible.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `5`
+::: info
+#### <p style="font-size: 1rem;">scroller-view-margin</p>
 
-    === "LSS"
+Right margin reserved for the horizontal scroller when the vertical scroller is also visible.
 
-        ```css
-        scroller-view {
-            scroller-view-margin: 5;
-        }
-        ```
+Default: `5`
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-width / adaptive-height</p>
+<DocTabs>
+<DocTab title="LSS">
 
-    When enabled, the `ScrollerView` resizes itself to match the content container's computed width or height.
+```css
+scroller-view {
+    scroller-view-margin: 5;
+}
+```
 
-    Default: `false`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">adaptive-width / adaptive-height</p>
 
-        ```java
-        sv.scrollerStyle(style -> style.adaptiveHeight(true));
-        ```
+When enabled, the `ScrollerView` resizes itself to match the content container's computed width or height.
 
-    === "LSS"
+Default: `false`
 
-        ```css
-        scroller-view {
-            adaptive-height: true;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">min-scroll / max-scroll</p>
+```java
+sv.scrollerStyle(style -> style.adaptiveHeight(true));
+```
 
-    Clamp bounds (in pixels) on how far the scroll bar thumb travels per scroll event.
+</DocTab>
+<DocTab title="LSS">
 
-    Defaults: `5` / `7`
+```css
+scroller-view {
+    adaptive-height: true;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        sv.scrollerStyle(style -> style.minScrollPixel(0f).maxScrollPixel(20f));
-        ```
+::: info
+#### <p style="font-size: 1rem;">min-scroll / max-scroll</p>
 
-    === "LSS"
+Clamp bounds (in pixels) on how far the scroll bar thumb travels per scroll event.
 
-        ```css
-        scroller-view {
-            min-scroll: 0;
-            max-scroll: 20;
-        }
-        ```
+Defaults: `5` / `7`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+sv.scrollerStyle(style -> style.minScrollPixel(0f).maxScrollPixel(20f));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+scroller-view {
+    min-scroll: 0;
+    max-scroll: 20;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -203,9 +238,9 @@ Direct XML children are placed inside `viewContainer`.
 | `hasScrollViewChild(UIElement)` | `boolean` | Returns `true` if the element is a child of `viewContainer`. |
 | `getContainerWidth()` | `float` | Computed content width (includes overflowing children). |
 | `getContainerHeight()` | `float` | Computed content height (includes overflowing children). |
-| `scrollerStyle(Consumer<ScrollerViewStyle>)` | `ScrollerView` | Configures the style fluently. |
-| `viewContainer(Consumer<UIElement>)` | `ScrollerView` | Configures `viewContainer`. |
-| `viewPort(Consumer<UIElement>)` | `ScrollerView` | Configures `viewPort`. |
-| `verticalContainer(Consumer<UIElement>)` | `ScrollerView` | Configures `verticalContainer`. |
-| `horizontalScroller(Consumer<Scroller>)` | `ScrollerView` | Configures the horizontal scroll bar. |
-| `verticalScroller(Consumer<Scroller>)` | `ScrollerView` | Configures the vertical scroll bar. |
+| `scrollerStyle(Consumer&lt;ScrollerViewStyle&gt;)` | `ScrollerView` | Configures the style fluently. |
+| `viewContainer(Consumer&lt;UIElement&gt;)` | `ScrollerView` | Configures `viewContainer`. |
+| `viewPort(Consumer&lt;UIElement&gt;)` | `ScrollerView` | Configures `viewPort`. |
+| `verticalContainer(Consumer&lt;UIElement&gt;)` | `ScrollerView` | Configures `verticalContainer`. |
+| `horizontalScroller(Consumer&lt;Scroller&gt;)` | `ScrollerView` | Configures the horizontal scroll bar. |
+| `verticalScroller(Consumer&lt;Scroller&gt;)` | `ScrollerView` | Configures the vertical scroll bar. |

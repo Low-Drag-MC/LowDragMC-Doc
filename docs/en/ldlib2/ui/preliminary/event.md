@@ -1,6 +1,6 @@
 # Event
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 LDLib2 UI provides events that communicate user actions or notifications to UI elements. The event system shares the same terminology and event naming as [HTML events](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events#what_is_an_event).
 
@@ -22,9 +22,9 @@ After the event dispatcher selects the event `target`, it computes the propagati
 2. The event target receives the event.
 3. The event then ascends the tree towards the root. This is the bubble-up phase.
 
-<figure markdown="span" style="width: 60%">
-  ![alt text](../assets/event_phase.png)
-  <figcaption>Propagation path</figcaption>
+<figure style="width: 60%">
+<img src="../assets/event_phase.png" alt="alt text">
+<figcaption>Propagation path</figcaption>
 </figure>
 
 
@@ -64,98 +64,114 @@ LDLib2 uses a **DOM-like event model**: events travel through the UI tree and a 
 
 Use `addEventListener(eventType, listener)` to register a **bubble-phase** listener:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var root = new UIElement().setId("root");
-    var button = new UIElement().setId("button");
-    root.addChild(button);
+```java
+var root = new UIElement().setId("root");
+var button = new UIElement().setId("button");
+root.addChild(button);
 
-    // UIEvents.CLICK == "mouseClick"
-    button.addEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Bubble listener: current={}, target={}",
-                e.currentElement.getId(), e.target.getId());
-    });
-    ```
+// UIEvents.CLICK == "mouseClick"
+button.addEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Bubble listener: current={}, target={}",
+            e.currentElement.getId(), e.target.getId());
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let root = new UIElement().setId("root");
-    let button = new UIElement().setId("button");
-    root.addChild(button);
+```js
+let root = new UIElement().setId("root");
+let button = new UIElement().setId("button");
+root.addChild(button);
 
-    // UIEvents.CLICK == "mouseClick"
-    button.addEventListener(UIEvents.CLICK, e => {
-        console.log(`Bubble listener: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
-    });
-    ```
+// UIEvents.CLICK == "mouseClick"
+button.addEventListener(UIEvents.CLICK, e => {
+    console.log(`Bubble listener: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
+});
+```
 
+</DocTab>
+</DocTabs>
 To register a capture-phase listener, pass true as the third argument:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    root.addEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Capture: current={}, target={}",
-                e.currentElement.getId(), e.target.getId());
-    }, true);
-    ```
+```java
+root.addEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Capture: current={}, target={}",
+            e.currentElement.getId(), e.target.getId());
+}, true);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    root.addEventListener(UIEvents.CLICK, e => {
-        console.log(`Capture: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
-    }, true);
-    ```
+```js
+root.addEventListener(UIEvents.CLICK, e => {
+    console.log(`Capture: current=${e.currentElement.getId()}, target=${e.target.getId()}`);
+}, true);
+```
 
+</DocTab>
+</DocTabs>
 We also provide method allow you to listen events on the `server`. Events are triggered on the client-side and sync to the server. Not all events support server listeners, check [Event reference](#event-reference) below.
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    root.addServerEventListener(UIEvents.CLICK, e -> {
-        LDLib2.LOGGER.info("Triggered on the server";
-    });
-    ```
+```java
+root.addServerEventListener(UIEvents.CLICK, e -> {
+    LDLib2.LOGGER.info("Triggered on the server";
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    root.addServerEventListener(UIEvents.CLICK, e => {
-        console.log("Triggered on the server");
-    });
-    ```
+```js
+root.addServerEventListener(UIEvents.CLICK, e => {
+    console.log("Triggered on the server");
+});
+```
 
+</DocTab>
+</DocTabs>
 To remove a listener, call `removeEventListener(...)`.
 Make sure the useCapture flag matches how the listener was registered:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    UIEventListener onClick = e -> LDLib2.LOGGER.info("clicked!");
+```java
+UIEventListener onClick = e -> LDLib2.LOGGER.info("clicked!");
 
-    button.addEventListener(UIEvents.CLICK, onClick);       // bubble
-    root.addEventListener(UIEvents.CLICK, onClick, true);   // capture
+button.addEventListener(UIEvents.CLICK, onClick);       // bubble
+root.addEventListener(UIEvents.CLICK, onClick, true);   // capture
 
-    button.removeEventListener(UIEvents.CLICK, onClick);          // remove bubble listener
-    root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture listener
-    ```
+button.removeEventListener(UIEvents.CLICK, onClick);          // remove bubble listener
+root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture listener
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let onClick = UIEventListener.creatre(e => LDLib2.LOGGER.info("clicked!"));
+```js
+let onClick = UIEventListener.creatre(e => LDLib2.LOGGER.info("clicked!"));
 
-    button.addEventListener(UIEvents.CLICK, onClick);       // bubble
-    root.addEventListener(UIEvents.CLICK, onClick, true);   // capture
+button.addEventListener(UIEvents.CLICK, onClick);       // bubble
+root.addEventListener(UIEvents.CLICK, onClick, true);   // capture
 
-    button.removeEventListener(UIEvents.CLICK, onClick);          // remove bubble listener
-    root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture listener
-    ```
+button.removeEventListener(UIEvents.CLICK, onClick);          // remove bubble listener
+root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture listener
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Event reference
@@ -166,8 +182,9 @@ Event types fit into a hierarchy based on the `UIEvent.class`. Each event family
 
 Here, we list common events available for all ui elemetns below. Select any of the event types listed below for more information on the event, and links to the API documentation.
 
-!!! note
-    We'd recommend to use `UIEvents.xxx` instead of an event type string.
+::: info
+We'd recommend to use `UIEvents.xxx` instead of an event type string.
+:::
 
 
 ### Mouse Events
@@ -196,22 +213,26 @@ Mouse Events are most used events. Event sent after a handler starts capturing t
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.DOUBLE_CLICK, e -> {
-        LDLib2.LOGGER.info("double click {} with button {}", e.target, e.button)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.DOUBLE_CLICK, e -> {
+    LDLib2.LOGGER.info("double click {} with button {}", e.target, e.button)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
-        console.log(`double click ${e.target} with button ${e.button}`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
+    console.log(`double click ${e.target} with button ${e.button}`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Drag and Drop Events
@@ -254,37 +275,42 @@ Parameters:
 - `dragTexture`: used to visually represent the drag operation
 - `dragSource`: the `UIElement` that acts as the source of the drag operation
 
-!!! note
-    `dragSourceUpdate` and `dragEnd` are only dispatched to the drag source.
+::: info
+`dragSourceUpdate` and `dragEnd` are only dispatched to the drag source.
+:::
 
 You could also start a drag by using `UIElement.startDrag` which can help you pass the `dragSource` directly.
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // start drag when the mouse down
-        elem.startDrag(null, null);
-    });
-    elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e -> {
-        LDLib2.LOGGER.info("{} dragged ({}, {})", e.target, e.deltaX, e.deltaY)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // start drag when the mouse down
+    elem.startDrag(null, null);
+});
+elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e -> {
+    LDLib2.LOGGER.info("{} dragged ({}, {})", e.target, e.deltaX, e.deltaY)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // start drag when the mouse down
-        elem.startDrag(null, null);
-    });
-    elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
-        copnsole.log(`${e.target} dragged (${e.deltaX}, ${e.deltaY})`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // start drag when the mouse down
+    elem.startDrag(null, null);
+});
+elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
+    copnsole.log(`${e.target} dragged (${e.deltaX}, ${e.deltaY})`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Focus Events
@@ -302,38 +328,43 @@ Focus events are dispatched when `focusable` elements gain or lose focus.
 | ----- | ----------- | --------------- |
 | `relatedTarget` | For `focusIn` and `focus`, refers to last focused element. <br> For `focusOut` and `blur`, refers to last focused element. | All |
 
-!!! note
-    - `focusIn` and `focusOut` are **not sent to the server**.
-    - `relatedTarget` indicates the element losing or gaining focus.
+::: info
+- `focusIn` and `focusOut` are **not sent to the server**.
+- `relatedTarget` indicates the element losing or gaining focus.
+:::
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.FOCUS, e -> {
-        LDLib2.LOGGER.info("{} gained the focus", elem);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.FOCUS, e -> {
+    LDLib2.LOGGER.info("{} gained the focus", elem);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.FOCUS, e => {
-        console.log(`${elem} gained the focus`);
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.FOCUS, e => {
+    console.log(`${elem} gained the focus`);
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Keyboard Events
@@ -354,32 +385,36 @@ Keyboard events are dispatched to the element that currently has **focus**.
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.KEY_DOWN, e -> {
-        LDLib2.LOGGER.info("key {} pressed", e.keyCode);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.KEY_DOWN, e -> {
+    LDLib2.LOGGER.info("key {} pressed", e.keyCode);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.KEY_DOWN, e => {
-        console.log(`key ${e.keyCode} pressed`)
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.KEY_DOWN, e => {
+    console.log(`key ${e.keyCode} pressed`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Text Input Events
@@ -397,31 +432,36 @@ Text input events are used for character-level input, such as typing into text f
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.CHAR_TYPED, e -> {
-        LDLib2.LOGGER.info("key {} pressed", e.codePoint);
-    });
-    ```
+```java
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e -> {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.CHAR_TYPED, e -> {
+    LDLib2.LOGGER.info("key {} pressed", e.codePoint);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.setFocusable(true)
-    elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
-        // request focus
-        elem.focus();
-    });
-    elem.addEventListener(UIEvents.CHAR_TYPED, e => {
-        console.log(`key ${e.codePoint} pressed`)
-    });
-    ```
+```js
+elem.setFocusable(true)
+elem.addEventListener(UIEvents.MOUSE_DOWN, e => {
+    // request focus
+    elem.focus();
+});
+elem.addEventListener(UIEvents.CHAR_TYPED, e => {
+    console.log(`key ${e.codePoint} pressed`)
+});
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### Hover Tooltip Events
@@ -437,40 +477,46 @@ Hover tooltip events are dispatched when dynamic tooltip information needs to be
 | ----- | ----------- | --------------- |
 | `hoverTooltips` | Set your hover tooltips to display | All |
 
-!!! info "TooltipComponent"
-    ![size](../assets/tooltipcomponent.png){ align=right width="200" }
-    `hoverTooltips` allow you to append a `TooltipComponent` after text components. You could append a LDLib2 UI into the tooltip by using `ModularUITooltipComponent`.
-    
+::: info TooltipComponent
+<img src="../assets/tooltipcomponent.png" alt="size" width="200" class="md-img-right">
+`hoverTooltips` allow you to append a `TooltipComponent` after text components. You could append a LDLib2 UI into the tooltip by using `ModularUITooltipComponent`.
+:::
+
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e -> {
-        e.hoverTooltips = HoverTooltips.empty()
-            // add text tooltips
-            .append(Component.literal("Hello"), Component.literal("World"))
-            // add a image
-            .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout -> {
-                layout.width(100).height(100);
-            }).style(style -> style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e -> {
+    e.hoverTooltips = HoverTooltips.empty()
+        // add text tooltips
+        .append(Component.literal("Hello"), Component.literal("World"))
+        // add a image
+        .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout -> {
+            layout.width(100).height(100);
+        }).style(style -> style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
-        e.hoverTooltips = HoverTooltips.empty()
-            // add text tooltips
-            .append("Hello", "World");
-            // add a image
-            .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout => {
-                layout.width(100).height(100);
-            }).style(style => style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
+    e.hoverTooltips = HoverTooltips.empty()
+        // add text tooltips
+        .append("Hello", "World");
+        // add a image
+        .tooltipComponent(new ModularUITooltipComponent(new UIElement().layout(layout => {
+            layout.width(100).height(100);
+        }).style(style => style.background(SpriteTexture.of("ldlib2:textures/gui/icon.png")))));
+});
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### Command Events
@@ -504,45 +550,50 @@ They follow a validation → execution flow. To claim a command during `validate
 | `save` | ctrl + s |
 
 
-!!! note
-    If a command input is detected. A command event will be sent to the `focus` element first (if exists). If it doesn't be consumed, it will be sent to the UI tree elements until an element cconsumes it.
+::: info
+If a command input is detected. A command event will be sent to the `focus` element first (if exists). If it doesn't be consumed, it will be sent to the UI tree elements until an element cconsumes it.
+:::
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
-        if (CommandEvents.COPY.equals(event.command)) {
-            // notify cosnuming
-            event.stopPropagation();
-        }
-    });
+```java
+elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
+    if (CommandEvents.COPY.equals(event.command)) {
+        // notify cosnuming
+        event.stopPropagation();
+    }
+});
 
-    elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
-        if (CommandEvents.COPY.equals(event.command)) {
-            ClipboardManager.copyDirect("data");
-        }
-    });
-    ```
+elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
+    if (CommandEvents.COPY.equals(event.command)) {
+        ClipboardManager.copyDirect("data");
+    }
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
-        if (CommandEvents.COPY == event.command) {
-            // notify cosnuming
-            event.stopPropagation();
-        }
-    });
+```js
+elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
+    if (CommandEvents.COPY == event.command) {
+        // notify cosnuming
+        event.stopPropagation();
+    }
+});
 
-    elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
-        if (CommandEvents.COPY == event.command) {
-            ClipboardManager.copyDirect("data");
-        }
-    });
-    ```
+elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
+    if (CommandEvents.COPY == event.command) {
+        ClipboardManager.copyDirect("data");
+    }
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Layout Events
@@ -556,22 +607,26 @@ Layout events are dispatched when the layout state of an element changes.
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.LAYOUT_CHANGED, e -> {
-        LDLib2.LOGGER.info("{} layout changed", e.target)
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.LAYOUT_CHANGED, e -> {
+    LDLib2.LOGGER.info("{} layout changed", e.target)
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
-        console.log(`${e.target} layout changed`)
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
+    console.log(`${e.target} layout changed`)
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Lifecycle Events
@@ -584,27 +639,32 @@ Lifecycle events describe changes to an element’s presence in the UI tree.
 | `removed`    | Fired when the element is removed from the UI tree.    | ❌            | ❌          | ❌ |
 | `muiChanged` | Fired when the element’s `ModularUI` instance changes. | ❌            | ❌          | ❌ |
 
-!!! note
-    `removed` will be sent not only the element removing but also UI closing. You could use this event to disponse resource.
+::: info
+`removed` will be sent not only the element removing but also UI closing. You could use this event to disponse resource.
+:::
 
 **Usage**
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.REMOVED, e -> {
-        // release resource here for safe
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.REMOVED, e -> {
+    // release resource here for safe
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.REMOVED, e => {
-        // release resource here for safe
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.REMOVED, e => {
+    // release resource here for safe
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Tick Event
@@ -615,21 +675,27 @@ The tick event is dispatched once per game tick while the element is active and 
 | ------ | ----------------------------------------------------- | ------------ | ---------- | ---------- |
 | `tick` | Fired every tick when the element is active and displayed. | ❌ | ❌ | ✅ |
 
-!!! note
-    - `tick` is not sent to the server automatically.
-    - You may still listen to it on the server side if needed.
+::: info
+- `tick` is not sent to the server automatically.
+- You may still listen to it on the server side if needed.
+:::
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    elem.addEventListener(UIEvents.TICK, e -> {
-    });
-    ```
+```java
+elem.addEventListener(UIEvents.TICK, e -> {
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    elem.addEventListener(UIEvents.TICK, e => {
-    });
-    ```
+```js
+elem.addEventListener(UIEvents.TICK, e => {
+});
+```
+
+</DocTab>
+</DocTabs>

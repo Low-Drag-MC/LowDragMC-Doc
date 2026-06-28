@@ -18,56 +18,72 @@
 
 为所有角设置统一的圆角半径。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setRadius(10);
-    ```
+``` java
+colorRectTexture.setRadius(10);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setLeftRadius
 
 为矩形的左侧（顶部和底部）设置圆角半径。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setLeftRadius(8);
-    ```
+``` java
+colorRectTexture.setLeftRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setRightRadius
 
 为矩形的右侧（顶部和底部）设置圆角半径。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setRightRadius(8);
-    ```
+``` java
+colorRectTexture.setRightRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setTopRadius
 
 为矩形的顶部（左侧和右侧）设置圆角半径。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setTopRadius(8);
-    ```
+``` java
+colorRectTexture.setTopRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBottomRadius
 
 为矩形的底部（左侧和右侧）设置圆角半径。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setBottomRadius(8);
-    ```
+``` java
+colorRectTexture.setBottomRadius(8);
+```
+
+</DocTab>
+</DocTabs>

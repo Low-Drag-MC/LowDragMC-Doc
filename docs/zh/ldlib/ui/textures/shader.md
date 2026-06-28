@@ -2,8 +2,9 @@
 
 `ShaderTexture` 类继承自 `TransformTexture`，用于使用自定义着色器渲染纹理。它支持动态着色器更新、设置统一变量值以及绑定纹理以实现高级视觉效果。该类提供了从资源路径或原始着色器代码创建基于着色器的纹理的方法，并包含缓存和释放机制。
 
-!!! warning "重要提示！！！"
-    如果你正在使用原始着色器，使用后请勿忘记释放纹理。
+::: warning 重要提示！！！
+如果你正在使用原始着色器，使用后请勿忘记释放纹理。
+:::
 
 ## 基本属性
 
@@ -21,60 +22,75 @@
 
 释放着色器。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    shaderTexture.dispose();
-    ```
+``` java
+shaderTexture.dispose();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### updateShader
 
 使用新的资源路径更新着色器。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    shaderTexture.updateShader(new ResourceLocation("modid:shader"));
-    ```
+``` java
+shaderTexture.updateShader(new ResourceLocation("modid:shader"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### updateRawShader
 
 使用原始着色器代码更新着色器。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    shaderTexture.updateRawShader("raw shader code");
-    ```
+``` java
+shaderTexture.updateRawShader("raw shader code");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setUniformCache
 
 设置统一变量缓存消费者以更新额外的着色器统一变量。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    shaderTexture.setUniformCache(cache -> {
-        // Update additional uniforms as needed
-    });
-    ```
+``` java
+shaderTexture.setUniformCache(cache -> {
+    // Update additional uniforms as needed
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setResolution
 
 设置着色器中使用的分辨率因子。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    shaderTexture.setResolution(2.5f);
-    ```
+``` java
+shaderTexture.setResolution(2.5f);
+```
 
+</DocTab>
+</DocTabs>
 ---

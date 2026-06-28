@@ -1,43 +1,50 @@
 # UIResourceTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `UIResourceTexture` 是对保存在 LDLib2 编辑器资源系统中的纹理资源的引用。它会在绘制时从 `TexturesResource` 注册表中延迟解析实际的 `IGuiTexture`，因此适用于编辑器管理的数据驱动纹理。
 
 注册名：`ui_resource_texture`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
-!!! tip ""
-    这种纹理类型主要由游戏内编辑器使用。对于代码驱动的纹理，建议使用其他具体类型。
+::: tip
+这种纹理类型主要由游戏内编辑器使用。对于代码驱动的纹理，建议使用其他具体类型。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 引用保存在内置路径 "MY_BG" 下的纹理
-    IGuiTexture ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
+```java
+// 引用保存在内置路径 "MY_BG" 下的纹理
+IGuiTexture ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
 
-    // 引用基于文件的资源
-    IGuiTexture file = new UIResourceTexture(IResourcePath.parse("file:mymod:ui/panel"));
-    ```
+// 引用基于文件的资源
+IGuiTexture file = new UIResourceTexture(IResourcePath.parse("file:mymod:ui/panel"));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val ref = UIResourceTexture(BuiltinPath("MY_BG"))
-    ```
+```kotlin
+val ref = UIResourceTexture(BuiltinPath("MY_BG"))
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
-    ```
+```js
+let ref = new UIResourceTexture(new BuiltinPath("MY_BG"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

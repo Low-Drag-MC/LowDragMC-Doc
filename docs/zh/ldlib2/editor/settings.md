@@ -2,11 +2,11 @@
 
 Editor settings 是编辑器 UI 和行为的持久化偏好。
 
-<figure markdown="span">
-    ![Editor settings panel](./assets/editor_setting.png)
-    <figcaption>
-    Editor settings panel：左侧是设置分组，右侧是可编辑设置。
-    </figcaption>
+<figure>
+<img src="./assets/editor_setting.png" alt="Editor settings panel">
+<figcaption>
+Editor settings panel：左侧是设置分组，右侧是可编辑设置。
+</figcaption>
 </figure>
 
 `Settings` 是配置单元：

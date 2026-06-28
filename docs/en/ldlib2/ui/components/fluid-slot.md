@@ -1,50 +1,56 @@
 # FluidSlot
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `FluidSlot` renders a `FluidStack` inside a slot with a directional fill visualisation. Clicking the slot with a fluid container in hand fills or drains it via the vanilla `FluidUtil` API. It also hooks into JEI, REI, and EMI when those mods are present.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var fluidSlot = new FluidSlot();
-    fluidSlot.bind(fluidHandler, 0); // IFluidHandler + tank index
-    fluidSlot.setCapacity(16000);
-    parent.addChild(fluidSlot);
+```java
+var fluidSlot = new FluidSlot();
+fluidSlot.bind(fluidHandler, 0); // IFluidHandler + tank index
+fluidSlot.setCapacity(16000);
+parent.addChild(fluidSlot);
 
-    // Phantom slot (XEI drag-drop)
-    fluidSlot.xeiPhantom();
-    ```
+// Phantom slot (XEI drag-drop)
+fluidSlot.xeiPhantom();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    fluidSlot({
-        layout { width(18).height(18) }
-    }) {
-        api {
-            bind(fluidHandler, 0)
-            setCapacity(16000)
-        }
+```kotlin
+fluidSlot({
+    layout { width(18).height(18) }
+}) {
+    api {
+        bind(fluidHandler, 0)
+        setCapacity(16000)
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let slot = new FluidSlot();
-    slot.bind(fluidHandler, 0);
-    slot.setCapacity(16000);
-    parent.addChild(slot);
-    ```
+```js
+let slot = new FluidSlot();
+slot.bind(fluidHandler, 0);
+slot.setCapacity(16000);
+parent.addChild(slot);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -74,126 +80,159 @@
 
 ## Slot Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">fill-direction</p>
+::: info
+#### <p style="font-size: 1rem;">fill-direction</p>
 
-    Direction in which the fluid texture fills the slot as the amount increases. Values: `LEFT_TO_RIGHT`, `RIGHT_TO_LEFT`, `UP_TO_DOWN`, `DOWN_TO_UP`, `ALWAYS_FULL`.
+Direction in which the fluid texture fills the slot as the amount increases. Values: `LEFT_TO_RIGHT`, `RIGHT_TO_LEFT`, `UP_TO_DOWN`, `DOWN_TO_UP`, `ALWAYS_FULL`.
 
-    Default: `LEFT_TO_RIGHT`
+Default: `LEFT_TO_RIGHT`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        fluidSlot.slotStyle(style -> style.fillDirection(FillDirection.UP_TO_DOWN));
-        ```
+```java
+fluidSlot.slotStyle(style -> style.fillDirection(FillDirection.UP_TO_DOWN));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        fluid-slot {
-            fill-direction: UP_TO_DOWN;
-        }
-        ```
+```css
+fluid-slot {
+    fill-direction: UP_TO_DOWN;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-overlay</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Texture drawn over the slot on hover.
+::: info
+#### <p style="font-size: 1rem;">hover-overlay</p>
 
-    Default: `ColorRectTexture(0x80FFFFFF)`
+Texture drawn over the slot on hover.
 
-    === "Java"
+Default: `ColorRectTexture(0x80FFFFFF)`
 
-        ```java
-        fluidSlot.slotStyle(style -> style.hoverOverlay(myTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+fluidSlot.slotStyle(style -> style.hoverOverlay(myTexture));
+```
 
-        ```css
-        fluid-slot {
-            hover-overlay: color(#FFFFFF80);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">slot-overlay</p>
+```css
+fluid-slot {
+    hover-overlay: color(#FFFFFF80);
+}
+```
 
-    Texture drawn over the slot background.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: none (empty)
+::: info
+#### <p style="font-size: 1rem;">slot-overlay</p>
 
-    === "Java"
+Texture drawn over the slot background.
 
-        ```java
-        fluidSlot.slotStyle(style -> style.slotOverlay(myOverlay));
-        ```
+Default: none (empty)
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        fluid-slot {
-            slot-overlay: sprite("mymod:textures/gui/fluid_slot.png");
-        }
-        ```
+```java
+fluidSlot.slotStyle(style -> style.slotOverlay(myOverlay));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-slot-overlay-only-empty</p>
+</DocTab>
+<DocTab title="LSS">
 
-    When `true`, `slot-overlay` is drawn only when the slot is empty.
+```css
+fluid-slot {
+    slot-overlay: sprite("mymod:textures/gui/fluid_slot.png");
+}
+```
 
-    Default: `true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-slot-overlay-only-empty</p>
 
-        ```java
-        fluidSlot.slotStyle(style -> style.showSlotOverlayOnlyEmpty(false));
-        ```
+When `true`, `slot-overlay` is drawn only when the slot is empty.
 
-    === "LSS"
+Default: `true`
 
-        ```css
-        fluid-slot {
-            show-slot-overlay-only-empty: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-fluid-tooltips</p>
+```java
+fluidSlot.slotStyle(style -> style.showSlotOverlayOnlyEmpty(false));
+```
 
-    Whether hovering shows the fluid name, amount/capacity, temperature, and state tooltip.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `true`
+```css
+fluid-slot {
+    show-slot-overlay-only-empty: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        fluidSlot.slotStyle(style -> style.showFluidTooltips(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">show-fluid-tooltips</p>
 
-    === "LSS"
+Whether hovering shows the fluid name, amount/capacity, temperature, and state tooltip.
 
-        ```css
-        fluid-slot {
-            show-fluid-tooltips: false;
-        }
-        ```
+Default: `true`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+fluidSlot.slotStyle(style -> style.showFluidTooltips(false));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+fluid-slot {
+    show-fluid-tooltips: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`FluidSlot` extends `BindableUIElement<FluidStack>`:
+`FluidSlot` extends `BindableUIElement&lt;FluidStack&gt;`:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    fluidSlot.bind(DataBindingBuilder.fluidStackS2C(
-        () -> tank.getFluidInTank(0)
-    ).build());
-    ```
+```java
+fluidSlot.bind(DataBindingBuilder.fluidStackS2C(
+    () -> tank.getFluidInTank(0)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -217,10 +256,10 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | `bind(IFluidHandler, int)` | `FluidSlot` | Binds to a fluid handler at the given tank index. Syncs fluid and capacity. |
 | `setFluid(FluidStack)` | `FluidSlot` | Sets the displayed fluid and notifies listeners. |
 | `setFluid(FluidStack, boolean)` | `FluidSlot` | Sets the fluid; second param controls notification. |
-| `slotStyle(Consumer<SlotStyle>)` | `FluidSlot` | Configures style fluently. |
+| `slotStyle(Consumer&lt;SlotStyle&gt;)` | `FluidSlot` | Configures style fluently. |
 | `xeiPhantom()` | `FluidSlot` | Enables XEI phantom drag-drop on this slot. |
 | `xeiRecipeIngredient(IngredientIO)` | `FluidSlot` | Marks as recipe ingredient in XEI recipe views. |
 | `xeiRecipeSlot()` | `FluidSlot` | Marks as recipe slot with default `IngredientIO.NONE`. |
 | `xeiRecipeSlot(IngredientIO, float)` | `FluidSlot` | Marks as recipe slot with given I/O type and chance. |
 | `getFluidAmountText()` | `Component` | Returns the compact amount text shown in `amountLabel`. |
-| `getFullTooltipTexts()` | `List<Component>` | Returns the combined fluid and custom tooltip lines. |
+| `getFullTooltipTexts()` | `List&lt;Component&gt;` | Returns the combined fluid and custom tooltip lines. |

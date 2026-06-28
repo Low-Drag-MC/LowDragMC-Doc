@@ -1,6 +1,6 @@
 # ButtonWidget
 
-![Image title](../assets/button.png){ width="30%" align=right }
+<img src="../assets/button.png" alt="Image title" width="30%" class="md-img-right">
 
 The ButtonWidget is a UI widget representing a clickable button in the GUI system
 
@@ -21,22 +21,30 @@ All properties can be accessed via Java / KubeJS.
 
 Equal to the [`setBackground`](index.md#setbackground).
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    button.setButtonTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Button"));
-    ```
+``` java 
+button.setButtonTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Button"));
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `setClickedTexture()`
 
 Remove child widget from it.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    button.setClickedTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Clicked"));
-    ```
+``` java 
+button.setClickedTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Clicked"));
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `setOnPressCallback()`
@@ -57,24 +65,28 @@ Used to bind functional logic.
 3. `clickData.isCtrlClick`: is the ctrl key typed.
 3. `clickData.isRemote`: is the remote enverionment.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    button.setOnPressCallback(clickData -> {
-        if (clickData.isRemote) { // can be used to check trigger side
-            
-        }
-    });
-    ```
+``` java 
+button.setOnPressCallback(clickData -> {
+    if (clickData.isRemote) { // can be used to check trigger side
 
-=== "KubeJS"
+    }
+});
+```
 
-    ``` javascript 
-    button.setOnPressCallback(clickData => {
-        if (clickData.isRemote) { // can be used to check trigger side
-            
-        }
-    });
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+``` javascript 
+button.setOnPressCallback(clickData => {
+    if (clickData.isRemote) { // can be used to check trigger side
+
+    }
+});
+```
+
+</DocTab>
+</DocTabs>
 ---

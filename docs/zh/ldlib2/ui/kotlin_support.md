@@ -1,6 +1,6 @@
 # Kotlin 支持
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 LDLib2 提供了类型安全的 Kotlin DSL 用于构建 UI 树。它通过构建器模式、嵌套 lambda 和运算符重载包装 Java API，使 UI 构建更加简洁和结构化。
 
@@ -78,7 +78,7 @@ element({
 
 ### `layout` 块
 
-使用 `TaffyLayoutStyleDsl`。阅读 [布局](preliminary/layout.md){ data-preview } 了解所有可用属性。常见示例：
+使用 `TaffyLayoutStyleDsl`。阅读 [布局](preliminary/layout.md) 了解所有可用属性。常见示例：
 
 ```kotlin
 layout = {
@@ -103,7 +103,7 @@ layout = {
 
 ### `style` 块
 
-直接使用 `BasicStyle`。阅读 [UIElement 样式](components/element.md#styles){ data-preview } 了解所有可用属性。
+直接使用 `BasicStyle`。阅读 [UIElement 样式](components/element.md#styles) 了解所有可用属性。
 
 ### `cls` 块
 
@@ -185,8 +185,9 @@ element({ layout = { size(50.px) } }) {
 }
 ```
 
-!!! note ""
-    `events { e -> ... }` 中的 `e` 参数是正在构建的 `UIElement`。当你需要在事件处理器中引用元素时很有用（例如，调用 `e.animation()`）。
+::: info
+`events { e -> ... }` 中的 `e` 参数是正在构建的 `UIElement`。当你需要在事件处理器中引用元素时很有用（例如，调用 `e.animation()`）。
+:::
 
 ---
 
@@ -219,8 +220,9 @@ serverEvents(capture = true) {
 
 绑定在服务端和客户端之间同步值。它们在 `UIContainer` 的 **init block** 中设置。
 
-!!! note ""
-    绑定需要双端支持。它们只在 `@LDLRegister`（服务端）菜单上下文中有意义，而不是仅 `@LDLRegisterClient` 的屏幕。
+::: info
+绑定需要双端支持。它们只在 `@LDLRegister`（服务端）菜单上下文中有意义，而不是仅 `@LDLRegisterClient` 的屏幕。
+:::
 
 ### `bind` — 双向绑定
 

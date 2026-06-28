@@ -4,11 +4,11 @@ Node Graph Toolkit 是 LDLib2 用来构建游戏内图编辑器的框架。
 
 它提供图数据模型、节点和端口定义、连线、变量、子图、Blackboard、编辑器面板、可撤销命令，以及基于资源系统的图编辑流程。
 
-<figure markdown="span">
-    ![Node Graph Toolkit overview](./assets/ngt-overview-placeholder.png)
-    <figcaption>
-    Node Graph Toolkit 概览。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-overview-placeholder.png" alt="Node Graph Toolkit overview">
+<figcaption>
+Node Graph Toolkit 概览。
+</figcaption>
 </figure>
 
 ## 主要组成
@@ -44,24 +44,24 @@ flowchart TD
 
 ## 章节
 
-[Getting Started](./getting-started.md){ data-preview } 创建一个小型图，并通过 `GraphEditorView` 打开。
+[Getting Started](./getting-started.md) 创建一个小型图，并通过 `GraphEditorView` 打开。
 
-[Graph Definition](./graph-definition.md){ data-preview } 介绍 `Graph`、`GraphNodeRegistry`、支持的节点、支持的类型和校验 hook。
+[Graph Definition](./graph-definition.md) 介绍 `Graph`、`GraphNodeRegistry`、支持的节点、支持的类型和校验 hook。
 
-[Nodes and Ports](./nodes-and-ports.md){ data-preview } 介绍 `Node`、节点 options、输入/输出端口、端口方向和预览。
+[Nodes and Ports](./nodes-and-ports.md) 介绍 `Node`、节点 options、输入/输出端口、端口方向和预览。
 
-[Variables and Blackboard](./variables-and-blackboard.md){ data-preview } 介绍图变量、Blackboard、变量 Inspector，以及子图输入/输出端口。
+[Variables and Blackboard](./variables-and-blackboard.md) 介绍图变量、Blackboard、变量 Inspector，以及子图输入/输出端口。
 
-[Type Handles](./type-handles.md){ data-preview } 介绍 `TypeHandle`、内置类型、自定义类型注册、常量、默认值、图标、颜色和 configurator。
+[Type Handles](./type-handles.md) 介绍 `TypeHandle`、内置类型、自定义类型注册、常量、默认值、图标、颜色和 configurator。
 
-[GraphView](./graph-view.md){ data-preview } 介绍 `GraphEditorView` 内部使用的底层图 UI。
+[GraphView](./graph-view.md) 介绍 `GraphEditorView` 内部使用的底层图 UI。
 
-[Editor Resources](./editor-resources.md){ data-preview } 介绍 `GraphResource`、`GraphEditorView`、保存回调和资源面板编辑。
+[Editor Resources](./editor-resources.md) 介绍 `GraphResource`、`GraphEditorView`、保存回调和资源面板编辑。
 
-[Subgraphs](./subgraphs.md){ data-preview } 介绍本地子图和外部子图。
+[Subgraphs](./subgraphs.md) 介绍本地子图和外部子图。
 
-[Context and Block Nodes](./context-and-block-nodes.md){ data-preview } 介绍拥有有序 block 列表的 context node。
+[Context and Block Nodes](./context-and-block-nodes.md) 介绍拥有有序 block 列表的 context node。
 
-[Commands and Customization](./commands-and-customization.md){ data-preview } 介绍命令拦截、capability、诊断信息和 UI 自定义点。
+[Commands and Customization](./commands-and-customization.md) 介绍命令拦截、capability、诊断信息和 UI 自定义点。
 
-[Glossary](./glossary.md){ data-preview } 定义常用模型和 UI 术语。
+[Glossary](./glossary.md) 定义常用模型和 UI 术语。

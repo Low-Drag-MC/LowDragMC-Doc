@@ -1,47 +1,54 @@
 # ShaderTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ShaderTexture` 使用自定义 GLSL Shader 渲染 GUI 区域。Shader 会自动接收元素的屏幕矩形和鼠标位置作为 automatic uniform，便于创建动画或交互效果。
 
 注册名: `shader_texture`
 
-!!! note ""
-    继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` — 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
-!!! warning ""
-    `ShaderTexture` 持有 GPU 资源（`LDShaderHolder`）并实现了 `AutoCloseable`。当纹理不再使用时需调用 `close()`，或确保由编辑器管理。
+::: warning
+`ShaderTexture` 持有 GPU 资源（`LDShaderHolder`）并实现了 `AutoCloseable`。当纹理不再使用时需调用 `close()`，或确保由编辑器管理。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 从 assets/mymod/shaders/core/my_effect.json 加载 Shader
-    IGuiTexture effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
+```java
+// 从 assets/mymod/shaders/core/my_effect.json 加载 Shader
+IGuiTexture effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
 
-    // 着色后的 Shader（顶点颜色将传递给 Shader）
-    IGuiTexture tinted = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
-        .setColor(0xFF44AAFF);
-    ```
+// 着色后的 Shader（顶点颜色将传递给 Shader）
+IGuiTexture tinted = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val effect = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+```kotlin
+val effect = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
 
-    val tinted = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
-        .setColor(0xFF44AAFF.toInt())
-    ```
+val tinted = ShaderTexture(ResourceLocation.parse("mymod:my_effect"))
+    .setColor(0xFF44AAFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
-    ```
+```js
+let effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

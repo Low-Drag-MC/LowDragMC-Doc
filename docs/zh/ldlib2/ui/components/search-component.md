@@ -1,62 +1,68 @@
 # SearchComponent
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`SearchComponent<T>` 是一个通用的搜索选择组件。它显示当前选中值的预览，点击后会打开一个浮动对话框，包含文本输入框和匹配候选项列表。候选项由 `ISearchUI<T>` 实现提供，可在客户端运行或委托给服务端执行。
+`SearchComponent&lt;T&gt;` 是一个通用的搜索选择组件。它显示当前选中值的预览，点击后会打开一个浮动对话框，包含文本输入框和匹配候选项列表。候选项由 `ISearchUI&lt;T&gt;` 实现提供，可在客户端运行或委托给服务端执行。
 
-`SearchComponent` 继承自 `BindableUIElement<T>`，因此选中的值可与数据绑定系统集成。
+`SearchComponent` 继承自 `BindableUIElement&lt;T&gt;`，因此选中的值可与数据绑定系统集成。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var search = new SearchComponent<String>();
-    search.setSearchUI(new SearchComponent.ISearchUI<>() {
-        @Override
-        public String resultText(String value) { return value; }
-        @Override
-        public void onResultSelected(String value) { }
-        @Override
-        public void search(String word, IResultHandler<String> find) {
-            List.of("Alpha", "Beta", "Gamma").stream()
-                .filter(s -> s.toLowerCase().contains(word.toLowerCase()))
-                .forEach(find::handle);
+```java
+var search = new SearchComponent<String>();
+search.setSearchUI(new SearchComponent.ISearchUI<>() {
+    @Override
+    public String resultText(String value) { return value; }
+    @Override
+    public void onResultSelected(String value) { }
+    @Override
+    public void search(String word, IResultHandler<String> find) {
+        List.of("Alpha", "Beta", "Gamma").stream()
+            .filter(s -> s.toLowerCase().contains(word.toLowerCase()))
+            .forEach(find::handle);
+    }
+});
+search.setOnValueChanged(v -> System.out.println("Selected: " + v));
+parent.addChild(search);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+searchComponent<String>({
+    searchUI {
+        resultText { it }
+        onSelected { v -> println("Selected: $v") }
+        search { word, find ->
+            listOf("Alpha", "Beta", "Gamma")
+                .filter { it.lowercase().contains(word.lowercase()) }
+                .forEach(find::handle)
         }
-    });
-    search.setOnValueChanged(v -> System.out.println("Selected: " + v));
-    parent.addChild(search);
-    ```
+    }
+}) { }
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```kotlin
-    searchComponent<String>({
-        searchUI {
-            resultText { it }
-            onSelected { v -> println("Selected: $v") }
-            search { word, find ->
-                listOf("Alpha", "Beta", "Gamma")
-                    .filter { it.lowercase().contains(word.lowercase()) }
-                    .forEach(find::handle)
-            }
-        }
-    }) { }
-    ```
+```js
+let search = new SearchComponent();
+// ISearchUI 必须通过代码提供。
+parent.addChild(search);
+```
 
-=== "KubeJS"
-
-    ```js
-    let search = new SearchComponent();
-    // ISearchUI 必须通过代码提供。
-    parent.addChild(search);
-    ```
-
+</DocTab>
+</DocTabs>
 ---
 
 ## 内部结构
@@ -73,114 +79,144 @@
 
 ## 搜索样式
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    当组件被悬停或聚焦时绘制的覆盖纹理。
+当组件被悬停或聚焦时绘制的覆盖纹理。
 
-    默认值：`Sprites.RECT_RD_T_SOLID`
+默认值：`Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        search.searchStyle(style -> style.focusOverlay(myTexture));
-        ```
+```java
+search.searchStyle(style -> style.focusOverlay(myTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        search-component {
-            focus-overlay: rect(#FFFFFF22, 2);
-        }
-        ```
+```css
+search-component {
+    focus-overlay: rect(#FFFFFF22, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-item</p>
+</DocTab>
+</DocTabs>
+:::
 
-    在切换到 `scrollerView` 之前，平铺 `listView` 中显示的最大结果数量。
+::: info
+#### <p style="font-size: 1rem;">max-item</p>
 
-    默认值：`5`
+在切换到 `scrollerView` 之前，平铺 `listView` 中显示的最大结果数量。
 
-    === "Java"
+默认值：`5`
 
-        ```java
-        search.searchStyle(style -> style.maxItemCount(10));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+search.searchStyle(style -> style.maxItemCount(10));
+```
 
-        ```css
-        search-component {
-            max-item: 10;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">view-height</p>
+```css
+search-component {
+    max-item: 10;
+}
+```
 
-    当候选项数量超过 `max-item` 时，`scrollerView` 的高度。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`50`
+::: info
+#### <p style="font-size: 1rem;">view-height</p>
 
-    === "Java"
+当候选项数量超过 `max-item` 时，`scrollerView` 的高度。
 
-        ```java
-        search.searchStyle(style -> style.scrollerViewHeight(80f));
-        ```
+默认值：`50`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        search-component {
-            view-height: 80;
-        }
-        ```
+```java
+search.searchStyle(style -> style.scrollerViewHeight(80f));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-overlay</p>
+</DocTab>
+<DocTab title="LSS">
 
-    是否高亮显示悬停和选中的候选行。
+```css
+search-component {
+    view-height: 80;
+}
+```
 
-    默认值：`true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-overlay</p>
 
-        ```java
-        search.searchStyle(style -> style.showOverlay(false));
-        ```
+是否高亮显示悬停和选中的候选行。
 
-    === "LSS"
+默认值：`true`
 
-        ```css
-        search-component {
-            show-overlay: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">close-after-select</p>
+```java
+search.searchStyle(style -> style.showOverlay(false));
+```
 
-    选中候选项后是否自动关闭对话框。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`true`
+```css
+search-component {
+    show-overlay: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        search.searchStyle(style -> style.closeAfterSelect(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">close-after-select</p>
 
-    === "LSS"
+选中候选项后是否自动关闭对话框。
 
-        ```css
-        search-component {
-            close-after-select: false;
-        }
-        ```
+默认值：`true`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+search.searchStyle(style -> style.closeAfterSelect(false));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+search-component {
+    close-after-select: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
-## `ISearchUI<T>` 接口
+## `ISearchUI&lt;T&gt;` 接口
 
 实现此接口以提供搜索逻辑：
 
@@ -218,13 +254,13 @@ public interface ISearchUI<T> extends ISearch<T> {
 
 | 方法 | 返回值 | 描述 |
 | ------ | ------- | ----------- |
-| `setSearchUI(ISearchUI<T>)` | `SearchComponent<T>` | 设置搜索逻辑提供者。 |
-| `setCandidateUIProvider(UIElementProvider<T>)` | `SearchComponent<T>` | 设置为每个候选项构建 UI 的工厂。 |
-| `setSearchOnServer(Class<T[]>)` | `SearchComponent<T>` | 启用服务端搜索（RPC）。 |
-| `setSelected(T)` | `SearchComponent<T>` | 选中一个值并通知监听器。 |
-| `setSelected(T, boolean)` | `SearchComponent<T>` | 选中一个值；第二个参数控制是否通知。 |
-| `setOnValueChanged(Consumer<T>)` | `SearchComponent<T>` | 注册值变化监听器。 |
-| `searchStyle(Consumer<SearchStyle>)` | `SearchComponent<T>` | 流式配置样式。 |
+| `setSearchUI(ISearchUI&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | 设置搜索逻辑提供者。 |
+| `setCandidateUIProvider(UIElementProvider&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | 设置为每个候选项构建 UI 的工厂。 |
+| `setSearchOnServer(Class&lt;T[]&gt;)` | `SearchComponent&lt;T&gt;` | 启用服务端搜索（RPC）。 |
+| `setSelected(T)` | `SearchComponent&lt;T&gt;` | 选中一个值并通知监听器。 |
+| `setSelected(T, boolean)` | `SearchComponent&lt;T&gt;` | 选中一个值；第二个参数控制是否通知。 |
+| `setOnValueChanged(Consumer&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | 注册值变化监听器。 |
+| `searchStyle(Consumer&lt;SearchStyle&gt;)` | `SearchComponent&lt;T&gt;` | 流式配置样式。 |
 | `show()` | `void` | 打开候选对话框。 |
 | `hide()` | `void` | 关闭候选对话框。 |
 | `isOpen()` | `boolean` | 对话框可见时返回 `true`。 |

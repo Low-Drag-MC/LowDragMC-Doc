@@ -1,6 +1,6 @@
 # IGuiTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `IGuiTexture` 是 LDLib2 中所有可绘制 Texture 的基接口。所有接受视觉外观的样式属性（例如 `background`、`focus-overlay`、`mark-background`）都使用 `IGuiTexture`。
 
@@ -29,33 +29,38 @@
 | `transform(float xOffset, float yOffset)` | 按给定的 GUI 像素偏移量平移。 |
 | `setColor(int argb)` | 为 Texture 着色。具体效果取决于子类型。 |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    IGuiTexture tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45f)
-        .scale(0.8f)
-        .setColor(0x80FFFFFF); // 50% 不透明度白色着色
-    ```
+```java
+IGuiTexture tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45f)
+    .scale(0.8f)
+    .setColor(0x80FFFFFF); // 50% 不透明度白色着色
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45f)
-        .scale(0.8f)
-        .setColor(0x80FFFFFF.toInt())
-    ```
+```kotlin
+val tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45f)
+    .scale(0.8f)
+    .setColor(0x80FFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .rotate(45)
-        .scale(0.8)
-        .setColor(0x80FFFFFF);
-    ```
+```js
+let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .rotate(45)
+    .scale(0.8)
+    .setColor(0x80FFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 接口方法
@@ -74,30 +79,35 @@
 
 ## 静态工厂辅助方法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 多层叠加 Texture（按顺序绘制）
-    IGuiTexture layered = IGuiTexture.group(background, overlay);
+```java
+// 多层叠加 Texture（按顺序绘制）
+IGuiTexture layered = IGuiTexture.group(background, overlay);
 
-    // 懒加载 / 动态 Texture，每帧解析
-    IGuiTexture dynamic = IGuiTexture.dynamic(() -> currentTexture);
-    ```
+// 懒加载 / 动态 Texture，每帧解析
+IGuiTexture dynamic = IGuiTexture.dynamic(() -> currentTexture);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val layered = IGuiTexture.group(background, overlay)
-    val dynamic = IGuiTexture.dynamic { currentTexture }
-    ```
+```kotlin
+val layered = IGuiTexture.group(background, overlay)
+val dynamic = IGuiTexture.dynamic { currentTexture }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let layered = IGuiTexture.group(background, overlay);
-    let dynamic = IGuiTexture.dynamic(() => currentTexture);
-    ```
+```js
+let layered = IGuiTexture.group(background, overlay);
+let dynamic = IGuiTexture.dynamic(() => currentTexture);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 已注册的 Texture 类型

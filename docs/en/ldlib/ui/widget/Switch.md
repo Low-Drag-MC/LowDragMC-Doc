@@ -25,12 +25,15 @@ The `SwitchWidget` is a **toggle button** that switches between an ON and OFF st
 
 Sets the **ON/OFF** state of the switch.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    switchWidget.setPressed(true); // Turns ON
-    ```
+```java
+switchWidget.setPressed(true); // Turns ON
+```
 
+</DocTab>
+</DocTabs>
 - Triggers **UI updates** and event callbacks.
 
 ---
@@ -39,38 +42,46 @@ Sets the **ON/OFF** state of the switch.
 
 Registers a callback when the switch is clicked.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    switchWidget.setOnPressCallback((clickData, state) -> {
-        System.out.println("Switch is now: " + state);
-    });
-    ```
+```java
+switchWidget.setOnPressCallback((clickData, state) -> {
+    System.out.println("Switch is now: " + state);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    switchWidget.setOnPressCallback((clickData, state) => {
-        console.log("Switch is now: " + state);
-    });
-    ```
+```javascript
+switchWidget.setOnPressCallback((clickData, state) => {
+    console.log("Switch is now: " + state);
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setSupplier
 
 Automatically syncs with an **external state**.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    switchWidget.setSupplier(() -> getCurrentState()); // bool
-    ```
+```java
+switchWidget.setSupplier(() -> getCurrentState()); // bool
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    switchWidget.setSupplier(() => getCurrentState()); // bool
-    ```
+```javascript
+switchWidget.setSupplier(() => getCurrentState()); // bool
+```
 
+</DocTab>
+</DocTabs>
 - Updates **dynamically** when `getCurrentState()` changes.

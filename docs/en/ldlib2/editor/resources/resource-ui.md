@@ -1,16 +1,16 @@
 # Resource UI
 
-<figure markdown="span">
-    ![Resource panel composition](../assets/resource_composite.png)
-    <figcaption>
-    Resource panel composition: resource types, providers, and provider contents.
-    </figcaption>
+<figure>
+<img src="../assets/resource_composite.png" alt="Resource panel composition">
+<figcaption>
+Resource panel composition: resource types, providers, and provider contents.
+</figcaption>
 </figure>
 
 The resource panel has four main areas:
 
 1. **Resource type tabs**  
-   Each tab switches to a different `Resource<?>` type, such as textures, colors, UI templates, or your own project resource type.
+   Each tab switches to a different `Resource&lt;?&gt;` type, such as textures, colors, UI templates, or your own project resource type.
 
 2. **Built-in resource providers**  
    These are providers registered by code. Built-in resources are usually examples, defaults, or internal assets. They are normally read-only.
@@ -23,11 +23,11 @@ The resource panel has four main areas:
 
 The resource panel is built from three layers.
 
-`ResourceView` is the built-in editor view. It creates one vertical tab per `Resource<?>` type and stores the selected `ResourceInstance`.
+`ResourceView` is the built-in editor view. It creates one vertical tab per `Resource&lt;?&gt;` type and stores the selected `ResourceInstance`.
 
-`ResourceContainer<T>` is the content for one resource type. The left side lists providers. The right side shows the selected provider's resources.
+`ResourceContainer&lt;T&gt;` is the content for one resource type. The left side lists providers. The right side shows the selected provider's resources.
 
-`ResourceProviderContainer<T>` renders the resources from one provider.
+`ResourceProviderContainer&lt;T&gt;` renders the resources from one provider.
 
 ## Provider UI
 
@@ -155,4 +155,4 @@ Use `setOnMenu(...)` to add resource-specific commands.
 })
 ```
 
-Keep resource UI behavior close to the `Resource<T>` subclass when it is part of the resource type itself. Use provider hooks when the behavior depends on where the resource comes from.
+Keep resource UI behavior close to the `Resource&lt;T&gt;` subclass when it is part of the resource type itself. Use provider hooks when the behavior depends on where the resource comes from.

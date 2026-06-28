@@ -1,43 +1,49 @@
 # InventorySlots
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `InventorySlots` is a pre-built player inventory widget. It renders the standard 3-row main inventory and a 9-slot hotbar, and automatically binds them to the player's `Inventory` when a `ModularUI` is opened.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var inv = new InventorySlots();
-    // Slots are bound automatically when the UI opens.
-    // Optionally configure all slots:
-    inv.apply(slot -> slot.slotStyle(style -> style.showItemTooltips(true)));
-    parent.addChild(inv);
-    ```
+```java
+var inv = new InventorySlots();
+// Slots are bound automatically when the UI opens.
+// Optionally configure all slots:
+inv.apply(slot -> slot.slotStyle(style -> style.showItemTooltips(true)));
+parent.addChild(inv);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    inventorySlots({}) {
-        api {
-            apply { slot -> slot.slotStyle { showItemTooltips(true) } }
-        }
+```kotlin
+inventorySlots({}) {
+    api {
+        apply { slot -> slot.slotStyle { showItemTooltips(true) } }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let inv = new InventorySlots();
-    parent.addChild(inv);
-    ```
+```js
+let inv = new InventorySlots();
+parent.addChild(inv);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -81,4 +87,4 @@ The slots inside each row are `ItemSlot` instances with `is-player-slot: true` a
 
 | Method | Returns | Description |
 | ------ | ------- | ----------- |
-| `apply(Consumer<ItemSlot>)` | `InventorySlots` | Applies a consumer to every slot across all rows and the hotbar. |
+| `apply(Consumer&lt;ItemSlot&gt;)` | `InventorySlots` | Applies a consumer to every slot across all rows and the hotbar. |

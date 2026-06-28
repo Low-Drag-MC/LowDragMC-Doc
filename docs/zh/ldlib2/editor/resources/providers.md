@@ -1,6 +1,6 @@
 # Providers and Paths
 
-`IResourceProvider<T>` 是资源来源。它可以添加、移除、重命名、编辑、复制、列出和重新加载资源。
+`IResourceProvider&lt;T&gt;` 是资源来源。它可以添加、移除、重命名、编辑、复制、列出和重新加载资源。
 
 常用 provider hook：
 
@@ -92,6 +92,6 @@ public class ShopRegistryProviderType extends ResourceProviderType {
 
 将 provider type 注册到当前环境使用的 LDLib2 resource provider type registry。
 
-你的 provider 应实现 `IResourceProvider<T>` 或继承 `ResourceProvider<T>`。根据来源覆写 `canEdit`、`canRemove`、`canRename`、`supportAdd` 等权限方法。
+你的 provider 应实现 `IResourceProvider&lt;T&gt;` 或继承 `ResourceProvider&lt;T&gt;`。根据来源覆写 `canEdit`、`canRemove`、`canRename`、`supportAdd` 等权限方法。
 
 如果资源来源可能在编辑器外变化，使用 `checkAndUpdateResourceProvider()`。

@@ -2,7 +2,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/selector.mp4" type="video/mp4">
+    <source src="../assets/selector.mp4" type="video/mp4">
     您的浏览器不支持视频播放。
   </video>
 </div>
@@ -32,18 +32,22 @@
 
 更新可选选项列表。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    selectorWidget.setCandidates(List.of("OptionA", "OptionB", "OptionC"));
-    ```
+```Java
+selectorWidget.setCandidates(List.of("OptionA", "OptionB", "OptionC"));
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
-    ```
+```Javascript
+selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
+```
 
+</DocTab>
+</DocTabs>
 - 触发 UI 更新以反映新选项。
 
 ---
@@ -52,12 +56,15 @@
 
 设置当前选中的值。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setValue("OptionA");
-    ```
+```java
+selectorWidget.setValue("OptionA");
+```
 
+</DocTab>
+</DocTabs>
 - 如果该值在 `candidates` 中**未找到**，则保持不变。
 
 ---
@@ -66,12 +73,15 @@
 
 定义在滚动前可见的选项数量。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setMaxCount(3);
-    ```
+```java
+selectorWidget.setMaxCount(3);
+```
 
+</DocTab>
+</DocTabs>
 - 如果选项数量**超过** `maxCount`，则会添加**滚动条**。
 
 ---
@@ -80,46 +90,56 @@
 
 更改选项文本的颜色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setFontColor(0xFFFFFF); // 白色文本
-    ```
+```java
+selectorWidget.setFontColor(0xFFFFFF); // 白色文本
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setButtonBackground
 
 设置按钮区域的背景纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setButtonBackground(myCustomTexture);
-    ```
+```java
+selectorWidget.setButtonBackground(myCustomTexture);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setOnChanged
 
 注册一个回调函数来处理选择变化。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selectorWidget.setOnChanged(selected -> {
-        System.out.println("New selection: " + selected);
-    });
-    ```
+```java
+selectorWidget.setOnChanged(selected -> {
+    System.out.println("New selection: " + selected);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    selectorWidget.setOnChanged(selected => {
-        console.log("New selection: " + selected);
-    });
-    ```
+```javascript
+selectorWidget.setOnChanged(selected => {
+    console.log("New selection: " + selected);
+});
+```
 
+</DocTab>
+</DocTabs>
 - 这对于**更新 UI 状态**或触发**游戏逻辑**非常有用。
 
 ---
@@ -128,18 +148,22 @@
 
 从动态源自动更新选项列表。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selectorWidget.setCandidatesSupplier(() -> fetchDynamicOptions());
-    ```
+```java
+selectorWidget.setCandidatesSupplier(() -> fetchDynamicOptions());
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
-    ```
+```javascript
+selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
+```
 
+</DocTab>
+</DocTabs>
 - 控件会**轮询**此函数来刷新列表。
 - 适用于**选项基于外部条件变化**的情况。
 
@@ -149,8 +173,12 @@
 
 手动切换下拉列表的可见性。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setShow(true); // 打开下拉列表
-    ```
+```java
+selectorWidget.setShow(true); // 打开下拉列表
+```
+
+</DocTab>
+</DocTabs>

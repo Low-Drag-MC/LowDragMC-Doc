@@ -1,6 +1,6 @@
 # UIElement
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `UIElement` is the most fundamental and commonly used UI component in LDLib2.
 All UI components inherit from it.
@@ -13,49 +13,55 @@ Because of that, everything introduced in this page also applies to all other UI
 
 ## Usages
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var element = new UIElement();
-    element.style(style -> style.background(MCSprites.RECT));
-    element.layout(layout -> layout.width(40).height(40));
-    element.setFocusable(true);
-    element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
-    element.addClass("add-class");
-    element.removeClass("add-class");
-    root.addChild(element);
-    ```
+```java
+var element = new UIElement();
+element.style(style -> style.background(MCSprites.RECT));
+element.layout(layout -> layout.width(40).height(40));
+element.setFocusable(true);
+element.addEventListener(UIEvents.MOUSE_DOWN, e -> e.currentElement.focus());
+element.addClass("add-class");
+element.removeClass("add-class");
+root.addChild(element);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val root = element root@{
-        element({
-            layout = { size(40.px) }
-            style = { background(MCSprites.RECT) }
-            focusable = true
-            cls = {
-                +"add-class"
-                -"remove-class"
-            }
-        }) {
-            events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
+```kotlin
+val root = element root@{
+    element({
+        layout = { size(40.px) }
+        style = { background(MCSprites.RECT) }
+        focusable = true
+        cls = {
+            +"add-class"
+            -"remove-class"
         }
+    }) {
+        events { UIEvents.MOUSE_DOWN += { it.currentElement.focus() } }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let element = new UIElement();
-    element.style(style => style.background(MCSprites.RECT));
-    element.layout(layout => layout.width(40).height(40));
-    element.setFocusable(true);
-    element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
-    element.addClass("add-class");
-    element.removeClass("add-class");
-    root.addChild(element);
-    ```
+```js
+let element = new UIElement();
+element.style(style => style.background(MCSprites.RECT));
+element.layout(layout => layout.width(40).height(40));
+element.setFocusable(true);
+element.addEventListener(UIEvents.MOUSE_DOWN, e => e.currentElement.focus());
+element.addClass("add-class");
+element.removeClass("add-class");
+root.addChild(element);
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ## Xml
@@ -71,1347 +77,1653 @@ Because of that, everything introduced in this page also applies to all other UI
 
 ## Styles
 
-!!! note "Layout"
-    layout attributes are actually styles as well.
+::: info Layout
+layout attributes are actually styles as well.
+:::
 
 UIElement styles (include layouts) can be accessed as below:
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    element.style(style -> style.background(...));
-    element.layout(layout -> layout.width(...));
-    element.getStyle().background(...);
-    element.getLayout().width(...);
-    ```
+```java
+element.style(style -> style.background(...));
+element.layout(layout -> layout.width(...));
+element.getStyle().background(...);
+element.getLayout().width(...);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element({
-        layout = { width(20.pct) }
-        style = { background(MCSprites.RECT) }
-    }) { }
+```kotlin
+element({
+    layout = { width(20.pct) }
+    style = { background(MCSprites.RECT) }
+}) { }
 
-    element.layoutDsl { 
-        width(20.pct)
-    }
-    element.styleDsl { 
-        background(MCSprites.RECT)
-    }
-    ```
+element.layoutDsl { 
+    width(20.pct)
+}
+element.styleDsl { 
+    background(MCSprites.RECT)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    element.style(style => style.background(...));
-    element.layout(layout => layout.width(...));
-    element.getStyle().background(...);
-    element.getLayout().width(...);
-    ```
+```js
+element.style(style => style.background(...));
+element.layout(layout => layout.width(...));
+element.getStyle().background(...);
+element.getLayout().width(...);
+```
+
+</DocTab>
+</DocTabs>
 ### Layout Properties
 
-You'd better read [Layout](../preliminary/layout.md){ data-preview } before using.
+You'd better read [Layout](../preliminary/layout.md) before using.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">display</p>
+::: info
+#### <p style="font-size: 1rem;">display</p>
 
-    Controls whether the element participates in layout. `FLEX` enables flex layout, `GRID` enables grid layout, `NONE` removes the element from layout calculation, and `CONTENTS` doesn't affect layout but renders its children.
+Controls whether the element participates in layout. `FLEX` enables flex layout, `GRID` enables grid layout, `NONE` removes the element from layout calculation, and `CONTENTS` doesn't affect layout but renders its children.
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        layout.display(TaffyDisplay.FLEX);
-        layout.display(TaffyDisplay.GRID); // enable grid layout
-        element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
-        ```
+```java
+layout.display(TaffyDisplay.FLEX);
+layout.display(TaffyDisplay.GRID); // enable grid layout
+element.setDisplay(false); // equals to layout.display(TaffyDisplay.NONE);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        layout {
-            display(false)
-            display(TaffyDisplay.GRID)
-        }
-        ```
+```kotlin
+layout {
+    display(false)
+    display(TaffyDisplay.GRID)
+}
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            display: flex;
-            display: grid;
-        }
-        ```
+```css
+element {
+    display: flex;
+    display: grid;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">layout-direction</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Sets the layout direction. Usually inherited from parent.
+::: info
+#### <p style="font-size: 1rem;">layout-direction</p>
 
-    === "Java"
+Sets the layout direction. Usually inherited from parent.
 
-        ```java
-        layout.layoutDirection(TaffyDirection.LTR);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+layout.layoutDirection(TaffyDirection.LTR);
+```
 
-        ```kotlin
-        layout {
-            direction(TaffyDirection.LTR)
-        }
-        ```
-        
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            layout-direction: ltr;
-        }
-        ```
+```kotlin
+layout {
+    direction(TaffyDirection.LTR)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-basis</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Sets the initial main size before flex grow/shrink. Supports **point**, **percent**, and **auto**.
+```css
+element {
+    layout-direction: ltr;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        layout.flexBasis(1);
-        ```
+::: info
+#### <p style="font-size: 1rem;">flex-basis</p>
 
-    === "Kotlin"
+Sets the initial main size before flex grow/shrink. Supports **point**, **percent**, and **auto**.
 
-        ```kotlin
-        layout {
-            flexBasis(1)
-        }
-        ```
-      
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            flex-basis: 1;
-        }
-        ```
+```java
+layout.flexBasis(1);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    Makes the element flexible along the main axis.
+```kotlin
+layout {
+    flexBasis(1)
+}
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        layout.flex(1);
-        ```
+```css
+element {
+    flex-basis: 1;
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        layout {
-            flex(1)
-        }
-        ```
-      
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">flex</p>
 
-        ```css
-        element {
-            flex: 1;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-grow</p>
+Makes the element flexible along the main axis.
 
-    Controls how much the element grows when extra space is available.
-
-    === "Java"
-
-        ```java
-        layout.flexGrow(1);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexGrow(1)
-        }
-        ```
-      
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            flex-grow: 1;
-        }
-        ```
+```java
+layout.flex(1);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-shrink</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    Controls how much the element shrinks when space is insufficient.
-
-    === "Java"
-
-        ```java
-        layout.flexShrink(1);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexShrink(1)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-shrink: 1;
-        }
-        ```
+```kotlin
+layout {
+    flex(1)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-direction</p>
-
-    Defines the main axis direction, e.g. `ROW` or `COLUMN`.
-
-    === "Java"
-
-        ```java
-        layout.flexDirection(FlexDirection.ROW);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            flexDirection(FlexDirection.ROW)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-direction: row;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">flex-wrap</p>
-
-    Controls whether children wrap into multiple lines.
-
-    === "Java"
-
-        ```java
-        layout.wrap(FlexWrap.WRAP);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout {
-            wrap(FlexWrap.WRAP)
-        }
-        ```
-      
-    === "LSS"
-
-        ```css
-        element {
-            flex-wrap: wrap;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">position</p>
-
-    Sets positioning mode. `RELATIVE` participates in layout, `ABSOLUTE` does not affect siblings.
-
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        layout.positionType(TaffyPosition.ABSOLUTE);
-        ```
+```css
+element {
+    flex: 1;
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        layout {
-            position(TaffyPosition.ABSOLUTE)
-        }
-        ```
-      
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">flex-grow</p>
 
-        ```css
-        element {
-            position: absolute;
-        }
-        ```
+Controls how much the element grows when extra space is available.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">top / right / bottom / left / start / end / horizontal / vertical / all</p>
+<DocTabs>
+<DocTab title="Java">
 
-    Offsets used when `position` is `RELATIVE` or `ABSOLUTE`.
+```java
+layout.flexGrow(1);
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```java
-        layout.top(10);
-        layout.leftPercent(30); // 30%
-        layout.allAuto()
-        ```
+```kotlin
+layout {
+    flexGrow(1)
+}
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="LSS">
 
-        ```kotlin
-        layout = {
-            pos {
-                top(10.px)
-                left(10.px)
-                bottom(auto)
-            }
-        }
-        ```
+```css
+element {
+    flex-grow: 1;
+}
+```
 
-    === "LSS"
+</DocTab>
+</DocTabs>
+:::
 
-        ```css
-        element {
-            top: 10;
-            left: 30%;
-            all: auto;
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">flex-shrink</p>
 
-!!! info ""
-    #### <p style="font-size: 1rem;">margin-*</p> 
-    
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+Controls how much the element shrinks when space is insufficient.
 
-    Sets outer spacing around the element.
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.flexShrink(1);
+```
 
-        ```java
-        layout.marginTop(5);
-        layout.marginAll(3);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    flexShrink(1)
+}
+```
 
-        ```kotlin
-        layout = {
-            margin {
-                top(5.px)
-                all(3.px)
-            }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-shrink: 1;
+}
+```
 
-        ```css
-        element {
-            margin-top: 5;
-            margin-all: 3;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">padding-*</p>
+::: info
+#### <p style="font-size: 1rem;">flex-direction</p>
 
-    `*`: top / right / bottom / left / start / end / horizontal / vertical / all
+Defines the main axis direction, e.g. `ROW` or `COLUMN`.
 
-    Sets inner spacing between border and content.
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.flexDirection(FlexDirection.ROW);
+```
 
-        ```java
-        layout.paddingLeft(8);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    flexDirection(FlexDirection.ROW)
+}
+```
 
-        ```kotlin
-        layout = {
-            padding { left(8) }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-direction: row;
+}
+```
 
-        ```css
-        element {
-            padding-left: 8;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">gap-*</p>
+::: info
+#### <p style="font-size: 1rem;">flex-wrap</p>
 
-    `*`: row / column / all
+Controls whether children wrap into multiple lines.
 
-    Sets spacing between children in flex layouts.
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.wrap(FlexWrap.WRAP);
+```
 
-        ```java
-        layout.rowGap(6);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout {
+    wrap(FlexWrap.WRAP)
+}
+```
 
-        ```kotlin
-        layout = {
-            gap { row(6) }
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    flex-wrap: wrap;
+}
+```
 
-        ```css
-        element {
-            gap-row: 6;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">width</p>
+::: info
+#### <p style="font-size: 1rem;">position</p>
 
-    Sets element width. Supports **point**, **percent**, and **auto** modes.
+Sets positioning mode. `RELATIVE` participates in layout, `ABSOLUTE` does not affect siblings.
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        layout.width(100);
-        layout.widthPercent(20); // 20%
-        ```
+```java
+layout.positionType(TaffyPosition.ABSOLUTE);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        layout = {
-            width(100)
-            width(20.pct) // 20%
-        }
-        ```
-        
-    === "LSS"
+```kotlin
+layout {
+    position(TaffyPosition.ABSOLUTE)
+}
+```
 
-        ```css
-        element {
-            width: 100;
-            width: 20%;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">height</p>
+```css
+element {
+    position: absolute;
+}
+```
 
-    Sets element height. Supports **point**, **percent**, and **auto** modes.
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">top / right / bottom / left / start / end / horizontal / vertical / all</p>
 
-        ```java
-        layout.height(50);
-        ```
+Offsets used when `position` is `RELATIVE` or `ABSOLUTE`.
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        layout = {
-            width(100)
-            height(20.pct) // 20%
-        }
-        ```
-        
-    === "LSS"
+```java
+layout.top(10);
+layout.leftPercent(30); // 30%
+layout.allAuto()
+```
 
-        ```css
-        element {
-            height: 50;
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">min-width / min-height</p>
+```kotlin
+layout = {
+    pos {
+        top(10.px)
+        left(10.px)
+        bottom(auto)
+    }
+}
+```
 
-    Sets the minimum size constraint.
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+element {
+    top: 10;
+    left: 30%;
+    all: auto;
+}
+```
 
-        ```java
-        layout.minWidth(20);
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "Kotlin"
+::: info
+#### <p style="font-size: 1rem;">margin-*</p> 
 
-        ```kotlin
-        layout = {
-            minWidth(20);
-        }
-        ```
+`*`: top / right / bottom / left / start / end / horizontal / vertical / all
 
-    === "LSS"
+Sets outer spacing around the element.
 
-        ```css
-        element {
-            min-width: 20;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-width / max-height</p>
+```java
+layout.marginTop(5);
+layout.marginAll(3);
+```
 
-    Sets the maximum size constraint.
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Java"
+```kotlin
+layout = {
+    margin {
+        top(5.px)
+        all(3.px)
+    }
+}
+```
 
-        ```java
-        layout.maxHeight(200);
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "Kotlin"
+```css
+element {
+    margin-top: 5;
+    margin-all: 3;
+}
+```
 
-        ```kotlin
-        layout = {
-            maxHeight(200);
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">padding-*</p>
 
-        ```css
-        element {
-            max-height: 200;
-        }
-        ```
+`*`: top / right / bottom / left / start / end / horizontal / vertical / all
 
-!!! info ""
-    #### <p style="font-size: 1rem;">aspect-rate</p>
+Sets inner spacing between border and content.
 
-    Locks width–height ratio. Useful for square or icon elements.
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+layout.paddingLeft(8);
+```
 
-        ```java
-        layout.aspectRate(1);
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "Kotlin"
+```kotlin
+layout = {
+    padding { left(8) }
+}
+```
 
-        ```kotlin
-        layout = {
-            aspectRate(1);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+element {
+    padding-left: 8;
+}
+```
 
-        ```css
-        element {
-            aspect-rate: 1;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-items</p>
+::: info
+#### <p style="font-size: 1rem;">gap-*</p>
 
-    Aligns children along the cross axis (container property).
+`*`: row / column / all
 
-    === "Java"
+Sets spacing between children in flex layouts.
 
-        ```java
-        layout.alignItems(AlignItems.CENTER);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+layout.rowGap(6);
+```
 
-        ```kotlin
-        layout = {
-            alignItems(AlignItems.CENTER)
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+layout = {
+    gap { row(6) }
+}
+```
 
-        ```css
-        element {
-            align-items: center;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">justify-content</p>
+```css
+element {
+    gap-row: 6;
+}
+```
 
-    Aligns children along the main axis (container property).
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">width</p>
 
-        ```java
-        layout.justifyContent(AlignContent.CENTER);
-        ```
+Sets element width. Supports **point**, **percent**, and **auto** modes.
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        layout = {
-            justifyContent(AlignContent.CENTER)
-        }
-        ```
+```java
+layout.width(100);
+layout.widthPercent(20); // 20%
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            justify-content: center;
-        }
-        ```
+```kotlin
+layout = {
+    width(100)
+    width(20.pct) // 20%
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-self</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Overrides cross-axis alignment for a single element.
+```css
+element {
+    width: 100;
+    width: 20%;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        layout.alignSelf(AlignItems.CENTER);
-        ```
+::: info
+#### <p style="font-size: 1rem;">height</p>
 
-    === "Kotlin"
+Sets element height. Supports **point**, **percent**, and **auto** modes.
 
-        ```kotlin
-        layout = {
-            alignSelf(AlignItems.CENTER)
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+layout.height(50);
+```
 
-        ```css
-        element {
-            align-self: center;
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">align-content</p>
+```kotlin
+layout = {
+    width(100)
+    height(20.pct) // 20%
+}
+```
 
-    Aligns wrapped lines when `flex-wrap` is enabled.
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+element {
+    height: 50;
+}
+```
 
-        ```java
-        layout.alignContent(AlignContent.CENTER);
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "Kotlin"
+::: info
+#### <p style="font-size: 1rem;">min-width / min-height</p>
 
-        ```kotlin
-        layout = {
-            alignContent(AlignContent.CENTER)
-        }
-        ```
+Sets the minimum size constraint.
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            align-content: center;
-        }
-        ```
+```java
+layout.minWidth(20);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    minWidth(20);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    min-width: 20;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">max-width / max-height</p>
+
+Sets the maximum size constraint.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.maxHeight(200);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    maxHeight(200);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    max-height: 200;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">aspect-rate</p>
+
+Locks width–height ratio. Useful for square or icon elements.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.aspectRate(1);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    aspectRate(1);
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    aspect-rate: 1;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-items</p>
+
+Aligns children along the cross axis (container property).
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignItems(AlignItems.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignItems(AlignItems.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-items: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">justify-content</p>
+
+Aligns children along the main axis (container property).
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.justifyContent(AlignContent.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    justifyContent(AlignContent.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    justify-content: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-self</p>
+
+Overrides cross-axis alignment for a single element.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignSelf(AlignItems.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignSelf(AlignItems.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-self: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">align-content</p>
+
+Aligns wrapped lines when `flex-wrap` is enabled.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.alignContent(AlignContent.CENTER);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    alignContent(AlignContent.CENTER)
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    align-content: center;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ### Grid Properties
 
-!!! note ""
-    To use grid layout, set `display(TaffyDisplay.GRID)` on the container element. Template properties define the grid structure on the **container**, while `grid-row` and `grid-column` are placed on **child** elements to control their positions.
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-rows</p>
-
-    Defines the explicit row tracks of a grid container.
-
-    Supported track sizes: `Npx` (fixed pixels), `N%` (percent), `Nfr` (fractional unit), `auto`, `min-content`, `max-content`, `minmax(min, max)`, `fit-content(limit)`, `repeat(count, size)`, `[name]` (named line). Multiple tracks are space-separated.
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
-        layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
-        layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
-        layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateRows("1fr 1fr 1fr")
-                templateRows("repeat(3, 100px)")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-rows: repeat(3, 100px);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-columns</p>
-
-    Defines the explicit column tracks of a grid container. Uses the same track sizing syntax as `grid-template-rows`.
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
-        layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
-        layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateColumns("10px 1fr 10px")
-                templateColumns("repeat(3, 1fr)")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-columns: 10px 1fr 10px;
-            grid-template-columns: repeat(3, 1fr);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-template-areas</p>
-
-    Assigns named areas to grid cells. Each quoted string represents a row; words within it name the cells in that row. Use `.` for empty cells. All rows must have the same number of cells.
-
-    === "Java"
-
-        ```java
-        layout.display(TaffyDisplay.GRID);
-        layout.gridTemplateColumns("1fr 1fr 1fr");
-        layout.gridTemplateRows("auto 1fr auto");
-        layout.gridTemplateAreas(
-            "\"header header header\" \"sidebar content content\" \"footer footer footer\""
-        );
-        // Children reference areas via gridRow/gridColumn by area name
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid {
-                templateColumns("1fr 1fr 1fr")
-                templateRows("auto 1fr auto")
-                templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
-            }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-rows</p>
-
-    Sets the row track size for implicitly created rows — those not covered by `grid-template-rows`.
-
-    === "Java"
-
-        ```java
-        layout.gridAutoRows("auto");
-        layout.gridAutoRows("minmax(50px, auto)");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoRows("minmax(50px, auto)") }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-rows: minmax(50px, auto);
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-columns</p>
-
-    Sets the column track size for implicitly created columns.
-
-    === "Java"
-
-        ```java
-        layout.gridAutoColumns("auto");
-        layout.gridAutoColumns("100px");
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoColumns("100px") }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-columns: 100px;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-auto-flow</p>
-
-    Controls how auto-placed items fill the grid. `ROW` fills rows first (default); `COLUMN` fills columns first. `ROW_DENSE` / `COLUMN_DENSE` back-fill earlier gaps.
-
-    === "Java"
-
-        ```java
-        layout.gridAutoFlow(GridAutoFlow.ROW);
-        layout.gridAutoFlow(GridAutoFlow.COLUMN);
-        layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        layout = {
-            display(TaffyDisplay.GRID)
-            grid { autoFlow(GridAutoFlow.COLUMN) }
-        }
-        ```
-
-    === "LSS"
-
-        ```css
-        element {
-            display: grid;
-            grid-auto-flow: column;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-row</p>
-
-    Controls a **child** element's row placement within the grid container. Set this on the child, not the container.
-
-    Placement values: `"1"` (line number), `"1 / 3"` (start / end lines), `"span 2"` (span N rows), `"1 / span 2"` (start + span), `"header"` (named area row), `"-1"` (last line).
-
-    === "Java"
-
-        ```java
-        child.layout(layout -> layout.gridRow("1"));          // row 1
-        child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1–3
-        child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
-        child.layout(layout -> layout.gridRow("header"));     // named area row
-        child.layout(layout -> layout.gridRow("-1"));         // last row line
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        element({
-            layout = {
-                grid { row("1 / span 2") }
-            }
-        }) { }
-        ```
-
-    === "LSS"
-
-        ```css
-        child {
-            grid-row: 1;
-            grid-row: 1 / 3;
-            grid-row: span 2;
-            grid-row: header;
-        }
-        ```
-
-!!! info ""
-    #### <p style="font-size: 1rem;">grid-column</p>
-
-    Controls a **child** element's column placement within the grid container. Uses the same placement syntax as `grid-row`.
-
-    === "Java"
-
-        ```java
-        child.layout(layout -> layout.gridColumn("2"));
-        child.layout(layout -> layout.gridColumn("1 / span 3"));
-        child.layout(layout -> layout.gridColumn("sidebar"));
-        ```
-
-    === "Kotlin"
-
-        ```kotlin
-        element({
-            layout = {
-                grid { column("1 / span 2") }
-            }
-        }) { }
-        ```
-
-    === "LSS"
-
-        ```css
-        child {
-            grid-column: 2;
-            grid-column: 1 / span 3;
-            grid-column: sidebar;
-        }
-        ```
+::: info
+To use grid layout, set `display(TaffyDisplay.GRID)` on the container element. Template properties define the grid structure on the **container**, while `grid-row` and `grid-column` are placed on **child** elements to control their positions.
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-rows</p>
+
+Defines the explicit row tracks of a grid container.
+
+Supported track sizes: `Npx` (fixed pixels), `N%` (percent), `Nfr` (fractional unit), `auto`, `min-content`, `max-content`, `minmax(min, max)`, `fit-content(limit)`, `repeat(count, size)`, `[name]` (named line). Multiple tracks are space-separated.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateRows("1fr 1fr 1fr");             // three equal rows
+layout.gridTemplateRows("50px 1fr auto");           // fixed, flexible, auto
+layout.gridTemplateRows("repeat(3, 100px)");        // three 100px rows
+layout.gridTemplateRows("[header] 50px [content] 1fr [footer] 50px"); // named lines
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateRows("1fr 1fr 1fr")
+        templateRows("repeat(3, 100px)")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 100px);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-columns</p>
+
+Defines the explicit column tracks of a grid container. Uses the same track sizing syntax as `grid-template-rows`.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateColumns("10px 1fr 10px");    // fixed margins + flexible center
+layout.gridTemplateColumns("repeat(3, 1fr)");   // three equal columns
+layout.gridTemplateColumns("minmax(100px, 1fr) 200px");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateColumns("10px 1fr 10px")
+        templateColumns("repeat(3, 1fr)")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-columns: 10px 1fr 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-template-areas</p>
+
+Assigns named areas to grid cells. Each quoted string represents a row; words within it name the cells in that row. Use `.` for empty cells. All rows must have the same number of cells.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.display(TaffyDisplay.GRID);
+layout.gridTemplateColumns("1fr 1fr 1fr");
+layout.gridTemplateRows("auto 1fr auto");
+layout.gridTemplateAreas(
+    "\"header header header\" \"sidebar content content\" \"footer footer footer\""
+);
+// Children reference areas via gridRow/gridColumn by area name
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid {
+        templateColumns("1fr 1fr 1fr")
+        templateRows("auto 1fr auto")
+        templateAreas("\"header header header\" \"sidebar content content\" \"footer footer footer\"")
+    }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-rows</p>
+
+Sets the row track size for implicitly created rows — those not covered by `grid-template-rows`.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoRows("auto");
+layout.gridAutoRows("minmax(50px, auto)");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoRows("minmax(50px, auto)") }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-rows: minmax(50px, auto);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-columns</p>
+
+Sets the column track size for implicitly created columns.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoColumns("auto");
+layout.gridAutoColumns("100px");
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoColumns("100px") }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-columns: 100px;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-auto-flow</p>
+
+Controls how auto-placed items fill the grid. `ROW` fills rows first (default); `COLUMN` fills columns first. `ROW_DENSE` / `COLUMN_DENSE` back-fill earlier gaps.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.gridAutoFlow(GridAutoFlow.ROW);
+layout.gridAutoFlow(GridAutoFlow.COLUMN);
+layout.gridAutoFlow(GridAutoFlow.ROW_DENSE);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+layout = {
+    display(TaffyDisplay.GRID)
+    grid { autoFlow(GridAutoFlow.COLUMN) }
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    display: grid;
+    grid-auto-flow: column;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-row</p>
+
+Controls a **child** element's row placement within the grid container. Set this on the child, not the container.
+
+Placement values: `"1"` (line number), `"1 / 3"` (start / end lines), `"span 2"` (span N rows), `"1 / span 2"` (start + span), `"header"` (named area row), `"-1"` (last line).
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+child.layout(layout -> layout.gridRow("1"));          // row 1
+child.layout(layout -> layout.gridRow("1 / 3"));      // rows 1–3
+child.layout(layout -> layout.gridRow("span 2"));     // span 2 rows
+child.layout(layout -> layout.gridRow("header"));     // named area row
+child.layout(layout -> layout.gridRow("-1"));         // last row line
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+element({
+    layout = {
+        grid { row("1 / span 2") }
+    }
+}) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+child {
+    grid-row: 1;
+    grid-row: 1 / 3;
+    grid-row: span 2;
+    grid-row: header;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">grid-column</p>
+
+Controls a **child** element's column placement within the grid container. Uses the same placement syntax as `grid-row`.
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+child.layout(layout -> layout.gridColumn("2"));
+child.layout(layout -> layout.gridColumn("1 / span 3"));
+child.layout(layout -> layout.gridColumn("sidebar"));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+element({
+    layout = {
+        grid { column("1 / span 2") }
+    }
+}) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+child {
+    grid-column: 2;
+    grid-column: 1 / span 3;
+    grid-column: sidebar;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ### Basic Properties
 
-!!! info ""
-    #### <p style="font-size: 1rem;">background</p>
+::: info
+#### <p style="font-size: 1rem;">background</p>
 
-    Sets the texture rendered behind the element, such as a solid color, rect sprite, or image.
+Sets the texture rendered behind the element, such as a solid color, rect sprite, or image.
 
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.background(MCSprites.BORDER);
-        ```
+```java
+style.background(MCSprites.BORDER);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            background(MCSprites.BORDER)
-        }
-        ```
+```kotlin
+style = {
+    background(MCSprites.BORDER)
+}
+```
 
-    === "LSS"
-        Check [Texture in LSS](../textures/lss.md) for lss supports.
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            background: #FFF;
-            background: rect(#2ff, 3);
-            background: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+Check [Texture in LSS](../textures/lss.md) for lss supports.
 
+```css
+element {
+    background: #FFF;
+    background: rect(#2ff, 3);
+    background: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow</p>
+</DocTab>
+</DocTabs>
+:::
 
-    **Deprecated, 1.21 API only.** Use [`clip`](#clip) in 26.1 and newer.
 
-    In the 1.21 API, `overflow` controlled how overflowing content was handled. `overflow` was a layout property, with convenience helpers such as `overflowVisible(...)` and `setOverflowVisible(...)`. In 26.1+, `UIElement#setOverflowVisible(false)` maps to `Clip.SCISSOR`.
+::: info
+#### <p style="font-size: 1rem;">overflow</p>
 
-    === "Java"
+**Deprecated, 1.21 API only.** Use [`clip`](#clip) in 26.1 and newer.
 
-        ```java
-        layout.overflow(YogaOverflow.HIDDEN);
-        style.overflowVisible(false);
-        element.setOverflowVisible(false); // helper on UIElement
-        ```
+In the 1.21 API, `overflow` controlled how overflowing content was handled. `overflow` was a layout property, with convenience helpers such as `overflowVisible(...)` and `setOverflowVisible(...)`. In 26.1+, `UIElement#setOverflowVisible(false)` maps to `Clip.SCISSOR`.
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        style = {
-            overflowVisible(false)
-        }
-        ```
+```java
+layout.overflow(YogaOverflow.HIDDEN);
+style.overflowVisible(false);
+element.setOverflowVisible(false); // helper on UIElement
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            overflow: hidden;
-        }
-        ```
+```kotlin
+style = {
+    overflowVisible(false)
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;" id="clip">clip</p>
+</DocTab>
+<DocTab title="LSS">
 
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+```css
+element {
+    overflow: hidden;
+}
+```
 
-    Controls whether and how the element's subtree is clipped. `clip` replaces the old 1.21 `overflow` / `overflow-clip` API. Any mode other than `NONE` also prevents hit testing outside the element's content bounds.
+</DocTab>
+</DocTabs>
+:::
 
-    | Mode | Description |
-    | --- | --- |
-    | `NONE` | No clipping. This is the default. |
-    | `SCISSOR` | Clips rendering to the element's content bounds. Use this as the 26.1+ replacement for `overflow: hidden` or `setOverflowVisible(false)`. |
-    | `MASK` | Clips rendering with the texture set by [`mask`](#mask). Use this for a static mask texture. |
-    | `DYNAMIC_MASK` | Same as `MASK`, but the mask is refreshed every frame. Use this for animated or otherwise changing masks. |
+::: info
+#### <p style="font-size: 1rem;" id="clip">clip</p>
 
-    === "Java"
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-        ```java
-        style.clip(Clip.SCISSOR);
-        style.clip(Clip.MASK).mask(MCSprites.BORDER);
-        style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
-        ```
+Controls whether and how the element's subtree is clipped. `clip` replaces the old 1.21 `overflow` / `overflow-clip` API. Any mode other than `NONE` also prevents hit testing outside the element's content bounds.
 
-    === "Kotlin"
+| Mode | Description |
+| --- | --- |
+| `NONE` | No clipping. This is the default. |
+| `SCISSOR` | Clips rendering to the element's content bounds. Use this as the 26.1+ replacement for `overflow: hidden` or `setOverflowVisible(false)`. |
+| `MASK` | Clips rendering with the texture set by [`mask`](#mask). Use this for a static mask texture. |
+| `DYNAMIC_MASK` | Same as `MASK`, but the mask is refreshed every frame. Use this for animated or otherwise changing masks. |
 
-        ```kotlin
-        style = {
-            clip(Clip.SCISSOR)
-            clip(Clip.MASK)
-            mask(MCSprites.BORDER)
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+style.clip(Clip.SCISSOR);
+style.clip(Clip.MASK).mask(MCSprites.BORDER);
+style.clip(Clip.DYNAMIC_MASK).mask(animatedMask);
+```
 
-        ```css
-        element {
-            clip: scissor;
-        }
+</DocTab>
+<DocTab title="Kotlin">
 
-        element.masked {
-            clip: mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
+```kotlin
+style = {
+    clip(Clip.SCISSOR)
+    clip(Clip.MASK)
+    mask(MCSprites.BORDER)
+}
+```
 
-        element.animated-mask {
-            clip: dynamic-mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;" id="mask">mask</p>
+```css
+element {
+    clip: scissor;
+}
 
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+element.masked {
+    clip: mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
 
-    Defines the texture used by `clip: mask` and `clip: dynamic-mask`. The mask is drawn over the element's bounds and multiplies the rendered subtree's color and alpha by the sampled mask factor.
+element.animated-mask {
+    clip: dynamic-mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-    Opaque grayscale masks use the texture luminance: white keeps content visible and black hides it. Alpha-encoded masks use the alpha channel, which is useful for transparent PNG masks and soft edges. The `mask` property has no visible effect unless `clip` is `MASK` or `DYNAMIC_MASK`.
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;" id="mask">mask</p>
 
-        ```java
-        style.clip(Clip.MASK);
-        style.mask(MCSprites.BORDER);
-        ```
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-    === "Kotlin"
+Defines the texture used by `clip: mask` and `clip: dynamic-mask`. The mask is drawn over the element's bounds and multiplies the rendered subtree's color and alpha by the sampled mask factor.
 
-        ```kotlin
-        style = {
-            clip(Clip.MASK)
-            mask(MCSprites.BORDER)
-        }
-        ```
+Opaque grayscale masks use the texture luminance: white keeps content visible and black hides it. Alpha-encoded masks use the alpha channel, which is useful for transparent PNG masks and soft edges. The `mask` property has no visible effect unless `clip` is `MASK` or `DYNAMIC_MASK`.
 
-    === "LSS"
-        Check [Texture in LSS](../textures/lss.md) for lss supports.
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            clip: mask;
-            mask: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+```java
+style.clip(Clip.MASK);
+style.mask(MCSprites.BORDER);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overlay</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    Controls overlay rendering drawn above the element content.
+```kotlin
+style = {
+    clip(Clip.MASK)
+    mask(MCSprites.BORDER)
+}
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="LSS">
 
-        ```java
-        style.overlay(...);
-        ```
+Check [Texture in LSS](../textures/lss.md) for lss supports.
 
-    === "Kotlin"
+```css
+element {
+    clip: mask;
+    mask: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-        ```kotlin
-        style = {
-            overlay(MCSprites.BORDER)
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
-        Check [Texture in LSS](../textures/lss.md) for lss supports.
+::: info
+#### <p style="font-size: 1rem;">overlay</p>
 
-        ```css
-        element {
-            overlay: #FFF;
-            overlay: rect(#2ff, 3);
-            overlay: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+Controls overlay rendering drawn above the element content.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">tooltips</p>
+<DocTabs>
+<DocTab title="Java">
 
-    Defines tooltip content displayed when hovering the element.
+```java
+style.overlay(...);
+```
 
-    === "Java"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```java
-        style.tooltips("tips.0", "tips.1");
-        style.appendTooltipsString("tips.2");
-        ```
+```kotlin
+style = {
+    overlay(MCSprites.BORDER)
+}
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="LSS">
 
-        ```kotlin
-        style = {
-            tooltips("tips.0", "tips.1")
-        }
-        ```
+Check [Texture in LSS](../textures/lss.md) for lss supports.
 
-    === "LSS"
+```css
+element {
+    overlay: #FFF;
+    overlay: rect(#2ff, 3);
+    overlay: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-        ```css
-        element {
-            tooltips: this is my tooltips;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">z-index</p>
+::: info
+#### <p style="font-size: 1rem;">tooltips</p>
 
-    Controls the stacking order of the element. Higher values appear above lower ones.
+Defines tooltip content displayed when hovering the element.
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.zIndex(1);
-        ```
+```java
+style.tooltips("tips.0", "tips.1");
+style.appendTooltipsString("tips.2");
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            zIndex(1)
-        }
-        ```
+```kotlin
+style = {
+    tooltips("tips.0", "tips.1")
+}
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            z-index: 1;
-        }
-        ```
+```css
+element {
+    tooltips: this is my tooltips;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">opacity</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Sets the transparency level of the element. `0` is fully transparent, `1` is fully opaque.
+::: info
+#### <p style="font-size: 1rem;">z-index</p>
 
-    === "Java"
+Controls the stacking order of the element. Higher values appear above lower ones.
 
-        ```java
-        style.opacity(0.8f);
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+style.zIndex(1);
+```
 
-        ```kotlin
-        style = {
-            opacity(0.8)
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+style = {
+    zIndex(1)
+}
+```
 
-        ```css
-        element {
-            opacity: 0.8;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">color</p>
+```css
+element {
+    z-index: 1;
+}
+```
 
-    Tints the current element's `background` and `overlay` textures using an ARGB multiplier.
-    This tint is applied only to the current element and does not affect child elements.
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">opacity</p>
 
-        ```java
-        style.color(0x80FF8080);
-        ```
+Sets the transparency level of the element. `0` is fully transparent, `1` is fully opaque.
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        style = {
-            color(0x80FF8080.toInt())
-        }
-        ```
+```java
+style.opacity(0.8f);
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        element {
-            color: #80FF8080;
-        }
-        ```
+```kotlin
+style = {
+    opacity(0.8)
+}
+```
 
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">overflow-clip</p>
+```css
+element {
+    opacity: 0.8;
+}
+```
 
-    **Deprecated, 1.21 API only.** Use [`clip: mask`](#clip) with [`mask`](#mask) in 26.1 and newer.
+</DocTab>
+</DocTabs>
+:::
 
-    In the 1.21 API, when the element's `overflow` was hidden, `overflow-clip` clipped child rendering using the given texture's red channel as a mask. In 26.1+, set `clip` to `MASK` or `DYNAMIC_MASK`, then set the mask texture with `mask`.
+::: info
+#### <p style="font-size: 1rem;">color</p>
 
-    <div style="text-align: center;">
-        <video controls>
-        <source src="../../assets/overflow-clip.mp4" type="video/mp4">
-        Your browser does not support video.
-        </video>
-    </div>
+Tints the current element's `background` and `overlay` textures using an ARGB multiplier.
+This tint is applied only to the current element and does not affect child elements.
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        style.overflowClip(MCSprites.BORDER);
-        ```
+```java
+style.color(0x80FF8080);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        style = {
-            overflowClip(MCSprites.BORDER)
-        }
-        ```
+```kotlin
+style = {
+    color(0x80FF8080.toInt())
+}
+```
 
-    === "LSS"
-        Check [Texture in LSS](../textures/lss.md) for lss supports.
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        element {
-            overflow-clip: sprite(ldlib2:textures/gui/icon.png);
-        }
-        ```
+```css
+element {
+    color: #80FF8080;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">transform-2d</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Applies 2D transformations such as translate, scale, or rotate.
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">overflow-clip</p>
 
-        ```java
-        style.transform2D(Transform2D.identity().scale(0.5f));
-        element.transform(transform -> transform.translate(10, 0))
-        ```
+**Deprecated, 1.21 API only.** Use [`clip: mask`](#clip) with [`mask`](#mask) in 26.1 and newer.
 
-    === "Kotlin"
+In the 1.21 API, when the element's `overflow` was hidden, `overflow-clip` clipped child rendering using the given texture's red channel as a mask. In 26.1+, set `clip` to `MASK` or `DYNAMIC_MASK`, then set the mask texture with `mask`.
 
-        ```kotlin
-        style = {
-            transform2D(Transform2D.identity().scale(0.5f))
-        }
-        ```
+<div style="text-align: center;">
+    <video controls>
+    <source src="../assets/overflow-clip.mp4" type="video/mp4">
+    Your browser does not support video.
+    </video>
+</div>
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        element {
-            transform: translate(10, 20) rotate(45) scale(2, 2) pivot(0.5, 0.5);
-            transform: translateX(10) scale(0.5);
-        }
-        ```
+```java
+style.overflowClip(MCSprites.BORDER);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">transition</p>
+</DocTab>
+<DocTab title="Kotlin">
 
-    Defines animated transitions between property changes.
+```kotlin
+style = {
+    overflowClip(MCSprites.BORDER)
+}
+```
 
-    <div style="text-align: center;">
-        <video controls>
-        <source src="../../assets/transition.mp4" type="video/mp4">
-        Your browser does not support video.
-        </video>
-    </div>
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+Check [Texture in LSS](../textures/lss.md) for lss supports.
 
-        ```java
-        layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
-        ```
+```css
+element {
+    overflow-clip: sprite(ldlib2:textures/gui/icon.png);
+}
+```
 
-    === "Kotlin"
+</DocTab>
+</DocTabs>
+:::
 
-        ```kotlin
-        style = {
-            transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">transform-2d</p>
 
-    === "LSS"
+Applies 2D transformations such as translate, scale, or rotate.
 
-        ```css
-        element {
-            transition: width 1;
-            transition: background 0.8 quad_in_out,
-                        transform 0.3;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
+
+```java
+style.transform2D(Transform2D.identity().scale(0.5f));
+element.transform(transform -> transform.translate(10, 0))
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+style = {
+    transform2D(Transform2D.identity().scale(0.5f))
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    transform: translate(10, 20) rotate(45) scale(2, 2) pivot(0.5, 0.5);
+    transform: translateX(10) scale(0.5);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">transition</p>
+
+Defines animated transitions between property changes.
+
+<div style="text-align: center;">
+    <video controls>
+    <source src="../assets/transition.mp4" type="video/mp4">
+    Your browser does not support video.
+    </video>
+</div>
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+layout.transition(new Transition(Map.of(LayoutProperties.HEIGHT, new Animation(1, 0, Eases.LINEAR))));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+style = {
+    transition(Transition(mapOf(LayoutProperties.HEIGHT to Animation(1f, 0f, Eases.LINEAR))))
+}
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+element {
+    transition: width 1;
+    transition: background 0.8 quad_in_out,
+                transform 0.3;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 
 ---
@@ -1425,45 +1737,47 @@ Elements with `isVisible = false` are also excluded from hit-testing, so many UI
 ### `isActive`
 When `isActive` is set to `false`, the element may lose its interactive behavior—for example, buttons can no longer be clicked—and the element will no longer receive `tick` events.
 
-!!! note
-    When `isActive` is set to `false`, a `__disabled__` class is automatically added to the element.  
-    You can use the following LSS selectors to style active and inactive states:
+::: info
+When `isActive` is set to `false`, a `__disabled__` class is automatically added to the element.  
+You can use the following LSS selectors to style active and inactive states:
 
-    ```css
-    selector.__disabled__ {
-    }
+```css
+selector.__disabled__ {
+}
 
-    selector:disabled {
-    }
+selector:disabled {
+}
 
-    selector:not(.__disabled__) {
-    }
+selector:not(.__disabled__) {
+}
 
-    selector:not(:disabled) {
-    }
-    ```
+selector:not(:disabled) {
+}
+```
+:::
 
 ### `focusable`
 Elements are `focusable: false` by default. Some components, such as `TextField`, are focusable by design, but you can still manually change an element’s focusable state.  
 Only when `focusable` is set to `true` can an element be focused via `focus()` or by mouse interaction.
 
-!!! note
-    When an element is in the `focused` state, a `__focused__` class is automatically added.  
-    You can style focused and unfocused states using the following LSS selectors:
+::: info
+When an element is in the `focused` state, a `__focused__` class is automatically added.  
+You can style focused and unfocused states using the following LSS selectors:
 
-    ```css
-    selector.__focused__ {
-    }
+```css
+selector.__focused__ {
+}
 
-    selector:focused {
-    }
+selector:focused {
+}
 
-    selector:not(.__focused__) {
-    }
+selector:not(.__focused__) {
+}
 
-    selector:not(:focused) {
-    }
-    ```
+selector:not(:focused) {
+}
+```
+:::
 
 ### `hover state`
 When an element is hovered, a `__hovered__` class is automatically added.  
@@ -1485,7 +1799,7 @@ Semantically, internal elements are not allowed to be added, removed, or reorder
 However, you can still edit their styles and manage their child elements via the editor or XML.  
 In the editor, internal elements are displayed in gray in the hierarchy view.
 
-In XML, you can access internal elements using the `#!xml <internal index="..."/>` tag, where `index` specifies which internal element to reference:
+In XML, you can access internal elements using the `#!xml &lt;internal index="..."/&gt;` tag, where `index` specifies which internal element to reference:
 
 ```xml
 <button>
@@ -1494,18 +1808,19 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
     </internal>
 </button>
 ```
-!!! note ""
-    In LSS, you can use :host and :internal to explicitly target host or internal elements. By default, selectors match both unless constrained.
-    ```css
-    button > text {
-    }
+::: info
+In LSS, you can use :host and :internal to explicitly target host or internal elements. By default, selectors match both unless constrained.
+```css
+button > text {
+}
 
-    button > text:internal {
-    }
+button > text:internal {
+}
 
-    button > text:host {
-    }
-    ```
+button > text:host {
+}
+```
+:::
 ---
 
 ## Fields
@@ -1518,9 +1833,9 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `nodeId`       | `NodeId`      | protected (getter)      | Node handle registered in the `TaffyTree`.              |
 | `modularUI`    | `ModularUI`   | private (getter)        | The `ModularUI` instance this element belongs to.        |
 | `id`           | `String`      | private (getter/setter) | Element ID, used by selectors and queries.               |
-| `classes`      | `Set<String>` | private (getter)        | CSS-like class list applied to this element.             |
+| `classes`      | `Set&lt;String&gt;` | private (getter)        | CSS-like class list applied to this element.             |
 | `styleBag`     | `StyleBag`    | private (getter)        | Stores resolved style candidates and computed styles.    |
-| `styles`       | `List<Style>` | private (getter)        | Inline styles attached to this element.                  |
+| `styles`       | `List&lt;Style&gt;` | private (getter)        | Inline styles attached to this element.                  |
 | `layoutStyle`  | `LayoutStyle` | private (getter)        | Layout-related style wrapper for layout properties.      |
 | `style`        | `BasicStyle`  | private (getter)        | Basic visual styles (background, overlay tint color, opacity, zIndex, etc.). |
 | `isVisible`    | `boolean`     | private (getter/setter) | Whether the element is visible.                          |
@@ -1537,7 +1852,7 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | Method                        | Signature                                 | Description                                              |
 | ----------------------------- | ----------------------------------------- | -------------------------------------------------------- |
 | `getLayout()`                 | `LayoutStyle`                             | Returns the layout style controller.                     |
-| `layout(...)`                 | `UIElement layout(Consumer<LayoutStyle>)` | Modify layout properties fluently.                       |
+| `layout(...)`                 | `UIElement layout(Consumer&lt;LayoutStyle&gt;)` | Modify layout properties fluently.                       |
 | `getTaffyLayout()`            | `Layout`                                  | Returns the resolved Taffy layout result for this element. |
 | `getPositionX()`              | `float`                                   | Absolute X position on screen.                           |
 | `getPositionY()`              | `float`                                   | Absolute Y position on screen.                           |
@@ -1557,14 +1872,14 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | Method               | Signature                             | Description                                       |
 | -------------------- | ------------------------------------- | ------------------------------------------------- |
 | `getParent()`        | `UIElement`                           | Returns parent element, or `null`.                |
-| `getChildren()`      | `List<UIElement>`                     | Returns an unmodifiable list of children.         |
+| `getChildren()`      | `List&lt;UIElement&gt;`                     | Returns an unmodifiable list of children.         |
 | `addChild(...)`      | `UIElement addChild(UIElement)`       | Adds a child element.                             |
 | `addChildren(...)`   | `UIElement addChildren(UIElement...)` | Adds multiple children.                           |
 | `removeChild(...)`   | `boolean removeChild(UIElement)`      | Removes a child element.                          |
 | `removeSelf()`       | `boolean`                             | Removes this element from its parent.             |
 | `clearAllChildren()` | `void`                                | Removes all children.                             |
 | `isAncestorOf(...)`  | `boolean`                             | Checks if this element is an ancestor of another. |
-| `getStructurePath()` | `ImmutableList<UIElement>`            | Path from root to this element.                   |
+| `getStructurePath()` | `ImmutableList&lt;UIElement&gt;`            | Path from root to this element.                   |
 
 ---
 
@@ -1572,18 +1887,18 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 
 | Method             | Signature                                    | Description                                         |
 | ------------------ | -------------------------------------------- | --------------------------------------------------- |
-| `style(...)`       | `UIElement style(Consumer<BasicStyle>)`      | Modify inline visual styles.                        |
+| `style(...)`       | `UIElement style(Consumer&lt;BasicStyle&gt;)`      | Modify inline visual styles.                        |
 | `lss(...)`         | `UIElement lss(String, Object)`              | Apply a stylesheet-style property programmatically. |
 | `addClass(...)`    | `UIElement addClass(String)`                 | Adds a CSS-like class.                              |
 | `removeClass(...)` | `UIElement removeClass(String)`              | Removes a class.                                    |
 | `hasClass(...)`    | `boolean`                                    | Checks if the class exists.                         |
-| `getLocalStylesheets()` | `List<Stylesheet>`                       | Returns local stylesheets attached to this element. |
+| `getLocalStylesheets()` | `List&lt;Stylesheet&gt;`                       | Returns local stylesheets attached to this element. |
 | `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(Stylesheet)` | Adds a local stylesheet (self + descendants only).  |
 | `addLocalStylesheet(...)` | `UIElement addLocalStylesheet(String)`     | Parses and adds local stylesheet from LSS text.     |
 | `removeLocalStylesheet(...)` | `UIElement removeLocalStylesheet(Stylesheet)` | Removes a local stylesheet from this element scope. |
 | `clearLocalStylesheets()` | `UIElement`                              | Removes all local stylesheets attached to this element. |
-| `transform(...)`   | `UIElement transform(Consumer<Transform2D>)` | Applies a 2D transform.                             |
-| `animation()`      | `StyleAnimation`                             | Creates a style animation targeting this element. See [StyleAnimation](../preliminary/style_animation.md){ data-preview }. |
+| `transform(...)`   | `UIElement transform(Consumer&lt;Transform2D&gt;)` | Applies a 2D transform.                             |
+| `animation()`      | `StyleAnimation`                             | Creates a style animation targeting this element. See [StyleAnimation](../preliminary/style_animation.md). |
 | `animation(a -> {})`| `StyleAnimation`                            | Runs animation setup immediately if `ModularUI` is valid, or once on `MUI_CHANGED` when it becomes valid. |
 
 ---
@@ -1612,52 +1927,57 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 
 #### Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Bubble-phase listener (default): fires after children handle the event
-    element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
-        event.currentElement.focus();
-    });
+```java
+// Bubble-phase listener (default): fires after children handle the event
+element.addEventListener(UIEvents.MOUSE_DOWN, event -> {
+    event.currentElement.focus();
+});
 
-    // Capture-phase listener: fires before children handle the event
-    element.addEventListener(UIEvents.CLICK, event -> {
-        event.stopPropagation(); // prevent children from seeing this event
-    }, true);
+// Capture-phase listener: fires before children handle the event
+element.addEventListener(UIEvents.CLICK, event -> {
+    event.stopPropagation(); // prevent children from seeing this event
+}, true);
 
-    // Removing a specific listener
-    UIEventListener listener = event -> { /* ... */ };
-    element.addEventListener(UIEvents.CLICK, listener);
-    element.removeEventListener(UIEvents.CLICK, listener);
+// Removing a specific listener
+UIEventListener listener = event -> { /* ... */ };
+element.addEventListener(UIEvents.CLICK, listener);
+element.removeEventListener(UIEvents.CLICK, listener);
 
-    // Stop all mouse/drag events from bubbling to parent elements
-    element.stopInteractionEventsPropagation();
-    ```
+// Stop all mouse/drag events from bubbling to parent elements
+element.stopInteractionEventsPropagation();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element {
-        // Bubble events (default)
-        events {
-            UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
-            UIEvents.CLICK on { event -> /* handle click */ }
-        }
-        // Capture events
-        events(capture = true) {
-            UIEvents.CLICK on { it.stopPropagation() }
-        }
+```kotlin
+element {
+    // Bubble events (default)
+    events {
+        UIEvents.MOUSE_DOWN += UIEventListener { it.currentElement.focus() }
+        UIEvents.CLICK on { event -> /* handle click */ }
     }
-    ```
+    // Capture events
+    events(capture = true) {
+        UIEvents.CLICK on { it.stopPropagation() }
+    }
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    element.addEventListener(UIEvents.MOUSE_DOWN, event => {
-        event.currentElement.focus();
-    });
-    ```
+```js
+element.addEventListener(UIEvents.MOUSE_DOWN, event => {
+    event.currentElement.focus();
+});
+```
 
+</DocTab>
+</DocTabs>
 #### Available Events
 
 | Event | Description |
@@ -1703,91 +2023,102 @@ In XML, you can access internal elements using the `#!xml <internal index="..."/
 | `removeSyncValue(...)`     | `UIElement` | Unregisters a synced value.                |
 | `addRPCEvent(...)`         | `RPCEmitter` | Registers an RPC event.                    |
 | `sendEvent(...)`           | `void`      | Sends an RPC event to server.              |
-| `sendEvent(..., callback)` | `<T> void`  | Sends an RPC event with response callback. |
+| `sendEvent(..., callback)` | `&lt;T&gt; void`  | Sends an RPC event with response callback. |
 
 #### Server Events
 
 Server-side event listeners run on the **server** instead of the client. They use the same `UIEvents` type constants and support both bubble and capture phases. They are automatically synchronized via an internal RPC mechanism.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Runs on the server when UIEvents.TICK fires
-    element.addServerEventListener(UIEvents.TICK, event -> {
-        // server-side tick logic
-    });
-    ```
+```java
+// Runs on the server when UIEvents.TICK fires
+element.addServerEventListener(UIEvents.TICK, event -> {
+    // server-side tick logic
+});
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element {
-        serverEvents {
-            UIEvents.TICK on { event ->
-                // server-side logic
-            }
-        }
-        // Capture phase on server
-        serverEvents(capture = true) {
-            UIEvents.CLICK on { it.stopPropagation() }
+```kotlin
+element {
+    serverEvents {
+        UIEvents.TICK on { event ->
+            // server-side logic
         }
     }
-    ```
+    // Capture phase on server
+    serverEvents(capture = true) {
+        UIEvents.CLICK on { it.stopPropagation() }
+    }
+}
+```
 
+</DocTab>
+</DocTabs>
 #### RPC Events
 
 RPC (Remote Procedure Call) events let the client explicitly invoke logic on the server and optionally receive a response.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Register an RPC event during element initialization
-    RPCEmitter emitter = element.addRPCEvent(ele ->
-        RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
-            // This runs on the server
-            ServerPlayer player = e.modularUI.player;
-            player.sendSystemMessage(Component.literal("Hello from server!"));
-        })
-    );
+```java
+// Register an RPC event during element initialization
+RPCEmitter emitter = element.addRPCEvent(ele ->
+    RPCEventBuilder.simple(UIEvents.CLICK, (e, args) -> {
+        // This runs on the server
+        ServerPlayer player = e.modularUI.player;
+        player.sendSystemMessage(Component.literal("Hello from server!"));
+    })
+);
 
-    // Trigger the RPC from client (e.g., inside a client event listener)
-    element.addEventListener(UIEvents.CLICK, event ->
-        element.sendEvent(emitter.event())
-    );
-    ```
+// Trigger the RPC from client (e.g., inside a client event listener)
+element.addEventListener(UIEvents.CLICK, event ->
+    element.sendEvent(emitter.event())
+);
+```
 
+</DocTab>
+</DocTabs>
 #### Data Bindings
 
 Data bindings automatically synchronize values between server and client. Use `addSyncValue` in Java, or the `bind*` DSL helpers in Kotlin.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Bidirectional: synced server <-> client
-    element.addSyncValue(new SyncValue<>(Integer.class,
-        () -> myData.count,
-        v  -> myData.count = v
-    ));
-    ```
+```java
+// Bidirectional: synced server <-> client
+element.addSyncValue(new SyncValue<>(Integer.class,
+    () -> myData.count,
+    v  -> myData.count = v
+));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    element({}) {
-        // Bidirectional (server <-> client)
-        bind({ myData.count }, { myData.count = it })
+```kotlin
+element({}) {
+    // Bidirectional (server <-> client)
+    bind({ myData.count }, { myData.count = it })
 
-        // Server → client only
-        bindS2C({ myData.count })
+    // Server → client only
+    bindS2C({ myData.count })
 
-        // Client → server only
-        bindC2S({ v -> myData.count = v })
+    // Client → server only
+    bindC2S({ v -> myData.count = v })
 
-        // Bind a mutable property directly (bidirectional)
-        bind(myData::count)
-    }
-    ```
+    // Bind a mutable property directly (bidirectional)
+    bind(myData::count)
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### Rendering

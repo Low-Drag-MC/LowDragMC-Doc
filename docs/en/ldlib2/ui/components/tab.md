@@ -1,11 +1,12 @@
 # Tab
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`Tab` is a single tab header element. It displays a text label and changes its background texture depending on whether it is idle, hovered, or selected. Tabs are normally managed inside a [`TabView`](tab-view.md){ data-preview }, which handles the selection logic.
+`Tab` is a single tab header element. It displays a text label and changes its background texture depending on whether it is idle, hovered, or selected. Tabs are normally managed inside a [`TabView`](tab-view.md), which handles the selection logic.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
@@ -13,28 +14,32 @@
 
 Tabs are usually created alongside a `TabView`:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var tabView = new TabView();
+```java
+var tabView = new TabView();
 
-    var tab1 = new Tab().setText("Settings");
-    var tab2 = new Tab().setText("Info");
+var tab1 = new Tab().setText("Settings");
+var tab2 = new Tab().setText("Info");
 
-    tabView.addTab(tab1, new UIElement()); // tab + its content pane
-    tabView.addTab(tab2, new UIElement());
-    parent.addChild(tabView);
-    ```
+tabView.addTab(tab1, new UIElement()); // tab + its content pane
+tabView.addTab(tab2, new UIElement());
+parent.addChild(tabView);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    tabView({ }) {
-        tab("Settings") { /* add settings content children here */ }
-        tab("Info") { /* add info content children here */ }
-    }
-    ```
+```kotlin
+tabView({ }) {
+    tab("Settings") { /* add settings content children here */ }
+    tab("Info") { /* add info content children here */ }
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -54,8 +59,9 @@ Tabs are usually created alongside a `TabView`:
 </tab-view>
 ```
 
-!!! note ""
-    `Tab` is normally placed as a direct XML child of `<tab-view>`. The `<tab-content>` element specifies the content pane associated with this tab.
+::: info
+`Tab` is normally placed as a direct XML child of `&lt;tab-view&gt;`. The `&lt;tab-content&gt;` element specifies the content pane associated with this tab.
+:::
 
 | XML Attribute | Type | Description |
 | ------------- | ---- | ----------- |
@@ -75,68 +81,86 @@ Tabs are usually created alongside a `TabView`:
 
 `TabStyle` mirrors `Button`'s three-state texture system but uses the three states for **idle**, **hovered**, and **selected**.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    Background when the tab is idle (not selected, not hovered).
+Background when the tab is idle (not selected, not hovered).
 
-    Default: `Sprites.TAB_DARK`
+Default: `Sprites.TAB_DARK`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        tab.tabStyle(style -> style.baseTexture(myIdleTexture));
-        ```
+```java
+tab.tabStyle(style -> style.baseTexture(myIdleTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        tab {
-            base-background: sprite("mymod:textures/gui/tab_idle.png");
-        }
-        ```
+```css
+tab {
+    base-background: sprite("mymod:textures/gui/tab_idle.png");
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Background when the mouse hovers over the tab.
+::: info
+#### <p style="font-size: 1rem;">hover-background</p>
 
-    Default: `Sprites.TAB_WHITE`
+Background when the mouse hovers over the tab.
 
-    === "Java"
+Default: `Sprites.TAB_WHITE`
 
-        ```java
-        tab.tabStyle(style -> style.hoverTexture(myHoverTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+tab.tabStyle(style -> style.hoverTexture(myHoverTexture));
+```
 
-        ```css
-        tab {
-            hover-background: sprite("mymod:textures/gui/tab_hover.png");
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+```css
+tab {
+    hover-background: sprite("mymod:textures/gui/tab_hover.png");
+}
+```
 
-    Background when the tab is **selected** (the `pressed-background` property is reused for the selected state).
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `Sprites.TAB`
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    === "Java"
+Background when the tab is **selected** (the `pressed-background` property is reused for the selected state).
 
-        ```java
-        tab.tabStyle(style -> style.selectedTexture(mySelectedTexture));
-        ```
+Default: `Sprites.TAB`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        tab {
-            pressed-background: sprite("mymod:textures/gui/tab_selected.png");
-        }
-        ```
+```java
+tab.tabStyle(style -> style.selectedTexture(mySelectedTexture));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+tab {
+    pressed-background: sprite("mymod:textures/gui/tab_selected.png");
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -162,9 +186,9 @@ When a tab is selected, it gains the CSS class `.__tab_selected__`. The associat
 | `setText(String)` | `Tab` | Sets the label text (literal). |
 | `setText(String, boolean)` | `Tab` | Sets label text. `true` = translatable. |
 | `setText(Component)` | `Tab` | Sets label from a `Component`. |
-| `setDynamicText(Supplier<Component>)` | `Tab` | Binds label to a data supplier for live updates. |
-| `textStyle(Consumer<TextElement.TextStyle>)` | `Tab` | Configures the label's text style fluently. |
-| `tabStyle(Consumer<TabStyle>)` | `Tab` | Configures `TabStyle` fluently. |
+| `setDynamicText(Supplier&lt;Component&gt;)` | `Tab` | Binds label to a data supplier for live updates. |
+| `textStyle(Consumer&lt;TextElement.TextStyle&gt;)` | `Tab` | Configures the label's text style fluently. |
+| `tabStyle(Consumer&lt;TabStyle&gt;)` | `Tab` | Configures `TabStyle` fluently. |
 | `setOnTabSelected(Runnable)` | — | Callback invoked when this tab is selected. |
 | `setOnTabUnselected(Runnable)` | — | Callback invoked when this tab is deselected. |
 | `getContent()` | `UIElement` (nullable) | Returns the content pane from the parent `TabView`. |

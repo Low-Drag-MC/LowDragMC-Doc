@@ -1,8 +1,8 @@
 # ColorSelector
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`ColorSelector` is a full-featured HSB (Hue–Saturation–Brightness) color picker. It extends `BindableUIElement<Integer>` and its value is the selected color as a packed ARGB integer. It includes:
+`ColorSelector` is a full-featured HSB (Hue–Saturation–Brightness) color picker. It extends `BindableUIElement&lt;Integer&gt;` and its value is the selected color as a packed ARGB integer. It includes:
 
 - An HSB gradient picking surface that can switch between hue, saturation, and brightness axes.
 - A hue/alpha slider.
@@ -10,40 +10,46 @@
 - A color preview swatch.
 - Clipboard copy support.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var picker = new ColorSelector();
-    picker.setValue(0xFF4080FF, false); // initial ARGB color
-    picker.registerValueListener(color -> System.out.printf("Color: #%08X%n", color));
-    parent.addChild(picker);
-    ```
+```java
+var picker = new ColorSelector();
+picker.setValue(0xFF4080FF, false); // initial ARGB color
+picker.registerValueListener(color -> System.out.printf("Color: #%08X%n", color));
+parent.addChild(picker);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    colorSelector({
-        color(0xFF4080FF.toInt())
-        onChange { color -> println("Color: ${color.toString(16)}") }
-    }) { }
-    ```
+```kotlin
+colorSelector({
+    color(0xFF4080FF.toInt())
+    onChange { color -> println("Color: ${color.toString(16)}") }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let picker = new ColorSelector();
-    picker.setValue(0xFF4080FF, false);
-    picker.registerValueListener(color => { /* use color */ });
-    parent.addChild(picker);
-    ```
+```js
+let picker = new ColorSelector();
+picker.setValue(0xFF4080FF, false);
+picker.registerValueListener(color => { /* use color */ });
+parent.addChild(picker);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Internal Structure
@@ -62,18 +68,21 @@
 
 ## Value Binding
 
-`ColorSelector` extends `BindableUIElement<Integer>`:
+`ColorSelector` extends `BindableUIElement&lt;Integer&gt;`:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    picker.bind(DataBindingBuilder.intVal(
-        () -> config.getColor(),
-        color -> config.setColor(color)
-    ).build());
-    ```
+```java
+picker.bind(DataBindingBuilder.intVal(
+    () -> config.getColor(),
+    color -> config.setColor(color)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -97,4 +106,4 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | ------ | ------- | ----------- |
 | `setValue(Integer, boolean)` | `ColorSelector` | Sets the ARGB color value; second param controls notification. |
 | `getValue()` | `Integer` | Returns the current ARGB color. |
-| `registerValueListener(Consumer<Integer>)` | `void` | Registers a listener called whenever the color changes. |
+| `registerValueListener(Consumer&lt;Integer&gt;)` | `void` | Registers a listener called whenever the color changes. |

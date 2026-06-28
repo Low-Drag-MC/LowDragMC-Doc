@@ -23,80 +23,102 @@
 
 Sets the border width.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setBorder(5);
-    ```
+``` java
+colorBorderTexture.setBorder(5);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 Sets the border color.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setColor(0xff00ff);
-    ```
+``` java
+colorBorderTexture.setColor(0xff00ff);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setRadius
 
 Sets uniform inner and outer radii based on the provided radius and current border.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setRadius(10);
-    ```
+``` java
+colorBorderTexture.setRadius(10);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setLeftRadius
 
 Sets the left-side radii for both inner and outer corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setLeftRadius(8);
-    ```
+``` java
+colorBorderTexture.setLeftRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setRightRadius
 
 Sets the right-side radii for both inner and outer corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setRightRadius(8);
-    ```
+``` java
+colorBorderTexture.setRightRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setTopRadius
 
 Sets the top-side radii for both inner and outer corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setTopRadius(8);
-    ```
+``` java
+colorBorderTexture.setTopRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBottomRadius
 
 Sets the bottom-side radii for both inner and outer corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorBorderTexture.setBottomRadius(8);
-    ```
+``` java
+colorBorderTexture.setBottomRadius(8);
+```
+
+</DocTab>
+</DocTabs>

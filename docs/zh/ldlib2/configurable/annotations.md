@@ -46,7 +46,7 @@ public class ShopEntry implements IPersistedSerializable {
 }
 ```
 
-字段既需要编辑又需要保存时使用 `@Configurable`。只需要保存、不需要 editor UI 时使用 `@Persisted`。序列化行为见 [PersistedParser](../sync/PersistedParser.md){ data-preview }。
+字段既需要编辑又需要保存时使用 `@Configurable`。只需要保存、不需要 editor UI 时使用 `@Persisted`。序列化行为见 [PersistedParser](../sync/PersistedParser.md)。
 
 ## 默认值
 
@@ -125,7 +125,7 @@ private Reward newReward() {
 }
 ```
 
-不加 `@ConfigList` 时，LDLib2 仍会构建 list UI。它会找到元素类型，再找到元素 accessor，并为每个元素创建一个子 configurator。比如 `List<Boolean>` 使用 `BooleanAccessor`；`List<Reward>` 则需要 Reward 有支持的 accessor、手动 accessor，或者自定义 item configurator。
+不加 `@ConfigList` 时，LDLib2 仍会构建 list UI。它会找到元素类型，再找到元素 accessor，并为每个元素创建一个子 configurator。比如 `List&lt;Boolean&gt;` 使用 `BooleanAccessor`；`List&lt;Reward&gt;` 则需要 Reward 有支持的 accessor、手动 accessor，或者自定义 item configurator。
 
 `@ConfigList` 参数：
 
@@ -210,7 +210,7 @@ private SearchComponentConfigurator.ISearchConfigurator<Block> createBlockSearch
 重要方法：
 
 * `defaultValue()`：configurator 使用的 fallback 值。
-* `search(String, IResultHandler<T>)`：把匹配结果推入 handler。
+* `search(String, IResultHandler&lt;T&gt;)`：把匹配结果推入 handler。
 * `resultText(T)`：选中值或结果行显示的文本。
 * `candidateUIProvider()`：可选的自定义结果行 UI，通常是图标加文本。
 

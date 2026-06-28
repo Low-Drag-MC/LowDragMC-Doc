@@ -1,52 +1,58 @@
 # GuiTextureGroup
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `GuiTextureGroup` draws multiple `IGuiTexture` instances stacked on top of each other in the order they were added. It is useful for combining a background image with an overlay, or layering a border over a fill.
 
 Registry name: `group_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Layer a sprite background and a coloured border
-    IGuiTexture layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
+```java
+// Layer a sprite background and a coloured border
+IGuiTexture layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
 
-    // Equivalent static factory
-    IGuiTexture same = GuiTextureGroup.of(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
-    ```
+// Equivalent static factory
+IGuiTexture same = GuiTextureGroup.of(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        ColorBorderTexture(1, 0xFFFFFFFF.toInt())
-       )
-    ```
+```kotlin
+val layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    ColorBorderTexture(1, 0xFFFFFFFF.toInt())
+   )
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let layered = IGuiTexture.group(
-        SpriteTexture.of("mymod:textures/gui/bg.png"),
-        new ColorBorderTexture(1, 0xFFFFFFFF)
-    );
-    ```
+```js
+let layered = IGuiTexture.group(
+    SpriteTexture.of("mymod:textures/gui/bg.png"),
+    new ColorBorderTexture(1, 0xFFFFFFFF)
+);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

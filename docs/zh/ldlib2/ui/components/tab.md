@@ -1,11 +1,12 @@
 # Tab
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`Tab` 是一个单独的选项卡头部元素。它显示一个文本标签，并根据其处于空闲、悬停或选中状态而改变背景纹理。选项卡通常在 [`TabView`](tab-view.md){ data-preview } 中管理，由 `TabView` 处理选择逻辑。
+`Tab` 是一个单独的选项卡头部元素。它显示一个文本标签，并根据其处于空闲、悬停或选中状态而改变背景纹理。选项卡通常在 [`TabView`](tab-view.md) 中管理，由 `TabView` 处理选择逻辑。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
@@ -13,28 +14,32 @@
 
 选项卡通常与 `TabView` 一起创建：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var tabView = new TabView();
+```java
+var tabView = new TabView();
 
-    var tab1 = new Tab().setText("Settings");
-    var tab2 = new Tab().setText("Info");
+var tab1 = new Tab().setText("Settings");
+var tab2 = new Tab().setText("Info");
 
-    tabView.addTab(tab1, new UIElement()); // 选项卡 + 其内容面板
-    tabView.addTab(tab2, new UIElement());
-    parent.addChild(tabView);
-    ```
+tabView.addTab(tab1, new UIElement()); // 选项卡 + 其内容面板
+tabView.addTab(tab2, new UIElement());
+parent.addChild(tabView);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    tabView({ }) {
-        tab("Settings") { /* 在此处添加设置内容子元素 */ }
-        tab("Info") { /* 在此处添加信息内容子元素 */ }
-    }
-    ```
+```kotlin
+tabView({ }) {
+    tab("Settings") { /* 在此处添加设置内容子元素 */ }
+    tab("Info") { /* 在此处添加信息内容子元素 */ }
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -54,8 +59,9 @@
 </tab-view>
 ```
 
-!!! note ""
-    `Tab` 通常作为 `<tab-view>` 的直接 XML 子元素放置。`<tab-content>` 元素指定与此选项卡关联的内容面板。
+::: info
+`Tab` 通常作为 `&lt;tab-view&gt;` 的直接 XML 子元素放置。`&lt;tab-content&gt;` 元素指定与此选项卡关联的内容面板。
+:::
 
 | XML 属性 | 类型 | 描述 |
 | --------- | ---- | ---- |
@@ -75,68 +81,86 @@
 
 `TabStyle` 采用与 `Button` 相同的三态纹理系统，但三种状态分别对应**空闲**、**悬停**和**选中**。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    选项卡处于空闲状态（未选中，未悬停）时的背景。
+选项卡处于空闲状态（未选中，未悬停）时的背景。
 
-    默认值：`Sprites.TAB_DARK`
+默认值：`Sprites.TAB_DARK`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        tab.tabStyle(style -> style.baseTexture(myIdleTexture));
-        ```
+```java
+tab.tabStyle(style -> style.baseTexture(myIdleTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        tab {
-            base-background: sprite("mymod:textures/gui/tab_idle.png");
-        }
-        ```
+```css
+tab {
+    base-background: sprite("mymod:textures/gui/tab_idle.png");
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    鼠标悬停在选项卡上时的背景。
+::: info
+#### <p style="font-size: 1rem;">hover-background</p>
 
-    默认值：`Sprites.TAB_WHITE`
+鼠标悬停在选项卡上时的背景。
 
-    === "Java"
+默认值：`Sprites.TAB_WHITE`
 
-        ```java
-        tab.tabStyle(style -> style.hoverTexture(myHoverTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+tab.tabStyle(style -> style.hoverTexture(myHoverTexture));
+```
 
-        ```css
-        tab {
-            hover-background: sprite("mymod:textures/gui/tab_hover.png");
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+```css
+tab {
+    hover-background: sprite("mymod:textures/gui/tab_hover.png");
+}
+```
 
-    选项卡**被选中**时的背景（`pressed-background` 属性被复用于选中状态）。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`Sprites.TAB`
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    === "Java"
+选项卡**被选中**时的背景（`pressed-background` 属性被复用于选中状态）。
 
-        ```java
-        tab.tabStyle(style -> style.selectedTexture(mySelectedTexture));
-        ```
+默认值：`Sprites.TAB`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        tab {
-            pressed-background: sprite("mymod:textures/gui/tab_selected.png");
-        }
-        ```
+```java
+tab.tabStyle(style -> style.selectedTexture(mySelectedTexture));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+tab {
+    pressed-background: sprite("mymod:textures/gui/tab_selected.png");
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -162,9 +186,9 @@
 | `setText(String)` | `Tab` | 设置标签文本（字面量）。 |
 | `setText(String, boolean)` | `Tab` | 设置标签文本。`true` = 可翻译。 |
 | `setText(Component)` | `Tab` | 从 `Component` 设置标签。 |
-| `setDynamicText(Supplier<Component>)` | `Tab` | 将标签绑定到数据提供器以进行实时更新。 |
-| `textStyle(Consumer<TextElement.TextStyle>)` | `Tab` | 流畅地配置标签的文本样式。 |
-| `tabStyle(Consumer<TabStyle>)` | `Tab` | 流畅地配置 `TabStyle`。 |
+| `setDynamicText(Supplier&lt;Component&gt;)` | `Tab` | 将标签绑定到数据提供器以进行实时更新。 |
+| `textStyle(Consumer&lt;TextElement.TextStyle&gt;)` | `Tab` | 流畅地配置标签的文本样式。 |
+| `tabStyle(Consumer&lt;TabStyle&gt;)` | `Tab` | 流畅地配置 `TabStyle`。 |
 | `setOnTabSelected(Runnable)` | — | 此选项卡被选中时调用的回调。 |
 | `setOnTabUnselected(Runnable)` | — | 此选项卡被取消选中时调用的回调。 |
 | `getContent()` | `UIElement` (nullable) | 返回父级 `TabView` 中的内容面板。 |

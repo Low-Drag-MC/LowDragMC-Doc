@@ -4,9 +4,9 @@ Multiblocked2 (mbd2) is the more powerful visual custom machine/multi-block stru
 
 Original project can be found here: [**Multiblocked**](https://www.curseforge.com/minecraft/mc-mods/multiblocked "multiblocked")
 
-:simple-discord: Discord: [Join our Discord](https://discord.com/invite/sDdf2yD9bh)
+<DocIcon name="simple-discord" /> Discord: [Join our Discord](https://discord.com/invite/sDdf2yD9bh)
 
-:simple-github: Github:  [Multiblocked2 Repository](https://github.com/Low-Drag-MC/Multiblocked2)
+<DocIcon name="simple-github" /> Github:  [Multiblocked2 Repository](https://github.com/Low-Drag-MC/Multiblocked2)
 
 ## Compatibility
 

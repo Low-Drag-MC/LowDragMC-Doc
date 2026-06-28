@@ -1,60 +1,66 @@
 # TextField
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `TextField` is a single-line text input element. It supports multiple input **modes** (free string, number, resource location, compound NBT tag), drag-to-change values for numeric fields, a text **validator** for highlighting invalid input, a **formatter** for custom display, and undo/redo via `Ctrl+Z` / `Ctrl+Y`.
 
 The field becomes editable when it is focused (clicked). Keyboard shortcuts follow standard Minecraft conventions: `Ctrl+A` select all, `Ctrl+C/X/V` copy/cut/paste, `Ctrl+←/→` word navigation, `Home`/`End`.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Free string input
-    var field = new TextField();
-    field.setTextResponder(text -> System.out.println("Typed: " + text));
-    parent.addChild(field);
+```java
+// Free string input
+var field = new TextField();
+field.setTextResponder(text -> System.out.println("Typed: " + text));
+parent.addChild(field);
 
-    // Integer input with a range
-    var intField = new TextField();
-    intField.setNumbersOnlyInt(0, 100);
-    intField.setText("50");
-    intField.setTextResponder(raw -> config.setValue(Integer.parseInt(raw)));
+// Integer input with a range
+var intField = new TextField();
+intField.setNumbersOnlyInt(0, 100);
+intField.setText("50");
+intField.setTextResponder(raw -> config.setValue(Integer.parseInt(raw)));
 
-    // Resource location input
-    var rlField = new TextField();
-    rlField.setResourceLocationOnly();
-    ```
+// Resource location input
+var rlField = new TextField();
+rlField.setResourceLocationOnly();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    textField({
-        layout { height(14) }
-    }) {
-        api {
-            setNumbersOnlyInt(0, 100)
-            setText("50")
-            setTextResponder { raw -> config.value = raw.toInt() }
-        }
+```kotlin
+textField({
+    layout { height(14) }
+}) {
+    api {
+        setNumbersOnlyInt(0, 100)
+        setText("50")
+        setTextResponder { raw -> config.value = raw.toInt() }
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let field = new TextField();
-    field.setText("Hello");
-    field.setTextResponder(text => { console.log("Input: " + text); });
-    parent.addChild(field);
-    ```
+```js
+let field = new TextField();
+field.setText("Hello");
+field.setTextResponder(text => { console.log("Input: " + text); });
+parent.addChild(field);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -104,152 +110,190 @@ Number fields support:
 
 ## Text Field Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    Texture drawn over the field when it is hovered or focused.
+Texture drawn over the field when it is hovered or focused.
 
-    Default: `Sprites.RECT_RD_T_SOLID`
+Default: `Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        field.textFieldStyle(style -> style.focusOverlay(myHighlight));
-        ```
+```java
+field.textFieldStyle(style -> style.focusOverlay(myHighlight));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text-field {
-            focus-overlay: rect(#FFFFFF22, 2);
-        }
-        ```
+```css
+text-field {
+    focus-overlay: rect(#FFFFFF22, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font / font-size</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Font and size of the rendered text.
+::: info
+#### <p style="font-size: 1rem;">font / font-size</p>
 
-    Defaults: vanilla default font / `9`
+Font and size of the rendered text.
 
-    === "Java"
+Defaults: vanilla default font / `9`
 
-        ```java
-        field.textFieldStyle(style -> style
-            .font(ResourceLocation.parse("minecraft:uniform"))
-            .fontSize(10)
-        );
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+field.textFieldStyle(style -> style
+    .font(ResourceLocation.parse("minecraft:uniform"))
+    .fontSize(10)
+);
+```
 
-        ```css
-        text-field {
-            font: "minecraft:uniform";
-            font-size: 10;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-color / error-color</p>
+```css
+text-field {
+    font: "minecraft:uniform";
+    font-size: 10;
+}
+```
 
-    Color of valid text and of text that fails validation.
+</DocTab>
+</DocTabs>
+:::
 
-    Defaults: `0xFFFFFF` (white) / `0xFF0000` (red)
+::: info
+#### <p style="font-size: 1rem;">text-color / error-color</p>
 
-    === "Java"
+Color of valid text and of text that fails validation.
 
-        ```java
-        field.textFieldStyle(style -> style
-            .textColor(0xFFFFFF)
-            .errorColor(0xFF4444)
-        );
-        ```
+Defaults: `0xFFFFFF` (white) / `0xFF0000` (red)
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text-field {
-            text-color: #FFFFFF;
-            error-color: #FF4444;
-        }
-        ```
+```java
+field.textFieldStyle(style -> style
+    .textColor(0xFFFFFF)
+    .errorColor(0xFF4444)
+);
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">cursor-color</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Color of the blinking cursor.
+```css
+text-field {
+    text-color: #FFFFFF;
+    error-color: #FF4444;
+}
+```
 
-    Default: `0xEEEEEE`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">cursor-color</p>
 
-        ```java
-        field.textFieldStyle(style -> style.cursorColor(0xFFFFFF));
-        ```
+Color of the blinking cursor.
 
-    === "LSS"
+Default: `0xEEEEEE`
 
-        ```css
-        text-field {
-            cursor-color: #FFFFFF;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-shadow</p>
+```java
+field.textFieldStyle(style -> style.cursorColor(0xFFFFFF));
+```
 
-    Whether to draw a drop shadow under the text.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `true`
+```css
+text-field {
+    cursor-color: #FFFFFF;
+}
+```
 
-    === "LSS"
+</DocTab>
+</DocTabs>
+:::
 
-        ```css
-        text-field {
-            text-shadow: false;
-        }
-        ```
+::: info
+#### <p style="font-size: 1rem;">text-shadow</p>
 
-!!! info ""
-    #### <p style="font-size: 1rem;">placeholder</p>
+Whether to draw a drop shadow under the text.
 
-    Ghost text shown when the field is empty.
+Default: `true`
 
-    Default: translatable key `text_field.empty`
+<DocTabs>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text-field {
+    text-shadow: false;
+}
+```
 
-        ```java
-        field.textFieldStyle(style -> style
-            .placeholder(Component.literal("Enter value…"))
-        );
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">placeholder</p>
 
-        ```css
-        text-field {
-            placeholder: "Enter value…";
-        }
-        ```
+Ghost text shown when the field is empty.
+
+Default: translatable key `text_field.empty`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+field.textFieldStyle(style -> style
+    .placeholder(Component.literal("Enter value…"))
+);
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text-field {
+    placeholder: "Enter value…";
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`TextField` extends `BindableUIElement<String>`, so it supports the standard data-binding system:
+`TextField` extends `BindableUIElement&lt;String&gt;`, so it supports the standard data-binding system:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    field.bind(DataBindingBuilder.string(
-        () -> config.getName(),
-        name -> config.setName(name)
-    ).build());
-    ```
+```java
+field.bind(DataBindingBuilder.string(
+    () -> config.getName(),
+    name -> config.setName(name)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -262,7 +306,7 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | `rawText` | `String` | `private` (getter) | Current display text (may not have passed validation). |
 | `mode` | `Mode` | `private` (getter) | Current input mode. |
 | `isError` | `boolean` | `private` (getter) | `true` when `rawText` fails the validator. |
-| `formatter` | `Function<String, Component>` | `private` (getter/setter/nullable) | Optional function to render `rawText` as a formatted `Component`. |
+| `formatter` | `Function&lt;String, Component&gt;` | `private` (getter/setter/nullable) | Optional function to render `rawText` as a formatted `Component`. |
 | `wheelDur` | `float` | `private` (getter) | Step size for mouse-wheel / drag on number fields. |
 | `cursorPos` | `int` | `private` (getter) | Current cursor position in `rawText`. |
 | `selectionStart` | `int` | `private` (getter) | Selection start in `rawText`. |
@@ -284,12 +328,12 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | `setNumbersOnlyDouble(double, double)` | `TextField` | Double mode with `[min, max]` range. |
 | `setNumbersOnlyShort(short, short)` | `TextField` | Short integer mode with `[min, max]` range. |
 | `setNumbersOnlyByte(byte, byte)` | `TextField` | Byte integer mode with `[min, max]` range. |
-| `setTextValidator(Predicate<String>)` | `TextField` | Custom validator; invalid text is shown in `error-color`. |
+| `setTextValidator(Predicate&lt;String&gt;)` | `TextField` | Custom validator; invalid text is shown in `error-color`. |
 | `setTextRegexValidator(String)` | `TextField` | Convenience to compile a regex and use it as the validator. |
-| `setCharValidator(Predicate<Character>)` | `TextField` | Filters characters before they are inserted. |
-| `setTextResponder(Consumer<String>)` | `TextField` | Registers a listener called on each valid text change. |
+| `setCharValidator(Predicate&lt;Character&gt;)` | `TextField` | Filters characters before they are inserted. |
+| `setTextResponder(Consumer&lt;String&gt;)` | `TextField` | Registers a listener called on each valid text change. |
 | `setWheelDur(float)` | `TextField` | Sets the scroll/drag step for number fields. |
-| `textFieldStyle(Consumer<TextFieldStyle>)` | `TextField` | Configures style fluently. |
+| `textFieldStyle(Consumer&lt;TextFieldStyle&gt;)` | `TextField` | Configures style fluently. |
 | `getValue()` | `String` | Returns the last validated text. |
 | `getRawText()` | `String` | Returns the current display text (may fail validation). |
 | `isEditable()` | `boolean` | `true` when focused, active, visible and displayed. |

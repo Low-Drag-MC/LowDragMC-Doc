@@ -5,9 +5,9 @@
 主要部分：
 
 * `Resources`：项目暴露的资源类型列表。
-* `Resource<T>`：某一种资源类型的定义。
-* `ResourceInstance<T>`：该资源类型的运行时状态。
-* `IResourceProvider<T>`：资源来源。
+* `Resource&lt;T&gt;`：某一种资源类型的定义。
+* `ResourceInstance&lt;T&gt;`：该资源类型的运行时状态。
+* `IResourceProvider&lt;T&gt;`：资源来源。
 * `IResourcePath`：指向某个资源的 typed path。
 * `ResourceView`：显示资源的内置 View。
 
@@ -22,7 +22,7 @@ public Resources getResources() {
 
 ## Resource
 
-`Resource<T>` 定义一种资源类型。它提供：
+`Resource&lt;T&gt;` 定义一种资源类型。它提供：
 
 * 图标；
 * 名称；
@@ -36,7 +36,7 @@ public Resources getResources() {
 
 ## 自定义 Resource
 
-为每一种资产类型创建一个 `Resource<T>` 子类。
+为每一种资产类型创建一个 `Resource&lt;T&gt;` 子类。
 
 ```java
 public class ShopEntryResource extends Resource<ShopEntry> {
@@ -120,7 +120,7 @@ var entry = ShopEntryResource.INSTANCE.getResourceInstance().getResource(path);
 
 ## ResourceInstance
 
-`ResourceInstance<T>` 是资源类型的运行时持有者。它管理：
+`ResourceInstance&lt;T&gt;` 是资源类型的运行时持有者。它管理：
 
 * built-in providers；
 * custom providers；

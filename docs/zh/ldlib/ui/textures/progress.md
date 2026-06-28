@@ -19,32 +19,42 @@
 
 设置进度纹理。`emptyBarArea` 和 `filledBarArea` 可以是任何类型的 [`GUI 纹理`](index.md)。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setTexture(emptyBarArea, filledBarArea);
-    ```
+``` java
+progressTexture.setTexture(emptyBarArea, filledBarArea);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setProgress
 
 设置进度值。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setProgress(0.75);
-    ```
+``` java
+progressTexture.setProgress(0.75);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFillDirection
 
 设置进度条的填充方向。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setFillDirection(ProgressTexture.FillDirection.RIGHT_TO_LEFT);
-    ```
+``` java
+progressTexture.setFillDirection(ProgressTexture.FillDirection.RIGHT_TO_LEFT);
+```
+
+</DocTab>
+</DocTabs>

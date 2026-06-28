@@ -1,6 +1,6 @@
 # Kotlin Support
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 LDLib2 provides a type-safe Kotlin DSL for building UI trees. It wraps the Java API with builder patterns, nested lambdas, and operator overloads to make UI construction more concise and structured.
 
@@ -78,7 +78,7 @@ element({
 
 ### `layout` block
 
-Uses `TaffyLayoutStyleDsl`. Read [Layout](preliminary/layout.md){ data-preview } for all available properties. Common examples:
+Uses `TaffyLayoutStyleDsl`. Read [Layout](preliminary/layout.md) for all available properties. Common examples:
 
 ```kotlin
 layout = {
@@ -103,7 +103,7 @@ layout = {
 
 ### `style` block
 
-Uses `BasicStyle` directly. Read [UIElement Styles](components/element.md#styles){ data-preview } for all available properties.
+Uses `BasicStyle` directly. Read [UIElement Styles](components/element.md#styles) for all available properties.
 
 ### `cls` block
 
@@ -185,8 +185,9 @@ element({ layout = { size(50.px) } }) {
 }
 ```
 
-!!! note ""
-    The `e` parameter in `events { e -> ... }` is the `UIElement` being built. It is useful when you need a reference to the element inside the event handler (e.g., to call `e.animation()`).
+::: info
+The `e` parameter in `events { e -> ... }` is the `UIElement` being built. It is useful when you need a reference to the element inside the event handler (e.g., to call `e.animation()`).
+:::
 
 ---
 
@@ -219,8 +220,9 @@ serverEvents(capture = true) {
 
 Bindings synchronize values between the server and client. They are set inside the **init block** on the `UIContainer`.
 
-!!! note ""
-    Bindings require both sides of the stack. They only make sense in a `@LDLRegister` (server-side) menu context, not a `@LDLRegisterClient`-only screen.
+::: info
+Bindings require both sides of the stack. They only make sense in a `@LDLRegister` (server-side) menu context, not a `@LDLRegisterClient`-only screen.
+:::
 
 ### `bind` — Bidirectional
 

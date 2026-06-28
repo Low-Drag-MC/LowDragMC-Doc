@@ -1,42 +1,48 @@
 # UITemplateElement
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`UITemplateElement` loads a saved [`UITemplate`](../ui_template.md){ data-preview } resource and inserts its children and stylesheets into itself at runtime. It is used to reuse UI layouts created in the editor without duplicating code.
+`UITemplateElement` loads a saved [`UITemplate`](../editor.md) resource and inserts its children and stylesheets into itself at runtime. It is used to reuse UI layouts created in the editor without duplicating code.
 
 Circular template references are detected and logged as errors.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var tmpl = new UITemplateElement(IResourcePath.parse("mymod:my_panel"));
-    parent.addChild(tmpl);
+```java
+var tmpl = new UITemplateElement(IResourcePath.parse("mymod:my_panel"));
+parent.addChild(tmpl);
 
-    // Change the template at runtime:
-    tmpl.setTemplate(IResourcePath.parse("mymod:other_panel"));
-    ```
+// Change the template at runtime:
+tmpl.setTemplate(IResourcePath.parse("mymod:other_panel"));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    uiTemplate("mymod:my_panel") { }
-    ```
+```kotlin
+uiTemplate("mymod:my_panel") { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let tmpl = new UITemplateElement();
-    tmpl.setTemplate(IResourcePath.parse("mymod:my_panel"));
-    parent.addChild(tmpl);
-    ```
+```js
+let tmpl = new UITemplateElement();
+tmpl.setTemplate(IResourcePath.parse("mymod:my_panel"));
+parent.addChild(tmpl);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML

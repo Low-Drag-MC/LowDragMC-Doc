@@ -1,6 +1,6 @@
 # Basics
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 LDLib2 UI follows ideas similar to **Web UI**, **UI Toolkits**, and **fluent-style APIs**.  
 All UI objects are built from a single base type called **`UIElement`**.  

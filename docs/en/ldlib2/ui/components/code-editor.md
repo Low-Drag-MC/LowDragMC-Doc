@@ -1,8 +1,8 @@
 # CodeEditor
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`CodeEditor` extends [`TextArea`](text-area.md){ data-preview } and adds syntax highlighting, code folding, and editor-quality keyboard shortcuts. It uses the built-in JetBrains Mono Bold font by default.
+`CodeEditor` extends [`TextArea`](text-area.md) and adds syntax highlighting, code folding, and editor-quality keyboard shortcuts. It uses the built-in JetBrains Mono Bold font by default.
 
 Additional shortcuts over `TextArea`:
 
@@ -12,43 +12,49 @@ Additional shortcuts over `TextArea`:
 | `Ctrl+/` | Toggles `//` line comments on the current line or selection. |
 | `Enter` | Inserts a new line and preserves the leading indentation of the previous line. |
 
-Everything from [`TextArea`](text-area.md){ data-preview } (styles, value binding, validators, scrollers, etc.) applies here too.
+Everything from [`TextArea`](text-area.md) (styles, value binding, validators, scrollers, etc.) applies here too.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var editor = new CodeEditor();
-    editor.setLanguage(Languages.JSON);
-    editor.setValue(new String[] { "{", "  \"key\": \"value\"", "}" }, false);
-    editor.setLinesResponder(lines -> System.out.println(String.join("\n", lines)));
-    parent.addChild(editor);
-    ```
+```java
+var editor = new CodeEditor();
+editor.setLanguage(Languages.JSON);
+editor.setValue(new String[] { "{", "  \"key\": \"value\"", "}" }, false);
+editor.setLinesResponder(lines -> System.out.println(String.join("\n", lines)));
+parent.addChild(editor);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    codeEditor({
-        language(Languages.JSON)
-        layout = { width(300.px); height(200.px) }
-    }) { }
-    ```
+```kotlin
+codeEditor({
+    language(Languages.JSON)
+    layout = { width(300.px); height(200.px) }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let editor = new CodeEditor();
-    editor.setLanguage(Languages.JSON);
-    editor.setValue(["{", "  \"key\": \"value\"", "}"], false);
-    parent.addChild(editor);
-    ```
+```js
+let editor = new CodeEditor();
+editor.setLanguage(Languages.JSON);
+editor.setValue(["{", "  \"key\": \"value\"", "}"], false);
+parent.addChild(editor);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -77,4 +83,4 @@ Text content is split by newlines into lines (same as `TextArea`).
 | `setLanguage(ILanguageDefinition)` | `CodeEditor` | Sets the language for syntax highlighting (e.g. `Languages.JSON`, `Languages.SNBT`). |
 | `getLanguage()` | `ILanguageDefinition` | Returns the current language. |
 
-All methods from [`TextArea`](text-area.md){ data-preview } are also available.
+All methods from [`TextArea`](text-area.md) are also available.

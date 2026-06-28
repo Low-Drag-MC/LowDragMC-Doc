@@ -1,52 +1,58 @@
 # Toggle
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `Toggle` 是一个可选中的 UI 组件——一个带有标记图标和可选标签的方形按钮。点击会切换其 `on/off` 状态。多个 Toggle 可以关联到一个 [`ToggleGroup`](#toggle-group) 中，实现互斥（类似单选按钮）的选择。
 
 在内部，`Toggle` 是一个水平 flex 行，包含一个 **`Button`**（可点击的方块，内部有标记图标）和一个 **`Label`**（文本标签）。两者均为**内部**子元素。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var toggle = new Toggle();
-    toggle.setText("my.toggle.label", true); // 可翻译的
-    toggle.setOn(true);
-    toggle.setOnToggleChanged(isOn -> {
-        // 状态变化时调用
-    });
-    parent.addChild(toggle);
-    ```
+```java
+var toggle = new Toggle();
+toggle.setText("my.toggle.label", true); // 可翻译的
+toggle.setOn(true);
+toggle.setOnToggleChanged(isOn -> {
+    // 状态变化时调用
+});
+parent.addChild(toggle);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    toggle({
-        text("my.toggle.label")
-        isOn = true
-        onToggle { isOn -> /* 状态变化 */ }
-    }) {
-        // 如有需要可添加额外子元素
-    }
-    ```
+```kotlin
+toggle({
+    text("my.toggle.label")
+    isOn = true
+    onToggle { isOn -> /* 状态变化 */ }
+}) {
+    // 如有需要可添加额外子元素
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let toggle = new Toggle();
-    toggle.setText("my.toggle.label", true);
-    toggle.setOn(true);
-    toggle.setOnToggleChanged(isOn => { /* ... */ });
-    parent.addChild(toggle);
-    ```
+```js
+let toggle = new Toggle();
+toggle.setText("my.toggle.label", true);
+toggle.setOn(true);
+toggle.setOnToggleChanged(isOn => { /* ... */ });
+parent.addChild(toggle);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -109,93 +115,114 @@ toggle > label.__toggle_label__ {
 
 `ToggleStyle` 控制方块按钮的纹理以及标记/取消标记图标。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background / hover-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background / hover-background</p>
 
-    内部 `Button` 在空闲和悬停状态下的纹理（委托给 `ButtonStyle`）。
+内部 `Button` 在空闲和悬停状态下的纹理（委托给 `ButtonStyle`）。
 
-    默认值：`Sprites.RECT_DARK` / `Sprites.RECT_DARK` + 白色边框
+默认值：`Sprites.RECT_DARK` / `Sprites.RECT_DARK` + 白色边框
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        toggle.toggleStyle(style -> {
-            style.baseTexture(myIdleTexture);   // 同时设置 base 和 pressed
-            style.hoverTexture(myHoverTexture);
-        });
-        ```
+```java
+toggle.toggleStyle(style -> {
+    style.baseTexture(myIdleTexture);   // 同时设置 base 和 pressed
+    style.hoverTexture(myHoverTexture);
+});
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        toggle({ toggleStyle = {
-            baseTexture(myIdleTexture)
-            hoverTexture(myHoverTexture)
-        } }) { }
-        ```
+```kotlin
+toggle({ toggleStyle = {
+    baseTexture(myIdleTexture)
+    hoverTexture(myHoverTexture)
+} }) { }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        toggle > button.__toggle_button__ {
-            base-background: rect(#4a4a4a, 2);
-            hover-background: rect(#5a5a5a, 2);
-        }
-        ```
+```css
+toggle > button.__toggle_button__ {
+    base-background: rect(#4a4a4a, 2);
+    hover-background: rect(#5a5a5a, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">unmark-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Toggle 处于**关闭**状态时，方块内部显示的图标。
+::: info
+#### <p style="font-size: 1rem;">unmark-background</p>
 
-    默认值：无（透明）
+Toggle 处于**关闭**状态时，方块内部显示的图标。
 
-    === "Java"
+默认值：无（透明）
 
-        ```java
-        toggle.toggleStyle(style -> style.unmarkTexture(myUncheckedIcon));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+toggle.toggleStyle(style -> style.unmarkTexture(myUncheckedIcon));
+```
 
-        ```kotlin
-        toggle({ toggleStyle = { unmarkTexture(myUncheckedIcon) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+toggle({ toggleStyle = { unmarkTexture(myUncheckedIcon) } }) { }
+```
 
-        ```css
-        toggle {
-            unmark-background: sprite("mymod:textures/gui/unchecked.png");
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">mark-background</p>
+```css
+toggle {
+    unmark-background: sprite("mymod:textures/gui/unchecked.png");
+}
+```
 
-    Toggle 处于**开启**状态时，方块内部显示的图标。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`Icons.CHECK_SPRITE`
+::: info
+#### <p style="font-size: 1rem;">mark-background</p>
 
-    === "Java"
+Toggle 处于**开启**状态时，方块内部显示的图标。
 
-        ```java
-        toggle.toggleStyle(style -> style.markTexture(myCheckedIcon));
-        ```
+默认值：`Icons.CHECK_SPRITE`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        toggle({ toggleStyle = { markTexture(myCheckedIcon) } }) { }
-        ```
+```java
+toggle.toggleStyle(style -> style.markTexture(myCheckedIcon));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        toggle {
-            mark-background: sprite("mymod:textures/gui/checked.png");
-        }
-        ```
+```kotlin
+toggle({ toggleStyle = { markTexture(myCheckedIcon) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+toggle {
+    mark-background: sprite("mymod:textures/gui/checked.png");
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -203,39 +230,45 @@ toggle > label.__toggle_label__ {
 
 `ToggleGroup` 将多个 `Toggle` 实例关联起来，使得同一时间只有一个可以处于激活状态（类似单选按钮组）。当 `allowEmpty` 为 `false`（默认值）时，始终至少有一个 Toggle 处于激活状态。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var group = new Toggle.ToggleGroup();
-    // group.setAllowEmpty(true); // 允许所有 Toggle 都关闭
+```java
+var group = new Toggle.ToggleGroup();
+// group.setAllowEmpty(true); // 允许所有 Toggle 都关闭
 
-    var t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
-    var t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
-    var t3 = new Toggle().setText("Option C", true).setToggleGroup(group);
+var t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
+var t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
+var t3 = new Toggle().setText("Option C", true).setToggleGroup(group);
 
-    group.getCurrentToggle(); // 当前激活的 Toggle（如果 allowEmpty 则为 null）
-    ```
+group.getCurrentToggle(); // 当前激活的 Toggle（如果 allowEmpty 则为 null）
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val group = Toggle.ToggleGroup()
+```kotlin
+val group = Toggle.ToggleGroup()
 
-    val t1 = toggle({ text("Option A"); toggleGroup = group }) { }
-    val t2 = toggle({ text("Option B"); toggleGroup = group }) { }
-    val t3 = toggle({ text("Option C"); toggleGroup = group }) { }
-    ```
+val t1 = toggle({ text("Option A"); toggleGroup = group }) { }
+val t2 = toggle({ text("Option B"); toggleGroup = group }) { }
+val t3 = toggle({ text("Option C"); toggleGroup = group }) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let group = new Toggle.ToggleGroup();
-    let t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
-    let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
-    ```
+```js
+let group = new Toggle.ToggleGroup();
+let t1 = new Toggle().setText("Option A", true).setToggleGroup(group);
+let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
+```
 
-!!! tip ""
-    使用 [`ToggleGroupElement`](toggle-group.md){ data-preview } 通过 XML / 编辑器自动管理分组——在子元素添加时自动注册，移除时自动注销。
+</DocTab>
+</DocTabs>
+::: tip
+使用 [`ToggleGroupElement`](toggle-group.md) 通过 XML / 编辑器自动管理分组——在子元素添加时自动注册，移除时自动注销。
+:::
 
 ---
 
@@ -245,49 +278,57 @@ toggle > label.__toggle_label__ {
 
 控制 Toggle 方块右侧显示的标签。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    toggle.setText("my.translation.key", true);  // 可翻译的
-    toggle.setText("Literal label", false);        // 字面量
-    toggle.noText();                               // 隐藏标签
-    toggle.enableText();                           // 再次显示
-    ```
+```java
+toggle.setText("my.translation.key", true);  // 可翻译的
+toggle.setText("Literal label", false);        // 字面量
+toggle.noText();                               // 隐藏标签
+toggle.enableText();                           // 再次显示
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    toggle({
-        text("my.translation.key")   // 可翻译的（默认）
-        noText()                      // 隐藏标签
-    }) { }
-    ```
+```kotlin
+toggle({
+    text("my.translation.key")   // 可翻译的（默认）
+    noText()                      // 隐藏标签
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    toggle.setText(Component.literal("Literal label"));
-    toggle.setText("my.key", true);
-    toggle.noText();
-    toggle.enableText();
-    ```
+```js
+toggle.setText(Component.literal("Literal label"));
+toggle.setText("my.key", true);
+toggle.noText();
+toggle.enableText();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 值绑定
 
-`Toggle` 继承自 `BindableUIElement<Boolean>`，因此可以与数据绑定系统集成：
+`Toggle` 继承自 `BindableUIElement&lt;Boolean&gt;`，因此可以与数据绑定系统集成：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    toggle.bind(DataBindingBuilder.bool(
-        () -> myState.isEnabled(),
-        val -> myState.setEnabled(val)
-    ).build());
-    ```
+```java
+toggle.bind(DataBindingBuilder.bool(
+    () -> myState.isEnabled(),
+    val -> myState.setEnabled(val)
+).build());
+```
 
-详细信息请参阅 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+详细信息请参阅 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -314,8 +355,8 @@ toggle > label.__toggle_label__ {
 | `setText(String, boolean)` | `Toggle` | 设置标签文本。`true` = 可翻译。 |
 | `noText()` | `Toggle` | 隐藏标签。 |
 | `enableText()` | `Toggle` | 显示标签。 |
-| `toggleStyle(Consumer<ToggleStyle>)` | `Toggle` | 以流式方式配置 `ToggleStyle`。 |
-| `toggleButton(Consumer<Button>)` | `Toggle` | 直接配置内部 `Button`。 |
-| `toggleLabel(Consumer<Label>)` | `Toggle` | 直接配置标签。 |
-| `markIcon(Consumer<UIElement>)` | `Toggle` | 直接配置标记图标元素。 |
+| `toggleStyle(Consumer&lt;ToggleStyle&gt;)` | `Toggle` | 以流式方式配置 `ToggleStyle`。 |
+| `toggleButton(Consumer&lt;Button&gt;)` | `Toggle` | 直接配置内部 `Button`。 |
+| `toggleLabel(Consumer&lt;Label&gt;)` | `Toggle` | 直接配置标签。 |
+| `markIcon(Consumer&lt;UIElement&gt;)` | `Toggle` | 直接配置标记图标元素。 |
 | `getValue()` | `Boolean` | 返回当前 on/off 状态。 |

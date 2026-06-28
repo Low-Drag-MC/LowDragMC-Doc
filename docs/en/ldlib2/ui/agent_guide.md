@@ -53,94 +53,104 @@ Each template is a complete, runnable starting point. Pick the one matching Step
 
 ### Client-only Screen
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    ModularUI createUI() {
-        var root = new UIElement().addClass("panel_bg").addChildren(
-            new Label().setText("Hello")
-        );
-        return ModularUI.of(UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)));
-    }
-    // Open: Minecraft.getInstance().setScreen(new ModularUIScreen(createUI(), Component.empty()));
-    ```
-
-=== "Kotlin"
-
-    ```kotlin
-    fun createUI(): ModularUI {
-        val root = element({ cls = { +"panel_bg" } }) {
-            label({ text("Hello") })
-        }
-        return ModularUI(UI.of(root, StylesheetManager.GDP))
-    }
-    // Open: Minecraft.getInstance().setScreen(ModularUIScreen(createUI(), Component.empty()))
-    ```
-
-=== "KubeJS"
-
-    ```javascript
-    // Client-only screen must be opened from client_scripts
-    let root = new UIElement().addClass("panel_bg").addChildren(
+```java
+ModularUI createUI() {
+    var root = new UIElement().addClass("panel_bg").addChildren(
         new Label().setText("Hello")
     );
-    let mui = ModularUI.of(UI.of(root));
-    // Open via client-side trigger
-    ```
+    return ModularUI.of(UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)));
+}
+// Open: Minecraft.getInstance().setScreen(new ModularUIScreen(createUI(), Component.empty()));
+```
 
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+fun createUI(): ModularUI {
+    val root = element({ cls = { +"panel_bg" } }) {
+        label({ text("Hello") })
+    }
+    return ModularUI(UI.of(root, StylesheetManager.GDP))
+}
+// Open: Minecraft.getInstance().setScreen(ModularUIScreen(createUI(), Component.empty()))
+```
+
+</DocTab>
+<DocTab title="KubeJS">
+
+```javascript
+// Client-only screen must be opened from client_scripts
+let root = new UIElement().addClass("panel_bg").addChildren(
+    new Label().setText("Hello")
+);
+let mui = ModularUI.of(UI.of(root));
+// Open via client-side trigger
+```
+
+</DocTab>
+</DocTabs>
 ### Menu-based UI (Server-synced)
 
 For Menu UIs, use the built-in factories. See [factory.md](./factory.md) for full details.
 
-=== "Java (Block)"
+<DocTabs>
+<DocTab title="Java (Block)">
 
-    ```java
-    public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
-        @Override
-        public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-            var root = new UIElement().addClass("panel_bg").addChildren(
-                new Label().setText("Block UI"),
-                new InventorySlots()
-            );
-            return ModularUI.of(
-                UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)),
-                holder.player
-            );
-        }
-        // Open: BlockUIMenuType.openUI((ServerPlayer) player, pos);
+```java
+public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
+    @Override
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
+        var root = new UIElement().addClass("panel_bg").addChildren(
+            new Label().setText("Block UI"),
+            new InventorySlots()
+        );
+        return ModularUI.of(
+            UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)),
+            holder.player
+        );
     }
-    ```
+    // Open: BlockUIMenuType.openUI((ServerPlayer) player, pos);
+}
+```
 
-=== "Kotlin (Block)"
+</DocTab>
+<DocTab title="Kotlin (Block)">
 
-    ```kotlin
-    class MyBlock : Block(...), BlockUIMenuType.BlockUI {
-        override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
-            val root = element({ cls = { +"panel_bg" } }) {
-                label({ text("Block UI") })
-                inventorySlots()
-            }
-            return ModularUI(UI.of(root, StylesheetManager.GDP), holder.player)
+```kotlin
+class MyBlock : Block(...), BlockUIMenuType.BlockUI {
+    override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
+        val root = element({ cls = { +"panel_bg" } }) {
+            label({ text("Block UI") })
+            inventorySlots()
         }
-        // Open: BlockUIMenuType.openUI(player as ServerPlayer, pos)
+        return ModularUI(UI.of(root, StylesheetManager.GDP), holder.player)
     }
-    ```
+    // Open: BlockUIMenuType.openUI(player as ServerPlayer, pos)
+}
+```
 
-=== "KubeJS (Block)"
+</DocTab>
+<DocTab title="KubeJS (Block)">
 
-    ```javascript
-    // startup_scripts/main.js — runs on both sides
-    LDLib2UI.block("mymod:my_block_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(
-            new UIElement().addClass("panel_bg").addChildren(
-                new Label().setText("Block UI"),
-                new InventorySlots()
-            )
-        ), event.player);
-    });
-    // server_scripts: LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
-    ```
+```javascript
+// startup_scripts/main.js — runs on both sides
+LDLib2UI.block("mymod:my_block_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(
+        new UIElement().addClass("panel_bg").addChildren(
+            new Label().setText("Block UI"),
+            new InventorySlots()
+        )
+    ), event.player);
+});
+// server_scripts: LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
+```
 
+</DocTab>
+</DocTabs>
 > **Other triggers:** Replace `BlockUIMenuType` with `HeldItemUIMenuType` (item) or `PlayerUIMenuType` (arbitrary). See [factory.md](./factory.md).
 
 ### HUD Overlay
@@ -275,7 +285,7 @@ Use this table to find detailed documentation by need.
 | Code editor | `CodeEditor` | — | [code-editor.md](./components/code-editor.md) |
 | Inspector | `Inspector` | — | [inspector.md](./components/inspector.md) |
 | Template | `Template` | (load from XML) | [template.md](./components/template.md) |
-| Bindable value | `BindableValue<T>` | `.bind()` (hidden sync helper) | [bindable-value.md](./components/bindable-value.md) |
+| Bindable value | `BindableValue&lt;T&gt;` | `.bind()` (hidden sync helper) | [bindable-value.md](./components/bindable-value.md) |
 | Rich text | `Text` | `.setText()` | [text.md](./components/text.md) |
 
 ### Textures Quick Reference
@@ -306,6 +316,6 @@ Before returning code to the user, verify:
 - [ ] **Data bindings are correct**: Server data uses `DataBindingBuilder.xxx().build()` + `.bind()`; client-only data uses `bindDataSource`/`bindObserver`
 - [ ] **Factory is registered**: Menu UIs need a factory registration (Block/Item/Player) or manual MenuType
 - [ ] **KubeJS script placement**: `LDLib2UI.*` handlers must run on both sides — prefer `startup_scripts/`
-- [ ] **XML files** are placed under `assets/<modid>/ui/` and loaded via `ResourceLocation`
+- [ ] **XML files** are placed under `assets/&lt;modid&gt;/ui/` and loaded via `ResourceLocation`
 - [ ] **Stylesheet applied**: Use `StylesheetManager.GDP`, `.MC`, or `.MODERN` for built-in themes, or provide custom LSS
 - [ ] **Output format matches request**: Return `ModularUI` for full UIs, `UIElement` for reusable components

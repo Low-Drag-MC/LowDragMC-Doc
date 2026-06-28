@@ -1,6 +1,6 @@
 # VanillaSpriteTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `VanillaSpriteTexture` renders a sprite that is already registered in Minecraft's vanilla GUI atlas. Use it when you want to draw a vanilla UI sprite such as the recipe-book toast icon or other atlas-backed GUI parts.
 
@@ -10,43 +10,50 @@ Sprite identifiers follow Minecraft's `blitSprite` convention: they are relative
 
 Registry name: `vanilla_sprite_texture`
 
-!!! note ""
-    Extends `TransformTexture` - supports `rotate()`, `scale()`, `transform()`, and color tinting.
+::: info
+Extends `TransformTexture` - supports `rotate()`, `scale()`, `transform()`, and color tinting.
+:::
 
-!!! tip ""
-    Use [`SpriteTexture`](sprite.md) for your own image files. Use `VanillaSpriteTexture` when the image is provided by Minecraft's GUI atlas.
+::: tip
+Use [`SpriteTexture`](sprite.md) for your own image files. Use `VanillaSpriteTexture` when the image is provided by Minecraft's GUI atlas.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    IGuiTexture toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
+```java
+IGuiTexture toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
 
-    IGuiTexture tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44);
-    ```
+IGuiTexture tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+```kotlin
+val toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
 
-    val tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44.toInt())
-    ```
+val tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
+```js
+let toastIcon = VanillaSpriteTexture.of("minecraft:toast/recipe_book");
 
-    let tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
-        .setColor(0xFFFFAA44);
-    ```
+let tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
+    .setColor(0xFFFFAA44);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

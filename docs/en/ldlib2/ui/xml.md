@@ -1,6 +1,6 @@
 # UI Xml
 
-{{ version_badge("2.1.6", label="Since", icon="tag") }}
+<VersionBadge version="2.1.6" label="Since" icon="tag" />
 
 LDLib2 allows you to define UIs using **XML**, including both **styles** and the **component tree**.  
 This provides a workflow similar to **HTML (H5) UI development**, making UI structure clear and declarative.
@@ -35,52 +35,59 @@ When editing the XML in VS Code, IntelliJ IDEA, or other IDEs, the schema enable
 
 You can load and use a UI XML file in the following way:
 
-<figure markdown="span">
-  ![Editor apperance](./assets/xml_path.png){ width="80%" }
+<figure>
+<img src="./assets/xml_path.png" alt="Editor apperance" width="80%">
 </figure>
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
-    if (xml != null) {
-        var ui = UI.of(xml);
+```java
+var xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
+if (xml != null) {
+    var ui = UI.of(xml);
 
-        // find elemetns and do data bindings or logic setup here
-        var buttons = ui.select(".button_container > button").toList(); // by selector
-        var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
-    }
-    ```
-=== "KubeJS"
+    // find elemetns and do data bindings or logic setup here
+    var buttons = ui.select(".button_container > button").toList(); // by selector
+    var container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+}
+```
 
-    ```js
-    let xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
-    if (xml != null) {
-        let ui = UI.of(xml);
-        
-        // find elemetns and do data bindings or logic setup here
-        let buttons = ui.select(".button_container > button").toList(); // by selector
-        let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
-    }
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
-!!! info
-    `XmlUtils`also provides other ways to load XML documents, such as from strings or input streams.
-    Choose the method that best fits your use case.
+```js
+let xml = XmlUtils.loadXml(ResourceLocation.parse("ldlib2:tuto.xml"));
+if (xml != null) {
+    let ui = UI.of(xml);
+
+    // find elemetns and do data bindings or logic setup here
+    let buttons = ui.select(".button_container > button").toList(); // by selector
+    let container = ui.selectRegex("container").findFirst().orElseThrow(); // by id regex
+}
+```
+
+</DocTab>
+</DocTabs>
+::: info
+`XmlUtils`also provides other ways to load XML documents, such as from strings or input streams.
+Choose the method that best fits your use case.
+:::
 
 
 ## XML Syntax Overview
 
 LDLib2 UI XML uses a **declarative syntax** to describe both the **UI structure** and its **styles**, similar to HTML + CSS.
 
-At the top level, the `<ldlib2-ui>` root defines a complete UI document.  
+At the top level, the `&lt;ldlib2-ui&gt;` root defines a complete UI document.  
 Inside it, you can describe **styles**, **external stylesheets**, and the **component tree**.
 
 ### Stylesheet
 
-!!! note inline end
-    Read [LSS page](./preliminary/stylesheet.md) before reading this chapter.
-You can reference external LSS files using the `<stylesheet>` tag:
+::: info
+Read [LSS page](./preliminary/stylesheet.md) before reading this chapter.
+:::
+You can reference external LSS files using the `&lt;stylesheet&gt;` tag:
 
 ```xml
 <stylesheet location="ldlib2:lss/mc.lss"/>
@@ -88,11 +95,11 @@ You can reference external LSS files using the `<stylesheet>` tag:
 
 This allows you to reuse shared styles or let resource packs override UI appearance globally.
 
-When `<stylesheet>` is placed directly under `#!xml <ldlib2-ui>`, it is a **global stylesheet** for the whole UI.
+When `&lt;stylesheet&gt;` is placed directly under `#!xml &lt;ldlib2-ui&gt;`, it is a **global stylesheet** for the whole UI.
 
 ### Embedded Styles
 
-Inline styles can be defined inside a `<style>` block using **LSS (LDLib Style Sheet)** syntax:
+Inline styles can be defined inside a `&lt;style&gt;` block using **LSS (LDLib Style Sheet)** syntax:
 
 ```xml
 <style>
@@ -109,11 +116,11 @@ Inline styles can be defined inside a `<style>` block using **LSS (LDLib Style S
 </style>
 ```
 
-When `<style>` is placed directly under `#!xml <ldlib2-ui>`, it is also **global** for the whole UI.
+When `&lt;style&gt;` is placed directly under `#!xml &lt;ldlib2-ui&gt;`, it is also **global** for the whole UI.
 
 ### Local Stylesheet on Elements
 
-You can also place `<style>` or `<stylesheet>` inside any element node (for example `root`, `element`, `button`, `tab`, `selector`).
+You can also place `&lt;style&gt;` or `&lt;stylesheet&gt;` inside any element node (for example `root`, `element`, `button`, `tab`, `selector`).
 
 In this case, the stylesheet is treated as a **local stylesheet** and only affects:
 
@@ -139,8 +146,9 @@ It does not affect parent elements or sibling branches.
 
 In the example above, the width rule applies to the button inside `left-panel`, not to the sibling button outside.
 
-!!! note
-    `ldlib2-ui.xsd` includes these element-level `<style>` / `<stylesheet>` nodes, so IDE schema validation and completion work for local stylesheet definitions too.
+::: info
+`ldlib2-ui.xsd` includes these element-level `&lt;style&gt;` / `&lt;stylesheet&gt;` nodes, so IDE schema validation and completion work for local stylesheet definitions too.
+:::
 
 ### Inline Style Attribute
 
@@ -154,7 +162,7 @@ Inline styles have higher priority than stylesheet rules.
 
 ### Component Tree
 
-The UI layout is described as a **tree of elements** under `<root>`.
+The UI layout is described as a **tree of elements** under `&lt;root&gt;`.
 Each XML node maps to a UI component, and nesting defines parent–child relationships.
 
 Attributes are used to configure component properties, while child nodes define structure.
@@ -163,9 +171,9 @@ Attributes are used to configure component properties, while child nodes define 
 
 In short:
 
-* **`<stylesheet>`** → load external styles
-* **`<style>`** → define embedded styles
-* **element-level `<stylesheet>` / `<style>`** → local stylesheet scoped to that element subtree
+* **`&lt;stylesheet&gt;`** → load external styles
+* **`&lt;style&gt;`** → define embedded styles
+* **element-level `&lt;stylesheet&gt;` / `&lt;style&gt;`** → local stylesheet scoped to that element subtree
 * **`style` attribute** → inline styles
 * **XML hierarchy** → UI component tree
 

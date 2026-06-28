@@ -10,24 +10,28 @@ All widgets inherit from the [Widget](https://github.com/Low-Drag-MC/LDLib-Multi
 
 All properties can be accessed via Java / KubeJS.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java 
-    var id = widget.getId();
-    var pos = widget.getPosition();
-    widget.setSize(10, 32);
-    widget.setSlefPosition(10, 10);
-    ```
+``` java 
+var id = widget.getId();
+var pos = widget.getPosition();
+widget.setSize(10, 32);
+widget.setSlefPosition(10, 10);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    let id = widget.getId();
-    let pos = widget.position // getPosition() is also fine.
-    widget.setSize(10, 32);
-    widget.setSlefPosition(10, 10);
-    ```
+``` javascript
+let id = widget.getId();
+let pos = widget.position // getPosition() is also fine.
+widget.setSize(10, 32);
+widget.setSlefPosition(10, 10);
+```
 
+</DocTab>
+</DocTabs>
 | Field       | Description                          |
 | :---------- | :----------------------------------- |
 | `id`       | Widget id, it doesn't have to be unique，and can be empty.  |
@@ -44,9 +48,10 @@ All properties can be accessed via Java / KubeJS.
 | `parent`    | parent widget. |
 | `align`    | align position refer to the parent. |
 
-!!! info "about position"
-    `Position` is an important concept. Check the image below:
-    ![Image title](../assets/positions.png){ width="70%" style="display: block; margin: 0 auto;" }
+::: info about position
+`Position` is an important concept. Check the image below:
+<img src="../assets/positions.png" alt="Image title" width="70%" class="md-img-center">
+:::
 
 ---
 
@@ -63,18 +68,22 @@ Used to define the tooltips while the mouse hovered. It support both `string` an
   </video>
 </div>
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    widget.setHoverTooltips("this is a button");
-    // widget.setHoverTooltips("line 1", "line2");
-    ```
+``` java 
+widget.setHoverTooltips("this is a button");
+// widget.setHoverTooltips("line 1", "line2");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
-!!! info inline end Textures
+::: info Textures
 
-    LDLib provides massive different types of textures, choose what you want:). See [`GUI Textures`](../textures/index.md) to check supported textures.
+LDLib provides massive different types of textures, choose what you want:). See [`GUI Textures`](../textures/index.md) to check supported textures.
+:::
 
 ### `setBackground()`
 
@@ -85,21 +94,28 @@ Used to set the background texture of the widget.
 Used to set the hover texture of the widget.
 
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    widget.setBackground(new ResourceTexture("ldlib:textures/gui/icon.png"));
-    ```
+``` java 
+widget.setBackground(new ResourceTexture("ldlib:textures/gui/icon.png"));
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `isMouseOverElement()`
 
 TO check whether the mouse over the widget.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java 
-    widget.isMouseOverElement(mouseX, mouseY);
-    ```
+``` java 
+widget.isMouseOverElement(mouseX, mouseY);
+```
 
+
+</DocTab>
+</DocTabs>

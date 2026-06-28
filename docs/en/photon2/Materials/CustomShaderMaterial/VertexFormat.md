@@ -1,6 +1,6 @@
 # Vertex Format
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
 > **Note:**  
 > In most cases, you don’t need to understand this section — Photon2 handles vertex layouts automatically.  

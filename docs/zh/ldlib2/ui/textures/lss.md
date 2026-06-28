@@ -1,6 +1,6 @@
 # LSS 中的纹理
 
-{{ version_badge("2.1.4", label="自", icon="tag") }}
+<VersionBadge version="2.1.4" label="自" icon="tag" />
 
 在 LDLib2 中，许多视觉样式（如 `background`）都接受一个**纹理值**。  
 LSS 中的纹理值是用来描述纹理如何创建以及可选变换的**字符串表达式**。

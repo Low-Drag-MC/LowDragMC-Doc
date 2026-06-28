@@ -95,4 +95,4 @@ public IConfigurableHistory createHistoryRecorder() {
 
 可序列化数据模型优先使用自动 history。对象修改外部状态、临时 editor 状态，或者不能用 NBT 快照时，再使用手动 history。
 
-Editor 侧 Inspector 用法见 [Built-in Views](../editor/views/builtin-views.md#inspectorview){ data-preview }。
+Editor 侧 Inspector 用法见 [Built-in Views](../editor/views/builtin-views.md#inspectorview)。

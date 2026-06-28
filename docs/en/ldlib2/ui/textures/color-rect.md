@@ -1,45 +1,51 @@
 # ColorRectTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `ColorRectTexture` draws a solid ARGB-filled rectangle. It is the simplest texture type — no rounding, no border, just a flat colour.
 
 Registry name: `color_rect_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Opaque dark background
-    IGuiTexture bg = new ColorRectTexture(0xFF1A1A1A);
+```java
+// Opaque dark background
+IGuiTexture bg = new ColorRectTexture(0xFF1A1A1A);
 
-    // Semi-transparent overlay
-    IGuiTexture overlay = new ColorRectTexture(0x80FFFFFF);
+// Semi-transparent overlay
+IGuiTexture overlay = new ColorRectTexture(0x80FFFFFF);
 
-    // From java.awt.Color
-    IGuiTexture red = new ColorRectTexture(java.awt.Color.RED);
-    ```
+// From java.awt.Color
+IGuiTexture red = new ColorRectTexture(java.awt.Color.RED);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val bg = ColorRectTexture(0xFF1A1A1A.toInt())
-    val overlay = ColorRectTexture(0x80FFFFFF.toInt())
-    ```
+```kotlin
+val bg = ColorRectTexture(0xFF1A1A1A.toInt())
+val overlay = ColorRectTexture(0x80FFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let bg = new ColorRectTexture(0xFF1A1A1A);
-    let overlay = new ColorRectTexture(0x80FFFFFF);
-    ```
+```js
+let bg = new ColorRectTexture(0xFF1A1A1A);
+let overlay = new ColorRectTexture(0x80FFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

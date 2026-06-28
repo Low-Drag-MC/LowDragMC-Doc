@@ -1,12 +1,13 @@
 # LabelWidget
 
-![Image title](../assets/label.png){ width="30%" align=right }
+<img src="../assets/label.png" alt="Image title" width="30%" class="md-img-right">
 
 `LabelWidget` is used to display text and component.
 
-!!! note "Advanced Widget"
-    `LabelWidget` is a light-weight widget to display text only. text height, align, ... are fixed.
-    Therefore, we reconmend to use the [`TextTextureWidget`](TextTexture.md) instead, which provids advanced controll of text display.
+::: info Advanced Widget
+`LabelWidget` is a light-weight widget to display text only. text height, align, ... are fixed.
+Therefore, we reconmend to use the [`TextTextureWidget`](TextTexture.md) instead, which provids advanced controll of text display.
+:::
 
 
 ## Basic Properties
@@ -25,12 +26,15 @@
 
 Updates the label text with a `string`.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    label.setText("New Label Text");
-    ```
+``` java
+label.setText("New Label Text");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `setComponent()`
@@ -43,40 +47,50 @@ Same as `setText()` but support `component` as input
 
 Configures a supplier to dynamically provide the label text. It will obtain the latest text per tick.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    label.setTextProvider(() -> "Dynamic Text");
-    ```
+``` java
+label.setTextProvider(() -> "Dynamic Text");
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    label.setTextProvider(() => "Dynamic Text");
-    ```
+``` javascript
+label.setTextProvider(() => "Dynamic Text");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `setColor()`
 
 Sets the text color. If a rich text component is already set, its style will be replaced accordingly.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    label.setColor(0xFFFFFFFF); // ARGB
-    ```
+``` java
+label.setColor(0xFFFFFFFF); // ARGB
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `setDropShadow()`
 
 Enables or disables the drop shadow effect for the label.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    label.setDropShadow(true);
-    ```
+``` java
+label.setDropShadow(true);
+```
 
+</DocTab>
+</DocTabs>
 ---

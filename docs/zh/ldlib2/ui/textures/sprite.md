@@ -1,6 +1,6 @@
 # SpriteTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `SpriteTexture` 从 `assets/` 目录中渲染一张 PNG 图像文件。它支持：
 
@@ -11,64 +11,70 @@
 
 注册名：`sprite_texture`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 整张图像，拉伸
-    IGuiTexture icon = SpriteTexture.of("mymod:textures/gui/icon.png");
+```java
+// 整张图像，拉伸
+IGuiTexture icon = SpriteTexture.of("mymod:textures/gui/icon.png");
 
-    // 九宫格面板：四边各 4 像素边框
-    IGuiTexture panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4);
+// 九宫格面板：四边各 4 像素边框
+IGuiTexture panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4);
 
-    // 九宫格，四边边框不同
-    IGuiTexture fancy = SpriteTexture.of("mymod:textures/gui/fancy.png")
-        .setBorder(4, 4, 4, 4); // left, top, right, bottom
+// 九宫格，四边边框不同
+IGuiTexture fancy = SpriteTexture.of("mymod:textures/gui/fancy.png")
+    .setBorder(4, 4, 4, 4); // left, top, right, bottom
 
-    // 精灵表中的子区域（x、y、width、height 以像素为单位）
-    IGuiTexture frame = SpriteTexture.of("mymod:textures/gui/sheet.png")
-        .setSprite(0, 0, 16, 16);
+// 精灵表中的子区域（x、y、width、height 以像素为单位）
+IGuiTexture frame = SpriteTexture.of("mymod:textures/gui/sheet.png")
+    .setSprite(0, 0, 16, 16);
 
-    // 平铺背景
-    IGuiTexture tile = SpriteTexture.of("mymod:textures/gui/tile.png")
-        .setWrapMode(SpriteTexture.WrapMode.REPEAT);
+// 平铺背景
+IGuiTexture tile = SpriteTexture.of("mymod:textures/gui/tile.png")
+    .setWrapMode(SpriteTexture.WrapMode.REPEAT);
 
-    // 着色
-    IGuiTexture tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .setColor(0xFF44AAFF);
-    ```
+// 着色
+IGuiTexture tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val icon = SpriteTexture.of("mymod:textures/gui/icon.png")
+```kotlin
+val icon = SpriteTexture.of("mymod:textures/gui/icon.png")
 
-    val panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4)
+val panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4)
 
-    val tile = SpriteTexture.of("mymod:textures/gui/tile.png")
-        .setWrapMode(SpriteTexture.WrapMode.REPEAT)
-    ```
+val tile = SpriteTexture.of("mymod:textures/gui/tile.png")
+    .setWrapMode(SpriteTexture.WrapMode.REPEAT)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let icon = SpriteTexture.of("mymod:textures/gui/icon.png");
+```js
+let icon = SpriteTexture.of("mymod:textures/gui/icon.png");
 
-    let panel = SpriteTexture.of("mymod:textures/gui/panel.png")
-        .setBorder(4);
+let panel = SpriteTexture.of("mymod:textures/gui/panel.png")
+    .setBorder(4);
 
-    let tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
-        .setColor(0xFF44AAFF);
-    ```
+let tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
+    .setColor(0xFF44AAFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

@@ -113,11 +113,11 @@ editorView.loadGraph(createTestGraph(), savedTag -> {});
 return new ModularUI(UI.of(editorView), player);
 ```
 
-<figure markdown="span">
-    ![GraphEditorView with a loaded graph](./assets/ngt-graph-view-placeholder.png)
-    <figcaption>
-    带有内置图工具的 `GraphEditorView`。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphEditorView with a loaded graph">
+<figcaption>
+带有内置图工具的 &lt;code&gt;GraphEditorView&lt;/code&gt;。
+</figcaption>
 </figure>
 
 ## 编辑器布局
@@ -125,10 +125,10 @@ return new ModularUI(UI.of(editorView), player);
 截图中标记的区域是：
 
 1. **子图面包屑路径**  
-   显示当前图路径。用它判断当前正在编辑根图还是嵌套子图。见 [Subgraphs](./subgraphs.md){ data-preview }。
+   显示当前图路径。用它判断当前正在编辑根图还是嵌套子图。见 [Subgraphs](./subgraphs.md)。
 
 2. **Blackboard**  
-   定义图变量。变量可以只在当前图内部使用，也可以暴露为子图输入/输出端口。见 [Variables and Blackboard](./variables-and-blackboard.md){ data-preview }。
+   定义图变量。变量可以只在当前图内部使用，也可以暴露为子图输入/输出端口。见 [Variables and Blackboard](./variables-and-blackboard.md)。
 
 3. **Inspector**  
    显示选中对象的设置，例如变量、节点、端口、Placemat 或 Sticky Note。
@@ -140,7 +140,7 @@ return new ModularUI(UI.of(editorView), player);
    显示图布局预览 / LOD 缩略图，便于浏览大型图。
 
 6. **Graph log**  
-   显示 `Graph.onGraphChanged(GraphLogger)` 输出的图诊断信息，例如错误、警告和普通提示。见 [GraphView Diagnostics Footer](./graph-view.md#diagnostics-footer){ data-preview } 和 [Graph Definition](./graph-definition.md#graph-hooks){ data-preview }。
+   显示 `Graph.onGraphChanged(GraphLogger)` 输出的图诊断信息，例如错误、警告和普通提示。见 [GraphView Diagnostics Footer](./graph-view.md#diagnostics-footer) 和 [Graph Definition](./graph-definition.md#graph-hooks)。
 
 ## 底层 GraphView
 
@@ -153,4 +153,4 @@ graphView.loadGraph(createTestGraph());
 
 不要把直接使用 `GraphView` 作为默认编辑器入口。它不提供完整的 `GraphEditorView` 工作流，包括子图 dive 和资源级外部子图编辑。
 
-对于基于资源的图资产，使用 `GraphResource`，这样 Editor 会自动打开 `GraphEditorView`。见 [Editor Resources](./editor-resources.md){ data-preview }。
+对于基于资源的图资产，使用 `GraphResource`，这样 Editor 会自动打开 `GraphEditorView`。见 [Editor Resources](./editor-resources.md)。

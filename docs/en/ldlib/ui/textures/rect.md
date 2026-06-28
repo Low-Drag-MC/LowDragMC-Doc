@@ -18,56 +18,72 @@
 
 Sets a uniform radius for all corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setRadius(10);
-    ```
+``` java
+colorRectTexture.setRadius(10);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setLeftRadius
 
 Sets the left-side radii (top and bottom) for the rectangle.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setLeftRadius(8);
-    ```
+``` java
+colorRectTexture.setLeftRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setRightRadius
 
 Sets the right-side radii (top and bottom) for the rectangle.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setRightRadius(8);
-    ```
+``` java
+colorRectTexture.setRightRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setTopRadius
 
 Sets the top-side radii (left and right) for the rectangle.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setTopRadius(8);
-    ```
+``` java
+colorRectTexture.setTopRadius(8);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBottomRadius
 
 Sets the bottom-side radii (left and right) for the rectangle.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    colorRectTexture.setBottomRadius(8);
-    ```
+``` java
+colorRectTexture.setBottomRadius(8);
+```
+
+</DocTab>
+</DocTabs>

@@ -37,35 +37,36 @@ The final style is determined by **priority**, not by application order.
 
 Every style value has a **StyleOrigin**, which defines **where the style comes from** and **how strong it is**.
 
-??? info "StyleOrigin"
-    ```java
-    public enum StyleOrigin {
-        /**
-         * Default style defined by the UI component itself
-         */
-        DEFAULT(0),
+::: details StyleOrigin
+```java
+public enum StyleOrigin {
+    /**
+     * Default style defined by the UI component itself
+     */
+    DEFAULT(0),
 
-        /**
-         * Style defined in an external stylesheet (LSS)
-         */
-        STYLESHEET(2),
+    /**
+     * Style defined in an external stylesheet (LSS)
+     */
+    STYLESHEET(2),
 
-        /**
-         * Inline style set directly in code
-         */
-        INLINE(3),
+    /**
+     * Inline style set directly in code
+     */
+    INLINE(3),
 
-        /**
-         * Style applied by animations
-         */
-        ANIMATION(4),
+    /**
+     * Style applied by animations
+     */
+    ANIMATION(4),
 
-        /**
-         * Important style that overrides all others
-         */
-        IMPORTANT(5);
-    }
-    ```
+    /**
+     * Important style that overrides all others
+     */
+    IMPORTANT(5);
+}
+```
+:::
 
 Styles with a higher priority override styles with a lower priority:
 
@@ -85,8 +86,9 @@ This design ensures that:
 LDLib2 provides multiple ways to customize UI styles.
 You can freely mix these approaches depending on your needs.
 
-!!! note inline end
-    In this page, we won't introduce all supported styles and their behaviour. Each UI component documents the styles it supports on its own wiki page.
+::: info
+In this page, we won't introduce all supported styles and their behaviour. Each UI component documents the styles it supports on its own wiki page.
+:::
 
 Each UI component exposes the `Style` objects it supports, allowing you to configure styles directly through code.
 
@@ -102,59 +104,64 @@ For instance, `Button` exposes a `buttonStyle(...)` API for configuring button-s
 
 There are many methods to set styles.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var button = new Button();
+```java
+var button = new Button();
 
-    // direct call
-    button.getStyle()
-        // set background texture
-        .background(SpriteTexture.of("photon:textures/icon.png"));
-        // set tooltips
-        .tooltips("This is my tooltips")
-        // set opacity
-        .opacity(0.5);
+// direct call
+button.getStyle()
+    // set background texture
+    .background(SpriteTexture.of("photon:textures/icon.png"));
+    // set tooltips
+    .tooltips("This is my tooltips")
+    // set opacity
+    .opacity(0.5);
 
-    // chain call, return button itself for chain calls
-    button.buttonStyle(style -> {}).style(style -> style
-        .background(SpriteTexture.of("photon:textures/icon.png"));
-        .tooltips("This is my tooltips")
-        .opacity(0.5)
-    );
+// chain call, return button itself for chain calls
+button.buttonStyle(style -> {}).style(style -> style
+    .background(SpriteTexture.of("photon:textures/icon.png"));
+    .tooltips("This is my tooltips")
+    .opacity(0.5)
+);
 
-    // lss text
-    button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
-    button.lss("tooltips", "This is my tooltips");
-    button.lss("opacity", 0.5);
-    ```
-=== "KubeJS"
+// lss text
+button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
+button.lss("tooltips", "This is my tooltips");
+button.lss("opacity", 0.5);
+```
 
-    ```js
-    let button = new Button();
+</DocTab>
+<DocTab title="KubeJS">
 
-    // direct call
-    button.getStyle()
-        // set background texture
-        .background(SpriteTexture.of("photon:textures/icon.png"));
-        // set tooltips
-        .tooltips("This is my tooltips")
-        // set opacity
-        .opacity(0.5);
+```js
+let button = new Button();
 
-     // chain call, return button itself for chain calls
-    button.buttonStyle(style => {}).style(style => style
-        .background(SpriteTexture.of("photon:textures/icon.png"));
-        .tooltips("This is my tooltips")
-        .opacity(0.5)
-    );
+// direct call
+button.getStyle()
+    // set background texture
+    .background(SpriteTexture.of("photon:textures/icon.png"));
+    // set tooltips
+    .tooltips("This is my tooltips")
+    // set opacity
+    .opacity(0.5);
 
-    // lss text
-    button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
-    button.lss("tooltips", "This is my tooltips");
-    button.lss("opacity", 0.5);
-    ```
+ // chain call, return button itself for chain calls
+button.buttonStyle(style => {}).style(style => style
+    .background(SpriteTexture.of("photon:textures/icon.png"));
+    .tooltips("This is my tooltips")
+    .opacity(0.5)
+);
 
+// lss text
+button.lss("background", "sprite(ldlib2:textures/gui/icon.png)");
+button.lss("tooltips", "This is my tooltips");
+button.lss("opacity", 0.5);
+```
+
+</DocTab>
+</DocTabs>
 All of the methods above can be used to set styles, but they are **not equivalent**.
 
 * Using `getStyle()` or `style(...)` sets styles with the `INLINE` origin by default.
@@ -162,27 +169,32 @@ All of the methods above can be used to set styles, but they are **not equivalen
 
 If you want to assign styles using these APIs **with a different `StyleOrigin`**, you can explicitly specify the origin when applying the style, as shown below:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    Style.pipeline(StyleOrigin.IMPORTANT, button.getStyle(), style -> style
-        .tooltips("This is my tooltips")
-    );
+```java
+Style.pipeline(StyleOrigin.IMPORTANT, button.getStyle(), style -> style
+    .tooltips("This is my tooltips")
+);
 
-    // lss text
-    button.lss("tooltips", "This is my tooltips", StyleOrigin.DEFAULT);
-    ```
-=== "KubeJS"
+// lss text
+button.lss("tooltips", "This is my tooltips", StyleOrigin.DEFAULT);
+```
 
-    ```js
-    Style.pipeline("IMPORTANT", button.getStyle(), style => style
-        .tooltips("This is my tooltips")
-    );
+</DocTab>
+<DocTab title="KubeJS">
 
-    // lss text
-    button.lss("tooltips", "This is my tooltips", "DEFAULT");
-    ```
+```js
+Style.pipeline("IMPORTANT", button.getStyle(), style => style
+    .tooltips("This is my tooltips")
+);
 
+// lss text
+button.lss("tooltips", "This is my tooltips", "DEFAULT");
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ## Customizing Styles via stylesheet
@@ -281,28 +293,30 @@ LSS supports a subset of CSS complex selectors. The following table provides a q
 | Child selector | `selector1 > selector2 {...}` | Elements that are the children of another element in the ui tree. |
 | Multiple selector | `selector1, selector2 {...}` | Elements that match all the simple selectors. |
 
-!!! info "`Host` and `Internal` Element"
-    A UI tree can contain both **host elements** and **internal elements**.
+::: info `Host` and `Internal` Element
+A UI tree can contain both **host elements** and **internal elements**.
 
-    Using **`button`** as an example:
+Using **`button`** as an example:
 
-    * The `button` itself is a **host element**. It is a component that you create and interact with directly.
-    * Internally, a `button` contains other UI elements, such as a `text` used to render its label.
+* The `button` itself is a **host element**. It is a component that you create and interact with directly.
+* Internally, a `button` contains other UI elements, such as a `text` used to render its label.
 
-    ![alt text](../assets/internal.png)
+![alt text](../assets/internal.png)
 
-    These internal elements are part of the component’s implementation and are called **internal elements**, which cannot be removed from the UI tree and diplayed in gray.
+These internal elements are part of the component’s implementation and are called **internal elements**, which cannot be removed from the UI tree and diplayed in gray.
 
-    You normally don’t need to create or manage them manually, but they still exist in the UI tree and can participate in layout, styling, and event propagation.
+You normally don’t need to create or manage them manually, but they still exist in the UI tree and can participate in layout, styling, and event propagation.
 
-    This distinction allows LDLib2 components to be both **composable** and **customizable**, while keeping their internal structure encapsulated.
+This distinction allows LDLib2 components to be both **composable** and **customizable**, while keeping their internal structure encapsulated.
+:::
 
 
-??? note "supported characters"
-    -  Must begin with a letter (`A–Z` or `a–z`) or an underscore (`_`).
-    - Can contain letters, digits (`0–9`), hyphens (`-`), and underscores (`_`).
-    - Selectors are case-sensitive. For example, myClass and MyClass are different.
-    - Selectors can’t start with a digit or a hyphen followed by a digit (for example, `.1class` or `.-1class`).
+::: details supported characters
+-  Must begin with a letter (`A–Z` or `a–z`) or an underscore (`_`).
+- Can contain letters, digits (`0–9`), hyphens (`-`), and underscores (`_`).
+- Selectors are case-sensitive. For example, myClass and MyClass are different.
+- Selectors can’t start with a digit or a hyphen followed by a digit (for example, `.1class` or `.-1class`).
+:::
 
 **Quiz**
 
@@ -313,116 +327,126 @@ button:host :not(.my_label#my_id > text:internal) > .my_class:host, text-field {
 }
 ```
 
-??? info "Answer"
-    1. **All `text-field` elements**, regardless of their position in the UI tree.
+::: details Answer
+1. **All `text-field` elements**, regardless of their position in the UI tree.
 
-    2. **Host elements with the class `my_class`**, with the following constraints:
-        - The element must be a **host element**.
-        - Its **direct parent** must **not** be an internal `text` element whose parent is an element with `my_label` class and with the ID `my_id`.
-        - The element must have a **host `button` ancestor** somewhere above it in the UI tree.
+2. **Host elements with the class `my_class`**, with the following constraints:
+    - The element must be a **host element**.
+    - Its **direct parent** must **not** be an internal `text` element whose parent is an element with `my_label` class and with the ID `my_id`.
+    - The element must have a **host `button` ancestor** somewhere above it in the UI tree.
+:::
 
 
 ### Apply stylesheet
 
 To apply your stylesheets, you can append them during `UI` creation.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java hl_lines="30-32"
-    private static ModularUI createModularUI() {
-        // set root with an ID
-        var root = new UIElement().setId("root");
-        root.addChildren(
-                new Label().setText("LSS example"),
-                new Button().setText("Click Me!"),
-                // set the element with a class
-                new UIElement().addClass("image")
-        );
-        var lss = """
-            // id selector
-            #root {
-                background: built-in(ui-gdp:BORDER);
-                padding-all: 7;
-                gap-all: 5;
-            }
-            
-            // class selector
-            .image {
-                width: 80;
-                height: 80;
-                background: sprite(ldlib2:textures/gui/icon.png);
-            }
-            
-            // element selector
-            #root label {
-                horizontal-align: center;
-            }
-            """;
-        var stylesheet = Stylesheet.parse(lss);
-        // add stylesheets to ui
-        var ui = UI.of(root, stylesheet);
-        return ModularUI.of(ui);
-    }
-    ```
-=== "KubeJS"
+```java hl_lines="30-32"
+private static ModularUI createModularUI() {
+    // set root with an ID
+    var root = new UIElement().setId("root");
+    root.addChildren(
+            new Label().setText("LSS example"),
+            new Button().setText("Click Me!"),
+            // set the element with a class
+            new UIElement().addClass("image")
+    );
+    var lss = """
+        // id selector
+        #root {
+            background: built-in(ui-gdp:BORDER);
+            padding-all: 7;
+            gap-all: 5;
+        }
 
-    ```js hl_lines="30-32"
-    function createModularUI() {
-        // set root with an ID
-        let root = new UIElement().setId("root");
-        root.addChildren(
-                new Label().setText("LSS example"),
-                new Button().setText("Click Me!"),
-                // set the element with a class
-                new UIElement().addClass("image")
-        );
-        let lss = `
-            // id selector
-            #root {
-                background: built-in(ui-gdp:BORDER);
-                padding-all: 7;
-                gap-all: 5;
-            }
-            
-            // class selector
-            .image {
-                width: 80;
-                height: 80;
-                background: sprite(ldlib2:textures/gui/icon.png);
-            }
-            
-            // element selector
-            #root label {
-                horizontal-align: center;
-            }
-        `;
-        let stylesheet = Stylesheet.parse(lss);
-        // add stylesheets to ui
-        let ui = UI.of(root, stylesheet);
-        return ModularUI.of(ui);
-    }
-    ```
+        // class selector
+        .image {
+            width: 80;
+            height: 80;
+            background: sprite(ldlib2:textures/gui/icon.png);
+        }
 
+        // element selector
+        #root label {
+            horizontal-align: center;
+        }
+        """;
+    var stylesheet = Stylesheet.parse(lss);
+    // add stylesheets to ui
+    var ui = UI.of(root, stylesheet);
+    return ModularUI.of(ui);
+}
+```
+
+</DocTab>
+<DocTab title="KubeJS">
+
+```js hl_lines="30-32"
+function createModularUI() {
+    // set root with an ID
+    let root = new UIElement().setId("root");
+    root.addChildren(
+            new Label().setText("LSS example"),
+            new Button().setText("Click Me!"),
+            // set the element with a class
+            new UIElement().addClass("image")
+    );
+    let lss = `
+        // id selector
+        #root {
+            background: built-in(ui-gdp:BORDER);
+            padding-all: 7;
+            gap-all: 5;
+        }
+
+        // class selector
+        .image {
+            width: 80;
+            height: 80;
+            background: sprite(ldlib2:textures/gui/icon.png);
+        }
+
+        // element selector
+        #root label {
+            horizontal-align: center;
+        }
+    `;
+    let stylesheet = Stylesheet.parse(lss);
+    // add stylesheets to ui
+    let ui = UI.of(root, stylesheet);
+    return ModularUI.of(ui);
+}
+```
+
+</DocTab>
+</DocTabs>
 You could also modify stylesheets at runtime.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var mui = elem.getModularUI();
-    if (mui != null) {
-        mui.getStyleEngine().addStylesheet(stylesheet);
-    }
-    ```
+```java
+var mui = elem.getModularUI();
+if (mui != null) {
+    mui.getStyleEngine().addStylesheet(stylesheet);
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let mui = elem.getModularUI();
-    if (mui != null) {
-        mui.getStyleEngine().addStylesheet(stylesheet);
-    }
-    ```
+```js
+let mui = elem.getModularUI();
+if (mui != null) {
+    mui.getStyleEngine().addStylesheet(stylesheet);
+}
+```
 
+</DocTab>
+</DocTabs>
 ### Local Stylesheet (Subtree Scope)
 
 Besides global stylesheets on `UI`, you can attach a **local stylesheet** to a specific `UIElement`.
@@ -434,27 +458,32 @@ Local stylesheets only affect:
 
 They do not affect parent elements or sibling subtrees.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var panel = new UIElement().setId("panel");
-    panel.addLocalStylesheet("""
-        button {
-            width: 80;
-        }
-    """);
-    ```
-=== "KubeJS"
+```java
+var panel = new UIElement().setId("panel");
+panel.addLocalStylesheet("""
+    button {
+        width: 80;
+    }
+""");
+```
 
-    ```js
-    let panel = new UIElement().setId("panel");
-    panel.addLocalStylesheet(`
-        button {
-            width: 80;
-        }
-    `);
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+```js
+let panel = new UIElement().setId("panel");
+panel.addLocalStylesheet(`
+    button {
+        width: 80;
+    }
+`);
+```
+
+</DocTab>
+</DocTabs>
 ### Builtin Stylesheets
 
 LDLib2 provides three builtin stylesheets `gdp`, `mc`, and `modern`, allows you to  switch themes flexibly.
@@ -462,69 +491,81 @@ LDLib2 provides three builtin stylesheets `gdp`, `mc`, and `modern`, allows you 
 
 You can use `StylesheetManager` to access all registered stylesheets.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java hl_lines="30-32"
-    private static ModularUI createModularUI() {
-        // ...
-        var stylesheet = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC)
-        return ModularUI.of(UI.of(root, stylesheet));
-    }
-    ```
-=== "KubeJS"
+```java hl_lines="30-32"
+private static ModularUI createModularUI() {
+    // ...
+    var stylesheet = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC)
+    return ModularUI.of(UI.of(root, stylesheet));
+}
+```
 
-    ```js hl_lines="30-32"
-    function createModularUI() {
-        // ...
-        let stylesheet = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC)
-        return ModularUI.of(UI.of(root, stylesheet));
-    }
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+```js hl_lines="30-32"
+function createModularUI() {
+    // ...
+    let stylesheet = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC)
+    return ModularUI.of(UI.of(root, stylesheet));
+}
+```
+
+</DocTab>
+</DocTabs>
 All three builtin stylesheets as below:
 
-<figure markdown="span">
-    ![size](../assets/gdp_style.png)
-    <figcaption>
-    GDP
-    </figcaption>
-    ![size](../assets/mc_style.png)
-    <figcaption>
-    MC
-    </figcaption>
-    ![size](../assets/modern_style.png)
-    <figcaption>
-    MODERN
-    </figcaption>
+<figure>
+<img src="../assets/gdp_style.png" alt="size">
+<figcaption>
+GDP
+</figcaption>
+<img src="../assets/mc_style.png" alt="size">
+<figcaption>
+MC
+</figcaption>
+<img src="../assets/modern_style.png" alt="size">
+<figcaption>
+MODERN
+</figcaption>
 </figure>
 
 ### Stylesheets from resourcepack
 
-!!! note inline end
-    ![size](../assets/lss_path.png)
+::: info
+![size](../assets/lss_path.png)
 
-    Don't foget `F3 + T` to reload resource after modification at runtime.
+Don't foget `F3 + T` to reload resource after modification at runtime.
+:::
 
 In practice, stylesheets can be added or overridden via resource packs.
 By placing your `LSS` files in the designated path, `StylesheetManager` will automatically discover and register them at runtime while reload resources.
 
-You should place your stylesheets under the path of `.assets/<namespace>/lss/<name>.lss`.
+You should place your stylesheets under the path of `.assets/&lt;namespace&gt;/lss/&lt;name&gt;.lss`.
 
 After register, you are able to access them by using `StylesheetManager`.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // replace <namespace> and <name> with your own.
-    StylesheetManager.INSTANCE.getStylesheetSafe(
-        ResourceLocation.parse("<namespace>:lss/<name>.lss")
-    );
-    ```
-=== "KubeJS"
+```java
+// replace <namespace> and <name> with your own.
+StylesheetManager.INSTANCE.getStylesheetSafe(
+    ResourceLocation.parse("<namespace>:lss/<name>.lss")
+);
+```
 
-    ```js
-    // replace <namespace> and <name> with your own.
-    StylesheetManager.INSTANCE.getStylesheetSafe(
-        "<namespace>:lss/<name>.lss"
-    );
-    ```
+</DocTab>
+<DocTab title="KubeJS">
+
+```js
+// replace <namespace> and <name> with your own.
+StylesheetManager.INSTANCE.getStylesheetSafe(
+    "<namespace>:lss/<name>.lss"
+);
+```
+
+</DocTab>
+</DocTabs>

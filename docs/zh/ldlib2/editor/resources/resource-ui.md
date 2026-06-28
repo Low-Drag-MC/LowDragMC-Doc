@@ -1,16 +1,16 @@
 # Resource UI
 
-<figure markdown="span">
-    ![Resource panel composition](../assets/resource_composite.png)
-    <figcaption>
-    资源面板组成：资源类型、provider 和 provider contents。
-    </figcaption>
+<figure>
+<img src="../assets/resource_composite.png" alt="Resource panel composition">
+<figcaption>
+资源面板组成：资源类型、provider 和 provider contents。
+</figcaption>
 </figure>
 
 资源面板有四个主要区域：
 
 1. **Resource type tabs**  
-   每个 tab 切换到一种 `Resource<?>` 类型，例如 texture、color、UI template，或你的项目自定义资源类型。
+   每个 tab 切换到一种 `Resource&lt;?&gt;` 类型，例如 texture、color、UI template，或你的项目自定义资源类型。
 
 2. **Built-in resource providers**  
    由代码注册的 provider。Built-in resource 通常是示例、默认值或内部资产，一般只读。
@@ -23,11 +23,11 @@
 
 资源面板由三层组成。
 
-`ResourceView` 是内置编辑器 View。它为每种 `Resource<?>` 创建一个垂直 tab，并保存当前选中的 `ResourceInstance`。
+`ResourceView` 是内置编辑器 View。它为每种 `Resource&lt;?&gt;` 创建一个垂直 tab，并保存当前选中的 `ResourceInstance`。
 
-`ResourceContainer<T>` 是某一种资源类型的内容。左侧列出 provider，右侧显示选中 provider 的资源。
+`ResourceContainer&lt;T&gt;` 是某一种资源类型的内容。左侧列出 provider，右侧显示选中 provider 的资源。
 
-`ResourceProviderContainer<T>` 渲染某个 provider 中的资源。
+`ResourceProviderContainer&lt;T&gt;` 渲染某个 provider 中的资源。
 
 ## Provider UI
 
@@ -155,4 +155,4 @@ container.getEditor().historyView.pushHistory(
 })
 ```
 
-如果行为属于资源类型本身，放在 `Resource<T>` 子类里。若行为取决于资源来源，则使用 provider hook。
+如果行为属于资源类型本身，放在 `Resource&lt;T&gt;` 子类里。若行为取决于资源来源，则使用 provider hook。

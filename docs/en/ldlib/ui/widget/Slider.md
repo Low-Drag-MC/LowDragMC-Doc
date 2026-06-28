@@ -2,8 +2,8 @@
 Added v1.0.48
 <br>
 
-Widget from SliderWidget test.<br>
-![Widget from SliderWidget test](../assets/slider.png){ width="30%" align=right }
+Widget from SliderWidget test.&lt;br&gt;
+<img src="../assets/slider.png" alt="Widget from SliderWidget test" width="30%" class="md-img-right">
 
 
 The `SliderWidget` is a simple gui slider, like in the Minecraft option menus. It features Horizontal and Vertical modes, and can have any number of steps.
@@ -36,65 +36,77 @@ The `SliderWidget` is a simple gui slider, like in the Minecraft option menus. I
 
 ### setSliderCallback
 
-Setting the change callback.<br>
+Setting the change callback.&lt;br&gt;
 Example sets text overlay to display value in percentage.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    sliderWidget.setSliderCallback(value -> {
-        if(sliderWidget.getOverlay() instanceof TextTexture) {
-            ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
-        }
-    });
-    ```
+```Java
+sliderWidget.setSliderCallback(value -> {
+    if(sliderWidget.getOverlay() instanceof TextTexture) {
+        ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
+    }
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    sliderWidget.setSliderCallback(value => {
-        if(sliderWidget.getOverlay() typeof TextTexture) {
-            ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
-        }
-    });
-    ```
+```Javascript
+sliderWidget.setSliderCallback(value => {
+    if(sliderWidget.getOverlay() typeof TextTexture) {
+        ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
+    }
+});
+```
 
+</DocTab>
+</DocTabs>
 ### getAmount
 
-Returns float of the lerp from minAmount to maxAmount.<br>
+Returns float of the lerp from minAmount to maxAmount.&lt;br&gt;
 Example, `minAmount = 5`, `maxAmount = 10`, `sliderValue = 0.5f`, then .getAmount() returns `0.75f`
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    value = sliderWidget.getAmount();
-    ```
+```Java
+value = sliderWidget.getAmount();
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    value = sliderWidget.getAmount();
-    ```
+```Javascript
+value = sliderWidget.getAmount();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAmount
 
-Sets the sliderValue to the inverseLerp using minAmount and maxAmount<br>
+Sets the sliderValue to the inverseLerp using minAmount and maxAmount&lt;br&gt;
 Example, `minAmount = 5`, `maxAmount = 10`, `sliderValue = 0.5f`, then .getAmount() returns `0.75f`
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    sliderWidget.setAmount(0.5f);
-    ```
+```Java
+sliderWidget.setAmount(0.5f);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    sliderWidget.setAmount(0.5f);
-    ```
+```Javascript
+sliderWidget.setAmount(0.5f);
+```
 
+</DocTab>
+</DocTabs>
 ---

@@ -1,6 +1,6 @@
 # Layout
 
-{{ version_badge("2.2.0", label="Since", icon="tag") }}
+<VersionBadge version="2.2.0" label="Since" icon="tag" />
 
 LDLib2 UI layout is built on top of the [Taffy layout engine](https://github.com/DioxusLabs/taffy). It currently implements the CSS Block, Flexbox and CSS Grid layout algorithms.
 
@@ -18,77 +18,82 @@ Each `UIElement` owns a layout object backed by taffy.
 You can configure layout properties in multiple ways, depending on your preference and use case.
 
 In addition to the examples below, layout properties can also be defined through  
-[LSS (LDLib Style Sheet)](./stylesheet.md){ data-preview }, which is especially useful for separating layout logic from UI structure.
+[LSS (LDLib Style Sheet)](./stylesheet.md), which is especially useful for separating layout logic from UI structure.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var element = new UIElement();
+```java
+var element = new UIElement();
 
-    // Set layout directly
-    element.getLayout()
-            .flexDirection(FlexDirection.ROW)
-            .width(150)
-            .heightPercent(100)
-            .marginAll(10)
-            .paddingAll(10);
+// Set layout directly
+element.getLayout()
+        .flexDirection(FlexDirection.ROW)
+        .width(150)
+        .heightPercent(100)
+        .marginAll(10)
+        .paddingAll(10);
 
-    // Set layout using a chaining lambda
-    element.layout(layout -> layout
-            .flexDirection(FlexDirection.ROW)
-            .width(150)
-            .heightPercent(100)
-            .marginAll(10)
-            .paddingAll(10)
-    );
+// Set layout using a chaining lambda
+element.layout(layout -> layout
+        .flexDirection(FlexDirection.ROW)
+        .width(150)
+        .heightPercent(100)
+        .marginAll(10)
+        .paddingAll(10)
+);
 
-    // Set layout via stylesheet (LSS)
-    element.lss("flex-direction", "row");
-    element.lss("width", 150);
-    element.lss("height-percent", 100);
-    element.lss("margin-all", 10);
-    element.lss("padding-all", 10);
-    ```
+// Set layout via stylesheet (LSS)
+element.lss("flex-direction", "row");
+element.lss("width", 150);
+element.lss("height-percent", 100);
+element.lss("margin-all", 10);
+element.lss("padding-all", 10);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let element = new UIElement();
+```js
+let element = new UIElement();
 
-    // Set layout directly
-    element.getLayout()
-            .flexDirection(FlexDirection.ROW)
-            .width(150)
-            .heightPercent(100)
-            .marginAll(10)
-            .paddingAll(10);
+// Set layout directly
+element.getLayout()
+        .flexDirection(FlexDirection.ROW)
+        .width(150)
+        .heightPercent(100)
+        .marginAll(10)
+        .paddingAll(10);
 
-    // Set layout using a chaining lambda
-    element.layout(layout -> layout
-            .flexDirection(FlexDirection.ROW)
-            .width(150)
-            .heightPercent(100)
-            .marginAll(10)
-            .paddingAll(10)
-    );
+// Set layout using a chaining lambda
+element.layout(layout -> layout
+        .flexDirection(FlexDirection.ROW)
+        .width(150)
+        .heightPercent(100)
+        .marginAll(10)
+        .paddingAll(10)
+);
 
-    // Set layout via stylesheet (LSS)
-    element.lss("flex-direction", "row");
-    element.lss("width", 150);
-    element.lss("height-percent", 100);
-    element.lss("margin-all", 10);
-    element.lss("padding-all", 10);
-    ```
+// Set layout via stylesheet (LSS)
+element.lss("flex-direction", "row");
+element.lss("width", 150);
+element.lss("height-percent", 100);
+element.lss("margin-all", 10);
+element.lss("padding-all", 10);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Learning Flex Layout
 
-!!! info
-    If you are already familiar with Flexbox, Taffy layout should feel very intuitive.  
-    If not, we recommend reading the official [Taffy documentation](https://taffylayout.com/docs) for a complete explanation.
+::: info
+If you are already familiar with Flexbox, Taffy layout should feel very intuitive.  
+If not, we recommend reading the official [Taffy documentation](https://taffylayout.com/docs) for a complete explanation.
 
-    For a lighter introduction, this chapter focuses on the **most commonly used Flex concepts in LDLib2 UI**.
+For a lighter introduction, this chapter focuses on the **most commonly used Flex concepts in LDLib2 UI**.
+:::
 
 
 ## UI Elements and Hierarchy
@@ -150,11 +155,11 @@ Elements are positioned relative to their parent container, but **do not partici
 - Elements may overlap other content
 - Position is controlled using offsets such as `Top`, `Right`, `Bottom`, and `Left`
 
-<figure markdown="span">
-  ![alt text](../assets/relative.png)
-  <br>
-  ![alt text](../assets/absolute.png)
-  <figcaption>On the top, the blue ui element has a Relative position, with the parent element using Flex Direction: Row as the Flex setting. On the bottom, the blue ui element uses Absolute position and ignores the parent element’s Flexbox rules.</figcaption>
+<figure>
+<img src="../assets/relative.png" alt="alt text">
+<br>
+<img src="../assets/absolute.png" alt="alt text">
+<figcaption>On the top, the blue ui element has a Relative position, with the parent element using Flex Direction: Row as the Flex setting. On the bottom, the blue ui element uses Absolute position and ignores the parent element’s Flexbox rules.</figcaption>
 </figure>
 
 ---
@@ -173,11 +178,11 @@ UI elements are containers by default.
 These size rules interact with Flexbox settings to determine the final layout.
 
 
-<figure markdown="span">
-  ![size](../assets/size.png)
-  <br>
-  ![size](../assets/overflow.png)
-  <figcaption>Size settings for a UI element.</figcaption>
+<figure>
+<img src="../assets/size.png" alt="size">
+<br>
+<img src="../assets/overflow.png" alt="size">
+<figcaption>Size settings for a UI element.</figcaption>
 </figure>
 
 ---
@@ -204,9 +209,9 @@ Defines the initial size of an element before Grow or Shrink is applied.
 
 > Elements with fixed pixel sizes do not respond to Grow or Shrink.
 
-<figure markdown="span">
-    ![size](../assets/flex.png)
-    <figcaption>Basis, Grow, and Shrink settings.</figcaption>
+<figure>
+<img src="../assets/flex.png" alt="size">
+<figcaption>Basis, Grow, and Shrink settings.</figcaption>
 </figure>
 
 The above example shows how Basis works with the Grow and Shrink options:
@@ -222,12 +227,12 @@ Here, both elements have a Shrink value of 1. They shrink equally to fit in the 
 
 `Flex = 1` equals to `Flex Grow = 1` and `Flex Shrink = 1`, which is used to set `Flex Grow` and `Flex Shrink` at the same time.
 
-<figure markdown="span">
-    ![size](../assets/flex2.png)
-    <figcaption>
-    In this example, we assume the root container `width: 200px`. 
-    The right most element set `width: 50%`. Therefore, the left space is 100px for the left most and middle elements. According to the `flex` of them, they divided the remaining space in a `2:1` ratio. 
-    </figcaption>
+<figure>
+<img src="../assets/flex2.png" alt="size">
+<figcaption>
+In this example, we assume the root container &lt;code&gt;width: 200px&lt;/code&gt;. 
+The right most element set &lt;code&gt;width: 50%&lt;/code&gt;. Therefore, the left space is 100px for the left most and middle elements. According to the &lt;code&gt;flex&lt;/code&gt; of them, they divided the remaining space in a &lt;code&gt;2:1&lt;/code&gt; ratio. 
+</figcaption>
 </figure>
 
 ---
@@ -252,11 +257,11 @@ When using Relative positioning, the layout engine determines element size in th
 
 Child elements follow the order defined in the UI hierarchy.
 
-<figure markdown="span">
-    ![size](../assets/flex_direction_wrap.png)
-    <figcaption>
-    Parent and child UI element using Relative positioning and different Direction and Wrap combinations.
-    </figcaption>
+<figure>
+<img src="../assets/flex_direction_wrap.png" alt="size">
+<figcaption>
+Parent and child UI element using Relative positioning and different Direction and Wrap combinations.
+</figcaption>
 </figure>
 
 ---
@@ -283,18 +288,19 @@ Allows an individual element to override the parent’s alignment rules.
 
 Controls how **multiple rows or columns** of flex items are aligned **along the cross axis**.
 
-!!! note
-    `Align Content` only takes effect when:
-    
-    - The container allows wrapping (`flex-wrap: wrap`)
-    - There are **multiple lines** of children
+::: info
+`Align Content` only takes effect when:
+
+- The container allows wrapping (`flex-wrap: wrap`)
+- There are **multiple lines** of children
+:::
 
 
-<figure markdown="span">
-    ![size](../assets/align_justify.png)
-    <figcaption>
-    Align and Justify settings applied to a parent element with a Direction set to Row; note that other position and sizing options can affect the final output.
-    </figcaption>
+<figure>
+<img src="../assets/align_justify.png" alt="size">
+<figcaption>
+Align and Justify settings applied to a parent element with a Direction set to Row; note that other position and sizing options can affect the final output.
+</figcaption>
 </figure>
 
 ---
@@ -308,11 +314,11 @@ LDLib2 UI follows a box model similar to CSS:
 - **Border**: optional boundary around the element, (avoid use it).
 - **Margin**: space outside the element, separating it from others
 
-<figure markdown="span">
-    ![size](../assets/margin_padding.png)
-    <figcaption>
-    A UI element with defined Size, Margin, Border, and Padding settings; elements with a fixed Width or Height can overflow the space.
-    </figcaption>
+<figure>
+<img src="../assets/margin_padding.png" alt="size">
+<figcaption>
+A UI element with defined Size, Margin, Border, and Padding settings; elements with a fixed Width or Height can overflow the space.
+</figcaption>
 </figure>
 
 ---

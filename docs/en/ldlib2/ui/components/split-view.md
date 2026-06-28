@@ -1,6 +1,6 @@
 # SplitView
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `SplitView` is a two-pane container whose divider can be dragged to resize the panes. Two concrete variants are registered:
 
@@ -9,52 +9,58 @@
 
 The divider position is expressed as a **percentage** (0–100 %). Dragging the border adjusts it in real time.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var split = new SplitView.Horizontal();
-    split.left(leftContent);
-    split.right(rightContent);
-    split.setPercentage(30f);
-    parent.addChild(split);
+```java
+var split = new SplitView.Horizontal();
+split.left(leftContent);
+split.right(rightContent);
+split.setPercentage(30f);
+parent.addChild(split);
 
-    var vsplit = new SplitView.Vertical();
-    vsplit.top(topContent);
-    vsplit.bottom(bottomContent);
-    parent.addChild(vsplit);
-    ```
+var vsplit = new SplitView.Vertical();
+vsplit.top(topContent);
+vsplit.bottom(bottomContent);
+parent.addChild(vsplit);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    splitViewHorizontal({ split(30f) }) {
-        withLeft(leftElement)
-        withRight(rightElement)
-    }
+```kotlin
+splitViewHorizontal({ split(30f) }) {
+    withLeft(leftElement)
+    withRight(rightElement)
+}
 
-    splitViewVertical {
-        withTop(topElement)
-        withBottom(bottomElement)
-    }
-    ```
+splitViewVertical {
+    withTop(topElement)
+    withBottom(bottomElement)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let split = new SplitViewHorizontal();
-    split.left(leftContent);
-    split.right(rightContent);
-    split.setPercentage(30);
-    parent.addChild(split);
-    ```
+```js
+let split = new SplitViewHorizontal();
+split.left(leftContent);
+split.right(rightContent);
+split.setPercentage(30);
+parent.addChild(split);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -83,7 +89,7 @@ The divider position is expressed as a **percentage** (0–100 %). Dragging the 
 | ------------- | ---- | ----------- |
 | `percentage` | `float` | Initial divider position (0–100). Default: `50`. |
 
-The `<first>` and `<second>` child elements configure the two panes.
+The `&lt;first&gt;` and `&lt;second&gt;` child elements configure the two panes.
 
 ---
 

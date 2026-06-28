@@ -1,53 +1,59 @@
 # AnimationTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `AnimationTexture` plays a frame animation from a **uniform sprite sheet** — a PNG image arranged as a grid of equal-sized cells. The animation advances at a configurable speed and loops between a `from` and `to` frame index.
 
 Registry name: `animation_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 8×8 grid of 8 px cells, frames 32–44, advance every 1 tick
-    IGuiTexture anim = new AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)   // from frame 32 to frame 44
-        .setAnimation(1);       // 1 tick per frame
+```java
+// 8×8 grid of 8 px cells, frames 32–44, advance every 1 tick
+IGuiTexture anim = new AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)   // from frame 32 to frame 44
+    .setAnimation(1);       // 1 tick per frame
 
-    // Tinted animation
-    IGuiTexture tinted = new AnimationTexture("mymod:textures/gui/glow.png")
-        .setCellSize(4)
-        .setAnimation(0, 15)
-        .setAnimation(2)
-        .setColor(0xFF44AAFF);
-    ```
+// Tinted animation
+IGuiTexture tinted = new AnimationTexture("mymod:textures/gui/glow.png")
+    .setCellSize(4)
+    .setAnimation(0, 15)
+    .setAnimation(2)
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val anim = AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)
-        .setAnimation(1)
-    ```
+```kotlin
+val anim = AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)
+    .setAnimation(1)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let anim = new AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)
-        .setAnimation(1);
-    ```
+```js
+let anim = new AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)
+    .setAnimation(1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## How the Grid Works

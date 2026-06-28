@@ -23,87 +23,107 @@ The `TextTexture` class extends `TransformTexture` to render text as a texture. 
 
 Sets a supplier to provide dynamic text updates.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textTexture.setSupplier(() -> "Updated dynamic text");
-    ```
+``` java
+textTexture.setSupplier(() -> "Updated dynamic text");
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    textTexture.setSupplier(() => "Updated dynamic text");
-    ```
+``` javascript
+textTexture.setSupplier(() => "Updated dynamic text");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### updateText
 
 Updates the displayed text. This method is invoked automatically via the supplier or can be called directly.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.updateText("New Text Content");
-    ```
+``` java
+textTexture.updateText("New Text Content");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBackgroundColor
 
 Sets the background color behind the text.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setBackgroundColor(0xffff0000);
-    ```
+``` java
+textTexture.setBackgroundColor(0xffff0000);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setDropShadow
 
 Enables or disables the drop shadow effect on the text.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setDropShadow(true);
-    ```
+``` java
+textTexture.setDropShadow(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setWidth
 
 Sets the maximum width for the text area. This method also recalculates text wrapping based on the new width.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setWidth(100);
-    ```
+``` java
+textTexture.setWidth(100);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setType
 
 Sets the text display type (e.g., NORMAL, ROLL, LEFT_HIDE).
 
-!!! info "TextType"
-    * `NORMAL`:  center, add new lines below
-    * `HIDE`:  center, hide redundant words
-    * `ROLL`:  center, hide redundant words, roll words while hover
-    * `ROLL_ALWAYS`:  center always roll words while redundant
-    * `LEFT`:  same as NOMAL but left align
-    * `RIGHT`:  same as NORMAL but right aligh
-    * `LEFT_HIDE`:  same as HIDE but left align
-    * `LEFT_ROLL`:  same as ROLL but left align
-    * `LEFT_ROLL_ALWAYS`:  same as ROLL_ALWAYS but let align
+::: info TextType
+* `NORMAL`:  center, add new lines below
+* `HIDE`:  center, hide redundant words
+* `ROLL`:  center, hide redundant words, roll words while hover
+* `ROLL_ALWAYS`:  center always roll words while redundant
+* `LEFT`:  same as NOMAL but left align
+* `RIGHT`:  same as NORMAL but right aligh
+* `LEFT_HIDE`:  same as HIDE but left align
+* `LEFT_ROLL`:  same as ROLL but left align
+* `LEFT_ROLL_ALWAYS`:  same as ROLL_ALWAYS but let align
+:::
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTexture.setType(TextType.ROLL);
-    ```
+``` java
+textTexture.setType(TextType.ROLL);
+```
 
+</DocTab>
+</DocTabs>
 ---

@@ -18,22 +18,28 @@
 
 设置边框角的大小。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    resourceBorderTexture.setBoderSize(5, 5);
-    ```
+``` java
+resourceBorderTexture.setBoderSize(5, 5);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setImageSize
 
 设置纹理图像的整体尺寸。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    resourceBorderTexture.setImageSize(200, 150);
-    ```
+``` java
+resourceBorderTexture.setImageSize(200, 150);
+```
 
+</DocTab>
+</DocTabs>
 ---

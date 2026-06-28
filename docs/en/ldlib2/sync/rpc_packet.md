@@ -15,8 +15,9 @@ The annotated method itself becomes the packet’s execution target, and its par
 * `RPCSender` (optional): If declared as the first parameter, LDLib2 injects sender-side information, allowing you to distinguish whether the 
 * Method parameters: All parameters (except RPCSender) are automatically serialized and transferred. call is executed on the client or the server. 
 
-!!! note
-    The types of parameters should be supoorted in the [Types Support](./types_support.md){ data-preview }.
+::: info
+The types of parameters should be supoorted in the [Types Support](./types_support.md).
+:::
 
 RPCPacketDistributor
 Provides utility methods to send RPC calls to the server, all players, or specific targets.

@@ -1,64 +1,70 @@
 # SDFRectTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `SDFRectTexture` draws a rounded rectangle using an SDF (Signed Distance Field) GPU shader. It produces sharp, anti-aliased edges at any size. Supports per-corner radii, an optional stroke border, and smooth CSS-transition interpolation.
 
 Registry name: `sdf_rect_texture`  
 LSS function: `rect(...)` / `sdf(...)`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Filled rounded rect
-    IGuiTexture panel = new SDFRectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(6f);
+```java
+// Filled rounded rect
+IGuiTexture panel = new SDFRectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(6f);
 
-    // Rounded rect with a white stroke
-    IGuiTexture bordered = new SDFRectTexture()
-        .setColor(0xFF1A1A1A)
-        .setRadius(4f)
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF);
+// Rounded rect with a white stroke
+IGuiTexture bordered = new SDFRectTexture()
+    .setColor(0xFF1A1A1A)
+    .setRadius(4f)
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF);
 
-    // Static factory
-    IGuiTexture simple = SDFRectTexture.of(0xFF3A3A3A);
-    ```
+// Static factory
+IGuiTexture simple = SDFRectTexture.of(0xFF3A3A3A);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val panel = SDFRectTexture()
-        .setColor(0xFF2A2A2A.toInt())
-        .setRadius(6f)
+```kotlin
+val panel = SDFRectTexture()
+    .setColor(0xFF2A2A2A.toInt())
+    .setRadius(6f)
 
-    val bordered = SDFRectTexture.of(0xFF1A1A1A.toInt())
-        .setRadius(4f)
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF.toInt())
-    ```
+val bordered = SDFRectTexture.of(0xFF1A1A1A.toInt())
+    .setRadius(4f)
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let panel = new SDFRectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(6);
+```js
+let panel = new SDFRectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(6);
 
-    let bordered = SDFRectTexture.of(0xFF1A1A1A)
-        .setRadius(4)
-        .setStroke(1)
-        .setBorderColor(0xFFFFFFFF);
-    ```
+let bordered = SDFRectTexture.of(0xFF1A1A1A)
+    .setRadius(4)
+    .setStroke(1)
+    .setBorderColor(0xFFFFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

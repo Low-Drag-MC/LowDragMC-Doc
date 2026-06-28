@@ -8,7 +8,8 @@ from deep_translator import GoogleTranslator
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS_DIR = ROOT / "docs" / "ldlib2"
+EN_DIR = ROOT / "docs" / "en" / "ldlib2"
+ZH_DIR = ROOT / "docs" / "zh" / "ldlib2"
 TRANSLATOR = GoogleTranslator(source="en", target="zh-CN")
 
 FENCED_BLOCK_RE = re.compile(r"(```[\s\S]*?```|~~~[\s\S]*?~~~)", re.MULTILINE)
@@ -106,11 +107,11 @@ def translate_markdown(content: str) -> str:
 
 
 def output_path(src: Path) -> Path:
-    return src.with_name(f"{src.stem}.zh.md")
+    return ZH_DIR / src.relative_to(EN_DIR)
 
 
 def main() -> None:
-    files = sorted(p for p in DOCS_DIR.rglob("*.md") if not p.name.endswith(".zh.md"))
+    files = sorted(EN_DIR.rglob("*.md"))
     for src in files:
         dst = output_path(src)
         if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
@@ -118,16 +119,9 @@ def main() -> None:
             continue
         text = src.read_text(encoding="utf-8")
         zh = translate_markdown(text)
+        dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_text(zh, encoding="utf-8")
         print(f"translated: {src.relative_to(ROOT)} -> {dst.relative_to(ROOT)}")
-
-    index_zh = ROOT / "docs" / "index.zh.md"
-    if not index_zh.exists():
-        index_zh.write_text(
-            "# LowDragMC 文档\n\n## 模块\n\n- [LDLib2](ldlib2/index.zh.md)\n",
-            encoding="utf-8",
-        )
-        print(f"created: {index_zh.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

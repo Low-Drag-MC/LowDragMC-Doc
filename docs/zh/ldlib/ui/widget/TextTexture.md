@@ -18,67 +18,84 @@
 
 修改内部文本纹理的样式。更多详情请参见 [`TextTexture`](../textures/text.md)。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textTextureWidget.textureStyle(texture -> {
-        texture.setType(TextType.ROLL);
-        texture.setRollSpeed(0.5);
-    });
-    ```
-=== "KubeJS"
+``` java
+textTextureWidget.textureStyle(texture -> {
+    texture.setType(TextType.ROLL);
+    texture.setRollSpeed(0.5);
+});
+```
 
-    ``` javascript
-    textTextureWidget.textureStyle(texture => {
-        texture.setType(TextType.ROLL);
-        texture.setRollSpeed(0.5);
-    });
-    ```
+</DocTab>
+<DocTab title="KubeJS">
 
+``` javascript
+textTextureWidget.textureStyle(texture => {
+    texture.setType(TextType.ROLL);
+    texture.setRollSpeed(0.5);
+});
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### `setText`
 
 使用字符串设置文本。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textTextureWidget.setText("Hello World");
-    ```
+``` java
+textTextureWidget.setText("Hello World");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `setText` / `setComponent`
 
 使用 Component 设置文本。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textTextureWidget.setText(Component.literal("Hello World"));
-    ```
+``` java
+textTextureWidget.setText(Component.literal("Hello World"));
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    textTextureWidget.setComponent("....");
-    ```
+``` javascript
+textTextureWidget.setComponent("....");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### `setText / setTextProvider`
 
 使用 Supplier 设置文本。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textTextureWidget.setText(() -> "dynamic text");
-    ```
+``` java
+textTextureWidget.setText(() -> "dynamic text");
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    textTextureWidget.setTextProvider(() => Component.string("dynamic text"));
-    ```
+``` javascript
+textTextureWidget.setTextProvider(() => Component.string("dynamic text"));
+```
+
+</DocTab>
+</DocTabs>

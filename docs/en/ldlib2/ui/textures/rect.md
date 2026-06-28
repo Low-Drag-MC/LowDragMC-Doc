@@ -1,61 +1,68 @@
 # RectTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `RectTexture` draws a rounded rectangle using CPU-side tessellation. It is a fallback alternative to [`SDFRectTexture`](sdf-rect.md) for environments where the SDF shader is unavailable. Both classes expose the same properties.
 
 Registry name: `rect_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
-!!! tip ""
-    For most use cases, prefer [`SDFRectTexture`](sdf-rect.md) which provides better visual quality at all sizes. Use `RectTexture` only when you need CPU-side rendering.
+::: tip
+For most use cases, prefer [`SDFRectTexture`](sdf-rect.md) which provides better visual quality at all sizes. Use `RectTexture` only when you need CPU-side rendering.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Filled rounded rect
-    IGuiTexture panel = new RectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(new Vector4f(6, 6, 6, 6));
+```java
+// Filled rounded rect
+IGuiTexture panel = new RectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(new Vector4f(6, 6, 6, 6));
 
-    // With stroke
-    IGuiTexture bordered = new RectTexture()
-        .setColor(0xFF1A1A1A)
-        .setRadius(new Vector4f(4, 4, 4, 4))
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF);
+// With stroke
+IGuiTexture bordered = new RectTexture()
+    .setColor(0xFF1A1A1A)
+    .setRadius(new Vector4f(4, 4, 4, 4))
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF);
 
-    // Static factory
-    IGuiTexture simple = RectTexture.of(0xFF3A3A3A);
-    ```
+// Static factory
+IGuiTexture simple = RectTexture.of(0xFF3A3A3A);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val panel = RectTexture()
-        .setColor(0xFF2A2A2A.toInt())
-        .setRadius(Vector4f(6f, 6f, 6f, 6f))
+```kotlin
+val panel = RectTexture()
+    .setColor(0xFF2A2A2A.toInt())
+    .setRadius(Vector4f(6f, 6f, 6f, 6f))
 
-    val simple = RectTexture.of(0xFF3A3A3A.toInt())
-    ```
+val simple = RectTexture.of(0xFF3A3A3A.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let panel = new RectTexture()
-        .setColor(0xFF2A2A2A)
-        .setStroke(1)
-        .setBorderColor(0xFFFFFFFF);
+```js
+let panel = new RectTexture()
+    .setColor(0xFF2A2A2A)
+    .setStroke(1)
+    .setBorderColor(0xFFFFFFFF);
 
-    let simple = RectTexture.of(0xFF3A3A3A);
-    ```
+let simple = RectTexture.of(0xFF3A3A3A);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Fields

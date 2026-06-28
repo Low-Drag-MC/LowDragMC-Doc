@@ -1,55 +1,61 @@
 # ProgressBar
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ProgressBar` 在可配置的 `[min, max]` 范围内将数值显示为部分填充的进度条。填充方向、插值动画和内部纹理均可配置。可选的居中 `Label` 可以覆盖在进度条上方。
 
-`ProgressBar` 实现了 `IBindable<Float>` 和 `IDataConsumer<Float>`，因此其数值可以由数据提供器驱动，并自动与服务端保持同步。
+`ProgressBar` 实现了 `IBindable&lt;Float&gt;` 和 `IDataConsumer&lt;Float&gt;`，因此其数值可以由数据提供器驱动，并自动与服务端保持同步。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var bar = new ProgressBar();
-    bar.setRange(0, 100);
-    bar.setProgress(75f);
-    parent.addChild(bar);
+```java
+var bar = new ProgressBar();
+bar.setRange(0, 100);
+bar.setProgress(75f);
+parent.addChild(bar);
 
-    // 数据绑定（服务端 → 客户端，每 tick 同步）
-    bar.bindDataSource(DataBindingBuilder.floatValS2C(
-        () -> machine.getProgress() / (float) machine.getMaxProgress()
-    ).build());
-    ```
+// 数据绑定（服务端 → 客户端，每 tick 同步）
+bar.bindDataSource(DataBindingBuilder.floatValS2C(
+    () -> machine.getProgress() / (float) machine.getMaxProgress()
+).build());
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    progressBar({
-        layout { width(80).height(14) }
-        style { background(Sprites.PROGRESS_CONTAINER) }
-    }) {
-        api {
-            setRange(0f, 100f)
-            setProgress(75f)
-        }
+```kotlin
+progressBar({
+    layout { width(80).height(14) }
+    style { background(Sprites.PROGRESS_CONTAINER) }
+}) {
+    api {
+        setRange(0f, 100f)
+        setProgress(75f)
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let bar = new ProgressBar();
-    bar.setRange(0, 100);
-    bar.setProgress(75);
-    parent.addChild(bar);
-    ```
+```js
+let bar = new ProgressBar();
+bar.setRange(0, 100);
+bar.setProgress(75);
+parent.addChild(bar);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -88,77 +94,95 @@
 
 ## 进度条样式
 
-!!! info ""
-    #### <p style="font-size: 1rem;">fill-direction</p>
+::: info
+#### <p style="font-size: 1rem;">fill-direction</p>
 
-    随着数值增加，进度条填充的方向。
+随着数值增加，进度条填充的方向。
 
-    默认值：`LEFT_TO_RIGHT`
+默认值：`LEFT_TO_RIGHT`
 
-    | 值 | 描述 |
-    | ----- | ----------- |
-    | `LEFT_TO_RIGHT` | 进度条从左边缘开始增长。 |
-    | `RIGHT_TO_LEFT` | 进度条从右边缘开始增长。 |
-    | `UP_TO_DOWN` | 进度条从上边缘开始增长。 |
-    | `DOWN_TO_UP` | 进度条从下边缘开始增长。 |
-    | `ALWAYS_FULL` | 无论数值如何，进度条始终完全可见。 |
+| 值 | 描述 |
+| ----- | ----------- |
+| `LEFT_TO_RIGHT` | 进度条从左边缘开始增长。 |
+| `RIGHT_TO_LEFT` | 进度条从右边缘开始增长。 |
+| `UP_TO_DOWN` | 进度条从上边缘开始增长。 |
+| `DOWN_TO_UP` | 进度条从下边缘开始增长。 |
+| `ALWAYS_FULL` | 无论数值如何，进度条始终完全可见。 |
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        bar.progressBarStyle(style -> style.fillDirection(FillDirection.DOWN_TO_UP));
-        ```
+```java
+bar.progressBarStyle(style -> style.fillDirection(FillDirection.DOWN_TO_UP));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        progress-bar {
-            fill-direction: DOWN_TO_UP;
-        }
-        ```
+```css
+progress-bar {
+    fill-direction: DOWN_TO_UP;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">interpolate</p>
+</DocTab>
+</DocTabs>
+:::
 
-    当为 `true` 时，进度条会在每个 tick 视觉上动画过渡到目标值，而不是直接跳变。
+::: info
+#### <p style="font-size: 1rem;">interpolate</p>
 
-    默认值：`true`
+当为 `true` 时，进度条会在每个 tick 视觉上动画过渡到目标值，而不是直接跳变。
 
-    === "Java"
+默认值：`true`
 
-        ```java
-        bar.progressBarStyle(style -> style.interpolate(false));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+bar.progressBarStyle(style -> style.interpolate(false));
+```
 
-        ```css
-        progress-bar {
-            interpolate: false;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">interpolate-step</p>
+```css
+progress-bar {
+    interpolate: false;
+}
+```
 
-    插值过程中每个 tick 移动的总范围（`max - min`）比例。负值使用 partial-tick lerp 以实现更平滑的动画。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`0.1`
+::: info
+#### <p style="font-size: 1rem;">interpolate-step</p>
 
-    === "Java"
+插值过程中每个 tick 移动的总范围（`max - min`）比例。负值使用 partial-tick lerp 以实现更平滑的动画。
 
-        ```java
-        bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // 更慢的动画
-        bar.progressBarStyle(style -> style.interpolateStep(-1f));    // partial-tick lerp
-        ```
+默认值：`0.1`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        progress-bar {
-            interpolate-step: 0.05;
-        }
-        ```
+```java
+bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // 更慢的动画
+bar.progressBarStyle(style -> style.interpolateStep(-1f));    // partial-tick lerp
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+progress-bar {
+    interpolate-step: 0.05;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -166,42 +190,49 @@
 
 进度条的外部容器使用 `Sprites.PROGRESS_CONTAINER`，填充部分使用 `Sprites.PROGRESS_BAR`。可以通过样式或 DSL 覆盖这些纹理：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    bar.barContainer(c -> c.style(s -> s.background(myContainerTexture)));
-    bar.bar(b -> b.style(s -> s.background(myBarTexture)));
-    ```
+```java
+bar.barContainer(c -> c.style(s -> s.background(myContainerTexture)));
+bar.bar(b -> b.style(s -> s.background(myBarTexture)));
+```
 
-=== "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-    ```css
-    .__progress-bar_bar-container__ {
-        background: sprite("mymod:textures/gui/bar_bg.png");
-    }
-    .__progress-bar_bar__ {
-        background: sprite("mymod:textures/gui/bar_fill.png");
-    }
-    ```
+```css
+.__progress-bar_bar-container__ {
+    background: sprite("mymod:textures/gui/bar_bg.png");
+}
+.__progress-bar_bar__ {
+    background: sprite("mymod:textures/gui/bar_fill.png");
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 数据绑定
 
-`ProgressBar` 订阅 `IDataProvider<Float>` 以自动更新数值。
+`ProgressBar` 订阅 `IDataProvider&lt;Float&gt;` 以自动更新数值。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var binding = DataBindingBuilder.floatValS2C(
-        () -> machine.getProgress() / (float) machine.getMaxProgress()
-    ).build();
+```java
+var binding = DataBindingBuilder.floatValS2C(
+    () -> machine.getProgress() / (float) machine.getMaxProgress()
+).build();
 
-    bar.bindDataSource(binding);
-    bar.unbindDataSource(binding); // 完成时取消绑定
-    ```
+bar.bindDataSource(binding);
+bar.unbindDataSource(binding); // 完成时取消绑定
+```
 
-完整的绑定 API 请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+完整的绑定 API 请参见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -226,11 +257,11 @@
 | `setRange(float, float)` | `ProgressBar` | 设置 `[min, max]` 范围并重新评估当前值。 |
 | `setMinValue(float)` | `ProgressBar` | 设置最小值。 |
 | `setMaxValue(float)` | `ProgressBar` | 设置最大值。 |
-| `progressBarStyle(Consumer<ProgressBarStyle>)` | `ProgressBar` | 以流式方式配置 `ProgressBarStyle`。 |
-| `bar(Consumer<UIElement>)` | `ProgressBar` | 配置填充条元素。 |
-| `barContainer(Consumer<UIElement>)` | `ProgressBar` | 配置外部容器元素。 |
-| `label(Consumer<Label>)` | `ProgressBar` | 配置覆盖层标签。 |
-| `bindDataSource(IDataProvider<Float>)` | `ProgressBar` | 订阅数据提供器。 |
-| `unbindDataSource(IDataProvider<Float>)` | `ProgressBar` | 取消订阅数据提供器。 |
+| `progressBarStyle(Consumer&lt;ProgressBarStyle&gt;)` | `ProgressBar` | 以流式方式配置 `ProgressBarStyle`。 |
+| `bar(Consumer&lt;UIElement&gt;)` | `ProgressBar` | 配置填充条元素。 |
+| `barContainer(Consumer&lt;UIElement&gt;)` | `ProgressBar` | 配置外部容器元素。 |
+| `label(Consumer&lt;Label&gt;)` | `ProgressBar` | 配置覆盖层标签。 |
+| `bindDataSource(IDataProvider&lt;Float&gt;)` | `ProgressBar` | 订阅数据提供器。 |
+| `unbindDataSource(IDataProvider&lt;Float&gt;)` | `ProgressBar` | 取消订阅数据提供器。 |
 | `getValue()` | `Float` | 返回当前值。 |
 | `getNormalizedValue()` | `float` | 返回归一化到 `[0, 1]` 的当前值。 |

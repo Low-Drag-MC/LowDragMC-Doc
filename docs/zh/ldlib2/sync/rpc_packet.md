@@ -15,8 +15,9 @@
 * `RPCSender`（可选）：如果声明为第一个参数，LDLib2 会注入发送方信息，允许你区分调用是在客户端还是服务端上执行的。
 * 方法参数：所有参数（除 RPCSender 外）都会自动序列化并传输。
 
-!!! note
-    参数类型应在 [类型支持](./types_support.md){ data-preview } 中受到支持。
+::: info
+参数类型应在 [类型支持](./types_support.md) 中受到支持。
+:::
 
 ## RPCPacketDistributor
 

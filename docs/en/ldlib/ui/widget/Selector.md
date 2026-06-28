@@ -2,7 +2,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/selector.mp4" type="video/mp4">
+    <source src="../assets/selector.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 </div>
@@ -32,18 +32,22 @@ The `SelectorWidget` is a **dropdown-style selection widget** that allows users 
 
 Updates the list of selectable options.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    selectorWidget.setCandidates(List.of("OptionA", "OptionB", "OptionC"));
-    ```
+```Java
+selectorWidget.setCandidates(List.of("OptionA", "OptionB", "OptionC"));
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
-    ```
+```Javascript
+selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
+```
 
+</DocTab>
+</DocTabs>
 - Triggers a UI update to reflect the new options.
 
 ---
@@ -52,12 +56,15 @@ Updates the list of selectable options.
 
 Sets the currently selected value.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setValue("OptionA");
-    ```
+```java
+selectorWidget.setValue("OptionA");
+```
 
+</DocTab>
+</DocTabs>
 - If the value is **not found** in `candidates`, it remains unchanged.
 
 ---
@@ -66,12 +73,15 @@ Sets the currently selected value.
 
 Defines how many options should be visible **before scrolling**.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setMaxCount(3);
-    ```
+```java
+selectorWidget.setMaxCount(3);
+```
 
+</DocTab>
+</DocTabs>
 - If there are **more** than `maxCount` options, a **scrollbar** is added.
 
 ---
@@ -80,46 +90,56 @@ Defines how many options should be visible **before scrolling**.
 
 Changes the color of option text.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setFontColor(0xFFFFFF); // White text
-    ```
+```java
+selectorWidget.setFontColor(0xFFFFFF); // White text
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setButtonBackground
 
 Sets the background texture for the button area.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setButtonBackground(myCustomTexture);
-    ```
+```java
+selectorWidget.setButtonBackground(myCustomTexture);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setOnChanged
 
 Registers a callback to handle selection changes.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selectorWidget.setOnChanged(selected -> {
-        System.out.println("New selection: " + selected);
-    });
-    ```
+```java
+selectorWidget.setOnChanged(selected -> {
+    System.out.println("New selection: " + selected);
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    selectorWidget.setOnChanged(selected => {
-        console.log("New selection: " + selected);
-    });
-    ```
+```javascript
+selectorWidget.setOnChanged(selected => {
+    console.log("New selection: " + selected);
+});
+```
 
+</DocTab>
+</DocTabs>
 - This is useful for **updating UI state** or triggering **game logic**.
 
 ---
@@ -128,18 +148,22 @@ Registers a callback to handle selection changes.
 
 Automatically updates the option list from a dynamic source.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selectorWidget.setCandidatesSupplier(() -> fetchDynamicOptions());
-    ```
+```java
+selectorWidget.setCandidatesSupplier(() -> fetchDynamicOptions());
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```javascript
-    selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
-    ```
+```javascript
+selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
+```
 
+</DocTab>
+</DocTabs>
 - The widget **polls** this function to refresh the list.
 - Useful when **candidates change based on external conditions**.
 
@@ -149,8 +173,12 @@ Automatically updates the option list from a dynamic source.
 
 Manually toggles the dropdown visibility.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ```java
-    selectorWidget.setShow(true); // Opens dropdown
-    ```
+```java
+selectorWidget.setShow(true); // Opens dropdown
+```
+
+</DocTab>
+</DocTabs>

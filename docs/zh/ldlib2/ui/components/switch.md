@@ -1,47 +1,53 @@
 # Switch
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`Switch` 是一个带动画效果的开/关切换器，外观呈滑动胶囊状。切换时，内部的指示器会从一端平滑滑到另一端，带有流畅的 CSS 过渡效果。它本身没有文字标签——如果你需要描述性文字，请使用 [`Label`](label.md){ data-preview } 或 [`Toggle`](toggle.md){ data-preview }。
+`Switch` 是一个带动画效果的开/关切换器，外观呈滑动胶囊状。切换时，内部的指示器会从一端平滑滑到另一端，带有流畅的 CSS 过渡效果。它本身没有文字标签——如果你需要描述性文字，请使用 [`Label`](label.md) 或 [`Toggle`](toggle.md)。
 
 从内部结构来看，`Switch` 是一个水平 flex 行，包含一个 **flex 占位元素**（`placeholder`）和一个 **方形指示器**（`markIcon`）。切换时，占位元素的 `flex` 值从 `0` 增长到 `1`，将指示器推至另一侧。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中介绍的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中介绍的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var sw = new Switch();
-    sw.setOn(true);
-    sw.setOnSwitchChanged(isOn -> {
-        // 当状态变化时调用
-    });
-    parent.addChild(sw);
-    ```
+```java
+var sw = new Switch();
+sw.setOn(true);
+sw.setOnSwitchChanged(isOn -> {
+    // 当状态变化时调用
+});
+parent.addChild(sw);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    switch({
-        isOn = true
-        onSwitch { isOn -> /* 状态已改变 */ }
-    }) { }
-    ```
+```kotlin
+switch({
+    isOn = true
+    onSwitch { isOn -> /* 状态已改变 */ }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let sw = new Switch();
-    sw.setOn(true);
-    sw.setOnSwitchChanged(isOn => { /* ... */ });
-    parent.addChild(sw);
-    ```
+```js
+let sw = new Switch();
+sw.setOn(true);
+sw.setOnSwitchChanged(isOn => { /* ... */ });
+parent.addChild(sw);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -75,130 +81,161 @@ Switch 包含两个内部元素：
 
 `SwitchStyle` 控制四张纹理：容器在两种状态下的背景，以及指示器在两种状态下的纹理。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    Switch 处于**关闭**状态时的容器背景。
+Switch 处于**关闭**状态时的容器背景。
 
-    默认值：`Sprites.RECT_RD_DARK`
+默认值：`Sprites.RECT_RD_DARK`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        sw.switchStyle(style -> style.baseTexture(myOffBg));
-        ```
+```java
+sw.switchStyle(style -> style.baseTexture(myOffBg));
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        switch({ switchStyle = { baseTexture(myOffBg) } }) { }
-        ```
+```kotlin
+switch({ switchStyle = { baseTexture(myOffBg) } }) { }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        switch {
-            base-background: rect(#3a3a3a, 4);
-        }
-        ```
+```css
+switch {
+    base-background: rect(#3a3a3a, 4);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Switch 处于**开启**状态时的容器背景。
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    默认值：`Sprites.RECT_RD_T`
+Switch 处于**开启**状态时的容器背景。
 
-    === "Java"
+默认值：`Sprites.RECT_RD_T`
 
-        ```java
-        sw.switchStyle(style -> style.pressedTexture(myOnBg));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+sw.switchStyle(style -> style.pressedTexture(myOnBg));
+```
 
-        ```kotlin
-        switch({ switchStyle = { pressedTexture(myOnBg) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+switch({ switchStyle = { pressedTexture(myOnBg) } }) { }
+```
 
-        ```css
-        switch {
-            pressed-background: rect(#3d7a4f, 4);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">unmark-background</p>
+```css
+switch {
+    pressed-background: rect(#3d7a4f, 4);
+}
+```
 
-    Switch 处于**关闭**状态时，滑动指示器的纹理。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`Sprites.RECT_RD`
+::: info
+#### <p style="font-size: 1rem;">unmark-background</p>
 
-    === "Java"
+Switch 处于**关闭**状态时，滑动指示器的纹理。
 
-        ```java
-        sw.switchStyle(style -> style.unmarkTexture(myOffIndicator));
-        ```
+默认值：`Sprites.RECT_RD`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        switch({ switchStyle = { unmarkTexture(myOffIndicator) } }) { }
-        ```
+```java
+sw.switchStyle(style -> style.unmarkTexture(myOffIndicator));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        switch {
-            unmark-background: rect(#888888, 3);
-        }
-        ```
+```kotlin
+switch({ switchStyle = { unmarkTexture(myOffIndicator) } }) { }
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">mark-background</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Switch 处于**开启**状态时，滑动指示器的纹理。
+```css
+switch {
+    unmark-background: rect(#888888, 3);
+}
+```
 
-    默认值：`Sprites.RECT_RD`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">mark-background</p>
 
-        ```java
-        sw.switchStyle(style -> style.markTexture(myOnIndicator));
-        ```
+Switch 处于**开启**状态时，滑动指示器的纹理。
 
-    === "Kotlin"
+默认值：`Sprites.RECT_RD`
 
-        ```kotlin
-        switch({ switchStyle = { markTexture(myOnIndicator) } }) { }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+sw.switchStyle(style -> style.markTexture(myOnIndicator));
+```
 
-        ```css
-        switch {
-            mark-background: rect(#FFFFFF, 3);
-        }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+switch({ switchStyle = { markTexture(myOnIndicator) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+switch {
+    mark-background: rect(#FFFFFF, 3);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## 值绑定
 
-`Switch` 继承自 `BindableUIElement<Boolean>`，因此它可以与数据绑定系统集成：
+`Switch` 继承自 `BindableUIElement&lt;Boolean&gt;`，因此它可以与数据绑定系统集成：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    sw.bind(DataBindingBuilder.bool(
-        () -> config.isEnabled(),
-        val -> config.setEnabled(val)
-    ).build());
-    ```
+```java
+sw.bind(DataBindingBuilder.bool(
+    () -> config.isEnabled(),
+    val -> config.setEnabled(val)
+).build());
+```
 
-详细信息请参阅 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+详细信息请参阅 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -219,5 +256,5 @@ Switch 包含两个内部元素：
 | ------ | ------- | ----------- |
 | `setOn(boolean)` | `Switch` | 设置开/关状态并通知监听器。 |
 | `setOnSwitchChanged(BooleanConsumer)` | `Switch` | 注册状态变化的监听器。 |
-| `switchStyle(Consumer<SwitchStyle>)` | `Switch` | 以流式方式配置 `SwitchStyle`。 |
+| `switchStyle(Consumer&lt;SwitchStyle&gt;)` | `Switch` | 以流式方式配置 `SwitchStyle`。 |
 | `getValue()` | `Boolean` | 返回当前开/关状态。 |

@@ -1,17 +1,17 @@
 # LowDragMC
 
-!!! info inline end "Profile"
-    ![Profile](../assets/profile.png){ width="105%"}
-
+<div class="home-profile">
+<img src="../assets/profile.png" alt="Profile">
+</div>
 LowDragMC is not an active team, but rather a collection of various interesting mod projects.  
 
 The sole maintainer of these projects is **[KilaBash](https://github.com/Yefancy) :)**  
 
 ---
 
-:simple-discord: [Join our Discord](https://discord.com/invite/sDdf2yD9bh)  
+<DocIcon name="simple-discord" /> [Join our Discord](https://discord.com/invite/sDdf2yD9bh)  
 
-:simple-github: [GitHub Repository](https://github.com/Low-Drag-MC)  
+<DocIcon name="simple-github" /> [GitHub Repository](https://github.com/Low-Drag-MC)  
 
 In essence, this is more of a **hub** for independent projects from myself and many talented developers rather than a structured team.  
 

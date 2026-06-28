@@ -1,8 +1,8 @@
 # CodeEditor
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`CodeEditor` 继承自 [`TextArea`](text-area.md){ data-preview }，并增加了语法高亮、代码折叠以及编辑器级别的键盘快捷键功能。默认使用内置的 JetBrains Mono Bold 字体。
+`CodeEditor` 继承自 [`TextArea`](text-area.md)，并增加了语法高亮、代码折叠以及编辑器级别的键盘快捷键功能。默认使用内置的 JetBrains Mono Bold 字体。
 
 相比 `TextArea` 额外提供的快捷键：
 
@@ -12,43 +12,49 @@
 | `Ctrl+/` | 在当前行或选区切换 `//` 行注释。 |
 | `Enter` | 插入新行并保留上一行的前导缩进。 |
 
-[`TextArea`](text-area.md){ data-preview } 的所有功能（样式、值绑定、验证器、滚动条等）在此同样适用。
+[`TextArea`](text-area.md) 的所有功能（样式、值绑定、验证器、滚动条等）在此同样适用。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中介绍的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+::: info
+[UIElement](element.md) 中介绍的所有内容（布局、样式、事件、数据绑定等）同样适用于此。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var editor = new CodeEditor();
-    editor.setLanguage(Languages.JSON);
-    editor.setValue(new String[] { "{", "  \"key\": \"value\"", "}" }, false);
-    editor.setLinesResponder(lines -> System.out.println(String.join("\n", lines)));
-    parent.addChild(editor);
-    ```
+```java
+var editor = new CodeEditor();
+editor.setLanguage(Languages.JSON);
+editor.setValue(new String[] { "{", "  \"key\": \"value\"", "}" }, false);
+editor.setLinesResponder(lines -> System.out.println(String.join("\n", lines)));
+parent.addChild(editor);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    codeEditor({
-        language(Languages.JSON)
-        layout = { width(300.px); height(200.px) }
-    }) { }
-    ```
+```kotlin
+codeEditor({
+    language(Languages.JSON)
+    layout = { width(300.px); height(200.px) }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let editor = new CodeEditor();
-    editor.setLanguage(Languages.JSON);
-    editor.setValue(["{", "  \"key\": \"value\"", "}"], false);
-    parent.addChild(editor);
-    ```
+```js
+let editor = new CodeEditor();
+editor.setLanguage(Languages.JSON);
+editor.setValue(["{", "  \"key\": \"value\"", "}"], false);
+parent.addChild(editor);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -77,4 +83,4 @@
 | `setLanguage(ILanguageDefinition)` | `CodeEditor` | 设置用于语法高亮的语言（例如 `Languages.JSON`、`Languages.SNBT`）。 |
 | `getLanguage()` | `ILanguageDefinition` | 返回当前语言。 |
 
-[`TextArea`](text-area.md){ data-preview } 的所有方法同样可用。
+[`TextArea`](text-area.md) 的所有方法同样可用。

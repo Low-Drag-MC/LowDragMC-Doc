@@ -19,32 +19,42 @@ The `ProgressTexture` is used to render a progress bar texture that fills accord
 
 Sets the progress textures. `emptyBarArea` and `filledBarArea` can any type of the [`GUi Texture`](index.md).
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setTexture(emptyBarArea, filledBarArea);
-    ```
+``` java
+progressTexture.setTexture(emptyBarArea, filledBarArea);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setProgress
 
 Sets the progress value.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setProgress(0.75);
-    ```
+``` java
+progressTexture.setProgress(0.75);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFillDirection
 
 Sets the fill direction for the progress bar.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    progressTexture.setFillDirection(ProgressTexture.FillDirection.RIGHT_TO_LEFT);
-    ```
+``` java
+progressTexture.setFillDirection(ProgressTexture.FillDirection.RIGHT_TO_LEFT);
+```
+
+</DocTab>
+</DocTabs>

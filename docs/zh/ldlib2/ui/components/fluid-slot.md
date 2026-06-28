@@ -1,50 +1,56 @@
 # FluidSlot
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `FluidSlot` 在槽位内渲染 `FluidStack`，并以方向性填充效果展示液位。手持流体容器点击槽位时，会通过原版 `FluidUtil` API 进行填充或排空。当 JEI、REI 或 EMI 存在时，它也会与这些模组联动。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var fluidSlot = new FluidSlot();
-    fluidSlot.bind(fluidHandler, 0); // IFluidHandler + tank index
-    fluidSlot.setCapacity(16000);
-    parent.addChild(fluidSlot);
+```java
+var fluidSlot = new FluidSlot();
+fluidSlot.bind(fluidHandler, 0); // IFluidHandler + tank index
+fluidSlot.setCapacity(16000);
+parent.addChild(fluidSlot);
 
-    // Phantom slot (XEI drag-drop)
-    fluidSlot.xeiPhantom();
-    ```
+// Phantom slot (XEI drag-drop)
+fluidSlot.xeiPhantom();
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    fluidSlot({
-        layout { width(18).height(18) }
-    }) {
-        api {
-            bind(fluidHandler, 0)
-            setCapacity(16000)
-        }
+```kotlin
+fluidSlot({
+    layout { width(18).height(18) }
+}) {
+    api {
+        bind(fluidHandler, 0)
+        setCapacity(16000)
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let slot = new FluidSlot();
-    slot.bind(fluidHandler, 0);
-    slot.setCapacity(16000);
-    parent.addChild(slot);
-    ```
+```js
+let slot = new FluidSlot();
+slot.bind(fluidHandler, 0);
+slot.setCapacity(16000);
+parent.addChild(slot);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -74,126 +80,159 @@
 
 ## 槽位样式
 
-!!! info ""
-    #### <p style="font-size: 1rem;">fill-direction</p>
+::: info
+#### <p style="font-size: 1rem;">fill-direction</p>
 
-    流体纹理随数量增加而填充槽位的方向。可选值：`LEFT_TO_RIGHT`、`RIGHT_TO_LEFT`、`UP_TO_DOWN`、`DOWN_TO_UP`、`ALWAYS_FULL`。
+流体纹理随数量增加而填充槽位的方向。可选值：`LEFT_TO_RIGHT`、`RIGHT_TO_LEFT`、`UP_TO_DOWN`、`DOWN_TO_UP`、`ALWAYS_FULL`。
 
-    默认值：`LEFT_TO_RIGHT`
+默认值：`LEFT_TO_RIGHT`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        fluidSlot.slotStyle(style -> style.fillDirection(FillDirection.UP_TO_DOWN));
-        ```
+```java
+fluidSlot.slotStyle(style -> style.fillDirection(FillDirection.UP_TO_DOWN));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        fluid-slot {
-            fill-direction: UP_TO_DOWN;
-        }
-        ```
+```css
+fluid-slot {
+    fill-direction: UP_TO_DOWN;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-overlay</p>
+</DocTab>
+</DocTabs>
+:::
 
-    悬停时绘制在槽位上方的纹理。
+::: info
+#### <p style="font-size: 1rem;">hover-overlay</p>
 
-    默认值：`ColorRectTexture(0x80FFFFFF)`
+悬停时绘制在槽位上方的纹理。
 
-    === "Java"
+默认值：`ColorRectTexture(0x80FFFFFF)`
 
-        ```java
-        fluidSlot.slotStyle(style -> style.hoverOverlay(myTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+fluidSlot.slotStyle(style -> style.hoverOverlay(myTexture));
+```
 
-        ```css
-        fluid-slot {
-            hover-overlay: color(#FFFFFF80);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">slot-overlay</p>
+```css
+fluid-slot {
+    hover-overlay: color(#FFFFFF80);
+}
+```
 
-    绘制在槽位背景上方的纹理。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：无（空）
+::: info
+#### <p style="font-size: 1rem;">slot-overlay</p>
 
-    === "Java"
+绘制在槽位背景上方的纹理。
 
-        ```java
-        fluidSlot.slotStyle(style -> style.slotOverlay(myOverlay));
-        ```
+默认值：无（空）
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        fluid-slot {
-            slot-overlay: sprite("mymod:textures/gui/fluid_slot.png");
-        }
-        ```
+```java
+fluidSlot.slotStyle(style -> style.slotOverlay(myOverlay));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-slot-overlay-only-empty</p>
+</DocTab>
+<DocTab title="LSS">
 
-    为 `true` 时，`slot-overlay` 仅在槽位为空时绘制。
+```css
+fluid-slot {
+    slot-overlay: sprite("mymod:textures/gui/fluid_slot.png");
+}
+```
 
-    默认值：`true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-slot-overlay-only-empty</p>
 
-        ```java
-        fluidSlot.slotStyle(style -> style.showSlotOverlayOnlyEmpty(false));
-        ```
+为 `true` 时，`slot-overlay` 仅在槽位为空时绘制。
 
-    === "LSS"
+默认值：`true`
 
-        ```css
-        fluid-slot {
-            show-slot-overlay-only-empty: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-fluid-tooltips</p>
+```java
+fluidSlot.slotStyle(style -> style.showSlotOverlayOnlyEmpty(false));
+```
 
-    悬停时是否显示流体名称、数量/容量、温度和状态悬停提示。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`true`
+```css
+fluid-slot {
+    show-slot-overlay-only-empty: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        fluidSlot.slotStyle(style -> style.showFluidTooltips(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">show-fluid-tooltips</p>
 
-    === "LSS"
+悬停时是否显示流体名称、数量/容量、温度和状态悬停提示。
 
-        ```css
-        fluid-slot {
-            show-fluid-tooltips: false;
-        }
-        ```
+默认值：`true`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+fluidSlot.slotStyle(style -> style.showFluidTooltips(false));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+fluid-slot {
+    show-fluid-tooltips: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## 值绑定
 
-`FluidSlot` 继承自 `BindableUIElement<FluidStack>`：
+`FluidSlot` 继承自 `BindableUIElement&lt;FluidStack&gt;`：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    fluidSlot.bind(DataBindingBuilder.fluidStackS2C(
-        () -> tank.getFluidInTank(0)
-    ).build());
-    ```
+```java
+fluidSlot.bind(DataBindingBuilder.fluidStackS2C(
+    () -> tank.getFluidInTank(0)
+).build());
+```
 
-详情请参见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+详情请参见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -217,10 +256,10 @@
 | `bind(IFluidHandler, int)` | `FluidSlot` | 绑定到指定储罐索引的流体处理器。同步流体和容量。 |
 | `setFluid(FluidStack)` | `FluidSlot` | 设置显示的流体并通知监听器。 |
 | `setFluid(FluidStack, boolean)` | `FluidSlot` | 设置流体；第二个参数控制是否通知。 |
-| `slotStyle(Consumer<SlotStyle>)` | `FluidSlot` | 以流式接口配置样式。 |
+| `slotStyle(Consumer&lt;SlotStyle&gt;)` | `FluidSlot` | 以流式接口配置样式。 |
 | `xeiPhantom()` | `FluidSlot` | 在此槽位上启用 XEI 虚拟拖拽功能。 |
 | `xeiRecipeIngredient(IngredientIO)` | `FluidSlot` | 在 XEI 配方视图中标记为配方原料。 |
 | `xeiRecipeSlot()` | `FluidSlot` | 标记为配方槽位，默认 `IngredientIO.NONE`。 |
 | `xeiRecipeSlot(IngredientIO, float)` | `FluidSlot` | 以给定的 I/O 类型和概率标记为配方槽位。 |
 | `getFluidAmountText()` | `Component` | 返回 `amountLabel` 中显示的精简数量文本。 |
-| `getFullTooltipTexts()` | `List<Component>` | 返回合并后的流体和自定义悬停提示文本行。 |
+| `getFullTooltipTexts()` | `List&lt;Component&gt;` | 返回合并后的流体和自定义悬停提示文本行。 |

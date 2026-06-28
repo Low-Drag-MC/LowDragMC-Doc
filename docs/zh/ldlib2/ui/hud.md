@@ -1,6 +1,6 @@
 # HUD 覆盖层
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 LDLib2 允许你使用 `ModularHudLayer` 接口将完整的 `ModularUI` 渲染为 HUD 覆盖层。UI 将填满整个屏幕，在窗口大小改变时自动调整，并且每帧都会 tick。
 
@@ -46,9 +46,10 @@ public class MyClientEvents {
 }
 ```
 
-!!! warning "不要急切地构建 UI"
-    当 `RegisterGuiLayersEvent` 触发时，样式表、Sprite 和世界状态都**不可用**。
-    务必将创建过程包装在 `Suppliers.memoize(...)` 或等效的延迟供应器中，使 `ModularUI` 在首次渲染 tick 时构建，而非注册时。
+::: warning 不要急切地构建 UI
+当 `RegisterGuiLayersEvent` 触发时，样式表、Sprite 和世界状态都**不可用**。
+务必将创建过程包装在 `Suppliers.memoize(...)` 或等效的延迟供应器中，使 `ModularUI` 在首次渲染 tick 时构建，而非注册时。
+:::
 
 ---
 

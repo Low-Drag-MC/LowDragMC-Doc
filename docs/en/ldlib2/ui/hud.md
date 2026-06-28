@@ -1,6 +1,6 @@
 # HUD Overlays
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 LDLib2 lets you render a full `ModularUI` as a HUD layer using the `ModularHudLayer` interface. The UI fills the entire screen, auto-resizes on window resize, and ticks every frame.
 
@@ -46,9 +46,10 @@ public class MyClientEvents {
 }
 ```
 
-!!! warning "Do not build the UI eagerly"
-    Stylesheets, sprites, and world state are **not available** when `RegisterGuiLayersEvent` fires.
-    Always wrap creation in `Suppliers.memoize(...)` or an equivalent lazy supplier so the `ModularUI` is built on the first render tick, not at registration time.
+::: warning Do not build the UI eagerly
+Stylesheets, sprites, and world state are **not available** when `RegisterGuiLayersEvent` fires.
+Always wrap creation in `Suppliers.memoize(...)` or an equivalent lazy supplier so the `ModularUI` is built on the first render tick, not at registration time.
+:::
 
 ---
 

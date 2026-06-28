@@ -1,6 +1,6 @@
 # Introduction
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
 The **Materials system** provides a flexible and extensible framework for handling rendering materials in particle systems.  
 It offers various material types with different rendering capabilities, from simple textures to complex custom shaders with HDR support and advanced effects:
@@ -13,7 +13,7 @@ It offers various material types with different rendering capabilities, from sim
 
 ## Universal Configuration
 
-![Image title](../assets/material.png){ width="30%" align=right }
+<img src="../assets/material.png" alt="Image title" width="30%" class="md-img-right">
 
 All materials share the following settings:
 
@@ -27,40 +27,49 @@ All materials share the following settings:
 
 ---
 
-=== "Texture Material"
-    `Texture Material` is the most common type, designed for texture-based rendering.  
-    It supports **custom textures**, **HDR color processing**, **pixel-art mode**, and more.  
-    This makes it the most **versatile** material choice in the particle system.
+<DocTabs>
+<DocTab title="Texture Material">
 
-    **Configuration parameters:**
+`Texture Material` is the most common type, designed for texture-based rendering.  
+It supports **custom textures**, **HDR color processing**, **pixel-art mode**, and more.  
+This makes it the most **versatile** material choice in the particle system.
 
-    | Property             | Type              | Description |
-    | -------------------- | ----------------- | ----------- |
-    | `Texture`            | `ResourceLocation`| Path to the texture file |
-    | `Discard Threshold`  | `float`           | Alpha discard threshold |
-    | `HDR`                | `Vector4f`        | HDR color vector |
-    | `HDR Mode`           | `HDRMode`         | HDR blending mode |
-    | `Pixel Art.bits`     | `int`             | Pixel art bit depth |
+**Configuration parameters:**
 
-=== "Sprite Material"
-    `Sprite Material` allows you to access **Minecraft’s registered particle textures**.
+| Property             | Type              | Description |
+| -------------------- | ----------------- | ----------- |
+| `Texture`            | `ResourceLocation`| Path to the texture file |
+| `Discard Threshold`  | `float`           | Alpha discard threshold |
+| `HDR`                | `Vector4f`        | HDR color vector |
+| `HDR Mode`           | `HDRMode`         | HDR blending mode |
+| `Pixel Art.bits`     | `int`             | Pixel art bit depth |
 
-=== "Custom Shader Material"
-    The most **powerful** material type, allowing you to fully control rendering,  
-    set **custom samplers/uniforms**, and even **access particle data**.  
-    In fact, all material types can be implemented via a custom shader.
+</DocTab>
+<DocTab title="Sprite Material">
 
-    For more info, see [Custom Shader Material](CustomShaderMaterial/index.md).
+`Sprite Material` allows you to access **Minecraft’s registered particle textures**.
 
+</DocTab>
+<DocTab title="Custom Shader Material">
+
+The most **powerful** material type, allowing you to fully control rendering,  
+set **custom samplers/uniforms**, and even **access particle data**.  
+In fact, all material types can be implemented via a custom shader.
+
+For more info, see [Custom Shader Material](CustomShaderMaterial/index.md).
+
+</DocTab>
+</DocTabs>
 ---
 
 ## Special Material: `block_atlas`
 
-!!! info "What is the Block Atlas?"
-    See the official wiki: [Block Atlas](https://minecraft.wiki/w/Blocks-atlas#:~:text=blocks%2Datlas%20was%20a%20texture,atlas%20to%20form%20textures%2Datlas%20.)  
-    ![Blocks Atlas](https://minecraft.wiki/images/14w17a_blocks-atlas.png?110fc)
+::: info What is the Block Atlas?
+See the official wiki: [Block Atlas](https://minecraft.wiki/w/Blocks-atlas#:~:text=blocks%2Datlas%20was%20a%20texture,atlas%20to%20form%20textures%2Datlas%20.)  
+![Blocks Atlas](https://minecraft.wiki/images/14w17a_blocks-atlas.png?110fc)
+:::
 
-![Image title](../assets/blockUV.png){ width="30%" align=right }
+<img src="../assets/blockUV.png" alt="Image title" width="30%" class="md-img-right">
 
 The built-in `block_atlas` material is essentially a **Texture Material** that lets FX access Minecraft's block atlas texture.
 

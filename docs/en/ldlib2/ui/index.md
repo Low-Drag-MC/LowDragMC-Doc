@@ -1,5 +1,5 @@
 # Introduction
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 LDLib2 provides powerful UI library based on the [`Taffy`](https://taffylayout.com/) layout engine. 
 If you are struggling with GUI development, LDLib2 is definitely one of your best choice. Compared with the LDLib, LDLib2 has undergone a complete refactoring:

@@ -1,6 +1,6 @@
 # ModularUI
 
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 This page introduces the core concepts of the **LDLib2 UI system**.
 At runtime, LDLib2 uses a class called **`ModularUI`** to manage the entire UI tree.  
@@ -109,11 +109,12 @@ The second one requires a `Player` as input, which is **NECESSARY** if your UI i
 
 | Method | Description |
 | ---- | ----------- |
-| `getElementsByType(Class<T> type)` | Returns all UI elements of the given type. |
+| `getElementsByType(Class&lt;T&gt; type)` | Returns all UI elements of the given type. |
 | `getAllElementsByType()` | Returns a copy of the internal mapping from element type to UI elements. |
 
-!!! note
-    All query methods return **copies** of internal collections when applicable. Returned lists are safe to modify and will not affect the internal UI tree.
+::: info
+All query methods return **copies** of internal collections when applicable. Returned lists are safe to modify and will not affect the internal UI tree.
+:::
 
 ---
 
@@ -124,13 +125,14 @@ and it can be difficult to understand what is going wrong.
 
 LDLib2 provides a **Debug Panel**, similar to the debug tools in Chrome. The panel lets you inspect the live UI hierarchy, view computed style and layout information, and select elements while the UI is running.
 
-!!! note
-    {{ version_badge("mc26.1", label="Since", icon="tag") }}
+::: info
+<VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-    Press **`F12`** to open or close the Debug Panel. In older 1.21 builds, the debug shortcut was **`F3`**.
+Press **`F12`** to open or close the Debug Panel. In older 1.21 builds, the debug shortcut was **`F3`**.
+:::
 
 After opening the Debug Panel, press **`F1`** to toggle **Look Up** mode. In Look Up mode, hover an element in the target UI and click it to jump to that `UIElement` in the Debug Panel's hierarchy and inspector.
 
-<figure markdown="span">
-  ![Debug](../assets//debug_mode.png){ width="80%" }
+<figure>
+<img src="../assets//debug_mode.png" alt="Debug" width="80%">
 </figure>

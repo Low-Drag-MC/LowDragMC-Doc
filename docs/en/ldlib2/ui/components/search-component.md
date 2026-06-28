@@ -1,62 +1,68 @@
 # SearchComponent
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`SearchComponent<T>` is a generic search-and-select widget. It shows a preview of the currently selected value and, when clicked, opens a floating dialog with a text field and a list of matching candidates. Candidates are produced by an `ISearchUI<T>` implementation that can run on the client or be delegated to the server.
+`SearchComponent&lt;T&gt;` is a generic search-and-select widget. It shows a preview of the currently selected value and, when clicked, opens a floating dialog with a text field and a list of matching candidates. Candidates are produced by an `ISearchUI&lt;T&gt;` implementation that can run on the client or be delegated to the server.
 
-`SearchComponent` extends `BindableUIElement<T>`, so the selected value integrates with the data-binding system.
+`SearchComponent` extends `BindableUIElement&lt;T&gt;`, so the selected value integrates with the data-binding system.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var search = new SearchComponent<String>();
-    search.setSearchUI(new SearchComponent.ISearchUI<>() {
-        @Override
-        public String resultText(String value) { return value; }
-        @Override
-        public void onResultSelected(String value) { }
-        @Override
-        public void search(String word, IResultHandler<String> find) {
-            List.of("Alpha", "Beta", "Gamma").stream()
-                .filter(s -> s.toLowerCase().contains(word.toLowerCase()))
-                .forEach(find::handle);
+```java
+var search = new SearchComponent<String>();
+search.setSearchUI(new SearchComponent.ISearchUI<>() {
+    @Override
+    public String resultText(String value) { return value; }
+    @Override
+    public void onResultSelected(String value) { }
+    @Override
+    public void search(String word, IResultHandler<String> find) {
+        List.of("Alpha", "Beta", "Gamma").stream()
+            .filter(s -> s.toLowerCase().contains(word.toLowerCase()))
+            .forEach(find::handle);
+    }
+});
+search.setOnValueChanged(v -> System.out.println("Selected: " + v));
+parent.addChild(search);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+searchComponent<String>({
+    searchUI {
+        resultText { it }
+        onSelected { v -> println("Selected: $v") }
+        search { word, find ->
+            listOf("Alpha", "Beta", "Gamma")
+                .filter { it.lowercase().contains(word.lowercase()) }
+                .forEach(find::handle)
         }
-    });
-    search.setOnValueChanged(v -> System.out.println("Selected: " + v));
-    parent.addChild(search);
-    ```
+    }
+}) { }
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```kotlin
-    searchComponent<String>({
-        searchUI {
-            resultText { it }
-            onSelected { v -> println("Selected: $v") }
-            search { word, find ->
-                listOf("Alpha", "Beta", "Gamma")
-                    .filter { it.lowercase().contains(word.lowercase()) }
-                    .forEach(find::handle)
-            }
-        }
-    }) { }
-    ```
+```js
+let search = new SearchComponent();
+// ISearchUI must be provided programmatically.
+parent.addChild(search);
+```
 
-=== "KubeJS"
-
-    ```js
-    let search = new SearchComponent();
-    // ISearchUI must be provided programmatically.
-    parent.addChild(search);
-    ```
-
+</DocTab>
+</DocTabs>
 ---
 
 ## Internal Structure
@@ -73,114 +79,144 @@
 
 ## Search Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    Texture drawn over the component when it is hovered or focused.
+Texture drawn over the component when it is hovered or focused.
 
-    Default: `Sprites.RECT_RD_T_SOLID`
+Default: `Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        search.searchStyle(style -> style.focusOverlay(myTexture));
-        ```
+```java
+search.searchStyle(style -> style.focusOverlay(myTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        search-component {
-            focus-overlay: rect(#FFFFFF22, 2);
-        }
-        ```
+```css
+search-component {
+    focus-overlay: rect(#FFFFFF22, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-item</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Maximum number of results shown in the flat `listView` before switching to a `scrollerView`.
+::: info
+#### <p style="font-size: 1rem;">max-item</p>
 
-    Default: `5`
+Maximum number of results shown in the flat `listView` before switching to a `scrollerView`.
 
-    === "Java"
+Default: `5`
 
-        ```java
-        search.searchStyle(style -> style.maxItemCount(10));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+search.searchStyle(style -> style.maxItemCount(10));
+```
 
-        ```css
-        search-component {
-            max-item: 10;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">view-height</p>
+```css
+search-component {
+    max-item: 10;
+}
+```
 
-    Height of the `scrollerView` when the candidate count exceeds `max-item`.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `50`
+::: info
+#### <p style="font-size: 1rem;">view-height</p>
 
-    === "Java"
+Height of the `scrollerView` when the candidate count exceeds `max-item`.
 
-        ```java
-        search.searchStyle(style -> style.scrollerViewHeight(80f));
-        ```
+Default: `50`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        search-component {
-            view-height: 80;
-        }
-        ```
+```java
+search.searchStyle(style -> style.scrollerViewHeight(80f));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-overlay</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Whether to highlight the hovered and selected candidate rows.
+```css
+search-component {
+    view-height: 80;
+}
+```
 
-    Default: `true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-overlay</p>
 
-        ```java
-        search.searchStyle(style -> style.showOverlay(false));
-        ```
+Whether to highlight the hovered and selected candidate rows.
 
-    === "LSS"
+Default: `true`
 
-        ```css
-        search-component {
-            show-overlay: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">close-after-select</p>
+```java
+search.searchStyle(style -> style.showOverlay(false));
+```
 
-    Whether the dialog closes automatically after a candidate is selected.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `true`
+```css
+search-component {
+    show-overlay: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        search.searchStyle(style -> style.closeAfterSelect(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">close-after-select</p>
 
-    === "LSS"
+Whether the dialog closes automatically after a candidate is selected.
 
-        ```css
-        search-component {
-            close-after-select: false;
-        }
-        ```
+Default: `true`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+search.searchStyle(style -> style.closeAfterSelect(false));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+search-component {
+    close-after-select: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
-## `ISearchUI<T>` Interface
+## `ISearchUI&lt;T&gt;` Interface
 
 Implement this interface to provide search logic:
 
@@ -218,13 +254,13 @@ public interface ISearchUI<T> extends ISearch<T> {
 
 | Method | Returns | Description |
 | ------ | ------- | ----------- |
-| `setSearchUI(ISearchUI<T>)` | `SearchComponent<T>` | Sets the search logic provider. |
-| `setCandidateUIProvider(UIElementProvider<T>)` | `SearchComponent<T>` | Sets the factory that builds the UI for each candidate. |
-| `setSearchOnServer(Class<T[]>)` | `SearchComponent<T>` | Enables server-side search (RPC). |
-| `setSelected(T)` | `SearchComponent<T>` | Selects a value and notifies listeners. |
-| `setSelected(T, boolean)` | `SearchComponent<T>` | Selects a value; second param controls notification. |
-| `setOnValueChanged(Consumer<T>)` | `SearchComponent<T>` | Registers a listener for value changes. |
-| `searchStyle(Consumer<SearchStyle>)` | `SearchComponent<T>` | Configures style fluently. |
+| `setSearchUI(ISearchUI&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | Sets the search logic provider. |
+| `setCandidateUIProvider(UIElementProvider&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | Sets the factory that builds the UI for each candidate. |
+| `setSearchOnServer(Class&lt;T[]&gt;)` | `SearchComponent&lt;T&gt;` | Enables server-side search (RPC). |
+| `setSelected(T)` | `SearchComponent&lt;T&gt;` | Selects a value and notifies listeners. |
+| `setSelected(T, boolean)` | `SearchComponent&lt;T&gt;` | Selects a value; second param controls notification. |
+| `setOnValueChanged(Consumer&lt;T&gt;)` | `SearchComponent&lt;T&gt;` | Registers a listener for value changes. |
+| `searchStyle(Consumer&lt;SearchStyle&gt;)` | `SearchComponent&lt;T&gt;` | Configures style fluently. |
 | `show()` | `void` | Opens the candidate dialog. |
 | `hide()` | `void` | Closes the candidate dialog. |
 | `isOpen()` | `boolean` | Returns `true` when the dialog is visible. |

@@ -1,9 +1,10 @@
 # UI 编辑器
 
-{{ version_badge("2.1.5", label="自", icon="tag") }}
+<VersionBadge version="2.1.5" label="自" icon="tag" />
 
-!!! warning inline end
-    该命令只能在 `single player` 世界中使用。
+::: warning
+该命令只能在 `single player` 世界中使用。
+:::
 
 LDLib2 提供了一个可视化编辑器来支持 UI 创建。使用以下命令打开 UI 编辑器：
 
@@ -11,8 +12,8 @@ LDLib2 提供了一个可视化编辑器来支持 UI 创建。使用以下命令
 /ldlib2_ui_editor
 ```
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_01.png){ width="80%" }
+<figure>
+<img src="./assets/editor_01.png" alt="编辑器外观" width="80%">
 </figure>
 
 UI 编辑器支持两种通过可视化方式创建 UI 的方法：
@@ -27,19 +28,20 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 点击 **`文件 → 新建 → UI XML 文件`** 以创建一个新的 UI XML 文件。  
 你也可以点击 **`打开`** 来加载一个已有的 XML 文件。
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_new_xml.png){ width="80%" }
+<figure>
+<img src="./assets/editor_new_xml.png" alt="编辑器外观" width="80%">
 </figure>
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_xml.png){ width="80%" }
+<figure>
+<img src="./assets/editor_xml.png" alt="编辑器外观" width="80%">
 </figure>
 
-打开后，你可以直接编辑 XML，并在编辑器中查看 UI 的**实时预览**。有关更多 XML 的详细信息，请查看 [UI XML](./xml.md){ data-preview }
+打开后，你可以直接编辑 XML，并在编辑器中查看 UI 的**实时预览**。有关更多 XML 的详细信息，请查看 [UI XML](./xml.md)
 
-!!! tip
-    你也可以使用外部 IDE（例如 VS Code 或 IntelliJ IDEA）来编辑 XML 文件。  
-    保存更改后，预览将自动更新。
+::: tip
+你也可以使用外部 IDE（例如 VS Code 或 IntelliJ IDEA）来编辑 XML 文件。  
+保存更改后，预览将自动更新。
+:::
 
 ---
 
@@ -56,8 +58,8 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 与 UI XML 文件不同，**UI 模板由 LDLib2 的资源系统管理**。  
 要创建一个 UI 模板，请使用**资源面板**：
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_template.png){ width="100%" }
+<figure>
+<img src="./assets/editor_template.png" alt="编辑器外观" width="100%">
 </figure>
 
 **步骤：**
@@ -70,8 +72,8 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 
 打开 UI 模板后，你将看到如下编辑器界面：
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_view.png){ width="100%" }
+<figure>
+<img src="./assets/editor_view.png" alt="编辑器外观" width="100%">
 </figure>
 
 1. **样式配置器**  
@@ -98,55 +100,59 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 1. 你也可以将其移动到你的 assets 文件夹中，并通过 `ResourceLocation` 来加载它。
 2. 如果资源位于 ldlib2 文件夹下，你可以右键点击该资源来获取资源路径并加载它。
 
-<figure markdown="span">
-  ![编辑器外观](./assets/template_path.png){ width="100%" }
+<figure>
+<img src="./assets/template_path.png" alt="编辑器外观" width="100%">
 </figure>
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    @Override
-    public ModularUI createUI(Player player) {
-        var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
-                // 基于资源位置
-                .getResource(new FilePath(ResourceLocation.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
+```java
+@Override
+public ModularUI createUI(Player player) {
+    var ui = Optional.ofNullable(UIResource.INSTANCE.getResourceInstance()
+            // 基于资源位置
+            .getResource(new FilePath(ResourceLocation.parse("ldlib2:resources/examples/example_layout.ui.nbt"))))
 
-                // 基于文件
-                //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
+            // 基于文件
+            //.getResource(new FilePath(new File(LDLib2.getAssetsDir(), "ldlib2/resources/examples/example_layout.ui.nbt"))) // LDLib2.getAssetsDir() = ".minecraft/ldlib2/assets"
 
-                .map(UITemplate::createUI)
-                .orElseGet(UI::empty);
+            .map(UITemplate::createUI)
+            .orElseGet(UI::empty);
 
-        // 查找元素并在此处进行数据绑定或逻辑设置
-        var buttons = ui.select(".button_container > button").toList(); // 通过选择器
-        var container = ui.selectRegex("container").findFirst().orElseThrow(); // 通过 ID 正则表达式
+    // 查找元素并在此处进行数据绑定或逻辑设置
+    var buttons = ui.select(".button_container > button").toList(); // 通过选择器
+    var container = ui.selectRegex("container").findFirst().orElseThrow(); // 通过 ID 正则表达式
 
-        return ModularUI.of(ui, player);
-    }
-    ```
+    return ModularUI.of(ui, player);
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    function createUIFromUIResource(path) {
-        return UIResource.INSTANCE.getResourceInstance().getResource(path).createUI();
-    }
+```js
+function createUIFromUIResource(path) {
+    return UIResource.INSTANCE.getResourceInstance().getResource(path).createUI();
+}
 
-    function createUI(player) {
-        // 基于文件
-        let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
+function createUI(player) {
+    // 基于文件
+    let ui = createUIFromUIResource("file(./ldlib2/assets/ldlib2/resources/global/modern_styles.ui.nbt)")
 
-        // 基于资源位置
-        // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
+    // 基于资源位置
+    // let ui = createUIFromUIResource("pack(ldlib2:resources/global/modern_styles.ui.nbt)")
 
-        // 查找元素并在此处进行数据绑定或逻辑设置
-        let buttons = ui.select(".button_container > button").toList(); // 通过选择器
-        let container = ui.selectRegex("container").findFirst().orElseThrow(); // 通过 ID 正则表达式
+    // 查找元素并在此处进行数据绑定或逻辑设置
+    let buttons = ui.select(".button_container > button").toList(); // 通过选择器
+    let container = ui.selectRegex("container").findFirst().orElseThrow(); // 通过 ID 正则表达式
 
-        return ModularUI.of(ui, player)
-    }
-    ```
+    return ModularUI.of(ui, player)
+}
+```
 
+</DocTab>
+</DocTabs>
 ### 加载事件
 
 已保存的 **UI 模板** 仅定义了视觉结构和样式 —— 默认情况下不包含运行时逻辑。  
@@ -172,6 +178,6 @@ public static void onUICreated(UITemplate.CreateUI event) {
 点击编辑器顶部的**绿色播放按钮**以进入**模拟模式**。  
 这允许你与 UI 交互并验证其行为。
 
-<figure markdown="span">
-  ![编辑器外观](./assets/editor_simulation.png){ width="100%" }
+<figure>
+<img src="./assets/editor_simulation.png" alt="编辑器外观" width="100%">
 </figure>

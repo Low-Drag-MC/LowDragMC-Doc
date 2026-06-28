@@ -1,21 +1,22 @@
 # 注解
-{{ version_badge("2.1.0", label="自", icon="tag") }}
+<VersionBadge version="2.1.0" label="自" icon="tag" />
 
 本页面展示所有注解及其使用方法。
 
-!!! note "LDLib Dev Tool"
-    ![Image title](../assets/plugin.png){ width="60%" align=right}
+::: info LDLib Dev Tool
+<img src="../assets/plugin.png" alt="Image title" width="60%" class="md-img-right">
 
-    如果您计划使用 LDLib2 进行开发，我们强烈建议您安装我们的 IDEA 插件 [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool)。
-    该插件具备以下功能：
+如果您计划使用 LDLib2 进行开发，我们强烈建议您安装我们的 IDEA 插件 [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool)。
+该插件具备以下功能：
 
-    - 代码高亮
-    - 语法检查
-    - 代码跳转
-    - 自动补全
-    - 其他功能
-    
-    这些功能将极大地帮助您使用 LDLib2 的各项特性。特别是，所有 LDLib2 的注解都已得到支持。
+- 代码高亮
+- 语法检查
+- 代码跳转
+- 自动补全
+- 其他功能
+
+这些功能将极大地帮助您使用 LDLib2 的各项特性。特别是，所有 LDLib2 的注解都已得到支持。
+:::
 
 ## 通用注解
 
@@ -59,7 +60,7 @@ boolean isWater = true;
 
 这对于不允许创建新实例的 `final` 实例非常有用。如果字段设置了 `subPersisted = true`，LDLib2 将执行以下操作：
 
-- 如果字段继承自 `INBTSerializable<?>`，它将尝试使用其 API 进行序列化。
+- 如果字段继承自 `INBTSerializable&lt;?&gt;`，它将尝试使用其 API 进行序列化。
 - 否则，它将序列化字段的内部值并将其包装为 map。
 
 ```java
@@ -121,10 +122,11 @@ public void setB(int value) {
 ### `@ReadOnlyManaged`
 此注解用于标记由用户管理的只读字段。
 
-`read-only` 类型（例如 `IManaged` 和 `INBTSerializable<?>`）要求字段非空且字段实例不会改变（final 字段）。
+`read-only` 类型（例如 `IManaged` 和 `INBTSerializable&lt;?&gt;`）要求字段非空且字段实例不会改变（final 字段）。
 
-!!! note "什么是 `read-only` 类型？"
-    `read-only` 类型指的是始终非空且不可变的字段，并且不确定如何创建该类型的新实例。更多详情可在 [类型支持](./types_support.md){ data-preview } 中找到。
+::: info 什么是 `read-only` 类型？
+`read-only` 类型指的是始终非空且不可变的字段，并且不确定如何创建该类型的新实例。更多详情可在 [类型支持](./types_support.md) 中找到。
+:::
 
 因为我们不知道如何为这些类型创建新实例。在这种情况下，您可以使用此注解并提供方法来：
 通过 `serializeMethod()` 从服务端存储一个唯一 id，并通过 `deserializeMethod()` 在客户端创建一个新实例。
@@ -214,16 +216,18 @@ public List<TestGroup> testGroupDeserialize(IntTag tag) {
     return groups;
 }
 ```
-!!! note
-    在这个示例中，`onDirtyMethod` 是不必要的。因为 `TestGroup` 继承自 `IPersistedSerializable`，而 `IPersistedSerializable` 又继承自 `INBTSerializable<?>`。因此，它是一个受支持的 `read-only` 类型。
+::: info
+在这个示例中，`onDirtyMethod` 是不必要的。因为 `TestGroup` 继承自 `IPersistedSerializable`，而 `IPersistedSerializable` 又继承自 `INBTSerializable&lt;?&gt;`。因此，它是一个受支持的 `read-only` 类型。
+:::
 
 ---
 
 ### `@RPCMethod`
 用于注解一个方法，您可以在服务端和远程端之间发送 RPC 数据包。只要参数支持同步，您就可以自由定义方法的参数，并在类中的任何位置发送 rpc。
 这对于传播事件（`c->s` / `s->c`）非常有用。
-!!! note
-    如果 `RPCSender` 被定义为方法的第一个参数。LDLib2 将提供发送者信息。
+::: info
+如果 `RPCSender` 被定义为方法的第一个参数。LDLib2 将提供发送者信息。
+:::
 
 确保所有参数与注解方法的参数匹配。
 
@@ -331,8 +335,9 @@ public boolean skipIntFieldPersisted(int value) {
 ---
 
 ## BlockEntity 专属
-!!! note
-    这些注解专为 `BlockEntity` 设计，在使用它们之前请先查看 [管理 BlockEntity](./blockentity.md){ data-preview }。
+::: info
+这些注解专为 `BlockEntity` 设计，在使用它们之前请先查看 [管理 BlockEntity](./blockentity.md)。
+:::
 
 ### `@DropSaved`
 有时，您希望在破坏方块时将字段值存储到掉落物品中。

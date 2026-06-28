@@ -1,6 +1,6 @@
 # TankWidget
 
-![Image title](../assets/tank.png){ width="30%" align=right }
+<img src="../assets/tank.png" alt="Image title" width="30%" class="md-img-right">
 
 The `TankWidget` represents a fluid slot widget within a container GUI. It displays a fluid in a designated tank and supports fluid interactions such as filling and emptying. In addition, it integrates with external systems (JEI/REI/EMI) to show fluid ingredient details and provides configurable options for hover overlays, tooltips, and click behavior.
 
@@ -28,70 +28,87 @@ The `TankWidget` represents a fluid slot widget within a container GUI. It displ
 
 Associates the widget with a fluid storage and sets the tank index to 0.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluidTank(fluidStorage);
-    ```
+``` java
+tankWidget.setFluidTank(fluidStorage);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFluidTank (IFluidTransfer, int)
 
 Associates the widget with a fluid transfer handler and specifies the tank index.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluidTank(fluidTransfer, 1);
-    ```
+``` java
+tankWidget.setFluidTank(fluidTransfer, 1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setFluid
 
 Set the internal fluidstack with/without notify.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    tankWidget.setFluid(fluidstack); // it will also trigger the listen you set
-    tankWidget.setFluid(fluidstack, false); // it wont trigger the listen
-    ```
+``` java
+tankWidget.setFluid(fluidstack); // it will also trigger the listen you set
+tankWidget.setFluid(fluidstack, false); // it wont trigger the listen
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### getFluid
 
 Get the internal fluidstack stored.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var fluidstack = tankWidget.getFluid();
-    ```
+``` java
+var fluidstack = tankWidget.getFluid();
+```
+
+</DocTab>
+</DocTabs>
 ---
 
 ### setChangeListener
 
 Configures additional slot location information, such as whether it belongs to the player container or hotbar. It will affect the shift move behaviour.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    tankWidget.setChangeListener(() -> {
-        var last = tankWidget.getLastFluidInTank();
-        var current = tankWidget.getFluid();
-    });
-    ```
+``` java
+tankWidget.setChangeListener(() -> {
+    var last = tankWidget.getLastFluidInTank();
+    var current = tankWidget.getFluid();
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    slotWidget.setChangeListener(() => {
-        let last = tankWidget.getLastFluidInTank();
-        let current = tankWidget.getFluid();
-    });
-    ```
+``` javascript
+slotWidget.setChangeListener(() => {
+    let last = tankWidget.getLastFluidInTank();
+    let current = tankWidget.getFluid();
+});
+```
 
+</DocTab>
+</DocTabs>
 ---

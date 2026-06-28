@@ -1,53 +1,59 @@
 # AnimationTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `AnimationTexture` 可以从一张**均等的精灵表**中播放逐帧动画——这是一张被划分为等大小单元格的 PNG 图像。动画以可配置的速度推进，并在 `from` 和 `to` 帧索引之间循环播放。
 
 注册名：`animation_texture`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 8×8 网格，每个单元格 8 像素，帧 32–44，每 1 tick 推进一帧
-    IGuiTexture anim = new AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)   // 从第 32 帧到第 44 帧
-        .setAnimation(1);       // 每帧 1 tick
+```java
+// 8×8 网格，每个单元格 8 像素，帧 32–44，每 1 tick 推进一帧
+IGuiTexture anim = new AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)   // 从第 32 帧到第 44 帧
+    .setAnimation(1);       // 每帧 1 tick
 
-    // 带颜色叠加的动画
-    IGuiTexture tinted = new AnimationTexture("mymod:textures/gui/glow.png")
-        .setCellSize(4)
-        .setAnimation(0, 15)
-        .setAnimation(2)
-        .setColor(0xFF44AAFF);
-    ```
+// 带颜色叠加的动画
+IGuiTexture tinted = new AnimationTexture("mymod:textures/gui/glow.png")
+    .setCellSize(4)
+    .setAnimation(0, 15)
+    .setAnimation(2)
+    .setColor(0xFF44AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val anim = AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)
-        .setAnimation(1)
-    ```
+```kotlin
+val anim = AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)
+    .setAnimation(1)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let anim = new AnimationTexture("mymod:textures/gui/particles.png")
-        .setCellSize(8)
-        .setAnimation(32, 44)
-        .setAnimation(1);
-    ```
+```js
+let anim = new AnimationTexture("mymod:textures/gui/particles.png")
+    .setCellSize(8)
+    .setAnimation(32, 44)
+    .setAnimation(1);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 网格的工作原理

@@ -1,17 +1,17 @@
 # LowDragMC
 
-!!! info inline end "Profile"
-    ![Profile](../assets/profile.png){ width="105%"}
-
+<div class="home-profile">
+<img src="../assets/profile.png" alt="Profile">
+</div>
 LowDragMC 并非一个活跃的团队，而是各种有趣模组项目的集合。
 
 这些项目的唯一维护者是 **[KilaBash](https://github.com/Yefancy) :)**
 
 ---
 
-:simple-discord: [加入我们的 Discord](https://discord.com/invite/sDdf2yD9bh)
+<DocIcon name="simple-discord" /> [加入我们的 Discord](https://discord.com/invite/sDdf2yD9bh)
 
-:simple-github: [GitHub 仓库](https://github.com/Low-Drag-MC)
+<DocIcon name="simple-github" /> [GitHub 仓库](https://github.com/Low-Drag-MC)
 
 本质上，这里更像是一个来自我自己以及众多有才华的开发者的独立项目的**枢纽**，而非一个有组织的团队。
 

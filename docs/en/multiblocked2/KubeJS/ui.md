@@ -4,10 +4,11 @@ You might have used mbd2’s visual editor to create the UI, but you may have no
 
 Here, we implement a simple, UI-based manual lava filling machine.
 
-!!! note inline end
-    Example can be downloaded <a href="../assets/example.zip" download>here</a>! 
-    
-    Put it under the `.minecraft` folder.
+::: info
+Example can be downloaded <a href="../assets/example.zip" download>here</a>! 
+
+Put it under the `.minecraft` folder.
+:::
 
 First, we configure the machine to have one item trait and one fluid trait, and prepare our UI:
 
@@ -15,11 +16,11 @@ First, we configure the machine to have one item trait and one fluid trait, and 
 2. Two [`buttons`](../../ldlib/ui/widget/Button.md) corresponding to the filling directions.
 3. A [`TextTexture`](../../ldlib/ui/widget/TextTexture.md) to display the amount of fluid in the tank.
 
-![Image title](../assets/kjs_ui_layout.png){ width="80%" style="display: block; margin: 0 auto;" }
+<img src="../assets/kjs_ui_layout.png" alt="Image title" width="80%" class="md-img-center">
 
 Once you have everything set up, opening the machine's UI should look like this:
 
-![Image title](../assets/kjs_ui_layout_2.png){ width="80%" style="display: block; margin: 0 auto;" }
+<img src="../assets/kjs_ui_layout_2.png" alt="Image title" width="80%" class="md-img-center">
 
 
 ## KubeJS Control
@@ -77,7 +78,7 @@ Let's see our final result!
 
 <div>
   <video controls>
-    <source src="../../assets/kjs_ui_result.mp4" type="video/mp4">
+    <source src="../assets/kjs_ui_result.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 </div>

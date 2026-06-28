@@ -4,10 +4,11 @@
 
 在这里，我们实现了一个简单的、基于 UI 的手动岩浆填充机。
 
-!!! note inline end
-    示例可以在<a href="../assets/example.zip" download>这里</a>下载！
+::: info
+示例可以在<a href="../assets/example.zip" download>这里</a>下载！
 
-    将其放在 `.minecraft` 文件夹下。
+将其放在 `.minecraft` 文件夹下。
+:::
 
 首先，我们将机器配置为具有一个物品 trait 和一个流体 trait，并准备好我们的 UI：
 
@@ -15,11 +16,11 @@
 2. 两个与填充方向对应的 [`Button`](../../ldlib/ui/widget/Button.md)。
 3. 一个用于显示储罐中流体量的 [`TextTexture`](../../ldlib/ui/widget/TextTexture.md)。
 
-![Image title](../assets/kjs_ui_layout.png){ width="80%" style="display: block; margin: 0 auto;" }
+<img src="../assets/kjs_ui_layout.png" alt="Image title" width="80%" class="md-img-center">
 
 当你完成所有设置后，打开机器的 UI 应该是这样的：
 
-![Image title](../assets/kjs_ui_layout_2.png){ width="80%" style="display: block; margin: 0 auto;" }
+<img src="../assets/kjs_ui_layout_2.png" alt="Image title" width="80%" class="md-img-center">
 
 
 ## KubeJS 控制
@@ -77,7 +78,7 @@ MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
 
 <div>
   <video controls>
-    <source src="../../assets/kjs_ui_result.mp4" type="video/mp4">
+    <source src="../assets/kjs_ui_result.mp4" type="video/mp4">
     您的浏览器不支持视频播放。
   </video>
 </div>

@@ -1,48 +1,54 @@
 # ScrollerView
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ScrollerView` 是一个可滚动的容器。它在 `viewPort` 内部包裹了一个 `viewContainer`，并提供可选的水平和垂直滚动条，当内容溢出时自动显示。通过代码或 XML 添加到 `ScrollerView` 的子元素都会被放置在 `viewContainer` 内部。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var sv = new ScrollerView();
-    sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
-    for (int i = 0; i < 20; i++) {
-        sv.addScrollViewChild(new Label().setText("Item " + i, false));
+```java
+var sv = new ScrollerView();
+sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
+for (int i = 0; i < 20; i++) {
+    sv.addScrollViewChild(new Label().setText("Item " + i, false));
+}
+parent.addChild(sv);
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+scrollerView({ scrollerViewStyle { mode(ScrollerMode.VERTICAL) } }) {
+    for (i in 0 until 20) {
+        label { api { setText("Item $i", false) } }
     }
-    parent.addChild(sv);
-    ```
+}
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```kotlin
-    scrollerView({ scrollerViewStyle { mode(ScrollerMode.VERTICAL) } }) {
-        for (i in 0 until 20) {
-            label { api { setText("Item $i", false) } }
-        }
-    }
-    ```
+```js
+let sv = new ScrollerView();
+sv.scrollerStyle(style => style.mode(ScrollerMode.VERTICAL));
+for (let i = 0; i < 20; i++) {
+    sv.addScrollViewChild(new Label().setText("Item " + i, false));
+}
+parent.addChild(sv);
+```
 
-=== "KubeJS"
-
-    ```js
-    let sv = new ScrollerView();
-    sv.scrollerStyle(style => style.mode(ScrollerMode.VERTICAL));
-    for (let i = 0; i < 20; i++) {
-        sv.addScrollViewChild(new Label().setText("Item " + i, false));
-    }
-    parent.addChild(sv);
-    ```
-
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -73,109 +79,138 @@
 
 ## ScrollerView 样式
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-mode</p>
+::: info
+#### <p style="font-size: 1rem;">scroller-view-mode</p>
 
-    启用哪些滚动轴。可选值：`HORIZONTAL`、`VERTICAL`、`BOTH`。
+启用哪些滚动轴。可选值：`HORIZONTAL`、`VERTICAL`、`BOTH`。
 
-    默认值：`BOTH`
+默认值：`BOTH`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
-        ```
+```java
+sv.scrollerStyle(style -> style.mode(ScrollerMode.VERTICAL));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        scroller-view {
-            scroller-view-mode: VERTICAL;
-        }
-        ```
+```css
+scroller-view {
+    scroller-view-mode: VERTICAL;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
+</DocTab>
+</DocTabs>
+:::
 
-    每条滚动条的可见性策略。可选值：`AUTO`（仅当内容溢出时显示）、`ALWAYS`、`NEVER`。
+::: info
+#### <p style="font-size: 1rem;">scroller-vertical-display / scroller-horizontal-display</p>
 
-    默认值：`AUTO`
+每条滚动条的可见性策略。可选值：`AUTO`（仅当内容溢出时显示）、`ALWAYS`、`NEVER`。
 
-    === "Java"
+默认值：`AUTO`
 
-        ```java
-        sv.scrollerStyle(style -> style
-            .verticalScrollDisplay(ScrollDisplay.ALWAYS)
-            .horizontalScrollDisplay(ScrollDisplay.NEVER)
-        );
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+sv.scrollerStyle(style -> style
+    .verticalScrollDisplay(ScrollDisplay.ALWAYS)
+    .horizontalScrollDisplay(ScrollDisplay.NEVER)
+);
+```
 
-        ```css
-        scroller-view {
-            scroller-vertical-display: ALWAYS;
-            scroller-horizontal-display: NEVER;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">scroller-view-margin</p>
+```css
+scroller-view {
+    scroller-vertical-display: ALWAYS;
+    scroller-horizontal-display: NEVER;
+}
+```
 
-    当垂直滚动条可见时，为水平滚动条预留的右侧边距。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`5`
+::: info
+#### <p style="font-size: 1rem;">scroller-view-margin</p>
 
-    === "LSS"
+当垂直滚动条可见时，为水平滚动条预留的右侧边距。
 
-        ```css
-        scroller-view {
-            scroller-view-margin: 5;
-        }
-        ```
+默认值：`5`
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-width / adaptive-height</p>
+<DocTabs>
+<DocTab title="LSS">
 
-    启用后，`ScrollerView` 会根据内容容器的计算宽度或高度自动调整自身大小。
+```css
+scroller-view {
+    scroller-view-margin: 5;
+}
+```
 
-    默认值：`false`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">adaptive-width / adaptive-height</p>
 
-        ```java
-        sv.scrollerStyle(style -> style.adaptiveHeight(true));
-        ```
+启用后，`ScrollerView` 会根据内容容器的计算宽度或高度自动调整自身大小。
 
-    === "LSS"
+默认值：`false`
 
-        ```css
-        scroller-view {
-            adaptive-height: true;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">min-scroll / max-scroll</p>
+```java
+sv.scrollerStyle(style -> style.adaptiveHeight(true));
+```
 
-    对每次滚动事件中滚动条滑块移动距离的限制（以像素为单位）。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`5` / `7`
+```css
+scroller-view {
+    adaptive-height: true;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        sv.scrollerStyle(style -> style.minScrollPixel(0f).maxScrollPixel(20f));
-        ```
+::: info
+#### <p style="font-size: 1rem;">min-scroll / max-scroll</p>
 
-    === "LSS"
+对每次滚动事件中滚动条滑块移动距离的限制（以像素为单位）。
 
-        ```css
-        scroller-view {
-            min-scroll: 0;
-            max-scroll: 20;
-        }
-        ```
+默认值：`5` / `7`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+sv.scrollerStyle(style -> style.minScrollPixel(0f).maxScrollPixel(20f));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+scroller-view {
+    min-scroll: 0;
+    max-scroll: 20;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -203,9 +238,9 @@
 | `hasScrollViewChild(UIElement)` | `boolean` | 如果该元素是 `viewContainer` 的子元素，则返回 `true`。 |
 | `getContainerWidth()` | `float` | 计算的内容宽度（包含溢出的子元素）。 |
 | `getContainerHeight()` | `float` | 计算的内容高度（包含溢出的子元素）。 |
-| `scrollerStyle(Consumer<ScrollerViewStyle>)` | `ScrollerView` | 以流式方式配置样式。 |
-| `viewContainer(Consumer<UIElement>)` | `ScrollerView` | 配置 `viewContainer`。 |
-| `viewPort(Consumer<UIElement>)` | `ScrollerView` | 配置 `viewPort`。 |
-| `verticalContainer(Consumer<UIElement>)` | `ScrollerView` | 配置 `verticalContainer`。 |
-| `horizontalScroller(Consumer<Scroller>)` | `ScrollerView` | 配置水平滚动条。 |
-| `verticalScroller(Consumer<Scroller>)` | `ScrollerView` | 配置垂直滚动条。 |
+| `scrollerStyle(Consumer&lt;ScrollerViewStyle&gt;)` | `ScrollerView` | 以流式方式配置样式。 |
+| `viewContainer(Consumer&lt;UIElement&gt;)` | `ScrollerView` | 配置 `viewContainer`。 |
+| `viewPort(Consumer&lt;UIElement&gt;)` | `ScrollerView` | 配置 `viewPort`。 |
+| `verticalContainer(Consumer&lt;UIElement&gt;)` | `ScrollerView` | 配置 `verticalContainer`。 |
+| `horizontalScroller(Consumer&lt;Scroller&gt;)` | `ScrollerView` | 配置水平滚动条。 |
+| `verticalScroller(Consumer&lt;Scroller&gt;)` | `ScrollerView` | 配置垂直滚动条。 |

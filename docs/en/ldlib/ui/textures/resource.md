@@ -22,20 +22,27 @@ The `ResourceTexture` class extends `TransformTexture` to render textures based 
 
 Create a texture from a resource location.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    // Using float parameters
-    var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
-    ```
+``` java
+// Using float parameters
+var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
+```
 
+</DocTab>
+</DocTabs>
 ### getSubTexture
 
 Returns a sub-texture of the current texture.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    // Using float parameters
-    var subTexture = resourceTexture.getSubTexture(0.2, 0.2, 0.5, 0.5);
-    ```
+``` java
+// Using float parameters
+var subTexture = resourceTexture.getSubTexture(0.2, 0.2, 0.5, 0.5);
+```
+
+</DocTab>
+</DocTabs>

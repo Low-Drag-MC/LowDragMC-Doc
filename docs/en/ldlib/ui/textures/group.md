@@ -14,20 +14,27 @@
 
 Sets the textures used in the group.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    guiTextureGroup.setTextures(texture1, texture2);
-    ```
+``` java
+guiTextureGroup.setTextures(texture1, texture2);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 Sets the color for all textures in the group.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    guiTextureGroup.setColor(0xff00ff);
-    ```
+``` java
+guiTextureGroup.setColor(0xff00ff);
+```
+
+</DocTab>
+</DocTabs>

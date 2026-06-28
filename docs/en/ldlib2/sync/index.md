@@ -1,5 +1,5 @@
 # Introduction
-{{ version_badge("2.0.0", label="Since", icon="tag") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" />
 
 One of the most repetitive and error-prone tasks in Minecraft mod development is handling  
 **data synchronization between server and client**, as well as **data persistence**.
@@ -16,15 +16,16 @@ Whether you are working with:
 2. **What data should be synchronized?** (which fields should be handled?)
 3. **How should it be serialized or saved?** (nbt io?)
 
-!!! warning "Why is this such a problem?"
-    Although synchronization and persistence are not inherently difficult,  **writing them cleanly usually requires a large amount of boilerplate code**:  
+::: warning Why is this such a problem?
+Although synchronization and persistence are not inherently difficult,  **writing them cleanly usually requires a large amount of boilerplate code**:  
 
-    - Repeated NBT read/write logic  
-    - Manual networking packets  
-    - Duplicate sync logic spread across classes  
-    - Easily desynchronized client/server states  
-    - Hard-to-read and hard-to-maintain code  
-    - Performance issues caused by unnecessary sync calls
+- Repeated NBT read/write logic  
+- Manual networking packets  
+- Duplicate sync logic spread across classes  
+- Easily desynchronized client/server states  
+- Hard-to-read and hard-to-maintain code  
+- Performance issues caused by unnecessary sync calls
+:::
 
 ---
 
@@ -35,14 +36,15 @@ which greatly simplify **data structure definition**.
 
 However:
 
-!!! note "Codec helps with *format*, but not with *syncing*"
-    To actually use Codec in a mod, you still need to:
+::: info Codec helps with *format*, but not with *syncing*
+To actually use Codec in a mod, you still need to:
 
-    - Manually define codec structures  
-    - Write encode/decode logic  
-    - Explicitly trigger synchronization  
-    - Manage packets  
-    - Dispatch updates to the client  
+- Manually define codec structures  
+- Write encode/decode logic  
+- Explicitly trigger synchronization  
+- Manage packets  
+- Dispatch updates to the client  
+:::
 
 Codec reduces *formatting pain*,  
 but **does not reduce the amount of sync/persistence code**.
@@ -61,88 +63,96 @@ To solve these long-standing issues, **LDLib2 provides an annotation-based data 
 
 The goal is simple:
 
-!!! tip "Core idea: *You should not write sync or serialization code manually*"
-    Declare what a field *is* —  
-    LDLib2 handles how it is synced and saved.
+::: tip Core idea: *You should not write sync or serialization code manually*
+Declare what a field *is* —  
+LDLib2 handles how it is synced and saved.
+:::
 
 Below is a minimal example showing how much code you would normally write between `Vanilla (forge)` and `LDLib2`. 
 
 (click the tab to switch code)
 
-=== "❌Vanilla / Forge-style Implementation"
-    ```java
-    public class ExampleBE extends BlockEntity {
+<DocTabs>
+<DocTab title="❌Vanilla / Forge-style Implementation">
 
-        private int energy = 0;
-        private String owner = "";
+```java
+public class ExampleBE extends BlockEntity {
 
-        @Override
-        public void saveAdditional(CompoundTag tag) {
-            super.saveAdditional(tag);
-            tag.putInt("Energy", energy);
-            tag.putString("Owner", owner);
-        }
+    private int energy = 0;
+    private String owner = "";
 
-        @Override
-        public void load(CompoundTag tag) {
-            super.load(tag);
-            energy = tag.getInt("Energy");
-            owner = tag.getString("Owner");
-        }
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("Energy", energy);
+        tag.putString("Owner", owner);
+    }
 
-        @Override
-        public CompoundTag getUpdateTag() {
-            CompoundTag tag = new CompoundTag();
-            saveAdditional(tag);
-            return tag;
-        }
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        energy = tag.getInt("Energy");
+        owner = tag.getString("Owner");
+    }
 
-        @Override
-        public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-            load(pkt.getTag());
-        }
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
 
-        protected void syncAndSave() {
-            if (!level.isClientSide) {
-                setChanged();
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-            }
-        }
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        load(pkt.getTag());
+    }
 
-        public void setEnergy(int newEnergy) {
-            if (this.energy != newEnergy) {
-                this.energy = newEnergy;
-                syncAndSave();
-            }
-        }
-
-        public void setOwner(String newOwner) {
-            if (this.energy != newOwner) {
-                this.energy = newOwner;
-                syncAndSave();
-            }
+    protected void syncAndSave() {
+        if (!level.isClientSide) {
+            setChanged();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
-    ```
-=== "✅ With LDLib2"
-    ```java
-    public class ExampleBE extends BlockEntity implements ISyncPersistRPCBlockEntity {
-        @Getter
-        private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);
 
-        // your fields
-        @Persisted
-        @DescSynced
-        public int energy = 0;
-
-        @Persisted
-        @DescSynced
-        public String owner = "";
+    public void setEnergy(int newEnergy) {
+        if (this.energy != newEnergy) {
+            this.energy = newEnergy;
+            syncAndSave();
+        }
     }
-    ```
 
-    As you can see from the comparison, the annotation-driven system provided by **LDLib2** is dramatically simpler and far more expressive than the traditional vanilla or Forge-style approach.
+    public void setOwner(String newOwner) {
+        if (this.energy != newOwner) {
+            this.energy = newOwner;
+            syncAndSave();
+        }
+    }
+}
+```
 
+</DocTab>
+<DocTab title="✅ With LDLib2">
+
+```java
+public class ExampleBE extends BlockEntity implements ISyncPersistRPCBlockEntity {
+    @Getter
+    private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);
+
+    // your fields
+    @Persisted
+    @DescSynced
+    public int energy = 0;
+
+    @Persisted
+    @DescSynced
+    public String owner = "";
+}
+```
+
+As you can see from the comparison, the annotation-driven system provided by **LDLib2** is dramatically simpler and far more expressive than the traditional vanilla or Forge-style approach.
+
+</DocTab>
+</DocTabs>
 You do not need any additional boilerplate.  
 Whenever `energy` or `owner` changes, LDLib2 will automatically handle:
 
@@ -233,71 +243,78 @@ LDLib2 aims to provide a **complete, modern, and highly customizable synchroniza
 
 While the modern Codec and StreamCodec systems are undeniably powerful and bring a huge improvement to serialization in newer Minecraft versions, **defining and using a Codec is still far from effortless**. LDLib2 offers a simpler, annotation-driven approach.
 
-=== "❌Vanilla / Forge-style Implementation"
-    ```java
-    public class MyObject implements INBTSerializable<CompoundTag> {
-        public final static Codec<MyObject> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ResourceLocation.CODEC.fieldOf("rl").forGetter(MyObject::getResourceLocation),
-                Direction.CODEC.fieldOf("enum").forGetter(MyObject::getEnumValue),
-                ItemStack.OPTIONAL_CODEC.fieldOf("item").forGetter(MyObject::getItemstack)
-        ).apply(instance, MyObject::new));
+<DocTabs>
+<DocTab title="❌Vanilla / Forge-style Implementation">
 
-        private ResourceLocation resourceLocation = LDLib2.id("test");
-        private Direction enumValue = Direction.NORTH;
-        private ItemStack itemstack = ItemStack.EMPTY;
+```java
+public class MyObject implements INBTSerializable<CompoundTag> {
+    public final static Codec<MyObject> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ResourceLocation.CODEC.fieldOf("rl").forGetter(MyObject::getResourceLocation),
+            Direction.CODEC.fieldOf("enum").forGetter(MyObject::getEnumValue),
+            ItemStack.OPTIONAL_CODEC.fieldOf("item").forGetter(MyObject::getItemstack)
+    ).apply(instance, MyObject::new));
 
-        public MyObject(ResourceLocation resourceLocation, Direction enumValue, ItemStack itemstack) {
-            this.resourceLocation = resourceLocation;
-            this.enumValue = enumValue;
-            this.itemstack = itemstack;
-        }
+    private ResourceLocation resourceLocation = LDLib2.id("test");
+    private Direction enumValue = Direction.NORTH;
+    private ItemStack itemstack = ItemStack.EMPTY;
 
-        public ResourceLocation getResourceLocation() {
-            return resourceLocation;
-        }
-
-        public Direction getEnumValue() {
-            return enumValue;
-        }
-
-        public ItemStack getItemstack() {
-            return itemstack;
-        }
-
-        // for INBTSerializable
-        @Override
-        public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-            var tag = new CompoundTag();
-            tag.putString("rl", resourceLocation.toString());
-            tag.putString("enum", enumValue.toString());
-            tag.put("item", ItemStack.OPTIONAL_CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), itemstack).getOrThrow());
-            return tag;
-        }
-
-        @Override
-        public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-            resourceLocation = ResourceLocation.parse(nbt.getString("rl"));
-            enumValue = Direction.byName(nbt.getString("enum"));
-            itemstack = ItemStack.OPTIONAL_CODEC.parse(provider.createSerializationContext(NbtOps.INSTANCE), nbt.get("item")).getOrThrow();
-        }
+    public MyObject(ResourceLocation resourceLocation, Direction enumValue, ItemStack itemstack) {
+        this.resourceLocation = resourceLocation;
+        this.enumValue = enumValue;
+        this.itemstack = itemstack;
     }
-    ```
-=== "✅ With LDLib2"
-    ```java
-    public class MyObject implements IPersistedSerializable {
-        public final static Codec<MyObject> CODEC = PersistedParser.createCodec(MyObject::new);
-        
-        @Persisted(key = "rl")
-        private ResourceLocation resourceLocation = LDLib2.id("test");
-        @Persisted(key = "enum")
-        private Direction enumValue = Direction.NORTH;
-        @Persisted(key = "item")
-        private ItemStack itemstack = ItemStack.EMPTY;
 
-        // IPersistedSerializable is inherited from INBTSerializable you don't need to implement it manually
+    public ResourceLocation getResourceLocation() {
+        return resourceLocation;
     }
-    ```
 
+    public Direction getEnumValue() {
+        return enumValue;
+    }
+
+    public ItemStack getItemstack() {
+        return itemstack;
+    }
+
+    // for INBTSerializable
+    @Override
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        var tag = new CompoundTag();
+        tag.putString("rl", resourceLocation.toString());
+        tag.putString("enum", enumValue.toString());
+        tag.put("item", ItemStack.OPTIONAL_CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), itemstack).getOrThrow());
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+        resourceLocation = ResourceLocation.parse(nbt.getString("rl"));
+        enumValue = Direction.byName(nbt.getString("enum"));
+        itemstack = ItemStack.OPTIONAL_CODEC.parse(provider.createSerializationContext(NbtOps.INSTANCE), nbt.get("item")).getOrThrow();
+    }
+}
+```
+
+</DocTab>
+<DocTab title="✅ With LDLib2">
+
+```java
+public class MyObject implements IPersistedSerializable {
+    public final static Codec<MyObject> CODEC = PersistedParser.createCodec(MyObject::new);
+
+    @Persisted(key = "rl")
+    private ResourceLocation resourceLocation = LDLib2.id("test");
+    @Persisted(key = "enum")
+    private Direction enumValue = Direction.NORTH;
+    @Persisted(key = "item")
+    private ItemStack itemstack = ItemStack.EMPTY;
+
+    // IPersistedSerializable is inherited from INBTSerializable you don't need to implement it manually
+}
+```
+
+</DocTab>
+</DocTabs>
 ### Why This Is Better
 
 With vanilla/Forge Codec usage, you must:
@@ -309,14 +326,15 @@ With vanilla/Forge Codec usage, you must:
 
 This leads to high boilerplate cost and maintenance difficulty.
 
-!!! note "LDLib2's Advantage"
-    LDLib2 can **automatically generate a full Codec** for your class using  
-    ```java
-    PersistedParser.createCodec(MyObject::new)
-    ```  
-    You no longer need to manually list each field or define how they are encoded.
+::: info LDLib2's Advantage
+LDLib2 can **automatically generate a full Codec** for your class using  
+```java
+PersistedParser.createCodec(MyObject::new)
+```  
+You no longer need to manually list each field or define how they are encoded.
 
-    As long as a field is annotated with `@Persisted`, LDLib2 includes it in the generated Codec.
+As long as a field is annotated with `@Persisted`, LDLib2 includes it in the generated Codec.
+:::
 
 ---
 

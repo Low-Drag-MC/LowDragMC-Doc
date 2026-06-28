@@ -1,6 +1,6 @@
 # ExtendedShader
 
-{{ version_badge("2.0.0", label="Since", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
 
 Before reading this page, make sure you understand [Minecraft Core Shader](https://minecraft.wiki/w/Shader#Core_shaders).
 
@@ -16,108 +16,113 @@ Photon2 and LDLib2 extend vanilla shaders with **ExtendedShader**, adding:
 ExtendedShader JSON is almost the same as Vanilla.  
 Here’s an example using `Texture Material`.
 
-=== "hdr_particle.json"
+<DocTabs>
+<DocTab title="hdr_particle.json">
 
-    ```json
-    {
-        "vertex": "photon:particle",
-        /*
-            "geometry": "<namespace>:<name>.gsh" // (1)
-        */
-        "fragment": "photon:hdr_particle",
-        "samplers": [
-            { "name": "Sampler2" },
-            // custom samplers
-            { "name": "Texture" }
-        ],
-        "uniforms": [
-            { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] },
-            { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] },
-            { "name": "ColorModulator", "type": "float", "count": 4, "values": [1,1,1,1] },
-            { "name": "FogStart", "type": "float", "count": 1, "values": [0.0] },
-            { "name": "FogEnd", "type": "float", "count": 1, "values": [1.0] },
-            { "name": "FogColor", "type": "float", "count": 4, "values": [0,0,0,0] },
-            { "name": "FogShape", "type": "int", "count": 1, "values": [0] },
-            // custom uniforms
-            { "name": "DiscardThreshold", "type": "float", "count": 1, "values": [0.01] },
-            { "name": "HDR", "type": "float", "count": 4, "values": [0,0,0,1] },
-            { "name": "HDRMode", "type": "int", "count": 1, "values": [0] }
-        ]
+```json
+{
+    "vertex": "photon:particle",
+    /*
+        "geometry": "<namespace>:<name>.gsh" // (1)
+    */
+    "fragment": "photon:hdr_particle",
+    "samplers": [
+        { "name": "Sampler2" },
+        // custom samplers
+        { "name": "Texture" }
+    ],
+    "uniforms": [
+        { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] },
+        { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] },
+        { "name": "ColorModulator", "type": "float", "count": 4, "values": [1,1,1,1] },
+        { "name": "FogStart", "type": "float", "count": 1, "values": [0.0] },
+        { "name": "FogEnd", "type": "float", "count": 1, "values": [1.0] },
+        { "name": "FogColor", "type": "float", "count": 4, "values": [0,0,0,0] },
+        { "name": "FogShape", "type": "int", "count": 1, "values": [0] },
+        // custom uniforms
+        { "name": "DiscardThreshold", "type": "float", "count": 1, "values": [0.01] },
+        { "name": "HDR", "type": "float", "count": 4, "values": [0,0,0,1] },
+        { "name": "HDRMode", "type": "int", "count": 1, "values": [0] }
+    ]
+}
+```
+
+1. Attach geometry shader if needed.
+
+</DocTab>
+<DocTab title="particle.vsh">
+
+```glsl
+// have to use 330+
+#version 330 core
+
+#moj_import <fog.glsl>
+// Photon2 vertex helper
+#moj_import <photon:particle.glsl> 
+
+uniform sampler2D Sampler2;
+uniform mat4 ModelViewMat;
+uniform mat4 ProjMat;
+uniform int FogShape;
+
+out float vertexDistance;
+out vec2 texCoord0;
+out vec4 vertexColor;
+
+void main() {
+    ParticleData data = getParticleData();
+    gl_Position = ProjMat * ModelViewMat * vec4(data.Position, 1.0);
+    vertexDistance = fog_distance(data.Position, FogShape);
+    texCoord0 = data.UV;
+    vertexColor = data.Color * texelFetch(Sampler2, data.LightUV / 16, 0);
+}
+```
+
+</DocTab>
+<DocTab title="hdr_particle.fsh">
+
+```glsl
+#version 150
+#moj_import <fog.glsl>
+
+uniform sampler2D Texture;
+uniform vec4 ColorModulator;
+uniform float FogStart;
+uniform float FogEnd;
+uniform vec4 FogColor;
+uniform float DiscardThreshold;
+uniform vec4 HDR;
+uniform int HDRMode;
+uniform float Bits;
+
+in float vertexDistance;
+in vec2 texCoord0;
+in vec4 vertexColor;
+
+out vec4 fragColor;
+
+void main() {
+    float bits = max(Bits, 1.0);
+    vec2 uv = (floor(texCoord0 * bits) + 0.5) / bits;
+    vec4 color = texture(Texture, uv) * vertexColor * ColorModulator;
+
+    if (color.a < DiscardThreshold) discard;
+
+    if (HDRMode == 0) {
+        color.rgb += HDR.a * HDR.rgb;
+    } else {
+        color.rgb *= HDR.a * HDR.rgb;
     }
-    ```
 
-    1. Attach geometry shader if needed.
+    fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+}
+```
 
-=== "particle.vsh"
-
-    ```glsl
-    // have to use 330+
-    #version 330 core
-
-    #moj_import <fog.glsl>
-    // Photon2 vertex helper
-    #moj_import <photon:particle.glsl> 
-
-    uniform sampler2D Sampler2;
-    uniform mat4 ModelViewMat;
-    uniform mat4 ProjMat;
-    uniform int FogShape;
-
-    out float vertexDistance;
-    out vec2 texCoord0;
-    out vec4 vertexColor;
-
-    void main() {
-        ParticleData data = getParticleData();
-        gl_Position = ProjMat * ModelViewMat * vec4(data.Position, 1.0);
-        vertexDistance = fog_distance(data.Position, FogShape);
-        texCoord0 = data.UV;
-        vertexColor = data.Color * texelFetch(Sampler2, data.LightUV / 16, 0);
-    }
-    ```
-
-=== "hdr_particle.fsh"
-
-    ```glsl
-    #version 150
-    #moj_import <fog.glsl>
-
-    uniform sampler2D Texture;
-    uniform vec4 ColorModulator;
-    uniform float FogStart;
-    uniform float FogEnd;
-    uniform vec4 FogColor;
-    uniform float DiscardThreshold;
-    uniform vec4 HDR;
-    uniform int HDRMode;
-    uniform float Bits;
-
-    in float vertexDistance;
-    in vec2 texCoord0;
-    in vec4 vertexColor;
-
-    out vec4 fragColor;
-
-    void main() {
-        float bits = max(Bits, 1.0);
-        vec2 uv = (floor(texCoord0 * bits) + 0.5) / bits;
-        vec4 color = texture(Texture, uv) * vertexColor * ColorModulator;
-
-        if (color.a < DiscardThreshold) discard;
-
-        if (HDRMode == 0) {
-            color.rgb += HDR.a * HDR.rgb;
-        } else {
-            color.rgb *= HDR.a * HDR.rgb;
-        }
-
-        fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
-    }
-    ```
-
+</DocTab>
+</DocTabs>
 **Difference from vanilla particle shader:**
 
-- In [`vsh`](#__tabbed_1_2), use `#moj_import <photon:particle.glsl>` and `getParticleData()` to fetch vertex data.
+- In [`vsh`](#__tabbed_1_2), use `#moj_import &lt;photon:particle.glsl&gt;` and `getParticleData()` to fetch vertex data.
 - In [`fsh`](#__tabbed_1_3), added HDR color output.
 
 ---
@@ -160,11 +165,12 @@ void main() {
 
 1. Internal Implementation, check [Vertex Format](./VertexFormat.md) for details.
 
-!!! note "Implementation Details"
+::: info Implementation Details
+:::
 In vertex shader:
 
 1. Ensure `#version` is 330 or higher.
-2. Import Photon2 vertex library: `#moj_import <photon:particle.glsl>`
+2. Import Photon2 vertex library: `#moj_import &lt;photon:particle.glsl&gt;`
 3. Access data via `getParticleData()` — no need to handle internal layouts manually.
 4. Photon2 supports passing extra GPU vertex data (e.g., particle lifetime, velocity).
 See: [Additional GPU Data](./AdditionalGPUData.md)
@@ -178,9 +184,9 @@ When declared in JSON, these samplers won’t appear in the Inspector.
 
 | Sampler Name        | Description      | Preview                                                |
 | ------------------- | ---------------- | ------------------------------------------------------ |
-| `Sampler2`          | Light Map        | ![Light Map](../../assets/LightMap.png){ width="30%" } |
-| `SamplerSceneColor` | World Color      | ![World Color](../../assets/color.png){ width="30%" }  |
-| `SamplerSceneDepth` | World Depth      | ![World Depth](../../assets/Depth.webp){ width="30%" } |
+| `Sampler2`          | Light Map        | <img src="../../assets/LightMap.png" alt="Light Map" width="30%"> |
+| `SamplerSceneColor` | World Color      | <img src="../../assets/color.png" alt="World Color" width="30%">  |
+| `SamplerSceneDepth` | World Depth      | <img src="../../assets/Depth.webp" alt="World Depth" width="30%"> |
 | `SamplerCurve`      | Curve Sampler    | -                                                      |
 | `SamplerGradient`   | Gradient Sampler | -                                                      |
 
@@ -188,7 +194,7 @@ When declared in JSON, these samplers won’t appear in the Inspector.
 
 ### 📈 SamplerCurve / SamplerGradient
 
-![Curve & Gradient](../../assets/CurveAndGradient.png){ width="30%" align=right }
+<img src="../../assets/CurveAndGradient.png" alt="Curve &amp; Gradient" width="30%" class="md-img-right">
 
 Special samplers, active only if a Curve or Gradient is assigned.
 Photon2 encodes them into a **128×128 texture** for sampling in shader.

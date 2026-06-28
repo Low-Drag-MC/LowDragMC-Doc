@@ -53,94 +53,104 @@ flowchart TD
 
 ### 仅客户端 Screen
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    ModularUI createUI() {
-        var root = new UIElement().addClass("panel_bg").addChildren(
-            new Label().setText("Hello")
-        );
-        return ModularUI.of(UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)));
-    }
-    // 打开：Minecraft.getInstance().setScreen(new ModularUIScreen(createUI(), Component.empty()));
-    ```
-
-=== "Kotlin"
-
-    ```kotlin
-    fun createUI(): ModularUI {
-        val root = element({ cls = { +"panel_bg" } }) {
-            label({ text("Hello") })
-        }
-        return ModularUI(UI.of(root, StylesheetManager.GDP))
-    }
-    // 打开：Minecraft.getInstance().setScreen(ModularUIScreen(createUI(), Component.empty()))
-    ```
-
-=== "KubeJS"
-
-    ```javascript
-    // 仅客户端 screen 必须从 client_scripts 中打开
-    let root = new UIElement().addClass("panel_bg").addChildren(
+```java
+ModularUI createUI() {
+    var root = new UIElement().addClass("panel_bg").addChildren(
         new Label().setText("Hello")
     );
-    let mui = ModularUI.of(UI.of(root));
-    // 通过客户端触发器打开
-    ```
+    return ModularUI.of(UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)));
+}
+// 打开：Minecraft.getInstance().setScreen(new ModularUIScreen(createUI(), Component.empty()));
+```
 
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+fun createUI(): ModularUI {
+    val root = element({ cls = { +"panel_bg" } }) {
+        label({ text("Hello") })
+    }
+    return ModularUI(UI.of(root, StylesheetManager.GDP))
+}
+// 打开：Minecraft.getInstance().setScreen(ModularUIScreen(createUI(), Component.empty()))
+```
+
+</DocTab>
+<DocTab title="KubeJS">
+
+```javascript
+// 仅客户端 screen 必须从 client_scripts 中打开
+let root = new UIElement().addClass("panel_bg").addChildren(
+    new Label().setText("Hello")
+);
+let mui = ModularUI.of(UI.of(root));
+// 通过客户端触发器打开
+```
+
+</DocTab>
+</DocTabs>
 ### 基于 Menu 的 UI（服务端同步）
 
 对于 Menu UI，请使用内置工厂。详见 [factory.md](./factory.md)。
 
-=== "Java (Block)"
+<DocTabs>
+<DocTab title="Java (Block)">
 
-    ```java
-    public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
-        @Override
-        public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-            var root = new UIElement().addClass("panel_bg").addChildren(
-                new Label().setText("Block UI"),
-                new InventorySlots()
-            );
-            return ModularUI.of(
-                UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)),
-                holder.player
-            );
-        }
-        // 打开：BlockUIMenuType.openUI((ServerPlayer) player, pos);
+```java
+public class MyBlock extends Block implements BlockUIMenuType.BlockUI {
+    @Override
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
+        var root = new UIElement().addClass("panel_bg").addChildren(
+            new Label().setText("Block UI"),
+            new InventorySlots()
+        );
+        return ModularUI.of(
+            UI.of(root, StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.GDP)),
+            holder.player
+        );
     }
-    ```
+    // 打开：BlockUIMenuType.openUI((ServerPlayer) player, pos);
+}
+```
 
-=== "Kotlin (Block)"
+</DocTab>
+<DocTab title="Kotlin (Block)">
 
-    ```kotlin
-    class MyBlock : Block(...), BlockUIMenuType.BlockUI {
-        override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
-            val root = element({ cls = { +"panel_bg" } }) {
-                label({ text("Block UI") })
-                inventorySlots()
-            }
-            return ModularUI(UI.of(root, StylesheetManager.GDP), holder.player)
+```kotlin
+class MyBlock : Block(...), BlockUIMenuType.BlockUI {
+    override fun createUI(holder: BlockUIMenuType.BlockUIHolder): ModularUI {
+        val root = element({ cls = { +"panel_bg" } }) {
+            label({ text("Block UI") })
+            inventorySlots()
         }
-        // 打开：BlockUIMenuType.openUI(player as ServerPlayer, pos)
+        return ModularUI(UI.of(root, StylesheetManager.GDP), holder.player)
     }
-    ```
+    // 打开：BlockUIMenuType.openUI(player as ServerPlayer, pos)
+}
+```
 
-=== "KubeJS (Block)"
+</DocTab>
+<DocTab title="KubeJS (Block)">
 
-    ```javascript
-    // startup_scripts/main.js — 在两侧运行
-    LDLib2UI.block("mymod:my_block_ui", event => {
-        event.modularUI = ModularUI.of(UI.of(
-            new UIElement().addClass("panel_bg").addChildren(
-                new Label().setText("Block UI"),
-                new InventorySlots()
-            )
-        ), event.player);
-    });
-    // server_scripts: LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
-    ```
+```javascript
+// startup_scripts/main.js — 在两侧运行
+LDLib2UI.block("mymod:my_block_ui", event => {
+    event.modularUI = ModularUI.of(UI.of(
+        new UIElement().addClass("panel_bg").addChildren(
+            new Label().setText("Block UI"),
+            new InventorySlots()
+        )
+    ), event.player);
+});
+// server_scripts: LDLib2UIFactory.openBlockUI(event.player, event.block.pos, "mymod:my_block_ui");
+```
 
+</DocTab>
+</DocTabs>
 > **其他触发器：** 将 `BlockUIMenuType` 替换为 `HeldItemUIMenuType`（物品）或 `PlayerUIMenuType`（任意）。详见 [factory.md](./factory.md)。
 
 ### HUD Overlay
@@ -275,7 +285,7 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 | 代码编辑器 | `CodeEditor` | — | [code-editor.md](./components/code-editor.md) |
 | 检查器 | `Inspector` | — | [inspector.md](./components/inspector.md) |
 | 模板 | `Template` | （从 XML 加载） | [template.md](./components/template.md) |
-| 可绑定值 | `BindableValue<T>` | `.bind()`（隐藏同步辅助） | [bindable-value.md](./components/bindable-value.md) |
+| 可绑定值 | `BindableValue&lt;T&gt;` | `.bind()`（隐藏同步辅助） | [bindable-value.md](./components/bindable-value.md) |
 | 富文本 | `Text` | `.setText()` | [text.md](./components/text.md) |
 
 ### 纹理速查表
@@ -306,6 +316,6 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 - [ ] **数据绑定正确**：服务端数据使用 `DataBindingBuilder.xxx().build()` + `.bind()`；仅客户端数据使用 `bindDataSource`/`bindObserver`
 - [ ] **工厂已注册**：Menu UI 需要工厂注册（方块/物品/玩家）或手动 MenuType
 - [ ] **KubeJS 脚本放置位置**：`LDLib2UI.*` 处理器必须在两侧运行 —— 建议放在 `startup_scripts/`
-- [ ] **XML 文件** 放在 `assets/<modid>/ui/` 下并通过 `ResourceLocation` 加载
+- [ ] **XML 文件** 放在 `assets/&lt;modid&gt;/ui/` 下并通过 `ResourceLocation` 加载
 - [ ] **样式表已应用**：使用 `StylesheetManager.GDP`、`.MC` 或 `.MODERN` 作为内置主题，或提供自定义 LSS
 - [ ] **输出格式匹配请求**：完整 UI 返回 `ModularUI`，可复用组件返回 `UIElement`

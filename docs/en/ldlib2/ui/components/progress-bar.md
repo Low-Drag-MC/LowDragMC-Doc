@@ -1,55 +1,61 @@
 # ProgressBar
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `ProgressBar` displays a value within a configurable `[min, max]` range as a partially-filled bar. The fill direction, interpolation animation, and inner textures are all configurable. An optional centered `Label` can overlay the bar.
 
-`ProgressBar` implements `IBindable<Float>` and `IDataConsumer<Float>`, so its value can be driven by a data provider and kept in sync with the server automatically.
+`ProgressBar` implements `IBindable&lt;Float&gt;` and `IDataConsumer&lt;Float&gt;`, so its value can be driven by a data provider and kept in sync with the server automatically.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var bar = new ProgressBar();
-    bar.setRange(0, 100);
-    bar.setProgress(75f);
-    parent.addChild(bar);
+```java
+var bar = new ProgressBar();
+bar.setRange(0, 100);
+bar.setProgress(75f);
+parent.addChild(bar);
 
-    // Data-bound (server → client, ticks every tick)
-    bar.bindDataSource(DataBindingBuilder.floatValS2C(
-        () -> machine.getProgress() / (float) machine.getMaxProgress()
-    ).build());
-    ```
+// Data-bound (server → client, ticks every tick)
+bar.bindDataSource(DataBindingBuilder.floatValS2C(
+    () -> machine.getProgress() / (float) machine.getMaxProgress()
+).build());
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    progressBar({
-        layout { width(80).height(14) }
-        style { background(Sprites.PROGRESS_CONTAINER) }
-    }) {
-        api {
-            setRange(0f, 100f)
-            setProgress(75f)
-        }
+```kotlin
+progressBar({
+    layout { width(80).height(14) }
+    style { background(Sprites.PROGRESS_CONTAINER) }
+}) {
+    api {
+        setRange(0f, 100f)
+        setProgress(75f)
     }
-    ```
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let bar = new ProgressBar();
-    bar.setRange(0, 100);
-    bar.setProgress(75);
-    parent.addChild(bar);
-    ```
+```js
+let bar = new ProgressBar();
+bar.setRange(0, 100);
+bar.setProgress(75);
+parent.addChild(bar);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -88,77 +94,95 @@ The following elements are nested inside the internal structure:
 
 ## Progress Bar Style
 
-!!! info ""
-    #### <p style="font-size: 1rem;">fill-direction</p>
+::: info
+#### <p style="font-size: 1rem;">fill-direction</p>
 
-    Direction in which the bar fills as the value increases.
+Direction in which the bar fills as the value increases.
 
-    Default: `LEFT_TO_RIGHT`
+Default: `LEFT_TO_RIGHT`
 
-    | Value | Description |
-    | ----- | ----------- |
-    | `LEFT_TO_RIGHT` | Bar grows from the left edge. |
-    | `RIGHT_TO_LEFT` | Bar grows from the right edge. |
-    | `UP_TO_DOWN` | Bar grows from the top edge. |
-    | `DOWN_TO_UP` | Bar grows from the bottom edge. |
-    | `ALWAYS_FULL` | Bar is always fully visible regardless of value. |
+| Value | Description |
+| ----- | ----------- |
+| `LEFT_TO_RIGHT` | Bar grows from the left edge. |
+| `RIGHT_TO_LEFT` | Bar grows from the right edge. |
+| `UP_TO_DOWN` | Bar grows from the top edge. |
+| `DOWN_TO_UP` | Bar grows from the bottom edge. |
+| `ALWAYS_FULL` | Bar is always fully visible regardless of value. |
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        bar.progressBarStyle(style -> style.fillDirection(FillDirection.DOWN_TO_UP));
-        ```
+```java
+bar.progressBarStyle(style -> style.fillDirection(FillDirection.DOWN_TO_UP));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        progress-bar {
-            fill-direction: DOWN_TO_UP;
-        }
-        ```
+```css
+progress-bar {
+    fill-direction: DOWN_TO_UP;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">interpolate</p>
+</DocTab>
+</DocTabs>
+:::
 
-    When `true`, the bar visually animates toward the target value each tick instead of jumping.
+::: info
+#### <p style="font-size: 1rem;">interpolate</p>
 
-    Default: `true`
+When `true`, the bar visually animates toward the target value each tick instead of jumping.
 
-    === "Java"
+Default: `true`
 
-        ```java
-        bar.progressBarStyle(style -> style.interpolate(false));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+bar.progressBarStyle(style -> style.interpolate(false));
+```
 
-        ```css
-        progress-bar {
-            interpolate: false;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">interpolate-step</p>
+```css
+progress-bar {
+    interpolate: false;
+}
+```
 
-    Fraction of the total range (`max - min`) moved per tick during interpolation. Negative values use partial-tick lerp for extra smoothness.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `0.1`
+::: info
+#### <p style="font-size: 1rem;">interpolate-step</p>
 
-    === "Java"
+Fraction of the total range (`max - min`) moved per tick during interpolation. Negative values use partial-tick lerp for extra smoothness.
 
-        ```java
-        bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // slower animation
-        bar.progressBarStyle(style -> style.interpolateStep(-1f));    // partial-tick lerp
-        ```
+Default: `0.1`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        progress-bar {
-            interpolate-step: 0.05;
-        }
-        ```
+```java
+bar.progressBarStyle(style -> style.interpolateStep(0.05f)); // slower animation
+bar.progressBarStyle(style -> style.interpolateStep(-1f));    // partial-tick lerp
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+progress-bar {
+    interpolate-step: 0.05;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -166,42 +190,49 @@ The following elements are nested inside the internal structure:
 
 The bar uses `Sprites.PROGRESS_CONTAINER` for the outer container and `Sprites.PROGRESS_BAR` for the fill. Override these via style or DSL:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    bar.barContainer(c -> c.style(s -> s.background(myContainerTexture)));
-    bar.bar(b -> b.style(s -> s.background(myBarTexture)));
-    ```
+```java
+bar.barContainer(c -> c.style(s -> s.background(myContainerTexture)));
+bar.bar(b -> b.style(s -> s.background(myBarTexture)));
+```
 
-=== "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-    ```css
-    .__progress-bar_bar-container__ {
-        background: sprite("mymod:textures/gui/bar_bg.png");
-    }
-    .__progress-bar_bar__ {
-        background: sprite("mymod:textures/gui/bar_fill.png");
-    }
-    ```
+```css
+.__progress-bar_bar-container__ {
+    background: sprite("mymod:textures/gui/bar_bg.png");
+}
+.__progress-bar_bar__ {
+    background: sprite("mymod:textures/gui/bar_fill.png");
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Data Binding
 
-`ProgressBar` subscribes to `IDataProvider<Float>` for automatic value updates.
+`ProgressBar` subscribes to `IDataProvider&lt;Float&gt;` for automatic value updates.
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var binding = DataBindingBuilder.floatValS2C(
-        () -> machine.getProgress() / (float) machine.getMaxProgress()
-    ).build();
+```java
+var binding = DataBindingBuilder.floatValS2C(
+    () -> machine.getProgress() / (float) machine.getMaxProgress()
+).build();
 
-    bar.bindDataSource(binding);
-    bar.unbindDataSource(binding); // when done
-    ```
+bar.bindDataSource(binding);
+bar.unbindDataSource(binding); // when done
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for the full binding API.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for the full binding API.
 
 ---
 
@@ -226,11 +257,11 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for the ful
 | `setRange(float, float)` | `ProgressBar` | Sets the `[min, max]` range and re-evaluates the current value. |
 | `setMinValue(float)` | `ProgressBar` | Sets the minimum value. |
 | `setMaxValue(float)` | `ProgressBar` | Sets the maximum value. |
-| `progressBarStyle(Consumer<ProgressBarStyle>)` | `ProgressBar` | Configures `ProgressBarStyle` fluently. |
-| `bar(Consumer<UIElement>)` | `ProgressBar` | Configures the fill bar element. |
-| `barContainer(Consumer<UIElement>)` | `ProgressBar` | Configures the outer container element. |
-| `label(Consumer<Label>)` | `ProgressBar` | Configures the overlay label. |
-| `bindDataSource(IDataProvider<Float>)` | `ProgressBar` | Subscribes to a data provider. |
-| `unbindDataSource(IDataProvider<Float>)` | `ProgressBar` | Unsubscribes from a data provider. |
+| `progressBarStyle(Consumer&lt;ProgressBarStyle&gt;)` | `ProgressBar` | Configures `ProgressBarStyle` fluently. |
+| `bar(Consumer&lt;UIElement&gt;)` | `ProgressBar` | Configures the fill bar element. |
+| `barContainer(Consumer&lt;UIElement&gt;)` | `ProgressBar` | Configures the outer container element. |
+| `label(Consumer&lt;Label&gt;)` | `ProgressBar` | Configures the overlay label. |
+| `bindDataSource(IDataProvider&lt;Float&gt;)` | `ProgressBar` | Subscribes to a data provider. |
+| `unbindDataSource(IDataProvider&lt;Float&gt;)` | `ProgressBar` | Unsubscribes from a data provider. |
 | `getValue()` | `Float` | Returns the current value. |
 | `getNormalizedValue()` | `float` | Returns the current value normalized to `[0, 1]`. |

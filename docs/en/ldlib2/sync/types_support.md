@@ -1,11 +1,12 @@
 # Types Support
-{{ version_badge("2.0.0", label="Since", icon="tag") }}
+<VersionBadge version="2.0.0" label="Since" icon="tag" />
 
 LDLib2 has provided massive types support for synchronization and persistence already. 
 
 ## Builtin Supports 
-!!! note inline end
-    Check [github](https://github.com/Low-Drag-MC/LDLib2/blob/1.21/src/main/java/com/lowdragmc/lowdraglib2/syncdata/AccessorRegistries.java) to get the latest support list.
+::: info
+Check [github](https://github.com/Low-Drag-MC/LDLib2/blob/1.21/src/main/java/com/lowdragmc/lowdraglib2/syncdata/AccessorRegistries.java) to get the latest support list.
+:::
 
 - native types in java (number, boolean, string, enum, etc)
 
@@ -20,19 +21,20 @@ LDLib2 has provided massive types support for synchronization and persistence al
 | `short` / `Short`            | `-1`     | -         |
 | `char` / `Character`         | `-1`     | -         |
 | `String`                     | `-1`     | -         |
-| `Enum<?>`                    | `-1`     | -         |
+| `Enum&lt;?&gt;`                    | `-1`     | -         |
 | `Number`                     | `1000`   | -         |
 | `UUID`                       | `100`    | -         |
 | `T[]`                        | `-1`     | depeends on `T` |
-| `Collection<?>`              | `-1`     | ✅         |
-| `Map<K, V>`                  | `-1`     | ✅         |
+| `Collection&lt;?&gt;`              | `-1`     | ✅         |
+| `Map&lt;K, V&gt;`                  | `-1`     | ✅         |
 
-!!! note "Map support"
-    {{ version_badge("2.2.8", label="Since", icon="tag") }}
+::: info Map support
+<VersionBadge version="2.2.8" label="Since" icon="tag" />
 
-    Since **2.2.8**, LDLib2 supports `Map<K, V>` for synchronization and persistence. Both `K` and `V` are resolved through their own accessors, so the key and value types must also be supported types.
+Since **2.2.8**, LDLib2 supports `Map&lt;K, V&gt;` for synchronization and persistence. Both `K` and `V` are resolved through their own accessors, so the key and value types must also be supported types.
 
-    Maps are managed as read-only containers. When both key and value accessors are direct, LDLib2 can clear and rebuild the map during deserialization. If the key or value type is read-only, the map structure must already match on both sides, or the field should use `@ReadOnlyManaged` to serialize and rebuild the structure.
+Maps are managed as read-only containers. When both key and value accessors are direct, LDLib2 can clear and rebuild the map during deserialization. If the key or value type is read-only, the map structure must already match on both sides, or the field should use `@ReadOnlyManaged` to serialize and rebuild the structure.
+:::
 
 - types in minecraft (Block, Item, Fluid, etc)
 
@@ -41,18 +43,18 @@ LDLib2 has provided massive types support for synchronization and persistence al
 | `Block`                         | `100`    | -         |
 | `Item`                          | `100`    | -         |
 | `Fluid`                         | `100`    | -         |
-| `EntityType<?>`                 | `100`    | -         |
-| `BlockEntityType<?>`            | `100`    | -         |
+| `EntityType&lt;?&gt;`                 | `100`    | -         |
+| `BlockEntityType&lt;?&gt;`            | `100`    | -         |
 | `BlockState`                    | `100`    | -         |
 | `ResourceLocation`              | `100`    | -         |
 | `AABB`                          | `1000`   | -         |
 | `BlockPos`                      | `1000`   | -         |
 | `FluidStack`                    | `1000`   | -         |
 | `ItemStack`                     | `1000`   | -         |
-| `RecipeHolder<?>`               | `1000`   | -         |
+| `RecipeHolder&lt;?&gt;`               | `1000`   | -         |
 | `Tag`                           | `2000`   | -         |
 | `Component`                     | `2000`   | -         |
-| `INBTSerializable<?>`           | `2000`   | ✅        |
+| `INBTSerializable&lt;?&gt;`           | `2000`   | ✅        |
 
 - types in LDLib2 or others.
 
@@ -75,11 +77,12 @@ LDLib2 has provided massive types support for synchronization and persistence al
 
 
 ## Add Custom Type Support
-To add a support of a new type, you need to register an `IAccessor<TYPE>` of this type. All types can be divided into two group, `direct` and `read-only`.
+To add a support of a new type, you need to register an `IAccessor&lt;TYPE&gt;` of this type. All types can be divided into two group, `direct` and `read-only`.
 
-!!! important
-    - `direct` refer to the type that can be null, and there is known method to create a new instance of this type during management life cycle.
-    - `read-only` refer to the type that can not be null and immutable during management life cycle. (e.g. INBTSerializable<?> amd Collection<?>). All modification should be done by its APIs.
+::: info
+- `direct` refer to the type that can be null, and there is known method to create a new instance of this type during management life cycle.
+- `read-only` refer to the type that can not be null and immutable during management life cycle. (e.g. INBTSerializable&lt;?&gt; amd Collection&lt;?&gt;). All modification should be done by its APIs.
+:::
 
 You can register accessor by using `AccessorRegistries.registerAccessor`. In general, you can register your accessors anywhere you want, while we'd recommend to do it in the [LDLibPlugin#onLoad](../java_integration.md#ldlibplugin).
 
@@ -88,9 +91,10 @@ You can register accessor by using `AccessorRegistries.registerAccessor`. In gen
 ### Register for a direct type
 You can use `CustomDirectAccessor` to register new type easily.
 
-!!! note inline end "What is Mark?"
-    Mark is a snapshot during management life cycle. LDLib2 will generate mark for current value and caompare it later to determine whether it has changes.
-    If Mark is not defined. It will store current value as mark. It works if the type's internal values are immutable. (e.g. UUID, ResoruceLocation). Otherwise, you'd better set a way to obtain mark.
+::: info What is Mark?
+Mark is a snapshot during management life cycle. LDLib2 will generate mark for current value and caompare it later to determine whether it has changes.
+If Mark is not defined. It will store current value as mark. It works if the type's internal values are immutable. (e.g. UUID, ResoruceLocation). Otherwise, you'd better set a way to obtain mark.
+:::
 
 | Method         | Optional | Note |
 | --------------- | -------- | ---------- |
@@ -119,4 +123,4 @@ AccessorRegistries.registerAccessor(CustomDirectAccessor.builder(ItemStack.class
 ### Register for a read-only type
 
 In general, you don't really need it. Cuz, you can make your own class to inherite from `INBTSerializable`.
-If you do need it, please implement `IReadOnlyAccessor<TYPE>` and register it, check code comments for more usage details .
+If you do need it, please implement `IReadOnlyAccessor&lt;TYPE&gt;` and register it, check code comments for more usage details .

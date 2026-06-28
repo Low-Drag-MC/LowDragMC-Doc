@@ -19,8 +19,12 @@
 
 设置旋转角度。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.rotate(45);
 ```
@@ -31,8 +35,12 @@ texture.rotate(45);
 
 设置缩放系数。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.scale(1.5);
 ```
@@ -43,8 +51,12 @@ texture.scale(1.5);
 
 设置水平和垂直偏移。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.transform(10, 20);
 ```
@@ -55,10 +67,13 @@ texture.transform(10, 20);
 
 创建纹理的副本。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var copiedTexture = texture.copy();
-    ```
+``` java
+var copiedTexture = texture.copy();
+```
 
+</DocTab>
+</DocTabs>
 ---

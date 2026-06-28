@@ -1,5 +1,5 @@
 # Getting Started
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 In this section, we will give you some examples step by step.
 
@@ -8,7 +8,7 @@ In this section, we will give you some examples step by step.
 Let's start with a simple UI.
 A `ModularUI` acts as the runtime manager for your UI — handling lifecycle, rendering, and interactions for all elements you define. 
 It takes a `UI` instance and optionally a `Player` as inputs.
-Check [ModularUI page](./preliminary/modularui.md){ data-preview } for more details.
+Check [ModularUI page](./preliminary/modularui.md) for more details.
 
 ```java
 private static ModularUI createModularUI() {
@@ -55,19 +55,20 @@ public class MyScreen extends Screen {
 }
 ```
 
-!!! info "Quick Test"
-    If you dont want to cope with the code of the `screen` and display. We also provide the `ModularUIScreen` for you. 
-    Check [screen and menu page](./preliminary/screen_and_menu.md){ data-preview } for more details.
+::: info Quick Test
+If you dont want to cope with the code of the `screen` and display. We also provide the `ModularUIScreen` for you. 
+Check [screen and menu page](./preliminary/screen_and_menu.md) for more details.
 
-    ```java
-    public static void openScreenUI() {
-        var modularUI = createModularUI();
-        minecraft.setScreen(new ModularUIScreen(modularUI, Component.empty()));
-    }
-    ```
-    
-<figure markdown="span">
-  ![Tuto 1](./assets/gs_s1.png){ width="80%" }
+```java
+public static void openScreenUI() {
+    var modularUI = createModularUI();
+    minecraft.setScreen(new ModularUIScreen(modularUI, Component.empty()));
+}
+```
+:::
+
+<figure>
+<img src="./assets/gs_s1.png" alt="Tuto 1" width="80%">
 </figure>
 
 ---
@@ -75,7 +76,7 @@ public class MyScreen extends Screen {
 ### Tutorial 2: better layout and style
 Fine, it works — but the layout and styling are still not ideal.
 For example, we want to add padding to the root element, introduce some spacing between components, and center-align the label.
-Thanks to the yoga, we do need to cope with layout code. Check [layout page](./preliminary/layout.md){ data-preview } for more details.
+Thanks to the yoga, we do need to cope with layout code. Check [layout page](./preliminary/layout.md) for more details.
 Let’s improve the UI by refining its layout and style. 
 
 ```java hl_lines="7-8 17-18" 
@@ -104,8 +105,8 @@ private static ModularUI createModularUI() {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial ２ Result](./assets/gs_s3.png){ width="80%" }
+<figure>
+<img src="./assets/gs_s3.png" alt="Tutorial ２ Result" width="80%">
 </figure>
 
 ---
@@ -152,15 +153,15 @@ private static ModularUI createModularUI() {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial 3 Result](./assets/gs_s4.gif){ width="80%" }
+<figure>
+<img src="./assets/gs_s4.gif" alt="Tutorial 3 Result" width="80%">
 </figure>
 
 In the previous step, we used `Button#setOnClick()` to handle interactions.
 While this is convenient, it is only an API method only provided by the Button component.
 
 LDLib2 itself exposes a complete and flexible UI event system. 
-Any UIElement can listen to input events such as mouse clicks, hover, command, lifecycle, drag, focus, keyboard input, etc. Check [event page](./preliminary/event.md){ data-preview } for more details.
+Any UIElement can listen to input events such as mouse clicks, hover, command, lifecycle, drag, focus, keyboard input, etc. Check [event page](./preliminary/event.md) for more details.
 
 By combining a basic UIElement with event listeners and styles, you can implement fully custom interactive components—including buttons.
 
@@ -208,8 +209,8 @@ private static ModularUI createModularUI() {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial 5 Result](./assets/gs_s5.gif){ width="80%" }
+<figure>
+<img src="./assets/gs_s5.gif" alt="Tutorial 5 Result" width="80%">
 </figure>
 
 ---
@@ -220,83 +221,88 @@ In [Tutorial 2](#tutorial-2-better-layout-and-style), we improved the layout and
 While this works well, inline layout and style definitions can quickly become verbose and harder to maintain as the UI grows.
 
 To address this, LDLib2 introduces a stylesheet system called `LSS` (LDLib2 StyleSheet).
-LSS allows you to describe layout and style properties in a declarative, CSS-like way, separating visual design from UI structure. Check [stylesheet page](./preliminary/stylesheet.md){ data-preview } for more details.
+LSS allows you to describe layout and style properties in a declarative, CSS-like way, separating visual design from UI structure. Check [stylesheet page](./preliminary/stylesheet.md) for more details.
 
 In the examples below, we reimplement the layout and style logic from Step 3 using LSS:
 
 * Example 1 demonstrates LSS bindings directly on UI elements
 * Example 2 shows how to define a standalone stylesheet and apply it to the UI
 
-=== "example 1"
+<DocTabs>
+<DocTab title="example 1">
 
-    ```java
-    private static ModularUI createModularUI() {
-        var root = new UIElement();
-        root.addChildren(
-                new Label().setText("LSS example")
-                        .lss("horizontal-align", "center"),
-                new Button().setText("Click Me!"),
-                new UIElement()
-                        .lss("width", 80)
-                        .lss("height", 80)
-                        .lss("background", "sprite(ldlib2:textures/gui/icon.png)")
-        );
-        root.lss("background", "built-in(ui-gdp:BORDER)");
-        root.lss("padding-all", 7);
-        root.lss("gap-all", 5);
-        var ui = UI.of(root);
-        return ModularUI.of(ui);
-    }
-    ```
+```java
+private static ModularUI createModularUI() {
+    var root = new UIElement();
+    root.addChildren(
+            new Label().setText("LSS example")
+                    .lss("horizontal-align", "center"),
+            new Button().setText("Click Me!"),
+            new UIElement()
+                    .lss("width", 80)
+                    .lss("height", 80)
+                    .lss("background", "sprite(ldlib2:textures/gui/icon.png)")
+    );
+    root.lss("background", "built-in(ui-gdp:BORDER)");
+    root.lss("padding-all", 7);
+    root.lss("gap-all", 5);
+    var ui = UI.of(root);
+    return ModularUI.of(ui);
+}
+```
 
-=== "example 2"
+</DocTab>
+<DocTab title="example 2">
 
-    ```java
-    private static ModularUI createModularUI() {
-        // set root with an ID
-        var root = new UIElement().setId("root");
-        root.addChildren(
-                new Label().setText("LSS example"),
-                new Button().setText("Click Me!"),
-                // set the element with a class
-                new UIElement().addClass("image")
-        );
-        var lss = """
-            // id selector
-            #root {
-                background: built-in(ui-gdp:BORDER);
-                padding-all: 7;
-                gap-all: 5;
-            }
-            
-            // class selector
-            .image {
-                width: 80;
-                height: 80;
-                background: sprite(ldlib2:textures/gui/icon.png);
-            }
-            
-            // element selector
-            #root label {
-                horizontal-align: center;
-            }
-            """;
-        var stylesheet = Stylesheet.parse(lss);
-        // add stylesheets to ui
-        var ui = UI.of(root, stylesheet);
-        return ModularUI.of(ui);
-    }
-    ```
+```java
+private static ModularUI createModularUI() {
+    // set root with an ID
+    var root = new UIElement().setId("root");
+    root.addChildren(
+            new Label().setText("LSS example"),
+            new Button().setText("Click Me!"),
+            // set the element with a class
+            new UIElement().addClass("image")
+    );
+    var lss = """
+        // id selector
+        #root {
+            background: built-in(ui-gdp:BORDER);
+            padding-all: 7;
+            gap-all: 5;
+        }
 
-!!! info "Built-in Stylesheets"
-    In addition to custom LSS definitions, LDLib2 also provides several **built-in stylesheet** themes that cover most common UI components:
+        // class selector
+        .image {
+            width: 80;
+            height: 80;
+            background: sprite(ldlib2:textures/gui/icon.png);
+        }
 
-    - `#!java StylesheetManager.GDP`
-    - `#!java StylesheetManager.MC`
-    - `#!java StylesheetManager.MODERN`
+        // element selector
+        #root label {
+            horizontal-align: center;
+        }
+        """;
+    var stylesheet = Stylesheet.parse(lss);
+    // add stylesheets to ui
+    var ui = UI.of(root, stylesheet);
+    return ModularUI.of(ui);
+}
+```
 
-    These built-in stylesheets allow you to apply a consistent visual style to an entire UI with minimal setup.
-    You can access and manage them through the `StylesheetManager`, which acts as a central registry for all available stylesheet packs. 
+</DocTab>
+</DocTabs>
+::: info Built-in Stylesheets
+In addition to custom LSS definitions, LDLib2 also provides several **built-in stylesheet** themes that cover most common UI components:
+
+- `#!java StylesheetManager.GDP`
+- `#!java StylesheetManager.MC`
+- `#!java StylesheetManager.MODERN`
+
+These built-in stylesheets allow you to apply a consistent visual style to an entire UI with minimal setup.
+You can access and manage them through the `StylesheetManager`, which acts as a central registry for all available stylesheet packs. 
+:::
 
 ```java
 private static ModularUI createModularUI() {
@@ -332,8 +338,8 @@ private static ModularUI createModularUI() {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial 4 Result](./assets/gs_s6.gif){ width="80%" }
+<figure>
+<img src="./assets/gs_s6.gif" alt="Tutorial 4 Result" width="80%">
 </figure>
 
 ---
@@ -342,8 +348,8 @@ private static ModularUI createModularUI() {
 
 LDLib2 provides built-in data binding support for most data-driven UI components.
 This allows UI elements to stay in sync with underlying data without manual update logic.
-The binding system is based on `#!java IObserver<T>` and `#!java IDataProvider<T>`. 
-Check [data bindings page](./preliminary/data_bindings.md){ data-preview } for more details.
+The binding system is based on `#!java IObserver&lt;T&gt;` and `#!java IDataProvider&lt;T&gt;`. 
+Check [data bindings page](./preliminary/data_bindings.md) for more details.
 
 In this example:
 
@@ -397,8 +403,8 @@ private static ModularUI createModularUI() {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial 5 Result](./assets/gs_s7.gif){ width="80%" }
+<figure>
+<img src="./assets/gs_s7.gif" alt="Tutorial 5 Result" width="80%">
 </figure>
 
 ---
@@ -466,28 +472,29 @@ public class MyContainerScreen extends AbstractContainerScreen<MyContainerMenu> 
 }
 ```
 
-!!! info "Quick Test"
-    To use and open a menu-based UI, you need to register your own `MenuType`, LDLib2 also provide the `ModularUIContainerScreen` and `ModularUIContainerMenu` to help you set this up quickly. Check [screen and menu page](./preliminary/screen_and_menu.md){ data-preview } for more details. 
+::: info Quick Test
+To use and open a menu-based UI, you need to register your own `MenuType`, LDLib2 also provide the `ModularUIContainerScreen` and `ModularUIContainerMenu` to help you set this up quickly. Check [screen and menu page](./preliminary/screen_and_menu.md) for more details. 
 
-    Alternatively, you can get started even faster by using the provided [factories](./factory.md){ data-preview }.
-    They allow you to create menu-based UIs for blocks, items, or players with minimal setup—without dealing with manual registration or boilerplate code.
-    In this case, we use the `PlayerUIMenuType` for quick demo.
+Alternatively, you can get started even faster by using the provided [factories](./factory.md).
+They allow you to create menu-based UIs for blocks, items, or players with minimal setup—without dealing with manual registration or boilerplate code.
+In this case, we use the `PlayerUIMenuType` for quick demo.
 
-    ```java
-    public static final ResourceLocation UI_ID = LDLib2.id("unique_id");
+```java
+public static final ResourceLocation UI_ID = LDLib2.id("unique_id");
 
-    // register your ui somewhere, e.g. during your mod initialization.
-    public static void registerPlayerUI() {
-        PlayerUIMenuType.register(UI_ID, ignored -> player -> createModularUI(player));
-    }
-    
-    public static void openMenuUI(Player player) {
-        PlayerUIMenuType.openUI(player, UI_ID);
-    }
-    ```
+// register your ui somewhere, e.g. during your mod initialization.
+public static void registerPlayerUI() {
+    PlayerUIMenuType.register(UI_ID, ignored -> player -> createModularUI(player));
+}
 
-<figure markdown="span">
-  ![Tutorial 6 Result](./assets/gs_s8.gif){ width="80%" }
+public static void openMenuUI(Player player) {
+    PlayerUIMenuType.openUI(player, UI_ID);
+}
+```
+:::
+
+<figure>
+<img src="./assets/gs_s8.gif" alt="Tutorial 6 Result" width="80%">
 </figure>
 
 ---
@@ -499,7 +506,7 @@ In real projects, you often need more control over how data and events flow betw
 
 ModularUI provides full support for `data bindings` and `event dispatch` across client and server.
 This allows UI interactions on the client to safely trigger logic on the server, and server-side state changes to automatically update the UI. 
-Check [data bindings page](./preliminary/data_bindings.md){ data-preview } for more details. 
+Check [data bindings page](./preliminary/data_bindings.md) for more details. 
 
 Here, we focus on practical patterns to help you get started quickly. 
 
@@ -553,12 +560,12 @@ private static ModularUI createModularUI(Player player) {
 }
 ```
 
-<figure markdown="span">
-  ![Tutorial 7 Result](./assets/gs_s9.gif){ width="80%" }
+<figure>
+<img src="./assets/gs_s9.gif" alt="Tutorial 7 Result" width="80%">
 </figure>
 
 ---
 
 ## Ending
 
-This is far from over. Why not give the powerful [UI editor](./editor.md){ data-preview } a try?
+This is far from over. Why not give the powerful [UI editor](./editor.md) a try?

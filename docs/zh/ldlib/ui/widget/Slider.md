@@ -3,7 +3,7 @@ Added v1.0.48
 <br>
 
 来自 SliderWidget 测试的 Widget。<br>
-![来自 SliderWidget 测试的 Widget](../assets/slider.png){ width="30%" align=right }
+<img src="../assets/slider.png" alt="来自 SliderWidget 测试的 Widget" width="30%" class="md-img-right">
 
 
 `SliderWidget` 是一个简单的 GUI 滑块，类似于 Minecraft 选项菜单中的滑块。它支持水平和垂直模式，并且可以拥有任意数量的步进。
@@ -39,62 +39,74 @@ Added v1.0.48
 设置变更回调。<br>
 示例将文本覆盖层设置为以百分比显示数值。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    sliderWidget.setSliderCallback(value -> {
-        if(sliderWidget.getOverlay() instanceof TextTexture) {
-            ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
-        }
-    });
-    ```
+```Java
+sliderWidget.setSliderCallback(value -> {
+    if(sliderWidget.getOverlay() instanceof TextTexture) {
+        ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
+    }
+});
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    sliderWidget.setSliderCallback(value => {
-        if(sliderWidget.getOverlay() typeof TextTexture) {
-            ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
-        }
-    });
-    ```
+```Javascript
+sliderWidget.setSliderCallback(value => {
+    if(sliderWidget.getOverlay() typeof TextTexture) {
+        ((TextTexture) sliderWidget.getOverlay()).updateText(((int) (value * 100)) + "%%");
+    }
+});
+```
 
+</DocTab>
+</DocTabs>
 ### getAmount
 
 返回从 minAmount 到 maxAmount 的 lerp 浮点值。<br>
 示例，`minAmount = 5`，`maxAmount = 10`，`sliderValue = 0.5f`，则 .getAmount() 返回 `0.75f`
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    value = sliderWidget.getAmount();
-    ```
+```Java
+value = sliderWidget.getAmount();
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    value = sliderWidget.getAmount();
-    ```
+```Javascript
+value = sliderWidget.getAmount();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setAmount
 
-使用 minAmount 和 maxAmount 将 sliderValue 设置为 inverseLerp<br>
+使用 minAmount 和 maxAmount 将 sliderValue 设置为 inverseLerp&lt;br&gt;
 示例，`minAmount = 5`，`maxAmount = 10`，`sliderValue = 0.5f`，则 .getAmount() 返回 `0.75f`
 
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```Java
-    sliderWidget.setAmount(0.5f);
-    ```
+```Java
+sliderWidget.setAmount(0.5f);
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```Javascript
-    sliderWidget.setAmount(0.5f);
-    ```
+```Javascript
+sliderWidget.setAmount(0.5f);
+```
 
+</DocTab>
+</DocTabs>
 ---

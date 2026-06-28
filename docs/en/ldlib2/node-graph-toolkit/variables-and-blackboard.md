@@ -17,11 +17,11 @@ Use variables when a value belongs to the whole graph instead of one node. Typic
 
 The blackboard is the built-in UI for graph variables.
 
-<figure markdown="span">
-    ![Blackboard](./assets/ngt-blackboard-placeholder.png)
-    <figcaption>
-    Blackboard variable declarations.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-blackboard-placeholder.png" alt="Blackboard">
+<figcaption>
+Blackboard variable declarations.
+</figcaption>
 </figure>
 
 Each row is a variable declaration. The row shows the variable name and can expand to show its type and default value. Selecting a variable shows the full editable state in the inspector.
@@ -30,11 +30,11 @@ Each row is a variable declaration. The row shows the variable name and can expa
 
 ## Variable Inspector
 
-<figure markdown="span">
-    ![Variable inspector](./assets/ngt-variable-inspector.png)
-    <figcaption>
-    Inspector for a selected graph variable.
-    </figcaption>
+<figure>
+<img src="./assets/ngt-variable-inspector.png" alt="Variable inspector">
+<figcaption>
+Inspector for a selected graph variable.
+</figcaption>
 </figure>
 
 The inspector is where variable declarations become useful editor data:
@@ -71,7 +71,7 @@ An input variable means the parent graph can pass a value into the subgraph.
 
 An output variable means the subgraph can publish a value back to the parent graph.
 
-See [Subgraphs](./subgraphs.md){ data-preview } for how exposed variables become ports on `SubgraphNodeModel`.
+See [Subgraphs](./subgraphs.md) for how exposed variables become ports on `SubgraphNodeModel`.
 
 ## Create Variables in Code
 
@@ -123,4 +123,4 @@ public @Nullable List<TypeHandle> getVariableSupportTypes() {
 
 Return `null` to reuse `getSupportTypes()`.
 
-See [Type Handles](./type-handles.md){ data-preview } for built-in handles, custom registration, icons, default values, and configurators.
+See [Type Handles](./type-handles.md) for built-in handles, custom registration, icons, default values, and configurators.

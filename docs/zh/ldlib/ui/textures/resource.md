@@ -21,20 +21,27 @@
 
 从资源路径创建纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    // 使用 float 参数
-    var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
-    ```
+``` java
+// 使用 float 参数
+var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
+```
 
+</DocTab>
+</DocTabs>
 ### getSubTexture
 
 返回当前纹理的子纹理。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    // 使用 float 参数
-    var subTexture = resourceTexture.getSubTexture(0.2, 0.2, 0.5, 0.5);
-    ```
+``` java
+// 使用 float 参数
+var subTexture = resourceTexture.getSubTexture(0.2, 0.2, 0.5, 0.5);
+```
+
+</DocTab>
+</DocTabs>

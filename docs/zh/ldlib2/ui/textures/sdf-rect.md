@@ -1,64 +1,70 @@
 # SDFRectTexture
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `SDFRectTexture` 使用 SDF（Signed Distance Field，有符号距离场）GPU Shader 绘制圆角矩形。它能在任意尺寸下生成锐利且抗锯齿的边缘。支持逐角半径、可选的描边边框以及平滑的 CSS 过渡插值。
 
 注册名：`sdf_rect_texture`  
 LSS 函数：`rect(...)` / `sdf(...)`
 
-!!! note ""
-    继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+::: info
+继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // 填充圆角矩形
-    IGuiTexture panel = new SDFRectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(6f);
+```java
+// 填充圆角矩形
+IGuiTexture panel = new SDFRectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(6f);
 
-    // 带白色描边的圆角矩形
-    IGuiTexture bordered = new SDFRectTexture()
-        .setColor(0xFF1A1A1A)
-        .setRadius(4f)
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF);
+// 带白色描边的圆角矩形
+IGuiTexture bordered = new SDFRectTexture()
+    .setColor(0xFF1A1A1A)
+    .setRadius(4f)
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF);
 
-    // 静态工厂
-    IGuiTexture simple = SDFRectTexture.of(0xFF3A3A3A);
-    ```
+// 静态工厂
+IGuiTexture simple = SDFRectTexture.of(0xFF3A3A3A);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val panel = SDFRectTexture()
-        .setColor(0xFF2A2A2A.toInt())
-        .setRadius(6f)
+```kotlin
+val panel = SDFRectTexture()
+    .setColor(0xFF2A2A2A.toInt())
+    .setRadius(6f)
 
-    val bordered = SDFRectTexture.of(0xFF1A1A1A.toInt())
-        .setRadius(4f)
-        .setStroke(1f)
-        .setBorderColor(0xFFFFFFFF.toInt())
-    ```
+val bordered = SDFRectTexture.of(0xFF1A1A1A.toInt())
+    .setRadius(4f)
+    .setStroke(1f)
+    .setBorderColor(0xFFFFFFFF.toInt())
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let panel = new SDFRectTexture()
-        .setColor(0xFF2A2A2A)
-        .setRadius(6);
+```js
+let panel = new SDFRectTexture()
+    .setColor(0xFF2A2A2A)
+    .setRadius(6);
 
-    let bordered = SDFRectTexture.of(0xFF1A1A1A)
-        .setRadius(4)
-        .setStroke(1)
-        .setBorderColor(0xFFFFFFFF);
-    ```
+let bordered = SDFRectTexture.of(0xFF1A1A1A)
+    .setRadius(4)
+    .setStroke(1)
+    .setBorderColor(0xFFFFFFFF);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## LSS

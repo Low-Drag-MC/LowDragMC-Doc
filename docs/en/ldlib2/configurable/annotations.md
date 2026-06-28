@@ -46,7 +46,7 @@ public class ShopEntry implements IPersistedSerializable {
 }
 ```
 
-Use `@Configurable` when a field should be editable and saved. Use `@Persisted` when it should be saved but does not need editor UI. The serialization behavior is covered in [PersistedParser](../sync/PersistedParser.md){ data-preview }.
+Use `@Configurable` when a field should be editable and saved. Use `@Persisted` when it should be saved but does not need editor UI. The serialization behavior is covered in [PersistedParser](../sync/PersistedParser.md).
 
 ## Default Values
 
@@ -125,7 +125,7 @@ private Reward newReward() {
 }
 ```
 
-Without `@ConfigList`, LDLib2 still builds a list UI. It finds the element type, finds the element accessor, and creates one child configurator per element. For `List<Boolean>`, each row uses `BooleanAccessor`; for `List<Reward>`, each row needs either a supported accessor, a custom accessor, or a custom item configurator.
+Without `@ConfigList`, LDLib2 still builds a list UI. It finds the element type, finds the element accessor, and creates one child configurator per element. For `List&lt;Boolean&gt;`, each row uses `BooleanAccessor`; for `List&lt;Reward&gt;`, each row needs either a supported accessor, a custom accessor, or a custom item configurator.
 
 `@ConfigList` options:
 
@@ -223,7 +223,7 @@ private SearchComponentConfigurator.ISearchConfigurator<Block> createBlockSearch
 Important methods:
 
 * `defaultValue()`: fallback value used by the configurator.
-* `search(String, IResultHandler<T>)`: push matching results into the handler.
+* `search(String, IResultHandler&lt;T&gt;)`: push matching results into the handler.
 * `resultText(T)`: text shown for a selected value or result row.
 * `candidateUIProvider()`: optional custom row UI, usually icon plus text.
 

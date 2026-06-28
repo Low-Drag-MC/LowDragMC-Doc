@@ -1,6 +1,6 @@
 # 顶点格式（Vertex Format）
 
-{{ version_badge("2.0.0", label="添加于", icon="tag", href="/changelog/#2.0.0") }}
+<VersionBadge version="2.0.0" label="添加于" icon="tag" href="/changelog/#2.0.0" />
 
 > **注意：**
 > 大多数情况下，你不需要理解本节内容 —— Photon2 会自动处理顶点布局。

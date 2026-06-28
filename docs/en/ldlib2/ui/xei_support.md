@@ -1,6 +1,6 @@
 # XEI Integration
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 LDLib2 provides first-class support for the three most popular recipe-viewer mods:
 
@@ -18,12 +18,12 @@ The integration is event-driven: LDLib2 fires custom `UIEvent`s during JEI/REI/E
 
 ### Registering a Recipe Category
 
-Extend `ModularUIRecipeCategory<T>` where `T` is your recipe type. The base class handles caching, rendering, and event dispatch automatically. You only need to provide:
+Extend `ModularUIRecipeCategory&lt;T&gt;` where `T` is your recipe type. The base class handles caching, rendering, and event dispatch automatically. You only need to provide:
 
-- **`getRecipeType()`** — the `RecipeType<T>` identifier.
+- **`getRecipeType()`** — the `RecipeType&lt;T&gt;` identifier.
 - **`getTitle()`** — display name shown in JEI's category list.
 - **`getWidth()` / `getHeight()`** — pixel dimensions of the recipe view.
-- **Constructor argument** — an `IModularUIProvider<T>` (i.e. `T -> ModularUI`) that builds the UI for a given recipe.
+- **Constructor argument** — an `IModularUIProvider&lt;T&gt;` (i.e. `T -> ModularUI`) that builds the UI for a given recipe.
 
 Then register the category and recipes inside a class annotated with `@JeiPlugin`:
 
@@ -71,9 +71,9 @@ public class MyJEIPlugin implements IModPlugin {
 }
 ```
 
-#### `IModularUIProvider<T>`
+#### `IModularUIProvider&lt;T&gt;`
 
-`IModularUIProvider<T>` is a functional interface equivalent to `Function<T, ModularUI>`. The simplest way to implement it is a method reference:
+`IModularUIProvider&lt;T&gt;` is a functional interface equivalent to `Function&lt;T, ModularUI&gt;`. The simplest way to implement it is a method reference:
 
 ```java
 // Method reference to an instance method:
@@ -102,7 +102,7 @@ All integration is handled via `UIEvent`s dispatched through the element tree. Y
 | Constant (`JEIUIEvents.*`) | When fired | `event.customData` type |
 | -------------------------- | ---------- | ----------------------- |
 | `CLICKABLE_INGREDIENT` | User hovers/clicks an element in a live screen | `IClickableIngredientFactory` |
-| `GHOST_INGREDIENT` | User starts dragging an ingredient from JEI | `JEITargetsTypedHandler<I>` |
+| `GHOST_INGREDIENT` | User starts dragging an ingredient from JEI | `JEITargetsTypedHandler&lt;I&gt;` |
 | `RECIPE_INGREDIENT` | JEI collects ingredients to register for focus | `JEIRecipeIngredientHandler` |
 | `RECIPE_WIDGET` | JEI collects slot widgets for hover/tooltip | `JEIRecipeWidgetHandler` |
 
@@ -310,7 +310,7 @@ LDLibJEIPlugin.clickableIngredient(myDisplayElement, () -> {
 
 ### Registering a Recipe Category
 
-Extend `ModularUIDisplayCategory<T>` where `T` implements the `ModularUIDisplay` marker interface. The structure mirrors JEI, with two key differences:
+Extend `ModularUIDisplayCategory&lt;T&gt;` where `T` implements the `ModularUIDisplay` marker interface. The structure mirrors JEI, with two key differences:
 
 - The recipe object is called a **display** in REI; it implements `ModularUIDisplay` instead of being a plain class.
 - The width method receives the display as an argument: `getDisplayWidth(T display)`.
@@ -434,7 +434,7 @@ For fluids, use `VanillaEntryTypes.FLUID`.
 
 #### `recipeIngredient` — provide focus ingredients
 
-Same purpose as the JEI equivalent, but the provider returns `List<EntryIngredient>`:
+Same purpose as the JEI equivalent, but the provider returns `List&lt;EntryIngredient&gt;`:
 
 ```java
 LDLibREIPlugin.recipeIngredient(inputSlot, IngredientIO.INPUT, () ->
@@ -475,7 +475,7 @@ LDLibREIPlugin.recipeSlot(
 
 ### Registering a Recipe
 
-Extend `ModularUIEMIRecipe` for your recipe class. The `EmiRecipeCategory` is a standard EMI type — no LDLib wrapper is needed for the category itself. Your recipe passes an `IModularUIProvider<ModularUIEMIRecipe>` to the `super()` constructor.
+Extend `ModularUIEMIRecipe` for your recipe class. The `EmiRecipeCategory` is a standard EMI type — no LDLib wrapper is needed for the category itself. Your recipe passes an `IModularUIProvider&lt;ModularUIEMIRecipe&gt;` to the `super()` constructor.
 
 ```java
 // MyEmiRecipe.java
@@ -580,7 +580,7 @@ LDLibEMIPlugin.dropStackHandler(
 
 #### `recipeIngredient` — provide inputs/outputs/catalysts
 
-The provider returns `List<EmiIngredient>`:
+The provider returns `List&lt;EmiIngredient&gt;`:
 
 ```java
 LDLibEMIPlugin.recipeIngredient(inputSlot, IngredientIO.INPUT, () ->

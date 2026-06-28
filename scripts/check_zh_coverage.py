@@ -1,14 +1,15 @@
 from pathlib import Path
 
-root = Path(__file__).resolve().parents[1] / "docs" / "ldlib2"
-missing = []
-for src in sorted(root.rglob("*.md")):
-    if src.name.endswith(".zh.md"):
-        continue
-    dst = src.with_name(f"{src.stem}.zh.md")
-    if not dst.exists():
-        missing.append(src)
+ROOT = Path(__file__).resolve().parents[1]
+EN_ROOT = ROOT / "docs" / "en"
+ZH_ROOT = ROOT / "docs" / "zh"
+
+missing: list[Path] = []
+for src in sorted(EN_ROOT.rglob("*.md")):
+    rel = src.relative_to(EN_ROOT)
+    if not (ZH_ROOT / rel).exists():
+        missing.append(rel)
 
 print(f"missing={len(missing)}")
-for p in missing:
-    print(p.as_posix())
+for rel in missing:
+    print(rel.as_posix())

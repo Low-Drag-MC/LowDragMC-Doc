@@ -2,11 +2,11 @@
 
 Configurator 是用于编辑一个值或一组值的小型 UI 组件。Accessors 创建 configurators，Inspector 展示它们，Editor 监听它们的变更事件。
 
-<figure markdown="span">
-    ![Configurator UI structure](./assets/configurator_ui.png){ width="52%" }
-    <figcaption>
-    Configurator UI 结构：1. `ConfiguratorGroup`，2. `ArrayConfiguratorGroup`，3. 常规 `ValueConfigurator` 行。
-    </figcaption>
+<figure>
+<img src="./assets/configurator_ui.png" alt="Configurator UI structure" width="52%">
+<figcaption>
+Configurator UI 结构：1. &lt;code&gt;ConfiguratorGroup&lt;/code&gt;，2. &lt;code&gt;ArrayConfiguratorGroup&lt;/code&gt;，3. 常规 &lt;code&gt;ValueConfigurator&lt;/code&gt; 行。
+</figcaption>
 </figure>
 
 图中三块是自定义 editor 最常复用的 UI 单元。`ConfiguratorGroup` 创建可折叠 section，`ArrayConfiguratorGroup` 编辑数组或集合，`ValueConfigurator` 行通过一个 inline 控件编辑一个值。
@@ -44,7 +44,7 @@ Inspector 正是依赖这个事件来运行 listener 和记录 history。
 
 ## ValueConfigurator
 
-`ValueConfigurator<T>` 是大多数可编辑属性行的核心基类。它把一个 UI 控件和一个值连接起来。
+`ValueConfigurator&lt;T&gt;` 是大多数可编辑属性行的核心基类。它把一个 UI 控件和一个值连接起来。
 
 构造参数：
 
@@ -91,7 +91,7 @@ protected void onValueUpdatePassively(Float newValue) {
 * `canDropObject(...)`
 * `onDropObject(...)`
 
-大多数简单自定义 configurator 应该继承 `ValueConfigurator<T>`，而不是直接继承 `Configurator`。
+大多数简单自定义 configurator 应该继承 `ValueConfigurator&lt;T&gt;`，而不是直接继承 `Configurator`。
 
 ## ConfiguratorGroup
 
@@ -149,7 +149,7 @@ public List<Entry> entries = new ArrayList<>();
 
 当某个值需要特殊 widget 时，创建自定义 configurator。基本模式：
 
-1. 继承 `ValueConfigurator<T>`；
+1. 继承 `ValueConfigurator&lt;T&gt;`；
 2. 创建 UI 控件并加入 `inlineContainer`；
 3. 用户修改控件时调用 `updateValueActively(value)`；
 4. 重写 `onValueUpdatePassively(...)`，在模型变化时刷新控件；

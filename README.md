@@ -1,14 +1,30 @@
 # LowDragMC-Doc
- 
-Material for MkDocs can be installed with pip:
+
+VitePress documentation site for LowDragMC modding projects.
+
+## Development
 
 ```shell
-pip install -r requirements.txt
+npm install
+npm run dev
 ```
 
-Then execute the command to start the server.
+The dev server runs at <http://127.0.0.1:4173/LowDragMC-Doc/> and hot-reloads
+Markdown, theme, and config changes. `npm run preview` serves the last static
+build output and is only for production-build checks.
+
+## Checks
+
 ```shell
-mkdocs serve
+npm test
+npm run docs:check
+npm run build
+npm run preview
 ```
 
-More detials can be found in [MkDocs-Material Docs](https://squidfunk.github.io/mkdocs-material/getting-started/)
+## Project Structure
+
+- `docs/en/` and `docs/zh/` contain bilingual documentation.
+- `docs/.vitepress/` contains VitePress config, theme components, and styles.
+- `docs/assets/` contains shared icons and images.
+- `.pages` files preserve section titles and ordering for generated sidebars.

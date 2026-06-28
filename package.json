@@ -1,0 +1,19 @@
+{
+  "name": "lowdragmc-doc",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test scripts/*.test.mjs",
+    "dev": "vitepress dev docs --host 127.0.0.1 --port 4173",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs --host 127.0.0.1 --port 4173",
+    "docs:migrate": "node scripts/migrate-markdown.mjs",
+    "docs:check": "node scripts/check-vitepress-migration.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "mermaid": "^11.16.0",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.39"
+  }
+}

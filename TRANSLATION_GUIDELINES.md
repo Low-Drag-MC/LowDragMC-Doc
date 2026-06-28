@@ -9,7 +9,7 @@
 1. **从 `docs/en/` 翻译到 `docs/zh/`，保持完全相同的目录结构。**
 2. **仅翻译自然语言内容**，所有代码、类名、方法名、资源路径、配置键保持原样。
 3. **Minecraft 及模组专有名词保留英文原文**，不翻译。
-4. **Markdown 格式必须 100% 保留**，包括表格对齐、代码块缩进、admonition、tabs、Mermaid 等。
+4. **Markdown 格式必须 100% 保留**，包括表格对齐、代码块缩进、VitePress containers、DocTabs、Mermaid 等。
 5. **代码块内仅翻译注释**（`//`、`/* */`、`#` 等），代码本身不动。
 6. **长文件必须分段写入**，不要一次性输出超过 100 行的内容。
 
@@ -112,10 +112,10 @@
 | `API` / `APIs` | `API` | 不译为 `接口` |
 | `Usage` | `用法` / `用法示例` | |
 | `Example` | `示例` | |
-| `Note` | `注意` / `备注` | admonition 类型保留 `!!! note` |
-| `Warning` | `警告` | admonition 类型保留 `!!! warning` |
-| `Info` | `信息` / `提示` | admonition 类型保留 `!!! info` |
-| `Tip` | `技巧` / `提示` | admonition 类型保留 `!!! tip` |
+| `Note` | `注意` / `备注` | container 类型保留 `::: info` |
+| `Warning` | `警告` | container 类型保留 `::: warning` |
+| `Info` | `信息` / `提示` | container 类型保留 `::: info` |
+| `Tip` | `技巧` / `提示` | container 类型保留 `::: tip` |
 | `Since` (version_badge label) | `自` | 统一使用 `label="自"`，不混用 `自版本`/`添加于` |
 | `Description` | `描述` / `说明` | 表格列标题统一用 `描述` |
 | `Field` | `字段` | 表格列标题 |

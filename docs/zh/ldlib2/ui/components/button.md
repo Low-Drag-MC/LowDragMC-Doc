@@ -1,56 +1,62 @@
 # Button
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `Button` 是一个可点击的 UI 组件，内置文本标签、响应状态的纹理（普通 / 悬停 / 按下），以及可选的头部或尾部图标装饰。
 
 从内部结构来看，`Button` 是一个水平 flex 行，包含一个**内部的** [`TextElement`](#text) 作为其标签。由于它是一个普通的 `UIElement` 容器，你可以在标签旁边添加额外的子元素 —— 最常见的方式是通过 [`addPreIcon`](#icon-decorations) 和 [`addPostIcon`](#icon-decorations)。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 上记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+::: info
+[UIElement](element.md) 上记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此处。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var button = new Button();
-    button.setText("my.button.label", true); // 可翻译的标签
-    button.setOnClick(event -> {
-        // 左键点击时在客户端执行
-    });
-    button.setOnServerClick(event -> {
-        // 左键点击时在服务端执行
-    });
-    parent.addChild(button);
-    ```
+```java
+var button = new Button();
+button.setText("my.button.label", true); // 可翻译的标签
+button.setOnClick(event -> {
+    // 左键点击时在客户端执行
+});
+button.setOnServerClick(event -> {
+    // 左键点击时在服务端执行
+});
+parent.addChild(button);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({
-        text("my.button.label")
-        onClick = { event -> /* 客户端 */ }
-        onServerClick = { event -> /* 服务端 */ }
-    }) {
-        // 如有需要，可添加额外的子元素
-    }
-    ```
+```kotlin
+button({
+    text("my.button.label")
+    onClick = { event -> /* 客户端 */ }
+    onServerClick = { event -> /* 服务端 */ }
+}) {
+    // 如有需要，可添加额外的子元素
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let button = new Button();
-    button.setText(Component.literal("Click me"));   // 字面量
-    button.setText("my.key", true);                  // 可翻译
-    button.setOnClick(e => {
-        // 客户端点击处理器
-    });
-    parent.addChild(button);
-    ```
+```js
+let button = new Button();
+button.setText(Component.literal("Click me"));   // 字面量
+button.setText("my.key", true);                  // 可翻译
+button.setOnClick(e => {
+    // 客户端点击处理器
+});
+parent.addChild(button);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -102,206 +108,246 @@ button > text:internal {
 
 控制按钮内显示的标签文本。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.setText("my.translation.key", true);  // 可翻译
-    button.setText("Literal label", false);       // 字面量
-    button.noText();                              // 隐藏标签
-    button.enableText();                          // 重新显示
-    ```
+```java
+button.setText("my.translation.key", true);  // 可翻译
+button.setText("Literal label", false);       // 字面量
+button.noText();                              // 隐藏标签
+button.enableText();                          // 重新显示
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({
-        text("my.translation.key")   // 可翻译（默认）
-        // 或直接赋值 Component：
-        // text = Component.literal("Literal label")
-        noText()                     // 隐藏文本元素
-    }) { }
-    ```
+```kotlin
+button({
+    text("my.translation.key")   // 可翻译（默认）
+    // 或直接赋值 Component：
+    // text = Component.literal("Literal label")
+    noText()                     // 隐藏文本元素
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.setText(Component.literal("Literal label"));
-    button.setText("my.key", true);   // 可翻译
-    button.noText();
-    button.enableText();
-    ```
+```js
+button.setText(Component.literal("Literal label"));
+button.setText("my.key", true);   // 可翻译
+button.noText();
+button.enableText();
+```
 
+</DocTab>
+</DocTabs>
 ### `textStyle`
 
 以流式 API 配置内部 `TextElement` 的文本渲染：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.textStyle(style -> style
-        .textColor(0xFFFFFF)
-        .fontSize(9)
-        .textShadow(true)
-    );
-    ```
+```java
+button.textStyle(style -> style
+    .textColor(0xFFFFFF)
+    .fontSize(9)
+    .textShadow(true)
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    // 构建完成后直接访问内部 TextElement
-    button.text.textStyle {
-        textColor(0xFFFFFF)
-        fontSize(9f)
-        textShadow(true)
-    }
-    ```
+```kotlin
+// 构建完成后直接访问内部 TextElement
+button.text.textStyle {
+    textColor(0xFFFFFF)
+    fontSize(9f)
+    textShadow(true)
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.textStyle(style => style
-        .textColor(0xFFFFFF)
-        .fontSize(9)
-        .textShadow(true)
-    );
-    ```
+```js
+button.textStyle(style => style
+    .textColor(0xFFFFFF)
+    .fontSize(9)
+    .textShadow(true)
+);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 图标装饰
 
 在标签前或标签后添加纹理图标。每个图标的大小会匹配按钮高度并保持宽高比。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.addPreIcon(Sprites.ICON_WRENCH);    // 文本前的图标
-    button.addPostIcon(Sprites.ICON_WRENCH);   // 文本后的图标
-    ```
+```java
+button.addPreIcon(Sprites.ICON_WRENCH);    // 文本前的图标
+button.addPostIcon(Sprites.ICON_WRENCH);   // 文本后的图标
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button.addPreIcon(Sprites.ICON_WRENCH)
-    button.addPostIcon(Sprites.ICON_WRENCH)
-    ```
+```kotlin
+button.addPreIcon(Sprites.ICON_WRENCH)
+button.addPostIcon(Sprites.ICON_WRENCH)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.addPreIcon(Sprites.ICON_WRENCH);
-    button.addPostIcon(Sprites.ICON_WRENCH);
-    ```
+```js
+button.addPreIcon(Sprites.ICON_WRENCH);
+button.addPostIcon(Sprites.ICON_WRENCH);
+```
 
+</DocTab>
+</DocTabs>
 要创建一个纯图标按钮，请同时调用 `noText()` 和 `addPreIcon`：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    new Button()
-        .noText()
-        .addPreIcon(myIcon)
-        .layout(l -> l.size(14));
-    ```
+```java
+new Button()
+    .noText()
+    .addPreIcon(myIcon)
+    .layout(l -> l.size(14));
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    button({ noText(); buttonStyle = { /* ... */ } }) {
-        api { addPreIcon(myIcon) }
-    }
-    ```
+```kotlin
+button({ noText(); buttonStyle = { /* ... */ } }) {
+    api { addPreIcon(myIcon) }
+}
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 按钮样式
 
 `ButtonStyle` 保存三个随状态变化的背景纹理。活动纹理会根据当前的[交互状态](#state)自动切换。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">base-background</p>
+::: info
+#### <p style="font-size: 1rem;">base-background</p>
 
-    在 `DEFAULT`（空闲）状态下渲染的纹理，当按钮未激活时（`isActive = false`）也会使用该纹理。
+在 `DEFAULT`（空闲）状态下渲染的纹理，当按钮未激活时（`isActive = false`）也会使用该纹理。
 
-    默认值：`Sprites.RECT_RD`
+默认值：`Sprites.RECT_RD`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        button.buttonStyle(style -> style.baseTexture(myTexture));
-        // 或：
-        button.getButtonStyle().baseTexture(myTexture);
-        ```
+```java
+button.buttonStyle(style -> style.baseTexture(myTexture));
+// 或：
+button.getButtonStyle().baseTexture(myTexture);
+```
 
-    === "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```kotlin
-        button({ buttonStyle = { baseTexture(myTexture) } }) { }
-        // 或构建完成后：
-        button.buttonStyleDsl { baseTexture(myTexture) }
-        ```
+```kotlin
+button({ buttonStyle = { baseTexture(myTexture) } }) { }
+// 或构建完成后：
+button.buttonStyleDsl { baseTexture(myTexture) }
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        button {
-            base-background: rect(#4a4a4a, 2);
-        }
-        ```
+```css
+button {
+    base-background: rect(#4a4a4a, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">hover-background</p>
+</DocTab>
+</DocTabs>
+:::
 
-    在 `HOVERED` 状态下渲染的纹理。
+::: info
+#### <p style="font-size: 1rem;">hover-background</p>
 
-    默认值：`Sprites.RECT_RD_LIGHT`
+在 `HOVERED` 状态下渲染的纹理。
 
-    === "Java"
+默认值：`Sprites.RECT_RD_LIGHT`
 
-        ```java
-        button.buttonStyle(style -> style.hoverTexture(myTexture));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+button.buttonStyle(style -> style.hoverTexture(myTexture));
+```
 
-        ```kotlin
-        button({ buttonStyle = { hoverTexture(myTexture) } }) { }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+button({ buttonStyle = { hoverTexture(myTexture) } }) { }
+```
 
-        ```css
-        button {
-            hover-background: rect(#5a5a5a, 2);
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">pressed-background</p>
+```css
+button {
+    hover-background: rect(#5a5a5a, 2);
+}
+```
 
-    在 `PRESSED` 状态下渲染的纹理（鼠标按键按住时）。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`Sprites.RECT_RD_DARK`
+::: info
+#### <p style="font-size: 1rem;">pressed-background</p>
 
-    === "Java"
+在 `PRESSED` 状态下渲染的纹理（鼠标按键按住时）。
 
-        ```java
-        button.buttonStyle(style -> style.pressedTexture(myTexture));
-        ```
+默认值：`Sprites.RECT_RD_DARK`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        button({ buttonStyle = { pressedTexture(myTexture) } }) { }
-        ```
+```java
+button.buttonStyle(style -> style.pressedTexture(myTexture));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        button {
-            pressed-background: rect(#3a3a3a, 2);
-        }
-        ```
+```kotlin
+button({ buttonStyle = { pressedTexture(myTexture) } }) { }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+button {
+    pressed-background: rect(#3a3a3a, 2);
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -314,56 +360,62 @@ Button 在 `UIElement` 的标准事件系统之上提供了两个便捷的 sette
 | `setOnClick(UIEventListener)` | 客户端 | `MOUSE_DOWN` 且为左键（button 0） |
 | `setOnServerClick(UIEventListener)` | 服务端 | `MOUSE_DOWN` 且为左键（button 0） |
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    button.setOnClick(event -> {
-        // 鼠标按下时立即在客户端调用
-        System.out.println("clicked on client");
-    });
+```java
+button.setOnClick(event -> {
+    // 鼠标按下时立即在客户端调用
+    System.out.println("clicked on client");
+});
 
-    button.setOnServerClick(event -> {
-        // 玩家点击时在服务端调用
-        player.sendSystemMessage(Component.literal("clicked!"));
-    });
-    ```
+button.setOnServerClick(event -> {
+    // 玩家点击时在服务端调用
+    player.sendSystemMessage(Component.literal("clicked!"));
+});
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    // 通过 ButtonSpec（推荐）
-    button({
-        onClick = { event -> /* 客户端 */ }
-        onServerClick = { event -> /* 服务端 */ }
-    }) { }
+```kotlin
+// 通过 ButtonSpec（推荐）
+button({
+    onClick = { event -> /* 客户端 */ }
+    onServerClick = { event -> /* 服务端 */ }
+}) { }
 
-    // 或通过标准 events 代码块
-    button {
-        events {
-            UIEvents.MOUSE_DOWN += { event ->
-                if (event.button == 0) { /* ... */ }
-            }
-        }
-        serverEvents {
-            UIEvents.MOUSE_DOWN += { event -> /* ... */ }
+// 或通过标准 events 代码块
+button {
+    events {
+        UIEvents.MOUSE_DOWN += { event ->
+            if (event.button == 0) { /* ... */ }
         }
     }
-    ```
+    serverEvents {
+        UIEvents.MOUSE_DOWN += { event -> /* ... */ }
+    }
+}
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    button.setOnClick(e => {
-        console.log("clicked on client");
-    });
-    // 通过事件监听器实现服务端处理：
-    button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
-        // 在服务端运行
-    });
-    ```
+```js
+button.setOnClick(e => {
+    console.log("clicked on client");
+});
+// 通过事件监听器实现服务端处理：
+button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
+    // 在服务端运行
+});
+```
 
-!!! note ""
-    `setOnClick` 仅对**左**鼠标键点击触发（`event.button == 0`）。对于其他鼠标键，请直接使用 `addEventListener(UIEvents.MOUSE_DOWN, ...)`。
+</DocTab>
+</DocTabs>
+::: info
+`setOnClick` 仅对**左**鼠标键点击触发（`event.button == 0`）。对于其他鼠标键，请直接使用 `addEventListener(UIEvents.MOUSE_DOWN, ...)`。
+:::
 
 ---
 
@@ -385,7 +437,7 @@ Button 自动追踪其当前的视觉状态：
 
 ## 字段
 
-> `Button` 特有的字段。基础字段请参见 [UIElement § 字段](element.md#fields){ data-preview }。
+> `Button` 特有的字段。基础字段请参见 [UIElement § 字段](element.md#fields)。
 
 | 名称 | 类型 | 访问权限 | 描述 |
 | ---- | ---- | -------- | ---- |
@@ -397,17 +449,17 @@ Button 自动追踪其当前的视觉状态：
 
 ## 方法
 
-> `Button` 特有的方法。完整的基础 API 请参见 [UIElement § 方法](element.md#methods){ data-preview }。
+> `Button` 特有的方法。完整的基础 API 请参见 [UIElement § 方法](element.md#methods)。
 
 | 方法 | 返回 | 描述 |
 | ---- | ---- | ---- |
 | `setText(String, boolean)` | `Button` | 设置标签文本。`true` = 可翻译，`false` = 字面量。 |
 | `noText()` | `Button` | 隐藏内部 `TextElement`。 |
 | `enableText()` | `Button` | 重新显示内部 `TextElement`。 |
-| `textStyle(Consumer<TextStyle>)` | `Button` | 以流式 API 配置内部文本样式。 |
+| `textStyle(Consumer&lt;TextStyle&gt;)` | `Button` | 以流式 API 配置内部文本样式。 |
 | `addPreIcon(IGuiTexture)` | `Button` | 在文本前插入一个方形图标元素。 |
 | `addPostIcon(IGuiTexture)` | `Button` | 在文本后追加一个方形图标元素。 |
-| `buttonStyle(Consumer<ButtonStyle>)` | `Button` | 以流式 API 配置 `ButtonStyle`。 |
+| `buttonStyle(Consumer&lt;ButtonStyle&gt;)` | `Button` | 以流式 API 配置 `ButtonStyle`。 |
 | `getButtonStyle()` | `ButtonStyle` | 直接返回 `ButtonStyle` 实例。 |
 | `setOnClick(UIEventListener)` | `Button` | 设置客户端点击处理器（替换之前的）。 |
 | `setOnServerClick(UIEventListener)` | `Button` | 添加服务端点击监听器。 |

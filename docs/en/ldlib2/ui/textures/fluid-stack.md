@@ -1,55 +1,61 @@
 # FluidStackTexture
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
 `FluidStackTexture` renders one or more `FluidStack`s as a GUI texture using the standard Minecraft fluid rendering. When multiple stacks are provided, they cycle every 20 ticks (1 second).
 
 Registry name: `fluid_stack_texture`
 
-!!! note ""
-    Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+::: info
+Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    // Single fluid
-    IGuiTexture water = new FluidStackTexture(Fluids.WATER);
+```java
+// Single fluid
+IGuiTexture water = new FluidStackTexture(Fluids.WATER);
 
-    // Multiple fluids — cycle every 20 ticks
-    IGuiTexture cycle = new FluidStackTexture(
-        Fluids.WATER, Fluids.LAVA
-    );
+// Multiple fluids — cycle every 20 ticks
+IGuiTexture cycle = new FluidStackTexture(
+    Fluids.WATER, Fluids.LAVA
+);
 
-    // From FluidStacks (custom amount)
-    IGuiTexture exact = new FluidStackTexture(
-        new FluidStack(Fluids.WATER, 1000)
-    );
+// From FluidStacks (custom amount)
+IGuiTexture exact = new FluidStackTexture(
+    new FluidStack(Fluids.WATER, 1000)
+);
 
-    // Tinted
-    IGuiTexture tinted = new FluidStackTexture(Fluids.WATER)
-        .setColor(0x8000AAFF);
-    ```
+// Tinted
+IGuiTexture tinted = new FluidStackTexture(Fluids.WATER)
+    .setColor(0x8000AAFF);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    val water = FluidStackTexture(Fluids.WATER)
+```kotlin
+val water = FluidStackTexture(Fluids.WATER)
 
-    val cycle = FluidStackTexture(Fluids.WATER, Fluids.LAVA)
-    ```
+val cycle = FluidStackTexture(Fluids.WATER, Fluids.LAVA)
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let water = new FluidStackTexture(Fluids.WATER);
+```js
+let water = new FluidStackTexture(Fluids.WATER);
 
-    let cycle = new FluidStackTexture(Fluids.WATER, Fluids.LAVA);
-    ```
+let cycle = new FluidStackTexture(Fluids.WATER, Fluids.LAVA);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## Fields

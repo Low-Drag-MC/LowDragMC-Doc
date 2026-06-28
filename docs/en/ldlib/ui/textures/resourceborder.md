@@ -18,22 +18,28 @@ The `ResourceBorderTexture` class extends `ResourceTexture` to render textures w
 
 Sets the size of the border corners.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    resourceBorderTexture.setBoderSize(5, 5);
-    ```
+``` java
+resourceBorderTexture.setBoderSize(5, 5);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setImageSize
 
 Sets the overall size of the texture image.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    resourceBorderTexture.setImageSize(200, 150);
-    ```
+``` java
+resourceBorderTexture.setImageSize(200, 150);
+```
 
+</DocTab>
+</DocTabs>
 ---

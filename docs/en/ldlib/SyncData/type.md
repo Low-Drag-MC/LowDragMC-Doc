@@ -18,7 +18,7 @@ Here we list all the classes with built-in support and how to add support to a c
 * `Position`
 * `IGuiTexture`
 * `Array`: T[] value.... (if T is support)
-* `Collection`: Set<T>, List<T>.... (if T is support)
+* `Collection`: Set&lt;T&gt;, List&lt;T&gt;.... (if T is support)
 * `ITagSerializable`: if class inherits from `ITagSerializable` it can also be synced/persisted but it should be a `final` field.
 * `IManaged`: if class inherits from `IManaged` it can also be synced/persisted but it should be a `final` field. Besides, syndata annotations in Imanaged can also be handled.
 

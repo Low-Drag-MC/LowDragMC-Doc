@@ -1,21 +1,22 @@
 # Anotations
-{{ version_badge("2.1.0", label="Since", icon="tag") }}
+<VersionBadge version="2.1.0" label="Since" icon="tag" />
 
 We show all anotations and their usage in this page.
 
-!!! note "LDLib Dev Tool"
-    ![Image title](../assets/plugin.png){ width="60%" align=right}
+::: info LDLib Dev Tool
+<img src="../assets/plugin.png" alt="Image title" width="60%" class="md-img-right">
 
-    If you are going to develop with LDLib2, we strongly recommend you to install our IDEA Plugin [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool). 
-    The plugin has:
+If you are going to develop with LDLib2, we strongly recommend you to install our IDEA Plugin [LDLib Dev Tool](https://plugins.jetbrains.com/plugin/28032-ldlib-dev-tool). 
+The plugin has:
 
-    - code highlight
-    - syntax check
-    - cdoe jumping
-    - auto complete
-    - others
-    
-    which greatly assist you in utilizing features of LDLib2. Especially, all the annotations of LDLib2 have been supported for use.
+- code highlight
+- syntax check
+- cdoe jumping
+- auto complete
+- others
+
+which greatly assist you in utilizing features of LDLib2. Especially, all the annotations of LDLib2 have been supported for use.
+:::
 
 ## Common Annotations
 
@@ -59,7 +60,7 @@ its nbt/json looks as below:
 
 It is very useful for `final` instance which doesn't allow new instance creation. If the filed set `subPersisted = true`, LDLib2 will do:
 
-- if the field inherits from `INBTSerializable<?>`, it will try to use its api for serialization.
+- if the field inherits from `INBTSerializable&lt;?&gt;`, it will try to use its api for serialization.
 - otherwise, it will serialize the field's internal values and wrap it as a map.
 
 ```java
@@ -121,10 +122,11 @@ public void setB(int value) {
 ### `@ReadOnlyManaged`
 This annotation is used to mark a read-only field that is managed by the user. 
 
-`read-only` types (e.g. `IManaged` and `INBTSerializable<?>`) requires the field to be non-null and the field instance won't be changed (a final field). 
+`read-only` types (e.g. `IManaged` and `INBTSerializable&lt;?&gt;`) requires the field to be non-null and the field instance won't be changed (a final field). 
 
-!!! note "What are `read-only` types?"
-    `read-only` types refer to fields which are always non-null and immutable, and not sure how to create a new instance of this type. More details can be found in [Types Support](./types_support.md){ data-preview }.
+::: info What are `read-only` types?
+`read-only` types refer to fields which are always non-null and immutable, and not sure how to create a new instance of this type. More details can be found in [Types Support](./types_support.md).
+:::
 
 Because we don't know how to create a new instance for these types. In this case, you can use this annotation and provide methods to
 store a unique id from server with `serializeMethod()` and create a new instance at the client with `deserializeMethod()`.
@@ -214,16 +216,18 @@ public List<TestGroup> testGroupDeserialize(IntTag tag) {
     return groups;
 }
 ```
-!!! note
-    In this example, `onDirtyMethod` is unncessary. Because `TestGroup` inherits from `IPersistedSerializable`, which also inherits from `INBTSerializable<?>`. Therefore, it is a supported `read-only` type.
+::: info
+In this example, `onDirtyMethod` is unncessary. Because `TestGroup` inherits from `IPersistedSerializable`, which also inherits from `INBTSerializable&lt;?&gt;`. Therefore, it is a supported `read-only` type.
+:::
 
 ---
 
 ### `@RPCMethod`
 Annotate a method, you can send RPC packet between server and remote. You are free to define the parameters of the methods long as the parameters support sync, and send rpc anywhere in your class.
 It is useful to spread an event (`c->s` / `s->c`).
-!!! note
-    if the `RPCSender` is defined as your first parameter of your method. LDLib2 will provide the sender information.
+::: info
+if the `RPCSender` is defined as your first parameter of your method. LDLib2 will provide the sender information.
+:::
 
 Make sure that all args match the parameters of annotated method.
 
@@ -331,8 +335,9 @@ public boolean skipIntFieldPersisted(int value) {
 ---
 
 ## Exclusive to `BlockEntity`
-!!! note
-    These annotations are designed specially for `BlockEntity`, check [Manage BlockEntity](./blockentity.md){ data-preview } before using them.
+::: info
+These annotations are designed specially for `BlockEntity`, check [Manage BlockEntity](./blockentity.md) before using them.
+:::
 
 ### `@DropSaved`
 Sometimes, you want to store the field values into the drop item while breaking the block.

@@ -17,22 +17,28 @@
 
 Sets the items.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    itemStackTexture.setItems(item1, item2);
-    ```
+``` java
+itemStackTexture.setItems(item1, item2);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setColor
 
 Sets the color overlay for the item stack texture.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    itemStackTexture.setColor(0xffff00ff);
-    ```
+``` java
+itemStackTexture.setColor(0xffff00ff);
+```
 
+</DocTab>
+</DocTabs>
 ---

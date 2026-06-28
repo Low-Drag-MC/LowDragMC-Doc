@@ -1,6 +1,6 @@
 # KubeJS 集成
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 LDLib2 将其完整的 UI 系统暴露给 KubeJS 脚本——无需 Java 或 Kotlin。你可以直接从 `.js` 文件打开 UI、构建元素树、应用样式表并连接数据绑定。
 

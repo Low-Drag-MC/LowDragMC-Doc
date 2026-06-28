@@ -1,6 +1,6 @@
 # Screen 与 Menu
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `ModularUI` 是一个 UI 树——它描述了 UI 的*外观*和*行为*。要将其实际展示给玩家，必须将其托管在 Minecraft 的 **Screen** 或 **Menu** 中。
 
@@ -43,8 +43,9 @@ val modularUI = ModularUI(UI.of(root))
 Minecraft.getInstance().setScreen(ModularUIScreen(modularUI, Component.literal("My UI")))
 ```
 
-!!! note
-    对于客户端工具（如编辑器、配置覆盖层）或任何不需要与服务器交互的 UI，请使用 `ModularUIScreen`。
+::: info
+对于客户端工具（如编辑器、配置覆盖层）或任何不需要与服务器交互的 UI，请使用 `ModularUIScreen`。
+:::
 
 ---
 
@@ -92,8 +93,9 @@ class MyBlockEntity : BlockEntity(...), IContainerUIHolder {
 }
 ```
 
-!!! note ""
-    `createUI` 在**服务端**被调用。生成的 `ModularUI` 会自动同步到客户端。你在其中设置的任何 `DataBindingBuilder` 绑定都会在两端保持同步。
+::: info
+`createUI` 在**服务端**被调用。生成的 `ModularUI` 会自动同步到客户端。你在其中设置的任何 `DataBindingBuilder` 绑定都会在两端保持同步。
+:::
 
 ### 打开 Menu
 
@@ -105,7 +107,7 @@ class MyBlockEntity : BlockEntity(...), IContainerUIHolder {
 
 LDLib2 为最常见的使用场景提供了三种预置的工厂辅助类——`BlockUIMenuType`、`HeldItemUIMenuType` 和 `PlayerUIMenuType`。KubeJS 用户可以通过 `LDLib2UI` 事件组和 `LDLib2UIFactory` 绑定来访问这三种工厂。
 
-详见 [UI Factory](../factory.md){ data-preview } 获取完整文档，包括 KubeJS 示例和脚本放置指南。
+详见 [UI Factory](../factory.md) 获取完整文档，包括 KubeJS 示例和脚本放置指南。
 
 ---
 
@@ -130,9 +132,10 @@ public static void onContainerMenuCreate(ContainerMenuEvent.Create event) throws
 }
 ```
 
-!!! warning ""
-    菜单必须实现 `IModularUIHolderMenu` 才能进行注入。
-    LDLib2 会通过 Mixin 自动将此接口附加到所有 `AbstractContainerMenu` 的子类上，因此游戏中的所有菜单都已支持该操作。
+::: warning
+菜单必须实现 `IModularUIHolderMenu` 才能进行注入。
+LDLib2 会通过 Mixin 自动将此接口附加到所有 `AbstractContainerMenu` 的子类上，因此游戏中的所有菜单都已支持该操作。
+:::
 
 ### 示例：增强原版熔炉
 
@@ -180,5 +183,6 @@ sequenceDiagram
     LDLib2->>Minecraft: 在现有 Screen 上方渲染 UI 覆盖层
 ```
 
-!!! tip
-    这种模式非常强大，可用于为游戏中的任何 Screen（包括其他模组的 Screen）添加上下文信息覆盖层、快速访问控件或调试面板。
+::: tip
+这种模式非常强大，可用于为游戏中的任何 Screen（包括其他模组的 Screen）添加上下文信息覆盖层、快速访问控件或调试面板。
+:::

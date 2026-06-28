@@ -1,71 +1,81 @@
 # Selector
 
-{{ version_badge("2.2.1", label="Since", icon="tag") }}
+<VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`Selector<T>` is a generic dropdown picker. Clicking it opens a floating list of candidate items; clicking an item selects it and optionally closes the dropdown. Each candidate is rendered by a configurable `UIElementProvider<T>`. When the candidate count exceeds [`max-item`](#max-item), the list switches to a scrollable `ScrollerView`.
+`Selector&lt;T&gt;` is a generic dropdown picker. Clicking it opens a floating list of candidate items; clicking an item selects it and optionally closes the dropdown. Each candidate is rendered by a configurable `UIElementProvider&lt;T&gt;`. When the candidate count exceeds [`max-item`](#max-item), the list switches to a scrollable `ScrollerView`.
 
-!!! note ""
-    Everything documented on [UIElement](element.md){ data-preview } (layout, styles, events, data bindings, etc.) applies here too.
+::: info
+Everything documented on [UIElement](element.md) (layout, styles, events, data bindings, etc.) applies here too.
+:::
 
 ---
 
 ## Usage
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var selector = new Selector<String>();
-    selector.setCandidates(List.of("Alpha", "Beta", "Gamma"));
-    selector.setSelected("Alpha");
-    selector.setOnValueChanged(value -> {
-        System.out.println("Selected: " + value);
-    });
-    parent.addChild(selector);
-    ```
+```java
+var selector = new Selector<String>();
+selector.setCandidates(List.of("Alpha", "Beta", "Gamma"));
+selector.setSelected("Alpha");
+selector.setOnValueChanged(value -> {
+    System.out.println("Selected: " + value);
+});
+parent.addChild(selector);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    selector<String>({
-        candidates("Alpha", "Beta", "Gamma")
-        selected("Alpha")
-        onChange { value -> println("Selected: $value") }
-    }) { }
-    ```
+```kotlin
+selector<String>({
+    candidates("Alpha", "Beta", "Gamma")
+    selected("Alpha")
+    onChange { value -> println("Selected: $value") }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let sel = new Selector();
-    sel.setCandidates(["Alpha", "Beta", "Gamma"]);
-    sel.setSelected("Alpha");
-    sel.setOnValueChanged(v => { console.log("Selected: " + v); });
-    parent.addChild(sel);
-    ```
+```js
+let sel = new Selector();
+sel.setCandidates(["Alpha", "Beta", "Gamma"]);
+sel.setSelected("Alpha");
+sel.setOnValueChanged(v => { console.log("Selected: " + v); });
+parent.addChild(sel);
+```
 
+</DocTab>
+</DocTabs>
 ### Custom Candidate UI
 
 By default each candidate is displayed as its `toString()` text. Supply a custom provider to render items however you like:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selector.setCandidateUIProvider(candidate ->
-        new UIElement()
-            .addChild(new Label().setText(candidate.displayName(), false))
-    );
-    ```
+```java
+selector.setCandidateUIProvider(candidate ->
+    new UIElement()
+        .addChild(new Label().setText(candidate.displayName(), false))
+);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    selector<MyItem>({
-        candidateUI { item ->
-            element { /* build custom row for item */ }
-        }
-    }) { }
-    ```
+```kotlin
+selector<MyItem>({
+    candidateUI { item ->
+        element { /* build custom row for item */ }
+    }
+}) { }
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -85,7 +95,7 @@ By default each candidate is displayed as its `toString()` text. Supply a custom
 
 | XML Child | Description |
 | --------- | ----------- |
-| `<candidate>` | Adds a string candidate to the list. The element's text content is used as the value. |
+| `&lt;candidate&gt;` | Adds a string candidate to the list. The element's text content is used as the value. |
 
 ---
 
@@ -111,145 +121,181 @@ The following children are nested inside the internal structure and can be targe
 
 `SelectorStyle` controls the dropdown overlay appearance and behavior.
 
-!!! info ""
-    #### <p style="font-size: 1rem;">focus-overlay</p>
+::: info
+#### <p style="font-size: 1rem;">focus-overlay</p>
 
-    Texture drawn over the selector bar when it is hovered or focused.
+Texture drawn over the selector bar when it is hovered or focused.
 
-    Default: `Sprites.RECT_RD_T_SOLID`
+Default: `Sprites.RECT_RD_T_SOLID`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        selector.selectorStyle(style -> style.focusOverlay(myHighlight));
-        ```
+```java
+selector.selectorStyle(style -> style.focusOverlay(myHighlight));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        selector {
-            focus-overlay: rect(#FFFFFF33, 2);
-        }
-        ```
+```css
+selector {
+    focus-overlay: rect(#FFFFFF33, 2);
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">max-item</p>
+</DocTab>
+</DocTabs>
+:::
 
-    Maximum number of items rendered in the flat `listView`. When the candidate list is longer, a `ScrollerView` is used instead.
+::: info
+#### <p style="font-size: 1rem;">max-item</p>
 
-    Default: `5`
+Maximum number of items rendered in the flat `listView`. When the candidate list is longer, a `ScrollerView` is used instead.
 
-    === "Java"
+Default: `5`
 
-        ```java
-        selector.selectorStyle(style -> style.maxItemCount(8));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "Kotlin"
+```java
+selector.selectorStyle(style -> style.maxItemCount(8));
+```
 
-        ```kotlin
-        selector<String>({ }) { withMaxItems(8) }
-        ```
+</DocTab>
+<DocTab title="Kotlin">
 
-    === "LSS"
+```kotlin
+selector<String>({ }) { withMaxItems(8) }
+```
 
-        ```css
-        selector {
-            max-item: 8;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">view-height</p>
+```css
+selector {
+    max-item: 8;
+}
+```
 
-    Height of the `ScrollerView` when candidate count exceeds `max-item`.
+</DocTab>
+</DocTabs>
+:::
 
-    Default: `50`
+::: info
+#### <p style="font-size: 1rem;">view-height</p>
 
-    === "Java"
+Height of the `ScrollerView` when candidate count exceeds `max-item`.
 
-        ```java
-        selector.selectorStyle(style -> style.scrollerViewHeight(80f));
-        ```
+Default: `50`
 
-    === "Kotlin"
+<DocTabs>
+<DocTab title="Java">
 
-        ```kotlin
-        selector<String>({ }) { withScrollHeight(80f) }
-        ```
+```java
+selector.selectorStyle(style -> style.scrollerViewHeight(80f));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="Kotlin">
 
-        ```css
-        selector {
-            view-height: 80;
-        }
-        ```
+```kotlin
+selector<String>({ }) { withScrollHeight(80f) }
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">show-overlay</p>
+</DocTab>
+<DocTab title="LSS">
 
-    Whether hovered and selected candidates are highlighted with a semi-transparent overlay.
+```css
+selector {
+    view-height: 80;
+}
+```
 
-    Default: `true`
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">show-overlay</p>
 
-        ```java
-        selector.selectorStyle(style -> style.showOverlay(false));
-        ```
+Whether hovered and selected candidates are highlighted with a semi-transparent overlay.
 
-    === "LSS"
+Default: `true`
 
-        ```css
-        selector {
-            show-overlay: false;
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">close-after-select</p>
+```java
+selector.selectorStyle(style -> style.showOverlay(false));
+```
 
-    Whether the dropdown closes automatically after the player selects an item.
+</DocTab>
+<DocTab title="LSS">
 
-    Default: `true`
+```css
+selector {
+    show-overlay: false;
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        selector.selectorStyle(style -> style.closeAfterSelect(false));
-        ```
+::: info
+#### <p style="font-size: 1rem;">close-after-select</p>
 
-    === "Kotlin"
+Whether the dropdown closes automatically after the player selects an item.
 
-        ```kotlin
-        selector<String>({ }) { closeOnSelect() }
-        ```
+Default: `true`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        selector {
-            close-after-select: false;
-        }
-        ```
+```java
+selector.selectorStyle(style -> style.closeAfterSelect(false));
+```
+
+</DocTab>
+<DocTab title="Kotlin">
+
+```kotlin
+selector<String>({ }) { closeOnSelect() }
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+selector {
+    close-after-select: false;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
 ## Value Binding
 
-`Selector<T>` extends `BindableUIElement<T>`, so it supports the standard data-binding API:
+`Selector&lt;T&gt;` extends `BindableUIElement&lt;T&gt;`, so it supports the standard data-binding API:
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    selector.bind(DataBindingBuilder.string(
-        () -> config.getMode(),
-        mode -> config.setMode(mode)
-    ).build());
-    ```
+```java
+selector.bind(DataBindingBuilder.string(
+    () -> config.getMode(),
+    mode -> config.setMode(mode)
+).build());
+```
 
-See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full details.
+</DocTab>
+</DocTabs>
+See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---
 
@@ -264,7 +310,7 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 | `listView` | `UIElement` | `public final` | Flat list used for short candidate lists. |
 | `scrollerView` | `ScrollerView` | `public final` | Scrollable list used for long candidate lists. |
 | `selectorStyle` | `SelectorStyle` | `private` (getter) | Current selector style. |
-| `candidates` | `List<T>` | `private` (getter) | Current candidate list. |
+| `candidates` | `List&lt;T&gt;` | `private` (getter) | Current candidate list. |
 | `value` | `T` | `private` (getter/nullable) | Currently selected value. |
 
 ---
@@ -273,11 +319,11 @@ See [Data Bindings](../preliminary/data_bindings.md){ data-preview } for full de
 
 | Method | Returns | Description |
 | ------ | ------- | ----------- |
-| `setCandidates(List<T>)` | `Selector<T>` | Replaces the candidate list and rebuilds the dropdown. |
-| `setCandidateUIProvider(UIElementProvider<T>)` | `Selector<T>` | Sets a custom factory for rendering each candidate. |
-| `setSelected(T)` | `Selector<T>` | Selects a value and notifies listeners. |
-| `setOnValueChanged(Consumer<T>)` | `Selector<T>` | Registers a listener for value changes. |
-| `selectorStyle(Consumer<SelectorStyle>)` | `Selector<T>` | Configures `SelectorStyle` fluently. |
+| `setCandidates(List&lt;T&gt;)` | `Selector&lt;T&gt;` | Replaces the candidate list and rebuilds the dropdown. |
+| `setCandidateUIProvider(UIElementProvider&lt;T&gt;)` | `Selector&lt;T&gt;` | Sets a custom factory for rendering each candidate. |
+| `setSelected(T)` | `Selector&lt;T&gt;` | Selects a value and notifies listeners. |
+| `setOnValueChanged(Consumer&lt;T&gt;)` | `Selector&lt;T&gt;` | Registers a listener for value changes. |
+| `selectorStyle(Consumer&lt;SelectorStyle&gt;)` | `Selector&lt;T&gt;` | Configures `SelectorStyle` fluently. |
 | `show()` | `void` | Opens the dropdown. |
 | `hide()` | `void` | Closes the dropdown. |
 | `isOpen()` | `boolean` | Returns `true` if the dropdown is currently open. |

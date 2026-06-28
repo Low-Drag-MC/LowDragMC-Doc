@@ -19,8 +19,12 @@
 
 Sets the rotation angle.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.rotate(45);
 ```
@@ -31,8 +35,12 @@ texture.rotate(45);
 
 Sets the scale factor.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.scale(1.5);
 ```
@@ -43,8 +51,12 @@ texture.scale(1.5);
 
 Sets the horizontal and vertical offset.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
+
+</DocTab>
+</DocTabs>
 ``` java
 texture.transform(10, 20);
 ```
@@ -55,10 +67,13 @@ texture.transform(10, 20);
 
 Creates a copy of the texture.
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    var copiedTexture = texture.copy();
-    ```
+``` java
+var copiedTexture = texture.copy();
+```
 
+</DocTab>
+</DocTabs>
 ---

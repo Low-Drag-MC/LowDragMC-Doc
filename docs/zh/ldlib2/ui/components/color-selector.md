@@ -1,8 +1,8 @@
 # ColorSelector
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`ColorSelector` 是一个功能完善的 HSB（色相–饱和度–亮度）颜色选择器。它继承自 `BindableUIElement<Integer>`，其值为所选颜色的 ARGB 压缩整数。包含以下功能：
+`ColorSelector` 是一个功能完善的 HSB（色相–饱和度–亮度）颜色选择器。它继承自 `BindableUIElement&lt;Integer&gt;`，其值为所选颜色的 ARGB 压缩整数。包含以下功能：
 
 - HSB 渐变拾色面板，可在色相、饱和度和亮度轴之间切换。
 - 色相/透明度滑块。
@@ -10,40 +10,46 @@
 - 颜色预览色块。
 - 剪贴板复制支持。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）同样适用于此组件。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var picker = new ColorSelector();
-    picker.setValue(0xFF4080FF, false); // 初始 ARGB 颜色
-    picker.registerValueListener(color -> System.out.printf("Color: #%08X%n", color));
-    parent.addChild(picker);
-    ```
+```java
+var picker = new ColorSelector();
+picker.setValue(0xFF4080FF, false); // 初始 ARGB 颜色
+picker.registerValueListener(color -> System.out.printf("Color: #%08X%n", color));
+parent.addChild(picker);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    colorSelector({
-        color(0xFF4080FF.toInt())
-        onChange { color -> println("Color: ${color.toString(16)}") }
-    }) { }
-    ```
+```kotlin
+colorSelector({
+    color(0xFF4080FF.toInt())
+    onChange { color -> println("Color: ${color.toString(16)}") }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let picker = new ColorSelector();
-    picker.setValue(0xFF4080FF, false);
-    picker.registerValueListener(color => { /* use color */ });
-    parent.addChild(picker);
-    ```
+```js
+let picker = new ColorSelector();
+picker.setValue(0xFF4080FF, false);
+picker.registerValueListener(color => { /* use color */ });
+parent.addChild(picker);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## 内部结构
@@ -62,18 +68,21 @@
 
 ## 值绑定
 
-`ColorSelector` 继承自 `BindableUIElement<Integer>`：
+`ColorSelector` 继承自 `BindableUIElement&lt;Integer&gt;`：
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    picker.bind(DataBindingBuilder.intVal(
-        () -> config.getColor(),
-        color -> config.setColor(color)
-    ).build());
-    ```
+```java
+picker.bind(DataBindingBuilder.intVal(
+    () -> config.getColor(),
+    color -> config.setColor(color)
+).build());
+```
 
-详见 [数据绑定](../preliminary/data_bindings.md){ data-preview }。
+</DocTab>
+</DocTabs>
+详见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---
 
@@ -97,4 +106,4 @@
 | ------ | ------- | ----------- |
 | `setValue(Integer, boolean)` | `ColorSelector` | 设置 ARGB 颜色值；第二个参数控制是否触发通知。 |
 | `getValue()` | `Integer` | 返回当前 ARGB 颜色值。 |
-| `registerValueListener(Consumer<Integer>)` | `void` | 注册颜色变化时调用的监听器。 |
+| `registerValueListener(Consumer&lt;Integer&gt;)` | `void` | 注册颜色变化时调用的监听器。 |

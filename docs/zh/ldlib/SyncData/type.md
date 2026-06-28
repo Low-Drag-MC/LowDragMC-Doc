@@ -18,7 +18,7 @@
 * `Position`
 * `IGuiTexture`
 * `Array`：T[] value……（如果 T 受支持）
-* `Collection`：Set<T>、List<T>……（如果 T 受支持）
+* `Collection`：Set&lt;T&gt;、List&lt;T&gt;……（如果 T 受支持）
 * `ITagSerializable`：如果类继承自 `ITagSerializable`，则它也可以被同步/持久化，但字段应为 `final`。
 * `IManaged`：如果类继承自 `IManaged`，则它也可以被同步/持久化，但字段应为 `final`。此外，Imanaged 中的 syndata 注解也可以被处理。
 

@@ -51,7 +51,7 @@ public void onDefinePorts(IPortDefinitionContext context) {
 | `withDefaultValue(Object)` | 初始值。 |
 | `showInInspectorOnly()` | 不显示在节点头部，只显示在 Inspector。 |
 | `withConfigurable(ITypeConfigurable)` | 覆盖这个 option 的编辑 UI。 |
-| `withCodec(Codec<?>)` | 覆盖序列化。 |
+| `withCodec(Codec&lt;?&gt;)` | 覆盖序列化。 |
 | `withoutSerialization()` | 保留类型 id，但不持久化值。 |
 | `withoutConfigurator()` | 保存值，但不暴露 UI 行。 |
 
@@ -85,7 +85,7 @@ context.addInputPort("amount", Float.class)
 | `withOrientation(PortOrientation)` | 水平侧边端口或垂直顶部/底部端口。 |
 | `withDefaultValue(Object)` | 初始内嵌常量。 |
 | `withConfigurable(ITypeConfigurable)` | 仅输入端口：覆盖编辑 UI。 |
-| `withCodec(Codec<?>)` | 仅输入端口：覆盖常量序列化。 |
+| `withCodec(Codec&lt;?&gt;)` | 仅输入端口：覆盖常量序列化。 |
 | `withoutSerialization()` | 仅输入端口：运行时非持久化值。 |
 | `withoutConfigurator()` | 仅输入端口：隐藏常量编辑器。 |
 
@@ -101,11 +101,11 @@ context.addInputPort("flow", TypeHandles.EXECUTION_FLOW)
 
 垂直输入端口默认隐藏内联 configurator。如果某个图类型需要显示垂直端口值，可以覆盖 `GraphModel.showVerticalPortConfigurator()`。
 
-<figure markdown="span">
-    ![Node anatomy](./assets/ngt-node-anatomy-placeholder.png)
-    <figcaption>
-    标准节点布局。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-node-anatomy-placeholder.png" alt="Node anatomy">
+<figcaption>
+标准节点布局。
+</figcaption>
 </figure>
 
 ## 节点结构
@@ -124,11 +124,11 @@ context.addInputPort("flow", TypeHandles.EXECUTION_FLOW)
 4. **Preview**  
    显示由 `hasNodePreview()` 和 `onBuildNodePreview(...)` 创建的可选预览面板。适合需要视觉反馈的节点，例如颜色、纹理、shader 或程序化结果节点。
 
-<figure markdown="span">
-    ![Node types](./assets/ngt-node-types.png)
-    <figcaption>
-    Node Graph Toolkit 中常见的节点类型。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-node-types.png" alt="Node types">
+<figcaption>
+Node Graph Toolkit 中常见的节点类型。
+</figcaption>
 </figure>
 
 ## 节点类型
@@ -136,25 +136,25 @@ context.addInputPort("flow", TypeHandles.EXECUTION_FLOW)
 图编辑器使用多种节点模型类型。它们共享同一个画布和连线系统，但创建和使用方式不同。
 
 1. **Variable Node**  
-   读取或写入图变量。先在 Blackboard 中创建变量，再从该声明创建变量节点。变量见 [Variables and Blackboard](./variables-and-blackboard.md){ data-preview }。
+   读取或写入图变量。先在 Blackboard 中创建变量，再从该声明创建变量节点。变量见 [Variables and Blackboard](./variables-and-blackboard.md)。
 
 2. **Constant Node**  
-   以输出端口形式提供固定值。当一个值应当作为可见节点，而不是输入端口的内联常量时使用。常量值使用 `TypeHandle` 支持，并与端口值使用同一套 configurable 系统。见 [Type Handles](./type-handles.md){ data-preview }。
+   以输出端口形式提供固定值。当一个值应当作为可见节点，而不是输入端口的内联常量时使用。常量值使用 `TypeHandle` 支持，并与端口值使用同一套 configurable 系统。见 [Type Handles](./type-handles.md)。
 
 3. **Node**  
    普通用户定义节点，通过继承 `Node` 并使用 `@NodeAttribute` 注册。用 `onDefineOptions(...)` 定义可编辑 options，用 `onDefinePorts(...)` 定义端口。
 
 4. **Context Node**  
-   拥有有序子 block 节点列表的节点。适合序列、分支、状态或组合操作。见 [Context and Block Nodes](./context-and-block-nodes.md){ data-preview }。
+   拥有有序子 block 节点列表的节点。适合序列、分支、状态或组合操作。见 [Context and Block Nodes](./context-and-block-nodes.md)。
 
 5. **Block Node**  
-   位于 context node 内部的子节点，而不是直接放在图画布上。通过继承 `BlockNode` 创建 block 节点类，并用 `@UseWithContext` 绑定兼容 context。见 [Context and Block Nodes](./context-and-block-nodes.md){ data-preview }。
+   位于 context node 内部的子节点，而不是直接放在图画布上。通过继承 `BlockNode` 创建 block 节点类，并用 `@UseWithContext` 绑定兼容 context。见 [Context and Block Nodes](./context-and-block-nodes.md)。
 
 6. **Subgraph Node**  
-   表示另一个图。它的端口由内部图的暴露变量生成。用于复用图逻辑，或通过 `GraphEditorView` 的面包屑编辑嵌套图。见 [Subgraphs](./subgraphs.md){ data-preview }。
+   表示另一个图。它的端口由内部图的暴露变量生成。用于复用图逻辑，或通过 `GraphEditorView` 的面包屑编辑嵌套图。见 [Subgraphs](./subgraphs.md)。
 
 7. **Wire Portal Node**  
-   通过命名 portal 对路由连线。长连线让图难以阅读时使用。可以从连线命令或图上下文操作创建 portal。见 [Commands and Customization](./commands-and-customization.md){ data-preview }。
+   通过命名 portal 对路由连线。长连线让图难以阅读时使用。可以从连线命令或图上下文操作创建 portal。见 [Commands and Customization](./commands-and-customization.md)。
 
 ## 节点预览
 

@@ -51,7 +51,7 @@ public class AddNode extends Node {
 
 ## Supported Types
 
-`getSupportTypes()` controls type handles available to constants and variables. See [Type Handles](./type-handles.md){ data-preview } for the type API and registration helpers.
+`getSupportTypes()` controls type handles available to constants and variables. See [Type Handles](./type-handles.md) for the type API and registration helpers.
 
 ```java
 @Override

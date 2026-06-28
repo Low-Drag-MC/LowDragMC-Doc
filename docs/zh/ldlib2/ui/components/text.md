@@ -1,54 +1,60 @@
 # TextElement
 
-{{ version_badge("2.2.1", label="自", icon="tag") }}
+<VersionBadge version="2.2.1" label="自" icon="tag" />
 
 `TextElement` 是一个底层文本渲染元素。它显示一个 `Component`（Minecraft 富文本对象），支持配置字体、大小、颜色、对齐方式、换行和滚动行为。
 
-大多数场景下，建议使用 [`Label`](label.md){ data-preview }（支持数据绑定）或 [`Button`](button.md){ data-preview }、[`Toggle`](toggle.md){ data-preview } 等控件内置的文本标签。
+大多数场景下，建议使用 [`Label`](label.md)（支持数据绑定）或 [`Button`](button.md)、[`Toggle`](toggle.md) 等控件内置的文本标签。
 
-!!! note ""
-    [UIElement](element.md){ data-preview } 中记录的所有内容（布局、样式、事件、数据绑定等）也适用于此元素。
+::: info
+[UIElement](element.md) 中记录的所有内容（布局、样式、事件、数据绑定等）也适用于此元素。
+:::
 
 ---
 
 ## 用法
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ```java
-    var text = new TextElement();
-    text.setText("my.translation.key", true);  // 可翻译
-    text.textStyle(style -> style
-        .fontSize(12)
-        .textColor(0xFFFF00)
-        .textShadow(false)
-        .textAlignHorizontal(Horizontal.CENTER)
-    );
-    parent.addChild(text);
-    ```
+```java
+var text = new TextElement();
+text.setText("my.translation.key", true);  // 可翻译
+text.textStyle(style -> style
+    .fontSize(12)
+    .textColor(0xFFFF00)
+    .textShadow(false)
+    .textAlignHorizontal(Horizontal.CENTER)
+);
+parent.addChild(text);
+```
 
-=== "Kotlin"
+</DocTab>
+<DocTab title="Kotlin">
 
-    ```kotlin
-    text({
-        layout { width(80).height(18) }
-        textStyle {
-            fontSize(12f)
-            textColor(0xFFFF00)
-            textAlignHorizontal(Horizontal.CENTER)
-        }
-    }) { }
-    ```
+```kotlin
+text({
+    layout { width(80).height(18) }
+    textStyle {
+        fontSize(12f)
+        textColor(0xFFFF00)
+        textAlignHorizontal(Horizontal.CENTER)
+    }
+}) { }
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ```js
-    let text = new TextElement();
-    text.setText(Component.literal("Hello world"));
-    text.textStyle(style => style.fontSize(12).textColor(0xFFFF00));
-    parent.addChild(text);
-    ```
+```js
+let text = new TextElement();
+text.setText(Component.literal("Hello world"));
+text.textStyle(style => style.fontSize(12).textColor(0xFFFF00));
+parent.addChild(text);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ## XML
@@ -66,8 +72,9 @@
 <text>Prefix: <translate key="my.key"/></text>
 ```
 
-!!! note ""
-    `TextElement` 在 XML 中不能添加布局子元素——只能添加文本内容。
+::: info
+`TextElement` 在 XML 中不能添加布局子元素——只能添加文本内容。
+:::
 
 ---
 
@@ -75,244 +82,310 @@
 
 `TextStyle` 控制渲染文本的所有视觉属性。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font-size</p>
+::: info
+#### <p style="font-size: 1rem;">font-size</p>
 
-    每行文本的高度（像素）。
+每行文本的高度（像素）。
 
-    默认值：`9`
+默认值：`9`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        text.textStyle(style -> style.fontSize(12));
-        ```
+```java
+text.textStyle(style -> style.fontSize(12));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text {
-            font-size: 12;
-        }
-        ```
+```css
+text {
+    font-size: 12;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-color</p>
+</DocTab>
+</DocTabs>
+:::
 
-    文本的 ARGB 颜色。使用 `0xRRGGBB`（alpha 默认为完全不透明）。
+::: info
+#### <p style="font-size: 1rem;">text-color</p>
 
-    默认值：`0xFFFFFF`（白色）
+文本的 ARGB 颜色。使用 `0xRRGGBB`（alpha 默认为完全不透明）。
 
-    === "Java"
+默认值：`0xFFFFFF`（白色）
 
-        ```java
-        text.textStyle(style -> style.textColor(0xFFFF00));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+text.textStyle(style -> style.textColor(0xFFFF00));
+```
 
-        ```css
-        text {
-            text-color: #FFFF00;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-shadow</p>
+```css
+text {
+    text-color: #FFFF00;
+}
+```
 
-    是否在文本下方绘制阴影。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`true`
+::: info
+#### <p style="font-size: 1rem;">text-shadow</p>
 
-    === "Java"
+是否在文本下方绘制阴影。
 
-        ```java
-        text.textStyle(style -> style.textShadow(false));
-        ```
+默认值：`true`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text {
-            text-shadow: false;
-        }
-        ```
+```java
+text.textStyle(style -> style.textShadow(false));
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">font</p>
+</DocTab>
+<DocTab title="LSS">
 
-    要使用的字体资源位置。
+```css
+text {
+    text-shadow: false;
+}
+```
 
-    默认值：原版默认字体（`minecraft:default`）
+</DocTab>
+</DocTabs>
+:::
 
-    === "Java"
+::: info
+#### <p style="font-size: 1rem;">font</p>
 
-        ```java
-        text.textStyle(style -> style.font(ResourceLocation.parse("minecraft:uniform")));
-        ```
+要使用的字体资源位置。
 
-    === "LSS"
+默认值：原版默认字体（`minecraft:default`）
 
-        ```css
-        text {
-            font: "minecraft:uniform";
-        }
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">horizontal-align</p>
+```java
+text.textStyle(style -> style.font(ResourceLocation.parse("minecraft:uniform")));
+```
 
-    文本行在元素内的水平对齐方式。可选值：`LEFT`、`CENTER`、`RIGHT`。
+</DocTab>
+<DocTab title="LSS">
 
-    默认值：`LEFT`
+```css
+text {
+    font: "minecraft:uniform";
+}
+```
 
-    === "Java"
+</DocTab>
+</DocTabs>
+:::
 
-        ```java
-        text.textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER));
-        ```
+::: info
+#### <p style="font-size: 1rem;">horizontal-align</p>
 
-    === "LSS"
+文本行在元素内的水平对齐方式。可选值：`LEFT`、`CENTER`、`RIGHT`。
 
-        ```css
-        text {
-            horizontal-align: CENTER;
-        }
-        ```
+默认值：`LEFT`
 
-!!! info ""
-    #### <p style="font-size: 1rem;">vertical-align</p>
+<DocTabs>
+<DocTab title="Java">
 
-    文本块在元素内的垂直对齐方式。可选值：`TOP`、`CENTER`、`BOTTOM`。
+```java
+text.textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER));
+```
 
-    默认值：`TOP`
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text {
+    horizontal-align: CENTER;
+}
+```
 
-        ```java
-        text.textStyle(style -> style.textAlignVertical(Vertical.CENTER));
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">vertical-align</p>
 
-        ```css
-        text {
-            vertical-align: CENTER;
-        }
-        ```
+文本块在元素内的垂直对齐方式。可选值：`TOP`、`CENTER`、`BOTTOM`。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">text-wrap</p>
+默认值：`TOP`
 
-    控制文本超出元素宽度时的行为。
+<DocTabs>
+<DocTab title="Java">
 
-    默认值：`NONE`
+```java
+text.textStyle(style -> style.textAlignVertical(Vertical.CENTER));
+```
 
-    | 值 | 行为 |
-    | ----- | --------- |
-    | `NONE` | 不换行；文本显示在一行，可能会溢出。 |
-    | `WRAP` | 文本换行到多行。 |
-    | `ROLL` | 文本以连续循环的方式水平滚动。 |
-    | `HOVER_ROLL` | 仅当鼠标悬停在元素上时文本才水平滚动。 |
-    | `HIDE` | 文本被裁剪为一行；溢出部分被隐藏。 |
+</DocTab>
+<DocTab title="LSS">
 
-    === "Java"
+```css
+text {
+    vertical-align: CENTER;
+}
+```
 
-        ```java
-        text.textStyle(style -> style.textWrap(TextWrap.WRAP));
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-    === "LSS"
+::: info
+#### <p style="font-size: 1rem;">text-wrap</p>
 
-        ```css
-        text {
-            text-wrap: WRAP;
-        }
-        ```
+控制文本超出元素宽度时的行为。
 
-!!! info ""
-    #### <p style="font-size: 1rem;">roll-speed</p>
+默认值：`NONE`
 
-    `ROLL` / `HOVER_ROLL` 滚动的速度倍数。值越大滚动越快。
+| 值 | 行为 |
+| ----- | --------- |
+| `NONE` | 不换行；文本显示在一行，可能会溢出。 |
+| `WRAP` | 文本换行到多行。 |
+| `ROLL` | 文本以连续循环的方式水平滚动。 |
+| `HOVER_ROLL` | 仅当鼠标悬停在元素上时文本才水平滚动。 |
+| `HIDE` | 文本被裁剪为一行；溢出部分被隐藏。 |
 
-    默认值：`1.0`
+<DocTabs>
+<DocTab title="Java">
 
-    === "Java"
+```java
+text.textStyle(style -> style.textWrap(TextWrap.WRAP));
+```
 
-        ```java
-        text.textStyle(style -> style.rollSpeed(2f));
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-    === "LSS"
+```css
+text {
+    text-wrap: WRAP;
+}
+```
 
-        ```css
-        text {
-            roll-speed: 2;
-        }
-        ```
+</DocTab>
+</DocTabs>
+:::
 
-!!! info ""
-    #### <p style="font-size: 1rem;">line-spacing</p>
+::: info
+#### <p style="font-size: 1rem;">roll-speed</p>
 
-    文本换行时行与行之间的额外像素间距。
+`ROLL` / `HOVER_ROLL` 滚动的速度倍数。值越大滚动越快。
 
-    默认值：`1`
+默认值：`1.0`
 
-    === "Java"
+<DocTabs>
+<DocTab title="Java">
 
-        ```java
-        text.textStyle(style -> style.lineSpacing(3f));
-        ```
+```java
+text.textStyle(style -> style.rollSpeed(2f));
+```
 
-    === "LSS"
+</DocTab>
+<DocTab title="LSS">
 
-        ```css
-        text {
-            line-spacing: 3;
-        }
-        ```
+```css
+text {
+    roll-speed: 2;
+}
+```
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-height</p>
+</DocTab>
+</DocTabs>
+:::
 
-    当设为 `true` 时，元素的高度会自动调整以适应所有文本行。
+::: info
+#### <p style="font-size: 1rem;">line-spacing</p>
 
-    默认值：`false`
+文本换行时行与行之间的额外像素间距。
 
-    === "Java"
+默认值：`1`
 
-        ```java
-        text.textStyle(style -> style.adaptiveHeight(true));
-        ```
+<DocTabs>
+<DocTab title="Java">
 
-    === "LSS"
+```java
+text.textStyle(style -> style.lineSpacing(3f));
+```
 
-        ```css
-        text {
-            adaptive-height: true;
-        }
-        ```
+</DocTab>
+<DocTab title="LSS">
 
-!!! info ""
-    #### <p style="font-size: 1rem;">adaptive-width</p>
+```css
+text {
+    line-spacing: 3;
+}
+```
 
-    当设为 `true` 时，元素的宽度会自动调整以适应第一行文本。
+</DocTab>
+</DocTabs>
+:::
 
-    默认值：`false`
+::: info
+#### <p style="font-size: 1rem;">adaptive-height</p>
 
-    === "Java"
+当设为 `true` 时，元素的高度会自动调整以适应所有文本行。
 
-        ```java
-        text.textStyle(style -> style.adaptiveWidth(true));
-        ```
+默认值：`false`
 
-    === "LSS"
+<DocTabs>
+<DocTab title="Java">
 
-        ```css
-        text {
-            adaptive-width: true;
-        }
-        ```
+```java
+text.textStyle(style -> style.adaptiveHeight(true));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text {
+    adaptive-height: true;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
+
+::: info
+#### <p style="font-size: 1rem;">adaptive-width</p>
+
+当设为 `true` 时，元素的宽度会自动调整以适应第一行文本。
+
+默认值：`false`
+
+<DocTabs>
+<DocTab title="Java">
+
+```java
+text.textStyle(style -> style.adaptiveWidth(true));
+```
+
+</DocTab>
+<DocTab title="LSS">
+
+```css
+text {
+    adaptive-width: true;
+}
+```
+
+</DocTab>
+</DocTabs>
+:::
 
 ---
 
@@ -331,6 +404,6 @@
 | ------ | ------- | ----------- |
 | `setText(String, boolean)` | `TextElement` | 设置文本。`true` = 可翻译，`false` = 字面文本。 |
 | `setText(Component)` | `TextElement` | 直接从 `Component` 设置文本。 |
-| `textStyle(Consumer<TextStyle>)` | `TextElement` | 流式配置 `TextStyle`。 |
+| `textStyle(Consumer&lt;TextStyle&gt;)` | `TextElement` | 流式配置 `TextStyle`。 |
 | `recompute()` | `void` | 强制重新布局文本行（样式或大小变化时会自动调用）。 |
 | `getText()` | `Component` | 返回当前文本。 |

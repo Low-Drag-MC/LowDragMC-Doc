@@ -5,9 +5,9 @@ The resource system is for reusable editor assets: UI templates, textures, color
 The main pieces are:
 
 * `Resources`: the list of resource types exposed by a project.
-* `Resource<T>`: the definition of one resource type.
-* `ResourceInstance<T>`: runtime state for that resource type.
-* `IResourceProvider<T>`: a source of resources.
+* `Resource&lt;T&gt;`: the definition of one resource type.
+* `ResourceInstance&lt;T&gt;`: runtime state for that resource type.
+* `IResourceProvider&lt;T&gt;`: a source of resources.
 * `IResourcePath`: a typed path to one resource.
 * `ResourceView`: the built-in editor view that displays resources.
 
@@ -22,7 +22,7 @@ public Resources getResources() {
 
 ## Resource
 
-`Resource<T>` defines one resource type. It provides:
+`Resource&lt;T&gt;` defines one resource type. It provides:
 
 * icon,
 * name,
@@ -36,7 +36,7 @@ Override `buildBuiltin(...)` to add built-in resources. Override `createResource
 
 ## Define a Custom Resource
 
-Create one `Resource<T>` subclass for each asset type you want to expose.
+Create one `Resource&lt;T&gt;` subclass for each asset type you want to expose.
 
 ```java
 public class ShopEntryResource extends Resource<ShopEntry> {
@@ -122,7 +122,7 @@ For user-authored resources, store `IResourcePath` in your project data instead 
 
 ## ResourceInstance
 
-`ResourceInstance<T>` is the runtime holder for a resource type. It owns:
+`ResourceInstance&lt;T&gt;` is the runtime holder for a resource type. It owns:
 
 * built-in providers,
 * custom providers,

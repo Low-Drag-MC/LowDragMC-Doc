@@ -4,11 +4,11 @@ Context nodes 持有有序 block nodes。
 
 当一个图元素需要全局设置，同时又需要一个可配置的子操作列表时使用它。它适合 shader stage、render pass、状态定义、规则组、子句，或者任何更适合编辑成一小组可组合 block，而不是散落成多个顶层节点的结构。
 
-<figure markdown="span">
-    ![Context and block nodes](./assets/ngt-context-block-placeholder.png)
-    <figcaption>
-    Shader 风格的 context node。这个 context 表示 vertex shader stage，它的 blocks 配置该 stage 的不同部分。
-    </figcaption>
+<figure>
+<img src="./assets/ngt-context-block-placeholder.png" alt="Context and block nodes">
+<figcaption>
+Shader 风格的 context node。这个 context 表示 vertex shader stage，它的 blocks 配置该 stage 的不同部分。
+</figcaption>
 </figure>
 
 ## 关系

@@ -1,6 +1,6 @@
 # Texture in LSS
 
-{{ version_badge("2.1.4", label="Since", icon="tag") }}
+<VersionBadge version="2.1.4" label="Since" icon="tag" />
 
 In LDLib2, many visual styles (such as `background`) accept a **texture value**.  
 Texture values in LSS are **string-based expressions** that describe how a texture is created and optionally transformed.

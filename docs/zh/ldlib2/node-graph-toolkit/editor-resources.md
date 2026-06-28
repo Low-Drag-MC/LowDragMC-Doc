@@ -84,4 +84,4 @@ Resolver 可以：
 
 外部子图节点需要它来从被引用图中重建端口形状。
 
-图资源也可以从资源面板拖拽到已打开图的画布上。`GraphView` 会把拖入资源导入为一个 external subgraph node，并存储资源路径。见 [Subgraphs](./subgraphs.md#import-external-subgraphs-from-resources){ data-preview }。
+图资源也可以从资源面板拖拽到已打开图的画布上。`GraphView` 会把拖入资源导入为一个 external subgraph node，并存储资源路径。见 [Subgraphs](./subgraphs.md#import-external-subgraphs-from-resources)。

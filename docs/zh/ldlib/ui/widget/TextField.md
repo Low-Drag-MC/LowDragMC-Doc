@@ -2,7 +2,7 @@
 
 <div>
   <video width="50%" controls style="margin-left: 20px; float: right;">
-    <source src="../../assets/textfield.mp4" type="video/mp4">
+    <source src="../assets/textfield.mp4" type="video/mp4">
     您的浏览器不支持视频播放。
   </video>
 </div>
@@ -30,128 +30,159 @@
 
 设置用于动态更新文本的 supplier。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setTextSupplier(() -> "Dynamic Text");
-    ```
+``` java
+textFieldWidget.setTextSupplier(() -> "Dynamic Text");
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setTextResponder
 
 设置当文本发生变化时调用的 responder。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setTextResponder(newText -> {
-        // 处理文本变化
-    });
-    ```
+``` java
+textFieldWidget.setTextResponder(newText -> {
+    // 处理文本变化
+});
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setBordered
 
 配置文本框是否显示边框。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setBordered(true);
-    ```
+``` java
+textFieldWidget.setBordered(true);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setTextColor
 
 设置文本框的文本颜色。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setTextColor(0xffffff);
-    ```
+``` java
+textFieldWidget.setTextColor(0xffffff);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setMaxStringLength
 
 设置文本框允许的最大字符数。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setMaxStringLength(100);
-    ```
+``` java
+textFieldWidget.setMaxStringLength(100);
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setValidator
 
 分配一个自定义验证器函数来控制和清理文本输入。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setValidator(text -> text.trim());
-    ```
+``` java
+textFieldWidget.setValidator(text -> text.trim());
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setCompoundTagOnly
 
 将输入限制为有效的 compound tag。会显示一个提示框指示该限制。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setCompoundTagOnly();
-    ```
+``` java
+textFieldWidget.setCompoundTagOnly();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setResourceLocationOnly
 
 将输入限制为有效的 resource location。会显示一个提示框指示该限制。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setResourceLocationOnly();
-    ```
+``` java
+textFieldWidget.setResourceLocationOnly();
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setNumbersOnly
 
 将输入限制为数值。针对不同数值类型提供了重载方法。
 
-=== "Java"
+<DocTabs>
+<DocTab title="Java">
 
-    ``` java
-    textFieldWidget.setNumbersOnly(0, 100); // int
-    textFieldWidget.setNumbersOnly(0.0f, 1.0f); // float
-    ```
+``` java
+textFieldWidget.setNumbersOnly(0, 100); // int
+textFieldWidget.setNumbersOnly(0.0f, 1.0f); // float
+```
 
-=== "KubeJS"
+</DocTab>
+<DocTab title="KubeJS">
 
-    ``` javascript
-    textFieldWidget.setNumbersOnlyInt(0, 100); // int
-    textFieldWidget.setNumbersOnlyFloat(0, 100); // float
-    ```
+``` javascript
+textFieldWidget.setNumbersOnlyInt(0, 100); // int
+textFieldWidget.setNumbersOnlyFloat(0, 100); // float
+```
 
+</DocTab>
+</DocTabs>
 ---
 
 ### setWheelDur
 
 设置通过鼠标滚轮或拖动调整数字时的轮步持续时间（步进值）。
 
-=== "Java / KubeJS"
+<DocTabs>
+<DocTab title="Java / KubeJS">
 
-    ``` java
-    textFieldWidget.setWheelDur(1);
-    ```
+``` java
+textFieldWidget.setWheelDur(1);
+```
 
+</DocTab>
+</DocTabs>
 ---
