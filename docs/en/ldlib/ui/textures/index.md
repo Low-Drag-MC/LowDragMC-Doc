@@ -25,6 +25,7 @@ Sets the rotation angle.
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.rotate(45);
 ```
@@ -41,6 +42,7 @@ Sets the scale factor.
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.scale(1.5);
 ```
@@ -57,6 +59,7 @@ Sets the horizontal and vertical offset.
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.transform(10, 20);
 ```
@@ -76,4 +79,5 @@ var copiedTexture = texture.copy();
 
 </DocTab>
 </DocTabs>
+
 ---

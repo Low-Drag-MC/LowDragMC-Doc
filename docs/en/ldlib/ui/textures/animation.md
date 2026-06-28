@@ -28,6 +28,7 @@ animationTexture.setTexture("ldlib:textures/gui/particles.png");
 
 </DocTab>
 </DocTabs>
+
 ### setCellSize
 
 Sets the cell size. Refer to how many cells does the animation texture need to be divided into (side length).
@@ -41,6 +42,7 @@ animationTexture.setCellSize(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setAnimation
@@ -56,6 +58,7 @@ animationTexture.setAnimation(32, 44);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setAnimation
@@ -71,6 +74,7 @@ animationTexture.setAnimation(1);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setColor
@@ -86,4 +90,5 @@ animationTexture.setColor(0xff000000);
 
 </DocTab>
 </DocTabs>
+
 ---

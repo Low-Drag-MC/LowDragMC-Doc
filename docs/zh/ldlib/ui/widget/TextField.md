@@ -39,6 +39,7 @@ textFieldWidget.setTextSupplier(() -> "Dynamic Text");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setTextResponder
@@ -56,6 +57,7 @@ textFieldWidget.setTextResponder(newText -> {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setBordered
@@ -71,6 +73,7 @@ textFieldWidget.setBordered(true);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setTextColor
@@ -86,6 +89,7 @@ textFieldWidget.setTextColor(0xffffff);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setMaxStringLength
@@ -101,6 +105,7 @@ textFieldWidget.setMaxStringLength(100);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setValidator
@@ -116,6 +121,7 @@ textFieldWidget.setValidator(text -> text.trim());
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setCompoundTagOnly
@@ -131,6 +137,7 @@ textFieldWidget.setCompoundTagOnly();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setResourceLocationOnly
@@ -146,6 +153,7 @@ textFieldWidget.setResourceLocationOnly();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setNumbersOnly
@@ -170,6 +178,7 @@ textFieldWidget.setNumbersOnlyFloat(0, 100); // float
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setWheelDur
@@ -185,4 +194,5 @@ textFieldWidget.setWheelDur(1);
 
 </DocTab>
 </DocTabs>
+
 ---

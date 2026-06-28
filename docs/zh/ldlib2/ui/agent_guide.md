@@ -93,6 +93,7 @@ let mui = ModularUI.of(UI.of(root));
 
 </DocTab>
 </DocTabs>
+
 ### 基于 Menu 的 UI（服务端同步）
 
 对于 Menu UI，请使用内置工厂。详见 [factory.md](./factory.md)。
@@ -151,6 +152,7 @@ LDLib2UI.block("mymod:my_block_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 > **其他触发器：** 将 `BlockUIMenuType` 替换为 `HeldItemUIMenuType`（物品）或 `PlayerUIMenuType`（任意）。详见 [factory.md](./factory.md)。
 
 ### HUD Overlay

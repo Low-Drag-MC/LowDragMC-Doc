@@ -63,6 +63,7 @@ sliderWidget.setSliderCallback(value => {
 
 </DocTab>
 </DocTabs>
+
 ### getAmount
 
 Returns float of the lerp from minAmount to maxAmount.&lt;br&gt;
@@ -85,6 +86,7 @@ value = sliderWidget.getAmount();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setAmount
@@ -109,4 +111,5 @@ sliderWidget.setAmount(0.5f);
 
 </DocTab>
 </DocTabs>
+
 ---

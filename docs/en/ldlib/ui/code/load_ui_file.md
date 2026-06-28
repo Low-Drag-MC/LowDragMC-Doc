@@ -42,6 +42,7 @@ function createUI() {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Bind UI functional logic

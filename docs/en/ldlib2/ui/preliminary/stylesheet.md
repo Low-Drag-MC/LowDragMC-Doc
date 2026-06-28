@@ -162,6 +162,7 @@ button.lss("opacity", 0.5);
 
 </DocTab>
 </DocTabs>
+
 All of the methods above can be used to set styles, but they are **not equivalent**.
 
 * Using `getStyle()` or `style(...)` sets styles with the `INLINE` origin by default.
@@ -195,6 +196,7 @@ button.lss("tooltips", "This is my tooltips", "DEFAULT");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Customizing Styles via stylesheet
@@ -423,6 +425,7 @@ function createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 You could also modify stylesheets at runtime.
 
 <DocTabs>
@@ -447,6 +450,7 @@ if (mui != null) {
 
 </DocTab>
 </DocTabs>
+
 ### Local Stylesheet (Subtree Scope)
 
 Besides global stylesheets on `UI`, you can attach a **local stylesheet** to a specific `UIElement`.
@@ -484,6 +488,7 @@ panel.addLocalStylesheet(`
 
 </DocTab>
 </DocTabs>
+
 ### Builtin Stylesheets
 
 LDLib2 provides three builtin stylesheets `gdp`, `mc`, and `modern`, allows you to  switch themes flexibly.
@@ -515,6 +520,7 @@ function createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 All three builtin stylesheets as below:
 
 <figure>

@@ -136,7 +136,8 @@ test('convertMarkdown normalizes existing DocTab spacing for markdown slots', ()
     'List<T> value;',
     '```',
     '</DocTab>',
-    '</DocTabs>'
+    '</DocTabs>',
+    'See [details](./details.md).'
   ].join('\n');
 
   assert.equal(
@@ -150,7 +151,9 @@ test('convertMarkdown normalizes existing DocTab spacing for markdown slots', ()
       '```',
       '',
       '</DocTab>',
-      '</DocTabs>'
+      '</DocTabs>',
+      '',
+      'See [details](./details.md).'
     ].join('\n')
   );
 });

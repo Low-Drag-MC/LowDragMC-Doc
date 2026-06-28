@@ -51,6 +51,7 @@ parent.addChild(tree);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Tree List Style
@@ -80,6 +81,7 @@ tree-list {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -107,6 +109,7 @@ tree-list {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -138,6 +141,7 @@ tree-list {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---

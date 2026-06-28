@@ -32,6 +32,7 @@ var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
 
 </DocTab>
 </DocTabs>
+
 ### getSubTexture
 
 Returns a sub-texture of the current texture.

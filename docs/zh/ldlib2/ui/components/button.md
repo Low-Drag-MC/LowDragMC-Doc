@@ -57,6 +57,7 @@ parent.addChild(button);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -142,6 +143,7 @@ button.enableText();
 
 </DocTab>
 </DocTabs>
+
 ### `textStyle`
 
 以流式 API 配置内部 `TextElement` 的文本渲染：
@@ -182,6 +184,7 @@ button.textStyle(style => style
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 图标装饰
@@ -214,6 +217,7 @@ button.addPostIcon(Sprites.ICON_WRENCH);
 
 </DocTab>
 </DocTabs>
+
 要创建一个纯图标按钮，请同时调用 `noText()` 和 `addPreIcon`：
 
 <DocTabs>
@@ -237,6 +241,7 @@ button({ noText(); buttonStyle = { /* ... */ } }) {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 按钮样式
@@ -279,6 +284,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -313,6 +319,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -347,6 +354,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -413,6 +421,7 @@ button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
 
 </DocTab>
 </DocTabs>
+
 ::: info
 `setOnClick` 仅对**左**鼠标键点击触发（`event.button == 0`）。对于其他鼠标键，请直接使用 `addEventListener(UIEvents.MOUSE_DOWN, ...)`。
 :::

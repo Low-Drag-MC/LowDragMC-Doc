@@ -32,6 +32,7 @@ widget.setSlefPosition(10, 10);
 
 </DocTab>
 </DocTabs>
+
 | 字段       | 描述                          |
 | :---------- | :----------------------------------- |
 | `id`       | Widget ID，不需要唯一，可以为空。  |
@@ -78,6 +79,7 @@ widget.setHoverTooltips("this is a button");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ::: info 纹理
@@ -103,6 +105,7 @@ widget.setBackground(new ResourceTexture("ldlib:textures/gui/icon.png"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `isMouseOverElement()`

@@ -107,7 +107,8 @@ public class ExampleExecutor extends IEffectExecutor {
 
 </DocTab>
 </DocTabs>
-查看 [ExampleExecutor](#__tabbed_1_2) 了解它是如何工作的。
+
+查看上方的 `ExampleExecutor` 标签页了解它是如何工作的。
 ```java
 FX fx = FXHelper.getFX(ResourceLocation.parse("photon:fire"));
 var executor = new ExampleExecutor(fx, level);

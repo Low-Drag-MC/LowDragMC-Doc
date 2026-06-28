@@ -35,6 +35,7 @@ label.setText("New Label Text");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setComponent()`
@@ -63,6 +64,7 @@ label.setTextProvider(() => "Dynamic Text");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setColor()`
@@ -78,6 +80,7 @@ label.setColor(0xFFFFFFFF); // ARGB
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setDropShadow()`
@@ -93,4 +96,5 @@ label.setDropShadow(true);
 
 </DocTab>
 </DocTabs>
+
 ---

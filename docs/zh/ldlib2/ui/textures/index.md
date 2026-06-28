@@ -61,6 +61,7 @@ let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 接口方法
@@ -108,6 +109,7 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 已注册的 Texture 类型

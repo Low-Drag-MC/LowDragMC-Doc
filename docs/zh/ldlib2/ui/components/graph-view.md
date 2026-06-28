@@ -66,6 +66,7 @@ parent.addChild(graph);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 内部结构
@@ -103,6 +104,7 @@ graph-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -130,6 +132,7 @@ graph-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -158,6 +161,7 @@ graph-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -185,6 +189,7 @@ graph-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -212,6 +217,7 @@ graph-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---

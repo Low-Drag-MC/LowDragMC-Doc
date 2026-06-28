@@ -63,6 +63,7 @@ label.bind(DataBindingBuilder.componentS2C(() =>
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -100,6 +101,7 @@ label.unbindDataSource(binding);
 
 </DocTab>
 </DocTabs>
+
 详见 [数据绑定](../preliminary/data_bindings.md) 了解完整的绑定 API。
 
 ---

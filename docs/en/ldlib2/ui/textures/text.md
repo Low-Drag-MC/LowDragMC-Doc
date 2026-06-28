@@ -58,6 +58,7 @@ let dynamic = new TextTexture(() => "Ticks: " + level.getGameTime());
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Text Types

@@ -49,6 +49,7 @@ parent.addChild(sel);
 
 </DocTab>
 </DocTabs>
+
 ### Custom Candidate UI
 
 By default each candidate is displayed as its `toString()` text. Supply a custom provider to render items however you like:
@@ -76,6 +77,7 @@ selector<MyItem>({
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -146,6 +148,7 @@ selector {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -180,6 +183,7 @@ selector {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -214,6 +218,7 @@ selector {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -241,6 +246,7 @@ selector {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -275,6 +281,7 @@ selector {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -295,6 +302,7 @@ selector.bind(DataBindingBuilder.string(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

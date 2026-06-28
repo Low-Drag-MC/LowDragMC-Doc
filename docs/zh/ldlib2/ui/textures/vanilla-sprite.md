@@ -54,6 +54,7 @@ let tinted = VanillaSpriteTexture.of("minecraft:toast/recipe_book")
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## LSS

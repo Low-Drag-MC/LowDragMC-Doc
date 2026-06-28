@@ -49,6 +49,7 @@ let effect = new ShaderTexture(ResourceLocation.parse("mymod:my_effect"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## LSS

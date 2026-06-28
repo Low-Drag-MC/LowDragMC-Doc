@@ -79,6 +79,7 @@ new ProgressBar()
 
 </DocTab>
 </DocTabs>
+
 ### **Data producer** with `IObservable&lt;T&gt;`
 Components that produce changeable data implement the `IObservable&lt;T&gt;` interface.
 Most data-driven components fall into this category, such as `Toggle`, `TextField`, `Selector`
@@ -141,6 +142,7 @@ new TextField()
 
 </DocTab>
 </DocTabs>
+
 ::: info
 Components such as `Toggle`, `Selector`, and `TextField` support both
 `IDataConsumer&lt;T&gt;` and `IObservable&lt;T&gt;`,
@@ -283,6 +285,7 @@ new ItemSlot()
 
 </DocTab>
 </DocTabs>
+
 For example, in:
 
 ```java
@@ -362,6 +365,7 @@ new Label().bind(
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Custom `IBinding&lt;T&gt;`
@@ -398,6 +402,7 @@ bind({ data }, { data = it })
 
 </DocTab>
 </DocTabs>
+
 ::: warning
 Not all types are supported by default.
 See [Type Support](../../sync/types_support.md).
@@ -440,6 +445,7 @@ bind({ data }, data))
 
 </DocTab>
 </DocTabs>
+
 This ensures correct synchronization and avoids ambiguity for read-only objects.
 
 ### `Getter` and `Setter` on the client
@@ -512,6 +518,7 @@ new BindableValue().bind(
 
 </DocTab>
 </DocTabs>
+
 ### All in one - `BindableUIElement&lt;T&gt;`
 You may have already noticed that almost all data-driven components—such as `TextArea`, `SearchComponent`, `Switch`, and others—are built on top of `BindableUIElement&lt;T&gt;`.
 `BindableUIElement&lt;T&gt;` is a wrapped UI element that implements all of the following interfaces:
@@ -577,6 +584,7 @@ element.addChildren(
 
 </DocTab>
 </DocTabs>
+
 ### Complex usage examples
 
 Ok, let's do one more complicated exmaple, let's bind a list of `String` stored at the server for a `Selector` (as candidates ).
@@ -686,6 +694,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 The equivalent implementation using `RPCEvent` directly:
 
 <DocTabs>
@@ -719,6 +728,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 You can use `RPCEventBuilder` to construct an `RPCEvent` and send data whenever needed.
 
 ::: info
@@ -858,6 +868,7 @@ button.sendMessage("test_message", TagBuilder.compound()
 
 </DocTab>
 </DocTabs>
+
 ### When to use `message`
 
 Use `message` when:

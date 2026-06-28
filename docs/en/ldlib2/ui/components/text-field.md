@@ -61,6 +61,7 @@ parent.addChild(field);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -135,6 +136,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -166,6 +168,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -197,6 +200,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -224,6 +228,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -244,6 +249,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -273,6 +279,7 @@ text-field {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -293,6 +300,7 @@ field.bind(DataBindingBuilder.string(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

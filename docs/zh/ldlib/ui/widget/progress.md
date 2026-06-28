@@ -48,6 +48,7 @@ progressWidget.setProgressSupplier(() => 0.3);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setDynamicHoverTips

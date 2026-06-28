@@ -25,6 +25,7 @@
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.rotate(45);
 ```
@@ -41,6 +42,7 @@ texture.rotate(45);
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.scale(1.5);
 ```
@@ -57,6 +59,7 @@ texture.scale(1.5);
 
 </DocTab>
 </DocTabs>
+
 ``` java
 texture.transform(10, 20);
 ```
@@ -76,4 +79,5 @@ var copiedTexture = texture.copy();
 
 </DocTab>
 </DocTabs>
+
 ---

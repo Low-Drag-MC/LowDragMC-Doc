@@ -32,6 +32,7 @@ widget.setSlefPosition(10, 10);
 
 </DocTab>
 </DocTabs>
+
 | Field       | Description                          |
 | :---------- | :----------------------------------- |
 | `id`       | Widget id, it doesn't have to be unique，and can be empty.  |
@@ -78,6 +79,7 @@ widget.setHoverTooltips("this is a button");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ::: info Textures
@@ -103,6 +105,7 @@ widget.setBackground(new ResourceTexture("ldlib:textures/gui/icon.png"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `isMouseOverElement()`

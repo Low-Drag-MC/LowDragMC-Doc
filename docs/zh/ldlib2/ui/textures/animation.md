@@ -54,6 +54,7 @@ let anim = new AnimationTexture("mymod:textures/gui/particles.png")
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 网格的工作原理

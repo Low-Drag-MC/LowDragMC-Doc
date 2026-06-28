@@ -26,6 +26,7 @@ itemStackTexture.setItems(item1, item2);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setColor
@@ -41,4 +42,5 @@ itemStackTexture.setColor(0xffff00ff);
 
 </DocTab>
 </DocTabs>
+
 ---

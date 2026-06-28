@@ -32,6 +32,7 @@ colorBorderTexture.setBorder(5);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setColor
@@ -47,6 +48,7 @@ colorBorderTexture.setColor(0xff00ff);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setRadius
@@ -62,6 +64,7 @@ colorBorderTexture.setRadius(10);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setLeftRadius
@@ -77,6 +80,7 @@ colorBorderTexture.setLeftRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setRightRadius
@@ -92,6 +96,7 @@ colorBorderTexture.setRightRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setTopRadius
@@ -107,6 +112,7 @@ colorBorderTexture.setTopRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setBottomRadius

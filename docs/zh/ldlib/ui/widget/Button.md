@@ -30,6 +30,7 @@ button.setButtonTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("Bu
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setClickedTexture()`
@@ -45,6 +46,7 @@ button.setClickedTexture(ResourceBorderTexture.BUTTON_COMMON, new TextTexture("C
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setOnPressCallback()`
@@ -89,4 +91,5 @@ button.setOnPressCallback(clickData => {
 
 </DocTab>
 </DocTabs>
+
 ---

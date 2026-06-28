@@ -41,6 +41,7 @@ for (let child of group.widgets) {
 
 </DocTab>
 </DocTabs>
+
 ::: warning
 **DO NOT** add widget to the `group.widgets` directly!! please check below methods.
 :::
@@ -64,6 +65,7 @@ group.addWidgets(button, label);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `removeWidget() / clearAllWidgets()`
@@ -81,6 +83,7 @@ group.clearAllWidget();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `waitToAdded() / waitToRemoved()`

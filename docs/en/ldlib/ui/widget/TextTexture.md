@@ -40,6 +40,7 @@ textTextureWidget.textureStyle(texture => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setText`
@@ -55,6 +56,7 @@ textTextureWidget.setText("Hello World");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setText` / `setComponent`
@@ -77,6 +79,7 @@ textTextureWidget.setComponent("....");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `setText / setTextProvider`

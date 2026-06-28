@@ -120,10 +120,11 @@ void main() {
 
 </DocTab>
 </DocTabs>
+
 **与原版粒子着色器的区别：**
 
-- 在 [`vsh`](#__tabbed_1_2) 中，使用 `#moj_import &lt;photon:particle.glsl&gt;` 和 `getParticleData()` 获取顶点数据。
-- 在 [`fsh`](#__tabbed_1_3) 中，添加了 HDR 颜色输出。
+- 在 `particle.vsh` 标签页中，使用 `#moj_import &lt;photon:particle.glsl&gt;` 和 `getParticleData()` 获取顶点数据。
+- 在 `hdr_particle.fsh` 标签页中，添加了 HDR 颜色输出。
 
 ---
 

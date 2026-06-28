@@ -57,6 +57,7 @@ parent.addChild(button);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -142,6 +143,7 @@ button.enableText();
 
 </DocTab>
 </DocTabs>
+
 ### `textStyle`
 
 Fluently configure the internal `TextElement`'s text rendering:
@@ -182,6 +184,7 @@ button.textStyle(style => style
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Icon Decorations
@@ -214,6 +217,7 @@ button.addPostIcon(Sprites.ICON_WRENCH);
 
 </DocTab>
 </DocTabs>
+
 To create an icon-only button, call `noText()` together with `addPreIcon`:
 
 <DocTabs>
@@ -237,6 +241,7 @@ button({ noText(); buttonStyle = { /* ... */ } }) {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Button Style
@@ -279,6 +284,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -313,6 +319,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -347,6 +354,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -413,6 +421,7 @@ button.addServerEventListener(UIEvents.MOUSE_DOWN, e => {
 
 </DocTab>
 </DocTabs>
+
 ::: info
 `setOnClick` fires only for **left** mouse button clicks (`event.button == 0`). For other mouse buttons, use `addEventListener(UIEvents.MOUSE_DOWN, ...)` directly.
 :::

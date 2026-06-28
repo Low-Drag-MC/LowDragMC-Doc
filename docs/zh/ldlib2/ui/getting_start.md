@@ -294,6 +294,7 @@ private static ModularUI createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 ::: info 内置样式表
 除了自定义 LSS 定义外，LDLib2 还提供了多个**内置样式表**主题，涵盖大多数常见 UI 组件：
 

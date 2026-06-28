@@ -23,6 +23,7 @@ guiTextureGroup.setTextures(texture1, texture2);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setColor

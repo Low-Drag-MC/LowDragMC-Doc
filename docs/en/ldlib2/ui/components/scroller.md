@@ -61,6 +61,7 @@ parent.addChild(scroller);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -119,6 +120,7 @@ scroller-vertical {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -148,6 +150,7 @@ scroller-vertical {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -168,6 +171,7 @@ scroller.bind(DataBindingBuilder.floatVal(
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Fields

@@ -31,6 +31,7 @@ var texture = new ResourceTexture("ldlib:textures/gui/icon.png");
 
 </DocTab>
 </DocTabs>
+
 ### getSubTexture
 
 返回当前纹理的子纹理。

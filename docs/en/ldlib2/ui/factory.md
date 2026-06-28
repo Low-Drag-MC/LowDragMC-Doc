@@ -89,6 +89,7 @@ LDLib2UI.block("mymod:my_block_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 The context object passed to `createUI` / available in the event:
 
 | Field | Type | Description |
@@ -172,6 +173,7 @@ LDLib2UI.item("mymod:my_item_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 The context object passed to `createUI` / available in the event:
 
 | Field | Type | Description |
@@ -245,6 +247,7 @@ LDLib2UI.player("mymod:my_player_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 The context object available in the event:
 
 | Field | Type | Description |

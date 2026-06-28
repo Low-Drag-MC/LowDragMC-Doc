@@ -1,4 +1,4 @@
-#Basic Information
+# Basic Information
 
 <VersionBadge version="2.0.4" label="Since" icon="tag" href="/changelog/#2.0.4" />
 
@@ -107,7 +107,8 @@ public class ExampleExecutor extends IEffectExecutor {
 
 </DocTab>
 </DocTabs>
-Check [ExampleExecutor](#__tabbed_1_2) to see how it works.
+
+Check the `ExampleExecutor` tab above to see how it works.
 ```java
 FX fx = FXHelper.getFX(ResourceLocation.parse("photon:fire"));
 var executor = new ExampleExecutor(fx, level);

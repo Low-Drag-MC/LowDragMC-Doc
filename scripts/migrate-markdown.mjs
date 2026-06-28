@@ -102,6 +102,9 @@ function normalizeDocTabSpacing(markdown) {
     if (/^<DocTab\b[^>]*>\s*$/.test(line) && lines[i + 1] !== '') {
       out.push('');
     }
+    if (/^<\/DocTabs>\s*$/.test(line) && lines[i + 1] !== undefined && lines[i + 1] !== '') {
+      out.push('');
+    }
   }
   return out.join('\n');
 }

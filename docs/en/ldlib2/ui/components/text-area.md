@@ -53,6 +53,7 @@ parent.addChild(area);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -107,6 +108,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -128,6 +130,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -149,6 +152,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -169,6 +173,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -189,6 +194,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -209,6 +215,7 @@ area.textAreaStyle(style -> style
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -229,6 +236,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -256,6 +264,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -287,6 +296,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -307,6 +317,7 @@ text-area {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -327,6 +338,7 @@ area.bind(DataBindingBuilder.create(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

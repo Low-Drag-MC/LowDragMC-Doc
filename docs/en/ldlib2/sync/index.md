@@ -153,6 +153,7 @@ As you can see from the comparison, the annotation-driven system provided by **L
 
 </DocTab>
 </DocTabs>
+
 You do not need any additional boilerplate.  
 Whenever `energy` or `owner` changes, LDLib2 will automatically handle:
 
@@ -315,6 +316,7 @@ public class MyObject implements IPersistedSerializable {
 
 </DocTab>
 </DocTabs>
+
 ### Why This Is Better
 
 With vanilla/Forge Codec usage, you must:

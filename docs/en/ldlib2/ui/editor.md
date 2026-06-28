@@ -156,6 +156,7 @@ function createUI(player) {
 
 </DocTab>
 </DocTabs>
+
 ### Loading Event
 
 A saved **UI Template** only defines the visual structure and styles — it does not include runtime logic by default.  

@@ -3,8 +3,11 @@ import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 
-import { buildLocaleNav, buildSidebar, parsePagesFile, routeForFile } from './vitepress-nav.mjs';
+import { DEFAULT_MODS, buildLocaleNav, buildSidebar, buildSidebars, parsePagesFile, routeForFile } from './vitepress-nav.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 test('parsePagesFile reads title and nav entries', () => {
   const parsed = parsePagesFile('title: LDLib2\nnav:\n  - index.md\n  - ui\n  - ...\n');
@@ -50,12 +53,41 @@ test('buildSidebar preserves .pages order and limits output to the selected mod'
   assert.equal(sidebar[1].text, 'UI');
   assert.equal(sidebar[1].link, '/en/ldlib2/ui/');
   assert.equal(sidebar[1].collapsed, true);
-  assert.equal(sidebar[1].items[0].text, 'UI Overview');
+  assert.equal(sidebar[1].items[0].text, 'Getting Started');
   assert.equal(sidebar[2].text, 'Java Integration');
   assert.equal(sidebar[3].text, 'Sync');
-  assert.equal(sidebar[3].collapsed, true);
+  assert.equal(sidebar[3].link, '/en/ldlib2/sync/');
+  assert.equal(sidebar[3].items, undefined);
   assert.ok(JSON.stringify(sidebar).includes('/en/ldlib2/'));
   assert.ok(!JSON.stringify(sidebar).includes('photon2'));
+});
+
+test('buildSidebar uses directory names for index-backed groups and hides nested index children', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'lowdrag-nav-'));
+  const docs = path.join(root, 'docs');
+  const mod = path.join(docs, 'en', 'photon2');
+  await mkdir(path.join(mod, 'Java Integration'), { recursive: true });
+
+  await writeFile(path.join(mod, 'index.md'), '# Introduction\n');
+  await writeFile(path.join(mod, 'Java Integration', 'index.md'), '# Basic Information\n');
+
+  const sidebar = await buildSidebar(docs, 'en', 'photon2');
+
+  assert.equal(sidebar[0].text, 'Introduction');
+  assert.equal(sidebar[1].text, 'Java Integration');
+  assert.equal(sidebar[1].link, '/en/photon2/Java%20Integration/');
+  assert.equal(sidebar[1].items, undefined);
+});
+
+test('real docs sidebars do not expose index as a visible item label', () => {
+  for (const locale of ['en', 'zh']) {
+    const sidebars = buildSidebars(path.join(ROOT, 'docs'), locale, DEFAULT_MODS);
+    for (const [base, items] of Object.entries(sidebars)) {
+      for (const item of flattenSidebar(items)) {
+        assert.notEqual(item.text.toLowerCase(), 'index', `${locale}${base} exposes index label`);
+      }
+    }
+  }
 });
 
 test('buildLocaleNav creates one header tab per configured mod', async () => {
@@ -76,3 +108,7 @@ test('buildLocaleNav creates one header tab per configured mod', async () => {
     { text: 'Photon2', link: '/zh/photon2/' }
   ]);
 });
+
+function flattenSidebar(items) {
+  return items.flatMap((item) => [item, ...flattenSidebar(item.items || [])]);
+}

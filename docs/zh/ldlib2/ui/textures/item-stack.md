@@ -56,6 +56,7 @@ let cycle = new ItemStackTexture(Items.DIAMOND, Items.EMERALD);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 字段

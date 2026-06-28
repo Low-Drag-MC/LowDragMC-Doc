@@ -34,6 +34,7 @@ switchWidget.setPressed(true); // Turns ON
 
 </DocTab>
 </DocTabs>
+
 - Triggers **UI updates** and event callbacks.
 
 ---
@@ -62,6 +63,7 @@ switchWidget.setOnPressCallback((clickData, state) => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setSupplier
@@ -84,4 +86,5 @@ switchWidget.setSupplier(() => getCurrentState()); // bool
 
 </DocTab>
 </DocTabs>
+
 - Updates **dynamically** when `getCurrentState()` changes.

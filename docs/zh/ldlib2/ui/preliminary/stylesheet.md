@@ -161,6 +161,7 @@ button.lss("opacity", 0.5);
 
 </DocTab>
 </DocTabs>
+
 以上所有方法都可以用来设置样式，但它们**并不等价**。
 
 * 使用 `getStyle()` 或 `style(...)` 默认设置 `INLINE` 来源的样式。
@@ -194,6 +195,7 @@ button.lss("tooltips", "This is my tooltips", "DEFAULT");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 通过样式表自定义样式
@@ -422,6 +424,7 @@ function createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 你也可以在运行时修改样式表。
 
 <DocTabs>
@@ -446,6 +449,7 @@ if (mui != null) {
 
 </DocTab>
 </DocTabs>
+
 ### 局部样式表（子树作用域）
 
 除了 `UI` 上的全局样式表外，你还可以将**局部样式表**附加到特定的 `UIElement`。
@@ -483,6 +487,7 @@ panel.addLocalStylesheet(`
 
 </DocTab>
 </DocTabs>
+
 ### 内置样式表
 
 LDLib2 提供了三个内置样式表 `gdp`、`mc` 和 `modern`，允许你灵活地切换主题。
@@ -514,6 +519,7 @@ function createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 所有三种内置样式表如下所示：
 
 <figure>

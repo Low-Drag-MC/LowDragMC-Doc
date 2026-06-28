@@ -34,6 +34,7 @@ switchWidget.setPressed(true); // 打开（ON）
 
 </DocTab>
 </DocTabs>
+
 - 触发 **UI 更新** 与事件回调。
 
 ---
@@ -62,6 +63,7 @@ switchWidget.setOnPressCallback((clickData, state) => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setSupplier
@@ -84,4 +86,5 @@ switchWidget.setSupplier(() => getCurrentState()); // bool
 
 </DocTab>
 </DocTabs>
+
 - 当 `getCurrentState()` 变化时**动态**更新。

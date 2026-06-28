@@ -51,6 +51,7 @@ parent.addChild(slot);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -105,6 +106,7 @@ fluid-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -132,6 +134,7 @@ fluid-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -159,6 +162,7 @@ fluid-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -186,6 +190,7 @@ fluid-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -213,6 +218,7 @@ fluid-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -232,6 +238,7 @@ fluidSlot.bind(DataBindingBuilder.fluidStackS2C(
 
 </DocTab>
 </DocTabs>
+
 详情请参见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

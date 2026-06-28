@@ -63,6 +63,7 @@ sliderWidget.setSliderCallback(value => {
 
 </DocTab>
 </DocTabs>
+
 ### getAmount
 
 返回从 minAmount 到 maxAmount 的 lerp 浮点值。<br>
@@ -85,6 +86,7 @@ value = sliderWidget.getAmount();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setAmount
@@ -109,4 +111,5 @@ sliderWidget.setAmount(0.5f);
 
 </DocTab>
 </DocTabs>
+
 ---

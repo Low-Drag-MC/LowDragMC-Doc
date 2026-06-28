@@ -153,6 +153,7 @@ function createUI(player) {
 
 </DocTab>
 </DocTabs>
+
 ### 加载事件
 
 已保存的 **UI 模板** 仅定义了视觉结构和样式 —— 默认情况下不包含运行时逻辑。  

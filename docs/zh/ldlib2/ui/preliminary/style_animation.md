@@ -70,6 +70,7 @@ target.animation()
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 提示
@@ -94,6 +95,7 @@ target.animation(anim -> {
 
 </DocTab>
 </DocTabs>
+
 当 `ModularUI` 已经可用时，回调会立即执行；否则会在 `UIEvents.MUI_CHANGED` 触发后执行一次。
 
 <DocTabs>
@@ -109,6 +111,7 @@ target.animationDsl {
 
 </DocTab>
 </DocTabs>
+
 Kotlin DSL 通常不需要额外处理 `start()`：
 
 * `animationDsl { ... }` 默认 `start = true`
@@ -158,6 +161,7 @@ target.animation()
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 目标选择
@@ -198,6 +202,7 @@ StyleAnimation.of(mui)
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 生命周期与控制

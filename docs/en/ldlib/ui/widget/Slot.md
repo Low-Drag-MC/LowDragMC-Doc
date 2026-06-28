@@ -38,6 +38,7 @@ slotWidget.setContainerSlot(player.getInventory(), 2); // bind the player invent
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setHandlerSlot
@@ -67,6 +68,7 @@ var itemTransfer = ItemTransferHelperImpl.toItemTransfer(storage);
 
 </DocTab>
 </DocTabs>
+
 :::
 
 #### KubeJS
@@ -82,6 +84,7 @@ slotWidget.setHandlerSlot(itemTransfer, 0);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setItem
@@ -98,6 +101,7 @@ slotWidget.setItem(itemstack, false); // it wont trigger the listen
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### getItem
@@ -113,6 +117,7 @@ var itemstack = slotWidget.getItem();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setChangeListener
@@ -141,6 +146,7 @@ slotWidget.setChangeListener(() => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### canPutStack
@@ -156,6 +162,7 @@ slotWidget.canPutStack(true);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### canTakeStack
@@ -171,6 +178,7 @@ slotWidget.canTakeStack(true);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setLocationInfo
@@ -186,4 +194,5 @@ slotWidget.setLocationInfo(true, false); // (isPlayerContainer isPlayerHotBar)
 
 </DocTab>
 </DocTabs>
+
 ---

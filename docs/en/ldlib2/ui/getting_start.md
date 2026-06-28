@@ -293,6 +293,7 @@ private static ModularUI createModularUI() {
 
 </DocTab>
 </DocTabs>
+
 ::: info Built-in Stylesheets
 In addition to custom LSS definitions, LDLib2 also provides several **built-in stylesheet** themes that cover most common UI components:
 

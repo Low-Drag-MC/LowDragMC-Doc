@@ -28,6 +28,7 @@ imageWidget.setImage(new ResourceTexture("ldlib:textures/gui/icon.png"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setImage
@@ -50,6 +51,7 @@ imageWidget.setImage(() => new ResourceTexture("ldlib:textures/gui/icon.png"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### getImage
@@ -65,6 +67,7 @@ var texture = imageWidget.getImage();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setBorder
@@ -82,4 +85,5 @@ imageWidget.setBorder(2, 0xFFFFFFFF); // ARGB
 
 </DocTab>
 </DocTabs>
+
 ---

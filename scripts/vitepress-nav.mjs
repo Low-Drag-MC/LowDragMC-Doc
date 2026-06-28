@@ -60,10 +60,10 @@ export function buildSidebar(docsRoot, locale, mod) {
   return buildDirectory(localeRoot, mod, locale);
 }
 
-function buildDirectory(localeRoot, relativeDir, locale) {
+function buildDirectory(localeRoot, relativeDir, locale, options = {}) {
   const absoluteDir = path.join(localeRoot, relativeDir);
   const pages = readPages(path.join(absoluteDir, '.pages'));
-  const children = listDocChildren(absoluteDir);
+  const children = listDocChildren(absoluteDir).filter((entry) => !(options.excludeIndex && entry.name === 'index.md'));
   const ordered = orderChildren(children, pages.nav);
 
   return ordered
@@ -82,14 +82,14 @@ function buildEntry(localeRoot, relativePath, locale, entry) {
 
   const indexFile = path.join(absolutePath, 'index.md');
   const pages = readPages(path.join(absolutePath, '.pages'));
-  const items = buildDirectory(localeRoot, relativePath, locale);
-  const group = {
-    text: pages.title || (fs.existsSync(indexFile) ? titleForFile(indexFile) : titleFromName(entry.name)),
-    collapsed: true,
-    items
-  };
+  const items = buildDirectory(localeRoot, relativePath, locale, { excludeIndex: true });
+  const group = { text: pages.title || titleFromName(entry.name) };
   if (fs.existsSync(indexFile)) {
     group.link = routeForFile(locale, path.join(relativePath, 'index.md'));
+  }
+  if (items.length) {
+    group.collapsed = true;
+    group.items = items;
   }
   return group;
 }

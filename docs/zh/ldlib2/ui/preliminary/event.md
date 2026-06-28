@@ -94,6 +94,7 @@ button.addEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 要注册捕获阶段监听器，将 true 作为第三个参数传递：
 
 <DocTabs>
@@ -138,6 +139,7 @@ root.addServerEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 要移除监听器，调用 `removeEventListener(...)`。
 确保 useCapture 标志与监听器注册时的方式匹配：
 
@@ -169,6 +171,7 @@ root.removeEventListener(UIEvents.CLICK, onClick, true);      // 移除捕获监
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 事件参考
@@ -230,6 +233,7 @@ elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 拖放事件
@@ -308,6 +312,7 @@ elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 焦点事件
@@ -362,6 +367,7 @@ elem.addEventListener(UIEvents.FOCUS, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 键盘事件
@@ -412,6 +418,7 @@ elem.addEventListener(UIEvents.KEY_DOWN, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 文本输入事件
@@ -459,6 +466,7 @@ elem.addEventListener(UIEvents.CHAR_TYPED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 悬停提示事件
@@ -514,6 +522,7 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 命令事件
@@ -591,6 +600,7 @@ elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 布局事件
@@ -624,6 +634,7 @@ elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 生命周期事件
@@ -662,6 +673,7 @@ elem.addEventListener(UIEvents.REMOVED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 刻事件

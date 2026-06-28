@@ -50,6 +50,7 @@ parent.addChild(field);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Internal Structure
@@ -76,6 +77,7 @@ tagField.bind(DataBindingBuilder.create(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

@@ -39,6 +39,7 @@ textTexture.setSupplier(() => "Updated dynamic text");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### updateText
@@ -54,6 +55,7 @@ textTexture.updateText("New Text Content");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setBackgroundColor
@@ -69,6 +71,7 @@ textTexture.setBackgroundColor(0xffff0000);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setDropShadow
@@ -84,6 +87,7 @@ textTexture.setDropShadow(true);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setWidth
@@ -99,6 +103,7 @@ textTexture.setWidth(100);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setType
@@ -126,4 +131,5 @@ textTexture.setType(TextType.ROLL);
 
 </DocTab>
 </DocTabs>
+
 ---

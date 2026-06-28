@@ -31,6 +31,7 @@ shaderTexture.dispose();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### updateShader
@@ -46,6 +47,7 @@ shaderTexture.updateShader(new ResourceLocation("modid:shader"));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### updateRawShader
@@ -61,6 +63,7 @@ shaderTexture.updateRawShader("raw shader code");
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setUniformCache
@@ -78,6 +81,7 @@ shaderTexture.setUniformCache(cache -> {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setResolution
@@ -93,4 +97,5 @@ shaderTexture.setResolution(2.5f);
 
 </DocTab>
 </DocTabs>
+
 ---

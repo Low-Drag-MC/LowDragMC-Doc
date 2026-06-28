@@ -37,6 +37,7 @@ tankWidget.setFluidTank(fluidStorage);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setFluidTank (IFluidTransfer, int)
@@ -52,6 +53,7 @@ tankWidget.setFluidTank(fluidTransfer, 1);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setFluid
@@ -68,6 +70,7 @@ tankWidget.setFluid(fluidstack, false); // 它不会触发监听
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### getFluid
@@ -83,6 +86,7 @@ var fluidstack = tankWidget.getFluid();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setChangeListener
@@ -111,4 +115,5 @@ tankWidget.setChangeListener(() => {
 
 </DocTab>
 </DocTabs>
+
 ---

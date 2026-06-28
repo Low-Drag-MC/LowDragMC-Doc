@@ -60,6 +60,7 @@ For more info, see [Custom Shader Material](CustomShaderMaterial/index.md).
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Special Material: `block_atlas`

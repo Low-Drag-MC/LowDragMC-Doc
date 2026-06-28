@@ -13,26 +13,11 @@ function cssBlock(selector) {
   return match?.[1] || '';
 }
 
-test('theme keeps the VitePress navbar divider visible without changing nav height', () => {
-  assert.doesNotMatch(cssBlock('.VPNavBar'), /border-bottom\s*:/);
-  assert.doesNotMatch(cssBlock('.VPNavBar .divider-line'), /display\s*:\s*none/);
-  assert.match(
+test('theme leaves VitePress header chrome to the default stylesheet', () => {
+  assert.doesNotMatch(
     STYLE,
-    /\.VPNavBar:not\(\.home\.top\)\s+\.divider-line\s*\{[\s\S]*background-color\s*:\s*var\(--ld-stone-edge\)/
+    /\.VP(?:NavBar|NavScreen|LocalNav)|\.content-body|\.divider-line|\.has-sidebar/
   );
-  assert.match(cssBlock('.VPNavBarTitle.has-sidebar .title'), /border-bottom-color\s*:\s*var\(--ld-stone-edge\)/);
-});
-
-test('theme paints navbar background on the bar instead of content-body', () => {
-  assert.match(
-    STYLE,
-    /\.VPNavBar:not\(\.home\.top\)\s*\{[\s\S]*background-color\s*:\s*var\(--vp-nav-bg-color\)/
-  );
-  assert.match(
-    STYLE,
-    /\.VPNavBar:not\(\.home\.top\)\s+\.content-body\s*\{[\s\S]*background-color\s*:\s*transparent/
-  );
-  assert.doesNotMatch(cssBlock('.VPNavBar:not(.home.top) .content-body'), /\b(width|left|right|padding-left)\s*:/);
 });
 
 test('theme keeps the home profile image compact and responsive', () => {

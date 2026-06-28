@@ -75,6 +75,7 @@ let tinted = SpriteTexture.of("mymod:textures/gui/icon.png")
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## LSS

@@ -89,6 +89,7 @@ LDLib2UI.block("mymod:my_block_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 传递给 `createUI` 的上下文对象 / 事件中可用的字段：
 
 | 字段 | 类型 | 描述 |
@@ -172,6 +173,7 @@ LDLib2UI.item("mymod:my_item_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 传递给 `createUI` 的上下文对象 / 事件中可用的字段：
 
 | 字段 | 类型 | 描述 |
@@ -245,6 +247,7 @@ LDLib2UI.player("mymod:my_player_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 事件中可用的上下文对象：
 
 | 字段 | 类型 | 描述 |

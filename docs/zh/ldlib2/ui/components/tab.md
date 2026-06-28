@@ -40,6 +40,7 @@ tabView({ }) {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -106,6 +107,7 @@ tab {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -133,6 +135,7 @@ tab {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -160,6 +163,7 @@ tab {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---

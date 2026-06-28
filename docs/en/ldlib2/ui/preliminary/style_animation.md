@@ -70,6 +70,7 @@ target.animation()
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Tips
@@ -94,6 +95,7 @@ target.animation(anim -> {
 
 </DocTab>
 </DocTabs>
+
 The callback is invoked immediately when `ModularUI` is already available, or once after `UIEvents.MUI_CHANGED` when it becomes available.
 
 <DocTabs>
@@ -109,6 +111,7 @@ target.animationDsl {
 
 </DocTab>
 </DocTabs>
+
 Kotlin DSL does not usually need extra `start()` handling:
 
 * `animationDsl { ... }` defaults to `start = true`
@@ -158,6 +161,7 @@ target.animation()
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Target Selection
@@ -198,6 +202,7 @@ StyleAnimation.of(mui)
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Lifecycle and Control

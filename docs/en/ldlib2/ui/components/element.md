@@ -62,6 +62,7 @@ root.addChild(element);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Xml
@@ -121,6 +122,7 @@ element.getLayout().width(...);
 
 </DocTab>
 </DocTabs>
+
 ### Layout Properties
 
 You'd better read [Layout](../preliminary/layout.md) before using.
@@ -161,6 +163,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -195,6 +198,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -229,6 +233,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -263,6 +268,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -297,6 +303,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -331,6 +338,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -365,6 +373,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -399,6 +408,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -433,6 +443,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -475,6 +486,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -516,6 +528,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -552,6 +565,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -588,6 +602,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -625,6 +640,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -660,6 +676,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -694,6 +711,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -728,6 +746,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -762,6 +781,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -796,6 +816,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -830,6 +851,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -864,6 +886,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -898,6 +921,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -952,6 +976,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -995,6 +1020,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1043,6 +1069,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1080,6 +1107,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1117,6 +1145,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1155,6 +1184,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1200,6 +1230,7 @@ child {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1240,6 +1271,7 @@ child {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -1283,6 +1315,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1322,6 +1355,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1379,6 +1413,7 @@ element.animated-mask {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1422,6 +1457,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1460,6 +1496,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1495,6 +1532,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1529,6 +1567,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1563,6 +1602,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1598,6 +1638,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1644,6 +1685,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1680,6 +1722,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1723,6 +1766,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1978,6 +2022,7 @@ element.addEventListener(UIEvents.MOUSE_DOWN, event => {
 
 </DocTab>
 </DocTabs>
+
 #### Available Events
 
 | Event | Description |
@@ -2058,6 +2103,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 #### RPC Events
 
 RPC (Remote Procedure Call) events let the client explicitly invoke logic on the server and optionally receive a response.
@@ -2083,6 +2129,7 @@ element.addEventListener(UIEvents.CLICK, event ->
 
 </DocTab>
 </DocTabs>
+
 #### Data Bindings
 
 Data bindings automatically synchronize values between server and client. Use `addSyncValue` in Java, or the `bind*` DSL helpers in Kotlin.
@@ -2119,6 +2166,7 @@ element({}) {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Rendering

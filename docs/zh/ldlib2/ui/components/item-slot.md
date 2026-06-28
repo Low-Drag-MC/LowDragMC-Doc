@@ -50,6 +50,7 @@ parent.addChild(slot);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -99,6 +100,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -126,6 +128,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -153,6 +156,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -180,6 +184,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -207,6 +212,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -235,6 +241,7 @@ item-slot {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -255,6 +262,7 @@ slot.bind(DataBindingBuilder.itemStack(
 
 </DocTab>
 </DocTabs>
+
 详见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

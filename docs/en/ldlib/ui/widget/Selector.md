@@ -48,6 +48,7 @@ selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
 
 </DocTab>
 </DocTabs>
+
 - Triggers a UI update to reflect the new options.
 
 ---
@@ -65,6 +66,7 @@ selectorWidget.setValue("OptionA");
 
 </DocTab>
 </DocTabs>
+
 - If the value is **not found** in `candidates`, it remains unchanged.
 
 ---
@@ -82,6 +84,7 @@ selectorWidget.setMaxCount(3);
 
 </DocTab>
 </DocTabs>
+
 - If there are **more** than `maxCount` options, a **scrollbar** is added.
 
 ---
@@ -99,6 +102,7 @@ selectorWidget.setFontColor(0xFFFFFF); // White text
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setButtonBackground
@@ -114,6 +118,7 @@ selectorWidget.setButtonBackground(myCustomTexture);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setOnChanged
@@ -140,6 +145,7 @@ selectorWidget.setOnChanged(selected => {
 
 </DocTab>
 </DocTabs>
+
 - This is useful for **updating UI state** or triggering **game logic**.
 
 ---
@@ -164,6 +170,7 @@ selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
 
 </DocTab>
 </DocTabs>
+
 - The widget **polls** this function to refresh the list.
 - Useful when **candidates change based on external conditions**.
 

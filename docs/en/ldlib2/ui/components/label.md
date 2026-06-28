@@ -63,6 +63,7 @@ label.bind(DataBindingBuilder.componentS2C(() =>
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -100,6 +101,7 @@ label.unbindDataSource(binding);
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for the full binding API.
 
 ---

@@ -28,6 +28,7 @@ progressTexture.setTexture(emptyBarArea, filledBarArea);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setProgress
@@ -43,6 +44,7 @@ progressTexture.setProgress(0.75);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setFillDirection

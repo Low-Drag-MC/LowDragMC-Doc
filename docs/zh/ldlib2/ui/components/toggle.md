@@ -53,6 +53,7 @@ parent.addChild(toggle);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -154,6 +155,7 @@ toggle > button.__toggle_button__ {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -188,6 +190,7 @@ toggle {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -222,6 +225,7 @@ toggle {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -266,6 +270,7 @@ let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
 
 </DocTab>
 </DocTabs>
+
 ::: tip
 使用 [`ToggleGroupElement`](toggle-group.md) 通过 XML / 编辑器自动管理分组——在子元素添加时自动注册，移除时自动注销。
 :::
@@ -310,6 +315,7 @@ toggle.enableText();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 值绑定
@@ -328,6 +334,7 @@ toggle.bind(DataBindingBuilder.bool(
 
 </DocTab>
 </DocTabs>
+
 详细信息请参阅 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

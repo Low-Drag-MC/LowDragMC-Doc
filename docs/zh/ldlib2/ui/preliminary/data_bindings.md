@@ -78,6 +78,7 @@ new ProgressBar()
 
 </DocTab>
 </DocTabs>
+
 ### 使用 `IObservable&lt;T&gt;` 的**数据生产者**
 
 产生可变数据的组件实现了 `IObservable&lt;T&gt;` 接口。
@@ -141,6 +142,7 @@ new TextField()
 
 </DocTab>
 </DocTabs>
+
 ::: info
 `Toggle`、`Selector` 和 `TextField` 等组件同时支持
 `IDataConsumer&lt;T&gt;` 和 `IObservable&lt;T&gt;`，
@@ -283,6 +285,7 @@ new ItemSlot()
 
 </DocTab>
 </DocTabs>
+
 例如，在：
 
 ```java
@@ -362,6 +365,7 @@ new Label().bind(
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 自定义 `IBinding&lt;T&gt;`
@@ -398,6 +402,7 @@ bind({ data }, { data = it })
 
 </DocTab>
 </DocTabs>
+
 ::: warning
 并非所有类型都受默认支持。
 请参阅[类型支持](../../sync/types_support.md)。
@@ -440,6 +445,7 @@ bind({ data }, data))
 
 </DocTab>
 </DocTabs>
+
 这确保了正确的同步，并避免了对只读对象的歧义。
 
 ### 客户端上的 `Getter` 和 `Setter`
@@ -512,6 +518,7 @@ new BindableValue().bind(
 
 </DocTab>
 </DocTabs>
+
 ### 一站式解决方案 - `BindableUIElement&lt;T&gt;`
 
 你可能已经注意到，几乎所有数据驱动组件——例如 `TextArea`、`SearchComponent`、`Switch` 等——都建立在 `BindableUIElement&lt;T&gt;` 之上。
@@ -578,6 +585,7 @@ element.addChildren(
 
 </DocTab>
 </DocTabs>
+
 ### 复杂用法示例
 
 好的，让我们再做一个更复杂的例子，我们将为 `Selector` 绑定一个存储在服务端上的 `String` 列表（作为候选项）。
@@ -688,6 +696,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 使用 `RPCEvent` 直接实现的等价方式：
 
 <DocTabs>
@@ -721,6 +730,7 @@ button {
 
 </DocTab>
 </DocTabs>
+
 你可以使用 `RPCEventBuilder` 来构造一个 `RPCEvent`，并在需要时发送数据。
 
 ::: info
@@ -861,6 +871,7 @@ button.sendMessage("test_message", TagBuilder.compound()
 
 </DocTab>
 </DocTabs>
+
 ### 什么时候使用 `message`
 
 在以下场景使用 `message`：

@@ -53,6 +53,7 @@ parent.addChild(bv);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 值绑定
@@ -71,6 +72,7 @@ bv.bind(DataBindingBuilder.string(
 
 </DocTab>
 </DocTabs>
+
 详情请参阅 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

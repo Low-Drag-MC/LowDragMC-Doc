@@ -48,6 +48,7 @@ selectorWidget.setCandidates(["OptionA", "OptionB", "OptionC"]);
 
 </DocTab>
 </DocTabs>
+
 - 触发 UI 更新以反映新选项。
 
 ---
@@ -65,6 +66,7 @@ selectorWidget.setValue("OptionA");
 
 </DocTab>
 </DocTabs>
+
 - 如果该值在 `candidates` 中**未找到**，则保持不变。
 
 ---
@@ -82,6 +84,7 @@ selectorWidget.setMaxCount(3);
 
 </DocTab>
 </DocTabs>
+
 - 如果选项数量**超过** `maxCount`，则会添加**滚动条**。
 
 ---
@@ -99,6 +102,7 @@ selectorWidget.setFontColor(0xFFFFFF); // 白色文本
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setButtonBackground
@@ -114,6 +118,7 @@ selectorWidget.setButtonBackground(myCustomTexture);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setOnChanged
@@ -140,6 +145,7 @@ selectorWidget.setOnChanged(selected => {
 
 </DocTab>
 </DocTabs>
+
 - 这对于**更新 UI 状态**或触发**游戏逻辑**非常有用。
 
 ---
@@ -164,6 +170,7 @@ selectorWidget.setCandidatesSupplier(() => fetchDynamicOptions());
 
 </DocTab>
 </DocTabs>
+
 - 控件会**轮询**此函数来刷新列表。
 - 适用于**选项基于外部条件变化**的情况。
 

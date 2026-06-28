@@ -41,6 +41,7 @@ for (let child of group.widgets) {
 
 </DocTab>
 </DocTabs>
+
 ::: warning
 **请勿**直接向 `group.widgets` 添加组件！！请查看下方的方法。
 :::
@@ -64,6 +65,7 @@ group.addWidgets(button, label);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `removeWidget() / clearAllWidgets()`
@@ -81,6 +83,7 @@ group.clearAllWidget();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### `waitToAdded() / waitToRemoved()`

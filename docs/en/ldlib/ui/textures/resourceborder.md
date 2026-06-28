@@ -27,6 +27,7 @@ resourceBorderTexture.setBoderSize(5, 5);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setImageSize
@@ -42,4 +43,5 @@ resourceBorderTexture.setImageSize(200, 150);
 
 </DocTab>
 </DocTabs>
+
 ---

@@ -93,6 +93,7 @@ let mui = ModularUI.of(UI.of(root));
 
 </DocTab>
 </DocTabs>
+
 ### Menu-based UI (Server-synced)
 
 For Menu UIs, use the built-in factories. See [factory.md](./factory.md) for full details.
@@ -151,6 +152,7 @@ LDLib2UI.block("mymod:my_block_ui", event => {
 
 </DocTab>
 </DocTabs>
+
 > **Other triggers:** Replace `BlockUIMenuType` with `HeldItemUIMenuType` (item) or `PlayerUIMenuType` (arbitrary). See [factory.md](./factory.md).
 
 ### HUD Overlay

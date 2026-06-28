@@ -50,6 +50,7 @@ parent.addChild(picker);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 内部结构
@@ -82,6 +83,7 @@ picker.bind(DataBindingBuilder.intVal(
 
 </DocTab>
 </DocTabs>
+
 详见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

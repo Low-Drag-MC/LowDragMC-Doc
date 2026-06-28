@@ -44,6 +44,7 @@ phantomSlot.setClearSlotOnRightClick(true);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setMaxStackSize
@@ -59,6 +60,7 @@ phantomSlot.setMaxStackSize(64);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 鼠标交互

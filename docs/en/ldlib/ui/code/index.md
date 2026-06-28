@@ -93,6 +93,7 @@ function createUI() {
 
 </DocTab>
 </DocTabs>
+
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/root.mp4" type="video/mp4">
@@ -149,6 +150,7 @@ function createUI() {
 
 </DocTab>
 </DocTabs>
+
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/counter.mp4" type="video/mp4">
@@ -258,6 +260,7 @@ LDLibUI.block("test_block_ui", e => {
 
 </DocTab>
 </DocTabs>
+
 ### Held Item UI Factory
 
 This factory allows user to open the ui from the held item.
@@ -330,6 +333,7 @@ LDLibUI.item("test_item_ui", e => {
 
 </DocTab>
 </DocTabs>
+
 <div style="text-align: center;">
   <video width="640" height="360" controls>
     <source src="../assets/display.mp4" type="video/mp4">

@@ -49,6 +49,7 @@ group.addChild(new Toggle().setText("Option B", true));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -96,6 +97,7 @@ val current: Toggle? = groupEl.toggleGroup.currentToggle
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Fields

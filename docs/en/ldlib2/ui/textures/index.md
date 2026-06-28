@@ -61,6 +61,7 @@ let tex = SpriteTexture.of("mymod:textures/gui/icon.png")
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Interface Methods
@@ -108,6 +109,7 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Registered Texture Types

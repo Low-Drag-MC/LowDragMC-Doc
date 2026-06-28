@@ -53,6 +53,7 @@ parent.addChild(toggle);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -154,6 +155,7 @@ toggle > button.__toggle_button__ {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -188,6 +190,7 @@ toggle {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -222,6 +225,7 @@ toggle {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -266,6 +270,7 @@ let t2 = new Toggle().setText("Option B", true).setToggleGroup(group);
 
 </DocTab>
 </DocTabs>
+
 ::: tip
 Use [`ToggleGroupElement`](toggle-group.md) to manage the group automatically through the XML / editor — it registers children as they are added and unregisters them when removed.
 :::
@@ -310,6 +315,7 @@ toggle.enableText();
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Value Binding
@@ -328,6 +334,7 @@ toggle.bind(DataBindingBuilder.bool(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

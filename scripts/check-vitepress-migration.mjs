@@ -15,8 +15,10 @@ const CHECKS = [
   ['MkDocs markdown figure', /<figure\b[^>]*\bmarkdown=/],
   ['multiline shields badge URL', /!\[[^\]]+\]\(https:\/\/img\.shields\.io\/badge\/dynamic\/xml\s*\n/],
   ['broken Maven host typo', /firstdar\.kdev/],
+  ['legacy MkDocs tab anchor', /#__tabbed_\d+_\d+/],
   ['MkDocs inline container option', /^(?:!!!|\?\?\?|:::+)[ \t]+[A-Za-z0-9_-]+[ \t]+.*\binline[ \t]+(?:end|start)\b/m],
-  ['unconverted Markdown image attributes', /!\[[^\]\n]*\]\([^\)\n]+\)\{[^}\n]+\}/]
+  ['unconverted Markdown image attributes', /!\[[^\]\n]*\]\([^\)\n]+\)\{[^}\n]+\}/],
+  ['DocTabs followed by markdown without a separating blank line', /<\/DocTabs>\r?\n[^\r\n]/]
 ];
 
 function listMarkdownFiles(dir) {

@@ -49,6 +49,7 @@ parent.addChild(sv);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -104,6 +105,7 @@ scroller-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -135,6 +137,7 @@ scroller-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -155,6 +158,7 @@ scroller-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -182,6 +186,7 @@ scroller-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -210,6 +215,7 @@ scroller-view {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---

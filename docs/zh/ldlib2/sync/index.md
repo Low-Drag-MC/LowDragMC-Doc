@@ -150,6 +150,7 @@ public class ExampleBE extends BlockEntity implements ISyncPersistRPCBlockEntity
 
 </DocTab>
 </DocTabs>
+
 你不需要任何额外的样板代码。
 每当 `energy` 或 `owner` 发生变化时，LDLib2 将自动处理：
 
@@ -309,6 +310,7 @@ public class MyObject implements IPersistedSerializable {
 
 </DocTab>
 </DocTabs>
+
 ### 为什么这更好
 
 使用 vanilla/Forge Codec 时，你必须：

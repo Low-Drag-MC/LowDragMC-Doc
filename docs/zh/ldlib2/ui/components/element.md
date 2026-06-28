@@ -62,6 +62,7 @@ root.addChild(element);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Xml
@@ -121,6 +122,7 @@ element.getLayout().width(...);
 
 </DocTab>
 </DocTabs>
+
 ### 布局属性
 
 使用前最好先阅读 [布局](../preliminary/layout.md)。
@@ -161,6 +163,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -195,6 +198,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -229,6 +233,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -263,6 +268,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -297,6 +303,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -331,6 +338,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -365,6 +373,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -399,6 +408,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -433,6 +443,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -475,6 +486,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -516,6 +528,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -552,6 +565,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -588,6 +602,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -625,6 +640,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -660,6 +676,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -694,6 +711,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -728,6 +746,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -762,6 +781,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -796,6 +816,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -830,6 +851,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -864,6 +886,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -898,6 +921,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -952,6 +976,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -995,6 +1020,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1043,6 +1069,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1080,6 +1107,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1117,6 +1145,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1155,6 +1184,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1200,6 +1230,7 @@ child {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1240,6 +1271,7 @@ child {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -1283,6 +1315,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1322,6 +1355,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1379,6 +1413,7 @@ element.animated-mask {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1422,6 +1457,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1460,6 +1496,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1495,6 +1532,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1529,6 +1567,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1563,6 +1602,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1598,6 +1638,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1644,6 +1685,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1680,6 +1722,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -1723,6 +1766,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 
@@ -1978,6 +2022,7 @@ element.addEventListener(UIEvents.MOUSE_DOWN, event => {
 
 </DocTab>
 </DocTabs>
+
 #### 可用事件
 
 | 事件 | 描述 |
@@ -2058,6 +2103,7 @@ element {
 
 </DocTab>
 </DocTabs>
+
 #### RPC 事件
 
 RPC（远程过程调用）事件允许客户端显式调用服务端逻辑，并可选择接收响应。
@@ -2083,6 +2129,7 @@ element.addEventListener(UIEvents.CLICK, event ->
 
 </DocTab>
 </DocTabs>
+
 #### 数据绑定
 
 数据绑定自动在服务端和客户端之间同步数值。在 Java 中使用 `addSyncValue`，或在 Kotlin 中使用 `bind*` DSL 辅助函数。
@@ -2119,6 +2166,7 @@ element({}) {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### 渲染

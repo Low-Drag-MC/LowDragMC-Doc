@@ -63,6 +63,7 @@ parent.addChild(search);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Internal Structure
@@ -104,6 +105,7 @@ search-component {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -131,6 +133,7 @@ search-component {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -158,6 +161,7 @@ search-component {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -185,6 +189,7 @@ search-component {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -212,6 +217,7 @@ search-component {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---

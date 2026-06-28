@@ -56,6 +56,7 @@ parent.addChild(bar);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -127,6 +128,7 @@ progress-bar {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -154,6 +156,7 @@ progress-bar {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -182,6 +185,7 @@ progress-bar {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -212,6 +216,7 @@ bar.bar(b -> b.style(s -> s.background(myBarTexture)));
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## 数据绑定
@@ -232,6 +237,7 @@ bar.unbindDataSource(binding); // 完成时取消绑定
 
 </DocTab>
 </DocTabs>
+
 完整的绑定 API 请参见 [数据绑定](../preliminary/data_bindings.md)。
 
 ---

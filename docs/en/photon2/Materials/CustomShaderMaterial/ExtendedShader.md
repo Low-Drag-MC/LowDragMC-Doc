@@ -120,10 +120,11 @@ void main() {
 
 </DocTab>
 </DocTabs>
+
 **Difference from vanilla particle shader:**
 
-- In [`vsh`](#__tabbed_1_2), use `#moj_import &lt;photon:particle.glsl&gt;` and `getParticleData()` to fetch vertex data.
-- In [`fsh`](#__tabbed_1_3), added HDR color output.
+- In the `particle.vsh` tab, use `#moj_import &lt;photon:particle.glsl&gt;` and `getParticleData()` to fetch vertex data.
+- In the `hdr_particle.fsh` tab, added HDR color output.
 
 ---
 

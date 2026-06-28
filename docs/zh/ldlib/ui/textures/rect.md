@@ -27,6 +27,7 @@ colorRectTexture.setRadius(10);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setLeftRadius
@@ -42,6 +43,7 @@ colorRectTexture.setLeftRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setRightRadius
@@ -57,6 +59,7 @@ colorRectTexture.setRightRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setTopRadius
@@ -72,6 +75,7 @@ colorRectTexture.setTopRadius(8);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### setBottomRadius

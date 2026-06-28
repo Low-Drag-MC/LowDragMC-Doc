@@ -48,6 +48,7 @@ parent.addChild(sw);
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## XML
@@ -113,6 +114,7 @@ switch {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -147,6 +149,7 @@ switch {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -181,6 +184,7 @@ switch {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ::: info
@@ -215,6 +219,7 @@ switch {
 
 </DocTab>
 </DocTabs>
+
 :::
 
 ---
@@ -235,6 +240,7 @@ sw.bind(DataBindingBuilder.bool(
 
 </DocTab>
 </DocTabs>
+
 See [Data Bindings](../preliminary/data_bindings.md) for full details.
 
 ---

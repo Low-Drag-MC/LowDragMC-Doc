@@ -95,6 +95,7 @@ button.addEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 To register a capture-phase listener, pass true as the third argument:
 
 <DocTabs>
@@ -118,6 +119,7 @@ root.addEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 We also provide method allow you to listen events on the `server`. Events are triggered on the client-side and sync to the server. Not all events support server listeners, check [Event reference](#event-reference) below.
 
 
@@ -141,6 +143,7 @@ root.addServerEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 To remove a listener, call `removeEventListener(...)`.
 Make sure the useCapture flag matches how the listener was registered:
 
@@ -172,6 +175,7 @@ root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture 
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ## Event reference
@@ -233,6 +237,7 @@ elem.addEventListener(UIEvents.DOUBLE_CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Drag and Drop Events
@@ -311,6 +316,7 @@ elem.addEventListener(UIEvents.DRAG_SOURCE_UPDATE, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Focus Events
@@ -365,6 +371,7 @@ elem.addEventListener(UIEvents.FOCUS, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Keyboard Events
@@ -415,6 +422,7 @@ elem.addEventListener(UIEvents.KEY_DOWN, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Text Input Events
@@ -462,6 +470,7 @@ elem.addEventListener(UIEvents.CHAR_TYPED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Hover Tooltip Events
@@ -517,6 +526,7 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Command Events
@@ -594,6 +604,7 @@ elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Layout Events
@@ -627,6 +638,7 @@ elem.addEventListener(UIEvents.LAYOUT_CHANGED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Lifecycle Events
@@ -665,6 +677,7 @@ elem.addEventListener(UIEvents.REMOVED, e => {
 
 </DocTab>
 </DocTabs>
+
 ---
 
 ### Tick Event
