@@ -31,3 +31,15 @@ test('theme draws the sidebar edge without changing sidebar width', () => {
   assert.doesNotMatch(cssBlock('.VPSidebar'), /border-right\s*:/);
   assert.match(cssBlock('.VPSidebar'), /box-shadow\s*:\s*inset\s+-2px\s+0\s+0\s+var\(--vp-c-divider\)/);
 });
+
+test('theme exposes ore ui texture and palette tokens', () => {
+  assert.match(STYLE, /--ld-ore-glow:/);
+  assert.match(STYLE, /--ld-pixel-shadow:/);
+  assert.match(STYLE, /--ld-panel-bg:/);
+});
+
+test('theme applies ore ui panel treatment to major chrome', () => {
+  assert.match(cssBlock('.VPNavBar'), /background:/);
+  assert.match(cssBlock('.VPSidebar'), /background:/);
+  assert.match(cssBlock('.vp-doc div[class*="language-"]'), /box-shadow:/);
+});
