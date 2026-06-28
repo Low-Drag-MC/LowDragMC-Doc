@@ -1,6 +1,6 @@
 # LowDragMC-Doc
 
-VitePress documentation site for LowDragMC modding projects.
+VitePress documentation site for LowDragMC modding projects. Welcome contributions!
 
 ## Development
 
