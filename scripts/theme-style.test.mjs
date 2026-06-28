@@ -23,6 +23,18 @@ test('theme keeps the VitePress navbar divider visible without changing nav heig
   assert.match(cssBlock('.VPNavBarTitle.has-sidebar .title'), /border-bottom-color\s*:\s*var\(--ld-stone-edge\)/);
 });
 
+test('theme paints navbar background on the bar instead of content-body', () => {
+  assert.match(
+    STYLE,
+    /\.VPNavBar:not\(\.home\.top\)\s*\{[\s\S]*background-color\s*:\s*var\(--vp-nav-bg-color\)/
+  );
+  assert.match(
+    STYLE,
+    /\.VPNavBar:not\(\.home\.top\)\s+\.content-body\s*\{[\s\S]*background-color\s*:\s*transparent/
+  );
+  assert.doesNotMatch(cssBlock('.VPNavBar:not(.home.top) .content-body'), /\b(width|left|right|padding-left)\s*:/);
+});
+
 test('theme keeps the home profile image compact and responsive', () => {
   assert.match(STYLE, /\.home-profile\s*\{[\s\S]*width:\s*min\([^)]*260px[\s\S]*\}/);
 });

@@ -34,6 +34,14 @@
   box-shadow: none;
 }
 
+.VPNavBar:not(.home.top) {
+  background-color: var(--vp-nav-bg-color) !important;
+}
+
+.VPNavBar:not(.home.top) .content-body {
+  background-color: transparent !important;
+}
+
 .VPNavBar .divider-line {
   height: 1px;
 }
