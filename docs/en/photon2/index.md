@@ -1,66 +1,81 @@
-# Introduction
+# Photon2
 
-<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
+<VersionBadge version="2.0.0" label="Since" icon="tag" />
 
-::: warning
-This Wiki is only available for Photon `2.x`. For `1.x`, check this [link](https://github.com/Low-Drag-MC/Photon/wiki)
-:::
-
-
-## Overview
-
-**Photon2** is a powerful Minecraft VFX creation mod inspired by Unity’s particle system.
-It brings modern, flexible, and highly customizable visual effects into Minecraft, making it possible to design stunning in-game VFX with a workflow familiar to Unity developers.
+Photon is an in-game real-time VFX toolkit for Minecraft. It combines particle emitters, trails, beams, a non-linear Timeline, Shader Graph materials, and graph-based post-processing in one editor.
 
 <figure>
-<img src="./assets/photonn_editor.png" alt="Photon Editor">
+<img src="/assets/photon2/editor-tornado-overview.webp" alt="Maximized Photon editor with hierarchy, scene, inspector, resources, and timeline">
 <figcaption>
-Photon Editor: build and preview in-game visual effects.
+The maximized Photon editor running the real tornado project. Hierarchy, Scene, Inspector, Resources, and Timeline stay visible together.
 </figcaption>
 </figure>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## Photon 2.2 Showcase
 
----
+<div class="video-container">
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/jr800pFgZBw" title="Photon 2.2 showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
 
-## Key Features
+The 2.2 release expands Photon from a particle editor into a complete VFX pipeline: Timeline sequencing, Shader Graph materials, Fullscreen Shader Graphs, Render Graph post effects, custom GPU data, force fields, mesh particles, and distributable FX Packs.
 
-* 🚀 **Unity-like Particle System**: 90%+ feature parity with Unity, including particles, trails, partial line rendering, and more
-* 🖼 **Visual FX Editor**: Built-in FX Editor with real-time preview and intuitive controls
-* 🧩 **Flexible Resource Management**: Custom materials, meshes, textures, curves, noise, and more
-* ⚡ **Advanced Rendering**: GPU instancing, custom shaders, HDR/bloom effects, pixel-art style
-* 💡 **Programmable & Extensible**: Custom shader material support, build up your own rendering pipeline
-* 🧑‍💻 **Developer Friendly**: Easily transferable skills for Unity users; clear and open extension points
+## Classic Introduction Video
 
----
+The original video remains available. It focuses on the foundational particle workflow and complements the 2.2 showcase above; its interface and feature coverage reflect the earlier release.
 
-## Getting Started
+<div class="video-container">
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="Photon classic introduction video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
-* **Photon2 is recommended for users with some Unity or VFX experience.**
-  If you know Unity’s particle system, you’ll find Photon2 intuitive.
-  Beginners should check out Unity or VFX basics first.
+## Choose a Path
 
-* **Photon2 focuses on effect creation—not usage logic.**
-  Use commands or code to bind effects to entities, blocks, or your own lifecycle manager.
+| Goal | Start here |
+| --- | --- |
+| Create a first effect in the editor | [Getting Started](./getting-started.md) |
+| Learn particle emitters and modules | [Particle System](./particle-system/) |
+| Sequence effects and properties | [Timeline](./timeline/) |
+| Build materials and GPU effects | [Shaders and GPU](./shaders-and-gpu/) |
+| Create fullscreen effects | [Post Processing](./post-processing/) |
+| Load and control effects from a mod | [Java API](./java-api/) |
 
-* **Supports advanced rendering and effects**
-  Such as custom shaders, HDR glow, Fresnel, mesh-based particle animations, and intersection highlights.
+## How the Parts Fit Together
 
----
+```mermaid
+flowchart LR
+    P["FX Project"] --> H["FX object hierarchy"]
+    P --> R["Reusable resources"]
+    P --> T["Timeline"]
+    H --> E["Particle / Trail / Beam emitters"]
+    R --> M["Materials and meshes"]
+    M --> S["Shader Graph or custom shader"]
+    E --> G["Photon render pipeline"]
+    T --> E
+    T --> X["Post-effect requests"]
+    X --> Q["Render Graph"]
+    S --> G
+    Q --> O["Final frame"]
+    G --> O
+```
 
-## Quick Start
+An exported `.fx` stores the authored object tree and Timeline. At runtime, `FX#createRuntime()` creates an independent playable instance. The runtime emits its objects into the client particle engine and submits active post-process clips once per frame.
 
-1. **Enter a creative mode world and run `/photon_editor` to launch the editor**
-2. **Create a new FX project** and start experimenting with particle effects
-3. **Export FX files** and apply them via command or your own triggers
-4. **Explore advanced features:** custom shaders, mesh-based animation, depth-based highlights, and more
+## Main Features
 
-> For details, see: [Commands](./commands.md), [Materials](./Materials/index.md), and [Java Integration](./Java%20Integration/index.md).
+- **Particle authoring:** particle, trail, beam, and AraTrail emitters with curves, gradients, collision, sub-emitters, UV animation, custom renderers, and simulation spaces.
+- **Timeline:** animation, activation, control, speed, signal, audio, group, and post-process tracks.
+- **Shader Graph:** visual vertex and fragment shaders with scene inputs, particle inputs, reusable functions, and live previews.
+- **GPU data:** per-emitter custom streams readable from Shader Graph or GLSL.
+- **Post-processing:** fullscreen passes composed in a Render Graph, including weighted blending, priorities, custom textures, mask groups, and custom depth.
+- **Distribution:** plain `.fx` exports and self-contained `.fxpack` resource packs.
+- **Java integration:** built-in block/entity executors or direct control through `FXRuntime`.
 
----
+## Requirements
 
-## Community & Support
+- Minecraft `1.21.1`
+- NeoForge `21.1+`
+- A compatible Photon `2.2.x` and LDLib2 version
+- A client environment: Photon rendering and playback APIs are client-side
 
-* **GitHub**: [Submit issues or feature requests](https://github.com/Low-Drag-MC/Photon)
-* **Discord**: [Join our community](https://discord.com/invite/sDdf2yD9bh)
-* **Feedback & Docs Contributions**: Open for issues, PRs, and community input!
+::: warning Photon 1.x
+This manual documents Photon 2.x. The original Photon 1.x wiki remains available in the [legacy repository wiki](https://github.com/Low-Drag-MC/Photon/wiki).
+:::

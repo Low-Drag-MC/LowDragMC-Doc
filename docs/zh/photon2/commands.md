@@ -1,119 +1,108 @@
 # 命令
 
-<VersionBadge version="2.0.0" label="自" icon="tag" href="/changelog/#2.0.0" />
+Photon 命令适合预览导出文件和进行简单绑定。如果效果生命周期由 Mod 管理，应使用 [Java API](./java-api/)。
 
-Photon2 不管理 VFX 何时、何地以及如何使用。虽然 Photon 提供了一些内置命令，但这些主要用于测试目的。
+![通过资源 ID 在世界中启动的 Photon 效果](/assets/photon2/fx-shield-gpu.webp)
 
-## ✨ 基础命令
+*命令与 Java Executor 解析相同的导出 FX 资源；图中是实际的 `photon:shield_gpu`。*
 
-| 命令                             | 描述                                          |
-| -------------------------------- | --------------------------------------------- |
-| `/photon particle_editor`        | 打开可视化粒子编辑器                          |
-| `/photon_client clear_particles` | 移除所有 Photon 粒子                          |
-| `/photon_client clear_fx_cache`  | 清除 FX 缓存（修改 .fx 文件后运行）           |
+## 打开编辑器
 
----
-
-## 📦 FX 绑定与发射
-
-Photon2 允许你**将效果绑定到方块或实体**，或在指定位置发射它们，并具有完整的参数控制。
-
-### 命令格式
-
-```shell
-/photon fx <fxFile> <type> ... [offset] [rotation] [scale] [delay] [force death] [allow multi] ...
+```mcfunction
+/photon_editor
 ```
 
-* `&lt;fxFile&gt;`：FX 文件的资源位置（例如 `mod_id:filename` 对应 `assets/mod_id/fx/filename.fx`）
-* `&lt;type&gt;`：`block` 或 `entity`
-* 详见下方参数表
+编辑器只能在单人世界中打开。
 
-| 参数        | 必需 | 默认值  | 描述                                                                     |
-| ----------- | ---- | ------- | ------------------------------------------------------------------------ |
-| fxFile      | 是   | -       | FX 文件资源名称，例如 `photon:fire`                                      |
-| type        | 是   | -       | `block` 或 `entity`                                                      |
-| offset      | 否   | 0 0 0   | 位置偏移 (x y z)                                                         |
-| rotation    | 否   | 0 0 0   | 旋转 (欧拉角: x y z)                                                     |
-| scale       | 否   | 1 1 1   | 缩放 (x y z)                                                             |
-| delay       | 否   | 0       | 发射延迟 (ticks)                                                         |
-| force death | 否   | false   | 如果目标变为无效，立即移除所有粒子                                       |
-| allow multi | 否   | false   | 允许相同名称的多个效果绑定到同一对象                                     |
+## 将 FX 绑定到方块
 
----
-
-### 🟦 绑定 FX 到方块
-
-**格式：**
-
-```shell
-/photon fx <fxFile> block <position(x y z)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [check state]
+```text
+/photon fx <id> block <x y z> [offset] [rotation] [scale] [delay] [forcedDeath] [allowMulti] [checkState]
 ```
 
-* `position`：必需，方块坐标 (x y z)
-* `check state`：如果为 `false`（默认），方块改变时效果被移除。如果为 `true`，方块状态改变时也会被移除。
+最小示例：
 
-**示例：**
-
-```shell
-/photon fx photon:fire block ~ ~ ~ 0 0 0 0 0 0 1 1 1 0 false false false
+```mcfunction
+/photon fx photon:fire block ~ ~-1 ~
 ```
 
----
+完整示例：
 
-### 🟩 绑定 FX 到实体
-
-**格式：**
-
-```shell
-/photon fx <fxFile> entity <entities(selector)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [auto rotation]
+```mcfunction
+/photon fx photon:fire block ~ ~-1 ~ 0 1 0 0 0 0 1 1 1 10 false false true
 ```
 
-* `entities`：必需，实体选择器
-* `auto rotation`：
+`checkState` 会在精确的 `BlockState` 变化时移除效果。不开启时，更换成其他方块仍会移除效果，但只改变方块属性不会。
 
-  * `none`（默认）：无旋转
-  * `forward`：前进方向
-  * `look`：头部朝向方向
-  * `xrot`：身体旋转方向
+## 将 FX 绑定到实体
 
-**示例：**
-
-```shell
-/photon fx photon:fire entity @e[type=minecraft:minecart, distance=..1] 0 0.5 0 0 0 0 1 1 1 0 false false look
+```text
+/photon fx <id> entity <selector> [offset] [rotation] [scale] [delay] [forcedDeath] [allowMulti] [autoRotate]
 ```
 
----
-
-## ❌ 移除 FX 命令
-
-| 命令格式                                                           | 示例                                    |
-| ------------------------------------------------------------------ | --------------------------------------- |
-| `/photon fx remove block &lt;position(x y z)&gt; [force] [location]`     | `/photon fx remove block ~ ~ ~ true`    |
-| `/photon fx remove entity &lt;entities(selector)&gt; [force] [location]` | `/photon fx remove entity @e[type=pig]` |
-
-* `force`：对象变为无效时立即移除所有粒子（`true`），或等待自然消失（`false`）
-* `location`：指定 FX 资源位置（可选）
-
----
-
-## 📋 参数说明与技巧
-
-* 位置、旋转和缩放始终为三个数字 (x y z)
-* FX 文件路径通常为 `assets/&lt;mod_id&gt;/fx/your_fx_name.fx`
-* 修改任何 .fx 文件后，务必运行 `/photon_client clear_fx_cache` 以刷新缓存！
-
----
-
-## 🌈 高级用法示例
-
-::: info 将效果绑定到你的脚下
-```shell
-/photon fx photon:smoke block ~ ~-1 ~
+```mcfunction
+/photon fx photon:fire entity @e[type=minecraft:minecart,distance=..8] 0 0.5 0 0 0 0 1 1 1 0 false false look
 ```
-:::
 
-::: info 将爆炸 FX 绑定到附近的所有 pig
-```shell
-/photon fx photon:explosion entity @e[type=minecraft:pig, distance=..10]
+`autoRotate` 支持：
+
+| 模式 | 行为 |
+| --- | --- |
+| `none` | 只使用设置的 rotation。 |
+| `forward` | 根据实体 forward vector 旋转。 |
+| `look` | 跟随实体 look vector。 |
+| `xrot` | 跟随实体可视身体 Y 旋转。 |
+
+## 通用参数
+
+| 参数 | 默认值 | 含义 |
+| --- | --- | --- |
+| offset | `0 0 0` | 添加到锚点的局部位移。 |
+| rotation | `0 0 0` | 角度制 Euler rotation。 |
+| scale | `1 1 1` | Root scale。 |
+| delay | `0` | 启动延迟，单位为 tick。 |
+| forcedDeath | `false` | 锚点消失时立即删除残留粒子。 |
+| allowMulti | `false` | 允许同一锚点上存在另一个相同 FX。 |
+
+## 移除绑定效果
+
+```mcfunction
+/photon fx remove block ~ ~-1 ~ true
+/photon fx remove entity @e[type=minecraft:pig,distance=..10] false photon:fire
 ```
-:::
+
+可选资源 id 可以把移除范围限制到一个 FX。`force=true` 会立即删除可见残留。
+
+## 客户端维护
+
+| 命令 | 用途 |
+| --- | --- |
+| `/photon_client clear_particles` | 清除 Photon 粒子和 Executor 缓存，并使缓存的 Runtime 失效。 |
+| `/photon_client clear_client_fx_cache` | 清除 FX 定义缓存和 FX 列表缓存。 |
+| `/photon_client convert` | 转换 `ldlib2/assets/photon/fx_old` 中的 Photon 1 文件。 |
+
+## 测试后处理
+
+<VersionBadge version="2.2.0" label="自" icon="tag" />
+
+```mcfunction
+/photonfx list
+/photonfx test invert
+/photonfx test invert 0.5
+/photonfx clear
+```
+
+测试命令会每帧提交所选效果，直到运行 `clear`。可选 weight 范围是 `0..1`。
+
+## Iris 诊断
+
+<VersionBadge version="2.2.2" label="自" icon="tag" />
+
+```mcfunction
+/photon_iris status
+/photon_iris dump
+/photon_iris overlay on
+/photon_iris mode auto
+```
+
+`dump` 会复制兼容性报告。Composite mode override 只用于诊断；正常游戏保持 `auto`。

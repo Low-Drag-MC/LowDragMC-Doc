@@ -1,66 +1,81 @@
-# 简介
+# Photon2
 
-<VersionBadge version="2.0.0" label="自" icon="tag" href="/changelog/#2.0.0" />
+<VersionBadge version="2.0.0" label="自" icon="tag" />
 
-::: warning
-本 Wiki 仅适用于 Photon `2.x` 版本。如需查看 `1.x` 版本，请访问此[链接](https://github.com/Low-Drag-MC/Photon/wiki)
-:::
-
-
-## 概述
-
-**Photon2** 是一款受 Unity 粒子系统启发的强大 Minecraft VFX 创作模组。
-它将现代、灵活且高度可定制的视觉特效引入 Minecraft，让熟悉 Unity 工作流程的开发者能够设计出惊艳的游戏内 VFX。
+Photon 是一套直接在 Minecraft 客户端内使用的实时 VFX 工具。它把粒子、Trail、Beam、非线性 Timeline、Shader Graph 材质和基于图的后处理整合进同一个编辑器。
 
 <figure>
-<img src="./assets/photonn_editor.png" alt="Photon Editor">
+<img src="/assets/photon2/editor-tornado-overview.webp" alt="最大化显示 Hierarchy、Scene、Inspector、Resources 和 Timeline 的 Photon 编辑器">
 <figcaption>
-Photon Editor：制作并预览游戏内视觉特效。
+最大化的 Photon 编辑器正在运行真实 tornado 项目；Hierarchy、Scene、Inspector、Resources 和 Timeline 可以同时查看。
 </figcaption>
 </figure>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## Photon 2.2 展示
 
----
+<div class="video-container">
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/jr800pFgZBw" title="Photon 2.2 展示" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
 
-## 核心特性
+2.2 将 Photon 从粒子编辑器扩展成了完整的 VFX 管线：Timeline 编排、Shader Graph 材质、Fullscreen Shader Graph、Render Graph 后处理、Custom GPU Data、Force Field、Mesh 粒子和可分发的 FX Pack。
 
-* 🚀 **类 Unity 粒子系统**：与 Unity 功能相似度达 90% 以上，包含粒子、拖尾、部分线条渲染等功能
-* 🖼 **视觉特效编辑器**：内置 FX 编辑器，支持实时预览和直观的操作控制
-* 🧩 **灵活的资源管理**：支持自定义材质、模型、纹理、曲线、噪声等
-* ⚡ **高级渲染**：GPU 实例化、自定义着色器、HDR/泛光效果、像素艺术风格
-* 💡 **可编程且可扩展**：支持自定义 Shader Material，构建你自己的渲染管线
-* 🧑‍💻 **开发者友好**：Unity 用户可轻松迁移技能；扩展点清晰且开放
+## 经典入门视频
 
----
+旧视频继续保留。它更集中于基础粒子工作流，可以配合上面的 2.2 Showcase 一起观看；其中的界面和功能范围以当时版本为准。
 
-## 入门须知
+<div class="video-container">
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/1fXFaWheYvc?si=veqThF1redsFnSHm" title="Photon 经典入门视频" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
 
-* **Photon2 推荐给具备一定 Unity 或 VFX 经验的用户。**
-  如果你了解 Unity 的粒子系统，你会觉得 Photon2 非常直观。
-  初学者建议先学习 Unity 或 VFX 基础知识。
+## 选择阅读路径
 
-* **Photon2 专注于特效制作，而非使用逻辑。**
-  请使用指令或代码将特效绑定到实体、方块，或你自己的生命周期管理器上。
+| 目标 | 从这里开始 |
+| --- | --- |
+| 在编辑器中制作第一个效果 | [快速开始](./getting-started.md) |
+| 学习粒子发射器和模块 | [Particle System](./particle-system/) |
+| 编排效果和属性动画 | [Timeline](./timeline/) |
+| 制作材质与 GPU 效果 | [Shader 与 GPU](./shaders-and-gpu/) |
+| 制作全屏后处理 | [Post Processing](./post-processing/) |
+| 从模组代码加载和控制效果 | [Java API](./java-api/) |
 
-* **支持高级渲染与特效**
-  例如自定义着色器、HDR 辉光、菲涅尔、基于模型的粒子动画，以及相交高亮等。
+## 各部分如何协作
 
----
+```mermaid
+flowchart LR
+    P["FX Project"] --> H["FX 对象层级"]
+    P --> R["可复用资源"]
+    P --> T["Timeline"]
+    H --> E["Particle / Trail / Beam 发射器"]
+    R --> M["Material 与 Mesh"]
+    M --> S["Shader Graph 或自定义 Shader"]
+    E --> G["Photon 渲染管线"]
+    T --> E
+    T --> X["后处理请求"]
+    X --> Q["Render Graph"]
+    S --> G
+    Q --> O["最终画面"]
+    G --> O
+```
 
-## 快速开始
+导出的 `.fx` 保存对象树和 Timeline。运行时，`FX#createRuntime()` 会创建一个独立的可播放实例。Runtime 将对象交给客户端粒子引擎，并在每帧提交当前生效的后处理 Clip。
 
-1. **进入创造模式世界并运行 `/photon_editor` 以启动编辑器**
-2. **创建一个新的 FX 项目**并开始尝试粒子特效
-3. **导出 FX 文件**并通过指令或你自己的触发器来应用它们
-4. **探索高级功能：** 自定义着色器、基于模型的动画、基于深度的高亮等
+## 主要功能
 
-> 详情请见：[命令](./commands.md)、[材质](./Materials/index.md) 和 [Java 集成](./Java%20Integration/index.md)。
+- **粒子制作：** Particle、Trail、Beam 和 AraTrail 发射器，支持曲线、渐变、碰撞、Sub Emitter、UV Animation、自定义 Renderer 和 Simulation Space。
+- **Timeline：** Animation、Activator、Control、Speed、Signal、Audio、Group 和 Post Process Track。
+- **Shader Graph：** 使用节点制作 Vertex/Fragment Shader，读取 Scene 与 Particle 数据，支持函数和实时预览。
+- **GPU Data：** 每个发射器可以声明自定义数据流，并从 Shader Graph 或 GLSL 读取。
+- **后处理：** 使用 Render Graph 组合 Fullscreen Pass，支持权重混合、优先级、自定义 Texture、Mask Group 和 Custom Depth。
+- **分发：** 普通 `.fx` 导出和包含依赖资源的 `.fxpack`。
+- **Java 集成：** 使用内置方块/实体 Executor，或直接控制 `FXRuntime`。
 
----
+## 环境要求
 
-## 社区与支持
+- Minecraft `1.21.1`
+- NeoForge `21.1+`
+- 互相兼容的 Photon `2.2.x` 与 LDLib2
+- 客户端环境：Photon 的渲染和播放 API 都在客户端运行
 
-* **GitHub**：[提交问题或功能请求](https://github.com/Low-Drag-MC/Photon)
-* **Discord**：[加入我们的社区](https://discord.com/invite/sDdf2yD9bh)
-* **反馈与文档贡献**：欢迎提交 Issue、PR 以及社区贡献！
+::: warning Photon 1.x
+本手册只介绍 Photon 2.x。Photon 1.x 文档仍可在[旧版仓库 Wiki](https://github.com/Low-Drag-MC/Photon/wiki)中查看。
+:::

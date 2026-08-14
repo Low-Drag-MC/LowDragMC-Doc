@@ -3,6 +3,23 @@ import path from 'node:path';
 
 export const LEGACY_ROOT_MODS = new Set(['ldlib', 'ldlib2', 'multiblocked2', 'photon2']);
 
+// Photon2's pre-2.2 wiki used title-cased and space-containing directories. Keep these output
+// routes as tiny static redirects so bookmarks and links in old READMEs continue to work after the
+// learning-order refactor. A route is emitted only when its new target page exists in the build.
+export const PHOTON2_ROUTE_REDIRECTS = new Map([
+  ['photon2/Materials/index.html', 'photon2/shaders-and-gpu/'],
+  ['photon2/Materials/CustomShaderMaterial/index.html',
+    'photon2/shaders-and-gpu/custom-shaders-uniforms-and-samplers.html'],
+  ['photon2/Materials/CustomShaderMaterial/ExtendedShader.html',
+    'photon2/shaders-and-gpu/extended-shader.html'],
+  ['photon2/Materials/CustomShaderMaterial/VertexFormat.html',
+    'photon2/shaders-and-gpu/vertex-formats-and-instancing.html'],
+  ['photon2/Materials/CustomShaderMaterial/AdditionalGPUData.html',
+    'photon2/shaders-and-gpu/additional-gpu-data.html'],
+  ['photon2/Java Integration/index.html', 'photon2/java-api/'],
+  ['photon2/resourcepack.html', 'photon2/distribution.html']
+]);
+
 export function legacyAliasForEnglishDistPath(relativePath) {
   const normalized = toPosix(relativePath);
   const segments = normalized.split('/');
@@ -36,7 +53,31 @@ export async function writeLegacyRedirects(outDir, base = '/') {
     await fs.writeFile(outputFile, redirectHtml(target), 'utf8');
     written.push(alias);
   }
+  for (const locale of ['en', 'zh']) {
+    for (const [oldRoute, newRoute] of PHOTON2_ROUTE_REDIRECTS) {
+      const targetRelative = newRoute.endsWith('/') ? `${newRoute}index.html` : newRoute;
+      if (!await fileExists(path.join(outDir, locale, ...targetRelative.split('/')))) {
+        continue;
+      }
+      const outputRelative = `${locale}/${oldRoute}`;
+      const outputFile = path.join(outDir, ...outputRelative.split('/'));
+      const target = `${base.endsWith('/') ? base : `${base}/`}${locale}/${newRoute}`;
+      await fs.mkdir(path.dirname(outputFile), { recursive: true });
+      await fs.writeFile(outputFile, redirectHtml(target), 'utf8');
+      written.push(outputRelative);
+    }
+  }
   return written;
+}
+
+async function fileExists(file) {
+  try {
+    await fs.access(file);
+    return true;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return false;
+    throw error;
+  }
 }
 
 async function listHtmlFiles(dir) {

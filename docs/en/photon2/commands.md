@@ -1,119 +1,108 @@
 # Commands
 
-<VersionBadge version="2.0.0" label="Since" icon="tag" href="/changelog/#2.0.0" />
+Photon commands are useful for previewing exports and simple bindings. A mod should use the [Java API](./java-api/) when it owns the effect lifecycle.
 
-Photon2 does not manage when, where, or how VFX are used. While Photon provides some built-in commands, these are primarily for testing purposes.
+![A Photon effect started in the world by its resource ID](/assets/photon2/fx-shield-gpu.webp)
 
-## ✨ Basic Commands
+*Commands and Java executors resolve the same exported FX resources; this shield is the real `photon:shield_gpu` effect.*
 
-| Command                          | Description                                   |
-| -------------------------------- | --------------------------------------------- |
-| `/photon particle_editor`        | Open the visual particle editor               |
-| `/photon_client clear_particles` | Remove all Photon particles                   |
-| `/photon_client clear_fx_cache`  | Clear FX cache (run after changing .fx files) |
+## Open the Editor
 
----
-
-## 📦 FX Binding & Emitting
-
-Photon2 lets you **bind effects to blocks or entities**, or emit them at specific positions with full parameter control.
-
-### Command Format
-
-```shell
-/photon fx <fxFile> <type> ... [offset] [rotation] [scale] [delay] [force death] [allow multi] ...
+```mcfunction
+/photon_editor
 ```
 
-* `&lt;fxFile&gt;`: Resource location of the FX file (e.g., `mod_id:filename` for `assets/mod_id/fx/filename.fx`)
-* `&lt;type&gt;`: `block` or `entity`
-* See parameter table below for details
+The editor can only open in a single-player world.
 
-| Parameter   | Required | Default | Description                                                              |
-| ----------- | -------- | ------- | ------------------------------------------------------------------------ |
-| fxFile      | Yes      | -       | FX file resource name, e.g. `photon:fire`                                |
-| type        | Yes      | -       | `block` or `entity`                                                      |
-| offset      | No       | 0 0 0   | Position offset (x y z)                                                  |
-| rotation    | No       | 0 0 0   | Rotation (Euler angles: x y z)                                           |
-| scale       | No       | 1 1 1   | Scale (x y z)                                                            |
-| delay       | No       | 0       | Emit delay (ticks)                                                       |
-| force death | No       | false   | Immediately remove all particles if the target becomes invalid           |
-| allow multi | No       | false   | Allow multiple effects with the same name to be bound to the same object |
+## Bind an FX to a Block
 
----
-
-### 🟦 Bind FX to a Block
-
-**Format:**
-
-```shell
-/photon fx <fxFile> block <position(x y z)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [check state]
+```text
+/photon fx <id> block <x y z> [offset] [rotation] [scale] [delay] [forcedDeath] [allowMulti] [checkState]
 ```
 
-* `position`: Required, block coordinates (x y z)
-* `check state`: If `false` (default), effect is removed if the block changes. If `true`, also removed if the blockstate changes.
+Minimal example:
 
-**Example:**
-
-```shell
-/photon fx photon:fire block ~ ~ ~ 0 0 0 0 0 0 1 1 1 0 false false false
+```mcfunction
+/photon fx photon:fire block ~ ~-1 ~
 ```
 
----
+Full example:
 
-### 🟩 Bind FX to Entities
-
-**Format:**
-
-```shell
-/photon fx <fxFile> entity <entities(selector)> [offset] [rotation] [scale] [delay] [force death] [allow multi] [auto rotation]
+```mcfunction
+/photon fx photon:fire block ~ ~-1 ~ 0 1 0 0 0 0 1 1 1 10 false false true
 ```
 
-* `entities`: Required, entity selector
-* `auto rotation`:
+`checkState` removes the effect when the exact `BlockState` changes. Without it, changing to another block type still removes the effect, but a property-only state change does not.
 
-  * `none` (default): No rotation
-  * `forward`: Forward direction
-  * `look`: Head look direction
-  * `xrot`: Body rotation direction
+## Bind an FX to Entities
 
-**Example:**
-
-```shell
-/photon fx photon:fire entity @e[type=minecraft:minecart, distance=..1] 0 0.5 0 0 0 0 1 1 1 0 false false look
+```text
+/photon fx <id> entity <selector> [offset] [rotation] [scale] [delay] [forcedDeath] [allowMulti] [autoRotate]
 ```
 
----
+```mcfunction
+/photon fx photon:fire entity @e[type=minecraft:minecart,distance=..8] 0 0.5 0 0 0 0 1 1 1 0 false false look
+```
 
-## ❌ Remove FX Commands
+`autoRotate` accepts:
 
-| Command Format                                                     | Example                                 |
-| ------------------------------------------------------------------ | --------------------------------------- |
-| `/photon fx remove block &lt;position(x y z)&gt; [force] [location]`     | `/photon fx remove block ~ ~ ~ true`    |
-| `/photon fx remove entity &lt;entities(selector)&gt; [force] [location]` | `/photon fx remove entity @e[type=pig]` |
+| Mode | Behaviour |
+| --- | --- |
+| `none` | Use only the configured rotation. |
+| `forward` | Rotate from the entity's forward vector. |
+| `look` | Follow the entity's look vector. |
+| `xrot` | Follow its visual body Y rotation. |
 
-* `force`: Remove all particles immediately if the object becomes invalid (`true`), or wait for natural death (`false`)
-* `location`: Specify FX resource location (optional)
+## Common Parameters
 
----
+| Parameter | Default | Meaning |
+| --- | --- | --- |
+| offset | `0 0 0` | Local translation added to the anchor. |
+| rotation | `0 0 0` | Euler rotation in degrees. |
+| scale | `1 1 1` | Root scale. |
+| delay | `0` | Start delay in ticks. |
+| forcedDeath | `false` | Drop remaining particles immediately when the anchor disappears. |
+| allowMulti | `false` | Permit another equivalent FX on the same anchor. |
 
-## 📋 Parameter Notes & Tips
+## Remove Bound Effects
 
-* Position, rotation, and scale are always three numbers (x y z)
-* FX file path is usually `assets/&lt;mod_id&gt;/fx/your_fx_name.fx`
-* After changing any .fx file, always run `/photon_client clear_fx_cache` to refresh!
+```mcfunction
+/photon fx remove block ~ ~-1 ~ true
+/photon fx remove entity @e[type=minecraft:pig,distance=..10] false photon:fire
+```
 
----
+The optional resource id limits removal to one FX. `force=true` removes visible remnants immediately.
 
-## 🌈 Advanced Usage Examples
+## Client Maintenance
 
-::: info Bind an effect to your feet
-:::
-`shell
-    /photon fx photon:smoke block ~ ~-1 ~
-    `
+| Command | Purpose |
+| --- | --- |
+| `/photon_client clear_particles` | Remove Photon particles, clear executor caches, and invalidate cached runtimes. |
+| `/photon_client clear_client_fx_cache` | Drop cached FX definitions and the cached listing. |
+| `/photon_client convert` | Convert Photon 1 files from `ldlib2/assets/photon/fx_old`. |
 
-::: info Bind explosion FX to all pigs nearby
-:::
-`shell
-    /photon fx photon:explosion entity @e[type=minecraft:pig, distance=..10]
-    `
+## Test Post Effects
+
+<VersionBadge version="2.2.0" label="Since" icon="tag" />
+
+```mcfunction
+/photonfx list
+/photonfx test invert
+/photonfx test invert 0.5
+/photonfx clear
+```
+
+The test command submits the selected effect every frame until `clear` is run. The optional weight is `0..1`.
+
+## Iris Diagnostics
+
+<VersionBadge version="2.2.2" label="Since" icon="tag" />
+
+```mcfunction
+/photon_iris status
+/photon_iris dump
+/photon_iris overlay on
+/photon_iris mode auto
+```
+
+`dump` copies the compatibility report. Composite-mode overrides are diagnostic tools; use `auto` for normal play.

@@ -58,3 +58,24 @@ test('writeLegacyRedirects writes redirect HTML aliases for English pages', asyn
     /\/LowDragMC-Doc\/en\/ldlib2\/java_integration\.html/
   );
 });
+
+test('writeLegacyRedirects preserves old bilingual Photon2 routes', async () => {
+  const outDir = await mkdtemp(path.join(tmpdir(), 'photon-redirects-'));
+  for (const locale of ['en', 'zh']) {
+    await mkdir(path.join(outDir, locale, 'photon2', 'shaders-and-gpu'), { recursive: true });
+    await mkdir(path.join(outDir, locale, 'photon2', 'java-api'), { recursive: true });
+    await writeFile(path.join(outDir, locale, 'photon2', 'shaders-and-gpu', 'index.html'), '<html>new</html>');
+    await writeFile(path.join(outDir, locale, 'photon2', 'shaders-and-gpu',
+      'additional-gpu-data.html'), '<html>new</html>');
+    await writeFile(path.join(outDir, locale, 'photon2', 'java-api', 'index.html'), '<html>new</html>');
+  }
+
+  const written = await writeLegacyRedirects(outDir, '/LowDragMC-Doc/');
+
+  assert.ok(written.includes('en/photon2/Materials/index.html'));
+  assert.ok(written.includes('zh/photon2/Materials/CustomShaderMaterial/AdditionalGPUData.html'));
+  assert.match(
+    await readFile(path.join(outDir, 'zh', 'photon2', 'Java Integration', 'index.html'), 'utf8'),
+    /\/LowDragMC-Doc\/zh\/photon2\/java-api\//
+  );
+});
