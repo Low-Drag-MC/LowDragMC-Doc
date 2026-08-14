@@ -14,6 +14,44 @@ public abstract class Node implements INode {
 
 `onDefineOptions(...)` 会先于 `onDefinePorts(...)` 运行。当节点形状依赖可编辑值时，使用 options。
 
+## Item Library 节点说明
+
+<VersionBadge version="2.2.30" label="Since" icon="tag" />
+
+覆盖 `createDescriptionUI()`，可以在用户于 Item Library 中选中该节点时，在右侧显示节点说明。返回的 UI 会放进可滚动面板，因此可以加入自动换行文本、图片或小型预览。
+
+```java
+@Override
+public UIElement createDescriptionUI() {
+    var description = new Label();
+    description.setText(Component.translatable("node.example.description"));
+    description.textStyle(style -> style
+            .textWrap(TextWrap.WRAP)
+            .adaptiveHeight(true));
+    description.layout(layout -> layout.widthPercent(100));
+
+    var root = new UIElement();
+    root.layout(layout -> layout.widthPercent(100).gapAll(4));
+    root.addChildren(
+            UIElementProvider.iconText(Node::getNodeIcon, Node::getDisplayName)
+                    .apply(this),
+            description
+    );
+    return root;
+}
+```
+
+Item Library 每次切换选中项时，都会重新调用 `createDescriptionUI()`。每次调用都要返回一棵新的 UI 树，不要缓存并复用已经挂载的 `UIElement`。节点不需要说明面板时返回 `null`。
+
+这段说明属于 Item Library 中的节点条目，不会显示在已经放到画布上的节点主体内。需要在节点主体内显示内容时，请使用[节点预览](#节点预览)。
+
+<figure>
+<img src="/assets/ldlib2/node-graph-toolkit/node-description.png" alt="Item Library 中选中的节点及其说明面板">
+<figcaption>
+选中 <strong>Description Test</strong> 后，Item Library 右侧会打开可滚动的节点说明面板。
+</figcaption>
+</figure>
+
 ## Options
 
 Options 是节点设置。它们可以显示在节点头部，也可以只显示在 Inspector 中。

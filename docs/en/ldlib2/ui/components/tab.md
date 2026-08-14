@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tab.png" alt="Tab headers inside a TabView">
+<figcaption>
+A Tab provides the selectable header; TabView owns selection and content visibility.
+</figcaption>
+</figure>
+
 `Tab` is a single tab header element. It displays a text label and changes its background texture depending on whether it is idle, hovered, or selected. Tabs are normally managed inside a [`TabView`](tab-view.md), which handles the selection logic.
 
 ::: info

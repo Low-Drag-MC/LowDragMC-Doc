@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/element.png" alt="展示 Flex 布局的嵌套 UIElement 容器">
+<figcaption>
+三个样式化子元素展示固定宽度、Flex 扩展、嵌套、内边距与间距。
+</figcaption>
+</figure>
+
 `UIElement` 是 LDLib2 中最基础且最常用的 UI 组件。
 所有 UI 组件都继承自它。
 

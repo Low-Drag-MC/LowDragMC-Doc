@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/selector.png" alt="Selector opened with direction candidates">
+<figcaption>
+The selected north value remains visible while the dropdown shows every candidate.
+</figcaption>
+</figure>
+
 `Selector&lt;T&gt;` is a generic dropdown picker. Clicking it opens a floating list of candidate items; clicking an item selects it and optionally closes the dropdown. Each candidate is rendered by a configurable `UIElementProvider&lt;T&gt;`. When the candidate count exceeds [`max-item`](#max-item), the list switches to a scrollable `ScrollerView`.
 
 ::: info

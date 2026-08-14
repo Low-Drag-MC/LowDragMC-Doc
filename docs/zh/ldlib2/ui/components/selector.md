@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/selector.png" alt="展开方向候选列表的 Selector">
+<figcaption>
+下拉列表展示全部候选，同时保留当前选中的 north。
+</figcaption>
+</figure>
+
 `Selector&lt;T&gt;` 是一个通用的下拉选择器。点击它会弹出一个悬浮的候选项目列表；点击某个项目即可选中它，并可选择关闭下拉列表。每个候选项目都由可配置的 `UIElementProvider&lt;T&gt;` 渲染。当候选数量超过 [`max-item`](#max-item) 时，列表会切换为可滚动的 `ScrollerView`。
 
 ::: info

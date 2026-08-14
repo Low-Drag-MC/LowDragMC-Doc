@@ -252,6 +252,9 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 | 数据绑定与 RPC | [Data Bindings](./preliminary/data_bindings.md) | `docs/ldlib2/ui/preliminary/data_bindings.md` |
 | 样式动画 | [Style Animation](./preliminary/style_animation.md) | `docs/ldlib2/ui/preliminary/style_animation.md` |
 | HUD 覆盖层 | [HUD](./hud.md) | `docs/ldlib2/ui/hud.md` |
+| 原生工具窗口 | [ModularUIWindow](./modular-ui-window.md) | `docs/ldlib2/ui/modular-ui-window.md` |
+| 平滑字体 | [字体](./fonts.md) | `docs/ldlib2/ui/fonts.md` |
+| UI 自动化 | [UI 测试框架](./testing.md) | `docs/ldlib2/ui/testing.md` |
 | XEI（JEI/REI/EMI） | [XEI](./xei_support.md) | `docs/ldlib2/ui/xei_support.md` |
 | XML UI | [XML](./xml.md) | `docs/ldlib2/ui/xml.md` |
 | Kotlin DSL | [Kotlin](./kotlin_support.md) | `docs/ldlib2/ui/kotlin_support.md` |
@@ -277,9 +280,12 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 | 标签页 / 标签视图 | `Tab`, `TabView` | `.addTab()` | [tab.md](./components/tab.md), [tab-view.md](./components/tab-view.md) |
 | 开关组 | `ToggleGroup` | `.addToggle()` | [toggle-group.md](./components/toggle-group.md) |
 | 滚动视图 | `ScrollerView` | （可滚动容器） | [scroller-view.md](./components/scroller-view.md) |
+| 虚拟滚动列表 | `VirtualScrollerView<T>` | `.setItems()`、`.setItemUIProvider()` | [virtual-scroller-view.md](./components/virtual-scroller-view.md) |
+| Slider | `Slider.Horizontal`、`Slider.Vertical` | `.setRange()`、`.setValue()` | [slider.md](./components/slider.md) |
 | 分割视图 | `SplitView` | （可调整大小的分割） | [split-view.md](./components/split-view.md) |
 | 颜色选择器 | `ColorSelector` | `.bind()` | [color-selector.md](./components/color-selector.md) |
 | 标签字段 | `TagField` | `.bind()` | [tag-field.md](./components/tag-field.md) |
+| 结构化 NBT 编辑器 | `StructuredTagEditor` | `.setValue()`、`.setTagResponder()` | [structured-tag-editor.md](./components/structured-tag-editor.md) |
 | 搜索 | `SearchComponent` | `.bind()` | [search-component.md](./components/search-component.md) |
 | 树形列表 | `TreeList` | — | [tree-list.md](./components/tree-list.md) |
 | 场景（3D） | `Scene` | — | [scene.md](./components/scene.md) |

@@ -890,3 +890,34 @@ When using **`FluidSlot`** with container bindings, the implementation already u
 You don't need to handle sync strategies yourself.
 The `FluidSlot.bind(...)` implementation is also a good reference for learning how data syncing and RPC-based interactions work together.
 :::
+
+---
+
+## Sync hooks
+
+<VersionBadge version="2.2.35" label="Since" icon="tag" />
+
+`DataBindingBuilder` can run additive hooks around a synchronized value. They are useful for cache invalidation, instrumentation, and side effects that must run on a particular side.
+
+```java
+var binding = DataBindingBuilder.string(() -> name, value -> name = value)
+        .onRemoteSyncReceived(value -> refreshPreview()) // client after S2C
+        .onServerSyncReceived(value -> audit(value))     // server after C2S
+        .onBeforeSync(value -> prepareForSend())
+        .onAfterSync(value -> sent())
+        .build();
+```
+
+| Hook | Runs on |
+| --- | --- |
+| `onSyncReceived` | The receiving side after the local data source is updated. |
+| `onRemoteSyncReceived` | Client only, after S2C data arrives. |
+| `onServerSyncReceived` | Server only, after C2S data arrives. |
+| `onBeforeSync` | Sending side, immediately before buffer encoding. |
+| `onAfterSync` | Sending side, immediately after buffer encoding. |
+
+::: warning
+
+`onBeforeSync` and `onAfterSync` run while `UISyncManager` iterates registered values. Do not add or remove UI sync values from these hooks; set a flag and change the UI on the next tick. Collection and map values may be mutated in place when received, so their callback value is not a snapshot.
+
+:::

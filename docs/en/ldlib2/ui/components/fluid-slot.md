@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/fluid-slot.png" alt="Empty and lava-filled FluidSlot examples">
+<figcaption>
+The lower slot contains 1000 mB of lava; the fill visual and amount overlay come from the FluidStack.
+</figcaption>
+</figure>
+
 `FluidSlot` renders a `FluidStack` inside a slot with a directional fill visualisation. Clicking the slot with a fluid container in hand fills or drains it via the vanilla `FluidUtil` API. It also hooks into JEI, REI, and EMI when those mods are present.
 
 ::: info

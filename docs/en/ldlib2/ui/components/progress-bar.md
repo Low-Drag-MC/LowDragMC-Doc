@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/progress-bar.png" alt="ProgressBar examples with labels and different fill values">
+<figcaption>
+The same component can hide its label, use the default label, or provide custom progress text.
+</figcaption>
+</figure>
+
 `ProgressBar` displays a value within a configurable `[min, max]` range as a partially-filled bar. The fill direction, interpolation animation, and inner textures are all configurable. An optional centered `Label` can overlay the bar.
 
 `ProgressBar` implements `IBindable&lt;Float&gt;` and `IDataConsumer&lt;Float&gt;`, so its value can be driven by a data provider and kept in sync with the server automatically.

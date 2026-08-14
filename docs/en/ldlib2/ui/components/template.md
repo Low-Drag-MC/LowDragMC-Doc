@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/template.png" alt="Component example screen loaded from a UITemplate resource">
+<figcaption>
+The complete two-pane layout and its stylesheets come from example_layout.ui.nbt; Java only supplies the live examples.
+</figcaption>
+</figure>
+
 `UITemplateElement` loads a saved [`UITemplate`](../editor.md) resource and inserts its children and stylesheets into itself at runtime. It is used to reuse UI layouts created in the editor without duplicating code.
 
 Circular template references are detected and logged as errors.

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/text-field.png" alt="TextField examples in empty, disabled, and editable states">
+<figcaption>
+The final field uses a larger font and height while retaining the same editing behavior.
+</figcaption>
+</figure>
+
 `TextField` is a single-line text input element. It supports multiple input **modes** (free string, number, resource location, compound NBT tag), drag-to-change values for numeric fields, a text **validator** for highlighting invalid input, a **formatter** for custom display, and undo/redo via `Ctrl+Z` / `Ctrl+Y`.
 
 The field becomes editable when it is focused (clicked). Keyboard shortcuts follow standard Minecraft conventions: `Ctrl+A` select all, `Ctrl+C/X/V` copy/cut/paste, `Ctrl+←/→` word navigation, `Home`/`End`.

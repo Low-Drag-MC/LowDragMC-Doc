@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/fluid-slot.png" alt="空 FluidSlot 与装有岩浆的 FluidSlot">
+<figcaption>
+下方槽位装有 1000 mB 岩浆；填充效果与数量叠层来自 FluidStack。
+</figcaption>
+</figure>
+
 `FluidSlot` 在槽位内渲染 `FluidStack`，并以方向性填充效果展示液位。手持流体容器点击槽位时，会通过原版 `FluidUtil` API 进行填充或排空。当 JEI、REI 或 EMI 存在时，它也会与这些模组联动。
 
 ::: info

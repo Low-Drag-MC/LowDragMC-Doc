@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/inspector.png" alt="Inspector generated from configurable string, boolean, number, and color properties">
+<figcaption>
+Inspector builds the appropriate editor row for each property type.
+</figcaption>
+</figure>
+
 `Inspector` is a property-editor panel. It accepts any `IConfigurable` object and renders its configurable properties inside a [`ScrollerView`](scroller-view.md). Changes to properties are optionally recorded in an undo/redo history stack.
 
 ::: info

@@ -252,6 +252,9 @@ Use this table to find detailed documentation by need.
 | Data Bindings & RPC | [Data Bindings](./preliminary/data_bindings.md) | `docs/ldlib2/ui/preliminary/data_bindings.md` |
 | Style Animation | [Style Animation](./preliminary/style_animation.md) | `docs/ldlib2/ui/preliminary/style_animation.md` |
 | HUD Overlays | [HUD](./hud.md) | `docs/ldlib2/ui/hud.md` |
+| Native tool windows | [ModularUIWindow](./modular-ui-window.md) | `docs/ldlib2/ui/modular-ui-window.md` |
+| Smooth fonts | [Fonts](./fonts.md) | `docs/ldlib2/ui/fonts.md` |
+| UI automation | [UI Test Harness](./testing.md) | `docs/ldlib2/ui/testing.md` |
 | XEI (JEI/REI/EMI) | [XEI](./xei_support.md) | `docs/ldlib2/ui/xei_support.md` |
 | XML UI | [XML](./xml.md) | `docs/ldlib2/ui/xml.md` |
 | Kotlin DSL | [Kotlin](./kotlin_support.md) | `docs/ldlib2/ui/kotlin_support.md` |
@@ -277,9 +280,12 @@ Use this table to find detailed documentation by need.
 | Tab / TabView | `Tab`, `TabView` | `.addTab()` | [tab.md](./components/tab.md), [tab-view.md](./components/tab-view.md) |
 | Toggle group | `ToggleGroup` | `.addToggle()` | [toggle-group.md](./components/toggle-group.md) |
 | Scroller view | `ScrollerView` | (scrollable container) | [scroller-view.md](./components/scroller-view.md) |
+| Virtual scroller | `VirtualScrollerView<T>` | `.setItems()`, `.setItemUIProvider()` | [virtual-scroller-view.md](./components/virtual-scroller-view.md) |
+| Slider | `Slider.Horizontal`, `Slider.Vertical` | `.setRange()`, `.setValue()` | [slider.md](./components/slider.md) |
 | Split view | `SplitView` | (resizable split) | [split-view.md](./components/split-view.md) |
 | Color selector | `ColorSelector` | `.bind()` | [color-selector.md](./components/color-selector.md) |
 | Tag field | `TagField` | `.bind()` | [tag-field.md](./components/tag-field.md) |
+| Structured NBT editor | `StructuredTagEditor` | `.setValue()`, `.setTagResponder()` | [structured-tag-editor.md](./components/structured-tag-editor.md) |
 | Search | `SearchComponent` | `.bind()` | [search-component.md](./components/search-component.md) |
 | Tree list | `TreeList` | — | [tree-list.md](./components/tree-list.md) |
 | Scene (3D) | `Scene` | — | [scene.md](./components/scene.md) |

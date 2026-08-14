@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/inventory-slots.png" alt="包含三行背包与快捷栏的 InventorySlots">
+<figcaption>
+该组件以一个可复用元素创建标准 27 格背包和 9 格快捷栏。
+</figcaption>
+</figure>
+
 `InventorySlots` 是一个预构建的玩家物品栏控件。它渲染标准的三行主物品栏和一个 9 格快捷栏，并在 `ModularUI` 打开时自动将其绑定到玩家的 `Inventory`。
 
 ::: info

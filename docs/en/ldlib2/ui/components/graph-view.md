@@ -245,3 +245,38 @@ graph-view {
 | `contentRoot(Consumer&lt;UIElement&gt;)` | `UIElement` | Configures `contentRoot`. |
 | `fitToChildren(float padding, float minScaleBound)` | `void` | Adjusts offset and scale to fit all visible children, with the given padding and minimum scale. |
 | `fit(float minX, float minY, float maxX, float maxY, float minScaleBound)` | `void` | Adjusts offset and scale to fit the given bounding box. |
+
+---
+
+## Adaptive grid and level of detail
+
+<VersionBadge version="2.2.34" label="Since" icon="tag" />
+
+The background grid now adapts its density as the canvas zoom changes. `getLod()` reports `FULL`, `SIMPLIFIED`, or `BLOCK` from the current physical pixel scale; graph nodes and wires can use it to avoid expensive detail while zoomed out.
+
+<figure>
+<img src="/assets/ldlib2/graph-view-full.png" alt="GraphView at full level of detail">
+<figcaption>
+<code>FULL</code> keeps labels, ports, and wire detail when the graph is close enough to edit.
+</figcaption>
+</figure>
+
+<figure>
+<img src="/assets/ldlib2/graph-view-simplified.png" alt="GraphView zoomed out at simplified level of detail">
+<figcaption>
+<code>SIMPLIFIED</code> removes expensive fine detail while preserving the graph's structure during navigation.
+</figcaption>
+</figure>
+
+```java
+graph.graphViewStyle(style -> style
+        .lodEnabled(true)
+        .lodSimplifiedPixelScale(0.5f)
+        .lodBlockPixelScale(0.2f));
+
+if (graph.getLod() == GraphViewLod.FULL) {
+    // Draw labels or other fine detail.
+}
+```
+
+`BLOCK` is intended for an overview, not for semantic editing. Keep hit targets and essential graph state available at every LOD.

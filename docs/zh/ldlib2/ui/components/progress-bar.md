@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/progress-bar.png" alt="带标签与不同进度值的 ProgressBar">
+<figcaption>
+同一组件可以隐藏标签、使用默认标签，或显示自定义进度文本。
+</figcaption>
+</figure>
+
 `ProgressBar` 在可配置的 `[min, max]` 范围内将数值显示为部分填充的进度条。填充方向、插值动画和内部纹理均可配置。可选的居中 `Label` 可以覆盖在进度条上方。
 
 `ProgressBar` 实现了 `IBindable&lt;Float&gt;` 和 `IDataConsumer&lt;Float&gt;`，因此其数值可以由数据提供器驱动，并自动与服务端保持同步。

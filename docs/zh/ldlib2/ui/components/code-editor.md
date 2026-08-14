@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/code-editor.png" alt="CodeEditor 展示 XML、LSS 与 JavaScript 语法高亮">
+<figcaption>
+编辑器按语言应用语法高亮，并维护彼此独立的可滚动文档。
+</figcaption>
+</figure>
+
 `CodeEditor` 继承自 [`TextArea`](text-area.md)，并增加了语法高亮、代码折叠以及编辑器级别的键盘快捷键功能。默认使用内置的 JetBrains Mono Bold 字体。
 
 相比 `TextArea` 额外提供的快捷键：

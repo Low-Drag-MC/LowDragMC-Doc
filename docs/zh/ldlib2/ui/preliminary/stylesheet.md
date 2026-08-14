@@ -574,3 +574,16 @@ StylesheetManager.INSTANCE.getStylesheetSafe(
 
 </DocTab>
 </DocTabs>
+
+## 合并样式表
+
+<VersionBadge version="2.2.12" label="Since" icon="tag" />
+
+路径相同的 `namespace:lss/path.lss` 样式表会被合并。先合并内置样式，再合并资源包样式，因此资源包可以扩展或覆盖内置主题，而不必替换整个文件。使用不带 `.lss` 的路径取得合并结果：
+
+```java
+var theme = StylesheetManager.INSTANCE.getStylesheetSafe(
+        ResourceLocation.parse("ldlib2:lss/ore"));
+```
+
+LDLib2 提供 `mc`、`modern`、`gdp` 和 `ore` 主题；`ore` 样式表用于内置编辑器外观。

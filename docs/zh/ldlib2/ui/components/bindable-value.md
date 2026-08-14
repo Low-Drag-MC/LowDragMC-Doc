@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/bindable-value.png" alt="BindableValue 驱动标签和进度条">
+<figcaption>
+同一个不可见值同时驱动文本标签和进度条。
+</figcaption>
+</figure>
+
 `BindableValue&lt;T&gt;` 是一种轻量级、不可见的元素，用于保存任意类型的单个值，并在值发生变化时通知已注册的监听器。在 UI 树中，它可用作非可视化的响应式绑定点。
 
 `BindableValue` 继承自 `BindableUIElement&lt;T&gt;`，拥有完整的数据绑定和事件系统。

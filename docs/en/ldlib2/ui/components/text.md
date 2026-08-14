@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/text.png" alt="TextElement capabilities shown through Label examples">
+<figcaption>
+Alignment, wrapping, clipping, rolling, custom font, size, and color all come from TextElement.
+</figcaption>
+</figure>
+
 `TextElement` is a low-level text rendering element. It displays a `Component` (a Minecraft rich-text object) with configurable font, size, color, alignment, wrapping, and scrolling behaviour.
 
 Most use cases are better served by [`Label`](label.md) (which adds data binding) or the built-in text labels inside [`Button`](button.md), [`Toggle`](toggle.md), etc.

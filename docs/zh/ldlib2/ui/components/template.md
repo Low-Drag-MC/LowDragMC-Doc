@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/template.png" alt="从 UITemplate 资源加载的组件示例界面">
+<figcaption>
+完整双栏布局及样式表来自 example_layout.ui.nbt，Java 只提供动态示例。
+</figcaption>
+</figure>
+
 `UITemplateElement` 会加载一个已保存的 [`UITemplate`](../editor.md) 资源，并在运行时将它的子元素和样式表插入到自身中。它用于复用在编辑器中创建的 UI 布局，而无需重复编写代码。
 
 循环模板引用会被检测并记录为错误。

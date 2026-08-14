@@ -575,3 +575,16 @@ StylesheetManager.INSTANCE.getStylesheetSafe(
 
 </DocTab>
 </DocTabs>
+
+## Merged stylesheets
+
+<VersionBadge version="2.2.12" label="Since" icon="tag" />
+
+Stylesheets with the same `namespace:lss/path.lss` are merged. Built-in styles are merged first, then pack-provided styles, so a resource pack can extend or override a built-in theme without replacing the whole file. Request the merged result with the path without `.lss`:
+
+```java
+var theme = StylesheetManager.INSTANCE.getStylesheetSafe(
+        ResourceLocation.parse("ldlib2:lss/ore"));
+```
+
+LDLib2 supplies `mc`, `modern`, `gdp`, and `ore` themes. The `ore` stylesheet is intended for the built-in editor look.

@@ -2,6 +2,13 @@
 
 `IResourceProvider&lt;T&gt;` is a source of resources. It can add, remove, rename, edit, copy, list, and reload resources.
 
+<figure>
+<img src="/assets/ldlib2/editor-resource-browser.png" alt="LDLib2 Resources view showing the provider tree, path bar, and resource list">
+<figcaption>
+The Resources view in the real editor. The left tree selects a provider and path; the right side lists resources at that location and exposes filtering and display controls.
+</figcaption>
+</figure>
+
 Important provider hooks:
 
 * `createSubPath(name)`: create a path inside the provider.
@@ -96,3 +103,11 @@ Register the provider type in the LDLib2 resource provider type registry used by
 Your provider should implement `IResourceProvider&lt;T&gt;` or extend `ResourceProvider&lt;T&gt;`. Override permission methods such as `canEdit`, `canRemove`, `canRename`, and `supportAdd` to match the source.
 
 Use `checkAndUpdateResourceProvider()` when the source can change outside the editor.
+
+## File path migration
+
+<VersionBadge version="2.2.33" label="Changed" icon="tag" />
+
+`FilePath` now stores its identity relative to the game directory, for example `./ldlib2/assets/ldlib2/resources/global/example.ui.nbt`. New saved resource references should use this portable form instead of an absolute machine path.
+
+Legacy absolute paths remain readable. LDLib2 normalizes paths under the game directory, and also recognizes the `ldlib2/assets/` portion of legacy references created on another machine. A direct file path can now resolve even when no file provider is registered.

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tab-view.png" alt="包含两个页签与选中内容区的 TabView">
+<figcaption>
+当前选中 Tab1，因此只显示对应内容面板。
+</figcaption>
+</figure>
+
 `TabView` 是一个带标签页的面板容器。它维护一行可水平滚动的 [`Tab`](tab.md) 标签头，以及一个用于显示当前选中标签内容的内容面板。切换标签页时会显示新内容并隐藏其他所有内容。
 
 在编辑器中只有 `Tab`（及其子类）可以作为子元素添加。

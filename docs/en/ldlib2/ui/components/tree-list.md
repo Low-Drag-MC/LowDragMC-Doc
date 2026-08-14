@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tree-list.png" alt="Expanded TreeList with nested branches and leaves">
+<figcaption>
+Indentation and arrow icons expose the hierarchy while keeping every row selectable.
+</figcaption>
+</figure>
+
 `TreeList&lt;NODE&gt;` is a generic hierarchical list widget. Each node implements `ITreeNode` and can be a branch (expandable) or a leaf. Nodes are rendered using a configurable `UIElementProvider` and can be expanded/collapsed via arrow icons, single-click, or double-click.
 
 Features:

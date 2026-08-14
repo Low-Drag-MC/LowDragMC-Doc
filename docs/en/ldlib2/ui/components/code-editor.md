@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/code-editor.png" alt="CodeEditor showing XML, LSS, and JavaScript syntax highlighting">
+<figcaption>
+The editor applies language-specific highlighting and keeps independent scrollable documents.
+</figcaption>
+</figure>
+
 `CodeEditor` extends [`TextArea`](text-area.md) and adds syntax highlighting, code folding, and editor-quality keyboard shortcuts. It uses the built-in JetBrains Mono Bold font by default.
 
 Additional shortcuts over `TextArea`:

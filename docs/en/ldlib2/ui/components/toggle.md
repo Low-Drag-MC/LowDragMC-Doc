@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/toggle.png" alt="Toggle examples with checked, disabled, and grouped states">
+<figcaption>
+The panel includes a standalone checked toggle and an exclusive three-option group.
+</figcaption>
+</figure>
+
 `Toggle` is a checkable UI component — a square button with a mark icon and an optional label. Clicking toggles its `on/off` state. Multiple toggles can be linked into a [`ToggleGroup`](#toggle-group) for exclusive (radio-button-like) selection.
 
 Internally, `Toggle` is a horizontal flex row containing a **`Button`** (the clickable box with the mark icon inside) and a **`Label`** (the text label). Both are **internal** children.

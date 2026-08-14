@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tab-view.png" alt="TabView with two tab headers and the selected content pane">
+<figcaption>
+Tab1 is selected, so only its content pane is displayed.
+</figcaption>
+</figure>
+
 `TabView` is a tabbed-panel container. It maintains a horizontal scrollable row of [`Tab`](tab.md) headers and a content pane that shows the currently-selected tab's contents. Switching tabs shows the new content and hides all others.
 
 Only `Tab` (and its subclasses) can be added as children in the editor.

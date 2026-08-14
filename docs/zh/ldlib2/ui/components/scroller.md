@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scroller.png" alt="水平与垂直 Scroller">
+<figcaption>
+手柄大小表示可见比例，手柄位置表示当前滚动偏移。
+</figcaption>
+</figure>
+
 `Scroller` 是一个在 `[min, max]` 范围内保存数值的滚动条控件。注册了两个具体的变体：
 
 - **`scroller-vertical`** — 一个细长的垂直条（默认宽 5 像素）。

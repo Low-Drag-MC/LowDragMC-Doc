@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/split-view.png" alt="水平与垂直 SplitView 示例">
+<figcaption>
+第一个分隔条调整左右面板，第二个分隔条调整上下区域。
+</figcaption>
+</figure>
+
 `SplitView` 是一个双面板容器，其分隔条可以通过拖拽来调整两个面板的大小。目前注册了两种具体的变体：
 
 - **`split-view-horizontal`** — 左右分割，带有垂直分隔条。

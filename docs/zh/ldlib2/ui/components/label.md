@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/label.png" alt="展示对齐、换行、裁切、滚动、字体、字号与颜色的 Label">
+<figcaption>
+这些示例集中展示常用文本布局与样式模式。
+</figcaption>
+</figure>
+
 `Label` 继承自 [`TextElement`](text.md)，并支持**数据绑定**。它实现了 `IBindable&lt;Component&gt;` 和 `IDataConsumer&lt;Component&gt;`，因此其文本可以由服务端到客户端或客户端的数据提供器驱动，并在数值变化时自动更新显示的文本。
 
 默认尺寸：宽度继承自布局；高度默认为 **9 px**（默认字体大小的一行高度）。

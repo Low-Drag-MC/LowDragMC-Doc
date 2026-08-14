@@ -2,6 +2,13 @@
 
 `IResourceProvider&lt;T&gt;` 是资源来源。它可以添加、移除、重命名、编辑、复制、列出和重新加载资源。
 
+<figure>
+<img src="/assets/ldlib2/editor-resource-browser.png" alt="LDLib2 Resources 视图，显示 provider 树、路径栏和资源列表">
+<figcaption>
+真实编辑器中的 Resources 视图。左侧树用于选择 provider 与路径，右侧列出当前位置的资源，并提供筛选和显示控制。
+</figcaption>
+</figure>
+
 常用 provider hook：
 
 * `createSubPath(name)`：在 provider 内创建路径。
@@ -95,3 +102,11 @@ public class ShopRegistryProviderType extends ResourceProviderType {
 你的 provider 应实现 `IResourceProvider&lt;T&gt;` 或继承 `ResourceProvider&lt;T&gt;`。根据来源覆写 `canEdit`、`canRemove`、`canRename`、`supportAdd` 等权限方法。
 
 如果资源来源可能在编辑器外变化，使用 `checkAndUpdateResourceProvider()`。
+
+## 文件路径迁移
+
+<VersionBadge version="2.2.33" label="Changed" icon="tag" />
+
+`FilePath` 现在以相对游戏目录的形式保存资源标识，例如 `./ldlib2/assets/ldlib2/resources/global/example.ui.nbt`。新保存的资源引用应使用这种可移植形式，而不是机器绝对路径。
+
+旧绝对路径仍可读取。LDLib2 会规范化游戏目录下的路径，也会识别其他机器旧引用中的 `ldlib2/assets/` 部分。现在即使没有注册文件 provider，也可以解析直接文件路径。

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scene.png" alt="Scene 组件渲染透视与正交世界预览">
+<figcaption>
+两个视口以不同相机投影渲染同一个 TrackedDummyWorld。
+</figcaption>
+</figure>
+
 `Scene` 在 GUI 元素内部渲染一个可交互的 3D Minecraft 世界视图。它使用 `WorldSceneRenderer` 从 `TrackedDummyWorld` 中绘制一组方块。该视口支持：
 
 - **拖拽旋转** — 按住左键并拖拽以环绕相机。

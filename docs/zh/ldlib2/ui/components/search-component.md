@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/search-component.png" alt="展开并显示 stone 搜索结果的 SearchComponent">
+<figcaption>
+输入 stone 后会打开真实候选列表，显示方块图标与本地化名称。
+</figcaption>
+</figure>
+
 `SearchComponent&lt;T&gt;` 是一个通用的搜索选择组件。它显示当前选中值的预览，点击后会打开一个浮动对话框，包含文本输入框和匹配候选项列表。候选项由 `ISearchUI&lt;T&gt;` 实现提供，可在客户端运行或委托给服务端执行。
 
 `SearchComponent` 继承自 `BindableUIElement&lt;T&gt;`，因此选中的值可与数据绑定系统集成。

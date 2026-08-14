@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/button.png" alt="Button examples with disabled and icon variants">
+<figcaption>
+Default, disabled, leading-icon, and trailing-icon button states.
+</figcaption>
+</figure>
+
 `Button` is a clickable UI component with a built-in text label, state-reactive textures (normal / hover / pressed), and optional leading or trailing icon decorations.
 
 Internally, `Button` is a horizontal flex row that owns a single **internal** [`TextElement`](#text) as its label. Because it is a regular `UIElement` container, you can add extra children alongside the label — most commonly via [`addPreIcon`](#icon-decorations) and [`addPostIcon`](#icon-decorations).

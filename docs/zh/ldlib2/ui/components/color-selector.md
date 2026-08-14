@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/color-selector.png" alt="ColorSelector 的 HSB 面板、色相与透明度控件">
+<figcaption>
+完整选择器包含 HSB 面板、色相与透明度条、数值通道和 ARGB 值。
+</figcaption>
+</figure>
+
 `ColorSelector` 是一个功能完善的 HSB（色相–饱和度–亮度）颜色选择器。它继承自 `BindableUIElement&lt;Integer&gt;`，其值为所选颜色的 ARGB 压缩整数。包含以下功能：
 
 - HSB 渐变拾色面板，可在色相、饱和度和亮度轴之间切换。

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scroller.png" alt="Horizontal and vertical Scroller controls">
+<figcaption>
+The handle size represents the visible fraction, while its position represents the current scroll offset.
+</figcaption>
+</figure>
+
 `Scroller` is a scroll bar control that holds a value in a `[min, max]` range. Two concrete variants are registered:
 
 - **`scroller-vertical`** — a thin vertical bar (5 px wide by default).

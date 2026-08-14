@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/inventory-slots.png" alt="InventorySlots with three inventory rows and a hotbar">
+<figcaption>
+The component creates the standard 27-slot inventory and 9-slot hotbar as one reusable element.
+</figcaption>
+</figure>
+
 `InventorySlots` is a pre-built player inventory widget. It renders the standard 3-row main inventory and a 9-slot hotbar, and automatically binds them to the player's `Inventory` when a `ModularUI` is opened.
 
 ::: info

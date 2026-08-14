@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/item-slot.png" alt="Empty and populated ItemSlot examples beside fluid slots">
+<figcaption>
+The populated item slot renders an apple stack using the normal slot pipeline.
+</figcaption>
+</figure>
+
 `ItemSlot` is a Minecraft item slot that integrates with the vanilla container system. It renders the held `ItemStack`, shows a hover highlight, and registers itself with the open `AbstractContainerMenu` for standard click-to-transfer behaviour. It also hooks into JEI, REI, and EMI when those mods are present.
 
 ::: info

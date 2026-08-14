@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/switch.png" alt="Switch showing enabled-on and disabled-off states">
+<figcaption>
+The upper indicator has animated to the on side; the lower switch is disabled.
+</figcaption>
+</figure>
+
 `Switch` is an animated on/off toggle that looks like a sliding pill. When toggled, the inner indicator slides from one end to the other with a smooth CSS transition. It has no text label — use a [`Label`](label.md) or [`Toggle`](toggle.md) if you need descriptive text.
 
 Internally, `Switch` is a horizontal flex row containing a **flex spacer** (`placeholder`) and a **square indicator** (`markIcon`). The spacer grows from `flex: 0` to `flex: 1` on toggle, pushing the indicator to the far side.

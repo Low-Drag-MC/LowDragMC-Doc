@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/bindable-value.png" alt="BindableValue feeding a label and progress bar">
+<figcaption>
+One invisible value is represented by two consumers: a text label and a progress bar.
+</figcaption>
+</figure>
+
 `BindableValue&lt;T&gt;` is a lightweight, invisible element that holds a single value of any type and notifies registered listeners whenever the value changes. It is useful as a non-visual reactive binding point inside a UI tree.
 
 `BindableValue` extends `BindableUIElement&lt;T&gt;` and inherits the full data-binding and event system.

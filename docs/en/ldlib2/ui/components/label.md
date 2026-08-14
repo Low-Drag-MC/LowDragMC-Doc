@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/label.png" alt="Label examples showing alignment, wrapping, clipping, rolling, font, size, and color">
+<figcaption>
+The examples deliberately exercise common text layout and styling modes.
+</figcaption>
+</figure>
+
 `Label` extends [`TextElement`](text.md) with **data binding** support. It implements `IBindable&lt;Component&gt;` and `IDataConsumer&lt;Component&gt;`, so its text can be driven by a server-to-client or client-side data provider that automatically updates the displayed text whenever the value changes.
 
 Default size: inherits width from layout; height defaults to **9 px** (one line at the default font size).

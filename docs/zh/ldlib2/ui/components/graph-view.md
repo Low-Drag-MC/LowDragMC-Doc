@@ -245,3 +245,38 @@ graph-view {
 | `contentRoot(Consumer&lt;UIElement&gt;)` | `UIElement` | 配置 `contentRoot`。 |
 | `fitToChildren(float padding, float minScaleBound)` | `void` | 调整偏移量和缩放比例以适应所有可见子元素，使用给定的内边距和最小缩放值。 |
 | `fit(float minX, float minY, float maxX, float maxY, float minScaleBound)` | `void` | 调整偏移量和缩放比例以适应给定的边界框。 |
+
+---
+
+## 自适应网格与细节等级
+
+<VersionBadge version="2.2.34" label="Since" icon="tag" />
+
+画布缩放时背景网格会自动调整密度。`getLod()` 根据当前物理像素比例返回 `FULL`、`SIMPLIFIED` 或 `BLOCK`；图节点和连线可以用它在缩小时省略高成本细节。
+
+<figure>
+<img src="/assets/ldlib2/graph-view-full.png" alt="完整细节等级下的 GraphView">
+<figcaption>
+距离足够近、适合编辑时，<code>FULL</code> 会保留标签、端口和连线细节。
+</figcaption>
+</figure>
+
+<figure>
+<img src="/assets/ldlib2/graph-view-simplified.png" alt="缩小到简化细节等级的 GraphView">
+<figcaption>
+导航时，<code>SIMPLIFIED</code> 会省略高成本细节，同时保留图的整体结构。
+</figcaption>
+</figure>
+
+```java
+graph.graphViewStyle(style -> style
+        .lodEnabled(true)
+        .lodSimplifiedPixelScale(0.5f)
+        .lodBlockPixelScale(0.2f));
+
+if (graph.getLod() == GraphViewLod.FULL) {
+    // 绘制标签或其他细节。
+}
+```
+
+`BLOCK` 用于总览，不应用于语义编辑。每个 LOD 都应保留命中区域和必要的图状态。

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/toggle-group.png" alt="选中一个互斥选项的 ToggleGroup">
+<figcaption>
+组内保持 toggle 2 选中，并自动清除其他选项。
+</figcaption>
+</figure>
+
 `ToggleGroupElement` 是一个布局容器，会自动为添加到其中的所有 [`Toggle`](toggle.md) 子元素管理一个 [`Toggle.ToggleGroup`](toggle.md#toggle-group)。你无需手动调用 `toggle.setToggleGroup(group)` —— 当子元素被添加或移除时，该元素会自动完成这一操作。
 
 ::: info

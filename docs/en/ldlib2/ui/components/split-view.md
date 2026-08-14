@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/split-view.png" alt="Horizontal and vertical SplitView examples">
+<figcaption>
+The first divider resizes left and right panes; the second resizes top and bottom panes.
+</figcaption>
+</figure>
+
 `SplitView` is a two-pane container whose divider can be dragged to resize the panes. Two concrete variants are registered:
 
 - **`split-view-horizontal`** — left/right split with a vertical divider.

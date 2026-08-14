@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tag-field.png" alt="TagField 的任意 Tag、CompoundTag 与 ListTag 模式">
+<figcaption>
+语法着色区分键、数值、字符串、括号与分隔符。
+</figcaption>
+</figure>
+
 `TagField` 是一个 NBT 标签输入框。它封装了一个 [`TextField`](text-field.md)，并为 NBT 文本提供了语法高亮显示（字符串为绿色、数字为金色、布尔值为紫色、括号为水色、分隔符为灰色、键为紫色）。无效输入将以错误颜色显示。
 
 该字段的值为 `Tag`（任何 NBT 类型）。`TagField` 继承自 `BindableUIElement&lt;Tag&gt;`。

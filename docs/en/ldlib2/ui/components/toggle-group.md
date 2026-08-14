@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/toggle-group.png" alt="ToggleGroup with one exclusive option selected">
+<figcaption>
+The group keeps toggle 2 selected and clears the other options automatically.
+</figcaption>
+</figure>
+
 `ToggleGroupElement` is a layout container that automatically manages a [`Toggle.ToggleGroup`](toggle.md#toggle-group) for all [`Toggle`](toggle.md) children added to it. You do not need to call `toggle.setToggleGroup(group)` manually — the element does it for you when children are added or removed.
 
 ::: info

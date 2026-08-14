@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/element.png" alt="Nested UIElement containers demonstrating flex layout">
+<figcaption>
+Three styled children demonstrate fixed width, flex growth, nesting, padding, and gaps.
+</figcaption>
+</figure>
+
 `UIElement` is the most fundamental and commonly used UI component in LDLib2.
 All UI components inherit from it.
 

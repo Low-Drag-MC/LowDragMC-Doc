@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scroller-view.png" alt="ScrollerView containing overflowing interactive controls">
+<figcaption>
+Only the viewport is visible; the vertical scrollbar moves through the remaining child controls.
+</figcaption>
+</figure>
+
 `ScrollerView` is a scrollable container. It wraps a `viewContainer` inside a `viewPort` and provides optional horizontal and vertical scroll bars that appear automatically when content overflows. Children added to a `ScrollerView` in code or XML are placed inside `viewContainer`.
 
 ::: info

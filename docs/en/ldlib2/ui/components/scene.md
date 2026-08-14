@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scene.png" alt="Scene component rendering perspective and orthographic world previews">
+<figcaption>
+Both viewports render the same tracked dummy world with different camera projections.
+</figcaption>
+</figure>
+
 `Scene` renders an interactive 3D Minecraft world view inside a GUI element. It uses a `WorldSceneRenderer` to draw a set of blocks from a `TrackedDummyWorld`. The viewport supports:
 
 - **Drag to rotate** — left-click and drag to orbit the camera.

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/switch.png" alt="展示启用开与禁用关状态的 Switch">
+<figcaption>
+上方指示器已移动到开启侧，下方 Switch 处于禁用状态。
+</figcaption>
+</figure>
+
 `Switch` 是一个带动画效果的开/关切换器，外观呈滑动胶囊状。切换时，内部的指示器会从一端平滑滑到另一端，带有流畅的 CSS 过渡效果。它本身没有文字标签——如果你需要描述性文字，请使用 [`Label`](label.md) 或 [`Toggle`](toggle.md)。
 
 从内部结构来看，`Switch` 是一个水平 flex 行，包含一个 **flex 占位元素**（`placeholder`）和一个 **方形指示器**（`markIcon`）。切换时，占位元素的 `flex` 值从 `0` 增长到 `1`，将指示器推至另一侧。

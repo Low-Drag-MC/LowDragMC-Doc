@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/item-slot.png" alt="空 ItemSlot 与已放入物品的 ItemSlot">
+<figcaption>
+已填充槽位通过普通物品槽渲染流程显示苹果。
+</figcaption>
+</figure>
+
 `ItemSlot` 是一个与原版容器系统集成的 Minecraft 物品槽位。它渲染持有的 `ItemStack`，显示悬停高亮，并向当前打开的 `AbstractContainerMenu` 注册以实现标准点击转移行为。当 JEI、REI 和 EMI 存在时，它也会与这些模组联动。
 
 ::: info

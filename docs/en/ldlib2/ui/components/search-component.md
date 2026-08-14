@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/search-component.png" alt="SearchComponent opened with stone search results">
+<figcaption>
+Typing stone opens a real candidate list with block icons and localized names.
+</figcaption>
+</figure>
+
 `SearchComponent&lt;T&gt;` is a generic search-and-select widget. It shows a preview of the currently selected value and, when clicked, opens a floating dialog with a text field and a list of matching candidates. Candidates are produced by an `ISearchUI&lt;T&gt;` implementation that can run on the client or be delegated to the server.
 
 `SearchComponent` extends `BindableUIElement&lt;T&gt;`, so the selected value integrates with the data-binding system.

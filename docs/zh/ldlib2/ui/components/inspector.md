@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/inspector.png" alt="由字符串、布尔、数值和颜色属性生成的 Inspector">
+<figcaption>
+Inspector 会为不同属性类型生成对应的编辑行。
+</figcaption>
+</figure>
+
 `Inspector` 是一个属性编辑面板。它接受任何 `IConfigurable` 对象，并在 [`ScrollerView`](scroller-view.md) 中渲染其可配置属性。对属性的更改可选择记录在撤销/重做历史栈中。
 
 ::: info

@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/text-field.png" alt="TextField 的空、禁用与可编辑状态">
+<figcaption>
+最后一个输入框使用更大字号和高度，但保持相同编辑行为。
+</figcaption>
+</figure>
+
 `TextField` 是一种单行文本输入元素。它支持多种输入**模式**（自由字符串、数字、ResourceLocation、复合 NBT 标签），数字字段支持拖拽调整数值、用于高亮无效输入的文本**校验器**、用于自定义显示的**格式化器**，以及通过 `Ctrl+Z` / `Ctrl+Y` 实现的撤销/重做功能。
 
 字段在获得焦点（点击）时变为可编辑状态。键盘快捷键遵循 Minecraft 的标准惯例：`Ctrl+A` 全选，`Ctrl+C/X/V` 复制/剪切/粘贴，`Ctrl+←/→` 按单词导航，`Home`/`End` 行首/行尾。

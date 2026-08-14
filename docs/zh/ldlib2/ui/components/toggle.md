@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/toggle.png" alt="Toggle 的选中、禁用与分组状态">
+<figcaption>
+画面包含独立选中的 Toggle 和三选一互斥组。
+</figcaption>
+</figure>
+
 `Toggle` 是一个可选中的 UI 组件——一个带有标记图标和可选标签的方形按钮。点击会切换其 `on/off` 状态。多个 Toggle 可以关联到一个 [`ToggleGroup`](#toggle-group) 中，实现互斥（类似单选按钮）的选择。
 
 在内部，`Toggle` 是一个水平 flex 行，包含一个 **`Button`**（可点击的方块，内部有标记图标）和一个 **`Label`**（文本标签）。两者均为**内部**子元素。

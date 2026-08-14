@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/text-area.png" alt="TextArea 的滚动、禁用与自定义样式状态">
+<figcaption>
+第一个编辑器滚动显示长内容，另外两个展示禁用与自定义样式。
+</figcaption>
+</figure>
+
 `TextArea` 是多行文本编辑器。其值为 `String[]` —— 每行一个元素。它内置了水平和垂直滚动条、用于错误高亮的文本**验证器**，以及完整的键盘支持（方向键、`Home`/`End`、`PageUp`/`PageDown`、`Ctrl+←/→` 按词导航、选择、复制/剪切/粘贴、撤销/重做）。
 
 当编辑器获得焦点（被点击）时，即可进行编辑。双击可选中一个单词。

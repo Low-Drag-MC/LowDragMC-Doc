@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tag-field.png" alt="TagField examples for any tag, CompoundTag, and ListTag modes">
+<figcaption>
+Syntax coloring distinguishes keys, numbers, strings, brackets, and separators.
+</figcaption>
+</figure>
+
 `TagField` is an NBT tag input field. It wraps a [`TextField`](text-field.md) and provides syntax-highlighted rendering of NBT text (strings in green, numbers in gold, booleans in purple, brackets in aqua, separators in gray, and keys in purple). Invalid input is shown in the error color.
 
 The field's value is a `Tag` (any NBT type). `TagField` extends `BindableUIElement&lt;Tag&gt;`.

@@ -14,6 +14,44 @@ public abstract class Node implements INode {
 
 `onDefineOptions(...)` runs before `onDefinePorts(...)`. Use options when the node shape depends on editable values.
 
+## Item Library Description
+
+<VersionBadge version="2.2.30" label="Since" icon="tag" />
+
+Override `createDescriptionUI()` to show documentation beside the Item Library when this node is selected. The returned UI is placed in a scrollable panel, so it can contain wrapped text, images, or a small preview.
+
+```java
+@Override
+public UIElement createDescriptionUI() {
+    var description = new Label();
+    description.setText(Component.translatable("node.example.description"));
+    description.textStyle(style -> style
+            .textWrap(TextWrap.WRAP)
+            .adaptiveHeight(true));
+    description.layout(layout -> layout.widthPercent(100));
+
+    var root = new UIElement();
+    root.layout(layout -> layout.widthPercent(100).gapAll(4));
+    root.addChildren(
+            UIElementProvider.iconText(Node::getNodeIcon, Node::getDisplayName)
+                    .apply(this),
+            description
+    );
+    return root;
+}
+```
+
+`createDescriptionUI()` is called again whenever the Item Library selection changes. Return a fresh UI tree on every call; do not cache and reuse an attached `UIElement`. Return `null` when the node does not need a description panel.
+
+This description belongs to the Item Library entry. It is not rendered inside nodes placed on the canvas; use [Node Preview](#node-preview) for content inside the node body.
+
+<figure>
+<img src="/assets/ldlib2/node-graph-toolkit/node-description.png" alt="The Item Library showing a selected node and its description panel">
+<figcaption>
+Selecting <strong>Description Test</strong> opens its scrollable description panel beside the Item Library.
+</figcaption>
+</figure>
+
 ## Options
 
 Options are node settings. They can appear in the node header or only in the inspector.

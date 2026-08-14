@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tree-list.png" alt="展开嵌套分支与叶节点的 TreeList">
+<figcaption>
+缩进和箭头显示层级，同时每一行仍可被选择。
+</figcaption>
+</figure>
+
 `TreeList&lt;NODE&gt;` 是一个通用层级列表 Widget。每个节点实现 `ITreeNode`，可以是分支（可展开）或叶子节点。节点使用可配置的 `UIElementProvider` 渲染，并可通过箭头图标、单击或双击来展开/折叠。
 
 特性：

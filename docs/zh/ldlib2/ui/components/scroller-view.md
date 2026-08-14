@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/scroller-view.png" alt="包含溢出交互控件的 ScrollerView">
+<figcaption>
+视口只显示当前区域，垂直滚动条用于浏览其余子控件。
+</figcaption>
+</figure>
+
 `ScrollerView` 是一个可滚动的容器。它在 `viewPort` 内部包裹了一个 `viewContainer`，并提供可选的水平和垂直滚动条，当内容溢出时自动显示。通过代码或 XML 添加到 `ScrollerView` 的子元素都会被放置在 `viewContainer` 内部。
 
 ::: info

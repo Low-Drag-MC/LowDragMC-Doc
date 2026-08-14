@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/text-area.png" alt="TextArea examples with scrolling, disabled, and custom-style states">
+<figcaption>
+The first editor scrolls long content; the other two demonstrate disabled and styled text areas.
+</figcaption>
+</figure>
+
 `TextArea` is a multi-line text editor. Its value is a `String[]` — one element per line. It has built-in horizontal and vertical scrollers, a text **validator** for error highlighting, and full keyboard support (arrows, `Home`/`End`, `PageUp`/`PageDown`, `Ctrl+←/→` word navigation, selection, copy/cut/paste, undo/redo).
 
 The editor becomes editable when focused (clicked). Double-click to select a word.

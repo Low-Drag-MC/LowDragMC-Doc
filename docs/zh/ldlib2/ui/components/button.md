@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/button.png" alt="Button 的禁用与图标变体">
+<figcaption>
+默认、禁用、前置图标与后置图标四种按钮状态。
+</figcaption>
+</figure>
+
 `Button` 是一个可点击的 UI 组件，内置文本标签、响应状态的纹理（普通 / 悬停 / 按下），以及可选的头部或尾部图标装饰。
 
 从内部结构来看，`Button` 是一个水平 flex 行，包含一个**内部的** [`TextElement`](#text) 作为其标签。由于它是一个普通的 `UIElement` 容器，你可以在标签旁边添加额外的子元素 —— 最常见的方式是通过 [`addPreIcon`](#icon-decorations) 和 [`addPostIcon`](#icon-decorations)。

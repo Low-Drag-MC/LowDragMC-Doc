@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/tab.png" alt="TabView 中的 Tab 页签头">
+<figcaption>
+Tab 提供可选页签头，TabView 负责选择状态与内容可见性。
+</figcaption>
+</figure>
+
 `Tab` 是一个单独的选项卡头部元素。它显示一个文本标签，并根据其处于空闲、悬停或选中状态而改变背景纹理。选项卡通常在 [`TabView`](tab-view.md) 中管理，由 `TabView` 处理选择逻辑。
 
 ::: info

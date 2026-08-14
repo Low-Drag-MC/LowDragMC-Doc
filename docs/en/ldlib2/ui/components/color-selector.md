@@ -2,6 +2,13 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
+<figure>
+<img src="/assets/ldlib2/components/color-selector.png" alt="ColorSelector with HSB surface, hue and alpha controls">
+<figcaption>
+The complete picker includes the HSB surface, hue and alpha bars, numeric channels, and ARGB value.
+</figcaption>
+</figure>
+
 `ColorSelector` is a full-featured HSB (Hue–Saturation–Brightness) color picker. It extends `BindableUIElement&lt;Integer&gt;` and its value is the selected color as a packed ARGB integer. It includes:
 
 - An HSB gradient picking surface that can switch between hue, saturation, and brightness axes.
