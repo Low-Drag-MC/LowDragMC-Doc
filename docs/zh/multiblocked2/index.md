@@ -1,73 +1,54 @@
-# 简介
+# Multiblocked2
 
-Multiblocked2（mbd2）是继 mbd1（multiblocked）之后更加强大的可视化自定义机器/多方块结构模组。Mbd2 是一款极其灵活且风格接近原版的的多方块模组，吸收了 MultiblockTweaker 和 Modular Machinery 的特点。
+<VersionBadge version="21.0.11" label="文档对应版本" icon="tag" />
 
-原始项目可在此查看：[**Multiblocked**](https://www.curseforge.com/minecraft/mc-mods/multiblocked "multiblocked")
+Multiblocked2（MBD2）让整合包作者通过游戏内编辑器创建单方块机器和多方块机器，并连接配方、Trait 与可选模组集成。
 
-<DocIcon name="simple-discord" /> Discord：[加入我们的 Discord](https://discord.com/invite/sDdf2yD9bh)
+<figure>
+<img src="/assets/multiblocked2/editor/overview.png" alt="最大化的 MBD2 1.21.1 编辑器，显示 Basic Settings、机器状态树、三维预览、Inspector 与 Resources 面板">
+<figcaption>打开新建单方块机器项目后的 MBD2 1.21.1 编辑器工作区。</figcaption>
+</figure>
 
-<DocIcon name="simple-github" /> Github：[Multiblocked2 仓库](https://github.com/Low-Drag-MC/Multiblocked2)
+::: warning 版本范围
+本文档面向 Minecraft `1.21.1` 和 MBD2 `21.0.11`。旧的 1.20.1 示例可能使用了不再公开的 API 或集成。
+:::
 
-## 兼容性
+## 选择路径
 
-内置支持
+| 目标 | 从这里开始 |
+| --- | --- |
+| 不写代码创建第一个机器 | [快速开始](./getting-started.md) |
+| 端到端注册机器、配方类型与配方 | [Java 与 KubeJS 教程](./tutorials/) |
+| 在编辑器中配置项目 | [编辑器](./editor/) |
+| 定义配方与运行条件 | [配方系统](./recipes/) |
+| 用脚本编写配方或机器行为 | [KubeJS](./KubeJS/) |
+| 从模组扩展 MBD2 | [Java 扩展](./java/) |
 
-* 物品
-* 物品耐久度
-* 流体
-* Forge Energy
-* 实体
+## 模块如何协作
 
-GTCEU
+```mermaid
+flowchart LR
+    P["编辑器项目"] --> D["机器定义"]
+    D --> T["Trait / NeoForge capability"]
+    D --> L["配方逻辑"]
+    R["配方类型和配方"] --> L
+    C["配方能力与条件"] --> R
+    K["KubeJS"] --> R
+    X["JEI / REI / EMI"] --> R
+```
 
-* 能量
+## 当前集成状态
 
-植物魔法 (Botania)
+| 集成 | 21.0.11 状态 | MBD2 提供的内容 |
+| --- | --- | --- |
+| JEI、REI、EMI | 已支持 | 配方与多方块信息展示 |
+| KubeJS | 已支持 | 配方 schema、注册事件、机器事件 |
+| Mekanism | 已支持 | 化学品/热 Trait、能力、热条件 |
+| Create | 已支持 | 转动能力、条件、动力 Trait |
+| PneumaticCraft | 已支持 | 压力/空气与热 Trait、能力、条件 |
+| Nature's Aura | 已支持 | 灵气 Trait 和配方能力 |
+| AE2 | 已支持 | ME Interface 和 Pattern Provider Trait |
+| GeckoLib、Jade | 已支持 | 动画机器渲染；机器信息提供器 |
+| Botania、GTCEu、Embers、Photon | 未公开 | 部分源码存在，但关键注册已禁用；请勿依赖它制作整合包内容 |
 
-* 魔力
-
-通用机械 (Mekanism)
-
-* 热量
-* 气体
-* 浆液
-* 颜料
-* 灌注
-
-机械动力 (Create)
-
-* 应力
-* RPM（转速）
-
-气动工艺 (PneumaticCraft)
-
-* 压力
-* 热量
-
-余烬 (Embers)
-
-* 余烬能量
-
-自然灵气 (Nature's aura)
-
-* 灵气
-
-
-## 新功能
-
-### 演示
-![演示](https://i.ibb.co/2ZLFgFb/demo.gif "演示")
-
-演示：一座火焰基座燃烧煤炭来发射火焰并照亮周围环境。想象一下，无需编写一行代码就能创造出如此酷炫的机器，这多么令人惊叹！
-
-### 新编辑器
-![编辑器](https://i.ibb.co/XVFC0mm/editor.png "编辑器")
-
-新编辑器：更强大、更现代、更易用。mbd2 帮助你在无需代码的情况下进行工作，提供了一个类似 Unity 的游戏设计引擎，让你更高效地自定义你的机器。
-
-### 逻辑节点图
-![节点图](https://i.ibb.co/7bqL3j6/nodegraph.png "节点图")
-
-节点图：节点图是一种全新的配置事件逻辑的方式。你不再需要 KubeJS 来定义复杂的功能。如果你是 Blender 或 Shader Graph 的用户，你一定会喜欢这个新功能。
-
-MBD2 允许你通过节点图监听各种机器事件并设置广泛的执行逻辑，赋予你巨大的创造力。
+依赖可选模组前，请阅读[集成](./integrations/)。

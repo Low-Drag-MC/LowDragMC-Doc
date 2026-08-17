@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -14,8 +14,25 @@ test('parsePagesFile reads title and nav entries', () => {
 
   assert.deepEqual(parsed, {
     title: 'LDLib2',
+    collapsed: undefined,
     nav: ['index.md', 'ui', '...']
   });
+});
+
+test('parsePagesFile and buildSidebar honor expanded groups', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'lowdrag-nav-'));
+  const docs = path.join(root, 'docs');
+  const mod = path.join(docs, 'en', 'example');
+  await mkdir(path.join(mod, 'guide'), { recursive: true });
+  await writeFile(path.join(mod, '.pages'), 'title: Example\nnav:\n  - index.md\n  - guide\n');
+  await writeFile(path.join(mod, 'index.md'), '# Example\n');
+  await writeFile(path.join(mod, 'guide', '.pages'), 'title: Guide\ncollapsed: false\nnav:\n  - index.md\n  - details.md\n');
+  await writeFile(path.join(mod, 'guide', 'index.md'), '# Guide\n');
+  await writeFile(path.join(mod, 'guide', 'details.md'), '# Details\n');
+
+  const sidebar = buildSidebar(docs, 'en', 'example');
+  assert.equal(sidebar[1].text, 'Guide');
+  assert.equal(sidebar[1].collapsed, false);
 });
 
 test('routeForFile creates encoded VitePress routes', () => {
@@ -87,6 +104,72 @@ test('real docs sidebars do not expose index as a visible item label', () => {
         assert.notEqual(item.text.toLowerCase(), 'index', `${locale}${base} exposes index label`);
       }
     }
+  }
+});
+
+test('MBD2 English and Chinese Markdown routes stay mirrored', async () => {
+  const relativeFiles = async (locale) => {
+    const root = path.join(ROOT, 'docs', locale, 'multiblocked2');
+    const out = [];
+    const visit = async (dir) => {
+      for (const entry of await readdir(dir, { withFileTypes: true })) {
+        if (entry.name === 'assets' || entry.name.startsWith('.')) continue;
+        const absolute = path.join(dir, entry.name);
+        if (entry.isDirectory()) await visit(absolute);
+        if (entry.isFile() && entry.name.endsWith('.md')) {
+          out.push(path.relative(root, absolute).replaceAll('\\', '/'));
+        }
+      }
+    };
+    await visit(root);
+    return out.sort();
+  };
+
+  assert.deepEqual(await relativeFiles('en'), await relativeFiles('zh'));
+});
+
+test('every MBD2 page declares its documented version', async () => {
+  for (const locale of ['en', 'zh']) {
+    const root = path.join(ROOT, 'docs', locale, 'multiblocked2');
+    const visit = async (dir) => {
+      for (const entry of await readdir(dir, { withFileTypes: true })) {
+        if (entry.name === 'assets' || entry.name.startsWith('.')) continue;
+        const absolute = path.join(dir, entry.name);
+        if (entry.isDirectory()) await visit(absolute);
+        if (entry.isFile() && entry.name.endsWith('.md')) {
+          const markdown = await readFile(absolute, 'utf8');
+          assert.match(
+            markdown,
+            /<VersionBadge\s+version="(?:21\.0\.11|[^"]*MBD2 21\.0\.11[^"]*)"/,
+            `${absolute}: missing MBD2 version badge`,
+          );
+        }
+      }
+    };
+    await visit(root);
+  }
+});
+
+test('every explicit MBD2 .pages entry exists', async () => {
+  for (const locale of ['en', 'zh']) {
+    const root = path.join(ROOT, 'docs', locale, 'multiblocked2');
+    const visit = async (dir) => {
+      const pagesPath = path.join(dir, '.pages');
+      try {
+        const pages = parsePagesFile(await readFile(pagesPath, 'utf8'));
+        for (const item of pages.nav.filter((entry) => entry !== '...')) {
+          const target = path.join(dir, item);
+          assert.ok((await stat(target)).isFile() || (await stat(target)).isDirectory(), `${pagesPath}: missing ${item}`);
+        }
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+      }
+
+      for (const entry of await readdir(dir, { withFileTypes: true })) {
+        if (entry.isDirectory() && entry.name !== 'assets') await visit(path.join(dir, entry.name));
+      }
+    };
+    await visit(root);
   }
 });
 

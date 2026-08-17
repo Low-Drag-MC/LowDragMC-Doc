@@ -1,94 +1,94 @@
-# UI
+# UI Behavior
 
-You might have used mbd2’s visual editor to create the UI, but you may have noticed that apart from the trait widget, the other widgets don't really work. This is because we haven't set up the UI logic, such as what should happen when a button is pressed. As mentioned in the [Ldlbib UI](../../ldlib/ui/index.md), we recommend using the UI Editor to create and edit the UI layout, and using [`KubeJS`](../../ldlib/ui/code/index.md) / <del>`NodeGraph (W.I.P)`</del> to set up the interaction logic.
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Applies to" icon="tag" />
+<VersionBadge version="LDLib2 2.2.35" label="UI API" icon="tag" />
 
-Here, we implement a simple, UI-based manual lava filling machine.
+<figure><img src="/assets/multiblocked2/editor/machine-ui.png" alt="The modern LDLib2 UIElement canvas in the MBD2 machine UI editor"><figcaption>Create the UIElement tree and stable IDs in the editor, then attach runtime behavior with KubeJS.</figcaption></figure>
 
-::: info
-Example can be downloaded <a href="../assets/example.zip" download>here</a>! 
+`MBDMachineEvents.onUI` still exists in 1.21.1, but `wrapper.event.ui` is now an LDLib2 2.x `UI`, not the WidgetGroup used by old 1.20.1 documentation. Element queries, event names, and server callbacks must use the new framework.
 
-Put it under the `.minecraft` folder.
-:::
+## 1.21.1: attach server behavior to an editor button
 
-First, we configure the machine to have one item trait and one fluid trait, and prepare our UI:
+<VersionBadge version="Minecraft 1.21.1" label="Current API" icon="tag" />
 
-1. A UI corresponding to the trait.
-2. Two [`buttons`](../../ldlib/ui/widget/Button.md) corresponding to the filling directions.
-3. A [`TextTexture`](../../ldlib/ui/widget/TextTexture.md) to display the amount of fluid in the tank.
+```js
+// kubejs/server_scripts/mbd2_ui.js
+MBDMachineEvents.onUI('example:crusher', wrapper => {
+  const { machine, ui, player } = wrapper.event
 
-<img src="../assets/kjs_ui_layout.png" alt="Image title" width="80%" class="md-img-center">
+  // UI.selectId returns a Java Stream. The ID comes from the editor UIElement.
+  const flush = ui.selectId('flush_button').findFirst().orElse(null)
+  if (flush === null) {
+    console.warn('Missing UI element #flush_button on example:crusher')
+    return
+  }
 
-Once you have everything set up, opening the machine's UI should look like this:
+  // Authoritative machine changes belong in a server event listener.
+  flush.addServerEventListener(UIEvents.MOUSE_DOWN, click => {
+    if (click.button !== 0) return
 
-<img src="../assets/kjs_ui_layout_2.png" alt="Image title" width="80%" class="md-img-center">
+    const output = machine.getTraitByName('output_items')
+    if (output === null) return
 
-
-## KubeJS Control
-Next, we use KubeJS to add interaction logic to the UI.
-We provide an event [`MBDMachineEvents.onUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) for you to setup the root widget. This event is triggered after [`MBDMachineEvents.onOpenUI`](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/kubejs/events/MBDServerEvents.java) and everything is prepared except the logic.
-
-```javascript
-MBDMachineEvents.onUI("mbd2:kjs_ui_test", e => {
-    const { machine, root } = e.event;
-    const slot = root.getFirstWidgetById("ui:item_slot_0") // SlotWidget
-    const tank = root.getFirstWidgetById("ui:fluid_tank_0") // FluidTankWidget
-    const fill_button = root.getFirstWidgetById("fill_button") // Button
-    const drain_button = root.getFirstWidgetById("drain_button") // Button
-    const label = root.getFirstWidgetById("tank_label") // TextWidget
-
-    // Set label to display fluid amount
-    label.setTextProvider(() => Component.string(tank.fluid.amount + "mB"))
-
-    // on button click
-    fill_button.setOnPressCallback(clickData => {
-        if (clickData.isRemote) {
-            // trigger on the remote side
-            // because everything is synced from server to client. you can do nothing on the remote side
-        } else {
-            var stored = slot.item
-            // check if a lava bucket is stored
-            if (stored && stored.id === "minecraft:lava_bucket") {
-                // check if there is enough space in the tank
-                if (tank.lastTankCapacity - tank.fluid.amount >= 1000) {
-                    // remove the lava bucket
-                    slot.item = { item: "minecraft:bucket", count: 1 }
-                    // add 1000mB of lava to the tank
-                    tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount + 1000 }
-                }
-            }
-        }
-    })
-
-    drain_button.setOnPressCallback(clickData => {
-        if (!clickData.isRemote) {
-            // check if there is lava in the tank
-            if (tank.fluid.amount >= 1000 && slot.item.id === "minecraft:bucket") {
-                // remove 1000mB of lava from the tank
-                tank.fluid = { fluid: "minecraft:lava", amount: tank.fluid.amount - 1000 }
-                // add a lava bucket
-                slot.item = { item: "minecraft:lava_bucket", count: 1 }
-            }
-        }
-    })
-
+    // Extract through the handler; do not mutate returned ItemStacks in place.
+    for (let slot = 0; slot < output.storage.slots; slot++) {
+      output.storage.extractItem(slot, 64, false)
+    }
+  })
 })
 ```
 
-Let's see our final result!
+Place this in `server_scripts`: MBD2 `onUI` is a targeted server-side machine event. LDLib2 synchronizes the UI RPC behavior registered by `addServerEventListener` to the corresponding client element.
 
-<div>
-  <video controls>
-    <source src="../assets/kjs_ui_result.mp4" type="video/mp4">
-    Your browser does not support video.
-  </video>
-</div>
+## Selecting elements
 
-We only use four widgets here (`TextTexture`, `Button`, `Slot`, and `Tank`). For more details about other widgets please check [pages](../../ldlib/ui/widget/index.md).
+<VersionBadge version="LDLib2 2.2.x" label="Current UI" icon="tag" />
 
+```js
+const byId = ui.selectId('status_label').findFirst().orElse(null)
+const allButtons = ui.select('.action').toList()
+const typed = ui.selectId('progress', ProgressBar).findFirst().orElse(null)
+const root = ui.rootElement
+```
 
-## Display part's trait ui in the Controller / Display controller's trait ui in the Part
-MBD2 supports proxy capabilities, allowing you to use a part to proxy the capabilities of a controller. However, you might also want to display the UI of a trait defined in the controller within the part, or vice versa—display a trait from a part in the controller’s UI. This is possible, but it requires some additional setup.
+| API | Result | Use |
+| --- | --- | --- |
+| `ui.selectId(id)` | `Stream<UIElement>` | Exact ID lookup |
+| `ui.select(selector)` | `Stream<UIElement>` | LDLib2 selector lookup |
+| `ui.selectId(id, Type)` | `Stream<Type>` | ID lookup constrained by element type |
+| `ui.rootElement` | `UIElement` | Edit the tree or append elements |
 
-For example, suppose your part has an item trait named `item_slot` with only one slot. Its UI ID would be `ui:item_slot_0`. To display it in the controller’s UI, you need to manually add an item slot widget to the controller UI and set its ID to `part:item_slot@ui:item_slot_0`.
+Do not mix `ModularUI.getElementById(...)` with `UI.selectId(...)`: `onUI` exposes the `UI` description before it is wrapped in a `ModularUI`.
 
-Similarly, let’s say your controller has a PneumaticCraft air trait named `air_handler`. To display it in the part's UI, you need to manually add a progress bar widget (you can also temporarily add a trait to auto-generate the UI, then remove the trait), and set the widget's ID to `controller:air_handler@ui:air_handler`.
+## Client visuals and server behavior
+
+`MBDMachineEvents.onUI` is registered as a server machine event in 21.0.11. Use it for `addServerEventListener`, server data sources, or replacing the server-created UI. A normal `addEventListener` is a client listener; do not assume a JavaScript lambda created by this server callback becomes client script code.
+
+To construct both client and server UI from KubeJS, use LDLib2 `LDLib2UI.block/item/player` and register the same ID on both sides as its documentation describes. Use LDLib2 data binding or server events/RPC for synchronized data. Continue with:
+
+- [LDLib2 KubeJS UI support](../../ldlib2/ui/kjs_support.md)
+- [LDLib2 UI Factory and script placement](../../ldlib2/ui/factory.md)
+- [UIElement selectors, events, and server listeners](../../ldlib2/ui/components/element.md)
+- [Data bindings](../../ldlib2/ui/preliminary/data_bindings.md)
+- [UI event propagation](../../ldlib2/ui/preliminary/event.md)
+
+## Legacy 1.20.1 syntax: migration reference only
+
+<VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="Legacy; not valid on 1.21.1" icon="tag" />
+
+```js
+// ❌ Old Widget API. These methods do not exist on the 1.21.1 UI.
+const button = event.event.ui.getFirstWidgetById('example:flush')
+button.setOnPressCallback(click => { /* ... */ })
+```
+
+| 1.20.1 Widget API | 1.21.1 LDLib2 UI API |
+| --- | --- |
+| `getFirstWidgetById(id)` | `ui.selectId(id).findFirst().orElse(null)` |
+| `setOnPressCallback(...)` | `addEventListener(...)` or `addServerEventListener(...)` |
+| `isRemote` checks in Widget callbacks | Select a client listener or server listener explicitly |
+| WidgetGroup hierarchy | `UIElement` tree, selectors, and LSS |
+
+::: warning
+`onUI` can replace `event.ui`, but most packs should query and enhance the editor-generated tree. For a fully script-built standalone UI, use the LDLib2 `LDLib2UI.*` factories instead of treating a machine UI as a generic window factory.
+:::

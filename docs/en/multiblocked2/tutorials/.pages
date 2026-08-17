@@ -1,0 +1,7 @@
+title: End-to-End Tutorials
+collapsed: false
+nav:
+  - index.md
+  - java-end-to-end.md
+  - kubejs-end-to-end.md
+  - hybrid-editor-kubejs.md

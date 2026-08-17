@@ -1,0 +1,13 @@
+title: 示例
+collapsed: false
+nav:
+  - index.md
+  - complete-machine.md
+  - recipe-cookbook.md
+  - conditions-and-routing.md
+  - machine-events.md
+  - traits-and-data.md
+  - ui-behavior.md
+  - runtime-recipe.md
+  - integrations.md
+  - migration.md

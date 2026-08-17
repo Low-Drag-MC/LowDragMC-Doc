@@ -1,118 +1,88 @@
-# Interact with Traits
+# Accessing Traits
 
-You can obtain machine trait by name.
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
 
-```javascript
-// reuturn the first match trait.
-let trait = machine.getTraitByName("item item_trait") 
+<figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="Named machine Traits and the Item Slot fields that KubeJS accesses at runtime"><figcaption>Use the authored Trait name shown in Inspector, then validate the returned runtime Trait's Java type.</figcaption></figure>
 
-let allTraits = machine.additionalTraits;
+Machine events expose the runtime machine. Retrieve a Trait by its editor name, check it exists, then use only the API of that Trait's actual Java class.
+
+```js
+MBDMachineEvents.onUseWithoutItem('example:crusher', wrapper => {
+  const machine = wrapper.event.machine
+  const itemTrait = machine.getTraitByName('input_items')
+  if (itemTrait === null) return
+
+  const storage = itemTrait.storage
+  const first = storage.getStackInSlot(0)
+  // Use storage insert/extract methods; do not mutate ItemStack in place.
+})
 ```
 
-## Trait APIs
-### Item
-more APIs can be found [here](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/misc/ItemStackTransfer.java)
-```javascript
-let trait = machine.getTraitByName("item_trait") 
-let storage = trait.storage;
-let stored = storage.getStackInSlot(0);
-storage.insertItem(0, "16x apple", true) // index, item stack, simulate
+`machine.additionalTraits` contains the runtime Traits attached to that exact machine. Names are configured in the editor; renaming one breaks script lookup and may also break UI bindings.
+
+## Three different identifiers
+
+| Identifier | Defined on | Used by |
+| --- | --- | --- |
+| Trait `name` | Trait definition in the machine project | `getTraitByName(name)` and UI ID `ui:<name>` |
+| `slotNames` | `RecipeCapabilityTraitDefinition` | Recipe `slotName(...)` routing |
+| Capability name | `RecipeCapability` registry | Recipe content grouping and generic `inputs/outputs` |
+
+A Trait named `input_items` can expose slot names `primary` and `catalyst` while handling the registered `item` recipe capability. These strings are not interchangeable.
+
+```js
+function requireTrait(machine, name) {
+  const trait = machine.getTraitByName(name)
+  if (trait === null) {
+    throw new Error(`Machine ${machine.definition.id()} has no trait named ${name}`)
+  }
+  return trait
+}
 ```
----
-### Fluid
-more APIs can be found [here](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/misc/FluidStorage.java)
-```javascript
-let trait = machine.getTraitByName("fluid_trait") 
-let storages = trait.storages;
-let stored = storages[0].getFluid();
-storages[0].setFluid(0, "water 1000")
+
+Use fail-fast lookup during development. In a published pack, log once and skip optional behavior so a renamed Trait does not spam every tick.
+
+## Common Java-backed surfaces
+
+| Trait | Common runtime member | Backing API |
+| --- | --- | --- |
+| Item slot | `storage` | Item handler insert/extract/query |
+| Fluid tank | `storages` | Fluid storage list |
+| Forge Energy | `storage` | FE receive/extract/query |
+| Mekanism chemical | `storages` | Chemical storage list |
+| Mekanism heat | `container` | Heat container |
+| Pneumatic air | `handler` | Air/pressure handler |
+| Pneumatic heat | `handler` | Heat exchanger |
+
+There is no single MBD2 JavaScript storage interface. Exact methods come from the backing Java API and may vary with an integration version.
+
+## Safe observation and mutation
+
+```js
+MBDMachineEvents.onUseWithoutItem('example:charger', wrapper => {
+  const { machine } = wrapper.event
+  const items = machine.getTraitByName('output')
+  const energy = machine.getTraitByName('energy')
+  if (items === null || energy === null) return
+
+  const stack = items.storage.getStackInSlot(0)
+  const stored = energy.storage.energyStored
+  console.info(`${stack} / ${stored} FE`)
+})
 ```
----
-### Forge Energy
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/common/trait/forgeenergy/CopiableEnergyStorage.java)
-```javascript
-let trait = machine.getTraitByName("forge_energy_trait") 
-let storage = trait.storage;
-let stored = storage.getEnergyStored();
-let maxStored = storage.getMaxEnergyStored();
-storage.receiveEnergy(1024, false) // fe, simulate
-storage.extractEnergy(1024, false) // fe, simulate
-```
----
-### Botania Mana
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/botania/trait/CopiableManaPool.java)
-```javascript
-let trait = machine.getTraitByName("botania_mana_trait") 
-let storage = trait.storage;
-let stored = storage.getCurrentMana();
-storage.receiveMana(1024) // input mana
-storage.receiveMana(-1024) // output mana
-```
----
-### Create rpm / stress
-```javascript
-let trait = machine.getTraitByName("create_trait") 
-let available_stress = trait.getMachine().getHolder().scheduleWorkingRPM(4, false) // rpm, simulate
-let available_stress = trait.getMachine().getHolder().scheduleWorking(256, false) // stress, simulate
-```
----
-### Ember
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/embers/trait/CopiableEmberCapability.java)
-```javascript
-let trait = machine.getTraitByName("ember_trait") 
-let storage = trait.storage;
-let stored = storage.getEmber();
-let capacity = storage.getEmberCapacity();
-storage.addAmount(1024, false) // ember, simulate
-storage.removeAmount(1024, false) // ember, simulate
-```
----
-### GTM energy
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/gtm/trait/CopiableEnergyContainer.java)
-```javascript
-let trait = machine.getTraitByName("gtm_energy_trait") 
-let container = trait.container;
-let stored = container.getEnergyStored();
-let capacity = container.getEnergyCapacity();
-container.changeEnergy(1024) // energyToAdd
-```
----
-### Mek Chemical
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/mekanism/trait/chemical/ChemicalStorage.java)
-```javascript
-let trait = machine.getTraitByName("mek_chemical_trait") 
-let storages = trait.storages;
-let stored = storages[0].getStack();
-storages[0].setStack(stored) // did not check how to create a chemical instance via kjs
-```
----
-### Mek Heat
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/mekanism/trait/heat/CopiableHeatContainer.java)
-```javascript
-let trait = machine.getTraitByName("mek_heat_trait") 
-let container = trait.container;
-let stored = container.getTemperature(0); // capacitor
-let stocapacityred = container.getHeatCapacity(0); // capacitor
-container.handleHeat(0, 1000) // capacitor, transfer value
-```
----
-### PNC Pressure / Air
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/pneumaticcraft/trait/pressure/CopiableAirHandler.java)
-```javascript
-let trait = machine.getTraitByName("pnc_pressure_trait") 
-let handler = trait.handler;
-let stored = handler.getAir();
-let maxPressure = handler.maxPressure();
-handler.addAir(16); // added air
-handler.setPressure(4) // addAir(((int) (pressure * getVolume())) - getAir());
-```
----
-### PNC heat
-more APIs can be found [here](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/pneumaticcraft/trait/heat/HeatExchanger.java)
-```javascript
-let trait = machine.getTraitByName("pnc_heat_trait") 
-let handler = trait.handler;
-let temp = handler.getTemperature();
-let cap = handler.getThermalCapacity();
-handler.setTemperature(300); // temperature
-```
+
+For mutation, call the backing API's `insertItem`/`extractItem`, `fill`/`drain`, or `receiveEnergy`/`extractEnergy` methods and respect their `simulate` argument. Never edit a returned stack/tank object in place and assume the handler notices.
+
+## Multiblock scope
+
+`additionalTraits` and `getTraitByName` inspect the current controller or part only. During recipe matching, a formed controller can aggregate recipe-logic Traits from its parts, but a script lookup on the controller does **not** automatically search every part by name.
+
+For normal controller/part IO, configure Pattern capability proxies, `traitNameFilter`, `capabilityIO`, and `autoIO` in the editor. Traverse the part API from JavaScript only for behavior the proxy system cannot express, and first verify that the machine is a formed multiblock controller.
+
+## Do not bypass the recipe engine
+
+Direct Trait mutation is suitable for explicit interactions or administrative behavior. It is usually wrong in `onRecipeWorking`: the engine already performs simulation, distinct-handler routing, per-tick handling, and commit. Consuming the same storage again from an event creates duplication or deficits when multiple handlers/proxies exist.
+
+::: warning Server authority
+Treat Traits as Java runtime objects, not stable JSON. Keep storage mutations on the server. Client events may read synchronized values for rendering but must not perform authoritative resource changes.
+:::

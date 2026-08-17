@@ -1,72 +1,54 @@
-# Introduction
+# Multiblocked2
 
-Multiblocked2 (mbd2) is the more powerful visual custom machine/multi-block structure mod after mbd1(multiblocked). Mbd2 is an extremely flexible yet vanilla-esque multiblock mod, that embraces aspects of MultiblockTweaker and Modular Machinery.
+<VersionBadge version="21.0.11" label="Documented version" icon="tag" />
 
-Original project can be found here: [**Multiblocked**](https://www.curseforge.com/minecraft/mc-mods/multiblocked "multiblocked")
+Multiblocked2 (MBD2) lets pack authors create single-block machines and multiblocks in an in-game editor, then connect them to recipes, traits, and optional mod integrations.
 
-<DocIcon name="simple-discord" /> Discord: [Join our Discord](https://discord.com/invite/sDdf2yD9bh)
+<figure>
+<img src="/assets/multiblocked2/editor/overview.png" alt="Maximized MBD2 1.21.1 editor showing Basic Settings, machine state tree, 3D preview, Inspector, and Resources panes">
+<figcaption>The MBD2 1.21.1 editor workspace with a new single-block machine project open.</figcaption>
+</figure>
 
-<DocIcon name="simple-github" /> Github:  [Multiblocked2 Repository](https://github.com/Low-Drag-MC/Multiblocked2)
+::: warning Version scope
+This manual targets Minecraft `1.21.1` and MBD2 `21.0.11`. Older 1.20.1 examples may use APIs or integrations that are no longer exposed.
+:::
 
-## Compatibility
+## Choose a path
 
-Built-in
+| Goal | Start here |
+| --- | --- |
+| Create a first machine without code | [Getting started](./getting-started.md) |
+| Register a machine, recipe type, and recipe end to end | [Java and KubeJS tutorials](./tutorials/) |
+| Configure a project in the editor | [Editor](./editor/) |
+| Define recipes and requirements | [Recipe system](./recipes/) |
+| Script recipes or machine behavior | [KubeJS](./KubeJS/) |
+| Extend MBD2 from a mod | [Java extensions](./java/) |
 
-* Item
-* Item Durability
-* Fluid
-* Forge energy
-* Entity
+## How the parts fit together
 
-GTCEU
+```mermaid
+flowchart LR
+    P["Editor project"] --> D["Machine definition"]
+    D --> T["Traits / NeoForge capabilities"]
+    D --> L["Recipe logic"]
+    R["Recipe type and recipes"] --> L
+    C["Recipe capabilities and conditions"] --> R
+    K["KubeJS"] --> R
+    X["JEI / REI / EMI"] --> R
+```
 
-* Energy
+## Current integration status
 
-Botania
+| Integration | Status in 21.0.11 | What MBD2 exposes |
+| --- | --- | --- |
+| JEI, REI, EMI | Supported | Recipe and multiblock information displays |
+| KubeJS | Supported | Recipe schemas, registry events, machine events |
+| Mekanism | Supported | Chemical and heat traits, capabilities, heat condition |
+| Create | Supported | Rotation capability, condition, kinetic trait |
+| PneumaticCraft | Supported | Pressure/air and heat traits, capabilities, conditions |
+| Nature's Aura | Supported | Aura trait and recipe capability |
+| AE2 | Supported | ME Interface and Pattern Provider traits |
+| GeckoLib, Jade | Supported | Animated machine rendering; machine information provider |
+| Botania, GTCEu, Embers, Photon | Not publicly exposed | Source is present in places, but key registrations are disabled; do not build pack content on it |
 
-* mana
-
-Mekanism
-
-* Heat
-* Gas
-* Slurry
-* Pigment
-* Infusion
-
-Create
-
-* Stress
-* RPM
-
-PneumaticCraft
-
-* pressure
-* heat
-
-Embers
-
-* ember
-
-Nature's aura
-
-* aura
-
-
-## What's new
-
-### Demo
-![demo](https://i.ibb.co/2ZLFgFb/demo.gif "demo")
-
-Demo: A fire pedestal burn coals to emi fire and light surroundings. Just imagine how amazing it is to create such a cool machine without writing a single line of code!
-### New Editor
-![editor](https://i.ibb.co/XVFC0mm/editor.png "editor")
-
-New editor: more powerful, more modern and easier to use. mbd2 helps you work without code, provides a unity-like game design engine, more efficient customization of your machine.
-
-### Logic Node Graph
-![node graph](https://i.ibb.co/7bqL3j6/nodegraph.png "node graph")
-
-Node Graph: The node graph is a brand-new way to configure event logic. You no longer need KubeJS to define complex functionality. If you're a user of Blender or Shader Graph, you're going to love this new feature.
-
-MBD2 allows you to listen to various machine events through the node graph and set up a wide range of execution logic, giving you immense creative power.
+Read [Integrations](./integrations/) before depending on an optional mod.

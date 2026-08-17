@@ -1,52 +1,22 @@
-# 动态实时配方
+# 动态修改配方
 
-## 升级系统
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
 
-致谢：@yellowcake3d 
-如果你正在寻找一种实现此类升级系统的方法，可以参考以下内容，这实际上大部分来自 mierno，但我最终使用了 `getTraitByName`，并且需要在 mbd 编辑器中勾选 "Always modify recipe"（始终修改配方）选项
+<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="KubeJS 可为单个运行时机器复制并修改的基础配方"><figcaption>运行时升级 hook 替换所选配方的副本，不会修改此已注册基础配方。</figcaption></figure>
+
+使用 `onBeforeRecipeModify` 为一个机器定义替换选中的运行时配方。这是实现升级系统在运行时更改时长、并行数或内容的支持方式。
+
 ```js
-MBDMachineEvents.onBeforeRecipeModify('mbd2:high_pressure_electrolyzer', (event) => {
-    const mbdEvent = event.getEvent();
-    const { machine, recipe } = mbdEvent;
+MBDMachineEvents.onBeforeRecipeModify('example:crusher', event => {
+  const mbd = event.event
+  const upgrades = mbd.machine.getTraitByName('upgrades')
+  if (upgrades === null) return
 
-    let itemTrait = machine.getTraitByName("item_slot");
-    if (itemTrait == null) return;
-    let storage = itemTrait.storage;
-    let upgradeCount = storage.getStackInSlot(0).count;
-
-    //并行配方修改器，升级槽位中的升级物品越多，并行处理的配方数量越多
-    let parallelRecipe = machine.applyParallel(recipe, upgradeCount);
-    let copyRecipe = parallelRecipe.copy();
-    //速度修改器，每安装一个新升级物品，配方速度加快1%
-    let reductionFactor = Math.max(1 - 0.01 * upgradeCount, 0.1);
-    copyRecipe.duration = Math.ceil(recipe.duration * reductionFactor);
-
-    mbdEvent.setRecipe(copyRecipe);
-});
+  const count = upgrades.storage.getStackInSlot(0).count
+  const builder = mbd.recipe.toBuilder()
+  builder.duration(Math.max(20, Math.ceil(mbd.recipe.duration * (1 - count * 0.01))))
+  mbd.setRecipe(builder.buildMBDRecipe())
+})
 ```
 
-## 通过 KubeJS 配方构建器创建动态配方
-
-你可以通过使用 `onBeforeRecipeModify` 事件来应用修改器并替换原始配方，从而动态修改配方。在大多数情况下，这种方法已经足够。
-然而，有时你可能需要更大的灵活性——例如删除、替换或追加原料。为此，我们提供了一种替代方法，允许你以类似于 KJS 配方事件的方式定义配方。
-![alt text](../assets/capability_names.png)
-```js
-MBDMachineEvents.onBeforeRecipeModify('machine:id', (event) => {
-    const mbdEvent = event.getEvent();
-    const { machine, recipe } = mbdEvent;
-    
-    // 创建一个空构建器
-    // let newEmptyRecipeBuilder = recipe.recipeType.recipeBuilder();
-    // 使用当前配方创建构建器
-    let builder = recipe.toBuilder();
-
-    builder.duration(412) // 修改持续时间
-    builder.inputItems("apple") // 追加原料
-    
-    let fluidCap = MBDRegistries.RECIPE_CAPABILITIES.get("fluid")
-    builder.removeOutputs(fluidCap) // 移除所有输出流体原料
-
-    let newRecipe = builder.buildMBDRecipe();
-    mbdEvent.setRecipe(newRecipe );
-});
-```
+使用此钩子时，请在编辑器中启用机器的配方修改行为。始终构建新配方；不要修改缓存的共享配方。

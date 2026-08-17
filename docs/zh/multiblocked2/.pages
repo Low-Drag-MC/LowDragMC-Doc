@@ -1,0 +1,11 @@
+title: Multiblocked2
+nav:
+  - index.md
+  - getting-started.md
+  - tutorials
+  - editor
+  - recipes
+  - integrations
+  - KubeJS
+  - java
+  - migration-1.20.1.md

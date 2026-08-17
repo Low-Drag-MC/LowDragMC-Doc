@@ -1,0 +1,10 @@
+title: Editor
+collapsed: false
+nav:
+  - index.md
+  - machines.md
+  - states-and-rendering.md
+  - multiblocks.md
+  - traits-and-ui.md
+  - recipe-logic.md
+  - debugging.md

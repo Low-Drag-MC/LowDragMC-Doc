@@ -1,0 +1,11 @@
+title: Java 扩展
+collapsed: false
+nav:
+  - index.md
+  - dependency-setup.md
+  - registration-and-lifecycle.md
+  - custom-machine.md
+  - custom-trait.md
+  - custom-recipe-capability.md
+  - custom-condition.md
+  - testing.md

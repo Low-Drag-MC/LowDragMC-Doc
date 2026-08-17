@@ -1,35 +1,42 @@
-# 自定义代理配方类型的转换
+# 代理配方类型
 
-`Proxy Recipetype` 在 mbd2 中并不总是能够完美运行。例如，如果某些配方包含 mbd2 无法识别的输入类型，它们将无法被转换。
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
 
-此外，玩家可能希望过滤某些配方，或修改持续时间、输入项等。
-我们提供了一个事件 `onTransferProxyRecipe`，允许你接管转换处理过程。
+<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type Inspector 中配置代理来源和 Fuel Recipe Types 的区域"><figcaption>代理来源在编辑器中启用；KubeJS 只接收每个转换结果的过滤事件。</figcaption></figure>
+
+配方传输代理把原版或模组 Recipe Type 转换为目标 `MBDRecipeType`。它不是 Trait，也不会自动为机器提供 IO。
+
+## 工作流
+
+1. 在目标 Recipe Type 的编辑器设置中添加 proxy source。
+2. 保存并发布 Recipe Type。
+3. 用目标 MBD Recipe Type ID 订阅 `onTransferProxyRecipe`。
+4. 检查来源 ID、来源配方和初始 `mbdRecipe`。
+5. 取消不应导入的配方，或替换转换结果。
+
 ```js
-MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
-    let event = e.event;
-    const {recipeType, proxyTypeId, proxyType, proxyRecipeId, proxyRecipe} = event;
+// kubejs/server_scripts/mbd2_proxy.js
+MBDRecipeTypeEvents.onTransferProxyRecipe('example:electric_furnace', wrapper => {
+  const event = wrapper.event
 
-    // 确保配方类型正确
-    if (proxyTypeId === "create:haunting") {
-        let input = proxyRecipe.getIngredients()[0]; // 我们假设原料有且仅有一个物品。
-        let output = proxyRecipe.getResultItem(null);
-        console.log("input: ", input);
-        console.log("output: ", output);
-        // 将其转换为 mbd2 配方
-        var recipe = recipeType.recipeBuilder() // 与通过 KJS 事件创建配方相同
-            .id(proxyRecipeId + "_mbd2")
-            .duration(400)
-            .inputItems(input)
-            .outputItems(output)
-            .chance(0)
-            .inputFluids("water 1000")
-            .chance(1)
-            .buildMBDRecipe();
+  // 只接受原版 smelting 来源。
+  if (`${event.proxyTypeId}` !== 'minecraft:smelting') {
+    event.setCanceled(true)
+    return
+  }
 
-        // 如果你想跳过此配方
-        // event.mbdRecipe = null;
-        // 设置结果
-        event.mbdRecipe = recipe;
-    }
+  // 某些来源无法自动转换时 mbdRecipe 可能为 null。
+  if (event.mbdRecipe === null) {
+    console.warn(`Could not transfer ${event.proxyRecipeId}`)
+  }
 })
 ```
+
+| 字段 | 含义 |
+| --- | --- |
+| `recipeType` | 目标 MBD Recipe Type |
+| `proxyTypeId` / `proxyType` | 来源 Recipe Type ID/对象 |
+| `proxyRecipeId` / `proxyRecipe` | 来源配方 ID/对象 |
+| `mbdRecipe` | 可为 null 的转换结果 |
+
+普通机器 IO 请添加 Trait，并在配方中使用 `slotName`。KubeJS 当前没有公开用于创建完整 proxy 配置的稳定 fluent builder；该部分应由编辑器完成。

@@ -1,0 +1,8 @@
+title: Recipe System
+collapsed: false
+nav:
+  - index.md
+  - recipe-lifecycle.md
+  - capabilities-and-conditions.md
+  - capability-reference.md
+  - condition-reference.md

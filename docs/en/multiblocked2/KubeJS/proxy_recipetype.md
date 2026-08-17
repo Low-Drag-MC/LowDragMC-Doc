@@ -1,35 +1,42 @@
-# Customize Proxy RecipeTypes Transfer
+# Proxy Recipe Types
 
-`Proxy Recipetype` in mbd2 don't always work very well. For example, if some recipes contain input types that mbd2 does not know, they cannot be translated.
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
 
-Furthermore, people may want to filter some recipes, or modify the duration, inputs, etc. 
-We provide an event `onTransferProxyRecipe` to allow you to take over the transfer processing.
+<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type Inspector area for proxy sources and Fuel Recipe Types"><figcaption>Enable proxy sources in the editor; KubeJS receives a filtering event for each converted result.</figcaption></figure>
+
+A recipe transfer proxy converts a vanilla or mod Recipe Type into the target `MBDRecipeType`. It is not a Trait and does not provide machine IO.
+
+## Workflow
+
+1. Add the proxy source in the target Recipe Type editor settings.
+2. Save and publish the Recipe Type.
+3. Subscribe to `onTransferProxyRecipe` with the target MBD Recipe Type ID.
+4. Inspect the source IDs, source recipe, and initial `mbdRecipe`.
+5. Cancel recipes that should not import, or replace the conversion result.
+
 ```js
-MBDRecipeTypeEvents.onTransferProxyRecipe("mbd2:recipe_type_id", e => {
-    let event = e.event;
-    const {recipeType, proxyTypeId, proxyType, proxyRecipeId, proxyRecipe} = event;
+// kubejs/server_scripts/mbd2_proxy.js
+MBDRecipeTypeEvents.onTransferProxyRecipe('example:electric_furnace', wrapper => {
+  const event = wrapper.event
 
-    // make sure the recipe type is correct
-    if (proxyTypeId === "create:haunting") {
-        let input = proxyRecipe.getIngredients()[0]; // we assume the ingredients has and only has one item.
-        let output = proxyRecipe.getResultItem(null);
-        console.log("input: ", input);
-        console.log("output: ", output);
-        // convert it into a mbd2 recipe
-        var recipe = recipeType.recipeBuilder() // same as create recipe via kjs event
-            .id(proxyRecipeId + "_mbd2")
-            .duration(400)
-            .inputItems(input)
-            .outputItems(output)
-            .chance(0)
-            .inputFluids("water 1000")
-            .chance(1)
-            .buildMBDRecipe();
+  // Accept only the vanilla smelting source.
+  if (`${event.proxyTypeId}` !== 'minecraft:smelting') {
+    event.setCanceled(true)
+    return
+  }
 
-        // If you want to skip this recipe
-        // event.mbdRecipe = null;
-        // set the result
-        event.mbdRecipe = recipe;
-    }
+  // mbdRecipe may be null when a source cannot be converted automatically.
+  if (event.mbdRecipe === null) {
+    console.warn(`Could not transfer ${event.proxyRecipeId}`)
+  }
 })
 ```
+
+| Field | Meaning |
+| --- | --- |
+| `recipeType` | Target MBD Recipe Type |
+| `proxyTypeId` / `proxyType` | Source Recipe Type ID/object |
+| `proxyRecipeId` / `proxyRecipe` | Source recipe ID/object |
+| `mbdRecipe` | Nullable conversion result |
+
+For normal machine IO, add Traits and use recipe `slotName`. KubeJS does not currently expose a stable fluent builder for complete proxy configuration; author that part in the editor.

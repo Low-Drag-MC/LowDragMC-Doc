@@ -10,6 +10,8 @@ export const DEFAULT_MODS = [
 
 export function parsePagesFile(content) {
   const title = content.match(/^title:\s*(.+?)\s*$/m)?.[1]?.trim();
+  const collapsedValue = content.match(/^collapsed:\s*(true|false)\s*$/mi)?.[1]?.toLowerCase();
+  const collapsed = collapsedValue === undefined ? undefined : collapsedValue === 'true';
   const nav = [];
   const lines = content.split(/\r?\n/);
   let inNav = false;
@@ -27,7 +29,7 @@ export function parsePagesFile(content) {
       }
     }
   }
-  return { title, nav };
+  return { title, collapsed, nav };
 }
 
 export function routeForFile(locale, relativeFile) {
@@ -88,7 +90,7 @@ function buildEntry(localeRoot, relativePath, locale, entry) {
     group.link = routeForFile(locale, path.join(relativePath, 'index.md'));
   }
   if (items.length) {
-    group.collapsed = true;
+    group.collapsed = pages.collapsed ?? true;
     group.items = items;
   }
   return group;
@@ -96,7 +98,7 @@ function buildEntry(localeRoot, relativePath, locale, entry) {
 
 function readPages(file) {
   if (!fs.existsSync(file)) {
-    return { title: undefined, nav: ['...'] };
+    return { title: undefined, collapsed: undefined, nav: ['...'] };
   }
   return parsePagesFile(fs.readFileSync(file, 'utf8'));
 }

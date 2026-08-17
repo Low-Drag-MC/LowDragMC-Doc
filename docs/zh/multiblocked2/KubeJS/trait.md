@@ -1,118 +1,88 @@
-# 与 Trait 交互
+# 访问 Trait
 
-你可以通过名称获取机器的 trait。
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
 
-```javascript
-// 返回第一个匹配的 trait。
-let trait = machine.getTraitByName("item item_trait") 
+<figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="KubeJS 在运行时访问的命名机器 Trait 与 Item Slot 字段"><figcaption>使用 Inspector 中制作的 Trait 名称，并验证返回运行时 Trait 的实际 Java 类型。</figcaption></figure>
 
-let allTraits = machine.additionalTraits;
+机器事件会暴露运行时机器。通过编辑器名称获取 Trait，检查它存在，再只使用该 Trait 实际 Java 类提供的 API。
+
+```js
+MBDMachineEvents.onUseWithoutItem('example:crusher', wrapper => {
+  const machine = wrapper.event.machine
+  const itemTrait = machine.getTraitByName('input_items')
+  if (itemTrait === null) return
+
+  const storage = itemTrait.storage
+  const first = storage.getStackInSlot(0)
+  // 使用 storage 的插入/提取方法；不要原地修改 ItemStack。
+})
 ```
 
-## Trait API
-### 物品
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/misc/ItemStackTransfer.java)
-```javascript
-let trait = machine.getTraitByName("item_trait") 
-let storage = trait.storage;
-let stored = storage.getStackInSlot(0);
-storage.insertItem(0, "16x apple", true) // index, item stack, simulate
+`machine.additionalTraits` 只包含当前机器附加的运行时 Trait。名称在编辑器中配置；更名会破坏脚本查询，也可能破坏 UI 绑定。
+
+## 三种不同的标识符
+
+| 标识符 | 定义位置 | 使用者 |
+| --- | --- | --- |
+| Trait `name` | 机器项目中的 Trait 定义 | `getTraitByName(name)` 与 UI ID `ui:<name>` |
+| `slotNames` | `RecipeCapabilityTraitDefinition` | 配方 `slotName(...)` 路由 |
+| Capability 名 | `RecipeCapability` registry | 配方内容分组与通用 `inputs/outputs` |
+
+名为 `input_items` 的 Trait 可以公开 `primary`、`catalyst` 两个槽位名，同时处理注册名为 `item` 的配方 capability。这些字符串不能互换。
+
+```js
+function requireTrait(machine, name) {
+  const trait = machine.getTraitByName(name)
+  if (trait === null) {
+    throw new Error(`Machine ${machine.definition.id()} has no trait named ${name}`)
+  }
+  return trait
+}
 ```
----
-### 流体
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/LDLib-MultiLoader/blob/1.20.1/common/src/main/java/com/lowdragmc/lowdraglib/misc/FluidStorage.java)
-```javascript
-let trait = machine.getTraitByName("fluid_trait") 
-let storages = trait.storages;
-let stored = storages[0].getFluid();
-storages[0].setFluid(0, "water 1000")
+
+开发阶段可快速失败；发布的整合包对可选行为应只记录一次并跳过，防止 Trait 更名后每 tick 刷屏。
+
+## 常见 Java 后端接口
+
+| Trait | 常见运行时成员 | 底层 API |
+| --- | --- | --- |
+| 物品槽 | `storage` | 物品 handler 插入/提取/查询 |
+| 流体罐 | `storages` | 流体存储列表 |
+| Forge Energy | `storage` | FE 接收/提取/查询 |
+| Mekanism 化学品 | `storages` | 化学品存储列表 |
+| Mekanism 热量 | `container` | Heat container |
+| 气动工艺空气 | `handler` | Air/pressure handler |
+| 气动工艺热量 | `handler` | Heat exchanger |
+
+MBD2 没有统一的 JavaScript 存储接口。准确方法来自底层 Java API，并可能随集成版本变化。
+
+## 安全观察与修改
+
+```js
+MBDMachineEvents.onUseWithoutItem('example:charger', wrapper => {
+  const { machine } = wrapper.event
+  const items = machine.getTraitByName('output')
+  const energy = machine.getTraitByName('energy')
+  if (items === null || energy === null) return
+
+  const stack = items.storage.getStackInSlot(0)
+  const stored = energy.storage.energyStored
+  console.info(`${stack} / ${stored} FE`)
+})
 ```
----
-### Forge Energy
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/common/trait/forgeenergy/CopiableEnergyStorage.java)
-```javascript
-let trait = machine.getTraitByName("forge_energy_trait") 
-let storage = trait.storage;
-let stored = storage.getEnergyStored();
-let maxStored = storage.getMaxEnergyStored();
-storage.receiveEnergy(1024, false) // fe, simulate
-storage.extractEnergy(1024, false) // fe, simulate
-```
----
-### Botania 魔力
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/botania/trait/CopiableManaPool.java)
-```javascript
-let trait = machine.getTraitByName("botania_mana_trait") 
-let storage = trait.storage;
-let stored = storage.getCurrentMana();
-storage.receiveMana(1024) // input mana
-storage.receiveMana(-1024) // output mana
-```
----
-### Create 转速 / 应力
-```javascript
-let trait = machine.getTraitByName("create_trait") 
-let available_stress = trait.getMachine().getHolder().scheduleWorkingRPM(4, false) // rpm, simulate
-let available_stress = trait.getMachine().getHolder().scheduleWorking(256, false) // stress, simulate
-```
----
-### 余烬（Ember）
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/embers/trait/CopiableEmberCapability.java)
-```javascript
-let trait = machine.getTraitByName("ember_trait") 
-let storage = trait.storage;
-let stored = storage.getEmber();
-let capacity = storage.getEmberCapacity();
-storage.addAmount(1024, false) // ember, simulate
-storage.removeAmount(1024, false) // ember, simulate
-```
----
-### GTM 能量
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/gtm/trait/CopiableEnergyContainer.java)
-```javascript
-let trait = machine.getTraitByName("gtm_energy_trait") 
-let container = trait.container;
-let stored = container.getEnergyStored();
-let capacity = container.getEnergyCapacity();
-container.changeEnergy(1024) // energyToAdd
-```
----
-### Mek 化学品
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/mekanism/trait/chemical/ChemicalStorage.java)
-```javascript
-let trait = machine.getTraitByName("mek_chemical_trait") 
-let storages = trait.storages;
-let stored = storages[0].getStack();
-storages[0].setStack(stored) // did not check how to create a chemical instance via kjs
-```
----
-### Mek 热量
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/mekanism/trait/heat/CopiableHeatContainer.java)
-```javascript
-let trait = machine.getTraitByName("mek_heat_trait") 
-let container = trait.container;
-let stored = container.getTemperature(0); // capacitor
-let stocapacityred = container.getHeatCapacity(0); // capacitor
-container.handleHeat(0, 1000) // capacitor, transfer value
-```
----
-### PNC 压力 / 空气
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/pneumaticcraft/trait/pressure/CopiableAirHandler.java)
-```javascript
-let trait = machine.getTraitByName("pnc_pressure_trait") 
-let handler = trait.handler;
-let stored = handler.getAir();
-let maxPressure = handler.maxPressure();
-handler.addAir(16); // added air
-handler.setPressure(4) // addAir(((int) (pressure * getVolume())) - getAir());
-```
----
-### PNC 热量
-更多 API 可参见[此处](https://github.com/Low-Drag-MC/Multiblocked2/blob/1.20.1/src/main/java/com/lowdragmc/mbd2/integration/pneumaticcraft/trait/heat/HeatExchanger.java)
-```javascript
-let trait = machine.getTraitByName("pnc_heat_trait") 
-let handler = trait.handler;
-let temp = handler.getTemperature();
-let cap = handler.getThermalCapacity();
-handler.setTemperature(300); // temperature
-```
+
+修改时调用底层 API 的 `insertItem`/`extractItem`、`fill`/`drain` 或 `receiveEnergy`/`extractEnergy`，并遵守 `simulate` 参数。不要原地修改返回的 stack/tank 对象并假设 handler 会检测到。
+
+## 多方块作用域
+
+`additionalTraits` 与 `getTraitByName` 只检查当前控制器或部件。配方匹配时，已成型控制器可以聚合部件的配方逻辑 Trait；但脚本在控制器上按名称查询时**不会**自动搜索所有部件。
+
+常规控制器/部件 IO 应在编辑器中配置 Pattern capability proxy、`traitNameFilter`、`capabilityIO` 与 `autoIO`。只有代理系统无法表达时才从 JavaScript 遍历 part API，并先确认机器确实是已成型多方块控制器。
+
+## 不要绕过配方引擎
+
+直接修改 Trait 适合明确交互或管理行为，通常不适合放进 `onRecipeWorking`。引擎已经负责模拟、distinct handler 路由、per-tick 处理与提交；事件再次消耗相同存储会在多 handler/代理存在时造成复制或亏损。
+
+::: warning 服务端权威
+Trait 是 Java 运行时对象，不是稳定 JSON。存储修改只应在服务端进行。客户端事件可以读取同步值来渲染，但不能执行权威资源变更。
+:::

@@ -1,5 +1,12 @@
-title: KubeJS Integration
+title: KubeJS
+collapsed: false
 nav:
+  - index.md
+  - registry.md
   - recipe.md
+  - trait.md
   - event.md
-  - ...
+  - ui.md
+  - upgrade_system.md
+  - proxy_recipetype.md
+  - examples
