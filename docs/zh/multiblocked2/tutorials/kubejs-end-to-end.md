@@ -1,6 +1,6 @@
 # KubeJS 教程：注册定义并添加配方
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 本教程在 KubeJS startup 阶段注册配方类型和基础机器定义，再通过 server script 添加配方与定向行为。同时会明确 KubeJS-only 机器目前能做到哪里。
 
@@ -54,7 +54,7 @@ MBDRegistryEvents.machine(event => {
 })
 ```
 
-21.0.11 的 KubeJS 机器类型 key 只有 `single` 与 `multiblock`。事件先保存返回的 Java builder，在全部 startup handler 完成后调用 `build()`。
+21.1.1 的 KubeJS 机器类型 key 只有 `single` 与 `multiblock`。事件先保存返回的 Java builder，在全部 startup handler 完成后调用 `build()`。
 
 ::: warning 这只是注册 shell
 公开 KubeJS API 不能完整配置状态机、渲染器、Trait、UI、Recipe Logic 或多方块 Pattern。这个 shell 可以注册定义/方块，但没有文档化的可工作物品 IO，也不会自动引用 `example:crushing`。不要照搬旧示例臆造 fluent builder 调用。真正可加工的机器请使用[混合教程](./hybrid-editor-kubejs.md)。

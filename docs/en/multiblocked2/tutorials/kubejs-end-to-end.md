@@ -1,6 +1,6 @@
 # KubeJS Tutorial: Register Definitions and Add Recipes
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 This tutorial registers a recipe type and a base machine definition during KubeJS startup, then creates recipes and targeted behavior in server scripts. It also shows the exact point where a KubeJS-only machine reaches its current authoring limit.
 
@@ -54,7 +54,7 @@ MBDRegistryEvents.machine(event => {
 })
 ```
 
-`single` and `multiblock` are the only supported KubeJS machine type keys in 21.0.11. The event keeps the returned Java builder and calls `build()` after all startup handlers finish.
+`single` and `multiblock` are the only supported KubeJS machine type keys in 21.1.1. The event keeps the returned Java builder and calls `build()` after all startup handlers finish.
 
 ::: warning This is a registration shell
 The public KubeJS API does not configure the complete state machine, renderer, Traits, UI, Recipe Logic, or multiblock Pattern. The shell can register a definition/block, but it has no documented operational item IO and does not automatically reference `example:crushing`. Do not invent fluent builder calls from old examples. Use the [hybrid tutorial](./hybrid-editor-kubejs.md) for a working processing machine.

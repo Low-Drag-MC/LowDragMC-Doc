@@ -1,10 +1,8 @@
 # 完整机器最小包
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 本例演示 KubeJS 能独立完成的最小闭环。实际机器的状态、模型、Trait、UI 与多方块 Pattern 仍建议由编辑器创建。
-
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="MBD2 机器项目概览，对应 KubeJS 注册的稳定机器定义 ID"><figcaption>KubeJS 注册建立 ID；编辑器项目补全可发布的机器定义。</figcaption></figure>
 
 ## 1. 注册配方类型和基础机器
 

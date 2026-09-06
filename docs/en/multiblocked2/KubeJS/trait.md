@@ -1,34 +1,54 @@
 # Accessing Traits
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="Named machine Traits and the Item Slot fields that KubeJS accesses at runtime"><figcaption>Use the authored Trait name shown in Inspector, then validate the returned runtime Trait's Java type.</figcaption></figure>
-
-Machine events expose the runtime machine. Retrieve a Trait by its editor name, check it exists, then use only the API of that Trait's actual Java class.
+Machine events expose the runtime machine. Look a Trait up by the name it was given in the editor, check it exists, then use the API of that Trait's actual Java class — MBD2 has no unified JavaScript storage facade.
 
 ```js
 MBDMachineEvents.onUseWithoutItem('example:crusher', wrapper => {
   const machine = wrapper.event.machine
-  const itemTrait = machine.getTraitByName('input_items')
-  if (itemTrait === null) return
+  const items = machine.getTraitByName('input_items')
+  if (items === null) return
 
-  const storage = itemTrait.storage
-  const first = storage.getStackInSlot(0)
-  // Use storage insert/extract methods; do not mutate ItemStack in place.
+  const first = items.storage.getStackInSlot(0)
+  const simulated = items.storage.extractItem(0, 1, true)
+  console.info(`${first} / can extract ${simulated} / ${items.storage.slots} slots`)
 })
 ```
 
-`machine.additionalTraits` contains the runtime Traits attached to that exact machine. Names are configured in the editor; renaming one breaks script lookup and may also break UI bindings.
+| Expression | Gives |
+| --- | --- |
+| `machine.getTraitByName(name)` | The Trait, or `null` |
+| `machine.additionalTraits` | Every Trait on **this** machine, as a Java `List<ITrait>` |
+| `trait.definition.name` | A Trait's authored name. There is no `trait.name` |
+| `trait.definition` | The editor-side definition, with its configured fields |
 
 ## Three different identifiers
 
 | Identifier | Defined on | Used by |
 | --- | --- | --- |
-| Trait `name` | Trait definition in the machine project | `getTraitByName(name)` and UI ID `ui:<name>` |
+| Trait `name` | The Trait definition in the machine project | `getTraitByName(name)`, generated widget ID `ui:<name>` |
 | `slotNames` | `RecipeCapabilityTraitDefinition` | Recipe `slotName(...)` routing |
-| Capability name | `RecipeCapability` registry | Recipe content grouping and generic `inputs/outputs` |
+| Capability name | The `RecipeCapability` registry | Recipe content grouping and generic `inputs`/`outputs` |
 
-A Trait named `input_items` can expose slot names `primary` and `catalyst` while handling the registered `item` recipe capability. These strings are not interchangeable.
+A Trait named `input_items` can advertise slot names `primary` and `catalyst` while handling the registered `item` capability. The three are not interchangeable.
+
+## Common runtime surfaces
+
+| Trait | Member | Backing API |
+| --- | --- | --- |
+| `item_slot` | `storage` | `IItemHandler`: `getStackInSlot`, `insertItem`, `extractItem`, `slots` |
+| `fluid_tank` | `storages` | A list of fluid tanks |
+| `forge_energy_storage` | `storage` | `IEnergyStorage`: `energyStored`, `maxEnergyStored`, `receiveEnergy`, `extractEnergy` |
+| `chemical_tank` | `storages` | Mekanism chemical tanks |
+| `mek_heat_container` | `container` | Mekanism heat container |
+| `pneumatic_pressure_air_handler` | `handler` | PNC air/pressure handler |
+| `pneumatic_heat_exchanger` | `handler` | PNC heat exchanger |
+| `ars_source_storage` | `storage` | Source buffer |
+
+Exact methods come from the backing Java API and can change with an integration version. Call `insertItem` / `extractItem`, `fill` / `drain`, `receiveEnergy` / `extractEnergy` and respect their `simulate` argument; never edit a returned stack or tank object in place and expect the handler to notice.
+
+## Fail fast while developing
 
 ```js
 function requireTrait(machine, name) {
@@ -40,49 +60,30 @@ function requireTrait(machine, name) {
 }
 ```
 
-Use fail-fast lookup during development. In a published pack, log once and skip optional behavior so a renamed Trait does not spam every tick.
+In a published pack, log once and skip the optional behaviour instead — a renamed Trait would otherwise spam every tick.
 
-## Common Java-backed surfaces
+## Overriding a Trait's configuration
 
-| Trait | Common runtime member | Backing API |
-| --- | --- | --- |
-| Item slot | `storage` | Item handler insert/extract/query |
-| Fluid tank | `storages` | Fluid storage list |
-| Forge Energy | `storage` | FE receive/extract/query |
-| Mekanism chemical | `storages` | Chemical storage list |
-| Mekanism heat | `container` | Heat container |
-| Pneumatic air | `handler` | Air/pressure handler |
-| Pneumatic heat | `handler` | Heat exchanger |
-
-There is no single MBD2 JavaScript storage interface. Exact methods come from the backing Java API and may vary with an integration version.
-
-## Safe observation and mutation
+Every editor setting on a Trait is also a [runtime value](../editor/runtime-values.md), overridable for one placed machine:
 
 ```js
-MBDMachineEvents.onUseWithoutItem('example:charger', wrapper => {
-  const { machine } = wrapper.event
-  const items = machine.getTraitByName('output')
-  const energy = machine.getTraitByName('energy')
-  if (items === null || energy === null) return
-
-  const stack = items.storage.getStackInSlot(0)
-  const stored = energy.storage.energyStored
-  console.info(`${stack} / ${stored} FE`)
-})
+const slots = machine.getTraitByName('input_items')
+slots.runtimeValues.set('auto_io.enable', true)
+slots.runtimeValues.set('auto_io.front', 'OUT')
+slots.setAutoIOInterval(10)
+slots.clearAutoIO()
 ```
-
-For mutation, call the backing API's `insertItem`/`extractItem`, `fill`/`drain`, or `receiveEnergy`/`extractEnergy` methods and respect their `simulate` argument. Never edit a returned stack/tank object in place and assume the handler notices.
 
 ## Multiblock scope
 
-`additionalTraits` and `getTraitByName` inspect the current controller or part only. During recipe matching, a formed controller can aggregate recipe-logic Traits from its parts, but a script lookup on the controller does **not** automatically search every part by name.
+`additionalTraits` and `getTraitByName` inspect the **current** controller or part only. A formed controller aggregates recipe-logic handlers from its parts during matching, but a script lookup on the controller does not search the parts by name.
 
-For normal controller/part IO, configure Pattern capability proxies, `traitNameFilter`, `capabilityIO`, and `autoIO` in the editor. Traverse the part API from JavaScript only for behavior the proxy system cannot express, and first verify that the machine is a formed multiblock controller.
+For normal controller/part IO, configure Pattern capability proxies, `traitNameFilter`, `capabilityIO` and `autoIO` in the editor. Traverse the part API from JavaScript only for behaviour the proxy system cannot express, and check that the machine is a formed controller first.
 
 ## Do not bypass the recipe engine
 
-Direct Trait mutation is suitable for explicit interactions or administrative behavior. It is usually wrong in `onRecipeWorking`: the engine already performs simulation, distinct-handler routing, per-tick handling, and commit. Consuming the same storage again from an event creates duplication or deficits when multiple handlers/proxies exist.
+Direct Trait mutation is right for an explicit interaction or an administrative action. It is usually wrong inside `onRecipeWorking`: the engine already simulates, routes across distinct handlers, applies per-tick content and commits. Consuming the same storage again from an event creates duplication or deficits as soon as more than one handler or proxy exists.
 
 ::: warning Server authority
-Treat Traits as Java runtime objects, not stable JSON. Keep storage mutations on the server. Client events may read synchronized values for rendering but must not perform authoritative resource changes.
+Keep storage mutations on the server. Client events may read synchronised values for rendering, but must not perform authoritative resource changes.
 :::

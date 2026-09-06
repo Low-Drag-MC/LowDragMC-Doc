@@ -1,6 +1,6 @@
 # 集成
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 MBD2 集成是一条管线，而不是单个开关。配方 capability 描述内容，机器 Trait 提供运行时 handler 和可选的外部 capability，condition 只观察状态。可执行配方通常至少需要前两层。
 
@@ -27,9 +27,10 @@ flowchart LR
 | Create | 转动、RPM/应力内容与条件 | [Create](./create.md) |
 | PneumaticCraft | 压力/空气与热 | [PneumaticCraft](./pneumaticcraft.md) |
 | Nature's Aura | 世界灵气传输 | [Nature's Aura](./natures-aura.md) |
+| Ars Nouveau | Source 缓冲或附近源罐，以及一个条件 | [Ars Nouveau](./ars-nouveau.md) |
 | Applied Energistics 2 | ME 接口与样板供应器桥接 | [Applied Energistics 2](./applied-energistics-2.md) |
 
-JEI/REI/EMI、Jade、GeckoLib、KubeJS 和休眠源码路径保留在[状态矩阵](./status.md)，不把它们作为内容资源集成展开。
+Photon 不提供配方 capability，它提供[机器特效](../editor/machine-fx.md)。JEI/REI/EMI、Jade、GeckoLib、KubeJS 和休眠源码路径见[状态矩阵](./status.md)。
 
 ## 通用配置清单
 
@@ -40,5 +41,5 @@ JEI/REI/EMI、Jade、GeckoLib、KubeJS 和休眠源码路径保留在[状态矩�
 5. 同时测试模拟与实际执行、输入与输出、每 tick 内容、重启后持久化、外部管道/网络以及整合包的准确模组版本。
 
 ::: warning 源码存在不等于支持
-集成类可能仍在仓库中，但注册注解或启动路径已经禁用。只有状态矩阵标为可用的入口才适合 21.0.11 教程。
+集成类可能仍在仓库中，但注册注解或启动路径已经禁用。只有状态矩阵标为可用的入口才适合 21.1.1 教程。
 :::

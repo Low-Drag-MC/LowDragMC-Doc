@@ -1,6 +1,6 @@
 # Traits and Persistent Data
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="Item, fluid, and energy Traits addressable by name in the machine Inspector"><figcaption>Script names must exactly match each editor Trait definition name.</figcaption></figure>
 
@@ -39,7 +39,29 @@ MBDMachineEvents.onUseWithoutItem('example:processor', wrapper => {
 })
 ```
 
-Copy and call `setCustomData` so persisted/synchronized update listeners run. Do not mutate the old `CompoundTag` reference and assume LDLib2 detects an internal change.
+Copy and call `setCustomData` so the persisted and synchronised update listeners run. Do not mutate the old `CompoundTag` reference and assume LDLib2 notices.
+
+Custom data is `@DescSynced`, so it is also the channel for anything the **client** has to see — a value a UI draws, for instance. [Runtime values](../../editor/runtime-values.md) are not synced and cannot be used for that.
+
+## Override a Trait's configuration for one machine
+
+```js
+MBDMachineEvents.onPlaced('example:processor', wrapper => {
+  const machine = wrapper.event.machine
+  const items = machine.getTraitByName('input_items')
+  if (items === null) return
+
+  // this placed machine only; saved with the block, never sent to clients
+  items.setAutoIOEnabled(true)
+  items.setAutoIOSide('up', IO.IN)
+  items.setAutoIOInterval(10)
+  machine.setMachineLevel(2)
+})
+```
+
+See [Runtime values](../../editor/runtime-values.md) for every key and the string-addressed form.
+
+## Fail fast in development
 
 ```js
 function requireTrait(machine, name) {

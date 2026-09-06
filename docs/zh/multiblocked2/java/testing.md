@@ -1,8 +1,6 @@
 # 测试 Java 扩展
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/editor/multiblock-pattern.png" alt="由 LDLib2 UI test harness 生成的真实客户端 MBD2 编辑器截图"><figcaption>编辑器注册和交互使用客户端内测试；codec 与 handler 模拟仍由单元测试覆盖。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 应将 capability 与 Trait 一起测试。仅测试 codec 无法发现复制、模拟修改状态、IO 方向错误，或 handler 从未被配方逻辑发现等问题。
 

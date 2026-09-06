@@ -1,6 +1,6 @@
 # 配方 Cookbook
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="配方类型编辑器展示物品输入和输出 Content 行"><figcaption>脚本 builder 生成与编辑器 Recipes 视图相同的 MBDRecipe 内容模型。</figcaption></figure>
 

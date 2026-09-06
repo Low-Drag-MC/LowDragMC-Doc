@@ -1,8 +1,6 @@
 # Capability、Handler 与条件
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="Trait 注册表显示与配方 capability 内容配对的机器侧 handler"><figcaption>配方 capability 描述内容；列表中的 Trait 提供兼容机器侧 handler。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 MBD2 配方不是一次直接的物品栏操作。它包含带类型的 `Content`；配方逻辑将每组内容路由给机器 Trait 提供的兼容 `IRecipeHandler`，再根据机器和世界检查条件。
 

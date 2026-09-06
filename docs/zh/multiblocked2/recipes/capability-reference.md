@@ -1,6 +1,6 @@
 # RecipeCapability 参考
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="编辑器中的内置物品、流体、Forge Energy 与实体 Trait handler"><figcaption>下方核心 capability 行直接映射到这些内置机器 handler。</figcaption></figure>
 
@@ -28,8 +28,21 @@ Registry name 是 codec 和 `MBDRegistries.RECIPE_CAPABILITIES.get(name)` 使用
 | `pneumatic_pressure_air` | PneumaticCraft | `pneumatic_pressure_air_handler` | 压力与空气方法 | `PressureAir` 记录数值是压力还是空气量 |
 | `pneumatic_heat` | PneumaticCraft | `pneumatic_heat_exchanger` | `inputPNCHeat`、`outputPNCHeat` | `double` 热量 |
 | `natures_aura` | Nature's Aura | `aura_handler` | `inputAura`、`outputAura` | 整数灵气量 |
+| `ars_source` | Ars Nouveau | `ars_source_storage` **或** `ars_nearby_source` | `inputSource`、`outputSource` | 整数 Source；两个 Trait 互斥 |
 
-可选注册使用 `@LDLRegister(modID = "...")`；依赖未加载时该 capability 不存在。如果整合包允许缺少对应模组，脚本就不能无条件调用其 builder 方法。
+可选注册使用 `@LDLRegister(modID = "...")`，依赖未加载时该 capability 不存在——而且对应的 KubeJS builder 方法会**抛异常**。如果整合包允许缺少该模组，脚本必须加判断。
+
+## 配方查看器控件 ID
+
+`uiName` 把一条内容绑到配方展示 UI 里的命名控件上。留空时 MBD2 匹配默认生成的 ID：
+
+```text
+@<capability>_<io>_<index>      例如 @item_import_0、@fluid_export_1
+```
+
+`<io>` 是 IO 的显示名——`IO.IN` 是 `import`，`IO.OUT` 是 `export`。
+
+只有在需要覆盖这套映射时才设置 `uiName`，例如把额外产出送到你自己的控件上。显式的 `uiName` 是按子串匹配的，不是精确 ID；这一点，以及 `@progress_bar` / `@duration` / `@condition` / `@custom_data` 这几个保留元素、还有 Trait 如何声明供 `slotName` 比对的槽位名，都见[槽位名与配方查看器 UI](slots-and-xei-ui.md)。
 
 ## 路由字段
 
@@ -41,7 +54,7 @@ builder.slotName("hot_side")
     .output(HeatUnitsCapability.CAP, 50);
 ```
 
-Fluent 字段会保持生效直到再次修改。KubeJS 回调形式会自动恢复上一个值，更适合限定作用域：
+Fluent 字段会保持生效直到再次修改。KubeJS 回调形式会自动恢复上一个值，更适合限定作用域。（`heat_units` 是[示例 Java capability](../java/custom-recipe-capability.md)，没装它时查找会抛异常。）
 
 ```js
 ServerEvents.recipes(event => {

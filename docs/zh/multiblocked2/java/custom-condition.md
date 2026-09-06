@@ -1,8 +1,6 @@
 # 自定义 RecipeCondition
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="已注册 Java condition 被添加到配方的 Recipe Type 项目"><figcaption>condition 注册后，可用于目标 Recipe Type 下编辑的配方。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 `RecipeCondition` 判断一个配方是否可以在某个 `RecipeLogic` 上运行。它应读取世界或机器状态，不应消耗资源或修改世界。
 

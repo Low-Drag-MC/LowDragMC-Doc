@@ -1,43 +1,60 @@
 # Mod Integration Recipes
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="Overview of current MBD2 mod integrations and recipe capabilities"><figcaption>Only loaded capabilities registered by 21.0.11 have runnable builder methods.</figcaption></figure>
-
-These methods require the corresponding mod to be loaded.
+Every builder method below **throws** when its mod is absent, so a pack where the mod is optional has to guard the call.
 
 ```js
+// kubejs/server_scripts/mbd2_integrations.js
 ServerEvents.recipes(event => {
-  event.recipes.example.integration_test()
-    .id('example:integration/create')
-    .duration(100)
-    .inputRPM(64)
-    .inputStress(1024)
-    .rotationCondition(32, 256, 512, 4096)
+  if (Platform.isLoaded('create')) {
+    event.recipes.example.integration_test()
+      .id('example:integration/create')
+      .duration(100)
+      .inputRPM(64)
+      .inputStress(1024)
+      .rotationCondition(32, 256, 512, 4096)
+  }
 
-  event.recipes.example.integration_test()
-    .id('example:integration/mekanism')
-    .duration(100)
-    .inputChemicals('100x mekanism:oxygen')
-    .inputHeat(500)
-    .mekTemperatureCondition(300, 1200)
+  if (Platform.isLoaded('mekanism')) {
+    event.recipes.example.integration_test()
+      .id('example:integration/mekanism')
+      .duration(100)
+      .inputChemicals('100x mekanism:oxygen')
+      .inputHeat(500)
+      .mekTemperatureCondition(300, 1200)
+  }
 
-  event.recipes.example.integration_test()
-    .id('example:integration/pneumaticcraft')
-    .duration(100)
-    .inputPNCPressure(2.0)
-    .inputPNCAir(1000)
-    .inputPNCHeat(350)
-    .pncPressureCondition(false, 1.5, 4.9)
-    .pncTemperatureCondition(300, 500)
+  if (Platform.isLoaded('pneumaticcraft')) {
+    event.recipes.example.integration_test()
+      .id('example:integration/pneumaticcraft')
+      .duration(100)
+      .inputPNCPressure(2.0)
+      .inputPNCAir(1000)
+      .inputPNCHeat(350)
+      .pncPressureCondition(false, 1.5, 4.9)
+      .pncTemperatureCondition(300, 500)
+  }
 
-  event.recipes.example.integration_test()
-    .id('example:integration/natures_aura')
-    .duration(100)
-    .inputAura(5000)
+  if (Platform.isLoaded('naturesaura')) {
+    event.recipes.example.integration_test()
+      .id('example:integration/natures_aura')
+      .duration(100)
+      .inputAura(5000)
+  }
+
+  if (Platform.isLoaded('ars_nouveau')) {
+    event.recipes.example.integration_test()
+      .id('example:integration/ars_nouveau')
+      .duration(100)
+      .inputSource(250)
+      .arsSourceNearbyCondition(8, 500, 10000)
+  }
 })
 ```
 
-<VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="Legacy/disabled API" icon="tag" />
+The machine still needs the matching Trait — a capability row never creates a tank, a buffer or a network node. See the [integration pages](../../integrations/) for which Trait handles which capability.
 
-`inputMana`, `inputEU`, and `inputEmber` (and outputs) are commented out in 21.0.11. Mekanism 1.21.1 uses unified chemicals; old `inputGas`, `inputSlurry`, `inputPigment`, and `inputInfuse` are not current builder methods.
+<VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="Removed" icon="tag" />
+
+`inputMana`, `inputEU` and `inputEmber` (with their outputs) are commented out in `21.1.1` and do not exist. Mekanism 1.21.1 uses unified chemicals, so `inputGas`, `inputSlurry`, `inputPigment` and `inputInfuse` are all `inputChemicals` now.

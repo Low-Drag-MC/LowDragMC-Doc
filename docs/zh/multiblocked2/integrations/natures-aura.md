@@ -1,6 +1,6 @@
 # Nature's Aura
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Nature's Aura 集成读取并修改机器周围世界中的灵气；它不是私有储罐，也不是有侧面的 NeoForge 存储 capability。
 

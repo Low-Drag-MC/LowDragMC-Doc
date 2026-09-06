@@ -1,6 +1,6 @@
 # Custom Recipe Capability
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/mekanism.png" alt="Mekanism Chemical Tank editor controls created by a registered custom recipe capability and Trait"><figcaption>Mekanism is a complete in-tree example: typed recipe content is paired with an editor-configurable storage Trait.</figcaption></figure>
 
@@ -45,13 +45,15 @@ public final class HeatUnitsCapability extends RecipeCapability<Integer> {
 
     @Override
     public void createContentConfigurator(
-            ConfiguratorGroup parent,
-            Supplier<Integer> getter,
-            Consumer<Integer> setter) {
-        parent.addConfigurators(new NumberConfigurator(
+            ConfiguratorGroup father,
+            Supplier<Integer> supplier,
+            Consumer<Integer> onUpdate) {
+        // supplier::get, not supplier — NumberConfigurator takes Supplier<Number>,
+        // and Supplier<Integer> is not one.
+        father.addConfigurators(new NumberConfigurator(
             "recipe.capability.examplemod.heat_units",
-            getter,
-            value -> setter.accept(value.intValue()),
+            supplier::get,
+            number -> onUpdate.accept(number.intValue()),
             100,
             true
         ).setRange(1, Integer.MAX_VALUE));
@@ -66,6 +68,8 @@ public final class HeatUnitsCapability extends RecipeCapability<Integer> {
 ```
 
 The annotation must be on a loaded `public static` field. MBD2 scans it, registers the value under `heat_units`, and then freezes `MBDRegistries.RECIPE_CAPABILITIES`.
+
+Two optional overrides are worth knowing: `xeiLayoutType()` returns `SLOT` or `BAR` and decides where the recipe viewer places the widget, and `calculateAmount(List<T>)` supplies the number a progress display shows. `ArsSourceRecipeCapability` in MBD2's own source is the shortest complete scalar example.
 
 ## 2. Understand the serializer contract
 
@@ -95,11 +99,16 @@ recipeType.recipeBuilder(id)
 ```js
 ServerEvents.recipes(event => {
   const heat = MBDRegistries.RECIPE_CAPABILITIES.get('heat_units')
+  if (heat === null) throw new Error('heat_units capability is not registered')
+
   event.recipes.example.heat_press()
+    .id('example:anneal_plate')
     .inputs(heat, 400)
     .outputs(heat, 50)
 })
 ```
+
+`MBDRegistries` is a global KubeJS binding — no `Java.loadClass` needed.
 
 The KubeJS call reaches `RecipeCapability#of`, which delegates to the serializer's `of(Object)`. Make conversion errors explicit; silently returning zero creates recipes that appear valid but do nothing.
 

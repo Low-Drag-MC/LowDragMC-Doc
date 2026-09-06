@@ -1,6 +1,6 @@
 # 机器事件示例
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/states-and-rendering.png" alt="机器状态编辑器展示事件脚本可切换的状态"><figcaption>事件可以选择已定义状态，但不会动态创建新的状态或渲染器。</figcaption></figure>
 
@@ -98,6 +98,21 @@ MBDMachineEvents.onCustomDataUpdate('example:crusher', wrapper => {
 
 高频事件 `onTick`、`onClientTick`、`onRecipeWorking` 中不要扫描世界、解析大量 JSON 或重建 UI。
 
-::: warning 已注册但基础机器不发布
-`onFuelBurningFinish`、`onConsumeInputsAfterWorking` 与 `onRecipeFinish` 在 21.0.11 的 KubeJS 事件组中有名称，但基础 `MBDMachine` 没有通过 `postCustomEvent()` 发布它们。不要把逻辑挂在这三个 handler 上；21.0.11 的基础机器不会把它们送达 KubeJS。
+## 一次合成完成之后
+
+```js
+MBDMachineEvents.onRecipeFinish('example:crusher', wrapper => {
+  const { machine, recipe } = wrapper.event
+  // The outputs already exist here; onAfterRecipeWorking runs before they do.
+  console.info(`${recipe.id} finished at ${machine.pos}`)
+})
+
+MBDMachineEvents.onConsumeInputsAfterWorking('example:crusher', wrapper => {
+  // Only fires when the machine defers input consumption to completion.
+  console.debug(`deferred inputs taken for ${wrapper.event.recipe.id}`)
+})
+```
+
+::: warning `onFuelBurningFinish` 从不触发
+它的 KubeJS 名字已注册，但 `MBDMachine#onFuelBurningFinish` 向 NeoForge 总线投递时没有调用 `postCustomEvent()`，所以在 `21.1.1` 中这个 handler 永远不会被调用。请改为观察 `machine.recipeLogic.fuelTime` 或 `WAITING` 状态。
 :::

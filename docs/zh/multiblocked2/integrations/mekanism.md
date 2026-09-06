@@ -1,6 +1,6 @@
 # Mekanism
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Mekanism 集成增加统一化学品存储/配方内容，以及热存储/传输。MBD2 1.21.1 不再使用旧版分离的气体、灌注、颜料和浆液 capability 家族。
 

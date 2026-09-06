@@ -5,6 +5,7 @@ nav:
   - tutorials
   - editor
   - recipes
+  - blueprints
   - integrations
   - KubeJS
   - java

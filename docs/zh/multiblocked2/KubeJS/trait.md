@@ -1,34 +1,54 @@
 # 访问 Trait
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="KubeJS 在运行时访问的命名机器 Trait 与 Item Slot 字段"><figcaption>使用 Inspector 中制作的 Trait 名称，并验证返回运行时 Trait 的实际 Java 类型。</figcaption></figure>
-
-机器事件会暴露运行时机器。通过编辑器名称获取 Trait，检查它存在，再只使用该 Trait 实际 Java 类提供的 API。
+机器事件会给出运行时机器对象。按编辑器里给的名字查 Trait，判空，然后只使用该 Trait 实际 Java 类的 API——MBD2 没有统一的 JavaScript 存储门面。
 
 ```js
 MBDMachineEvents.onUseWithoutItem('example:crusher', wrapper => {
   const machine = wrapper.event.machine
-  const itemTrait = machine.getTraitByName('input_items')
-  if (itemTrait === null) return
+  const items = machine.getTraitByName('input_items')
+  if (items === null) return
 
-  const storage = itemTrait.storage
-  const first = storage.getStackInSlot(0)
-  // 使用 storage 的插入/提取方法；不要原地修改 ItemStack。
+  const first = items.storage.getStackInSlot(0)
+  const simulated = items.storage.extractItem(0, 1, true)
+  console.info(`${first} / can extract ${simulated} / ${items.storage.slots} slots`)
 })
 ```
 
-`machine.additionalTraits` 只包含当前机器附加的运行时 Trait。名称在编辑器中配置；更名会破坏脚本查询，也可能破坏 UI 绑定。
+| 表达式 | 得到 |
+| --- | --- |
+| `machine.getTraitByName(name)` | 该 Trait，或 `null` |
+| `machine.additionalTraits` | **这一台**机器上的所有 Trait，Java `List<ITrait>` |
+| `trait.definition.name` | Trait 的名字。没有 `trait.name` |
+| `trait.definition` | 编辑器侧的定义对象，带它配置好的字段 |
 
-## 三种不同的标识符
+## 三个不同的标识符
 
-| 标识符 | 定义位置 | 使用者 |
+| 标识符 | 定义在 | 被谁使用 |
 | --- | --- | --- |
-| Trait `name` | 机器项目中的 Trait 定义 | `getTraitByName(name)` 与 UI ID `ui:<name>` |
-| `slotNames` | `RecipeCapabilityTraitDefinition` | 配方 `slotName(...)` 路由 |
-| Capability 名 | `RecipeCapability` registry | 配方内容分组与通用 `inputs/outputs` |
+| Trait `name` | 机器项目里的 Trait 定义 | `getTraitByName(name)`、生成控件 ID `ui:<name>` |
+| `slotNames` | `RecipeCapabilityTraitDefinition` | 配方的 `slotName(...)` 路由 |
+| Capability 名 | `RecipeCapability` 注册表 | 配方内容分组与通用的 `inputs`/`outputs` |
 
-名为 `input_items` 的 Trait 可以公开 `primary`、`catalyst` 两个槽位名，同时处理注册名为 `item` 的配方 capability。这些字符串不能互换。
+一个名为 `input_items` 的 Trait 可以声明 slot 名 `primary` 和 `catalyst`，同时处理注册名为 `item` 的 capability。三者不可互换。
+
+## 常见运行时接口
+
+| Trait | 成员 | 背后的 API |
+| --- | --- | --- |
+| `item_slot` | `storage` | `IItemHandler`：`getStackInSlot`、`insertItem`、`extractItem`、`slots` |
+| `fluid_tank` | `storages` | 流体罐数组 |
+| `forge_energy_storage` | `storage` | `IEnergyStorage`：`energyStored`、`maxEnergyStored`、`receiveEnergy`、`extractEnergy` |
+| `chemical_tank` | `storages` | Mekanism 化学品罐 |
+| `mek_heat_container` | `container` | Mekanism 热量容器 |
+| `pneumatic_pressure_air_handler` | `handler` | PNC 空气/压力 handler |
+| `pneumatic_heat_exchanger` | `handler` | PNC 热交换器 |
+| `ars_source_storage` | `storage` | Source 缓冲 |
+
+具体方法来自背后的 Java API，可能随整合模组版本变化。请调用 `insertItem` / `extractItem`、`fill` / `drain`、`receiveEnergy` / `extractEnergy` 并正确使用它们的 `simulate` 参数；绝不要就地修改返回的 stack 或罐子对象再指望 handler 能察觉。
+
+## 开发期快速失败
 
 ```js
 function requireTrait(machine, name) {
@@ -40,49 +60,30 @@ function requireTrait(machine, name) {
 }
 ```
 
-开发阶段可快速失败；发布的整合包对可选行为应只记录一次并跳过，防止 Trait 更名后每 tick 刷屏。
+发布版整合包里应改成只记录一次日志并跳过可选行为——否则改名后的 Trait 会每 tick 刷屏。
 
-## 常见 Java 后端接口
+## 覆盖 Trait 的配置
 
-| Trait | 常见运行时成员 | 底层 API |
-| --- | --- | --- |
-| 物品槽 | `storage` | 物品 handler 插入/提取/查询 |
-| 流体罐 | `storages` | 流体存储列表 |
-| Forge Energy | `storage` | FE 接收/提取/查询 |
-| Mekanism 化学品 | `storages` | 化学品存储列表 |
-| Mekanism 热量 | `container` | Heat container |
-| 气动工艺空气 | `handler` | Air/pressure handler |
-| 气动工艺热量 | `handler` | Heat exchanger |
-
-MBD2 没有统一的 JavaScript 存储接口。准确方法来自底层 Java API，并可能随集成版本变化。
-
-## 安全观察与修改
+Trait 上的每一项编辑器设置同时也是一个 [runtime value](../editor/runtime-values.md)，可以为单台机器覆盖：
 
 ```js
-MBDMachineEvents.onUseWithoutItem('example:charger', wrapper => {
-  const { machine } = wrapper.event
-  const items = machine.getTraitByName('output')
-  const energy = machine.getTraitByName('energy')
-  if (items === null || energy === null) return
-
-  const stack = items.storage.getStackInSlot(0)
-  const stored = energy.storage.energyStored
-  console.info(`${stack} / ${stored} FE`)
-})
+const slots = machine.getTraitByName('input_items')
+slots.runtimeValues.set('auto_io.enable', true)
+slots.runtimeValues.set('auto_io.front', 'OUT')
+slots.setAutoIOInterval(10)
+slots.clearAutoIO()
 ```
-
-修改时调用底层 API 的 `insertItem`/`extractItem`、`fill`/`drain` 或 `receiveEnergy`/`extractEnergy`，并遵守 `simulate` 参数。不要原地修改返回的 stack/tank 对象并假设 handler 会检测到。
 
 ## 多方块作用域
 
-`additionalTraits` 与 `getTraitByName` 只检查当前控制器或部件。配方匹配时，已成型控制器可以聚合部件的配方逻辑 Trait；但脚本在控制器上按名称查询时**不会**自动搜索所有部件。
+`additionalTraits` 和 `getTraitByName` 只检查**当前**这台控制器或部件。已成型的控制器在配方匹配时会聚合部件的配方 handler，但脚本在控制器上做的查找不会按名字去搜部件。
 
-常规控制器/部件 IO 应在编辑器中配置 Pattern capability proxy、`traitNameFilter`、`capabilityIO` 与 `autoIO`。只有代理系统无法表达时才从 JavaScript 遍历 part API，并先确认机器确实是已成型多方块控制器。
+常规的控制器/部件 IO 请在编辑器里配置 Pattern capability 代理、`traitNameFilter`、`capabilityIO` 和 `autoIO`。只有代理系统表达不了的行为才需要从 JavaScript 遍历部件，而且要先确认机器确实是已成型的控制器。
 
 ## 不要绕过配方引擎
 
-直接修改 Trait 适合明确交互或管理行为，通常不适合放进 `onRecipeWorking`。引擎已经负责模拟、distinct handler 路由、per-tick 处理与提交；事件再次消耗相同存储会在多 handler/代理存在时造成复制或亏损。
+直接改 Trait 适合显式交互或管理性操作。在 `onRecipeWorking` 里这样做通常是错的：引擎已经做过模拟、跨 distinct handler 路由、per-tick 处理和提交。一旦存在多个 handler 或代理，在事件里再消耗一次同一个存储就会造成复制或亏空。
 
 ::: warning 服务端权威
-Trait 是 Java 运行时对象，不是稳定 JSON。存储修改只应在服务端进行。客户端事件可以读取同步值来渲染，但不能执行权威资源变更。
+存储修改留在服务端。客户端事件可以读取已同步的值用于渲染，但不能做权威性的资源变更。
 :::

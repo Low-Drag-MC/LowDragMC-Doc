@@ -1,9 +1,7 @@
 # KubeJS 1.20.1 Migration Reference
 
 <VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="Source version" icon="tag" />
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Target version" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="MBD2 1.21.1 editor used to verify migrated script target IDs"><figcaption>After migration, verify definition IDs and recipe types in both the 1.21.1 editor and KubeJS logs.</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Target version" icon="tag" />
 
 | Legacy example | 1.21.1 form | Status |
 | --- | --- | --- |
@@ -15,7 +13,7 @@
 | `.isFuel(true)` | Configure Fuel Recipe Types in the Recipe Type editor | No current builder method |
 | `.inputGas/.inputSlurry/.inputPigment/.inputInfuse` | `.inputChemicals(...)` | Unified Mekanism chemical |
 | `.inputGases/.inputInfusions/.inputSlurries/.inputPigments` | `.inputChemicals(...)` | Plural forms from the old official Wiki are also removed |
-| `.inputMana/.inputEU/.inputEmber` | No current KJS builder | Disabled in 21.0.11 |
+| `.inputMana/.inputEU/.inputEmber` | No current KJS builder | Disabled in 21.1.1 |
 | `.inputFluids('water 1000')` | `.inputFluids('1000x minecraft:water')` | Current sized-ingredient format |
 | `.addData('key', '{...}')` | `addDataString` or pass a real `Tag` | `addData` does not parse a JSON string |
 | `ui.getFirstWidgetById(...)` | `ui.selectId(...).findFirst().orElse(null)` | New UIElement tree |

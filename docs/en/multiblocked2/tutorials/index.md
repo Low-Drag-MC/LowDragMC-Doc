@@ -1,6 +1,6 @@
 # End-to-End Registration Tutorials
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 These tutorials connect registration phase, authored definition, recipe creation, restart/reload behavior, and runtime verification. Follow one path from beginning to end before combining APIs.
 
@@ -33,5 +33,9 @@ flowchart LR
 | Build a complete editor machine but keep pack recipes scriptable | [Editor + Java + KubeJS hybrid](./hybrid-editor-kubejs.md) |
 
 ::: warning KubeJS-only boundary
-KubeJS can create base `single`/`multiblock` definitions, but 21.0.11 does not expose a supported complete machine-authoring API for states, renderers, Traits, UI, recipe logic, or multiblock patterns. A KubeJS-created shell proves registration; an operational processing machine should come from the editor or Java.
+KubeJS can create bare `single` / `multiblock` definitions, but `21.1.1` exposes no supported machine-authoring API for states, renderers, Traits, UI, recipe logic or multiblock patterns. A KubeJS-created shell proves registration; an operational machine comes from the editor or Java.
+:::
+
+::: tip Machine behaviour without any of this
+If what you want is behaviour rather than a new machine — redstone control, an overclock, a bonus output — bind a [built-in blueprint](../blueprints/built-in.md) instead. No script, no mod, no restart.
 :::

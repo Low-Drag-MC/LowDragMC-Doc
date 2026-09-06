@@ -1,7 +1,7 @@
 # UI 行为示例
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 MBD2" icon="tag" />
-<VersionBadge version="LDLib2 2.2.35" label="当前 UI" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 MBD2" icon="tag" />
+<VersionBadge version="LDLib2 2.2.39" label="当前 UI" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/machine-ui.png" alt="带稳定 reset_button 元素 ID 的 MBD2 Machine UI 编辑器"><figcaption>先在编辑器中创建元素和 ID，再让 `onUI` 添加服务端行为。</figcaption></figure>
 
@@ -38,7 +38,18 @@ MBDRecipeTypeEvents.onRecipeUI('example:processor', wrapper => {
 })
 ```
 
-`onRecipeUI` 是客户端配方类型事件，因此可以注册普通客户端 `UIElement` listener；不要在此修改机器或服务端存储。
+`onRecipeUI` 是客户端配方类型事件，用 `addEventListener` 注册普通客户端 `UIElement` 监听器；不要在这里修改机器或服务端存储。
+
+`HoverTooltips.empty().append(...)` 接受 `Component`，传 JS 字符串会自动转换。
+
+## 该用哪种监听器
+
+| 调用 | 运行于 | 用于 |
+| --- | --- | --- |
+| `addEventListener(type, cb)` | 客户端 | 提示、视觉状态等本地逻辑 |
+| `addServerEventListener(type, cb)` | 服务端（通过 RPC） | 机器与存储变更 |
+
+在服务端 `onUI` 回调里创建的 JavaScript lambda 不会变成客户端代码——请显式选择监听器种类。
 
 <VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="旧写法，不可复制到 1.21.1" icon="tag" />
 

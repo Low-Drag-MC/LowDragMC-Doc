@@ -1,6 +1,6 @@
 # 内置资源 Capability
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 这五种 capability 不需要可选模组，也是理解外部集成的参考模型。
 

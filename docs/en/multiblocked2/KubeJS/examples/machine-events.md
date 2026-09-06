@@ -1,6 +1,6 @@
 # Machine Event Examples
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/states-and-rendering.png" alt="Machine state editor showing states that event scripts may select"><figcaption>Events can select authored states; they do not create new states or renderers dynamically.</figcaption></figure>
 
@@ -98,6 +98,21 @@ MBDMachineEvents.onCustomDataUpdate('example:crusher', wrapper => {
 
 Avoid world scans, JSON parsing, and UI reconstruction in `onTick`, `onClientTick`, and `onRecipeWorking`.
 
-::: warning Registered but not posted by the base machine
-`onFuelBurningFinish`, `onConsumeInputsAfterWorking`, and `onRecipeFinish` have KubeJS event names in 21.0.11, but base `MBDMachine` does not send them through `postCustomEvent()`. Do not place behavior in these three handlers; they do not reach KubeJS on a base machine in 21.0.11.
+## After a craft completes
+
+```js
+MBDMachineEvents.onRecipeFinish('example:crusher', wrapper => {
+  const { machine, recipe } = wrapper.event
+  // The outputs already exist here; onAfterRecipeWorking runs before they do.
+  console.info(`${recipe.id} finished at ${machine.pos}`)
+})
+
+MBDMachineEvents.onConsumeInputsAfterWorking('example:crusher', wrapper => {
+  // Only fires when the machine defers input consumption to completion.
+  console.debug(`deferred inputs taken for ${wrapper.event.recipe.id}`)
+})
+```
+
+::: warning `onFuelBurningFinish` never fires
+Its KubeJS name is registered, but `MBDMachine#onFuelBurningFinish` posts to the NeoForge bus without `postCustomEvent()`, so the handler is never called in `21.1.1`. Watch `machine.recipeLogic.fuelTime` or the `WAITING` status instead.
 :::

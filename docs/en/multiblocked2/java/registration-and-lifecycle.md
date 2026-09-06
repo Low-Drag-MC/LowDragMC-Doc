@@ -1,8 +1,6 @@
 # Registration and Lifecycle
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="Runtime editor registry proving that annotation-scanned Trait extension types were loaded"><figcaption>Annotation scanning must complete before the editor builds this registry-backed menu.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 MBD2 has two registration paths. Annotation-scanned extension types are discovered before MBD2 freezes its internal registries. Concrete machine and recipe-type definitions are supplied through MBD2 mod-bus events.
 

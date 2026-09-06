@@ -1,6 +1,6 @@
 # Single-Block Machines
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 A machine project produces a definition that later registers one block, item, block-entity type, runtime `MBDMachine`, state machine, traits, UI, and optional recipe logic.
 
@@ -23,10 +23,12 @@ The ID becomes the generated block, item, block-entity type, and machine-definit
 | --- | --- |
 | Block properties | Rotation, collision/shape inherited from state, render layers, hardness/resistance and block behavior |
 | Item properties | Item renderer, tooltip, GUI lighting, creative-tab toggle |
-| Machine settings | Machine level, UI enabled, drop-machine-item behavior, redstone signal connections |
+| Machine settings | Machine level, UI enabled, drop-machine-item behaviour, redstone signal connections, [blueprint bindings](../blueprints/), the [FX library](./machine-fx.md) |
 | Traits | Storage, recipe handlers, world capability exposure, automatic IO |
 | Recipe logic | Enable flag, selected recipe type, damping, input-consumption timing, recipe modifiers |
 | Part settings | Whether this single machine can be a multiblock part, sharing, controller capability proxying |
+
+Most of these are also [runtime values](./runtime-values.md) — the definition supplies the default, and one placed machine can hold its own override.
 
 ## Part versus controller
 

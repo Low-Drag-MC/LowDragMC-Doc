@@ -1,105 +1,140 @@
 # Machine and Recipe-Type Events
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="MBD2 machine editor representing the machine definition targeted by KubeJS machine events"><figcaption>Every targeted event ID resolves to one registered machine definition; callbacks operate on its runtime instances.</figcaption></figure>
-
-MBD2 event subscriptions are **targeted**. The first argument is the exact machine-definition or recipe-type ID; the callback receives a KubeJS wrapper whose Java event is stored in `event.event`.
+MBD2 event subscriptions are **targeted**. The first argument is the exact machine-definition or recipe-type ID; the callback receives a KubeJS wrapper whose Java event is `wrapper.event`.
 
 ```js
 // kubejs/server_scripts/mbd2_events.js
 MBDMachineEvents.onAfterRecipeWorking('example:crusher', wrapper => {
   const event = wrapper.event
-  const machine = event.machine
-  const recipe = event.recipe
-  console.info(`Recipe ${recipe.id} is leaving its active run at ${machine.pos}`)
+  console.info(`Recipe ${event.recipe.id} left its active run at ${event.machine.pos}`)
 })
 ```
 
-Do not target a block ID or a recipe ID. A machine handler targets the ID registered in `MBDRegistries.MACHINE_DEFINITIONS`; a recipe-type handler targets the ID registered in `MBDRegistries.RECIPE_TYPES`.
+Do not target a block ID or a recipe ID. A machine handler targets an ID in `MBDRegistries.MACHINE_DEFINITIONS`; a recipe-type handler targets an ID in `MBDRegistries.RECIPE_TYPES`.
 
-## Shared event contract
+::: tip Blueprints cover the same events
+Every event on this page is also a **[blueprint](../blueprints/) entry node**, so the same reaction can be drawn in the editor instead of scripted. Choose KubeJS when the pack already scripts; choose a blueprint when the machine should ship self-contained.
+:::
 
-Every machine event exposes `event.machine`. Additional fields depend on the event:
+## Server machine events
 
-| Event | Important fields | Typical use |
-| --- | --- | --- |
-| `onLoad`, `onRemoved` | `machine` | Attach or release script-side bookkeeping |
-| `onPlaced` | `player`, `itemStack` | Initialize data from the placing stack |
-| `onNeighborChanged` | `block`, `fromPos` | React to a specific neighboring update |
-| `onDrops` | mutable `drops`, `entity` | Replace or append machine drops |
-| `onOpenUI` | `player` | Validate access before opening |
-| `onUseCatalyst` | `catalyst`, `player`, `hand` | Handle multiblock catalyst use |
-| `onUseWithoutItem` | `player`, `hit`, mutable `interactionResult` | Implement empty-hand interaction |
-| `onUI` | mutable `ui`, `player` | Adjust the machine UI instance |
-| `onStateChanged` | `oldState`, `newState` | React to a state transition |
-| `onStructureFormed`, `onStructureInvalid` | `machine` | Initialize or tear down multiblock-only state |
-| `onTick` | `machine` | Small server tick operation |
+All of these live in `kubejs/server_scripts`. `wrapper.event.machine` is always present.
 
-Fields marked mutable are intentionally replaceable on the underlying Java event. Other fields should be treated as observations.
+| Handler | Extra fields | Cancellable | When it runs |
+| --- | --- | --- | --- |
+| `onLoad` | — | no | One tick after the block entity becomes valid |
+| `onRemoved` | — | no | The machine is being removed |
+| `onPlaced` | `player`, `itemStack` | no | Placed by an entity |
+| `onNeighborChanged` | `block`, `fromPos` | no | A neighbour update reached the machine |
+| `onDrops` | `entity`, mutable `drops` | no | Drop list assembled, before it is spawned |
+| `onOpenUI` | `player` | yes | Before the machine UI opens |
+| `onUseWithoutItem` | `player`, `hit`, mutable `interactionResult` | no | Empty-hand right click |
+| `onUseCatalyst` | `catalyst`, `player`, `hand` | yes | Multiblock catalyst use |
+| `onUI` | mutable `ui`, mutable `player` | no | The server built the machine `UI` |
+| `onStateChanged` | `oldState`, `newState` | yes | A machine-state transition |
+| `onStructureFormed` / `onStructureInvalid` | — | no | Multiblock formation and loss |
+| `onTick` | — | yes | Before recipe logic and every trait tick |
+
+`drops` is the live Java `List<ItemStack>`; add to it rather than replacing it. Cancelling `onTick` skips recipe logic **and** every trait's `serverTick`.
 
 ## Recipe lifecycle events
 
-| Event | Fields | When it runs |
-| --- | --- | --- |
-| `onBeforeRecipeModify` | mutable `recipe` | Before machine and part recipe modifiers |
-| `onAfterRecipeModify` | mutable `recipe` | After modifiers have produced the effective recipe |
-| `onBeforeRecipeWorking` | `recipe` | Immediately before a work step |
-| `onRecipeWorking` | `recipe`, `progress` | During a work step |
-| `onAfterRecipeWorking` | `recipe` | Completion before deferred inputs/outputs, or interruption |
-| `onRecipeWaiting` | `recipe` | Recipe found, but currently unable to advance |
-| `onRecipeStatusChanged` | `oldStatus`, `newStatus` | Recipe logic status transition |
-| `onFuelRecipeModify` | mutable `recipe` | Fuel recipe modification |
-| `onFuelBurningFinish` | nullable `recipe` | Registered, but not posted to KubeJS in 21.0.11 |
+| Handler | Extra fields | Cancellable | Exact point |
+| --- | --- | --- | --- |
+| `onBeforeRecipeModify` | mutable `recipe` | yes | Before configured modifiers and parallel calculation |
+| `onAfterRecipeModify` | mutable `recipe` | no | After modifiers produced the effective recipe |
+| `onBeforeRecipeWorking` | `recipe` | yes | After fuel is taken, before inputs are committed |
+| `onRecipeWorking` | `recipe`, `progress` | yes | After this tick's per-tick IO committed, before progress increments |
+| `onRecipeWaiting` | `recipe` | no | Status became `WAITING` |
+| `onAfterRecipeWorking` | `recipe` | no | Completion **or** interruption, before outputs |
+| `onConsumeInputsAfterWorking` | `recipe` | no | Deferred inputs were committed at completion |
+| `onRecipeFinish` | `recipe` | no | After the outputs exist |
+| `onFuelRecipeModify` | mutable `recipe` | yes | A fuel candidate matched, before its inputs are taken |
+| `onFuelBurningFinish` | nullable `recipe` | no | Registered, but **not delivered** — see below |
 
-Use recipe contents and conditions for normal processing rules. Events are best for behavior that cannot be represented by the recipe engine.
+`onAfterRecipeWorking` fires *before* outputs are produced; `onRecipeFinish` fires *after*. Use the latter for "a craft completed" bonuses, or a bonus item lands in the slot the recipe's own output still needs.
 
-::: warning Registered names without a base-machine publisher
-`onFuelBurningFinish`, `onConsumeInputsAfterWorking`, and `onRecipeFinish` are registered in the KubeJS event group, but MBD2 21.0.11's base `MBDMachine` does not send them through `postCustomEvent()`. Their Java hooks may run, but KubeJS handlers for these three names do not receive a base-machine event. See the [RecipeLogic lifecycle](../recipes/recipe-lifecycle.md#completion-and-the-next-execution).
+`onConsumeInputsAfterWorking` only fires when the machine's **Consume inputs after working** setting is on — as a definition value, or as a per-machine [runtime value](../editor/runtime-values.md) override of `recipe_logic.consume_inputs_after_working`.
+
+::: warning `onFuelBurningFinish` never fires
+`MBDMachine#onFuelBurningFinish` posts its event to the NeoForge bus without `postCustomEvent()`, so neither the KubeJS handler nor the blueprint entry node receives it in `21.1.1`. Java `NeoForge.EVENT_BUS` listeners do work. Track fuel exhaustion through `onRecipeWaiting` or `machine.recipeLogic.fuelTime` instead.
+:::
+
+::: info An event with no KubeJS handler
+`MachineUseItemOnEvent` (right click **with** an item) exists and has a blueprint entry node, but `MBDServerEvents` registers no KubeJS name for it. Use a blueprint, or a Java listener on `NeoForge.EVENT_BUS`.
 :::
 
 ```js
 MBDMachineEvents.onRecipeWorking('example:crusher', wrapper => {
-  const { machine, recipe, progress } = wrapper.event
+  const { recipe, progress } = wrapper.event
   if (progress % 20 === 0) {
     console.debug(`${recipe.id}: ${progress}/${recipe.duration}`)
   }
 })
 ```
 
-## Cancellation and mutation
+## Cancelling
 
-Some underlying NeoForge events implement `ICancellableEvent`: `onBeforeRecipeWorking`, `onRecipeWorking`, `onOpenUI`, `onFuelRecipeModify`, `onStateChanged`, `onTick`, `onUseCatalyst`, and the client `onCustomDataUpdate`. Cancellation is a control-flow decision, not a general replacement for recipe conditions. Confirm the KubeJS version's event cancellation bridge in your pack before depending on it; changing the documented mutable fields is the stable path for transformations.
+Two equivalent forms, for the handlers marked cancellable above:
 
-Never modify storage in a handler that may be called during simulation or on the client. Runtime resource movement belongs in a Java `IRecipeHandlerTrait`.
+```js
+MBDMachineEvents.onOpenUI('example:crusher', wrapper => {
+  wrapper.event.setCanceled(true)          // set it on the Java event
+})
+
+MBDMachineEvents.onOpenUI('example:crusher', wrapper => {
+  return false                             // KubeJS interrupt-false, mapped to setCanceled
+})
+```
+
+Cancelling is a control-flow decision, not a substitute for recipe conditions — a cancelled `onBeforeRecipeWorking` runs *after* fuel was already consumed, and a cancelled `onRecipeWorking` runs *after* that tick's per-tick IO committed. Put eligibility in a [`RecipeCondition`](../recipes/condition-reference.md).
+
+Never move resources in an event that can run during simulation or on the client. Resource accounting belongs in a Java `IRecipeHandlerTrait`.
 
 ## Client events
 
-Client script handlers are:
+These belong in `kubejs/client_scripts`.
 
-- `onClientTick(machineId, handler)`
-- `onCustomDataUpdate(machineId, handler)`, with `oldValue` and `newValue`
-- `onCustomKeyframe(machineId, handler)` only when GeckoLib is installed
-- `MBDRecipeTypeEvents.onRecipeUI(recipeTypeId, handler)`, with mutable `recipe` and `ui`
+| Handler | Group | Fields |
+| --- | --- | --- |
+| `onClientTick(machineId, cb)` | `MBDMachineEvents` | `machine` |
+| `onCustomDataUpdate(machineId, cb)` | `MBDMachineEvents` | `oldValue`, `newValue`; cancellable |
+| `onCustomKeyframe(machineId, cb)` | `MBDMachineEvents` | `instruction`, `controllerName`, `animationTick`; GeckoLib only |
+| `onRecipeUI(recipeTypeId, cb)` | `MBDRecipeTypeEvents` | mutable `recipe`, mutable `ui`; cancellable |
+| `registerCustomRenderers(cb)` | `MBDClientEvents` | not targeted — see [script renderers](./client-renderers.md) |
 
-Keep these visual-only. Server authority is not transferred merely because the wrapper exposes a machine object.
+```js
+// kubejs/client_scripts/mbd2_visuals.js
+MBDMachineEvents.onCustomDataUpdate('example:crusher', wrapper => {
+  const { oldValue, newValue } = wrapper.event
+  console.debug(`Client machine data changed: ${oldValue} -> ${newValue}`)
+})
+```
+
+Keep these visual-only. Holding a machine object on the client does not transfer server authority.
 
 ## Proxy-recipe transfer
 
 ```js
-MBDRecipeTypeEvents.onTransferProxyRecipe('example:crusher', wrapper => {
+// kubejs/server_scripts/mbd2_proxy.js
+MBDRecipeTypeEvents.onTransferProxyRecipe('example:electric_furnace', wrapper => {
   const event = wrapper.event
-  // event.recipeType       target MBD recipe type
+  // event.recipeType       target MBDRecipeType
   // event.proxyTypeId      source vanilla/mod recipe type ID
   // event.proxyType        source RecipeType object
   // event.proxyRecipeId    source recipe ID
   // event.proxyRecipe      source recipe object
   // event.mbdRecipe        nullable, mutable converted result
+  if (`${event.proxyTypeId}` !== 'minecraft:smelting') {
+    event.setCanceled(true)
+  }
 })
 ```
 
-This event is for altering or rejecting a recipe produced by a configured proxy. It does not enable a proxy by itself; configure the source proxy on the recipe type first.
+This filters recipes produced by a proxy the recipe type already declares; it does not enable one. See [proxy recipe types](./proxy_recipetype.md).
 
 ::: warning Tick cost
-`onTick`, `onClientTick`, and `onRecipeWorking` are hot paths. Avoid world-wide searches, rebuilding collections, parsing IDs, or allocating UI objects in them. Cache immutable lookups during startup/load.
+`onTick`, `onClientTick`, and `onRecipeWorking` run every tick per machine. Do not scan the world, parse IDs, rebuild collections, or allocate UI objects in them.
 :::

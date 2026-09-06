@@ -1,6 +1,6 @@
 # Create
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Create integration models rotation as one value containing RPM and stress. It adds recipe content, a range condition, a machine Trait, and rotation rendering support.
 
@@ -38,12 +38,21 @@ ServerEvents.recipes(event => {
 })
 ```
 
-The condition checks all four bounds and consumes nothing. Capability content is handled by the rotation Trait. Test rotation direction and zero-speed/disconnected states in-game; the editor preview cannot prove membership in a live Create kinetic network.
+The condition checks all four bounds and consumes nothing. Capability content is handled by the rotation Trait.
 
-::: warning Current authoring boundary
-The source contains Create kinetic machine project/builder code, but its editor-project registration and KubeJS `kinetic` builder path are disabled in 21.0.11. Do not teach `event.create('kinetic', ...)`. Use a released editor/Java Create definition that actually supplies `!create_rotation`; adding recipe rows to an ordinary machine does not create a shaft node.
+## Where the Trait comes from
+
+You do not add `!create_rotation` from the **Add Trait** menu — a **Create Kinetic Machine** project supplies it. Create one in `/mbd2_editor`, export its `.cm` product, and register it from Java under the type key `create_machine`:
+
+```java
+event.registerFromResource(ExampleMod.class, "create_machine",
+        "examplemod/mbd/machines/mechanical_press.cm");
+```
+
+::: warning No KubeJS builder key
+`MBDRegistryEvents.machine` accepts `single` and `multiblock` only; `event.create('kinetic', ...)` throws `Unknown machine type`. Adding rotation recipe rows to an ordinary machine does not create a shaft node either — the machine has to be a kinetic definition.
 :::
 
 ## Validation
 
-Confirm the machine joins the kinetic network, the shaft face matches orientation, current RPM/stress falls inside the condition, disconnecting the shaft stops matching, and recipe input/output values change network behavior as intended. If the Trait is unavailable on a normal definition, this is an authoring limitation—not a reason to edit project JSON by hand.
+Confirm the machine joins the kinetic network, the shaft face matches orientation, current RPM/stress falls inside the condition, disconnecting the shaft stops matching, and recipe input/output values change network behaviour as intended. The editor preview cannot prove membership in a live kinetic network; test rotation direction and the zero-speed and disconnected states in game.

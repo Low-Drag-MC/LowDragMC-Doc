@@ -1,6 +1,6 @@
 # Create
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Create 集成把转动建模为同时包含 RPM 与应力的值，增加配方内容、范围条件、机器 Trait 与转动渲染支持。
 
@@ -38,12 +38,21 @@ ServerEvents.recipes(event => {
 })
 ```
 
-条件检查四个边界且不消耗资源；capability 内容由转动 Trait 处理。必须在游戏中测试转向、零转速与断网状态，编辑器预览无法证明机器已加入真实动力网络。
+条件检查四个边界且不消耗资源；capability 内容由转动 Trait 处理。
 
-::: warning 当前创作边界
-源码包含 Create 动力机器 project/builder，但 21.0.11 禁用了编辑器项目注册和 KubeJS `kinetic` builder 路径。不要教授 `event.create('kinetic', ...)`。应使用发布构建中确实提供 `!create_rotation` 的编辑器/Java Create 定义；给普通机器增加配方行不会创建传动轴节点。
+## Trait 从哪里来
+
+`!create_rotation` 不是从 **Add Trait** 菜单添加的——它由 **Create 动能机器**项目提供。在 `/mbd2_editor` 里新建这样一个项目，导出它的 `.cm` 产物，然后用类型键 `create_machine` 从 Java 注册：
+
+```java
+event.registerFromResource(ExampleMod.class, "create_machine",
+        "examplemod/mbd/machines/mechanical_press.cm");
+```
+
+::: warning 没有 KubeJS builder 键
+`MBDRegistryEvents.machine` 只接受 `single` 和 `multiblock`；`event.create('kinetic', ...)` 会抛 `Unknown machine type`。给普通机器加转动配方行同样不会产生传动轴节点——机器必须是动能定义。
 :::
 
 ## 验证
 
-确认机器加入动力网络、传动轴面与朝向一致、当前 RPM/应力落在条件范围、断轴后不再匹配，并验证配方输入/输出对网络行为的实际影响。若普通定义无法选择该 Trait，这是创作接口限制，不应手改项目 JSON 绕过。
+确认机器加入动力网络、传动轴面与朝向一致、当前 RPM/应力落在条件范围、断轴后不再匹配，并验证配方输入/输出对网络行为的实际影响。编辑器预览无法证明机器已加入真实动力网络；转向、零转速和断开状态必须在游戏中测试。

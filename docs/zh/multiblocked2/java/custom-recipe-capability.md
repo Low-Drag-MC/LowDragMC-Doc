@@ -1,6 +1,6 @@
 # 自定义 RecipeCapability
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/mekanism.png" alt="由已注册自定义配方 capability 与 Trait 创建的 Mekanism Chemical Tank 编辑控件"><figcaption>Mekanism 是源码内完整范例：强类型配方内容与可由编辑器配置的存储 Trait 配对。</figcaption></figure>
 
@@ -45,13 +45,15 @@ public final class HeatUnitsCapability extends RecipeCapability<Integer> {
 
     @Override
     public void createContentConfigurator(
-            ConfiguratorGroup parent,
-            Supplier<Integer> getter,
-            Consumer<Integer> setter) {
-        parent.addConfigurators(new NumberConfigurator(
+            ConfiguratorGroup father,
+            Supplier<Integer> supplier,
+            Consumer<Integer> onUpdate) {
+        // 是 supplier::get 而不是 supplier —— NumberConfigurator 要的是
+        // Supplier<Number>，而 Supplier<Integer> 并不是它。
+        father.addConfigurators(new NumberConfigurator(
             "recipe.capability.examplemod.heat_units",
-            getter,
-            value -> setter.accept(value.intValue()),
+            supplier::get,
+            number -> onUpdate.accept(number.intValue()),
             100,
             true
         ).setRange(1, Integer.MAX_VALUE));
@@ -95,7 +97,10 @@ recipeType.recipeBuilder(id)
 ```js
 ServerEvents.recipes(event => {
   const heat = MBDRegistries.RECIPE_CAPABILITIES.get('heat_units')
+  if (heat === null) throw new Error('heat_units capability is not registered')
+
   event.recipes.example.heat_press()
+    .id('example:anneal_plate')
     .inputs(heat, 400)
     .outputs(heat, 50)
 })

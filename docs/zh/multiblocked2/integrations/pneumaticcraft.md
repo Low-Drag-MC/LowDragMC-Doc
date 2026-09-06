@@ -1,6 +1,6 @@
 # PneumaticCraft: Repressurized
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 PneumaticCraft 集成包含两个独立系统：压力/空气存储和热交换器温度。不要用其中一个 Trait 处理另一个系统。
 

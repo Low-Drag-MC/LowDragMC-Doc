@@ -1,8 +1,6 @@
 # Capabilities, Handlers, and Conditions
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="Trait registry showing the machine-side handlers paired with recipe capability content"><figcaption>Recipe capabilities describe content; the listed Traits supply compatible machine-side handlers.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 An MBD2 recipe is not a direct inventory operation. It contains typed `Content`; recipe logic routes each content list to compatible `IRecipeHandler` instances supplied by machine traits, then evaluates conditions against the machine and world.
 

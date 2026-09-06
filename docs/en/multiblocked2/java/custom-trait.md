@@ -1,6 +1,6 @@
 # Custom Trait and Recipe Handler
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="Trait definition in the editor list with its generated configuration controls in Inspector"><figcaption>A correctly registered TraitDefinitionType supplies the list entry; its configurable definition supplies the Inspector controls.</figcaption></figure>
 
@@ -225,6 +225,20 @@ public static final SimpleCapabilityTraitDefinition.Type<
 
 The runtime trait implements `getCapContent(IO capabilityIO)` and returns a wrapper that enforces insertion/extraction direction. `merge` must preserve IO restrictions and simulation semantics when several traits or proxied controller capabilities are combined.
 
+## 7. Make settings overridable per machine
+
+A definition field is shared by every machine placed from it. Front it with a [runtime value](../editor/runtime-values.md) and one machine can override it — from a script, a blueprint node, or a UI:
+
+```java
+public final RuntimeValue<Integer> capacity =
+        runtimeValues.ofInt("capacity", () -> getDefinition().getCapacity())
+                .onChanged(this::onCapacityChanged);
+```
+
+The fallback must be a lambda: it is evaluated lazily, because `getDefinition()` is not available while the owner's field initialisers run. Read through `capacity.get()` at the point of use rather than caching the value. `onChanged` is for invalidation a plain read cannot do for itself, such as `invalidateCapabilities()`; it may run before the block entity is in a level, and on either side.
+
+Slot values must be **immutable** — `RuntimeValueStorage#serializeNBT` runs on LDLib's async persistence thread while writes come from the game thread.
+
 ## Runtime lifecycle
 
-`ITrait` provides `onMachineLoad`, `onChunkUnloaded`, `onMachineUnLoad`, `onMachineRemoved`, drop, neighbor-change, `serverTick`, and `clientTick` hooks. Register external listeners/caches on load and release them on unload/removal. Keep gameplay mutation on the server.
+`ITrait` provides `onMachineLoad`, `onChunkUnloaded`, `onMachineUnLoad`, `onMachineRemoved`, drop, neighbour-change, `serverTick` and `clientTick` hooks. Register external listeners and caches on load, release them on unload and removal. Keep gameplay mutation on the server.

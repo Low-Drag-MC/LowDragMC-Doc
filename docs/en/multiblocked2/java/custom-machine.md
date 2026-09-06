@@ -1,6 +1,6 @@
 # Registering Machines and Recipe Types
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/basic-settings.png" alt="Editor-authored machine definition ready to be exported and registered from Java"><figcaption>The recommended Java path registers an exported definition while preserving all settings authored in this Inspector.</figcaption></figure>
 

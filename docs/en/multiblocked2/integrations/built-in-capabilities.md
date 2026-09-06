@@ -1,6 +1,6 @@
 # Built-in Resource Capabilities
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 These five capabilities require no optional mod. They are also the reference model for understanding external integrations.
 

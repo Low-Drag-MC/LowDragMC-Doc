@@ -1,6 +1,6 @@
 # Trait 与持久数据
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="机器 Inspector 中可由名称查询的物品、流体和能量 Trait"><figcaption>脚本名称必须与编辑器 Trait definition 的 name 完全一致。</figcaption></figure>
 
@@ -39,9 +39,29 @@ MBDMachineEvents.onUseWithoutItem('example:processor', wrapper => {
 })
 ```
 
-复制后再 `setCustomData`，可触发持久化/同步字段的更新监听。不要只修改旧 `CompoundTag` 引用并假设 LDLib2 会检测内部变化。
+复制后再 `setCustomData`，才会触发持久化与同步字段的更新监听。不要只修改旧 `CompoundTag` 引用并假设 LDLib2 会察觉。
 
-## 可复用的必需 Trait helper
+自定义数据带 `@DescSynced`，所以它也是把值送到**客户端**的通道——比如 UI 要画的东西。[Runtime value](../../editor/runtime-values.md) 不同步，不能用于此。
+
+## 按机器覆盖 Trait 配置
+
+```js
+MBDMachineEvents.onPlaced('example:processor', wrapper => {
+  const machine = wrapper.event.machine
+  const items = machine.getTraitByName('input_items')
+  if (items === null) return
+
+  // 只作用于这一台机器；随方块存盘，从不发给客户端
+  items.setAutoIOEnabled(true)
+  items.setAutoIOSide('up', IO.IN)
+  items.setAutoIOInterval(10)
+  machine.setMachineLevel(2)
+})
+```
+
+全部键与按名字访问的写法见 [Runtime value](../../editor/runtime-values.md)。
+
+## 开发期快速失败
 
 ```js
 function requireTrait(machine, name) {

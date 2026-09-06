@@ -1,105 +1,140 @@
 # 机器与配方类型事件
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="表示 KubeJS machine event 目标机器定义的 MBD2 机器编辑器"><figcaption>每个定向事件 ID 都解析为一个已注册机器定义；回调作用于其运行时实例。</figcaption></figure>
-
-MBD2 的事件订阅全部**带目标**。第一个参数是准确的机器定义或配方类型 ID；回调收到 KubeJS wrapper，真正的 Java 事件位于 `event.event`。
+MBD2 的事件订阅都**带目标**。第一个参数是确切的机器定义 ID 或配方类型 ID；回调收到一个 KubeJS 包装对象，其中的 Java 事件在 `wrapper.event` 上。
 
 ```js
 // kubejs/server_scripts/mbd2_events.js
 MBDMachineEvents.onAfterRecipeWorking('example:crusher', wrapper => {
   const event = wrapper.event
-  const machine = event.machine
-  const recipe = event.recipe
-  console.info(`Recipe ${recipe.id} is leaving its active run at ${machine.pos}`)
+  console.info(`Recipe ${event.recipe.id} left its active run at ${event.machine.pos}`)
 })
 ```
 
-不要填写方块 ID 或单个配方 ID。机器事件目标是在 `MBDRegistries.MACHINE_DEFINITIONS` 注册的 ID；配方类型事件目标是在 `MBDRegistries.RECIPE_TYPES` 注册的 ID。
+不要传方块 ID 或配方 ID。机器事件的目标是 `MBDRegistries.MACHINE_DEFINITIONS` 里的 ID；配方类型事件的目标是 `MBDRegistries.RECIPE_TYPES` 里的 ID。
 
-## 通用事件协议
+::: tip 蓝图覆盖同样这些事件
+本页的每个事件同时也是一个 **[蓝图](../blueprints/)入口节点**，所以同样的反应可以在编辑器里画出来而不用写脚本。整合包已经在写脚本就用 KubeJS；机器要自带行为发布就用蓝图。
+:::
 
-每个机器事件都有 `event.machine`，其余字段由事件决定：
+## 服务端机器事件
 
-| 事件 | 重要字段 | 典型用途 |
-| --- | --- | --- |
-| `onLoad`、`onRemoved` | `machine` | 建立或释放脚本侧状态 |
-| `onPlaced` | `player`、`itemStack` | 从放置物品初始化数据 |
-| `onNeighborChanged` | `block`、`fromPos` | 响应特定邻居更新 |
-| `onDrops` | 可修改 `drops`、`entity` | 替换或追加机器掉落物 |
-| `onOpenUI` | `player` | 打开 UI 前验证访问权限 |
-| `onUseCatalyst` | `catalyst`、`player`、`hand` | 处理多方块催化剂 |
-| `onUseWithoutItem` | `player`、`hit`、可修改 `interactionResult` | 实现空手交互 |
-| `onUI` | 可修改 `ui`、`player` | 调整机器 UI 实例 |
-| `onStateChanged` | `oldState`、`newState` | 响应状态切换 |
-| `onStructureFormed`、`onStructureInvalid` | `machine` | 建立或清理多方块专属状态 |
-| `onTick` | `machine` | 少量服务端 tick 逻辑 |
+这些都放在 `kubejs/server_scripts`。`wrapper.event.machine` 始终存在。
 
-标为“可修改”的字段可以在底层 Java 事件上替换；其他字段应视为只读观察值。
+| Handler | 额外字段 | 可取消 | 触发时机 |
+| --- | --- | --- | --- |
+| `onLoad` | — | 否 | 方块实体有效后的下一 tick |
+| `onRemoved` | — | 否 | 机器正在被移除 |
+| `onPlaced` | `player`、`itemStack` | 否 | 被实体放置 |
+| `onNeighborChanged` | `block`、`fromPos` | 否 | 相邻更新到达机器 |
+| `onDrops` | `entity`、可改的 `drops` | 否 | 掉落列表已组装、尚未生成 |
+| `onOpenUI` | `player` | 是 | 机器 UI 打开之前 |
+| `onUseWithoutItem` | `player`、`hit`、可改的 `interactionResult` | 否 | 空手右键 |
+| `onUseCatalyst` | `catalyst`、`player`、`hand` | 是 | 多方块催化剂使用 |
+| `onUI` | 可改的 `ui`、可改的 `player` | 否 | 服务端构建好机器 `UI` |
+| `onStateChanged` | `oldState`、`newState` | 是 | 机器状态切换 |
+| `onStructureFormed` / `onStructureInvalid` | — | 否 | 多方块成型与失效 |
+| `onTick` | — | 是 | 配方逻辑和所有 Trait tick 之前 |
+
+`drops` 是活的 Java `List<ItemStack>`，往里加而不要替换它。取消 `onTick` 会同时跳过配方逻辑**和**每个 Trait 的 `serverTick`。
 
 ## 配方生命周期事件
 
-| 事件 | 字段 | 调用时机 |
-| --- | --- | --- |
-| `onBeforeRecipeModify` | 可修改 `recipe` | 机器和部件修改器之前 |
-| `onAfterRecipeModify` | 可修改 `recipe` | 修改器生成有效配方之后 |
-| `onBeforeRecipeWorking` | `recipe` | 一次工作步骤之前 |
-| `onRecipeWorking` | `recipe`、`progress` | 工作步骤期间 |
-| `onAfterRecipeWorking` | `recipe` | 完成时位于延迟输入/输出之前，或配方被中断时 |
-| `onRecipeWaiting` | `recipe` | 找到配方但暂时无法推进 |
-| `onRecipeStatusChanged` | `oldStatus`、`newStatus` | 配方逻辑状态切换 |
-| `onFuelRecipeModify` | 可修改 `recipe` | 修改燃料配方 |
-| `onFuelBurningFinish` | 可为 null 的 `recipe` | 已注册，但 21.0.11 未发布给 KubeJS |
+| Handler | 额外字段 | 可取消 | 确切位置 |
+| --- | --- | --- | --- |
+| `onBeforeRecipeModify` | 可改的 `recipe` | 是 | 配置的修饰器与并行计算之前 |
+| `onAfterRecipeModify` | 可改的 `recipe` | 否 | 修饰器产出最终配方之后 |
+| `onBeforeRecipeWorking` | `recipe` | 是 | 燃料已扣除之后、输入提交之前 |
+| `onRecipeWorking` | `recipe`、`progress` | 是 | 本 tick 的 per-tick IO 已提交、进度递增之前 |
+| `onRecipeWaiting` | `recipe` | 否 | 状态变为 `WAITING` |
+| `onAfterRecipeWorking` | `recipe` | 否 | 完成**或**中断，产出之前 |
+| `onConsumeInputsAfterWorking` | `recipe` | 否 | 完成时刚刚提交了延迟的输入 |
+| `onRecipeFinish` | `recipe` | 否 | 产出已经存在之后 |
+| `onFuelRecipeModify` | 可改的 `recipe` | 是 | 燃料候选匹配后、扣除其输入之前 |
+| `onFuelBurningFinish` | 可空的 `recipe` | 否 | 已注册，但**不会送达**——见下 |
 
-普通加工规则优先使用配方内容与条件；事件适合表达配方引擎本身无法描述的行为。
+`onAfterRecipeWorking` 在产出生成*之前*触发，`onRecipeFinish` 在*之后*。「一次合成完成」的奖励要写在后者里，否则奖励物品会落进配方自己的产出正要用的槽位。
 
-::: warning 已注册名称不等于基础机器会发布
-KubeJS 事件组注册了 `onFuelBurningFinish`、`onConsumeInputsAfterWorking` 与 `onRecipeFinish`，但 MBD2 21.0.11 的基础 `MBDMachine` 没有通过 `postCustomEvent()` 将它们送往 KubeJS。对应 Java hook 可能会运行，但这三个 KubeJS handler 收不到基础机器事件。准确顺序见 [RecipeLogic 生命周期](../recipes/recipe-lifecycle.md#完成与下一次执行)。
+`onConsumeInputsAfterWorking` 只有在机器打开了 **Consume inputs after working** 时才会触发——无论它来自定义值，还是来自 `recipe_logic.consume_inputs_after_working` 的单机 [runtime value](../editor/runtime-values.md) 覆盖。
+
+::: warning `onFuelBurningFinish` 从不触发
+`MBDMachine#onFuelBurningFinish` 把事件投递到 NeoForge 总线时没有调用 `postCustomEvent()`，所以在 `21.1.1` 中 KubeJS handler 和蓝图入口节点都收不到它。Java 的 `NeoForge.EVENT_BUS` 监听器是有效的。要跟踪燃料耗尽，请改用 `onRecipeWaiting` 或 `machine.recipeLogic.fuelTime`。
+:::
+
+::: info 一个没有 KubeJS handler 的事件
+`MachineUseItemOnEvent`（手持物品右键）存在并且有蓝图入口节点，但 `MBDServerEvents` 没有为它注册 KubeJS 名字。请改用蓝图，或者用 Java 监听 `NeoForge.EVENT_BUS`。
 :::
 
 ```js
 MBDMachineEvents.onRecipeWorking('example:crusher', wrapper => {
-  const { machine, recipe, progress } = wrapper.event
+  const { recipe, progress } = wrapper.event
   if (progress % 20 === 0) {
     console.debug(`${recipe.id}: ${progress}/${recipe.duration}`)
   }
 })
 ```
 
-## 取消与修改
+## 取消
 
-以下底层 NeoForge 事件实现了 `ICancellableEvent`：`onBeforeRecipeWorking`、`onRecipeWorking`、`onOpenUI`、`onFuelRecipeModify`、`onStateChanged`、`onTick`、`onUseCatalyst`，以及客户端 `onCustomDataUpdate`。取消是流程控制，不应代替一般配方条件。若整合包依赖取消行为，请先确认所用 KubeJS 版本的事件取消桥；转换数据时，修改表中明确可修改的字段更稳定。
+对上表中标记为可取消的 handler，两种写法等价：
 
-不要在可能处于模拟阶段或客户端的处理器中修改存储。运行时资源移动属于 Java `IRecipeHandlerTrait`。
+```js
+MBDMachineEvents.onOpenUI('example:crusher', wrapper => {
+  wrapper.event.setCanceled(true)          // 直接设置 Java 事件
+})
+
+MBDMachineEvents.onOpenUI('example:crusher', wrapper => {
+  return false                             // KubeJS 的 interrupt-false，会映射到 setCanceled
+})
+```
+
+取消是控制流决策，不能替代配方条件——被取消的 `onBeforeRecipeWorking` 发生在燃料已经被扣掉*之后*，被取消的 `onRecipeWorking` 发生在该 tick 的 per-tick IO 已经提交*之后*。资格判断请写进 [`RecipeCondition`](../recipes/condition-reference.md)。
+
+不要在可能于模拟阶段或客户端执行的事件里搬运资源。资源结算属于 Java 的 `IRecipeHandlerTrait`。
 
 ## 客户端事件
 
-客户端脚本事件包括：
+这些放在 `kubejs/client_scripts`。
 
-- `onClientTick(machineId, handler)`
-- `onCustomDataUpdate(machineId, handler)`，字段为 `oldValue` 和 `newValue`
-- 仅安装 GeckoLib 时存在的 `onCustomKeyframe(machineId, handler)`
-- `MBDRecipeTypeEvents.onRecipeUI(recipeTypeId, handler)`，字段为可修改的 `recipe` 与 `ui`
+| Handler | 事件组 | 字段 |
+| --- | --- | --- |
+| `onClientTick(machineId, cb)` | `MBDMachineEvents` | `machine` |
+| `onCustomDataUpdate(machineId, cb)` | `MBDMachineEvents` | `oldValue`、`newValue`；可取消 |
+| `onCustomKeyframe(machineId, cb)` | `MBDMachineEvents` | `instruction`、`controllerName`、`animationTick`；仅 GeckoLib |
+| `onRecipeUI(recipeTypeId, cb)` | `MBDRecipeTypeEvents` | 可改的 `recipe` 与 `ui`；可取消 |
+| `registerCustomRenderers(cb)` | `MBDClientEvents` | 不带目标——见[脚本渲染器](./client-renderers.md) |
 
-这些事件只处理视觉内容。wrapper 暴露机器对象并不代表客户端获得服务端权威。
+```js
+// kubejs/client_scripts/mbd2_visuals.js
+MBDMachineEvents.onCustomDataUpdate('example:crusher', wrapper => {
+  const { oldValue, newValue } = wrapper.event
+  console.debug(`Client machine data changed: ${oldValue} -> ${newValue}`)
+})
+```
+
+这些只做视觉。在客户端拿到机器对象并不意味着获得了服务端权限。
 
 ## 代理配方转换
 
 ```js
-MBDRecipeTypeEvents.onTransferProxyRecipe('example:crusher', wrapper => {
+// kubejs/server_scripts/mbd2_proxy.js
+MBDRecipeTypeEvents.onTransferProxyRecipe('example:electric_furnace', wrapper => {
   const event = wrapper.event
-  // event.recipeType       目标 MBD 配方类型
-  // event.proxyTypeId      来源原版/模组配方类型 ID
+  // event.recipeType       目标 MBDRecipeType
+  // event.proxyTypeId      来源 vanilla/模组配方类型 ID
   // event.proxyType        来源 RecipeType 对象
   // event.proxyRecipeId    来源配方 ID
   // event.proxyRecipe      来源配方对象
-  // event.mbdRecipe        可为 null、可修改的转换结果
+  // event.mbdRecipe        可空、可改的转换结果
+  if (`${event.proxyTypeId}` !== 'minecraft:smelting') {
+    event.setCanceled(true)
+  }
 })
 ```
 
-该事件用于修改或拒绝已由代理生成的配方，不能单独启用代理；必须先在配方类型上配置来源代理。
+这个事件过滤的是配方类型已经声明的代理产生的配方，它本身不会启用代理。见[代理配方类型](./proxy_recipetype.md)。
 
-::: warning Tick 成本
-`onTick`、`onClientTick` 与 `onRecipeWorking` 都是高频路径。不要在其中进行全世界搜索、重建集合、解析 ID 或创建 UI 对象。不可变查询结果应在 startup/load 阶段缓存。
+::: warning tick 开销
+`onTick`、`onClientTick` 和 `onRecipeWorking` 对每台机器每 tick 都会跑。不要在里面扫世界、解析 ID、重建集合或分配 UI 对象。
 :::

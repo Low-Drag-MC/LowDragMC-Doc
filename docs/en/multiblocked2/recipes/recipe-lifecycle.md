@@ -1,12 +1,10 @@
 # RecipeLogic Lifecycle
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Registered Recipe Type and candidate recipe consumed by the RecipeLogic lifecycle"><figcaption>The lifecycle searches the selected type's recipe collection, then simulates and commits its typed contents.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 `RecipeLogic` is the server-side scheduler for one machine. It decides when to search, validates and modifies candidates, simulates all handlers, acquires fuel, commits recipe IO, advances progress, waits or damps, completes outputs, and decides whether the same recipe can immediately run again.
 
-This page follows the actual 21.0.11 call order. Event names such as `onBeforeRecipeWorking` are easy to misread; use the injection table rather than inferring timing from the name.
+This page follows the actual 21.1.1 call order. Event names such as `onBeforeRecipeWorking` are easy to misread; use the injection table rather than inferring timing from the name.
 
 ## State and persisted fields
 
@@ -208,18 +206,20 @@ When fuel is required and `fuelTime == 0`, `handleFuelRecipe`:
 
 The current engine does not commit fuel-recipe outputs, and although tick contents participate in fuel matching, `handleFuelRecipe` only commits normal inputs. Author fuel recipes as duration plus normal inputs; do not rely on fuel outputs or per-tick fuel content.
 
-At the end of every valid server tick, positive `fuelTime` decreases by one. When it becomes zero, Java hook `onFuelBurningFinish(lastFuelRecipe)` runs and MBD2 posts a `MachineFuelBurningFinishEvent` to the NeoForge event bus. In 21.0.11 this event omits `postCustomEvent()`, so the registered KubeJS `onFuelBurningFinish` handler does **not** run. A new fuel recipe is not searched until a main recipe setup/working tick calls `handleFuelRecipe` again.
+At the end of every valid server tick, positive `fuelTime` decreases by one. When it becomes zero, `MBDMachine#onFuelBurningFinish(lastFuelRecipe)` posts a `MachineFuelBurningFinishEvent` to the NeoForge event bus. That call omits `postCustomEvent()`, so in `21.1.1` neither the KubeJS `onFuelBurningFinish` handler nor the blueprint **Fuel Burning Finish** entry node receives it — only Java `NeoForge.EVENT_BUS` listeners do. A new fuel recipe is not searched until a main recipe setup or working tick calls `handleFuelRecipe` again.
 
 ## Completion and the next execution
 
 When `progress >= duration`, completion happens in the same server tick:
 
 1. `machine.afterWorking()` publishes `onAfterRecipeWorking`.
-2. If inputs were deferred, commit normal `IO.IN`, clear the flag, then call Java hook `onConsumeInputsAfterWorking()`.
+2. If inputs were deferred, commit normal `IO.IN`, clear the flag, then publish `onConsumeInputsAfterWorking`.
 3. Call handler `postWorking` for input and output handlers.
 4. Commit non-per-tick `IO.OUT`.
-5. Call Java hook `IMachine#onRecipeFinish()`.
+5. Publish `onRecipeFinish`.
 6. Decide whether the next run may reuse the recipe.
+
+Step 1 happens **before** the outputs exist and step 5 **after**, which is the whole difference between them: a bonus product added in `onAfterRecipeWorking` lands in a slot the recipe's own output is about to want.
 
 Next-run selection is controlled by two machine settings:
 
@@ -245,9 +245,11 @@ Use `alwaysSearchRecipe` when another recipe with better priority may become ava
 | `onRecipeWorking` | After successful condition/fuel checks and per-tick IO commit, before progress increment | Cancel interrupts | Observe completed tick IO or trigger a post-IO effect |
 | `onRecipeWaiting` | After status/reason becomes waiting | Observation | UI, diagnostics, throttled feedback |
 | `onAfterRecipeWorking` | Completion before deferred inputs/outputs, and also interruption | Observation | Cleanup paired with setup; distinguish finish from interrupt if outputs matter |
-| Java/NeoForge `onFuelBurningFinish` | Fuel counter reaches zero at end of server tick | Observation | Java event-bus listeners only in 21.0.11; not delivered to KubeJS |
+| `onConsumeInputsAfterWorking` | Deferred inputs were just committed at completion | Observation | Only fires when the machine defers inputs |
+| `onRecipeFinish` | After the outputs have been produced | Observation | "A craft completed" — bonus products, counters, sounds |
+| `onFuelBurningFinish` | Fuel counter reaches zero at end of server tick | Observation | **Java `NeoForge.EVENT_BUS` listeners only** — not delivered to KubeJS or blueprints in 21.1.1 |
 
-`MBDServerEvents` currently registers KubeJS names `onFuelBurningFinish`, `onConsumeInputsAfterWorking`, and `onRecipeFinish`, but the base `MBDMachine` does not send any of these three through `postCustomEvent()` in 21.0.11. The Java hooks/event-bus post may run, but these KubeJS subscriptions are not injection points until the machine implementation publishes them. Use `onAfterRecipeWorking` plus state/recipe inspection, or implement a Java machine hook when exact completion timing is required.
+Every row above except `onFuelBurningFinish` reaches both KubeJS and [blueprints](../blueprints/). If you need a reliable "fuel ran out" signal today, poll `machine.recipeLogic.fuelTime` or react to the `WAITING` status instead.
 
 ## Where behavior belongs
 
@@ -257,8 +259,9 @@ Use `alwaysSearchRecipe` when another recipe with better priority may become ava
 | Consume or produce a resource | `IRecipeHandlerTrait` simulate/commit |
 | Overclock, parallel, duration/content transformation | Recipe modifiers / `getModifiedRecipe` |
 | Reserve/release external transaction state | Handler `preWorking` / `postWorking` |
-| Visual state and telemetry | Status, waiting, fuel-finish events |
+| Visual state and telemetry | Status and waiting events |
 | One-off post-tick behavior | `onRecipeWorking`, remembering tick IO already committed |
-| Exact post-output Java behavior | `IMachine#onRecipeFinish` override |
+| Something that happens once a craft is done | `onRecipeFinish` |
+| Per-machine configuration | [Runtime values](../editor/runtime-values.md) |
 
 Do not move resource accounting into generic events. Conditions can be evaluated repeatedly, searches can be asynchronous, and working events may happen after IO; the handler contract is the only layer designed for simulation followed by authoritative commit.

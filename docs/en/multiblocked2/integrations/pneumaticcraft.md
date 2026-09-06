@@ -1,6 +1,6 @@
 # PneumaticCraft: Repressurized
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 PneumaticCraft integration has two independent systems: pressure/air storage and heat-exchanger temperature. Do not route one through the other's Trait.
 

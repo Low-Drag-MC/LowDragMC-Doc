@@ -1,9 +1,7 @@
 # 1.20.1 KubeJS 迁移速查
 
 <VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="来源版本" icon="tag" />
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="目标版本" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="用于验证迁移脚本目标 ID 的 MBD2 1.21.1 编辑器"><figcaption>迁移后在 1.21.1 编辑器和 KubeJS 日志中同时验证定义 ID 与配方类型。</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="目标版本" icon="tag" />
 
 | 旧示例 | 1.21.1 写法 | 状态 |
 | --- | --- | --- |
@@ -15,7 +13,7 @@
 | `.isFuel(true)` | 在 Recipe Type 编辑器配置 Fuel Recipe Types | 当前 builder 无此方法 |
 | `.inputGas/.inputSlurry/.inputPigment/.inputInfuse` | `.inputChemicals(...)` | Mekanism 统一 chemical |
 | `.inputGases/.inputInfusions/.inputSlurries/.inputPigments` | `.inputChemicals(...)` | 旧官方 Wiki 的复数写法同样已移除 |
-| `.inputMana/.inputEU/.inputEmber` | 无当前 KJS builder | 21.0.11 已停用 |
+| `.inputMana/.inputEU/.inputEmber` | 无当前 KJS builder | 21.1.1 已停用 |
 | `.inputFluids('water 1000')` | `.inputFluids('1000x minecraft:water')` | 当前 sized ingredient 格式 |
 | `.addData('key', '{...}')` | `addDataString` 或传入真正的 `Tag` | `addData` 参数不是 JSON 字符串 |
 | `ui.getFirstWidgetById(...)` | `ui.selectId(...).findFirst().orElse(null)` | 新 UIElement 树 |

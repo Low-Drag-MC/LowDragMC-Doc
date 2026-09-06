@@ -1,14 +1,12 @@
 # KubeJS 配方
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="MBD2 Recipes 视图包含与 KubeJS schema builder 创建结果等价的配方"><figcaption>KubeJS 配方与编辑器内置配方在已注册类型下生成相同的 MBDRecipe 内容模型。</figcaption></figure>
-
-MBD2 会为每个已注册 `MBDRecipeType` 创建一个 KubeJS 配方 schema。配方应放在 `kubejs/server_scripts`，可通过 `/reload` 重建。
+MBD2 为每个已注册的 `MBDRecipeType` 生成一个 KubeJS 配方 schema。配方写在 `kubejs/server_scripts`，`/reload` 会重建它们。
 
 ## 最小配方
 
-若配方类型 ID 为 `example:crusher`，builder 路径就是命名空间加 path：
+builder 路径就是配方类型的 namespace 和 path。对 `example:crusher`：
 
 ```js
 ServerEvents.recipes(event => {
@@ -20,29 +18,29 @@ ServerEvents.recipes(event => {
 })
 ```
 
-强烈建议显式填写 `.id(...)`，让日志、删除脚本、JEI/REI/EMI 与迁移都拥有稳定标识。
+强烈建议显式写 `.id(...)`：它给日志、移除脚本、配方查看器和后续迁移一个稳定的身份。
 
-## 完整注释示例
+## 带注释的完整示例
 
 ```js
 ServerEvents.recipes(event => {
   event.recipes.example.crusher()
     .id('example:wet_crushing')
-    .duration(200)                    // 机器 tick
-    .priority(10)                     // 数值越小越先参与匹配
+    .duration(200)                    // 机器 tick；默认 100
+    .priority(10)                     // 数值越小越先尝试
     .isXEIHidden(false)
 
     .inputItems('#c:ores/iron')
     .inputFluids('250x minecraft:water')
-    .perTick(r => r.inputFE(40))      // 每个工作 tick 消耗 40 FE
+    .perTick(r => r.inputFE(40))      // 每个工作 tick 40 FE
 
     .outputItems('2x minecraft:raw_iron')
-    .chance(0.15, r =>                // modifier 仅在 callback 内生效
+    .chance(0.15, r =>                // 修饰器只作用于回调内部
       r.outputItems('minecraft:flint'))
     .tierChanceBoost(0.05, r =>
       r.outputItems('minecraft:iron_nugget'))
 
-    .slotName('water_in', r =>        // 只路由 callback 内的内容
+    .slotName('water_in', r =>        // 只路由这部分内容
       r.inputFluids('100x minecraft:water'))
     .uiName('bonus_output', r =>
       r.outputItems('minecraft:gravel'))
@@ -57,40 +55,43 @@ ServerEvents.recipes(event => {
 
 ## 内容方法
 
-| Capability | 输入 | 输出 | 接受值 |
+| Capability | 输入 | 输出 | 接受的值 |
 | --- | --- | --- | --- |
-| 物品 | `inputItems(...)` | `outputItems(...)` | KubeJS `SizedIngredient` 字符串/对象 |
-| 物品耐久 | `inputItemsDurability(...)` | `outputItemsDurability(...)` | 按耐久解释的 Sized item ingredient |
-| 流体 | `inputFluids(...)` | `outputFluids(...)` | `SizedFluidIngredient`，如 `250x minecraft:water` |
-| 实体 | `inputEntities(...)` | `outputEntities(...)` | `minecraft:zombie`、`2x minecraft:zombie` 或 `EntityIngredient` |
-| Forge Energy | `inputFE(int)` | `outputFE(int)` | 整数 FE 数量 |
-| Nature's Aura | `inputAura(int)` | `outputAura(int)` | Aura 数量；需要安装模组 |
-| Mekanism 化学品 | `inputChemicals(...)` | `outputChemicals(...)` | Chemical stack 字符串；需要安装模组 |
-| Mekanism 热量 | `inputHeat(double)` | `outputHeat(double)` | 热量；需要安装模组 |
-| Create 应力 | `inputStress(float)` | `outputStress(float)` | 应力值；需要安装模组 |
-| Create 转速 | `inputRPM(float)` | `outputRPM(float)` | RPM；需要安装模组 |
-| PNC 压力 | `inputPNCPressure(float)` | `outputPNCPressure(float)` | 压力；需要安装模组 |
-| PNC 空气 | `inputPNCAir(int)` | `outputPNCAir(int)` | 空气量；需要安装模组 |
-| PNC 热量 | `inputPNCHeat(double)` | `outputPNCHeat(double)` | 热量；需要安装模组 |
+| 物品 | `inputItems(...)` | `outputItems(...)` | `SizedIngredient`：`'minecraft:apple'`、`'2x minecraft:iron_ingot'`、`'#c:ores/iron'` |
+| 物品耐久 | `inputItemsDurability(...)` | `outputItemsDurability(...)` | 数量被当作耐久度 |
+| 流体 | `inputFluids(...)` | `outputFluids(...)` | `SizedFluidIngredient`：`'250x minecraft:water'` |
+| 实体 | `inputEntities(...)` | `outputEntities(...)` | `'minecraft:zombie'`、`'2x minecraft:zombie'` 或 `EntityIngredient` |
+| Forge Energy | `inputFE(int)` | `outputFE(int)` | |
+| Nature's Aura | `inputAura(int)` | `outputAura(int)` | 需要 `naturesaura` |
+| Ars Nouveau Source | `inputSource(int)` | `outputSource(int)` | 需要 `ars_nouveau` |
+| Mekanism 化学品 | `inputChemicals(...)` | `outputChemicals(...)` | `'100x mekanism:hydrogen'`；需要 `mekanism` |
+| Mekanism 热量 | `inputHeat(double)` | `outputHeat(double)` | 需要 `mekanism` |
+| Create 应力 | `inputStress(float)` | `outputStress(float)` | 需要 `create` |
+| Create 转速 | `inputRPM(float)` | `outputRPM(float)` | 需要 `create` |
+| PNC 压力 | `inputPNCPressure(float)` | `outputPNCPressure(float)` | 需要 `pneumaticcraft` |
+| PNC 空气 | `inputPNCAir(int)` | `outputPNCAir(int)` | 需要 `pneumaticcraft` |
+| PNC 热量 | `inputPNCHeat(double)` | `outputPNCHeat(double)` | 需要 `pneumaticcraft` |
 
-21.0.11 中不能调用 `inputMana`、`inputEU` 与 `inputEmber`；对应旧源码路径已被注释。
+对应模组没加载时调用相应方法会**抛异常**，所以模组可选的整合包必须加判断。`inputMana`、`inputEU` 和 `inputEmber` 在源码里已被注释掉，不存在。
 
-## Modifier 状态机
+物品和实体的带数量字符串用 `<数量>x <id>` 形式；流体总是需要显式数量。
 
-`perTick`、`chance`、`tierChanceBoost`、`slotName` 与 `uiName` 会修饰其生效期间创建的每个 `Content`。
+## 修饰器状态机
 
-callback 形式临时应用 modifier，结束后恢复之前的值：
+`perTick`、`chance`、`tierChanceBoost`、`slotName` 和 `uiName` 会修饰它们生效期间创建的每一条 `Content`。
+
+回调形式会在回调结束后恢复原值：
 
 ```js
 ServerEvents.recipes(event => {
   event.recipes.example.crusher()
     .id('example:modifier_scope')
     .chance(0.2, r => r.outputItems('minecraft:diamond'))
-    .outputItems('minecraft:cobblestone') // 必定输出，不是 20%
+    .outputItems('minecraft:cobblestone') // 必定产出，不是 20%
 })
 ```
 
-单参数形式会修改 builder 状态，影响之后所有内容，直到再次修改：
+单参数形式会一直改变 builder 状态，直到再次改变：
 
 ```js
 ServerEvents.recipes(event => {
@@ -104,13 +105,13 @@ ServerEvents.recipes(event => {
 })
 ```
 
-局部 modifier 优先使用 callback，防止意外泄漏到后续内容。
+优先用回调形式——它不会泄漏到后面的内容上。
 
-- `chance` 是该内容的基础概率。
-- `tierChanceBoost` 参与机器配方逻辑使用的 capability 等级概率加成。
-- `slotName` 只把内容路由给 Trait 定义中公开对应槽位名的 handler。
-- `uiName` 选择配方 UI 组件绑定，不选择存储。
-- `perTick` 表示每个正常推进的工作 tick 都处理，而非只在配方开始/结束处理一次。
+- `chance` 是该条内容的基础概率。
+- `tierChanceBoost` 是每级机器 tier 增加的概率。
+- `slotName` 限制只由声明了该 slot 名的 Trait 处理。它**不是** Trait 的名字。
+- `uiName` 把内容绑到配方查看器 UI 里的命名控件上，不影响存储选择。
+- `perTick` 让内容在每个工作 tick 发生，而不是在配方的开始/结束。
 
 ## 条件
 
@@ -125,22 +126,25 @@ ServerEvents.recipes(event => {
     .raining(1, 15)
     .thundering(1, 15)
     .blocksInStructure(2, 8, 'minecraft:copper_block')
-    .machineData({mode: 'precision'}, true)
+    .machineData({ mode: 'precision' }, true)
     .dayTime(true)
     .light(0, 15, 0, 7, false)
     .redstoneSignal(1, 15)
+    .inputItems('minecraft:stone')
+    .outputItems('minecraft:gravel')
 })
 ```
 
-可选集成会添加 `rotationCondition(minRPM, maxRPM, minStress, maxStress)`、`mekTemperatureCondition(min, max)`、`pncTemperatureCondition(min, max)` 与 `pncPressureCondition(isAir, min, max)`。分组与 reverse 语义见[条件参考](../recipes/condition-reference.md)。
+可选整合另外提供 `rotationCondition(minRPM, maxRPM, minStress, maxStress)`、`mekTemperatureCondition(min, max)`、`pncTemperatureCondition(min, max)`、`pncPressureCondition(isAir, min, max)` 和 `arsSourceNearbyCondition(radius, min, max)`。分组与反转语义见[条件参考](../recipes/condition-reference.md)。
 
-## 自定义 capability 与 condition
+## 自定义 capability
 
-Java 扩展自动使用通用 builder 路径：
+Java 注册的 capability 没有专门的 builder 方法，但通用入口对任何 capability 都有效。`MBDRegistries` 是全局绑定。
+
+下面的 `heat_units` 是[自定义 RecipeCapability](../java/custom-recipe-capability.md) 里的示例 capability——没有装那个 Java 扩展时查找会返回 `null`，这段脚本会按设计抛出异常：
 
 ```js
 ServerEvents.recipes(event => {
-  const MBDRegistries = Java.loadClass('com.lowdragmc.mbd2.api.registry.MBDRegistries')
   const heat = MBDRegistries.RECIPE_CAPABILITIES.get('heat_units')
   if (heat === null) throw new Error('heat_units capability is not registered')
 
@@ -148,21 +152,25 @@ ServerEvents.recipes(event => {
     .id('example:anneal_plate')
     .inputs(heat, 400)
     .outputs(heat, 50)
-    .removeOutputs(heat) // 移除当前 builder 中该 capability 的全部输出 Content
+    .removeOutputs(heat)   // removes every output Content for this capability
+    .inputItems('minecraft:iron_ingot')
+    .outputItems('minecraft:iron_block')
 })
 ```
 
-`inputs(capability, ...values)` 与 `outputs(...)` 会调用 capability 的 `of(Object)`，后者委托给 `IContentSerializer`。因此 Java serializer 决定 JavaScript 可以传入哪些值。`removeInputs`/`removeOutputs` 只操作当前 builder，不会删除其他配方。
+`inputs(capability, ...values)` 和 `outputs(...)` 会调用该 capability 的 `of(Object)`，后者委托给它的 `IContentSerializer`。所以哪些 JavaScript 值合法由 Java 的序列化器决定。`removeInputs` / `removeOutputs` 只作用于正在构建的这条配方，不影响别的配方。
 
-当 Java 集成向脚本提供自定义 `RecipeCondition` 实例时，可调用 `.addCondition(javaCondition)`。自定义条件不会自动获得具名 KubeJS 便捷方法；若需要，集成作者必须另外暴露。
+当某个 Java 整合把 `RecipeCondition` 实例暴露给脚本时，可以用 `addCondition(condition)`。自定义条件不会自动获得便捷方法，除非该整合自己加。
 
 ## 自定义 NBT 数据
 
-`addData(key, Tag)`、`addDataString`、`addDataNumber` 和 `addDataBoolean` 写入配方的自定义 `CompoundTag`。这些数据本身没有效果，必须由 Java Trait、机器事件或集成读取并解释。整合包应记录每个 key 与默认值，避免行为悄悄变化。
+`addData(key, Tag)`、`addDataString`、`addDataNumber`（按 double 存）和 `addDataBoolean` 写入配方的 `data` 复合标签。它**本身不产生任何效果**——必须有 Trait、机器事件、蓝图或 Java 整合去读它。请把每个键和默认值都记录下来。
 
-## 删除与诊断
+::: warning
+`addData` 接受真正的 `Tag`，不是 JSON 字符串。文本请用 `addDataString`。
+:::
 
-已加载配方可使用 KubeJS 标准按 ID 删除：
+## 移除
 
 ```js
 ServerEvents.recipes(event => {
@@ -170,11 +178,11 @@ ServerEvents.recipes(event => {
 })
 ```
 
-找不到 builder 路径时，依次检查：
+## builder 路径不存在时
 
-1. 配方类型是否在 startup 阶段注册。
-2. startup 脚本是否无错误，并且是否重启过游戏。
-3. namespace/path 拼写是否与配方类型 ID 一致。
-4. 可选 capability 方法是否只在对应模组安装时使用。
-5. 自定义 serializer 是否接受从 JavaScript 传入的值。
-6. 机器定义是否确实引用该配方类型，并拥有匹配 IO 的 Trait。
+1. 配方类型是在 **startup** 阶段注册的，不是在 server 脚本里。
+2. startup 脚本没有报错，并且已经完整重启。
+3. namespace 和 path 与配方类型 ID 完全一致。
+4. 可选 capability 方法只在对应模组安装时调用。
+5. 自定义序列化器接受你传入的值。
+6. 机器定义确实引用了这个配方类型，并且有匹配的 IO Trait。

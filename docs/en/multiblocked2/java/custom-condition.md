@@ -1,8 +1,6 @@
 # Custom Recipe Condition
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type project where registered Java conditions are attached to authored recipes"><figcaption>A registered condition becomes available to recipes edited under the target Recipe Type.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 A `RecipeCondition` answers whether a recipe may run for one `RecipeLogic`. It should inspect world or machine state without consuming resources or mutating the world.
 

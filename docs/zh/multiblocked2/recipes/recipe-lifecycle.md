@@ -1,12 +1,10 @@
 # RecipeLogic 生命周期
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="由 RecipeLogic 生命周期消费的已注册 Recipe Type 与候选配方"><figcaption>生命周期搜索所选类型的配方集合，然后模拟并提交其强类型内容。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 `RecipeLogic` 是一台机器的服务端调度器。它负责决定何时搜索，验证并修改候选配方，模拟全部 handler，获取燃料，提交配方 IO，推进进度，进入等待/衰减，完成输出，并决定同一配方能否立即执行下一轮。
 
-本页严格按照 21.0.11 的真实调用顺序描述。`onBeforeRecipeWorking` 等事件名很容易让人误判时机，请以本文注入点表格为准。
+本页严格按照 21.1.1 的真实调用顺序描述。`onBeforeRecipeWorking` 等事件名很容易让人误判时机，请以本文注入点表格为准。
 
 ## 状态与持久化字段
 
@@ -208,18 +206,20 @@ MBD2 会按 capability 将无标签内容与各 `slotName` 分组分开。先尝
 
 当前引擎不会提交燃料配方输出；虽然 tick 内容会参与燃料匹配，`handleFuelRecipe` 只提交普通输入。燃料配方应只依赖 duration 与普通输入，不要依赖燃料输出或 per-tick 燃料内容。
 
-每个有效服务端 tick 结束时，正数 `fuelTime` 都会减一。变成零时会运行 Java hook `onFuelBurningFinish(lastFuelRecipe)`，并向 NeoForge event bus 发布 `MachineFuelBurningFinishEvent`。但 21.0.11 此处没有调用 `postCustomEvent()`，所以已注册的 KubeJS `onFuelBurningFinish` handler **不会运行**。直到主配方 setup/工作 tick 再次调用 `handleFuelRecipe`，才会搜索下一份燃料。
+每个有效服务端 tick 结束时，正数 `fuelTime` 都会减一。变成零时 `MBDMachine#onFuelBurningFinish(lastFuelRecipe)` 会向 NeoForge event bus 发布 `MachineFuelBurningFinishEvent`。这次调用没有走 `postCustomEvent()`，所以在 `21.1.1` 中 KubeJS 的 `onFuelBurningFinish` handler 和蓝图的 **Fuel Burning Finish** 入口节点都收不到它——只有 Java `NeoForge.EVENT_BUS` 监听器有效。直到主配方 setup 或工作 tick 再次调用 `handleFuelRecipe`，才会搜索下一份燃料。
 
 ## 完成与下一次执行
 
 `progress >= duration` 时，会在同一个服务端 tick 完成：
 
 1. `machine.afterWorking()` 发布 `onAfterRecipeWorking`。
-2. 输入延迟时，提交普通 `IO.IN`、清除标志，再调用 Java hook `onConsumeInputsAfterWorking()`。
+2. 输入延迟时，提交普通 `IO.IN`、清除标志，再发布 `onConsumeInputsAfterWorking`。
 3. 对输入/输出 handler 调用 `postWorking`。
 4. 提交非 per-tick `IO.OUT`。
-5. 调用 Java hook `IMachine#onRecipeFinish()`。
+5. 发布 `onRecipeFinish`。
 6. 决定下一轮能否复用当前配方。
+
+第 1 步发生在产出**存在之前**，第 5 步在**之后**——这就是两者的全部区别：在 `onAfterRecipeWorking` 里加的额外产物会落进配方自己的产出马上要用的槽位。
 
 下一轮选择由两个机器设置控制：
 
@@ -245,9 +245,11 @@ MBD2 会按 capability 将无标签内容与各 `slotName` 分组分开。先尝
 | `onRecipeWorking` | 条件/燃料成功且 per-tick IO 提交后、progress 增加前 | 取消会中断 | 观察已完成的 tick IO，或触发 post-IO 效果 |
 | `onRecipeWaiting` | 状态与原因设为 waiting 后 | 只观察 | UI、诊断、限频反馈 |
 | `onAfterRecipeWorking` | 完成时位于延迟输入/输出之前；中断时也会调用 | 只观察 | 与 setup 配对清理；涉及输出时必须区分完成/中断 |
-| Java/NeoForge `onFuelBurningFinish` | 服务端 tick 末尾燃料计数变零时 | 只观察 | 21.0.11 仅 Java event-bus listener 可用；不会送达 KubeJS |
+| `onConsumeInputsAfterWorking` | 完成时刚刚提交了延迟的输入 | 只观察 | 只有机器延迟输入时才触发 |
+| `onRecipeFinish` | 产出已经生成之后 | 只观察 | 「一次合成完成」——额外产物、计数、音效 |
+| `onFuelBurningFinish` | 服务端 tick 末尾燃料计数变零时 | 只观察 | **只有 Java `NeoForge.EVENT_BUS` 监听器**——21.1.1 中不送达 KubeJS 和蓝图 |
 
-`MBDServerEvents` 当前注册了 KubeJS 名称 `onFuelBurningFinish`、`onConsumeInputsAfterWorking` 与 `onRecipeFinish`，但 21.0.11 的基础 `MBDMachine` 没有将这三者通过 `postCustomEvent()` 送出。Java hook/event-bus post 可能会运行，但在机器实现真正发布事件前，这三个 KubeJS 订阅都不是注入点。需要精确完成时机时，可结合 `onAfterRecipeWorking` 与状态/配方检查，或实现 Java machine hook。
+除 `onFuelBurningFinish` 外，上表每一行都同时到达 KubeJS 和[蓝图](../blueprints/)。现在需要可靠的「燃料耗尽」信号，请轮询 `machine.recipeLogic.fuelTime`，或响应 `WAITING` 状态。
 
 ## 行为应该放在哪里
 
@@ -259,6 +261,7 @@ MBD2 会按 capability 将无标签内容与各 `slotName` 分组分开。先尝
 | 预留/释放外部事务状态 | Handler `preWorking` / `postWorking` |
 | 视觉状态与统计 | 状态、等待、燃料结束事件 |
 | 一次性的 tick 后行为 | `onRecipeWorking`，并牢记 tick IO 已提交 |
-| 精确的输出后 Java 行为 | 重写 `IMachine#onRecipeFinish` |
+| 一次合成完成后要做的事 | `onRecipeFinish` |
+| 按机器的配置 | [Runtime value](../editor/runtime-values.md) |
 
 不要把资源核算放进通用事件。条件可能重复计算，搜索可能异步执行，工作事件也可能发生在 IO 之后；只有 handler 协议专门为“先模拟、后权威提交”设计。

@@ -1,6 +1,6 @@
 # 单方块机器
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 机器项目会生成一个定义，随后注册一个方块、物品、方块实体类型、运行时 `MBDMachine`、状态机、Trait、UI 和可选配方逻辑。
 
@@ -23,10 +23,12 @@
 | --- | --- |
 | 方块属性 | 旋转、从状态继承的碰撞/形状、渲染层、硬度/抗性和方块行为 |
 | 物品属性 | 物品渲染器、提示、GUI 光照、创造标签页开关 |
-| 机器设置 | 机器等级、是否有 UI、掉落机器物品、红石信号连接 |
+| 机器设置 | 机器等级、是否有 UI、掉落机器物品、红石信号连接、[蓝图绑定](../blueprints/)、[FX 库](./machine-fx.md) |
 | Trait | 存储、配方 handler、世界 capability 暴露、自动 IO |
 | 配方逻辑 | 启用、所选配方类型、damping、输入消耗时机、配方修饰器 |
 | 部件设置 | 是否可作为多方块部件、共享、控制器 capability 代理 |
+
+其中大多数同时也是 [runtime value](./runtime-values.md)——定义提供默认值，单台放置的机器可以持有自己的覆盖。
 
 ## 部件与控制器
 

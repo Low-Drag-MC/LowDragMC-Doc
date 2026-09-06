@@ -1,6 +1,6 @@
 # 混合教程：编辑器机器与 KubeJS 配方
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 这是适合整合包分发的推荐工作流：编辑器负责完整机器与配方类型定义，Java 注册导出产品，KubeJS 负责配方与可选行为。
 

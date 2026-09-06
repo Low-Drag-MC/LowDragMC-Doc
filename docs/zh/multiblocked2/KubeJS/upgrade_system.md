@@ -1,8 +1,6 @@
 # 动态修改配方
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="KubeJS 可为单个运行时机器复制并修改的基础配方"><figcaption>运行时升级 hook 替换所选配方的副本，不会修改此已注册基础配方。</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 使用 `onBeforeRecipeModify` 为一个机器定义替换选中的运行时配方。这是实现升级系统在运行时更改时长、并行数或内容的支持方式。
 

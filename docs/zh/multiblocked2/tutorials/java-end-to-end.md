@@ -1,6 +1,6 @@
 # Java 教程：注册机器、配方类型与配方
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 本教程在 Java 模组中分发一个由编辑器制作的单方块粉碎机和配方类型 UI，再通过 Java 添加 `iron_ingot -> iron_nugget` 内置配方。
 

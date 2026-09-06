@@ -7,4 +7,6 @@ nav:
   - multiblocks.md
   - traits-and-ui.md
   - recipe-logic.md
+  - machine-fx.md
+  - runtime-values.md
   - debugging.md

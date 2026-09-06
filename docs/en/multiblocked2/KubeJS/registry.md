@@ -1,8 +1,6 @@
 # Registry Events
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="MBD2 editor menu populated after definition registries are finalized during startup"><figcaption>Startup registry changes become editor-visible only after a restart completes registration.</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 Registry events run only from `kubejs/startup_scripts`. They change MBD2 definition registries before Minecraft blocks, items, block entities, and generated KubeJS recipe schemas are finalized. A `/reload` is not enough; restart the game/server after changing these scripts.
 
@@ -24,6 +22,12 @@ event.recipes.example.crusher()
 
 Prefer exporting a configured `.rt` editor product through Java resource registration when the recipe type needs editor-authored UI, proxy mappings, or other full configuration. The KubeJS function creates the base object; it is not a fluent mirror of every Java/editor setting.
 
+::: warning Registering the same recipe-type ID twice is fatal
+`MBDRegistries.RECIPE_TYPES` refuses a duplicate key, and an exception in a startup script makes KubeJS abort mod loading — the game does not start, with `There were KubeJS startup script syntax errors!` in the crash report and `[register] registry mbd2:recipe_type contains key <id> already` in `logs/kubejs/startup.log`.
+
+So call `createRecipeType` for an ID exactly once, and never for an ID a Java mod already registers. Machine builders behave differently: `event.create` with a repeated ID simply replaces the pending builder.
+:::
+
 ## Register a basic machine definition
 
 ```js
@@ -33,17 +37,19 @@ MBDRegistryEvents.machine(event => {
 })
 ```
 
-Supported builder keys in 21.0.11 are exactly:
+Supported builder keys in 21.1.1 are exactly:
 
 | Key | Java builder supplied by MBD2 | Result |
 | --- | --- | --- |
 | `single` | `MBDMachineDefinition.builder()` | Base single-block definition |
 | `multiblock` | `MultiblockMachineDefinition.builder()` | Base multiblock definition |
 
-The event stores builders and calls `build()` after every startup handler has run. Creating the same ID twice replaces the pending builder in that event. `kinetic` is not registered; Create's old KubeJS kinetic builder path is disabled in current source.
+The event stores builders and calls `build()` after every startup handler has run, so creating the same ID twice replaces the pending builder. Any other key throws `Unknown machine type` — in particular `kinetic` is not registered, so a Create kinetic machine has to be authored in the editor and registered from Java. See [Create](../integrations/create.md).
 
-::: warning Definition completeness
-The returned Java builder does not have KubeJS documentation or a supported fluent surface for the entire MBD2 editor model. Use the editor to author states, renderers, traits, UI, recipe logic, and patterns, export `.sm`/`.mb`, then register the product from a Java mod. KubeJS is the supported place for recipes and event behavior around that definition.
+::: warning A registration shell, not a machine
+`create` returns MBD2's Java `MBDMachineDefinition.Builder`. It is not a documented or supported fluent surface for the editor model — the definition it builds has no traits, no UI, no recipe logic and no pattern, so the block exists and does nothing.
+
+Author complete machines in the editor, export `.sm` / `.mb`, and register the product from a Java mod ([how](../java/custom-machine.md)). Use KubeJS for the recipes and behaviour around that definition.
 :::
 
 ## Query and remove

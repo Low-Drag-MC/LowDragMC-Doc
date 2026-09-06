@@ -1,25 +1,25 @@
 # KubeJS Example Library
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Default version" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Default version" icon="tag" />
 
-These examples are organized as copyable script files. Unless a page carries a legacy badge, every snippet was checked against MBD2 `21.0.11`, KubeJS `2101.7.2-build.226`, and LDLib2 `2.2.35` source.
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-display-ui.png" alt="MBD2 Recipe Viewer UI showing the content layout used by KubeJS recipes"><figcaption>Example scripts supply runtime data; editor projects supply machine, Trait, and UI authoring data.</figcaption></figure>
+Copyable script files. Unless a snippet carries a legacy badge, it was executed against MBD2 `21.1.1`, KubeJS `2101.7.2-build.226` and LDLib2 `2.2.39.a` — not only read off the source.
 
 | Example | What it teaches | Script stage |
 | --- | --- | --- |
-| [Minimal complete machine](./complete-machine.md) | Register a recipe type, base machine, and recipe | Startup + Server |
-| [Recipe cookbook](./recipe-cookbook.md) | Built-in content, chance, and per-tick IO | Server |
-| [Conditions and routing](./conditions-and-routing.md) | Conditions, `slotName`, and `uiName` | Server |
-| [Machine events](./machine-events.md) | Interaction, states, multiblocks, lifecycle hooks | Server/Client |
-| [Traits and custom data](./traits-and-data.md) | Safe item, fluid, FE, and persistent NBT access | Server |
-| [UI behavior](./ui-behavior.md) | 1.21.1 `UIElement` queries and server listeners | Server |
-| [Runtime recipe modification](./runtime-recipe.md) | Upgrades, duration, and recipe copies | Server |
-| [Mod integrations](./integrations.md) | Create, Mekanism, PNC, Nature's Aura | Server |
-| [1.20.1 migration](./migration.md) | Map legacy APIs to current APIs | Migration |
+| [Minimal complete machine](./complete-machine.md) | Register a recipe type, a base machine and a recipe | Startup + Server |
+| [Recipe cookbook](./recipe-cookbook.md) | Built-in content, chance, per-tick IO, recipe data | Server |
+| [Conditions and routing](./conditions-and-routing.md) | Conditions, `slotName` and `uiName` | Server |
+| [Machine events](./machine-events.md) | Interaction, states, multiblocks, lifecycle hooks | Server / Client |
+| [Traits and custom data](./traits-and-data.md) | Item, fluid and FE access, persistent NBT, runtime values | Server |
+| [UI behaviour](./ui-behavior.md) | `UIElement` queries and server listeners | Server / Client |
+| [Runtime recipe modification](./runtime-recipe.md) | Upgrades, duration and recipe copies | Server |
+| [Mod integrations](./integrations.md) | Create, Mekanism, PNC, Nature's Aura, Ars Nouveau | Server |
+| [1.20.1 migration](./migration.md) | Map legacy APIs to current ones | Migration |
 
-::: tip Validation order
-Check `logs/kubejs/startup.log` first, restart after registry changes, and then inspect `logs/kubejs/server.log`. `/reload` cannot validate registry changes.
+::: tip Debugging order
+1. `logs/kubejs/startup.log` — registry scripts. A failure here means no recipe schema exists.
+2. Restart. `/reload` cannot recreate registries.
+3. `logs/kubejs/server.log` — recipe and event scripts. The line `Added N recipes … with X failed recipes` is the one to read.
 :::
 
-Legacy Discord examples are treated as requirements input only. Methods absent from current source are documented on the migration page, not presented as runnable 1.21.1 code.
+Legacy Discord and old-wiki examples are treated as requirements input only. Methods absent from current source are listed on the [migration page](./migration.md), never presented as runnable code.

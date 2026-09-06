@@ -1,8 +1,6 @@
 # 注册事件
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="startup 阶段定义注册表冻结后填充的 MBD2 编辑器菜单"><figcaption>startup 注册变更只有在重启并完成注册后才会显示在编辑器中。</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 注册事件只能在 `kubejs/startup_scripts` 运行。它们会在 Minecraft 方块、物品、方块实体以及生成的 KubeJS 配方 schema 最终确定之前修改 MBD2 定义 registry。修改这些脚本后 `/reload` 不够，必须重启游戏或服务器。
 
@@ -24,6 +22,12 @@ event.recipes.example.crusher()
 
 如果配方类型需要编辑器设计的 UI、代理映射或其他完整配置，应由 Java 从资源注册导出的 `.rt` 产品。KubeJS 函数只创建基础对象，不是所有 Java/编辑器设置的 fluent 镜像。
 
+::: warning 同一个配方类型 ID 注册两次会直接崩游戏
+`MBDRegistries.RECIPE_TYPES` 拒绝重复的键，而 startup 脚本抛异常会让 KubeJS 中止 mod 加载——游戏起不来，崩溃报告里是 `There were KubeJS startup script syntax errors!`，`logs/kubejs/startup.log` 里是 `[register] registry mbd2:recipe_type contains key <id> already`。
+
+所以同一个 ID 只能调用一次 `createRecipeType`，也绝不要对 Java 模组已经注册过的 ID 调用它。机器 builder 的行为不同：`event.create` 传入重复 ID 只是替换掉待构建的 builder。
+:::
+
 ## 注册基础机器定义
 
 ```js
@@ -33,17 +37,19 @@ MBDRegistryEvents.machine(event => {
 })
 ```
 
-21.0.11 中支持的 builder key 只有：
+21.1.1 中支持的 builder key 只有：
 
 | Key | MBD2 提供的 Java builder | 结果 |
 | --- | --- | --- |
 | `single` | `MBDMachineDefinition.builder()` | 基础单方块定义 |
 | `multiblock` | `MultiblockMachineDefinition.builder()` | 基础多方块定义 |
 
-事件先保存 builder，在全部 startup handler 完成后统一调用 `build()`。同一事件内重复创建相同 ID 会覆盖待构建 builder。当前没有注册 `kinetic`；旧版 Create KubeJS 动力机器 builder 路径已在源码中停用。
+事件先保存 builder，在全部 startup handler 完成后统一调用 `build()`，所以同一事件内重复创建相同 ID 会覆盖之前的 builder。传入其他 key 会抛 `Unknown machine type`——特别是没有注册 `kinetic`，所以 Create 动能机器必须在编辑器里创作、由 Java 注册。见 [Create](../integrations/create.md)。
 
-::: warning 定义完整度
-返回的 Java builder 没有面向 KubeJS 的完整文档，也没有覆盖全部 MBD2 编辑器模型的稳定 fluent API。状态、渲染器、Trait、UI、配方逻辑与 Pattern 请在编辑器中创建，导出 `.sm`/`.mb`，再由 Java 模组注册。KubeJS 适合为已有定义编写配方和事件行为。
+::: warning 这是一个注册空壳，不是一台机器
+`create` 返回的是 MBD2 的 Java `MBDMachineDefinition.Builder`。它不是面向编辑器模型的、有文档且受支持的 fluent API——它构建出的定义没有 Trait、没有 UI、没有配方逻辑、没有 Pattern，所以方块存在但什么都不做。
+
+完整机器请在编辑器里创作，导出 `.sm` / `.mb`，再[由 Java 模组注册](../java/custom-machine.md)。KubeJS 负责围绕该定义的配方和行为。
 :::
 
 ## 查询与删除

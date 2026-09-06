@@ -1,8 +1,6 @@
 # Java 集成（已移动）
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="由内置与 Java 集成 Trait type 填充的编辑器注册表"><figcaption>当前 Java 扩展章节说明代码注册如何成为这些编辑器可见条目。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 此 URL 为旧版 1.20.1 Wiki 链接保留。1.21.1 Java API 现已拆分为完整章节：
 
@@ -16,5 +14,5 @@
 - [扩展测试](./java/testing.md)
 
 ::: warning 1.20.1 示例
-不要继续使用旧 Forge event-bus 初始化、`create_machine` 资源类型或已注释的 Botania/GTCEu/Embers 路径。以上页面均以 NeoForge/Minecraft 1.21.1 的 MBD2 21.0.11 源码核对。
+不要继续使用旧 Forge event-bus 初始化、`create_machine` 资源类型或已注释的 Botania/GTCEu/Embers 路径。以上页面均以 NeoForge/Minecraft 1.21.1 的 MBD2 21.1.1 源码核对。
 :::

@@ -1,8 +1,6 @@
 # Runtime Recipe Modification
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Registered base recipe before runtime modification"><figcaption>The event replaces a recipe copy for one machine and does not mutate this registered base data.</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 ```js
 MBDMachineEvents.onBeforeRecipeModify('example:crusher', wrapper => {

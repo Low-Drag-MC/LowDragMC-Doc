@@ -1,0 +1,7 @@
+title: Blueprints
+collapsed: false
+nav:
+  - index.md
+  - concepts.md
+  - nodes.md
+  - built-in.md

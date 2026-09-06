@@ -1,6 +1,6 @@
 # Nature's Aura
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Nature's Aura integration reads and modifies aura in the world around the machine. It is not a private tank or a sided NeoForge storage capability.
 

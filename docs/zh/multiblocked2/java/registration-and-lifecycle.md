@@ -1,8 +1,6 @@
 # 注册与生命周期
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/integrations/integration-map.png" alt="证明注解扫描 Trait 扩展 type 已加载的运行时编辑器注册表"><figcaption>编辑器构建此注册表菜单之前，注解扫描必须已完成。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 MBD2 有两条注册路径。带注解的扩展类型会在 MBD2 冻结内部 registry 前被发现；具体机器与配方类型定义则通过 MBD2 mod-bus 事件提供。
 

@@ -1,6 +1,6 @@
 # Hybrid Tutorial: Editor Machine with KubeJS Recipes
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 This is the recommended production workflow for a modpack-friendly machine: the editor owns the complete machine and recipe-type definitions, Java registers those exported products, and KubeJS owns recipes and optional behavior.
 

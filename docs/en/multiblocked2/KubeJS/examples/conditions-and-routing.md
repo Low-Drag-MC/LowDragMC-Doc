@@ -1,6 +1,6 @@
 # Conditions and Content Routing
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-display-ui.png" alt="Named content display regions in the Recipe Viewer UI editor"><figcaption>`uiName` selects a display region; `slotName` independently routes to Trait handlers.</figcaption></figure>
 

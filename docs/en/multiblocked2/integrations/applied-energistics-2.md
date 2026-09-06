@@ -1,6 +1,6 @@
 # Applied Energistics 2
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 AE2 integration adds two machine Traits that participate in an ME network while handling MBD2's existing `item` and `fluid` recipe capabilities. It does not add an `ae2` recipe capability.
 

@@ -1,6 +1,6 @@
 # Recipe Capability Reference
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="Built-in item, fluid, Forge Energy, and entity Trait handlers in the editor"><figcaption>The core capability rows below map directly to these built-in machine handlers.</figcaption></figure>
 
@@ -28,8 +28,21 @@ An item-slot trait returns both item and durability handlers. A filter, side cap
 | `pneumatic_pressure_air` | PneumaticCraft | `pneumatic_pressure_air_handler` | pressure and air methods | `PressureAir` records whether the number is pressure or air volume |
 | `pneumatic_heat` | PneumaticCraft | `pneumatic_heat_exchanger` | `inputPNCHeat`, `outputPNCHeat` | Heat amount as `double` |
 | `natures_aura` | Nature's Aura | `aura_handler` | `inputAura`, `outputAura` | Aura amount as integer |
+| `ars_source` | Ars Nouveau | `ars_source_storage` **or** `ars_nearby_source` | `inputSource`, `outputSource` | Source amount as integer; the two traits are mutually exclusive |
 
-Optional registrations use `@LDLRegister(modID = "...")`; the capability is absent when the dependency is not loaded. A script must not call its builder methods unconditionally in a pack where the mod can be absent.
+Optional registrations use `@LDLRegister(modID = "...")`, so the capability is absent when the dependency is not loaded — and the matching KubeJS builder method **throws**. Guard the call in a pack where the mod can be absent.
+
+## Recipe-viewer widget IDs
+
+`uiName` binds a content entry to a named widget in the recipe display UI. When it is empty, MBD2 matches the default generated ID:
+
+```text
+@<capability>_<io>_<index>      e.g. @item_import_0, @fluid_export_1
+```
+
+`<io>` is the IO's display name — `import` for `IO.IN`, `export` for `IO.OUT`.
+
+Set `uiName` only to override that mapping — for example to send a bonus output to a widget of your own. An explicit `uiName` is matched as a substring, not as an exact ID; see [Slot Names and the Recipe Viewer UI](slots-and-xei-ui.md) for that, for the reserved `@progress_bar` / `@duration` / `@condition` / `@custom_data` elements, and for how a Trait declares the slot names `slotName` is matched against.
 
 ## Routing fields
 
@@ -41,7 +54,7 @@ builder.slotName("hot_side")
     .output(HeatUnitsCapability.CAP, 50);
 ```
 
-Fluent fields remain active until changed. The KubeJS callback forms restore the previous value automatically and are safer for scoped modifiers:
+Fluent fields remain active until changed. The KubeJS callback forms restore the previous value automatically and are safer for scoped modifiers. (`heat_units` is the [example Java capability](../java/custom-recipe-capability.md); the lookup throws without it.)
 
 ```js
 ServerEvents.recipes(event => {

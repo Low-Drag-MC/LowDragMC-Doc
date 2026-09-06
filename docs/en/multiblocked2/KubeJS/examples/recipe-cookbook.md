@@ -1,6 +1,6 @@
 # Recipe Cookbook
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type editor showing item input and output Content rows"><figcaption>The script builder produces the same MBDRecipe content model shown by the editor Recipes view.</figcaption></figure>
 

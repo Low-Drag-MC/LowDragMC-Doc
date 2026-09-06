@@ -1,14 +1,12 @@
 # KubeJS Recipes
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="MBD2 Recipes view containing a recipe equivalent to one created by the KubeJS schema builder"><figcaption>KubeJS recipes and editor built-in recipes produce the same MBDRecipe content model under a registered type.</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 MBD2 creates one KubeJS recipe schema for every registered `MBDRecipeType`. Recipes belong in `kubejs/server_scripts` and are rebuilt by `/reload`.
 
 ## Minimal recipe
 
-If the recipe type ID is `example:crusher`, its builder path is namespace plus path:
+The builder path is the recipe type's namespace and path. For `example:crusher`:
 
 ```js
 ServerEvents.recipes(event => {
@@ -20,7 +18,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-An explicit `.id(...)` is strongly recommended. It gives logs, removal scripts, JEI/REI/EMI, and migrations one stable identity.
+An explicit `.id(...)` is strongly recommended: it gives logs, removal scripts, recipe viewers and migrations one stable identity.
 
 ## Complete annotated example
 
@@ -28,16 +26,16 @@ An explicit `.id(...)` is strongly recommended. It gives logs, removal scripts, 
 ServerEvents.recipes(event => {
   event.recipes.example.crusher()
     .id('example:wet_crushing')
-    .duration(200)                    // machine ticks
-    .priority(10)                     // lower numbers are considered first
+    .duration(200)                    // machine ticks; defaults to 100
+    .priority(10)                     // lower numbers are tried first
     .isXEIHidden(false)
 
     .inputItems('#c:ores/iron')
     .inputFluids('250x minecraft:water')
-    .perTick(r => r.inputFE(40))      // 40 FE each working tick
+    .perTick(r => r.inputFE(40))      // 40 FE every working tick
 
     .outputItems('2x minecraft:raw_iron')
-    .chance(0.15, r =>                // modifier is scoped to callback
+    .chance(0.15, r =>                // modifier scoped to the callback
       r.outputItems('minecraft:flint'))
     .tierChanceBoost(0.05, r =>
       r.outputItems('minecraft:iron_nugget'))
@@ -59,27 +57,30 @@ ServerEvents.recipes(event => {
 
 | Capability | Input | Output | Accepted value |
 | --- | --- | --- | --- |
-| Item | `inputItems(...)` | `outputItems(...)` | KubeJS `SizedIngredient` strings/objects |
-| Item durability | `inputItemsDurability(...)` | `outputItemsDurability(...)` | Sized item ingredients interpreted as durability |
-| Fluid | `inputFluids(...)` | `outputFluids(...)` | `SizedFluidIngredient`, for example `250x minecraft:water` |
-| Entity | `inputEntities(...)` | `outputEntities(...)` | `minecraft:zombie`, `2x minecraft:zombie`, or `EntityIngredient` |
-| Forge Energy | `inputFE(int)` | `outputFE(int)` | Integer FE amount |
-| Nature's Aura | `inputAura(int)` | `outputAura(int)` | Aura amount; mod must be installed |
-| Mekanism chemical | `inputChemicals(...)` | `outputChemicals(...)` | Chemical stack strings; mod must be installed |
-| Mekanism heat | `inputHeat(double)` | `outputHeat(double)` | Heat amount; mod must be installed |
-| Create stress | `inputStress(float)` | `outputStress(float)` | Stress value; mod must be installed |
-| Create RPM | `inputRPM(float)` | `outputRPM(float)` | RPM value; mod must be installed |
-| PNC pressure | `inputPNCPressure(float)` | `outputPNCPressure(float)` | Pressure; mod must be installed |
-| PNC air | `inputPNCAir(int)` | `outputPNCAir(int)` | Air; mod must be installed |
-| PNC heat | `inputPNCHeat(double)` | `outputPNCHeat(double)` | Heat; mod must be installed |
+| Item | `inputItems(...)` | `outputItems(...)` | `SizedIngredient`: `'minecraft:apple'`, `'2x minecraft:iron_ingot'`, `'#c:ores/iron'` |
+| Item durability | `inputItemsDurability(...)` | `outputItemsDurability(...)` | Sized item ingredients, read as durability |
+| Fluid | `inputFluids(...)` | `outputFluids(...)` | `SizedFluidIngredient`: `'250x minecraft:water'` |
+| Entity | `inputEntities(...)` | `outputEntities(...)` | `'minecraft:zombie'`, `'2x minecraft:zombie'`, or an `EntityIngredient` |
+| Forge Energy | `inputFE(int)` | `outputFE(int)` | |
+| Nature's Aura | `inputAura(int)` | `outputAura(int)` | Requires `naturesaura` |
+| Ars Nouveau Source | `inputSource(int)` | `outputSource(int)` | Requires `ars_nouveau` |
+| Mekanism chemical | `inputChemicals(...)` | `outputChemicals(...)` | `'100x mekanism:hydrogen'`; requires `mekanism` |
+| Mekanism heat | `inputHeat(double)` | `outputHeat(double)` | Requires `mekanism` |
+| Create stress | `inputStress(float)` | `outputStress(float)` | Requires `create` |
+| Create RPM | `inputRPM(float)` | `outputRPM(float)` | Requires `create` |
+| PNC pressure | `inputPNCPressure(float)` | `outputPNCPressure(float)` | Requires `pneumaticcraft` |
+| PNC air | `inputPNCAir(int)` | `outputPNCAir(int)` | Requires `pneumaticcraft` |
+| PNC heat | `inputPNCHeat(double)` | `outputPNCHeat(double)` | Requires `pneumaticcraft` |
 
-`inputMana`, `inputEU`, and `inputEmber` are not callable in 21.0.11. Their older source paths are commented out.
+A method for a mod that is not loaded **throws**, so guard it in a pack where the mod is optional. `inputMana`, `inputEU` and `inputEmber` are commented out in the source and do not exist.
+
+Counted item and entity strings use the `<count>x <id>` form; fluids always take an explicit amount.
 
 ## Modifier state machine
 
-`perTick`, `chance`, `tierChanceBoost`, `slotName`, and `uiName` decorate each `Content` created while the modifier is active.
+`perTick`, `chance`, `tierChanceBoost`, `slotName` and `uiName` decorate every `Content` created while they are active.
 
-The callback form temporarily applies the modifier and restores the previous value afterward:
+The callback form applies the modifier and restores the previous value afterwards:
 
 ```js
 ServerEvents.recipes(event => {
@@ -90,7 +91,7 @@ ServerEvents.recipes(event => {
 })
 ```
 
-The one-argument form changes builder state for all following contents until changed again:
+The one-argument form changes builder state until it is changed again:
 
 ```js
 ServerEvents.recipes(event => {
@@ -104,13 +105,13 @@ ServerEvents.recipes(event => {
 })
 ```
 
-Prefer callbacks for local modifiers; they prevent accidental leakage to later content.
+Prefer callbacks — they cannot leak into later content.
 
 - `chance` is the base probability for that content.
-- `tierChanceBoost` contributes the capability-tier bonus used by the machine's recipe logic.
-- `slotName` routes content only to handlers whose Trait definition exposes that slot name.
-- `uiName` identifies the recipe UI widget binding; it does not select storage.
-- `perTick` causes the content to be handled for each progressing work tick, not once at recipe start/end.
+- `tierChanceBoost` is the extra probability per machine tier.
+- `slotName` restricts handling to Traits advertising that slot name. It is **not** the Trait's name.
+- `uiName` binds the content to a named widget in the recipe-viewer UI. It does not select storage.
+- `perTick` makes the content happen on every working tick instead of at the recipe boundary.
 
 ## Conditions
 
@@ -125,22 +126,25 @@ ServerEvents.recipes(event => {
     .raining(1, 15)
     .thundering(1, 15)
     .blocksInStructure(2, 8, 'minecraft:copper_block')
-    .machineData({mode: 'precision'}, true)
+    .machineData({ mode: 'precision' }, true)
     .dayTime(true)
     .light(0, 15, 0, 7, false)
     .redstoneSignal(1, 15)
+    .inputItems('minecraft:stone')
+    .outputItems('minecraft:gravel')
 })
 ```
 
-Optional integrations add `rotationCondition(minRPM, maxRPM, minStress, maxStress)`, `mekTemperatureCondition(min, max)`, `pncTemperatureCondition(min, max)`, and `pncPressureCondition(isAir, min, max)`. See the [condition reference](../recipes/condition-reference.md) for grouping and reverse semantics.
+Optional integrations add `rotationCondition(minRPM, maxRPM, minStress, maxStress)`, `mekTemperatureCondition(min, max)`, `pncTemperatureCondition(min, max)`, `pncPressureCondition(isAir, min, max)` and `arsSourceNearbyCondition(radius, min, max)`. See the [condition reference](../recipes/condition-reference.md) for grouping and reverse semantics.
 
-## Custom capabilities and conditions
+## Custom capabilities
 
-Java extensions automatically use the generic builder path:
+A Java-registered capability has no named builder method, but the generic path works with any of them. `MBDRegistries` is a global binding.
+
+`heat_units` below is the example capability from [Custom Recipe Capability](../java/custom-recipe-capability.md) — without that Java extension installed the lookup returns `null` and this script throws on purpose:
 
 ```js
 ServerEvents.recipes(event => {
-  const MBDRegistries = Java.loadClass('com.lowdragmc.mbd2.api.registry.MBDRegistries')
   const heat = MBDRegistries.RECIPE_CAPABILITIES.get('heat_units')
   if (heat === null) throw new Error('heat_units capability is not registered')
 
@@ -148,21 +152,25 @@ ServerEvents.recipes(event => {
     .id('example:anneal_plate')
     .inputs(heat, 400)
     .outputs(heat, 50)
-    .removeOutputs(heat) // removes every output Content for this capability
+    .removeOutputs(heat)   // removes every output Content for this capability
+    .inputItems('minecraft:iron_ingot')
+    .outputItems('minecraft:iron_block')
 })
 ```
 
-`inputs(capability, ...values)` and `outputs(...)` call that capability's `of(Object)`, which delegates to its `IContentSerializer`. Therefore the Java serializer defines which JavaScript values are valid. `removeInputs`/`removeOutputs` operate on the current builder, not on other recipes.
+`inputs(capability, ...values)` and `outputs(...)` call the capability's `of(Object)`, which delegates to its `IContentSerializer`. The Java serializer therefore decides which JavaScript values are valid. `removeInputs` / `removeOutputs` operate on the recipe being built, not on other recipes.
 
-Use `.addCondition(javaCondition)` when a Java integration makes a custom `RecipeCondition` instance available to scripts. A custom condition does not receive an automatic named KubeJS convenience method; the integration must add one if desired.
+`addCondition(condition)` accepts a `RecipeCondition` instance when a Java integration exposes one to scripts. A custom condition gets no convenience method unless its integration adds one.
 
 ## Custom NBT data
 
-`addData(key, Tag)`, `addDataString`, `addDataNumber`, and `addDataBoolean` write the recipe's custom `CompoundTag`. This data has no effect by itself. A Java Trait, machine event, or integration must read and interpret it. Document every key and default in the pack to avoid silent behavior changes.
+`addData(key, Tag)`, `addDataString`, `addDataNumber` (stored as a double) and `addDataBoolean` write the recipe's `data` compound. This has **no effect on its own** — a Trait, a machine event, a blueprint or a Java integration has to read it. Document every key and its default.
 
-## Removal and diagnosis
+::: warning
+`addData` takes a real `Tag`, not a JSON string. Use `addDataString` for text.
+:::
 
-Use normal KubeJS recipe removal by ID for an already-loaded recipe:
+## Removal
 
 ```js
 ServerEvents.recipes(event => {
@@ -170,11 +178,11 @@ ServerEvents.recipes(event => {
 })
 ```
 
-If the builder path is missing, check in order:
+## If the builder path is missing
 
-1. The recipe type was registered during startup.
-2. The startup script has no error and the game was restarted.
-3. Namespace/path spelling matches the recipe type ID.
-4. Optional capability methods are used only with their mod installed.
-5. A custom serializer accepts the value passed from JavaScript.
+1. The recipe type was registered during **startup**, not in a server script.
+2. The startup script logged no error and the game was fully restarted.
+3. Namespace and path match the recipe-type ID exactly.
+4. Optional capability methods are only called with their mod installed.
+5. A custom serializer accepts the value being passed.
 6. The machine definition actually references this recipe type and has matching IO Traits.

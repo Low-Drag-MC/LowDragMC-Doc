@@ -1,6 +1,6 @@
 # 注册机器与配方类型
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/basic-settings.png" alt="可导出并通过 Java 注册的编辑器机器定义"><figcaption>推荐的 Java 路径注册导出定义，并保留此 Inspector 中制作的全部设置。</figcaption></figure>
 

@@ -1,6 +1,6 @@
 # 代理配方类型
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type Inspector 中配置代理来源和 Fuel Recipe Types 的区域"><figcaption>代理来源在编辑器中启用；KubeJS 只接收每个转换结果的过滤事件。</figcaption></figure>
 

@@ -1,6 +1,6 @@
 # Multiblock Machines
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 A multiblock project adds reusable predicates, a three-dimensional pattern, repetition ranges, controller placement, shape previews, catalysts, and part capability routing.
 

@@ -1,8 +1,6 @@
 # RecipeCondition 参考
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="condition 实例被添加到单个配方的 Recipe Type 项目"><figcaption>condition 属于类型下的配方，并由各机器 RecipeLogic 求值。</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 条件会在匹配期间和配方工作期间检查。除非另有说明，所有值都描述机器/控制器位置或运行时机器。
 
@@ -32,6 +30,9 @@
 | `mekanism_heat` | Mekanism | `mekTemperatureCondition(min, max)` | Mekanism 温度位于范围内 |
 | `pneumatic_temperature` | PneumaticCraft | `pncTemperatureCondition(min, max)` | 气动工艺热交换器温度位于范围内 |
 | `pneumatic_pressure` | PneumaticCraft | `pncPressureCondition(isAir, min, max)` | 所选空气量或压力位于范围内 |
+| `ars_source_nearby` | Ars Nouveau | `arsSourceNearbyCondition(radius, min, max)` | `radius` 内源罐持有的 Source 位于范围内 |
+
+对应模组未加载时调用条件方法会在脚本执行时**抛异常**，所以模组可选的整合包必须加判断。
 
 ## OR、AND 与 Reverse
 

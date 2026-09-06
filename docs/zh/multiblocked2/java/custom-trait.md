@@ -1,6 +1,6 @@
 # 自定义 Trait 与配方 Handler
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/integrations/built-in-capabilities.png" alt="编辑器列表中的 Trait definition 及 Inspector 自动生成的配置控件"><figcaption>正确注册的 TraitDefinitionType 提供列表条目，其可配置 definition 提供 Inspector 控件。</figcaption></figure>
 
@@ -228,3 +228,17 @@ public static final SimpleCapabilityTraitDefinition.Type<
 ## 运行时生命周期
 
 `ITrait` 提供 `onMachineLoad`、`onChunkUnloaded`、`onMachineUnLoad`、`onMachineRemoved`、掉落、邻居变化、`serverTick` 和 `clientTick` 钩子。在 load 时注册外部 listener/cache，在 unload/removal 时释放。游戏逻辑修改应留在服务端。
+
+## 让设置可以按机器覆盖
+
+定义上的字段由所有从它放置出来的机器共享。给它套一个 [runtime value](../editor/runtime-values.md)，单台机器就能覆盖它——来自脚本、蓝图节点或 UI：
+
+```java
+public final RuntimeValue<Integer> capacity =
+        runtimeValues.ofInt("capacity", () -> getDefinition().getCapacity())
+                .onChanged(this::onCapacityChanged);
+```
+
+回退值必须写成 lambda：它是惰性求值的，因为字段初始化器执行时 `getDefinition()` 还不可用。使用时通过 `capacity.get()` 读取，不要缓存。`onChanged` 用于那些「读取本身做不到」的失效处理，例如 `invalidateCapabilities()`；它可能在方块实体还没进入世界时运行，也可能在任意一侧运行。
+
+槽位里的值必须**不可变**——`RuntimeValueStorage#serializeNBT` 跑在 LDLib 的异步持久化线程上，而写入来自游戏线程。

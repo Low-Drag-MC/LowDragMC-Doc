@@ -1,8 +1,6 @@
 # 运行时配方修改
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="运行时修改前的已注册基础配方"><figcaption>事件只替换当前机器使用的配方副本，不修改此注册基础数据。</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 ```js
 MBDMachineEvents.onBeforeRecipeModify('example:crusher', wrapper => {

@@ -5,4 +5,5 @@ nav:
   - recipe-lifecycle.md
   - capabilities-and-conditions.md
   - capability-reference.md
+  - slots-and-xei-ui.md
   - condition-reference.md

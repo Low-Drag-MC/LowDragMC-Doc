@@ -1,6 +1,6 @@
 # Java Tutorial: Register a Machine, Recipe Type, and Recipe
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 This tutorial ships an editor-authored single-block crusher and recipe-type UI inside a Java mod, then adds an `iron_ingot -> iron_nugget` built-in recipe in Java.
 

@@ -140,7 +140,7 @@ test('every MBD2 page declares its documented version', async () => {
           const markdown = await readFile(absolute, 'utf8');
           assert.match(
             markdown,
-            /<VersionBadge\s+version="(?:21\.0\.11|[^"]*MBD2 21\.0\.11[^"]*)"/,
+            /<VersionBadge\s+version="(?:21\.1\.1|[^"]*MBD2 21\.1\.1[^"]*)"/,
             `${absolute}: missing MBD2 version badge`,
           );
         }

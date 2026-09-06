@@ -56,7 +56,10 @@ test('current MBD2 scripts avoid confirmed 1.21.1 traps', async () => {
         assert.doesNotMatch(source, /minecraft:copper_nugget/, `${file} block ${index + 1}: invalid vanilla item ID`);
         assert.doesNotMatch(source, /machine\.machineState(?!Name)/, `${file} block ${index + 1}: use machineStateName`);
         assert.doesNotMatch(source, /machine\.definition\.id(?!\s*\()/, `${file} block ${index + 1}: fluent id accessor must be called`);
-        assert.doesNotMatch(source, /MBDMachineEvents\.onFuelBurningFinish\s*\(/, `${file} block ${index + 1}: event is not posted to KubeJS in 21.0.11`);
+        assert.doesNotMatch(source, /MBDMachineEvents\.onFuelBurningFinish\s*\(/, `${file} block ${index + 1}: event is not posted to KubeJS in 21.1.1`);
+        assert.doesNotMatch(source, /\.set\((?:true|false|-?\d)/, `${file} block ${index + 1}: RuntimeValue.set is generic; scripts must call setValue`);
+        assert.doesNotMatch(source, /trait\.name/, `${file} block ${index + 1}: a trait's name is trait.definition.name`);
+        assert.doesNotMatch(source, /buildRawRecipe\s*\(/, `${file} block ${index + 1}: the KubeJS builder builds with buildMBDRecipe`);
       }
     }
   }

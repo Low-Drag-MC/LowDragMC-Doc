@@ -1,8 +1,6 @@
 # Recipe Condition Reference
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type project in which condition instances are attached to individual recipes"><figcaption>Conditions belong to recipes under a type and are evaluated by each machine's RecipeLogic.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Conditions are checked during matching and while a recipe works. All values describe the machine/controller position or runtime machine unless noted otherwise.
 
@@ -32,6 +30,9 @@ Ranges are inclusive. `machine_custom_data` performs a containment-style check b
 | `mekanism_heat` | Mekanism | `mekTemperatureCondition(min, max)` | Mekanism temperature is within range |
 | `pneumatic_temperature` | PneumaticCraft | `pncTemperatureCondition(min, max)` | Pneumatic heat-exchanger temperature is within range |
 | `pneumatic_pressure` | PneumaticCraft | `pncPressureCondition(isAir, min, max)` | Selected air amount or pressure is within range |
+| `ars_source_nearby` | Ars Nouveau | `arsSourceNearbyCondition(radius, min, max)` | Source held by jars within `radius` is inside the range |
+
+A condition method for a mod that is not loaded **throws** when the script runs, so guard it in a pack where the mod is optional.
 
 ## OR, AND, and reverse
 

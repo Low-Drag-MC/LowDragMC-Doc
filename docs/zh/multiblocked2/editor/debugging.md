@@ -1,6 +1,6 @@
 # 调试机器与配方
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 使用 MBD gadgets 区分结构失败和配方失败。先修复注册与机器接线，再调试脚本回调。
 
@@ -26,6 +26,10 @@
 | 路由 | 无匹配 Trait、配方 IO 错误、`slotName` 不匹配、distinct handler 行为 |
 | 存储 | 过滤器、容量、数量、速率或输出空间阻止模拟 |
 
+## Debug probe 蓝图
+
+给机器绑定 `built-in(mbd2:debug_probe)`，手持配置的物品（默认木棍）右键：它会在聊天栏报告机器状态、tier 和配方状态，并消耗这次点击，所以 UI 不会打开。往它的某个 Info 节点里加一个 block 就能扩展报告内容。见[内置蓝图](../blueprints/built-in.md#debug-probe)。
+
 ## 有用的开发检查
 
 - 构造后只记录一次机器定义、配方类型、capability 和 condition registry key。
@@ -33,3 +37,5 @@
 - 比较模拟前后的 handler 状态；模拟期间发生任何变化都是 bug。
 - 先只测试一种配方内容，再加入 per-tick、概率和条件。
 - 同时验证服务端行为与客户端 UI/XEI 渲染。
+- 改完蓝图后看一眼 `logs/latest.log`——抛异常的图只报告**一次**，之后保持沉默。
+- 记住 [runtime value](./runtime-values.md) 覆盖会比「本该修好它」的定义改动活得更久。某项设置怎么改都不生效时，用 `Clear All Runtime Values`，或者把机器破坏后重新放置。

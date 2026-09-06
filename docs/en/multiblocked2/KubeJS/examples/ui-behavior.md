@@ -1,7 +1,7 @@
 # UI Behavior Example
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current MBD2" icon="tag" />
-<VersionBadge version="LDLib2 2.2.35" label="Current UI" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current MBD2" icon="tag" />
+<VersionBadge version="LDLib2 2.2.39" label="Current UI" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/machine-ui.png" alt="MBD2 Machine UI editor with a stable reset_button element ID"><figcaption>Create the element and ID in the editor, then attach server behavior with `onUI`.</figcaption></figure>
 
@@ -38,11 +38,22 @@ MBDRecipeTypeEvents.onRecipeUI('example:processor', wrapper => {
 })
 ```
 
-`onRecipeUI` is a client recipe-type event, so it may register normal client `UIElement` listeners. Never mutate a machine or server storage here.
+`onRecipeUI` is a client recipe-type event, so it registers ordinary client `UIElement` listeners with `addEventListener`. Never mutate a machine or server storage here.
+
+`HoverTooltips.empty().append(...)` takes `Component`s; a JS string is coerced for you.
+
+## Which listener to use
+
+| Call | Runs on | Use for |
+| --- | --- | --- |
+| `addEventListener(type, cb)` | Client | Tooltips, visual state, anything local |
+| `addServerEventListener(type, cb)` | Server, via RPC | Machine and storage changes |
+
+A JavaScript lambda created inside the server `onUI` callback does not become client code — pick the listener explicitly.
 
 <VersionBadge version="Minecraft 1.20.1 / MBD2 1.0.x" label="Legacy; do not copy to 1.21.1" icon="tag" />
 
 ```js
-// ❌ Legacy Widget API
+// ❌ Legacy Widget API — these methods do not exist on the 1.21.1 UI
 ui.getFirstWidgetById('reset_button').setOnPressCallback(...)
 ```

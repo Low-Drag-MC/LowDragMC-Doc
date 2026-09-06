@@ -1,6 +1,6 @@
 # Applied Energistics 2
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 AE2 集成增加两种参与 ME 网络的机器 Trait，同时处理 MBD2 已有的 `item` 与 `fluid` 配方 capability；它不会新增名为 `ae2` 的配方 capability。
 

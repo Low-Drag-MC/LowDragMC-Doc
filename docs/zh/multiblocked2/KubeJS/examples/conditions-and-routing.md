@@ -1,6 +1,6 @@
 # 条件与内容路由
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="当前 API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="当前 API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-display-ui.png" alt="Recipe Viewer UI 编辑器中的命名内容显示区域"><figcaption>`uiName` 选择显示区域；`slotName` 独立选择 Trait handler 路由。</figcaption></figure>
 

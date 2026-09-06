@@ -1,6 +1,6 @@
 # Proxy Recipe Types
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Recipe Type Inspector area for proxy sources and Fuel Recipe Types"><figcaption>Enable proxy sources in the editor; KubeJS receives a filtering event for each converted result.</figcaption></figure>
 

@@ -1,10 +1,8 @@
 # Minimal Complete Machine
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 This is the smallest loop KubeJS can create by itself. Use the editor for production states, models, Traits, UI, and multiblock Patterns.
-
-<figure><img src="/assets/multiblocked2/editor/overview.png" alt="MBD2 machine project overview corresponding to a stable KubeJS machine definition ID"><figcaption>KubeJS registration establishes the ID; the editor project completes a publishable machine definition.</figcaption></figure>
 
 ## 1. Register the recipe type and base machine
 

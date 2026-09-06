@@ -1,6 +1,6 @@
 # Mekanism
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Mekanism adds unified chemical storage/recipe content and heat storage/transfer. MBD2 1.21.1 does not use the old separate gas, infusion, pigment, and slurry capability families.
 

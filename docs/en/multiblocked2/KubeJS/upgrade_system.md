@@ -1,8 +1,6 @@
 # Dynamic Recipe Modification
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Current API" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/recipes/recipe-type.png" alt="Authored base recipe that KubeJS can copy and modify for one runtime machine"><figcaption>Runtime upgrade hooks replace a copy of the selected recipe; they do not mutate this registered base recipe.</figcaption></figure>
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Current API" icon="tag" />
 
 Use `onBeforeRecipeModify` to replace the selected runtime recipe for one machine definition. This is the supported route for upgrades that change duration, parallelism, or contents at runtime.
 

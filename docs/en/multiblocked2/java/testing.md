@@ -1,8 +1,6 @@
 # Testing Java Extensions
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
-
-<figure><img src="/assets/multiblocked2/editor/multiblock-pattern.png" alt="Real-client MBD2 editor capture produced by the LDLib2 UI test harness"><figcaption>Use in-client tests for editor registration and interaction; unit tests still cover codecs and handler simulation.</figcaption></figure>
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 Test a capability and trait together. A codec-only test cannot detect duplication, simulation mutation, wrong IO direction, or a handler that is never discovered by recipe logic.
 

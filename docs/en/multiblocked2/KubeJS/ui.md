@@ -1,7 +1,7 @@
 # UI Behavior
 
-<VersionBadge version="Minecraft 1.21.1 / MBD2 21.0.11" label="Applies to" icon="tag" />
-<VersionBadge version="LDLib2 2.2.35" label="UI API" icon="tag" />
+<VersionBadge version="Minecraft 1.21.1 / MBD2 21.1.1" label="Applies to" icon="tag" />
+<VersionBadge version="LDLib2 2.2.39" label="UI API" icon="tag" />
 
 <figure><img src="/assets/multiblocked2/editor/machine-ui.png" alt="The modern LDLib2 UIElement canvas in the MBD2 machine UI editor"><figcaption>Create the UIElement tree and stable IDs in the editor, then attach runtime behavior with KubeJS.</figcaption></figure>
 
@@ -40,6 +40,35 @@ MBDMachineEvents.onUI('example:crusher', wrapper => {
 
 Place this in `server_scripts`: MBD2 `onUI` is a targeted server-side machine event. LDLib2 synchronizes the UI RPC behavior registered by `addServerEventListener` to the corresponding client element.
 
+## Change what an element shows
+
+A listener leaves the UI looking exactly as the editor drew it. To change the tree itself, write to the elements you selected:
+
+```js
+// kubejs/server_scripts/mbd2_ui.js
+MBDMachineEvents.onUI('example:crusher', wrapper => {
+  const { machine, ui } = wrapper.event
+
+  const status = ui.selectId('status_label').findFirst().orElse(null)
+  if (status !== null) {
+    // The one-argument setText is hidden from scripts. Pass false to use the string
+    // literally; true would treat it as a translation key.
+    status.setText(`Crusher — ${machine.machineStateName}`, false)
+  }
+
+  const flush = ui.selectId('flush_button').findFirst().orElse(null)
+  if (flush !== null) {
+    flush.setText('Flush Output (scripted)', false)
+  }
+})
+```
+
+<figure><img src="/assets/multiblocked2/kubejs/onui-effect.png" alt="The same machine panel twice, unchanged on the left and rewritten by the script on the right"><figcaption>The same machine UI without the script (left) and after <code>onUI</code> ran (right). The caption is written from live machine state, which the editor cannot know when the panel is authored.</figcaption></figure>
+
+::: tip
+`setText(String)` and `setText(Component)` are hidden from scripts. Use the two-argument `setText(text, translate)` or pass a `Component`; a one-argument string call fails with "no such method".
+:::
+
 ## Selecting elements
 
 <VersionBadge version="LDLib2 2.2.x" label="Current UI" icon="tag" />
@@ -48,21 +77,25 @@ Place this in `server_scripts`: MBD2 `onUI` is a targeted server-side machine ev
 const byId = ui.selectId('status_label').findFirst().orElse(null)
 const allButtons = ui.select('.action').toList()
 const typed = ui.selectId('progress', ProgressBar).findFirst().orElse(null)
+const allBars = ui.select('progress-bar', ProgressBar).toList()
 const root = ui.rootElement
 ```
 
 | API | Result | Use |
 | --- | --- | --- |
 | `ui.selectId(id)` | `Stream<UIElement>` | Exact ID lookup |
-| `ui.select(selector)` | `Stream<UIElement>` | LDLib2 selector lookup |
-| `ui.selectId(id, Type)` | `Stream<Type>` | ID lookup constrained by element type |
+| `ui.select(selector)` | `Stream<UIElement>` | LDLib2 selector — type name, `.class`, `#id` |
+| `ui.selectRegex(regex)` | `Stream<UIElement>` | IDs matching a pattern |
+| `ui.selectId(id, Type)` / `ui.select(selector, Type)` | `Stream<Type>` | Constrained by element type |
 | `ui.rootElement` | `UIElement` | Edit the tree or append elements |
+
+`ProgressBar`, `Button`, `ItemSlot`, `Label` and the rest of LDLib2's elements are global bindings, so no `Java.loadClass` is needed for the typed forms.
 
 Do not mix `ModularUI.getElementById(...)` with `UI.selectId(...)`: `onUI` exposes the `UI` description before it is wrapped in a `ModularUI`.
 
 ## Client visuals and server behavior
 
-`MBDMachineEvents.onUI` is registered as a server machine event in 21.0.11. Use it for `addServerEventListener`, server data sources, or replacing the server-created UI. A normal `addEventListener` is a client listener; do not assume a JavaScript lambda created by this server callback becomes client script code.
+`MBDMachineEvents.onUI` is registered as a server machine event in 21.1.1. Use it for `addServerEventListener`, server data sources, or replacing the server-created UI. A normal `addEventListener` is a client listener; do not assume a JavaScript lambda created by this server callback becomes client script code.
 
 To construct both client and server UI from KubeJS, use LDLib2 `LDLib2UI.block/item/player` and register the same ID on both sides as its documentation describes. Use LDLib2 data binding or server events/RPC for synchronized data. Continue with:
 

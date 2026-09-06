@@ -1,6 +1,6 @@
 # 多方块机器
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 多方块项目增加可复用谓词、三维 Pattern、重复范围、控制器位置、结构预览、催化剂和部件 capability 路由。
 

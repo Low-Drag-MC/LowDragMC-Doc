@@ -1,6 +1,6 @@
 # 配置配方逻辑
 
-<VersionBadge version="21.0.11" label="MBD2" icon="tag" />
+<VersionBadge version="21.1.1" label="MBD2" icon="tag" />
 
 配方逻辑将一个机器定义连接到一个 `MBDRecipeType`。只有机器拥有可处理配方内容的兼容 handler proxy 时才会搜索。
 
@@ -11,15 +11,17 @@
 
 ## 设置
 
-| 设置 | 效果 |
-| --- | --- |
-| Enable | 为机器创建/使用配方逻辑 |
-| Recipe type | 该机器搜索的 registry ID |
-| Recipe damping value | 重复搜索之间的延迟/退避；数值越大搜索越不频繁 |
-| Consume inputs after working | 将普通输入消耗延迟到完成；只在理解失败/中断行为时使用 |
-| Always search recipe | 强制重复搜索，而不是只依赖 handler 变化通知 |
-| Always modify recipe | 一致执行配方修改流程；使用 `onBeforeRecipeModify` 的升级系统需要它 |
-| Recipe modifiers | 应用由机器/部件逻辑配置的数量、时长或并行转换 |
+| 设置 | Runtime value 键 | 效果 |
+| --- | --- | --- |
+| Enable | `recipe_logic.enable` | 配方逻辑是否运行 |
+| Recipe type | — | 该机器搜索的 registry ID |
+| Recipe damping value | `recipe_logic.damping` | **每个等待 tick 损失的进度**，下限为 0。填 `0` 表示等待时进度冻结 |
+| Consume inputs after working | `recipe_logic.consume_inputs_after_working` | 把普通输入的消耗推迟到完成时。每个工作 tick 都会重新模拟这些输入，输入消失会中断配方 |
+| Always search recipe | `recipe_logic.always_search` | 每条配方完成后强制重新搜索，而不是复用缓存的那条 |
+| Always modify recipe | `recipe_logic.always_modify` | 每轮重新应用修饰器。当 tier、升级件或机器数据会在两轮之间改变最终配方时需要它 |
+| Recipe modifiers | — | 对匹配到的配方施加数量、时长与并行变换 |
+
+上表中带键的设置同时也是 [runtime value](./runtime-values.md)，蓝图、脚本或 UI 可以只为**一台放置的机器**修改它，而不动定义。
 
 ## 接线检查表
 
@@ -31,6 +33,6 @@
 6. 视觉需要反映状态时添加 `waiting` 和 `working` 状态。
 7. 从生成 UI 测试配方查看器查询。
 
-工作期间还会重新检查条件。天气、红石、转动、热、压力或其他条件变化时配方可能等待；这不等于重置进度，除非机器逻辑明确这样做。
+工作期间还会重新检查条件。天气、红石、转动、热、压力或其他条件变化时配方可能进入等待；等待不等于重置，等待要付出多少进度由 damping value 决定。
 
-执行模型参见[配方生命周期](../recipes/recipe-lifecycle.md)。
+执行模型参见[配方生命周期](../recipes/recipe-lifecycle.md)；想改写而不只是缩放已匹配的配方，见[蓝图](../blueprints/)。
