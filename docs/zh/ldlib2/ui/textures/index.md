@@ -118,9 +118,9 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 | ------------- | ----- | ------------ | ----------- |
 | `color_rect_texture` | [`ColorRectTexture`](color-rect.md) | `color(#RGBA)` 或十六进制字面量 | 纯色填充矩形。 |
 | `color_border_texture` | [`ColorBorderTexture`](color-border.md) | `border(size, #RGBA)` | 仅边框矩形（无填充）。 |
-| `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `rect(color, radius?, stroke?, borderColor?)` | GPU SDF 圆角矩形，可选描边。 |
-| `rect_texture` | [`RectTexture`](rect.md) | — | CPU 渲染圆角矩形（无需 Shader）。 |
-| `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` | PNG 图像，可选 9-slice 和环绕模式。 |
+| `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `sdf(color, radius?, stroke?, borderColor?)` | GPU SDF 圆角矩形，可选描边。 |
+| `rect_texture` | [`RectTexture`](rect.md) | `rect(color, radius?, stroke?, borderColor?, segments?)` | CPU 渲染圆角矩形（无需 Shader）。 |
+| `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` + `wrap(mode)` | PNG 图像，可选 9-slice 和环绕模式。 |
 | `vanilla_sprite_texture` | [`VanillaSpriteTexture`](vanilla-sprite.md) | `vanilla-sprite(id)` | 已注册的原版 GUI 图集 sprite。 |
 | `text_texture` | [`TextTexture`](text.md) | — | 渲染文本，支持滚动模式。 |
 | `animation_texture` | [`AnimationTexture`](animation.md) | — | 精灵表帧动画。 |
@@ -134,7 +134,7 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 
 ## LSS 参考
 
-Texture 在 LSS 属性中作为值使用。有关完整语法，包括 `rect()`、`sprite()`、`group()` 和变换链，请参见 [LSS 中的 Texture](lss.md)。
+Texture 在 LSS 属性中作为值使用。有关完整语法，包括 `rect()`、`sdf()`、`sprite()`、`group()` 和修饰链，请参见 [LSS 中的 Texture](lss.md)。
 
 ```css
 button {

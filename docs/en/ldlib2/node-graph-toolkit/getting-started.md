@@ -31,7 +31,7 @@ public class TestGraph extends Graph {
 
 `getSupportNodes()` controls which node classes can be created in the graph.
 
-`getSupportTypes()` controls constant nodes and variable types. Returning `null` lets LDLib2 detect types from registered node ports.
+`getSupportTypes()` controls the types available to ports, constants, and variables. Returning `null` lets LDLib2 detect types from registered node ports. The item library offers a constant node only for the supported types that have a default value; see [Supported Types](./graph-definition.md#supported-types).
 
 ## Create a Node
 
@@ -114,7 +114,7 @@ return new ModularUI(UI.of(editorView), player);
 ```
 
 <figure>
-<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphEditorView with a loaded graph">
+<img src="/assets/ldlib2/node-graph-toolkit/ngt-graph-view.png" alt="GraphEditorView with a loaded graph">
 <figcaption>
 &lt;code&gt;GraphEditorView&lt;/code&gt; with the built-in graph tools.
 </figcaption>

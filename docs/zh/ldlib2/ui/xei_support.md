@@ -16,6 +16,25 @@ LDLib2 为三种最流行的配方查看器 Mod 提供了一流的支持：
 
 ## JEI
 
+::: info 依赖
+LDLib2 只针对 JEI **API** 编译，并把 JEI 声明为可选的客户端依赖（1.21.1 上为 `[19.51.0.417,)`）。JEI 不是 LDLib2 Maven 构件的传递依赖：如果你的模组使用了 `LDLibJEIPlugin`，请在自己的构建中声明 JEI API（以及用于测试的 JEI 运行时）。
+:::
+
+::: warning 2.2.38.a 的破坏性变更
+<VersionBadge version="2.2.38.a" label="Changed" icon="triangle-alert" />
+
+现在每个绑定的元素都是一个真正的 JEI 配方槽位。如果你直接调用了辅助方法：
+
+| 2.2.38.a 之前 | 自 2.2.38.a |
+| --- | --- |
+| `JEIUIEvents.RECIPE_INGREDIENT` + `JEIRecipeIngredientHandler` | `JEIUIEvents.RECIPE_BINDING` + `JEIRecipeSlotHandler` |
+| `JEIUIEvents.RECIPE_WIDGET` + `JEIRecipeWidgetHandler` | `JEIUIEvents.RECIPE_BINDING` + `JEIRecipeSlotHandler` |
+| `recipeSlot(element, Supplier<ITypedIngredient<?>>, Supplier<List<ITypedIngredient<?>>>)` | `recipeSlot(element, IngredientIO, IIngredientType<V>, Supplier<Stream<V>>, Consumer<V>)`，返回 `Consumer<V>` |
+| `createTypedIngredient(type, value, boolean normalize)` | 已移除；请使用 `createTypedIngredient(type, value)` |
+
+`ItemSlot` 和 `FluidSlot` 上的 `xei*` 快捷方法签名不变，只用到它们的代码无需修改。
+:::
+
 ### 注册配方类别
 
 继承 `ModularUIRecipeCategory&lt;T&gt;`，其中 `T` 是你的配方类型。基类会自动处理缓存、渲染和事件分发。你只需提供：
@@ -103,8 +122,7 @@ Provider 对每个配方调用一次，结果会缓存 10 秒。`ModularUI.init(
 | ---------------------- | -------- | ----------------------- |
 | `CLICKABLE_INGREDIENT` | 用户在活动界面中悬停/点击元素时 | `IClickableIngredientFactory` |
 | `GHOST_INGREDIENT` | 用户从 JEI 开始拖拽原料时 | `JEITargetsTypedHandler&lt;I&gt;` |
-| `RECIPE_INGREDIENT` | JEI 收集用于聚焦注册的原料时 | `JEIRecipeIngredientHandler` |
-| `RECIPE_WIDGET` | JEI 收集用于悬停/提示的槽位 Widget 时 | `JEIRecipeWidgetHandler` |
+| `RECIPE_BINDING` | JEI 布局配方、为每个绑定的元素收集一个配方槽位时（自 2.2.38.a） | `JEIRecipeSlotHandler` |
 
 ---
 
@@ -148,7 +166,7 @@ LDLibJEIPlugin.ghostIngredient(
 
 #### `recipeIngredient` — 提供聚焦原料
 
-将元素的原料注册到 JEI，以便配方聚焦（当查找匹配原料时高亮）能够生效。在你的配方 UI 工厂中，每个承载原料的元素调用一次：
+设置元素对应 JEI 配方槽位的角色和原料，使配方聚焦和查找能够生效。在你的配方 UI 工厂中，每个承载原料的元素调用一次：
 
 ```java
 // 在 createModularUI() / IModularUIProvider 内部：
@@ -174,21 +192,39 @@ LDLibJEIPlugin.recipeIngredient(outputSlot, IngredientIO.OUTPUT, () -> {
 
 ---
 
-#### `recipeSlot` — 附加槽位覆盖层以实现悬停和提示
+#### `recipeSlot` — 把元素绑定到 JEI 配方槽位
+<VersionBadge version="2.2.38.a" label="Changed" icon="triangle-alert" />
 
-在元素上方添加一个**不可见的 JEI 槽位 Widget**，以便鼠标悬停时显示 JEI 的原料提示和标签内容信息。提供当前显示的原料，以及可选的所有原料替代项（用于标签提示）：
+把元素绑定到一个真正的 JEI 配方槽位。悬停、原料悬停提示、标签内容以及在替代项之间轮播由 JEI 处理，元素本身仍由 LDLib2 渲染。元素自己的悬停提示会追加到 JEI 的提示中。
 
 ```java
-LDLibJEIPlugin.recipeSlot(
+Consumer<ItemStack> showInJei = LDLibJEIPlugin.recipeSlot(
     inputSlot,
-    // 主要显示的原料：
-    () -> LDLibJEIPlugin.createTypedIngredient(VanillaTypes.ITEM_STACK, inputSlot.getItem()).orElse(null),
-    // 所有替代项（例如标签成员）；可以为 null 以省略标签提示：
-    () -> tagItems.stream()
-            .map(i -> LDLibJEIPlugin.<ItemStack>createTypedIngredient(VanillaTypes.ITEM_STACK, i).orElse(null))
-            .toList()
+    IngredientIO.INPUT,
+    VanillaTypes.ITEM_STACK,
+    // 所有替代项，在 JEI 布局配方时取一次快照
+    () -> tagItems.stream(),
+    // JEI 轮播了槽位：在 LDLib2 中显示同一个值
+    item -> inputSlot.setItem(item, false)
 );
+
+// LDLib2 改变了显示内容：通知 JEI
+inputSlot.registerValueListener(showInJei);
 ```
+
+| 参数 | 描述 |
+| --- | --- |
+| `ingredientIO` | 槽位的角色。同一元素上 `recipeIngredient(...)` 设置的角色优先。 |
+| `ingredientType` | JEI 原料类型，例如 `VanillaTypes.ITEM_STACK` 或 `NeoForgeTypes.FLUID_STACK`。 |
+| `ingredientsProvider` | 槽位可显示的所有替代项，在 JEI 布局配方时读取。如果 `recipeIngredient(...)` 已提供原料则忽略。 |
+| `displayedIngredientListener` | JEI 每次轮播槽位时，以 JEI 显示的值调用；不显示任何内容时为 `null`。 |
+| 返回值 | 推送 LDLib2 当前显示的值。之后 JEI 在该槽位里只显示这个值。 |
+
+`ItemSlot` 和 `FluidSlot` 通过 `xeiRecipeSlot(...)` 为你接好了两个方向。
+
+::: info `createTypedIngredient`
+在 JEI 调用 `registerCategories` 之前，`LDLibJEIPlugin.createTypedIngredient(type, value)` 返回空的 `Optional`。在你插件的 `registerRecipes` 中以及构建配方 UI 时它已经可用。
+:::
 
 ---
 
@@ -199,11 +235,13 @@ LDLibJEIPlugin.recipeSlot(
 | 方法 | 作用 |
 | ---- | ---- |
 | `xeiRecipeIngredient(IngredientIO)` | 为槽位当前物品/流体调用 `LDLibJEIPlugin.recipeIngredient(...)`。 |
-| `xeiRecipeSlot()` | 以槽位的物品/流体调用 `LDLibJEIPlugin.recipeSlot(...)`；不显示概率。 |
-| `xeiRecipeSlot(IngredientIO, float chance)` | 同上，但在 `chance < 1` 时额外显示概率覆盖层。 |
+| `xeiRecipeIngredient(IngredientIO, Supplier<Stream<...>>)` | 同上，但提供槽位所有可能的物品/流体。 |
+| `xeiRecipeSlot()` | 以槽位的物品/流体和角色 `NONE` 调用 `LDLibJEIPlugin.recipeSlot(...)`。 |
+| `xeiRecipeSlot(IngredientIO, float chance)` | 同上，但带有角色。`chance` 仅供 EMI 使用。 |
+| `xeiRecipeSlot(IngredientIO, float chance, int amount, Supplier<Stream<...>>)` | 同上，并提供槽位可轮播的所有替代项。`chance` 和 `amount` 仅供 EMI 使用。 |
 | `xeiPhantom()` | 注册 `ghostIngredient`，使 JEI 物品可以拖拽到槽位中。 |
 
-所有四个方法均返回 `this` 以支持链式调用。
+所有方法均返回 `this` 以支持链式调用。
 
 ---
 

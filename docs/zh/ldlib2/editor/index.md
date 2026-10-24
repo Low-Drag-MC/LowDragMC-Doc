@@ -38,14 +38,17 @@ flowchart TD
     A[Editor Framework] --> B[Getting Start]
     A --> D[Project System]
     A --> E[Views]
+    A --> W[Windows and Floating Views]
     A --> F[Resources]
     A --> G[Menus]
+    A --> K[Keymap]
     A --> H[Settings]
     A --> I[Misc]
 
     E --> E1[Built-in Views]
     F --> F1[Providers and Paths]
     F --> F2[Resource UI]
+    F --> F3[Asset Browser]
     I --> I1[SceneEditor]
     I --> I2[Source Examples]
 ```
@@ -54,11 +57,15 @@ flowchart TD
 
 [Project System](./project-system.md) 介绍项目类型、项目生命周期和文件持久化。
 
-[Views](./views/index.md) 介绍 View 系统。[Built-in Views](./views/builtin-views.md) 介绍 Inspector 和 History。
+[Views](./views/index.md) 介绍 View 系统。[Built-in Views](./views/builtin-views.md) 介绍 Inspector、History，以及 View 如何处理命令。
 
-[Resources](./resources/index.md) 介绍资源定义。[Providers and Paths](./resources/providers.md) 介绍资源来源和路径。[Resource UI](./resources/resource-ui.md) 介绍内置资源浏览器。
+[Windows and Floating Views](./windows.md) 介绍如何把 Editor 移入独立桌面窗口，以及把 View 拆出为浮动窗口。
+
+[Resources](./resources/index.md) 介绍资源定义。[Providers and Paths](./resources/providers.md) 介绍资源来源和路径。[Resource UI](./resources/resource-ui.md) 介绍内置资源面板。[Asset Browser](./resources/asset-browser.md) 介绍 `ldlib2` 文件夹的文件浏览器。
 
 [Menus](./menus.md) 介绍 File/View 菜单扩展。
+
+[Keymap](./keymap.md) 介绍编辑器快捷键：内置 action、添加自己的 action，以及用户重新绑定。
 
 [Settings](./settings.md) 介绍持久化编辑器设置。
 

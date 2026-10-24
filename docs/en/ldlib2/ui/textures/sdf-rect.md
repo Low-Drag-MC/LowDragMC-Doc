@@ -5,7 +5,7 @@
 `SDFRectTexture` draws a rounded rectangle using an SDF (Signed Distance Field) GPU shader. It produces sharp, anti-aliased edges at any size. Supports per-corner radii, an optional stroke border, and smooth CSS-transition interpolation.
 
 Registry name: `sdf_rect_texture`  
-LSS function: `rect(...)` / `sdf(...)`
+LSS function: `sdf(...)`
 
 ::: info
 Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
@@ -71,18 +71,24 @@ let bordered = SDFRectTexture.of(0xFF1A1A1A)
 ## LSS
 
 ```css
-/* rect(fillColor) */
-background: rect(#2A2A2A);
+/* sdf(fillColor) */
+background: sdf(#2A2A2A);
 
-/* rect(fillColor, radius) */
-background: rect(#2A2A2A, 6);
+/* sdf(fillColor, radius) */
+background: sdf(#2A2A2A, 6);
 
-/* rect(fillColor, radius, strokeWidth, borderColor) */
-background: rect(#2A2A2A, 4, 1, #FFFFFF);
+/* sdf(fillColor, radius, strokeWidth, borderColor) */
+background: sdf(#2A2A2A, 4, 1, #FFFFFF);
 
-/* Per-corner radii: top-left top-right bottom-right bottom-left */
-background: rect(#2A2A2A, 8 4 8 4);
+/* Per-corner radii: bottom-left bottom-right top-right top-left */
+background: sdf(#2A2A2A, 0 0 8 8); /* rounds the top corners */
 ```
+
+::: warning Corner order
+`sdf()` reads four radii from bottom-left: bottom-left, bottom-right, top-right, top-left. This is the reverse of CSS and of [`rect()`](rect.md#lss). `r 0 0 r` (left side) and `0 r r 0` (right side) are the same in both orders, so a wrong order only shows up when rounding the top or bottom.
+:::
+
+`rect(...)` creates a CPU-drawn [`RectTexture`](rect.md), not an `SDFRectTexture`.
 
 ---
 

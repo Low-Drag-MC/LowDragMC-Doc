@@ -80,12 +80,18 @@ public class ShopEditor extends Editor {
 }
 ```
 
-`EditorWindow` 是承载 Editor 的外壳。它负责 editor tab、最大化/窗口化、最小化恢复、拖拽、缩放和 GUI scale 恢复。
+`EditorWindow` 是承载 Editor 的外壳。它负责 editor tab、最大化/窗口化、最小化恢复、拖拽、缩放和 GUI scale 恢复。它还可以把 Editor 移入独立的桌面窗口，见 [Windows and Floating Views](./windows.md)。
 
-如果希望同一个编辑器最小化后可以恢复，使用固定 `WINDOW_ID`：
+如果希望同一个编辑器最小化后可以恢复，使用固定 `WINDOW_ID`。只有带 id 的窗口才能最小化，没有 id 的窗口不显示最小化按钮。
 
 ```java
 EditorWindow.open(ShopEditor.WINDOW_ID, ShopEditor::new);
+```
+
+`open(...)` 只创建或恢复 `EditorWindow`，并不显示它。在客户端，`EditorWindow.show(...)` <VersionBadge version="2.2.42" label="自" icon="tag" /> 会创建或恢复它，并在用户上次离开的位置显示：作为 Screen，或在独立窗口中。
+
+```java
+EditorWindow.show(ShopEditor.WINDOW_ID, ShopEditor::new);
 ```
 
 如果只需要一个临时客户端界面，可以直接创建窗口：

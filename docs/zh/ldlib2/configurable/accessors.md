@@ -18,7 +18,7 @@ LDLib2 在 `ldlib2:configurator_accessor` 中注册了许多客户端 accessor�
 | Boolean | `boolean`, `Boolean` | 使用 toggle。 |
 | Numbers | `int`, `long`, `float`, `double`, `short`, `byte` 以及 boxed 类型 | 支持 `@ConfigNumber`、`@DefaultValue` 和 `@ConfigColor`。 |
 | String | `String`, `String[]` | `String[]` 会作为多行字符串编辑。 |
-| Enum | 任意 enum 类型 | 支持 `@ConfigSelector`；实现 `StringRepresentable` 时使用 serialized name。 |
+| Enum | 任意 enum 类型 | 支持 `@ConfigSelector`。条目在存在 `<enum class>.<CONSTANT>` 翻译键时使用它（自 2.2.42），否则使用 `StringRepresentable` 的 serialized name 或 `name()`。见 [翻译枚举条目](./annotations.md#translating-enum-entries)。 |
 | Text | `Component` | Component 文本 configurator。 |
 | Minecraft registry values | `Block`, `Item`, `Fluid`, `EntityType&lt;?&gt;` | 通常使用 registry search/selector UI。 |
 | Resource IDs | `ResourceLocation` | 支持 `@ConfigRL` 的 font 和 tag-key 模式。 |

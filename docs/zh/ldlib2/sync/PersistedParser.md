@@ -87,3 +87,7 @@ public class MyObject {
     }
 }
 ```
+
+::: tip 为单个字段定制格式
+带有 [`@ManagedCodec`](./annotations.md#managedcodec) 的字段在这里同样会用它自己的 codec 序列化；标记了 `subPersisted` 或 `subConfigurable` 的字段除外。
+:::

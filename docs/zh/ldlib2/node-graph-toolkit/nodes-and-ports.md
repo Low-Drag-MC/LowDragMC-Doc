@@ -16,7 +16,7 @@ public abstract class Node implements INode {
 
 ## Item Library 节点说明
 
-<VersionBadge version="2.2.30" label="Since" icon="tag" />
+<VersionBadge version="2.2.30" label="自" icon="tag" />
 
 覆盖 `createDescriptionUI()`，可以在用户于 Item Library 中选中该节点时，在右侧显示节点说明。返回的 UI 会放进可滚动面板，因此可以加入自动换行文本、图片或小型预览。
 
@@ -54,7 +54,11 @@ Item Library 每次切换选中项时，都会重新调用 `createDescriptionUI(
 
 ## Options
 
-Options 是节点设置。它们可以显示在节点头部，也可以只显示在 Inspector 中。
+Options 是节点设置。默认情况下，option 既显示在节点本体中，也会在选中节点时列在 Inspector 中。使用 `showInInspectorOnly()` 或 `showInNodeOnly()` 可以只保留其中一处。
+
+::: warning
+从 2.2.39 起，Inspector 会在"选项"标题下列出**所有** option，包括同时显示在节点本体中的 option。2.2.39 之前，Inspector 完全不显示 option 行。若不希望某个 option 出现在 Inspector 中，使用 `showInNodeOnly()`（2.2.40+）。
+:::
 
 ```java
 @Override
@@ -87,11 +91,22 @@ public void onDefinePorts(IPortDefinitionContext context) {
 | `withDisplayName(Component)` | UI 中显示的标签。 |
 | `withTooltips(Tooltips)` | Tooltip 文本。 |
 | `withDefaultValue(Object)` | 初始值。 |
-| `showInInspectorOnly()` | 不显示在节点头部，只显示在 Inspector。 |
+| `showInInspectorOnly()` | 只显示在 Inspector 中，不显示在节点本体中。 |
+| `showInNodeOnly()` | 只显示在节点本体中，不显示在 Inspector 中。<VersionBadge version="2.2.40" label="自" icon="tag" /> |
 | `withConfigurable(ITypeConfigurable)` | 覆盖这个 option 的编辑 UI。 |
 | `withCodec(Codec&lt;?&gt;)` | 覆盖序列化。 |
 | `withoutSerialization()` | 保留类型 id，但不持久化值。 |
 | `withoutConfigurator()` | 保存值，但不暴露 UI 行。 |
+
+`showInInspectorOnly()` 和 `showInNodeOnly()` 设置的是同一个 `OptionVisibility` 值，后调用的生效：
+
+| `OptionVisibility` | 节点本体 | Inspector |
+| ------------------ | -------- | --------- |
+| `NODE_AND_INSPECTOR`（默认） | ✅ | ✅ |
+| `INSPECTOR_ONLY` | ❌ | ✅ |
+| `NODE_ONLY` | ✅ | ❌ |
+
+两处都不显示时，使用 `withoutConfigurator()`。
 
 ## Ports
 
@@ -114,11 +129,16 @@ context.addInputPort("amount", Float.class)
         .build();
 ```
 
+::: tip
+从 2.2.40 起，在代码中修改输入端口的声明类型后，修改前保存的图也会跟着更新。加载时，如果内嵌常量保存时的类型与端口当前类型不同，且当前类型能装下该值，常量会转换为端口当前的类型；装不下时保留保存时的类型。
+:::
+
 常用 port builder 方法：
 
 | 方法 | 用途 |
 | ---- | ---- |
 | `withDisplayName(Component)` | 端口旁显示的标签。 |
+| `withTooltips(Tooltips)` | 悬停 tooltip，替换自动生成的 `name (type)` tooltip。输入端口和输出端口都可用。<VersionBadge version="2.2.41" label="自" icon="tag" /> |
 | `withConnectorUI(PortConnectorUI)` | 自定义连接点图标。 |
 | `withOrientation(PortOrientation)` | 水平侧边端口或垂直顶部/底部端口。 |
 | `withDefaultValue(Object)` | 初始内嵌常量。 |

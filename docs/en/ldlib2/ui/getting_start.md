@@ -300,6 +300,10 @@ In addition to custom LSS definitions, LDLib2 also provides several **built-in s
 - `#!java StylesheetManager.GDP`
 - `#!java StylesheetManager.MC`
 - `#!java StylesheetManager.MODERN`
+- `#!java StylesheetManager.ORE`
+- `#!java StylesheetManager.DUSK`, `CARBON`, `MINT`, `PLUM`, `PAPER`, `LATTE` (since 2.2.39)
+
+See [Builtin Stylesheets](./preliminary/stylesheet.md#builtin-stylesheets) for what each theme looks like.
 
 These built-in stylesheets allow you to apply a consistent visual style to an entire UI with minimal setup.
 You can access and manage them through the `StylesheetManager`, which acts as a central registry for all available stylesheet packs. 

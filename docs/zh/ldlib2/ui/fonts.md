@@ -1,6 +1,6 @@
 # 平滑字体渲染
 
-<VersionBadge version="2.2.31" label="Since" icon="tag" />
+<VersionBadge version="2.2.31" label="自" icon="tag" />
 
 LDLib2 可以通过自己的字体管线渲染 UI 文本。它会为每次绘制选择渲染器、维护字形图集，并在缺少字形时回退到 Minecraft Unicode 字体。`Label`、`TextField`、`TextArea` 与 `CodeEditor` 会自动使用该机制。
 

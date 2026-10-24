@@ -123,6 +123,21 @@ UI module overview. Replace this placeholder with a real editor or runtime scree
 - 新增图片放在对应模块的 `assets/` 下；共享资源放在 `docs/assets/`。
 - 不使用与内容无关的装饰图。
 
+### 用 uitest 生成截图
+
+LDLib2 的界面截图优先用 UI 测试框架生成，而不是手工截屏，这样换机器、换版本后可以重拍出一致的图。截图场景在 LDLib2 仓库的 `com.lowdragmc.lowdraglib2.test.uitest` 包中，均为 `DEV_ONLY`，带 `wiki` tag。
+
+```text
+gradlew runClient -PldTest=tag:wiki -PldTestWindow=1440x900
+# 本机（无人值守或远程）再加：-PldTestHeadless -PldTestEarlyWindow=false
+```
+
+- 窗口固定为 `1440x900`；场景自己固定 `guiScale(2)`。不固定窗口时不同机器的图尺寸对不上。
+- 输出在 LDLib2 的 `build/ldlib2-uitest/screenshots/<scenario>/`，文件名为 `NN_<label>.png`；元素裁剪图为 `NN_<label>__<元素路径>.png`。
+- 输出不会自动进入 wiki：挑出需要的图，按 wiki 的命名改名后拷到 `docs/assets/ldlib2/…` 或对应模块的 `assets/`。
+- 主要场景：`wiki_captures`（单独组件与字体演示）、`wiki_component_gallery`（组件页的组件图）、`wiki_component_special`（需要特殊搭建的组件图）、`ngt_node_description`（Node Graph Toolkit 节点说明）。主题对比图用 `theme_gallery`，它没有 `wiki` tag，需要单独 `-PldTest=theme_gallery`。
+- 新增截图需求时，在这些场景里加步骤或新建一个带 `wiki` tag 的场景，不要在 wiki 里放无法重拍的手工截图。
+
 ## 5. 示例与代码
 
 - 示例应短、完整、可复制；省略部分用注释说明。

@@ -22,6 +22,7 @@
 * `canRemove`：用户是否可以关闭 tab。
 * `dynamicName`：可选运行时标题。
 * `onRemove`：可选移除回调。
+* `floatable`：View 是否可以拆出到独立窗口。默认 `true`。见 [浮动 View](../windows.md#floating-views)。
 
 ```java
 var view = new View("editor.view.shop_items", Icons.FILE);
@@ -53,6 +54,18 @@ public class ShopItemsView extends View {
 * 在可能时移除空面板。
 
 大多数代码不需要直接创建 `ViewContainer`。通过 Editor 的默认区域或 `placeView(...)` 添加 View 即可。
+
+## Tab 菜单 { #tab-menu }
+
+<VersionBadge version="2.2.34" label="自" icon="tag" />
+
+右键 tab 会打开它的菜单：
+
+* **Maximize** / **Restore**：让该面板占满 Editor，或恢复原状。`Ctrl+M` 对当前焦点面板做同样的事。
+* **Float in New Window** / **Dock Back**：见 [浮动 View](../windows.md#floating-views)。
+* **Close**、**Close Others**、**Close All**：关闭可移除的 View（`canRemove`），批量关闭只确认一次。
+
+覆写 `View#createTabMenu()` 可以添加菜单项。先调用 `super` 以保留标准项。
 
 ## Built-in Views
 

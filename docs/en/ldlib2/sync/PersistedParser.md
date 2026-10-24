@@ -88,3 +88,6 @@ public class MyObject {
 }
 ```
 
+::: tip Custom format for one field
+A field annotated with [`@ManagedCodec`](./annotations.md#managedcodec) is serialized with its own codec here too, except on fields marked `subPersisted` or `subConfigurable`.
+:::

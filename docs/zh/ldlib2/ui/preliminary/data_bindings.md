@@ -814,6 +814,8 @@ button.addServerEventListener(UIEvents.MOUSE_DOWN, e -> {
 
 这在 **KubeJS** 中尤其方便，因为你可以直接使用“消息名 + NBT 负载”的形式同步数据，而不必每次都定义一个自定义的强类型事件。
 
+[Compose](../compose/index.md) 的组合也通过消息与服务端通信：`rememberServerMessenger()` 发送具名消息，由在 `createUI` 中注册的处理器接收。见[服务端驱动的 UI](../compose/state-and-sync.md#server-driven-ui)。
+
 ### message 基础用法
 
 <DocTabs>

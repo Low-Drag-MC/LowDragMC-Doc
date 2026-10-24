@@ -1,0 +1,9 @@
+title: Compose
+nav:
+  - index.md
+  - getting-started.md
+  - styling-and-events.md
+  - components.md
+  - state-and-sync.md
+  - lazy-and-animation.md
+  - limitations.md

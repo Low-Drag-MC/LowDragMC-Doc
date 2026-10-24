@@ -59,6 +59,20 @@ The save button writes the current graph back through the callback supplied by t
 
 `GraphEditorView` also owns subgraph navigation. When a user enters a subgraph, it creates another `GraphView` through the same factory, updates the breadcrumb, and preserves the root editor save workflow.
 
+## Read-only Graphs
+
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+A graph resource whose provider cannot edit it, such as a built-in resource, still opens. `GraphResourceProviderContainer` opens it in a read-only `GraphEditorView`:
+
+* the save button is hidden and the view never becomes dirty,
+* subgraphs entered from it are read-only too,
+* the resource's context menu shows **View** instead of **Edit**.
+
+Users who want to change such a graph pick **Copy** in the resource's context menu. The **Copy Resource To** dialog lets them choose a writable provider and a name. The copy is an ordinary resource of that provider and opens for editing. See [Resource Providers](../editor/resources/providers.md) for the copy dialog.
+
+For a custom editor flow, call `GraphEditorView.setReadOnly(true)` before `loadGraph(...)`. See [GraphView read-only views](./graph-view.md#read-only-views) for what is disabled.
+
 ## Custom GraphView Factory
 
 Override `getGraphViewFactory()` to use a custom `GraphView` subclass.

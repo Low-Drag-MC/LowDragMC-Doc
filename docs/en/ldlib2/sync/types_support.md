@@ -52,9 +52,19 @@ Maps are managed as read-only containers. When both key and value accessors are 
 | `FluidStack`                    | `1000`   | -         |
 | `ItemStack`                     | `1000`   | -         |
 | `RecipeHolder&lt;?&gt;`               | `1000`   | -         |
+| `Ingredient`                    | `1000`   | -         |
+| `FluidIngredient`               | `1000`   | -         |
+| `SizedIngredient`               | `1000`   | -         |
+| `SizedFluidIngredient`          | `1000`   | -         |
 | `Tag`                           | `2000`   | -         |
 | `Component`                     | `2000`   | -         |
 | `INBTSerializable&lt;?&gt;`           | `2000`   | ✅        |
+
+::: info Ingredient support
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+Since **2.2.38**, `Ingredient`, `FluidIngredient`, `SizedIngredient` and `SizedFluidIngredient` can be synced and persisted. These are accessors only: the [configurator](../configurable/index.md) has no editor for them.
+:::
 
 - types in LDLib2 or others.
 
@@ -85,6 +95,10 @@ To add a support of a new type, you need to register an `IAccessor&lt;TYPE&gt;` 
 :::
 
 You can register accessor by using `AccessorRegistries.registerAccessor`. In general, you can register your accessors anywhere you want, while we'd recommend to do it in the [LDLibPlugin#onLoad](../java_integration.md#ldlibplugin).
+
+::: tip Only one field needs it?
+To give a single field its own format without registering an accessor for the whole type, annotate it with [`@ManagedCodec`](./annotations.md#managedcodec).
+:::
 
 ---
 

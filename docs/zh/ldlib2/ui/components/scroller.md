@@ -208,6 +208,7 @@ scroller.bind(DataBindingBuilder.floatVal(
 | `setScrollBarSize(float)` | `Scroller` | 设置滚动条滑块大小（0–100%）。 |
 | `scrollerStyle(Consumer&lt;ScrollerStyle&gt;)` | `Scroller` | 以流式方式配置样式。 |
 | `getNormalizedValue()` | `float` | 返回归一化到 `[0, 1]` 的当前值。 |
+| `scrollByWheel(double)` | `void` | 按原始滚轮增量的方向滚动一个 `scroll-delta` 步长；增量为 `0` 时不动。当你自己的滚轮处理逻辑决定由哪根滚轮轴驱动该滚动条时使用（自 2.2.38）。 |
 | `headButton(Consumer&lt;Button&gt;)` | `Scroller` | 配置头部箭头按钮。 |
 | `tailButton(Consumer&lt;Button&gt;)` | `Scroller` | 配置尾部箭头按钮。 |
 | `scrollContainer(Consumer&lt;UIElement&gt;)` | `Scroller` | 配置轨道元素。 |

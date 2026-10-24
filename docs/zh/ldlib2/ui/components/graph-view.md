@@ -250,7 +250,7 @@ graph-view {
 
 ## 自适应网格与细节等级
 
-<VersionBadge version="2.2.34" label="Since" icon="tag" />
+<VersionBadge version="2.2.34" label="自" icon="tag" />
 
 画布缩放时背景网格会自动调整密度。`getLod()` 根据当前物理像素比例返回 `FULL`、`SIMPLIFIED` 或 `BLOCK`；图节点和连线可以用它在缩小时省略高成本细节。
 

@@ -80,12 +80,18 @@ public class ShopEditor extends Editor {
 }
 ```
 
-`EditorWindow` is the shell that hosts the editor. It handles editor tabs, maximized/windowed mode, minimize restore, dragging, resizing, and GUI scale restore.
+`EditorWindow` is the shell that hosts the editor. It handles editor tabs, maximized/windowed mode, minimize restore, dragging, resizing, and GUI scale restore. It can also move the editor into its own desktop window; see [Windows and Floating Views](./windows.md).
 
-Use a fixed `WINDOW_ID` when the same editor should be restored after being minimized:
+Use a fixed `WINDOW_ID` when the same editor should be restored after being minimized. Only a window with an id can be minimized, so a window without one has no minimize button.
 
 ```java
 EditorWindow.open(ShopEditor.WINDOW_ID, ShopEditor::new);
+```
+
+`open(...)` creates or restores the `EditorWindow` but does not show it. On the client, `EditorWindow.show(...)` <VersionBadge version="2.2.42" label="Since" icon="tag" /> creates or restores it and shows it where the user last left it: as a screen, or in its own window.
+
+```java
+EditorWindow.show(ShopEditor.WINDOW_ID, ShopEditor::new);
 ```
 
 Use a direct window when you only need a temporary client screen:

@@ -52,7 +52,7 @@ TypeHandle damageType = TypeHandleHelpers.customType(
 | `FLOAT`, `DOUBLE`, `INT`, `LONG` | 数值。 |
 | `STRING` | 文本值。 |
 | `COLOR` | 带颜色 configurator 的整数颜色。 |
-| `DIRECTION` | Minecraft direction。 |
+| `DIRECTION` | Minecraft direction。没有默认值，因此默认不会作为常量节点提供。 |
 | `BLOCK`, `ITEM`, `FLUID` | Minecraft registry 值。 |
 | `ENTITY_TYPE` | Entity type 值。 |
 | `ITEM_STACK`, `FLUID_STACK` | Stack 值。 |
@@ -77,6 +77,10 @@ TypeHandleHelpers.setCustomColor(profileType, 0xFFFFAA33);
 TypeHandleHelpers.setCustomIcon(profileType, MyIcons.DAMAGE);
 TypeHandleHelpers.setCustomDefaultValue(profileType, DamageProfile::empty);
 ```
+
+::: warning
+从 2.2.41 起，默认值还决定 Item Library 是否为该类型提供常量节点。只有注册了默认值时，`TypeHandleHelpers.canAuthorLiteral(handle)` 才为 true。没有默认值的类型仍然可以用于端口和变量，但除非图在 `getLibrarySupportTypes()` 中列出它，否则不会有常量节点。见 [支持的类型](./graph-definition.md#supported-types)。
+:::
 
 当颜色和图标都需要设置时，使用 `setCustomColorAndIcon(...)`：
 
@@ -157,4 +161,4 @@ public @Nullable List<TypeHandle> getVariableSupportTypes() {
 }
 ```
 
-`getSupportTypes()` 是基础列表。`getLibrarySupportTypes()` 控制 Item Library 中的 constant nodes。`getVariableSupportTypes()` 控制 Blackboard 变量选项。
+`getSupportTypes()` 是基础列表。`getLibrarySupportTypes()` 控制 Item Library 中的 constant nodes；返回 `null` 时，Item Library 使用基础列表中有默认值的类型。`getVariableSupportTypes()` 控制 Blackboard 变量选项。

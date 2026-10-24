@@ -5,7 +5,7 @@
 `SDFRectTexture` 使用 SDF（Signed Distance Field，有符号距离场）GPU Shader 绘制圆角矩形。它能在任意尺寸下生成锐利且抗锯齿的边缘。支持逐角半径、可选的描边边框以及平滑的 CSS 过渡插值。
 
 注册名：`sdf_rect_texture`  
-LSS 函数：`rect(...)` / `sdf(...)`
+LSS 函数：`sdf(...)`
 
 ::: info
 继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
@@ -71,18 +71,24 @@ let bordered = SDFRectTexture.of(0xFF1A1A1A)
 ## LSS
 
 ```css
-/* rect(fillColor) */
-background: rect(#2A2A2A);
+/* sdf(fillColor) */
+background: sdf(#2A2A2A);
 
-/* rect(fillColor, radius) */
-background: rect(#2A2A2A, 6);
+/* sdf(fillColor, radius) */
+background: sdf(#2A2A2A, 6);
 
-/* rect(fillColor, radius, strokeWidth, borderColor) */
-background: rect(#2A2A2A, 4, 1, #FFFFFF);
+/* sdf(fillColor, radius, strokeWidth, borderColor) */
+background: sdf(#2A2A2A, 4, 1, #FFFFFF);
 
-/* 逐角半径：左上 右上 右下 左下 */
-background: rect(#2A2A2A, 8 4 8 4);
+/* 逐角半径：左下 右下 右上 左上 */
+background: sdf(#2A2A2A, 0 0 8 8); /* 圆上方两个角 */
 ```
+
+::: warning 圆角顺序
+`sdf()` 从左下开始读取 4 个半径：左下、右下、右上、左上。这与 CSS 以及 [`rect()`](rect.md#lss) 的顺序相反。`r 0 0 r`（左侧）和 `0 r r 0`（右侧）在两种顺序下相同，所以顺序写错只有在圆上边或下边时才会暴露。
+:::
+
+`rect(...)` 创建的是 CPU 绘制的 [`RectTexture`](rect.md)，而不是 `SDFRectTexture`。
 
 ---
 

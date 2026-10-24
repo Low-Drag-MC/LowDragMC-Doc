@@ -1,6 +1,6 @@
 # StructuredTagEditor
 
-<VersionBadge version="2.2.9" label="Since" icon="tag" />
+<VersionBadge version="2.2.9" label="自" icon="tag" />
 
 `StructuredTagEditor` 以树结构编辑 NBT `Tag`。它支持基本 Tag、列表、复合 Tag 和 NBT 数组，用户不必为每项修改手写 SNBT。
 

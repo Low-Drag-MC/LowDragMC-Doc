@@ -4,7 +4,9 @@ nav:
   - getting_start.md
   - project-system.md
   - views
+  - windows.md
   - resources
   - menus.md
+  - keymap.md
   - settings.md
   - misc

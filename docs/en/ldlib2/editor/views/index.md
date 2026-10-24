@@ -22,6 +22,7 @@ Important properties:
 * `canRemove`: whether the tab can be closed by the user.
 * `dynamicName`: optional runtime tab title.
 * `onRemove`: optional removal callback.
+* `floatable`: whether the view may be torn out into its own window. Default `true`. See [Floating Views](../windows.md#floating-views).
 
 ```java
 var view = new View("editor.view.shop_items", Icons.FILE);
@@ -53,6 +54,18 @@ It supports:
 * removing empty panels when possible.
 
 Most code should not construct `ViewContainer` directly. Add views through the editor's anchor windows or `placeView(...)`.
+
+## Tab Menu
+
+<VersionBadge version="2.2.34" label="Since" icon="tag" />
+
+Right-clicking a tab opens its menu:
+
+* **Maximize** / **Restore**: fill the editor with this pane, or put it back. `Ctrl+M` does the same for the focused pane.
+* **Float in New Window** / **Dock Back**: see [Floating Views](../windows.md#floating-views).
+* **Close**, **Close Others**, **Close All**: close removable views (`canRemove`), with one confirmation for the batch.
+
+Override `View#createTabMenu()` to add entries. Call `super` first to keep the standard ones.
 
 ## Built-in Views
 

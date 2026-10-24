@@ -31,7 +31,7 @@ public class TestGraph extends Graph {
 
 `getSupportNodes()` 控制图中可以创建哪些节点类。
 
-`getSupportTypes()` 控制常量节点和变量类型。返回 `null` 时，LDLib2 会从已注册节点的端口中自动检测类型。
+`getSupportTypes()` 控制端口、常量和变量可用的类型。返回 `null` 时，LDLib2 会从已注册节点的端口中自动检测类型。Item Library 只会为其中有默认值的类型提供常量节点，见 [支持的类型](./graph-definition.md#supported-types)。
 
 ## 创建节点
 
@@ -114,7 +114,7 @@ return new ModularUI(UI.of(editorView), player);
 ```
 
 <figure>
-<img src="./assets/ngt-graph-view-placeholder.png" alt="GraphEditorView with a loaded graph">
+<img src="/assets/ldlib2/node-graph-toolkit/ngt-graph-view.png" alt="GraphEditorView with a loaded graph">
 <figcaption>
 带有内置图工具的 &lt;code&gt;GraphEditorView&lt;/code&gt;。
 </figcaption>

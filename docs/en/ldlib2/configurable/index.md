@@ -235,3 +235,7 @@ Use Configurable when your object has editor-facing properties: a shop entry, an
 If the property panel is mostly regular fields, annotate the fields and let `ConfiguratorParser` build the UI. If the panel needs custom layout, conditional rows, or custom controls, override `buildConfigurator(...)` and add configurators manually.
 
 `@Configurable` fields are persisted by default. `PersistedParser` treats them like `@Persisted` fields unless `@Configurable(persisted = false)` is used. See [PersistedParser](../sync/PersistedParser.md) for the serialization side.
+
+::: warning Configurators are client-only
+Configurators are editing UI and are not synced. The accessor registry (`ldlib2:configurator_accessor`) only exists on the client, so calling `buildConfigurator(...)` or `createDirectConfigurator()` on a dedicated server fails. The annotations themselves are safe on shared classes: `@Configurable` fields still persist on both sides.
+:::

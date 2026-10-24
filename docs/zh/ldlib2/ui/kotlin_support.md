@@ -4,6 +4,10 @@
 
 LDLib2 提供了类型安全的 Kotlin DSL 用于构建 UI 树。它通过构建器模式、嵌套 lambda 和运算符重载包装 Java API，使 UI 构建更加简洁和结构化。
 
+::: tip DSL 还是 Compose
+DSL 只构建一次树。如果 UI 的结构要跟着状态变化（会增长的列表、按条件出现的面板），请看可选的 [Compose](./compose/index.md) 模块。两者使用相同的 `layout` 和 `style` 接收者，也可以在同一棵树里混用。
+:::
+
 ---
 
 ## 核心概念

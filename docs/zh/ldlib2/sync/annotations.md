@@ -334,6 +334,63 @@ public boolean skipIntFieldPersisted(int value) {
 
 ---
 
+### `@ManagedCodec`
+<VersionBadge version="2.2.43" label="自" icon="tag" />
+
+用你自己的 codec 保存和同步字段，而不是用该类型注册的 accessor。适用于类型没有 accessor，或某个字段需要与注册格式不同的场合。
+
+只要字段会被保存或同步，它就生效：托管持有者（例如 BlockEntity）上的 `@Persisted` 与 `@DescSynced` 字段，以及由 [`PersistedParser`](./PersistedParser.md) 序列化的 `@Persisted` 字段或持久化的 `@Configurable` 字段。
+
+```java
+public class MachineBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEntity {
+    @Persisted
+    @DescSynced
+    @ManagedCodec(value = "targetCodec", streamCodec = "targetStreamCodec")
+    private BlockPos target = BlockPos.ZERO;
+
+    protected Codec<BlockPos> targetCodec() {
+        return Codec.LONG.xmap(BlockPos::of, BlockPos::asLong);
+    }
+
+    protected StreamCodec<ByteBuf, BlockPos> targetStreamCodec() {
+        return ByteBufCodecs.VAR_LONG.map(BlockPos::of, BlockPos::asLong);
+    }
+}
+
+public class AdvancedMachineBlockEntity extends MachineBlockEntity {
+    @Override
+    protected Codec<BlockPos> targetCodec() {
+        return BlockPos.CODEC; // 子类可以用不同的方式保存该字段
+    }
+}
+```
+
+| 属性 | 描述 |
+| --- | --- |
+| `value` | 一个无参方法的名字，返回该字段类型的 `Codec<T>`，或返回完全接管保存、同步与变更检测的 `IAccessor<T>`。 |
+| `streamCodec` | 可选。一个无参方法的名字，返回 `StreamCodec<? super RegistryFriendlyByteBuf, T>`。`value` 返回 `IAccessor` 时必须留空。 |
+| `owner` | 可选。改为在这个类上查找方法，而不是在持有者上。此时方法必须是 `static`。 |
+
+**方法查找。** 先在持有者自身的类上找，再找其父类（不限可见性），最后在其 public 方法中找，其中包括接口的 default 方法。实例方法可以被子类覆写；`static` 方法同样可用。
+
+**值如何传输。**
+
+- 保存和初次同步（客户端加载区块时随 update tag 收到的那一次）使用 codec，并带有注册表感知的 ops，所以 `ItemStack.CODEC` 这类 codec 可以直接用。
+- 之后的同步包和写入 buffer 使用 stream codec。没有 stream codec 时，会把 codec 的结果以 NBT 写入 buffer，效果相同，只是更大、更慢。
+- 字段为 `null` 时按 `null` 保存和同步，不会调用任何 codec。
+- 读回时会给字段赋一个新实例。
+- 变更检测方式是每次 update 都编码一次值，并与上次的编码比较，因此原地修改（例如往 list 里添加元素）也能被发现。想让检测更便宜，就改为返回 `IAccessor`，例如用 `CustomDirectAccessor.builder(...)` 搭配其 `copyMark` 或 `customMark` 构建。
+
+::: warning 结果按类共享
+这些方法在该字段第一次创建 ref 时按（字段，类）调用一次，结果由该类的所有实例共享。它们不能依赖实例状态、不能有副作用，并且服务端和客户端必须得到相同的 codec。codec 和 stream codec 也必须对每个值给出一致的结果：之后才加载区块的客户端读到的是 codec 解码的值。
+:::
+
+**出错时。** 方法找不到、抛出异常、返回 `null` 或返回类型不对时，会抛出带字段名的 `IllegalArgumentException`，而不是静默退回注册的 accessor。codec 的类型不会与字段类型做校验：不匹配时会在第一次保存或同步时表现为 `ClassCastException`。primitive 字段请使用装箱类型，例如 `int` 字段用 `Codec<Integer>`。
+
+`PersistedParser` 在标记了 `subPersisted` 或 `subConfigurable` 的字段上会忽略 `@ManagedCodec`，因为这类字段保存的是值内部的字段，而不是值本身。
+
+---
+
 ## BlockEntity 专属
 ::: info
 这些注解专为 `BlockEntity` 设计，在使用它们之前请先查看 [管理 BlockEntity](./blockentity.md)。

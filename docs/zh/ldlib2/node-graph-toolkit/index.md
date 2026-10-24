@@ -54,7 +54,7 @@ flowchart TD
 
 [Type Handles](./type-handles.md) 介绍 `TypeHandle`、内置类型、自定义类型注册、常量、默认值、图标、颜色和 configurator。
 
-[GraphView](./graph-view.md) 介绍 `GraphEditorView` 内部使用的底层图 UI。
+[GraphView](./graph-view.md) 介绍 `GraphEditorView` 内部使用的底层图 UI，包括快捷键、吸附、连线样式、自动布局、中继点和只读 view。
 
 [Editor Resources](./editor-resources.md) 介绍 `GraphResource`、`GraphEditorView`、保存回调和资源面板编辑。
 

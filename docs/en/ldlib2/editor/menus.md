@@ -16,10 +16,17 @@ The menu UI is created by `createMenuTab()` and added to the editor top bar.
 
 * New,
 * Open,
+* Recent Projects,
 * Save,
 * Save As,
 * Settings,
 * Exit.
+
+Each entry shows the chord it is currently bound to in the [keymap](./keymap.md).
+
+**Recent Projects** lists recently opened project files, newest first, and opens one directly. Projects whose file is gone are left out, and the branch ends with an entry that clears the list. **Settings → Behavior → Recent Projects To Remember** sets how many are listed; `0` hides the branch.
+
+<VersionBadge version="2.2.40" label="Changed" icon="tag" /> The list only contains projects of the types registered on this editor's `FileMenu`. Before 2.2.40, every editor shared one list.
 
 Register project types in your editor:
 
@@ -138,5 +145,14 @@ Most editor menus are built with `TreeBuilder.Menu`:
 * `leaf(icon, name, action)` adds a command with an icon.
 * `branch(name, builder)` adds a submenu.
 * `crossLine()` adds a separator.
+* `disabledLeaf(name)` / `disabledLeaf(icon, name)` adds an entry that is shown dimmed and cannot be picked. Clicking it leaves the menu open. <VersionBadge version="2.2.42" label="Since" icon="tag" />
+
+Use `disabledLeaf` when hiding an entry would hide that the action exists at all, and it is only unavailable here.
 
 Menu item names are translation keys. Keep them stable, just like view names and project type names.
+
+Do not write shortcuts into menu translations. Use `Keymap#menuLabel(actionId, translationKey)` to append the chord the user has bound:
+
+```java
+menu.leaf(Icons.PLAY, editor.getKeymap().menuLabel(MyIds.RUN_PREVIEW, "shop.menu.run_preview"), this::runPreview);
+```

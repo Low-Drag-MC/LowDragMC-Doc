@@ -25,6 +25,9 @@
 | Context node | Node that owns an ordered list of block nodes. |
 | Block node | Node that lives inside a context node instead of directly on the graph canvas. |
 | Wire portal | Compact node pair used to route a wire through named entry/exit points. |
+| Reroute point | `WireReroutePointModel`. A point a wire is drawn through. Changes routing only, not the wire's ports. See [Wire Reroute Points](./graph-view.md#wire-reroute-points). |
+| Wire route style | `WireRouteStyle`. How every wire in a graph view is drawn: default, curved, octilinear, orthogonal, or straight. See [Wire Styles](./graph-view.md#wire-styles). |
+| Auto layout | Context-menu command that arranges the selection or the whole graph with a `GraphLayoutAlgorithm`. See [Auto Layout](./graph-view.md#auto-layout). |
 | Placemat | Resizable canvas area used to visually group graph elements. |
 | Sticky note | Comment element placed on the graph canvas. |
 | Capability | Flag on graph element models that controls actions such as delete, move, copy, rename, color, collapse, or resize. |

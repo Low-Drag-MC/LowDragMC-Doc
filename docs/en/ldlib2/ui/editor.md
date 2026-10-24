@@ -72,6 +72,12 @@ To create one, use the **Resource Panel**:
 2. Choose or create a **resource provider**.
 3. Right-click and create a **UI Template**, then double-click it to enter edit mode.
 
+::: info Built-in templates
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+Templates in the built-in provider open read-only, and their tab title ends with `(read-only)`. To change one, right-click it → **Copy Resource To**, pick a writable provider and a name, then edit the copy. See [Providers and Paths](../editor/resources/providers.md#built-in-provider).
+:::
+
 ### Edit your Template
 
 After opening a UI Template, you will see the following editor interface:
@@ -85,7 +91,8 @@ After opening a UI Template, you will see the following editor interface:
 
 2. **UI Tree**  
    Displays the full UI hierarchy.  
-   You can create or remove components via the context menu, select multiple elements, or drag to reorder the hierarchy.
+   You can create or remove components via the context menu, select multiple elements, or drag to reorder the hierarchy.  
+   Since 2.2.42, adding, removing, pasting, and moving elements can be undone and redone like property edits.
 
 3. **Element Configurator**  
    Shows configurable properties of the currently selected element.
@@ -185,3 +192,20 @@ This allows you to interact with the UI and verify its behavior.
 <figure>
 <img src="./assets/editor_simulation.png" alt="Editor appearance" width="100%">
 </figure>
+
+### Debug the Simulation
+
+<VersionBadge version="2.2.42" label="Since" icon="tag" />
+
+The running simulation can be inspected with the [UI debugger](./preliminary/modularui.md#debug-your-ui):
+
+* click into the simulation and press **`F3`**: the debugger opens on the simulated UI, not on the editor around it, or
+* open the debugger on the editor and choose **Game Window / Simulation** in its target picker. If the editor is in its own window, the entry starts with that window's title instead.
+
+The simulation is a separate `ModularUI` drawn inside the editor. It registers itself with `ModularUI#embedIn(host, name)`, which is what makes it reachable. Call the same method for your own UIs drawn inside another UI's element:
+
+```java
+embeddedUI.embedIn(hostElement, "Preview");
+```
+
+`F3` with the focus inside `hostElement` then targets the embedded UI, and the target picker lists it under the outer UI, for example `Game Window / Preview`. The registration is removed when the embedded UI is removed.

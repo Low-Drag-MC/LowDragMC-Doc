@@ -37,7 +37,11 @@ pack(ldlib2:resources/global/example.ui.nbt)
 
 ## Built-in Provider
 
-`BuiltinResourceProvider` stores resources registered by code. It is read-only from the UI: no add, edit, rename, remove, or copy.
+`BuiltinResourceProvider` stores resources registered by code. It is read-only from the UI: no add, edit, rename, or remove.
+
+<VersionBadge version="2.2.38" label="Changed" icon="tag" /> Built-in resources can be copied. **Copy Resource To** asks for a writable provider of the same type and a name, then writes the copy there. This is how users fork a built-in resource into something they can edit. The destinations come from `ResourceInstance#listWritableProviders()`, which leaves out providers whose `supportAdd()` is `false`.
+
+Some resource types can open a built-in resource read-only, for example UI templates and graphs. See [Resource UI](./resource-ui.md#open-without-editing).
 
 Use it for default assets and examples.
 
@@ -47,7 +51,7 @@ Use it for default assets and examples.
 
 Use it when users should create or edit assets on disk.
 
-Users can add custom file providers from the resource panel when the provider type supports custom instances.
+Users can add custom file providers from the resource panel when the provider type supports custom instances. Since 2.2.42, they can also right-click a folder in the [Asset Browser](./asset-browser.md#use-a-folder-as-a-resource-provider) and choose **Use As Resource Provider**.
 
 ## Pack Loading
 

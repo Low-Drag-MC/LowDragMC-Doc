@@ -56,9 +56,12 @@ background: sprite(
     ldlib2:textures/gui/icon.png,
     0, 0, 16, 16,          /* sprite 区域（可选） */
     2, 2, 2, 2,            /* 边框（可选） */
-    #FFFFFF                /* 颜色色调（可选） */
+    #FFFFFF,               /* 颜色色调（可选） */
+    repeat                 /* 环绕模式（可选，自 2.2.41） */
 );
 ```
+
+环绕模式可选 `clamp`、`repeat` 或 `mirrored-repeat`。由于它是第 11 个参数，推荐改用 [`wrap(...)`](#wrap-mode) 修饰，这样不必写出区域、边框和色调。
 
 ---
 
@@ -73,22 +76,47 @@ background: icon(modid, check);
 
 ---
 
-### `rect(...)` / `sdf(...)`
+### `rect(...)`
 
-创建一个基于 SDF 的矩形纹理。
+创建一个 [`RectTexture`](rect.md)，即在 CPU 上细分绘制的圆角矩形。
 
 ```css
 background: rect(#FF0000);
 background: rect(#FF0000, 4);
 background: rect(#FF0000, 4 4 4 4, 2, #FFFFFF);
+background: rect(#FF0000, 6, 0, #00000000, 16); /* 更平滑的圆角 */
 ```
 
 参数：
 
 1. 填充颜色
-2. 圆角半径（单个值或 4 个值）（可选）
+2. 圆角半径（单个值，或 4 个值：左上、右上、右下、左下）（可选）
 3. 描边宽度（可选）
 4. 边框颜色（可选）
+5. 圆角分段数，即每段圆弧的线段数（可选，默认 `8`，自 2.2.41）
+
+---
+
+### `sdf(...)`
+
+创建一个 [`SDFRectTexture`](sdf-rect.md)，即由 SDF shader 绘制的圆角矩形，在任意尺寸下都有抗锯齿边缘。
+
+```css
+background: sdf(#FF0000);
+background: sdf(#FF0000, 4);
+background: sdf(#FF0000, 4 4 4 4, 2, #FFFFFF);
+```
+
+参数：
+
+1. 填充颜色
+2. 圆角半径（单个值，或 4 个值：左下、右下、右上、左上）（可选）
+3. 描边宽度（可选）
+4. 边框颜色（可选）
+
+::: warning 圆角顺序不同
+写 4 个半径时，`sdf()` 按左下、右下、右上、左上读取，而 `rect()` 按左上、右上、右下、左下读取。只圆左边（`r 0 0 r`）和只圆右边（`0 r r 0`）在两种顺序下读法相同，所以在两者之间切换时，请用上边或下边的圆角来确认。
+:::
 
 ---
 
@@ -140,7 +168,7 @@ background: file("<namespace>:<path>");
 
 ## 纹理变换
 
-在主纹理之后，你可以应用**变换函数**。
+在主纹理之后，你可以应用**修饰函数**。修饰函数不会改动共享的纹理实例：需要改动纹理时，会作用在一份副本上。
 
 ### 缩放
 
@@ -175,6 +203,24 @@ background: sprite(...) color(255, 255, 0, 0);
 ```
 
 这将使用给定的颜色为纹理着色。
+
+---
+
+### 环绕模式 { #wrap-mode }
+<VersionBadge version="2.2.41" label="自" icon="tag" />
+
+```css
+background: sprite(mymod:textures/gui/tile.png) wrap(repeat);
+background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4) wrap-mode(mirrored-repeat);
+```
+
+`wrap(...)` 和 `wrap-mode(...)` 用于设置 [`SpriteTexture` 的环绕模式](sprite.md#wrap-modes)：`clamp`、`repeat` 或 `mirrored-repeat`。它们只对 `sprite(...)` 纹理生效，对其他类型会被忽略。
+
+---
+
+::: info 无效值
+无法解析的纹理值会在日志里输出警告（每个不同的值只输出一次），而不是静默失败。
+:::
 
 ---
 

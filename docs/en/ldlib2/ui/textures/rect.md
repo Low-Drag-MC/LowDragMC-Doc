@@ -2,9 +2,10 @@
 
 <VersionBadge version="2.2.1" label="Since" icon="tag" />
 
-`RectTexture` draws a rounded rectangle using CPU-side tessellation. It is a fallback alternative to [`SDFRectTexture`](sdf-rect.md) for environments where the SDF shader is unavailable. Both classes expose the same properties.
+`RectTexture` draws a rounded rectangle using CPU-side tessellation. It is a fallback alternative to [`SDFRectTexture`](sdf-rect.md) for environments where the SDF shader is unavailable. Both classes expose the same properties, plus `cornerSegments` on `RectTexture`.
 
-Registry name: `rect_texture`
+Registry name: `rect_texture`  
+LSS function: `rect(...)`
 
 ::: info
 Extends `TransformTexture` — supports `rotate()`, `scale()`, `transform()`.
@@ -66,13 +67,42 @@ let simple = RectTexture.of(0xFF3A3A3A);
 
 ---
 
+## LSS
+
+```css
+/* rect(fillColor) */
+background: rect(#2A2A2A);
+
+/* rect(fillColor, radius) */
+background: rect(#2A2A2A, 6);
+
+/* rect(fillColor, radius, strokeWidth, borderColor) */
+background: rect(#2A2A2A, 4, 1, #FFFFFF);
+
+/* Per-corner radii: top-left top-right bottom-right bottom-left */
+background: rect(#2A2A2A, 8 8 0 0);
+
+/* rect(fillColor, radius, strokeWidth, borderColor, cornerSegments) */
+background: rect(#2A2A2A, 12, 0, #00000000, 16);
+```
+
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+The fifth argument, `cornerSegments`, was added in 2.2.41. Raise it for large radii that look faceted.
+
+::: warning
+`rect()` reads four radii in CSS order (top-left first), while [`sdf()`](sdf-rect.md#lss) reads them from bottom-left. See [Texture in LSS](lss.md#sdf).
+:::
+
+---
+
 ## Fields
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `color` | `int` | Fill colour (ARGB). Default: `0xFFFFFFFF`. |
 | `borderColor` | `int` | Stroke colour (ARGB). Default: `0xFF000000`. |
-| `radius` | `Vector4f` | Per-corner radii: `x` = bottom-left, `y` = bottom-right, `z` = top-right, `w` = top-left. |
+| `radius` | `Vector4f` | Per-corner radii: `x` = top-left, `y` = top-right, `z` = bottom-right, `w` = bottom-left. |
 | `stroke` | `float` | Border stroke width. `0` disables the border. |
 | `cornerSegments` | `int` | Number of line segments per corner arc. Higher = smoother but more vertices. Default: `8`. |
 

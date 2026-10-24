@@ -4,6 +4,10 @@
 
 LDLib2 provides a type-safe Kotlin DSL for building UI trees. It wraps the Java API with builder patterns, nested lambdas, and operator overloads to make UI construction more concise and structured.
 
+::: tip DSL or Compose
+The DSL builds a tree once. For UI whose structure follows state (lists that grow, panels that appear on a condition), see the optional [Compose](./compose/index.md) module. Both use the same `layout` and `style` receivers, and the two can be mixed in one tree.
+:::
+
 ---
 
 ## Core Concepts

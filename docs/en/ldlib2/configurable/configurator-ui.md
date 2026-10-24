@@ -233,3 +233,32 @@ configurator
 ```
 
 This is useful for repeated editor data such as colors, vectors, textures, and renderer settings.
+
+## Context Menu And Overrides
+<VersionBadge version="2.2.42" label="Since" icon="tag" />
+
+These APIs let an editor that owns a whole configurator tree mark rows and add actions to them, for example a prefab-style inspector that shows which values differ from a template and offers to revert them.
+
+| Method | Description |
+| --- | --- |
+| `getSourceField()` | The `Field` this row edits. Set for rows made by `ConfiguratorParser`, and for the group of a `subConfigurable` field. `null` for rows built by hand. |
+| `addMenuContributor(BiConsumer<Configurator, TreeBuilder.Menu>)` | Adds entries to the right-click menu of this configurator **and every configurator under it**, after the row's own copy/paste entries. The callback receives the row that was clicked. |
+| `setOverridden(boolean)` / `isOverridden()` | Draws the row as overridden: a blue bar (`Configurator.OVERRIDDEN_COLOR`, `0xFF4A9EFF`) and a bold label. Only the look; deciding what counts as overridden is up to you. `getLabel()` still returns the plain label. |
+
+```java
+ConfiguratorGroup root = new ConfiguratorGroup("Properties", false);
+ConfiguratorParser.createConfigurators(root, instance);
+
+root.addMenuContributor((row, menu) -> {
+    var field = row.getSourceField();
+    if (field == null) return;
+    var key = PersistedParser.persistedKey(field); // null when the field is not saved
+    if (key != null && template.contains(key)) {
+        menu.leaf("Revert to template", () -> revert(key));
+    }
+});
+```
+
+A row that opens a menu stops the right-click from reaching its parent group, so one click opens one menu that contains the entries contributed by every group around the row.
+
+To find a row's value in saved data, use `PersistedParser.persistedKey(Field)` (the key the field is saved under, or `null` if it is not saved) and `PersistedParser.isPersistedFlat(Field)` (whether a sub-object writes its values into its owner instead of under its own key).

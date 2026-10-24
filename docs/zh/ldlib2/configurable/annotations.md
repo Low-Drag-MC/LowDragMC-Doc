@@ -111,6 +111,20 @@ private void buildModeOptions(Mode mode, ConfiguratorGroup group) {
 }
 ```
 
+### 翻译枚举条目 { #translating-enum-entries }
+<VersionBadge version="2.2.42" label="自" icon="tag" />
+
+每个 selector 条目通过翻译键 `<enum class>.<CONSTANT>` 显示，其中类名部分取 `Class#getName()`，所以嵌套枚举的键里带有 `$`。
+
+```json
+{
+  "com.example.Machine$Mode.BASIC": "Basic",
+  "com.example.Machine$Mode.ADVANCED": "Advanced"
+}
+```
+
+语言文件里没有这个键时，`StringRepresentable` 枚举回退为 `getSerializedName()`，其他枚举回退为 `name()`，这个名字仍会被当作翻译键处理。`@ConfigSelector` 的 `candidate` 始终按这些未翻译的名字匹配。
+
 ## 列表和数组
 
 数组和集合会显示为 `ArrayConfiguratorGroup`。`@ConfigList` 控制添加、删除、重排、默认元素创建，以及自定义元素 UI。

@@ -59,6 +59,20 @@ flowchart LR
 
 `GraphEditorView` 也负责子图导航。当用户进入子图时，它通过同一个 factory 创建另一个 `GraphView`，更新面包屑，并保留根编辑器保存流程。
 
+## 只读图 { #read-only-graphs }
+
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+provider 无法编辑的图资源（例如内置资源）仍然可以打开。`GraphResourceProviderContainer` 会用只读的 `GraphEditorView` 打开它：
+
+* 保存按钮隐藏，view 不会进入 dirty 状态，
+* 从它进入的子图同样是只读的，
+* 资源右键菜单中显示 **查看**（View），而不是 **编辑**（Edit）。
+
+想要修改这类图时，在资源右键菜单中选择 **复制**（Copy）。**复制资源到**（Copy Resource To）对话框可以选择一个可写的 provider 并填写名称。复制出的资源是该 provider 中的普通资源，打开后可以编辑。复制对话框见 [资源提供器](../editor/resources/providers.md)。
+
+自定义编辑流程时，在 `loadGraph(...)` 之前调用 `GraphEditorView.setReadOnly(true)`。具体禁用了哪些操作，见 [GraphView 只读 view](./graph-view.md#read-only-views)。
+
 ## 自定义 GraphView Factory
 
 覆盖 `getGraphViewFactory()` 来使用自定义 `GraphView` 子类。

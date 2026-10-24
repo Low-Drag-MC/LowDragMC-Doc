@@ -811,6 +811,8 @@ LDLib2 therefore also provides **message**, a lightweight wrapper built internal
 
 This is especially convenient in **KubeJS**, because you can pass around named messages plus NBT-like payloads without defining a custom typed event each time.
 
+Messages are also how a [Compose](../compose/index.md) composition talks to the server: `rememberServerMessenger()` sends named messages that handlers registered in `createUI` receive. See [Server-driven UI](../compose/state-and-sync.md#server-driven-ui).
+
 ### Basic message usage
 
 <DocTabs>

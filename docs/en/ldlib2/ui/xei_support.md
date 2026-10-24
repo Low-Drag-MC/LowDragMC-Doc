@@ -16,6 +16,25 @@ The integration is event-driven: LDLib2 fires custom `UIEvent`s during JEI/REI/E
 
 ## JEI
 
+::: info Dependency
+LDLib2 compiles against the JEI **API** only and declares JEI as an optional client dependency (`[19.51.0.417,)` on 1.21.1). JEI is not a transitive dependency of LDLib2's Maven artifact: if your mod uses `LDLibJEIPlugin`, declare the JEI API (and a JEI runtime for testing) in your own build.
+:::
+
+::: warning Breaking changes in 2.2.38.a
+<VersionBadge version="2.2.38.a" label="Changed" icon="triangle-alert" />
+
+Every bound element is now a genuine JEI recipe slot. If you call the helpers directly:
+
+| Before 2.2.38.a | Since 2.2.38.a |
+| --- | --- |
+| `JEIUIEvents.RECIPE_INGREDIENT` + `JEIRecipeIngredientHandler` | `JEIUIEvents.RECIPE_BINDING` + `JEIRecipeSlotHandler` |
+| `JEIUIEvents.RECIPE_WIDGET` + `JEIRecipeWidgetHandler` | `JEIUIEvents.RECIPE_BINDING` + `JEIRecipeSlotHandler` |
+| `recipeSlot(element, Supplier<ITypedIngredient<?>>, Supplier<List<ITypedIngredient<?>>>)` | `recipeSlot(element, IngredientIO, IIngredientType<V>, Supplier<Stream<V>>, Consumer<V>)`, returns `Consumer<V>` |
+| `createTypedIngredient(type, value, boolean normalize)` | Removed; use `createTypedIngredient(type, value)` |
+
+The `xei*` shortcuts on `ItemSlot` and `FluidSlot` keep their signatures, so code that only uses them needs no change.
+:::
+
 ### Registering a Recipe Category
 
 Extend `ModularUIRecipeCategory&lt;T&gt;` where `T` is your recipe type. The base class handles caching, rendering, and event dispatch automatically. You only need to provide:
@@ -103,8 +122,7 @@ All integration is handled via `UIEvent`s dispatched through the element tree. Y
 | -------------------------- | ---------- | ----------------------- |
 | `CLICKABLE_INGREDIENT` | User hovers/clicks an element in a live screen | `IClickableIngredientFactory` |
 | `GHOST_INGREDIENT` | User starts dragging an ingredient from JEI | `JEITargetsTypedHandler&lt;I&gt;` |
-| `RECIPE_INGREDIENT` | JEI collects ingredients to register for focus | `JEIRecipeIngredientHandler` |
-| `RECIPE_WIDGET` | JEI collects slot widgets for hover/tooltip | `JEIRecipeWidgetHandler` |
+| `RECIPE_BINDING` | JEI lays out the recipe and collects one recipe slot per bound element (since 2.2.38.a) | `JEIRecipeSlotHandler` |
 
 ---
 
@@ -148,7 +166,7 @@ For fluids use `NeoForgeTypes.FLUID_STACK` as the type.
 
 #### `recipeIngredient` — provide focus ingredients
 
-Registers the ingredients of an element with JEI so that recipe focus (highlight when a matching ingredient is looked up) works. Call this once per ingredient-bearing element inside your recipe UI factory:
+Sets the role and the ingredients of the element's JEI recipe slot, so that recipe focus and lookups work. Call this once per ingredient-bearing element inside your recipe UI factory:
 
 ```java
 // Inside createModularUI() / IModularUIProvider:
@@ -174,21 +192,39 @@ LDLibJEIPlugin.recipeIngredient(outputSlot, IngredientIO.OUTPUT, () -> {
 
 ---
 
-#### `recipeSlot` — attach slot overlay for hover and tooltips
+#### `recipeSlot` — bind an element to a JEI recipe slot
+<VersionBadge version="2.2.38.a" label="Changed" icon="triangle-alert" />
 
-Adds an **invisible JEI slot widget** over the element so that mousing over it shows the JEI ingredient tooltip and tag content info. Provide the currently displayed ingredient and optionally all ingredient alternatives (for tag tooltips):
+Binds the element to one genuine JEI recipe slot. JEI handles hover, the ingredient tooltip, tag contents and cycling through alternatives, while LDLib2 keeps rendering the element. The element's own hover tooltips are added to JEI's tooltip.
 
 ```java
-LDLibJEIPlugin.recipeSlot(
+Consumer<ItemStack> showInJei = LDLibJEIPlugin.recipeSlot(
     inputSlot,
-    // Primary displayed ingredient:
-    () -> LDLibJEIPlugin.createTypedIngredient(VanillaTypes.ITEM_STACK, inputSlot.getItem()).orElse(null),
-    // All alternatives (e.g. tag members); may be null to omit tag tooltip:
-    () -> tagItems.stream()
-            .map(i -> LDLibJEIPlugin.<ItemStack>createTypedIngredient(VanillaTypes.ITEM_STACK, i).orElse(null))
-            .toList()
+    IngredientIO.INPUT,
+    VanillaTypes.ITEM_STACK,
+    // all alternatives, snapshotted when JEI lays out the recipe
+    () -> tagItems.stream(),
+    // JEI cycled the slot: show the same value in LDLib2
+    item -> inputSlot.setItem(item, false)
 );
+
+// LDLib2 changed what it shows: tell JEI
+inputSlot.registerValueListener(showInJei);
 ```
+
+| Parameter | Description |
+| --- | --- |
+| `ingredientIO` | Role of the slot. A role set by `recipeIngredient(...)` on the same element takes precedence. |
+| `ingredientType` | JEI ingredient type, such as `VanillaTypes.ITEM_STACK` or `NeoForgeTypes.FLUID_STACK`. |
+| `ingredientsProvider` | Every alternative the slot can show, read when JEI lays out the recipe. Ignored when `recipeIngredient(...)` already supplied ingredients. |
+| `displayedIngredientListener` | Called with the value JEI displays whenever JEI cycles the slot; `null` when it shows nothing. |
+| return value | Push the value LDLib2 now displays. JEI then shows only that value in the slot. |
+
+`ItemSlot` and `FluidSlot` wire both directions for you through `xeiRecipeSlot(...)`.
+
+::: info `createTypedIngredient`
+`LDLibJEIPlugin.createTypedIngredient(type, value)` returns an empty `Optional` until JEI has called `registerCategories`. It is ready in your plugin's `registerRecipes` and when recipe UIs are built.
+:::
 
 ---
 
@@ -199,11 +235,13 @@ LDLibJEIPlugin.recipeSlot(
 | Method | What it does |
 | ------ | ------------ |
 | `xeiRecipeIngredient(IngredientIO)` | Calls `LDLibJEIPlugin.recipeIngredient(...)` for the slot's current item/fluid. |
-| `xeiRecipeSlot()` | Calls `LDLibJEIPlugin.recipeSlot(...)` with the slot's item/fluid; no chance display. |
-| `xeiRecipeSlot(IngredientIO, float chance)` | Same, but also shows a chance overlay when `chance < 1`. |
+| `xeiRecipeIngredient(IngredientIO, Supplier<Stream<...>>)` | Same, with every possible item/fluid of the slot. |
+| `xeiRecipeSlot()` | Calls `LDLibJEIPlugin.recipeSlot(...)` with the slot's item/fluid and role `NONE`. |
+| `xeiRecipeSlot(IngredientIO, float chance)` | Same, with a role. `chance` is used by EMI only. |
+| `xeiRecipeSlot(IngredientIO, float chance, int amount, Supplier<Stream<...>>)` | Same, with every alternative the slot can cycle through. `chance` and `amount` are used by EMI only. |
 | `xeiPhantom()` | Registers `ghostIngredient` so JEI items can be dragged into the slot. |
 
-All four methods return `this` for chaining.
+All methods return `this` for chaining.
 
 ---
 

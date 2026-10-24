@@ -54,7 +54,11 @@ Selecting <strong>Description Test</strong> opens its scrollable description pan
 
 ## Options
 
-Options are node settings. They can appear in the node header or only in the inspector.
+Options are node settings. By default an option is drawn in the node body and listed in the inspector when the node is selected. Use `showInInspectorOnly()` or `showInNodeOnly()` to keep it in one place.
+
+::: warning
+Since 2.2.39, the inspector lists **every** option under an "Options" heading, including options that are also drawn in the node body. Before 2.2.39, the inspector showed no option rows at all. Use `showInNodeOnly()` (2.2.40+) to keep an option out of the inspector.
+:::
 
 ```java
 @Override
@@ -87,11 +91,22 @@ Useful option builder methods:
 | `withDisplayName(Component)` | Label shown in UI. |
 | `withTooltips(Tooltips)` | Tooltip text. |
 | `withDefaultValue(Object)` | Initial value. |
-| `showInInspectorOnly()` | Hide from node header. |
+| `showInInspectorOnly()` | Show only in the inspector, not in the node body. |
+| `showInNodeOnly()` | Show only in the node body, not in the inspector. <VersionBadge version="2.2.40" label="Since" icon="tag" /> |
 | `withConfigurable(ITypeConfigurable)` | Override editor UI for this option. |
 | `withCodec(Codec&lt;?&gt;)` | Override serialization. |
 | `withoutSerialization()` | Keep the type id, skip value persistence. |
 | `withoutConfigurator()` | Store the value without exposing a UI row. |
+
+`showInInspectorOnly()` and `showInNodeOnly()` set the same `OptionVisibility` value, so the last call wins:
+
+| `OptionVisibility` | Node body | Inspector |
+| ------------------ | --------- | --------- |
+| `NODE_AND_INSPECTOR` (default) | ✅ | ✅ |
+| `INSPECTOR_ONLY` | ❌ | ✅ |
+| `NODE_ONLY` | ✅ | ❌ |
+
+To show an option in neither place, use `withoutConfigurator()`.
 
 ## Ports
 
@@ -114,11 +129,16 @@ context.addInputPort("amount", Float.class)
         .build();
 ```
 
+::: tip
+Since 2.2.40, changing an input port's declared type in code also updates graphs saved before the change. On load, an embedded constant saved under a different type is converted to the port's current type when that type can hold the value. If it cannot, the constant keeps its saved type.
+:::
+
 Useful port builder methods:
 
 | Method | Use |
 | ------ | --- |
 | `withDisplayName(Component)` | Label shown beside the port. |
+| `withTooltips(Tooltips)` | Hover tooltip. Replaces the generated `name (type)` tooltip. Input and output ports. <VersionBadge version="2.2.41" label="Since" icon="tag" /> |
 | `withConnectorUI(PortConnectorUI)` | Custom connector icon. |
 | `withOrientation(PortOrientation)` | Horizontal side port or vertical top/bottom port. |
 | `withDefaultValue(Object)` | Initial embedded constant. |

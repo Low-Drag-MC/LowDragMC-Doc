@@ -38,14 +38,17 @@ flowchart TD
     A[Editor Framework] --> B[Getting Start]
     A --> D[Project System]
     A --> E[Views]
+    A --> W[Windows and Floating Views]
     A --> F[Resources]
     A --> G[Menus]
+    A --> K[Keymap]
     A --> H[Settings]
     A --> I[Misc]
 
     E --> E1[Built-in Views]
     F --> F1[Providers and Paths]
     F --> F2[Resource UI]
+    F --> F3[Asset Browser]
     I --> I1[SceneEditor]
     I --> I2[Source Examples]
 ```
@@ -54,11 +57,15 @@ flowchart TD
 
 [Project System](./project-system.md) explains project types, project lifecycle, and file persistence.
 
-[Views](./views/index.md) explains the view system. [Built-in Views](./views/builtin-views.md) covers Inspector and History.
+[Views](./views/index.md) explains the view system. [Built-in Views](./views/builtin-views.md) covers Inspector, History, and how views handle commands.
 
-[Resources](./resources/index.md) explains resource definitions. [Providers and Paths](./resources/providers.md) covers resource sources and typed paths. [Resource UI](./resources/resource-ui.md) covers the built-in resource browser.
+[Windows and Floating Views](./windows.md) covers moving the editor into its own desktop window and tearing views out into floating windows.
+
+[Resources](./resources/index.md) explains resource definitions. [Providers and Paths](./resources/providers.md) covers resource sources and typed paths. [Resource UI](./resources/resource-ui.md) covers the built-in resource panel. [Asset Browser](./resources/asset-browser.md) covers the file browser over the `ldlib2` folder.
 
 [Menus](./menus.md) covers File/View menu extension.
+
+[Keymap](./keymap.md) covers editor shortcuts: built-in actions, adding your own, and user rebinding.
 
 [Settings](./settings.md) covers persistent editor settings.
 

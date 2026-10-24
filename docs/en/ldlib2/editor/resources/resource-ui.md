@@ -1,16 +1,16 @@
 # Resource UI
 
 <figure>
-<img src="../assets/resource_composite.png" alt="Resource panel composition">
+<img src="/assets/ldlib2/editor/resource-view-tab-strip.png" alt="Resource panel with a widened tab strip down the left and the Assets tab open">
 <figcaption>
-Resource panel composition: resource types, providers, and provider contents.
+The resource panel. The tab strip on the left has been widened, so the resource tabs wrap into two columns below the pinned Assets tab.
 </figcaption>
 </figure>
 
 The resource panel has four main areas:
 
 1. **Resource type tabs**  
-   Each tab switches to a different `Resource&lt;?&gt;` type, such as textures, colors, UI templates, or your own project resource type.
+   Each tab switches to a different `Resource&lt;?&gt;` type, such as textures, colors, UI templates, or your own project resource type. The **Assets** tab, pinned in front, opens the [Asset Browser](./asset-browser.md).
 
 2. **Built-in resource providers**  
    These are providers registered by code. Built-in resources are usually examples, defaults, or internal assets. They are normally read-only.
@@ -23,11 +23,27 @@ The resource panel has four main areas:
 
 The resource panel is built from three layers.
 
-`ResourceView` is the built-in editor view. It creates one vertical tab per `Resource&lt;?&gt;` type and stores the selected `ResourceInstance`.
+`ResourceView` is the built-in editor view. It creates one tab per `Resource&lt;?&gt;` type after the pinned Assets tab, and stores the selected `ResourceInstance`.
 
 `ResourceContainer&lt;T&gt;` is the content for one resource type. The left side lists providers. The right side shows the selected provider's resources.
 
 `ResourceProviderContainer&lt;T&gt;` renders the resources from one provider.
+
+## Tab Strip
+
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+Users arrange the resource tab strip themselves:
+
+* drag the seam between the strip and the content to resize the strip,
+* drag a tab along the strip to reorder it,
+* right-click the strip → **Tab Strip** to put it on the left (default), right, top, or bottom,
+* **Visible Tabs** hides or shows individual resource types,
+* **Fit Tabs to One Line** hands the thickness back to the theme, and **Reset Tab Layout** restores everything.
+
+A thicker strip holds several lines of tabs: they wrap onto the next line once there is room for one. Tabs that still do not fit scroll with the mouse wheel.
+
+The arrangement is saved per editor class in `ldlib2/editor_layouts/resource_views.nbt`. Override `ResourceView#layoutKeyOf(Editor)` to share one arrangement between editors, or to give an editor created many times a stable key. The same settings are available in code through `setPlacement(...)`, `setStripSize(...)`, `fitStripSize()`, and `resetTabLayout()`.
 
 ## Provider UI
 
@@ -48,7 +64,43 @@ Right-clicking the provider list can create custom providers for registered `Res
 * copy resource,
 * rename resource,
 * remove resource,
-* provider-specific context menu entries.
+* provider-specific context menu entries,
+* search and sort (2.2.42).
+
+### Copy and Duplicate
+
+<VersionBadge version="2.2.38" label="Changed" icon="tag" />
+
+**Copy Resource To** opens a dialog that asks for a destination and a name. The destinations are every writable provider of the resource type, not only the current one, so a resource from a read-only built-in library can be copied somewhere editable. The copy is undoable.
+
+To copy in place without a prompt, call `duplicateResource(path)`. It writes a `_copy` resource into the same provider. `copyResource(path)` is the dialog version.
+
+### Open Without Editing
+
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+`canOpen` decides whether double-clicking opens a resource at all. `canEdit` decides whether it can be changed. By default `canOpen` follows `canEdit`.
+
+A resource type whose editor has a read-only mode can widen `canOpen`. The menu entry then reads **View** instead of **Edit** for resources that cannot be edited:
+
+```java
+container.setCanOpen(path -> true);
+```
+
+UI templates and graphs do this, so built-in templates and graphs open read-only.
+
+### Search and Sort
+
+<VersionBadge version="2.2.42" label="Since" icon="tag" />
+
+The toolbar has a search field that filters the provider's resources by name, and a sort button. Sort modes are in `Resource.SortMode`: `DEFAULT` (the provider's own order), `NAME`, `MODIFIED`, and `SIZE`. `MODIFIED` and `SIZE` are offered for file providers only. The sort mode and direction are stored on the `ResourceInstance`, so they apply to every provider of that type.
+
+| Method | Description |
+| --- | --- |
+| `setSearchText(String)` / `getSearchText()` | Sets or reads the search text. |
+| `matchesSearch(path)` | Whether a resource passes the current search. |
+| `setSortMode(Resource.SortMode)` | Changes the sort mode. |
+| `setSortAscending(boolean)` | Changes the direction. |
 
 Use these hooks to customize behavior:
 

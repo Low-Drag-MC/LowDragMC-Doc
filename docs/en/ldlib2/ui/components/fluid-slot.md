@@ -203,7 +203,7 @@ fluid-slot {
 ::: info
 #### <p style="font-size: 1rem;">show-fluid-tooltips</p>
 
-Whether hovering shows the fluid name, amount/capacity, temperature, and state tooltip.
+Whether hovering shows the fluid name, amount/capacity, temperature, and state tooltip. An empty slot shows an "Empty" line and `0 / capacity` (since 2.2.43; earlier versions showed no tooltip).
 
 Default: `true`
 

@@ -86,6 +86,7 @@ NGT 不只有 nodes 和 wires：
 * placemats：用于可视化分组图区域，
 * sticky notes：放在图画布上的注释，
 * wire portals：通过命名 entry/exit portal 路由连线，
+* [中继点](./graph-view.md#wire-reroute-points)：在不改变端口的前提下折弯连线或分出支线，
 * graph panels：用于停靠工具，
 * graph preview：用于自定义预览 UI。
 

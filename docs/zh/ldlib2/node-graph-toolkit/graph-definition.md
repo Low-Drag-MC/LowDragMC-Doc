@@ -49,9 +49,9 @@ public class AddNode extends Node {
 | `environment` | 注册环境。 |
 | `graphTypes` | 这个节点可以在哪些图类中使用。 |
 
-## 支持的类型
+## 支持的类型 { #supported-types }
 
-`getSupportTypes()` 控制常量和变量可用的类型句柄。Type API 和注册辅助方法见 [Type Handles](./type-handles.md)。
+`getSupportTypes()` 控制端口、常量和变量可用的类型句柄。Type API 和注册辅助方法见 [Type Handles](./type-handles.md)。
 
 ```java
 @Override
@@ -75,6 +75,20 @@ public List<TypeHandle> getVariableSupportTypes() {
     return List.of(TypeHandles.FLOAT, TypeHandles.BOOL);
 }
 ```
+
+默认情况下，`getVariableSupportTypes()` 返回 `getSupportTypes()`，`getLibrarySupportTypes()` 返回 `null`。Library 列表为 `null` 时，只保留可以写出字面量的支持类型，即 `TypeHandleHelpers.canAuthorLiteral(handle)` 为 true、已注册默认值的类型。
+
+::: warning
+从 2.2.41 起，Item Library 不再为每个支持的类型都提供常量节点。2.2.41 之前，默认值是整个 `getSupportTypes()` 列表。
+
+现在没有默认值的类型会被排除，包括没有调用 `setCustomDefaultValue(...)` 的自定义类型、普通 enum，以及内置的 `TypeHandles.DIRECTION`。要重新提供它们，可以注册默认值：
+
+```java
+TypeHandleHelpers.setCustomDefaultValue(TypeHandles.DIRECTION, () -> Direction.NORTH);
+```
+
+或者覆盖 `getLibrarySupportTypes()`，自行列出类型。
+:::
 
 ## Graph Hooks
 

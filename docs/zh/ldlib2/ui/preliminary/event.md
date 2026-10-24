@@ -124,7 +124,7 @@ root.addEventListener(UIEvents.CLICK, e => {
 
 ```java
 root.addServerEventListener(UIEvents.CLICK, e -> {
-    LDLib2.LOGGER.info("Triggered on the server";
+    LDLib2.LOGGER.info("Triggered on the server");
 });
 ```
 
@@ -139,6 +139,20 @@ root.addServerEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
+#### 读取服务端监听器 { #reading-server-listeners }
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+`getServerEventListeners(String eventType, boolean useCapture)` 返回为某个事件类型注册的服务端监听器，没有时返回空列表。可以用它在不需要客户端发送 RPC 的情况下，测试元素在服务端的那一半行为。
+
+```java
+var event = UIEvent.create(UIEvents.CLICK);
+for (var listener : button.getServerEventListeners(UIEvents.CLICK, false)) {
+    listener.handleEvent(event);
+}
+```
+
+返回的列表是只读的。请用 `addServerEventListener(...)` 注册监听器，它同时会注册客户端调用该监听器所需的 RPC。
 
 要移除监听器，调用 `removeEventListener(...)`。
 确保 useCapture 标志与监听器注册时的方式匹配：
@@ -528,12 +542,12 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 ### 命令事件
 
 命令事件用于处理高级 UI 命令（例如复制、粘贴、全选）。
-它们遵循验证 → 执行的流程。要在 `validateCommand` 期间声明命令，请调用 `UIEvent.stopPropagation()`。
+在 `validateCommand` 中调用 `UIEvent.stopPropagation()` 认领命令；在 `executeCommand` 中处理完命令后也要再调用一次。
 
 | 事件             | 描述                     | 向下捕获 | 向上冒泡 | 支持服务端 |
 | ----------------- | ------------------------------- | :----------: | :----------: | :----------: |
 | `validateCommand` | 触发以检查元素是否可以处理某个命令。 | ❌ | ❌ | ❌ |
-| `executeCommand`  | 当命令在元素上执行时触发。         | ❌ | ❌ | ❌ |
+| `executeCommand`  | 当命令在元素上执行时触发。自 2.2.42 起冒泡。 | ❌ | ✅ | ❌ |
 
 | 字段 | 描述 | 支持的事件 |
 | ----- | ----------- | --------------- |
@@ -549,6 +563,7 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 | `copy` | ctrl + c |
 | `cut` | ctrl + x |
 | `paste` | ctrl + v |
+| `duplicate` | ctrl + d |
 | `select-all` | ctrl + a |
 | `undo` | ctrl + z |
 | `redo` | ctrl + y / ctrl + shift + z |
@@ -556,9 +571,17 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 | `save` | ctrl + s |
 
 
-::: info
-如果检测到命令输入。命令事件将首先发送给 `focus` 元素（如果存在）。如果它没有被消费，它将被发送给 UI 树元素，直到某个元素消费它为止。
+**路由**
+<VersionBadge version="2.2.42" label="Changed" icon="triangle-alert" />
+
+- **有元素持有焦点。** `executeCommand` 发送给焦点元素，并沿祖先向上冒泡，不会发送 `validateCommand`。这样即使焦点在某个子元素上，view 也能处理复制、粘贴或撤销。
+- **没有焦点。** `validateCommand` 遍历 UI 树，直到某个元素用 `stopPropagation()` 认领它。随后该元素收到 `executeCommand`，同样会冒泡。
+
+::: warning 处理完命令要停止传播
+由于 `executeCommand` 会冒泡，如果祖先也监听同一个命令，不调用 `stopPropagation()` 就会再执行一次。`executeCommand` 中的判断条件应与 `validateCommand` 保持一致。自 2.2.43 起，只有当处理器停止或认领了命令时，编辑器快捷键才不会再传给游戏；仅仅监听到命令不算。
 :::
+
+要在代码中像按下快捷键一样执行命令，调用 `ModularUI#dispatchCommand(String)`（仅客户端）。若有处理器停止或认领了该命令，返回 `true`。
 
 **用法**
 
@@ -567,15 +590,17 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 
 ```java
 elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
-    if (CommandEvents.COPY.equals(event.command)) {
-        // 通知消费
-        event.stopPropagation();
+    if (CommandEvents.COPY.equals(e.command)) {
+        // 认领命令
+        e.stopPropagation();
     }
 });
 
 elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
-    if (CommandEvents.COPY.equals(event.command)) {
-        ClipboardManager.copyDirect("data");
+    if (CommandEvents.COPY.equals(e.command)) {
+        ClipboardManager.INSTANCE.copyDirect("data");
+        // 已处理：不要让祖先再执行一次
+        e.stopPropagation();
     }
 });
 ```
@@ -585,15 +610,17 @@ elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
 
 ```js
 elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
-    if (CommandEvents.COPY == event.command) {
-        // 通知消费
-        event.stopPropagation();
+    if (CommandEvents.COPY == e.command) {
+        // 认领命令
+        e.stopPropagation();
     }
 });
 
 elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
-    if (CommandEvents.COPY == event.command) {
-        ClipboardManager.copyDirect("data");
+    if (CommandEvents.COPY == e.command) {
+        ClipboardManager.INSTANCE.copyDirect("data");
+        // 已处理：不要让祖先再执行一次
+        e.stopPropagation();
     }
 });
 ```

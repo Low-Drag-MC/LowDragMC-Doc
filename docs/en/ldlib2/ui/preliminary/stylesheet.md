@@ -240,6 +240,20 @@ selector {
 
 When you define a stylesheet, you can apply it to the ui tree. Selectors match against elements to resolve which properties apply from the LSS. If a selector matches an element, the style declarations apply to the element.
 
+**Enum values**
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+Enum-valued properties are case-insensitive and accept kebab-case. Matching ignores `-`, `_` and spaces, so `hover-roll`, `HOVER_ROLL` and `hoverRoll` all mean `TextWrap.HOVER_ROLL`.
+
+```css
+label {
+    text-wrap: hover-roll;
+    justify-content: space-between;
+}
+```
+
+An unknown value logs a warning that lists every accepted value. Before 2.2.41, kebab-case values such as `space-between` were silently ignored.
+
 For example, the following rule matches any `Button` object:
 ```css
 button {
@@ -491,8 +505,18 @@ panel.addLocalStylesheet(`
 
 ### Builtin Stylesheets
 
-LDLib2 provides three builtin stylesheets `gdp`, `mc`, and `modern`, allows you to  switch themes flexibly.
-`gdp` is the default stylesheet while using LDLib2 components.
+LDLib2 provides builtin stylesheets so you can switch themes flexibly:
+
+| Theme | Constant | Description |
+| --- | --- | --- |
+| `gdp` | `StylesheetManager.GDP` | Default stylesheet of LDLib2 components. |
+| `mc` | `StylesheetManager.MC` | Vanilla Minecraft look. |
+| `modern` | `StylesheetManager.MODERN` | Flat modern look. |
+| `ore` | `StylesheetManager.ORE` | The built-in editor look. |
+| `dusk`, `carbon`, `mint`, `plum` | `StylesheetManager.DUSK`, `CARBON`, `MINT`, `PLUM` | Dark palettes of one shared design (since 2.2.39). |
+| `paper`, `latte` | `StylesheetManager.PAPER`, `LATTE` | Light palettes of the same design (since 2.2.39). |
+
+Each constant points to `ldlib2:lss/<name>.lss`. Every theme also has a `*_MERGED` constant, such as `DUSK_MERGED`, for the [merged](#merged-stylesheets) result.
 
 You can use `StylesheetManager` to access all registered stylesheets.
 
@@ -521,7 +545,7 @@ function createModularUI() {
 </DocTab>
 </DocTabs>
 
-All three builtin stylesheets as below:
+The `gdp`, `mc`, and `modern` stylesheets:
 
 <figure>
 <img src="../assets/gdp_style.png" alt="size">
@@ -537,6 +561,43 @@ MC
 MODERN
 </figcaption>
 </figure>
+
+The `ore` editor theme:
+
+<figure>
+<img src="/assets/ldlib2/themes/ore.png" alt="Components styled with the ore theme">
+<figcaption>
+ORE
+</figcaption>
+</figure>
+
+#### Shared-design themes
+<VersionBadge version="2.2.39" label="Since" icon="tag" />
+
+`dusk`, `carbon`, `mint`, `plum`, `paper`, and `latte` are one design in six palettes: four dark (`dusk` blue-grey, `carbon` graphite, `mint` green, `plum` violet) and two light (`paper` cool, `latte` warm). They share every selector, so a component styled in one is styled in all six. Offer them to players as a light/dark choice rather than as unrelated looks.
+
+```java
+var theme = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.DUSK);
+```
+
+<figure>
+<img src="/assets/ldlib2/themes/dusk.png" alt="Components styled with the dusk theme">
+<figcaption>DUSK</figcaption>
+<img src="/assets/ldlib2/themes/carbon.png" alt="Components styled with the carbon theme">
+<figcaption>CARBON</figcaption>
+<img src="/assets/ldlib2/themes/mint.png" alt="Components styled with the mint theme">
+<figcaption>MINT</figcaption>
+<img src="/assets/ldlib2/themes/plum.png" alt="Components styled with the plum theme">
+<figcaption>PLUM</figcaption>
+<img src="/assets/ldlib2/themes/paper.png" alt="Components styled with the paper theme">
+<figcaption>PAPER</figcaption>
+<img src="/assets/ldlib2/themes/latte.png" alt="Components styled with the latte theme">
+<figcaption>LATTE</figcaption>
+</figure>
+
+::: warning Corner radius order
+These themes write `sdf(...)` radii in the 1.21 order, bottom-left, bottom-right, top-right, top-left. See [SDF Rect](../textures/sdf-rect.md) before copying their values.
+:::
 
 ### Stylesheets from resourcepack
 
@@ -587,4 +648,4 @@ var theme = StylesheetManager.INSTANCE.getStylesheetSafe(
         ResourceLocation.parse("ldlib2:lss/ore"));
 ```
 
-LDLib2 supplies `mc`, `modern`, `gdp`, and `ore` themes. The `ore` stylesheet is intended for the built-in editor look.
+Every [builtin theme](#builtin-stylesheets) can be requested this way, for example `ldlib2:lss/dusk` or `StylesheetManager.DUSK_MERGED`. The `ore` stylesheet is intended for the built-in editor look.

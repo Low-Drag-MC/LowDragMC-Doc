@@ -2,9 +2,10 @@
 
 <VersionBadge version="2.2.1" label="自" icon="tag" />
 
-`RectTexture` 使用 CPU 端曲面细分绘制圆角矩形。在无法使用 SDF `Shader` 的环境中，它可作为 [`SDFRectTexture`](sdf-rect.md) 的备用方案。两个类公开的属性完全相同。
+`RectTexture` 使用 CPU 端曲面细分绘制圆角矩形。在无法使用 SDF `Shader` 的环境中，它可作为 [`SDFRectTexture`](sdf-rect.md) 的备用方案。两个类公开的属性相同，`RectTexture` 另有 `cornerSegments`。
 
-注册名：`rect_texture`
+注册名：`rect_texture`  
+LSS 函数：`rect(...)`
 
 ::: info
 继承自 `TransformTexture` —— 支持 `rotate()`、`scale()`、`transform()`。
@@ -66,13 +67,42 @@ let simple = RectTexture.of(0xFF3A3A3A);
 
 ---
 
+## LSS
+
+```css
+/* rect(fillColor) */
+background: rect(#2A2A2A);
+
+/* rect(fillColor, radius) */
+background: rect(#2A2A2A, 6);
+
+/* rect(fillColor, radius, strokeWidth, borderColor) */
+background: rect(#2A2A2A, 4, 1, #FFFFFF);
+
+/* 逐角半径：左上 右上 右下 左下 */
+background: rect(#2A2A2A, 8 8 0 0);
+
+/* rect(fillColor, radius, strokeWidth, borderColor, cornerSegments) */
+background: rect(#2A2A2A, 12, 0, #00000000, 16);
+```
+
+<VersionBadge version="2.2.41" label="自" icon="tag" />
+
+第五个参数 `cornerSegments` 自 2.2.41 起可用。半径较大、圆角显得有棱角时可以调高它。
+
+::: warning
+`rect()` 按 CSS 顺序（从左上开始）读取 4 个半径，而 [`sdf()`](sdf-rect.md#lss) 从左下开始读取。见 [LSS 中的 Texture](lss.md#sdf)。
+:::
+
+---
+
 ## 字段
 
 | 名称 | 类型 | 描述 |
 | ---- | ---- | ---- |
 | `color` | `int` | 填充颜色（ARGB）。默认值：`0xFFFFFFFF`。 |
 | `borderColor` | `int` | 描边颜色（ARGB）。默认值：`0xFF000000`。 |
-| `radius` | `Vector4f` | 每个角的半径：`x` = 左下角，`y` = 右下角，`z` = 右上角，`w` = 左上角。 |
+| `radius` | `Vector4f` | 每个角的半径：`x` = 左上角，`y` = 右上角，`z` = 右下角，`w` = 左下角。 |
 | `stroke` | `float` | 边框描边宽度。`0` 表示禁用边框。 |
 | `cornerSegments` | `int` | 每个角圆弧的线段数。数值越高越平滑，但顶点数也越多。默认值：`8`。 |
 

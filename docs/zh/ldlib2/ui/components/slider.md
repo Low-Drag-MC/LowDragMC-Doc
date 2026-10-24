@@ -1,6 +1,6 @@
 # Slider
 
-<VersionBadge version="2.2.33" label="Since" icon="tag" />
+<VersionBadge version="2.2.33" label="自" icon="tag" />
 
 `Slider` 用于在 `[min, max]` 范围内选择 `float`。它是 [Scroller](scroller.md) 的数值选择对应物：Slider 的手柄长度固定，Scroller 的手柄表示视口大小。已注册两个具体组件：
 

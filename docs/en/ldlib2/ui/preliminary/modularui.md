@@ -128,11 +128,37 @@ LDLib2 provides a **Debug Panel**, similar to the debug tools in Chrome. The pan
 ::: info
 <VersionBadge version="mc26.1" label="Since" icon="tag" />
 
-Press **`F12`** to open or close the Debug Panel. In older 1.21 builds, the debug shortcut was **`F3`**.
+Press **`F12`** to open or close the Debug Panel. On 1.21, the shortcut is **`F3`**.
 :::
 
-After opening the Debug Panel, press **`F1`** to toggle **Look Up** mode. In Look Up mode, hover an element in the target UI and click it to jump to that `UIElement` in the Debug Panel's hierarchy and inspector.
+After opening the Debug Panel, press **`F1`** to toggle **Look Up** mode. In Look Up mode, hover an element in the target UI and click it to jump to that `UIElement` in the Debug Panel's hierarchy and inspector. Press **`F4`** to toggle drawing the UI's layout shapes.
 
 <figure>
 <img src="../assets//debug_mode.png" alt="Debug" width="80%">
 </figure>
+
+### Debugger in Its Own Window
+
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+The Debug Panel opens layered over the game. The window toggle in its title bar moves it into a desktop window of its own, where it no longer covers the UI you are inspecting. In that window it can be larger than the game window, moved to another monitor, or kept above other windows with its always-on-top toggle. Its size, position, and pin are remembered.
+
+`F1` and `F4` still work while the pointer is over the inspected UI.
+
+The same switch is available in code while the debugger is open:
+
+```java
+modularUI.enableDebugger(true);
+modularUI.setDebuggerWindowed(true);    // false moves it back over the game
+modularUI.isDebuggerWindowed();
+```
+
+`setDebuggerWindowed(true)` does nothing if no second window can be opened, for example in native fullscreen. See [ModularUIWindow](../modular-ui-window.md).
+
+### Choose What to Inspect
+
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+When more than one UI is on screen, use the debugger's target picker to choose which one to inspect: the game window's UI, a UI in its own window (such as a floating editor view), or a UI embedded in either. Element outlines are drawn in the window where the inspected UI lives.
+
+Since 2.2.42, UIs drawn inside another UI's element appear in the picker as `Outer / Name` when they register with `ModularUI#embedIn(host, name)`. Pressing the debug key with the focus inside `host` opens the debugger on the embedded UI. The UI Editor's [simulation](../editor.md#debug-the-simulation) uses this.

@@ -92,19 +92,26 @@ background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4);
 
 /* With color tint */
 background: sprite(mymod:textures/gui/icon.png, 0, 0, 16, 16, 0, 0, 0, 0, #FF44AAFF);
+
+/* With wrap mode (since 2.2.41) */
+background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4) wrap(repeat);
 ```
 
 ---
 
 ## Wrap Modes
 
-| Value | Description |
-| ----- | ----------- |
-| `CLAMP` | The centre tile is stretched to fill the available area. Default. |
-| `REPEAT` | The centre tile is repeated (tiled). |
-| `MIRRORED_REPEAT` | The centre tile is tiled with alternating mirrors. |
+| Value | LSS | Description |
+| ----- | --- | ----------- |
+| `CLAMP` | `clamp` | The centre tile is stretched to fill the available area. Default. |
+| `REPEAT` | `repeat` | The centre tile is repeated (tiled). |
+| `MIRRORED_REPEAT` | `mirrored-repeat` | The centre tile is tiled with alternating mirrors. |
 
 Wrap modes only apply to the **centre** region of a 9-slice sprite. Corners and edges are always stretched.
+
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+In LSS, set the wrap mode with the `wrap(...)` (or `wrap-mode(...)`) modifier after `sprite(...)`, or as the 11th argument of `sprite(...)`. See [Texture in LSS](lss.md#wrap-mode).
 
 ---
 

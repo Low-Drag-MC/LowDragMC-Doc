@@ -334,6 +334,63 @@ public boolean skipIntFieldPersisted(int value) {
 
 ---
 
+### `@ManagedCodec`
+<VersionBadge version="2.2.43" label="Since" icon="tag" />
+
+Saves and syncs a field with a codec of your own instead of the accessor registered for its type. Use it when a type has no accessor, or when one field needs a different format from the registered one.
+
+It works wherever the field is saved or synced: `@Persisted` and `@DescSynced` fields of a managed holder (such as a block entity), and `@Persisted` or persisted `@Configurable` fields serialized by [`PersistedParser`](./PersistedParser.md).
+
+```java
+public class MachineBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEntity {
+    @Persisted
+    @DescSynced
+    @ManagedCodec(value = "targetCodec", streamCodec = "targetStreamCodec")
+    private BlockPos target = BlockPos.ZERO;
+
+    protected Codec<BlockPos> targetCodec() {
+        return Codec.LONG.xmap(BlockPos::of, BlockPos::asLong);
+    }
+
+    protected StreamCodec<ByteBuf, BlockPos> targetStreamCodec() {
+        return ByteBufCodecs.VAR_LONG.map(BlockPos::of, BlockPos::asLong);
+    }
+}
+
+public class AdvancedMachineBlockEntity extends MachineBlockEntity {
+    @Override
+    protected Codec<BlockPos> targetCodec() {
+        return BlockPos.CODEC; // a subclass may save the field differently
+    }
+}
+```
+
+| Attribute | Description |
+| --- | --- |
+| `value` | Name of a no-arg method returning a `Codec<T>` for the field type, or an `IAccessor<T>` that takes over saving, syncing and change detection entirely. |
+| `streamCodec` | Optional. Name of a no-arg method returning a `StreamCodec<? super RegistryFriendlyByteBuf, T>`. Leave it empty when `value` returns an `IAccessor`. |
+| `owner` | Optional. Look the methods up on this class instead of the holder. The methods must then be `static`. |
+
+**Method lookup.** The methods are looked up on the holder's own class, then its superclasses (any visibility), and last among its public methods, which includes interface default methods. An instance method can be overridden by a subclass; a `static` method works too.
+
+**How the value travels.**
+
+- Saves and the initial sync (the update tag a client gets when it loads the chunk) use the codec, with registry-aware ops, so codecs such as `ItemStack.CODEC` work.
+- Later sync packets and buffer writes use the stream codec. Without one, the codec's value is written to the buffer as NBT, which is larger and slower but otherwise the same.
+- A `null` field is saved and synced as `null` without calling either codec.
+- Reading a value back assigns a new instance to the field.
+- Changes are detected by encoding the value on every update and comparing it with the last encoding, which also catches in-place changes such as adding to a list. To make the check cheaper, return an `IAccessor` instead, for example one built with `CustomDirectAccessor.builder(...)` and its `copyMark` or `customMark`.
+
+::: warning The result is shared per class
+The methods are called once per field and class, when the first ref for that field is created, and the result is shared by every instance of that class. They must not depend on instance state, must have no side effects, and must give the server and the client the same codecs. The codec and the stream codec must also agree on every value: a client that loads the chunk later reads what the codec decodes.
+:::
+
+**Mistakes.** A method that cannot be found, throws, returns `null` or returns the wrong kind of value fails with an `IllegalArgumentException` naming the field, instead of falling back to the registered accessor. The codec type is not checked against the field type: a mismatch shows up as a `ClassCastException` the first time the value is saved or synced. Use the boxed type for a primitive field, such as `Codec<Integer>` for an `int`.
+
+`PersistedParser` ignores `@ManagedCodec` on a field marked `subPersisted` or `subConfigurable`, because those save the value's own fields instead of the value.
+
+---
+
 ## Exclusive to `BlockEntity`
 ::: info
 These annotations are designed specially for `BlockEntity`, check [Manage BlockEntity](./blockentity.md) before using them.

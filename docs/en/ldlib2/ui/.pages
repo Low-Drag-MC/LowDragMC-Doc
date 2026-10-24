@@ -7,9 +7,11 @@ nav:
   - xml.md
   - editor.md
   - kotlin_support.md
+  - compose
   - components
   - textures
   - hud.md
   - kjs_support.md
+  - testing
   - ...
   - agent_guide.md

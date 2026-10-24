@@ -37,7 +37,11 @@ pack(ldlib2:resources/global/example.ui.nbt)
 
 ## Built-in Provider
 
-`BuiltinResourceProvider` 保存由代码注册的资源。它在 UI 中通常是只读的：不能添加、编辑、重命名、移除或复制。
+`BuiltinResourceProvider` 保存由代码注册的资源。它在 UI 中是只读的：不能添加、编辑、重命名或移除。
+
+<VersionBadge version="2.2.38" label="Changed" icon="tag" /> 内置资源可以复制。**Copy Resource To** 会询问同类型的一个可写 provider 和名称，然后把副本写到那里。用户就是这样把内置资源复制成自己可以编辑的版本。可选目标来自 `ResourceInstance#listWritableProviders()`，它会排除 `supportAdd()` 为 `false` 的 provider。
+
+部分资源类型可以以只读方式打开内置资源，例如 UI template 和 graph。见 [Resource UI](./resource-ui.md#open-without-editing)。
 
 适合默认资产和示例。
 
@@ -47,7 +51,7 @@ pack(ldlib2:resources/global/example.ui.nbt)
 
 适合用户需要创建或编辑磁盘资产的情况。
 
-用户可以在资源面板中添加支持 custom instance 的 file provider。
+用户可以在资源面板中添加支持 custom instance 的 file provider。自 2.2.42 起，也可以在 [Asset Browser](./asset-browser.md#use-a-folder-as-a-resource-provider) 中右键文件夹并选择 **Use As Resource Provider**。
 
 ## Pack Loading
 

@@ -301,6 +301,10 @@ private static ModularUI createModularUI() {
 - `#!java StylesheetManager.GDP`
 - `#!java StylesheetManager.MC`
 - `#!java StylesheetManager.MODERN`
+- `#!java StylesheetManager.ORE`
+- `#!java StylesheetManager.DUSK`、`CARBON`、`MINT`、`PLUM`、`PAPER`、`LATTE`（自 2.2.39）
+
+各主题的效果见[内置样式表](./preliminary/stylesheet.md#builtin-stylesheets)。
 
 这些内置样式表允许您以最少的设置将整个 UI 应用一致的视觉样式。
 您可以通过 `StylesheetManager` 访问和管理它们，它充当所有可用样式表包的中央注册表。

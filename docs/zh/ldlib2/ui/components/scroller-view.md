@@ -94,6 +94,8 @@ parent.addChild(sv);
 
 默认值：`BOTH`
 
+在 `BOTH` 模式下，按住 <kbd>Shift</kbd> 会交换鼠标滚轮的轴向，竖向滚轮改为横向滚动（自 2.2.38）。`VERTICAL` 和 `HORIZONTAL` 模式不受影响。
+
 <DocTabs>
 <DocTab title="Java">
 

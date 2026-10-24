@@ -51,7 +51,7 @@ public class AddNode extends Node {
 
 ## Supported Types
 
-`getSupportTypes()` controls type handles available to constants and variables. See [Type Handles](./type-handles.md) for the type API and registration helpers.
+`getSupportTypes()` controls type handles available to ports, constants, and variables. See [Type Handles](./type-handles.md) for the type API and registration helpers.
 
 ```java
 @Override
@@ -75,6 +75,20 @@ public List<TypeHandle> getVariableSupportTypes() {
     return List.of(TypeHandles.FLOAT, TypeHandles.BOOL);
 }
 ```
+
+By default, `getVariableSupportTypes()` returns `getSupportTypes()`, and `getLibrarySupportTypes()` returns `null`. A `null` library list keeps only the supported types a literal can be authored of: those for which `TypeHandleHelpers.canAuthorLiteral(handle)` is true, meaning the handle has a registered default value.
+
+::: warning
+Since 2.2.41, the item library no longer offers a constant node for every supported type. Before 2.2.41, the default was the whole `getSupportTypes()` list.
+
+Types without a default value are now left out. This includes custom types registered without `setCustomDefaultValue(...)`, plain enums, and the built-in `TypeHandles.DIRECTION`. To bring one back, register a default value:
+
+```java
+TypeHandleHelpers.setCustomDefaultValue(TypeHandles.DIRECTION, () -> Direction.NORTH);
+```
+
+Or override `getLibrarySupportTypes()` and list the types yourself.
+:::
 
 ## Graph Hooks
 

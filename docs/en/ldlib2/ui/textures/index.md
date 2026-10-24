@@ -118,9 +118,9 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 | ------------- | ----- | ------------ | ----------- |
 | `color_rect_texture` | [`ColorRectTexture`](color-rect.md) | `color(#RGBA)` or hex literal | Solid-fill rectangle. |
 | `color_border_texture` | [`ColorBorderTexture`](color-border.md) | `border(size, #RGBA)` | Border-only rectangle (no fill). |
-| `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `rect(color, radius?, stroke?, borderColor?)` | GPU SDF rounded rect with optional stroke. |
-| `rect_texture` | [`RectTexture`](rect.md) | — | CPU-rendered rounded rect (no shader required). |
-| `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` | PNG image with optional 9-slice and wrap mode. |
+| `sdf_rect_texture` | [`SDFRectTexture`](sdf-rect.md) | `sdf(color, radius?, stroke?, borderColor?)` | GPU SDF rounded rect with optional stroke. |
+| `rect_texture` | [`RectTexture`](rect.md) | `rect(color, radius?, stroke?, borderColor?, segments?)` | CPU-rendered rounded rect (no shader required). |
+| `sprite_texture` | [`SpriteTexture`](sprite.md) | `sprite(path, ...)` + `wrap(mode)` | PNG image with optional 9-slice and wrap mode. |
 | `vanilla_sprite_texture` | [`VanillaSpriteTexture`](vanilla-sprite.md) | `vanilla-sprite(id)` | Registered vanilla GUI atlas sprite. |
 | `text_texture` | [`TextTexture`](text.md) | — | Rendered text with scrolling modes. |
 | `animation_texture` | [`AnimationTexture`](animation.md) | — | Sprite-sheet frame animation. |
@@ -134,7 +134,7 @@ let dynamic = IGuiTexture.dynamic(() => currentTexture);
 
 ## LSS Reference
 
-Textures are used as values in LSS properties. See [Texture in LSS](lss.md) for the complete syntax including `rect()`, `sprite()`, `group()`, and transform chains.
+Textures are used as values in LSS properties. See [Texture in LSS](lss.md) for the complete syntax including `rect()`, `sdf()`, `sprite()`, `group()`, and modifier chains.
 
 ```css
 button {

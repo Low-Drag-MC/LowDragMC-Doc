@@ -56,9 +56,12 @@ background: sprite(
     ldlib2:textures/gui/icon.png,
     0, 0, 16, 16,          /* sprite region (optional) */
     2, 2, 2, 2,            /* border (opional) */
-    #FFFFFF                /* color tint (optional) */
+    #FFFFFF,               /* color tint (optional) */
+    repeat                 /* wrap mode (optional, since 2.2.41) */
 );
 ```
+
+The wrap mode is `clamp`, `repeat` or `mirrored-repeat`. Because it is the 11th argument, prefer the [`wrap(...)`](#wrap-mode) modifier, which works without spelling out the region, border and tint.
 
 ---
 
@@ -73,22 +76,47 @@ background: icon(modid, check);
 
 ---
 
-### `rect(...)` / `sdf(...)`
+### `rect(...)`
 
-Creates an SDF-based rectangle texture.
+Creates a [`RectTexture`](rect.md), a rounded rectangle tessellated on the CPU.
 
 ```css
 background: rect(#FF0000);
 background: rect(#FF0000, 4);
 background: rect(#FF0000, 4 4 4 4, 2, #FFFFFF);
+background: rect(#FF0000, 6, 0, #00000000, 16); /* smoother corners */
 ```
 
 Arguments:
 
 1. Fill color
-2. Corner radius (single value or 4 values) (optional)
+2. Corner radius (single value, or 4 values: top-left, top-right, bottom-right, bottom-left) (optional)
 3. Stroke width (optional)
 4. Border color (optional)
+5. Corner segments, the number of line segments per corner arc (optional, default `8`, since 2.2.41)
+
+---
+
+### `sdf(...)`
+
+Creates an [`SDFRectTexture`](sdf-rect.md), a rounded rectangle drawn by an SDF shader with anti-aliased edges at any size.
+
+```css
+background: sdf(#FF0000);
+background: sdf(#FF0000, 4);
+background: sdf(#FF0000, 4 4 4 4, 2, #FFFFFF);
+```
+
+Arguments:
+
+1. Fill color
+2. Corner radius (single value, or 4 values: bottom-left, bottom-right, top-right, top-left) (optional)
+3. Stroke width (optional)
+4. Border color (optional)
+
+::: warning Corner order differs
+With four radii, `sdf()` reads them bottom-left, bottom-right, top-right, top-left, while `rect()` reads them top-left, top-right, bottom-right, bottom-left. Left-only (`r 0 0 r`) and right-only (`0 r r 0`) values read the same in both orders, so check a top or bottom rounding when you switch between them.
+:::
 
 ---
 
@@ -140,7 +168,7 @@ This allows integration with LDLib2’s resource system.
 
 ## Texture Transforms
 
-After the main texture, you can apply **transform functions**.
+After the main texture, you can apply **modifier functions**. Modifiers never change a shared texture instance: when a modifier changes the texture, it is applied to a copy.
 
 ### Scale
 
@@ -175,6 +203,24 @@ background: sprite(...) color(255, 255, 0, 0);
 ```
 
 This tints the texture using the given color.
+
+---
+
+### Wrap Mode
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+```css
+background: sprite(mymod:textures/gui/tile.png) wrap(repeat);
+background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4) wrap-mode(mirrored-repeat);
+```
+
+`wrap(...)` and `wrap-mode(...)` set the [`SpriteTexture` wrap mode](sprite.md#wrap-modes): `clamp`, `repeat` or `mirrored-repeat`. They only affect `sprite(...)` textures and are ignored on other types.
+
+---
+
+::: info Invalid values
+A texture value that cannot be parsed logs a warning, once per distinct value, instead of failing silently.
+:::
 
 ---
 

@@ -92,19 +92,26 @@ background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4);
 
 /* 带颜色着色 */
 background: sprite(mymod:textures/gui/icon.png, 0, 0, 16, 16, 0, 0, 0, 0, #FF44AAFF);
+
+/* 带环绕模式（自 2.2.41） */
+background: sprite(mymod:textures/gui/panel.png, 0, 0, 64, 64, 4, 4, 4, 4) wrap(repeat);
 ```
 
 ---
 
-## 环绕模式
+## 环绕模式 { #wrap-modes }
 
-| 值 | 描述 |
-| ----- | ----------- |
-| `CLAMP` | 中心区域拉伸以填充可用区域。默认值。 |
-| `REPEAT` | 中心区域重复（平铺）。 |
-| `MIRRORED_REPEAT` | 中心区域以交替镜像的方式平铺。 |
+| 值 | LSS | 描述 |
+| ----- | --- | ----------- |
+| `CLAMP` | `clamp` | 中心区域拉伸以填充可用区域。默认值。 |
+| `REPEAT` | `repeat` | 中心区域重复（平铺）。 |
+| `MIRRORED_REPEAT` | `mirrored-repeat` | 中心区域以交替镜像的方式平铺。 |
 
 环绕模式仅适用于九宫格精灵的**中心**区域。角和边缘始终为拉伸。
+
+<VersionBadge version="2.2.41" label="自" icon="tag" />
+
+在 LSS 中，可以在 `sprite(...)` 之后用 `wrap(...)`（或 `wrap-mode(...)`）修饰设置环绕模式，也可以把它作为 `sprite(...)` 的第 11 个参数。见 [LSS 中的 Texture](lss.md#wrap-mode)。
 
 ---
 

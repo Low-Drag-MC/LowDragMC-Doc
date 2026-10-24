@@ -52,9 +52,19 @@ Map 会作为只读容器管理。当 key 和 value 的 accessor 都是 direct �
 | `FluidStack`                    | `1000`   | -     |
 | `ItemStack`                     | `1000`   | -     |
 | `RecipeHolder&lt;?&gt;`               | `1000`   | -     |
+| `Ingredient`                    | `1000`   | -     |
+| `FluidIngredient`               | `1000`   | -     |
+| `SizedIngredient`               | `1000`   | -     |
+| `SizedFluidIngredient`          | `1000`   | -     |
 | `Tag`                           | `2000`   | -     |
 | `Component`                     | `2000`   | -     |
 | `INBTSerializable&lt;?&gt;`           | `2000`   | ✅    |
+
+::: info 原料支持
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+自 **2.2.38** 起，`Ingredient`、`FluidIngredient`、`SizedIngredient` 和 `SizedFluidIngredient` 可以同步和持久化。这里只提供了 accessor：[配置器](../configurable/index.md)没有对应的编辑控件。
+:::
 
 - LDLib2 或其他模组中的类型。
 
@@ -85,6 +95,10 @@ Map 会作为只读容器管理。当 key 和 value 的 accessor 都是 direct �
 :::
 
 你可以使用 `AccessorRegistries.registerAccessor` 来注册访问器。一般来说，你可以在任何地方注册你的访问器，但我们建议在 [LDLibPlugin#onLoad](../java_integration.md#ldlibplugin) 中进行。
+
+::: tip 只有一个字段需要？
+如果只想让某个字段使用自己的格式，而不为整个类型注册 accessor，可以给它加上 [`@ManagedCodec`](./annotations.md#managedcodec)。
+:::
 
 ---
 

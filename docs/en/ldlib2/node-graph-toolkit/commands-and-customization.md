@@ -86,6 +86,7 @@ NGT includes more than nodes and wires:
 * placemats for grouping visible graph areas,
 * sticky notes for comments,
 * wire portals for routing wires through named entry and exit portals,
+* [reroute points](./graph-view.md#wire-reroute-points) for bending and branching wires without changing their ports,
 * graph panels for docking tools,
 * graph preview for custom preview UI.
 

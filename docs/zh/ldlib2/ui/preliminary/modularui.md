@@ -118,7 +118,7 @@ flowchart LR
 
 ---
 
-## 调试你的 UI
+## 调试你的 UI { #debug-your-ui }
 
 在开发过程中，UI 树的行为可能并不总是如预期，
 而且很难理解哪里出了问题。
@@ -126,13 +126,39 @@ flowchart LR
 LDLib2 提供了一个类似 Chrome 调试工具的 **Debug Panel**。你可以通过它检查实时 UI 层级、查看计算后的样式和布局信息，并在 UI 运行时选择元素。
 
 ::: info
-<VersionBadge version="mc26.1" label="Since" icon="tag" />
+<VersionBadge version="mc26.1" label="自" icon="tag" />
 
-按 **`F12`** 可以打开或关闭 Debug Panel。在较早的 1.21 构建中，调试快捷键是 **`F3`**。
+按 **`F12`** 可以打开或关闭 Debug Panel。在 1.21 上，快捷键是 **`F3`**。
 :::
 
-打开 Debug Panel 后，按 **`F1`** 可以切换 **Look Up** 模式。在 Look Up 模式下，将鼠标悬停在目标 UI 的元素上并点击，即可跳转到 Debug Panel 的层级树和检查器中的对应 `UIElement`。
+打开 Debug Panel 后，按 **`F1`** 可以切换 **Look Up** 模式。在 Look Up 模式下，将鼠标悬停在目标 UI 的元素上并点击，即可跳转到 Debug Panel 的层级树和检查器中的对应 `UIElement`。按 **`F4`** 可以切换是否绘制 UI 的布局形状。
 
 <figure>
 <img src="../assets//debug_mode.png" alt="Debug" width="80%">
 </figure>
+
+### 在独立窗口中调试 { #debugger-in-its-own-window }
+
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+Debug Panel 默认叠加在游戏画面之上打开。点击它标题栏上的窗口切换按钮，可以把它移到独立的桌面窗口中，这样它就不会再遮住你正在检查的 UI。在独立窗口中，它可以比游戏窗口更大、可以移到另一台显示器，也可以通过置顶开关保持在其他窗口之上。它的大小、位置和置顶状态都会被记住。
+
+鼠标停在被检查的 UI 上时，`F1` 和 `F4` 依然有效。
+
+调试器打开时，也可以在代码中切换：
+
+```java
+modularUI.enableDebugger(true);
+modularUI.setDebuggerWindowed(true);    // false 则移回游戏画面之上
+modularUI.isDebuggerWindowed();
+```
+
+无法打开第二个窗口时（例如原生全屏），`setDebuggerWindowed(true)` 不会做任何事。见 [ModularUIWindow](../modular-ui-window.md)。
+
+### 选择要检查的 UI { #choose-what-to-inspect }
+
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+屏幕上同时有多个 UI 时，使用调试器的目标选择器来选择要检查哪一个：游戏窗口中的 UI、独立窗口中的 UI（例如浮动的编辑器 View），或者嵌入在两者之中的 UI。元素轮廓会绘制在被检查 UI 所在的窗口中。
+
+自 2.2.42 起，绘制在另一个 UI 元素内部、并通过 `ModularUI#embedIn(host, name)` 注册的 UI，会以 `Outer / Name` 的形式出现在选择器中。焦点在 `host` 内部时按调试键，会在嵌入的 UI 上打开调试器。UI 编辑器的 [模拟](../editor.md#debug-the-simulation) 就使用了这一机制。

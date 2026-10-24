@@ -54,7 +54,7 @@ flowchart TD
 
 [Type Handles](./type-handles.md) covers `TypeHandle`, built-in types, custom type registration, constants, default values, icons, colors, and configurators.
 
-[GraphView](./graph-view.md) covers the low-level graph UI used by `GraphEditorView`.
+[GraphView](./graph-view.md) covers the low-level graph UI used by `GraphEditorView`, including shortcuts, snapping, wire styles, auto layout, reroute points, and read-only views.
 
 [Editor Resources](./editor-resources.md) covers `GraphResource`, `GraphEditorView`, save callbacks, and resource-panel editing.
 

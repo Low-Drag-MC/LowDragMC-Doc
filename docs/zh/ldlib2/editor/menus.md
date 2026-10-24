@@ -16,10 +16,17 @@ Editor 菜单基于 `MenuTab` 构建。
 
 * New
 * Open
+* Recent Projects
 * Save
 * Save As
 * Settings
 * Exit
+
+每一项都会显示它在 [keymap](./keymap.md) 中当前绑定的 chord。
+
+**Recent Projects** 按时间倒序列出最近打开的项目文件，点击即可直接打开。文件已不存在的项目不会列出，分支末尾有一个清空列表的菜单项。**Settings → Behavior → Recent Projects To Remember** 控制列出的数量；设为 `0` 时隐藏该分支。
+
+<VersionBadge version="2.2.40" label="Changed" icon="tag" /> 列表只包含在当前 Editor 的 `FileMenu` 上注册过的项目类型的项目。2.2.40 之前，所有 Editor 共用一个列表。
 
 在 Editor 中注册项目类型：
 
@@ -122,5 +129,14 @@ subscription.unsubscribe();
 * `leaf(icon, name, action)` 添加带图标命令。
 * `branch(name, builder)` 添加子菜单。
 * `crossLine()` 添加分隔线。
+* `disabledLeaf(name)` / `disabledLeaf(icon, name)` 添加一个变暗显示、无法选择的菜单项，点击它不会关闭菜单。<VersionBadge version="2.2.42" label="自" icon="tag" />
+
+当隐藏某一项会让用户不知道该操作存在、而它只是在此处不可用时，使用 `disabledLeaf`。
 
 菜单项名称是翻译 key。和 View name、ProjectType name 一样，保持稳定。
+
+不要把快捷键写进菜单翻译。使用 `Keymap#menuLabel(actionId, translationKey)` 在名称后追加用户绑定的 chord：
+
+```java
+menu.leaf(Icons.PLAY, editor.getKeymap().menuLabel(MyIds.RUN_PREVIEW, "shop.menu.run_preview"), this::runPreview);
+```

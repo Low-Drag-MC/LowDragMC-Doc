@@ -68,6 +68,12 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 2. 选择或创建一个**资源提供器**。
 3. 右键创建一个 **UI 模板**，然后双击进入编辑模式。
 
+::: info 内置模板
+<VersionBadge version="2.2.38" label="自" icon="tag" />
+
+内置 provider 中的模板以只读方式打开，标签页标题以 `(read-only)` 结尾。要修改它，右键 → **Copy Resource To**，选择一个可写的资源提供器和名称，然后编辑副本。见 [Providers and Paths](../editor/resources/providers.md#built-in-provider)。
+:::
+
 ### 编辑你的模板
 
 打开 UI 模板后，你将看到如下编辑器界面：
@@ -81,7 +87,8 @@ UI 编辑器支持两种通过可视化方式创建 UI 的方法：
 
 2. **UI 树**  
    显示完整的 UI 层级结构。  
-   你可以通过右键菜单创建或删除组件，多选元素，或拖拽以重新排序层级。
+   你可以通过右键菜单创建或删除组件，多选元素，或拖拽以重新排序层级。  
+   自 2.2.42 起，添加、删除、粘贴和移动元素都可以像属性修改一样撤销和重做。
 
 3. **元素配置器**  
    显示当前选中元素的可配置属性。
@@ -182,3 +189,20 @@ public static void onUICreated(UITemplate.CreateUI event) {
 <figure>
 <img src="./assets/editor_simulation.png" alt="编辑器外观" width="100%">
 </figure>
+
+### 调试模拟中的 UI { #debug-the-simulation }
+
+<VersionBadge version="2.2.42" label="自" icon="tag" />
+
+运行中的模拟可以用 [UI 调试器](./preliminary/modularui.md#debug-your-ui) 检查：
+
+* 点击进入模拟区域后按 **`F3`**：调试器会打开在模拟的 UI 上，而不是外面的编辑器上；或者
+* 在编辑器上打开调试器，然后在目标选择器中选择 **Game Window / Simulation**。如果编辑器在独立窗口中，该项以那个窗口的标题开头。
+
+模拟是绘制在编辑器内部的一个独立 `ModularUI`。它通过 `ModularUI#embedIn(host, name)` 注册自己，调试器因此能找到它。你自己绘制在另一个 UI 元素内部的 UI 也可以调用同一个方法：
+
+```java
+embeddedUI.embedIn(hostElement, "Preview");
+```
+
+之后焦点在 `hostElement` 内部时按 `F3` 会以嵌入的 UI 为目标，目标选择器会把它列在外层 UI 之下，例如 `Game Window / Preview`。嵌入的 UI 被移除时，注册也会随之移除。

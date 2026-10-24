@@ -52,7 +52,7 @@ Built-in handles live in `TypeHandles`.
 | `FLOAT`, `DOUBLE`, `INT`, `LONG` | Numeric values. |
 | `STRING` | Text values. |
 | `COLOR` | Integer color with color configurator. |
-| `DIRECTION` | Minecraft direction. |
+| `DIRECTION` | Minecraft direction. Has no default value, so it is not offered as a constant node by default. |
 | `BLOCK`, `ITEM`, `FLUID` | Minecraft registry values. |
 | `ENTITY_TYPE` | Entity type values. |
 | `ITEM_STACK`, `FLUID_STACK` | Stack values. |
@@ -77,6 +77,10 @@ TypeHandleHelpers.setCustomColor(profileType, 0xFFFFAA33);
 TypeHandleHelpers.setCustomIcon(profileType, MyIcons.DAMAGE);
 TypeHandleHelpers.setCustomDefaultValue(profileType, DamageProfile::empty);
 ```
+
+::: warning
+Since 2.2.41, the default value also decides whether the item library offers a constant node of the type. `TypeHandleHelpers.canAuthorLiteral(handle)` is true only when a default value is registered. Without one, the type can still be used by ports and variables, but it has no constant node unless the graph lists it in `getLibrarySupportTypes()`. See [Supported Types](./graph-definition.md#supported-types).
+:::
 
 Use `setCustomColorAndIcon(...)` when both should be set together:
 
@@ -157,4 +161,4 @@ public @Nullable List<TypeHandle> getVariableSupportTypes() {
 }
 ```
 
-`getSupportTypes()` is the base list. `getLibrarySupportTypes()` controls constant nodes in the item library. `getVariableSupportTypes()` controls blackboard variable choices.
+`getSupportTypes()` is the base list. `getLibrarySupportTypes()` controls constant nodes in the item library; when it returns `null`, the item library uses the base types that have a default value. `getVariableSupportTypes()` controls blackboard variable choices.

@@ -208,6 +208,7 @@ scroller.bind(DataBindingBuilder.floatVal(
 | `setScrollBarSize(float)` | `Scroller` | Sets the scroll bar thumb size (0–100 %). |
 | `scrollerStyle(Consumer&lt;ScrollerStyle&gt;)` | `Scroller` | Configures style fluently. |
 | `getNormalizedValue()` | `float` | Returns the current value normalized to `[0, 1]`. |
+| `scrollByWheel(double)` | `void` | Scrolls one `scroll-delta` step in the direction a raw wheel delta implies; does nothing for `0`. Use it when your own wheel handler decides which wheel axis drives the scroller (since 2.2.38). |
 | `headButton(Consumer&lt;Button&gt;)` | `Scroller` | Configures the head arrow button. |
 | `tailButton(Consumer&lt;Button&gt;)` | `Scroller` | Configures the tail arrow button. |
 | `scrollContainer(Consumer&lt;UIElement&gt;)` | `Scroller` | Configures the track element. |

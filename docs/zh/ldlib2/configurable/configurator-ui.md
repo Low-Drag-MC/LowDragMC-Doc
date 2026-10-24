@@ -231,3 +231,32 @@ configurator
 ```
 
 这对颜色、向量、贴图和渲染器设置这类会被重复使用的数据很有用。
+
+## 右键菜单与覆盖标记
+<VersionBadge version="2.2.42" label="自" icon="tag" />
+
+这组 API 让持有整棵 configurator 树的编辑器给行打标记、往行上加操作。例如一个类似 prefab 的 inspector：标出哪些值与模板不同，并提供「还原为模板值」。
+
+| 方法 | 描述 |
+| --- | --- |
+| `getSourceField()` | 这一行编辑的 `Field`。由 `ConfiguratorParser` 生成的行，以及 `subConfigurable` 字段对应的 group 上有值；手动创建的行为 `null`。 |
+| `addMenuContributor(BiConsumer<Configurator, TreeBuilder.Menu>)` | 往这个 configurator **及其下所有 configurator** 的右键菜单里追加条目，排在该行自身的复制/粘贴条目之后。回调参数是被点击的那一行。 |
+| `setOverridden(boolean)` / `isOverridden()` | 把这一行画成「已覆盖」：一条蓝色竖条（`Configurator.OVERRIDDEN_COLOR`，`0xFF4A9EFF`）加粗体标签。只负责外观；什么算覆盖由你决定。`getLabel()` 仍返回原始标签。 |
+
+```java
+ConfiguratorGroup root = new ConfiguratorGroup("Properties", false);
+ConfiguratorParser.createConfigurators(root, instance);
+
+root.addMenuContributor((row, menu) -> {
+    var field = row.getSourceField();
+    if (field == null) return;
+    var key = PersistedParser.persistedKey(field); // 字段不保存时为 null
+    if (key != null && template.contains(key)) {
+        menu.leaf("Revert to template", () -> revert(key));
+    }
+});
+```
+
+打开了菜单的行会阻止右键继续传到父 group，所以一次点击只弹出一个菜单，菜单里包含该行外层所有 group 贡献的条目。
+
+要在保存的数据里找到某一行的值，可以用 `PersistedParser.persistedKey(Field)`（字段保存时用的键，不保存则为 `null`）和 `PersistedParser.isPersistedFlat(Field)`（子对象是否把值直接写进所属对象，而不是写在自己的键下）。

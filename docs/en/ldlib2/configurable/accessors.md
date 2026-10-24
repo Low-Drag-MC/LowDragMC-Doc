@@ -20,7 +20,7 @@ Built-in support:
 | Boolean | `boolean`, `Boolean` | Uses a toggle. |
 | Numbers | `int`, `long`, `float`, `double`, `short`, `byte` and boxed types | Supports `@ConfigNumber`, `@DefaultValue`, and `@ConfigColor`. |
 | String | `String`, `String[]` | `String[]` is edited as multiple string rows. |
-| Enum | any enum type | Supports `@ConfigSelector`; `StringRepresentable` names are used when available. |
+| Enum | any enum type | Supports `@ConfigSelector`. Entries use the `<enum class>.<CONSTANT>` translation key when it exists (since 2.2.42), otherwise the `StringRepresentable` name or `name()`. See [Translating enum entries](./annotations.md#translating-enum-entries). |
 | Text | `Component` | Component text configurator. |
 | Minecraft registry values | `Block`, `Item`, `Fluid`, `EntityType&lt;?&gt;` | Usually backed by registry search/selector UI. |
 | Resource IDs | `ResourceLocation` | Supports `@ConfigRL` for font and tag-key modes. |

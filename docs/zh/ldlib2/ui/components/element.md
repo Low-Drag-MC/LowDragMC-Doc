@@ -1368,7 +1368,7 @@ element {
 ::: info
 #### <p style="font-size: 1rem;" id="clip">clip</p>
 
-<VersionBadge version="mc26.1" label="Since" icon="tag" />
+<VersionBadge version="mc26.1" label="自" icon="tag" />
 
 控制元素子树是否被裁剪，以及以何种方式裁剪。`clip` 用于替代旧的 1.21 `overflow` / `overflow-clip` API。除 `NONE` 以外的所有模式也会阻止元素内容边界外的命中测试。
 
@@ -1426,7 +1426,7 @@ element.animated-mask {
 ::: info
 #### <p style="font-size: 1rem;" id="mask">mask</p>
 
-<VersionBadge version="mc26.1" label="Since" icon="tag" />
+<VersionBadge version="mc26.1" label="自" icon="tag" />
 
 定义 `clip: mask` 和 `clip: dynamic-mask` 使用的纹理。遮罩会绘制在元素边界上，并使用采样得到的遮罩系数乘到已渲染子树的颜色和 alpha 上。
 

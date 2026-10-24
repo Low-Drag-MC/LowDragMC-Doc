@@ -254,7 +254,7 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 | HUD 覆盖层 | [HUD](./hud.md) | `docs/ldlib2/ui/hud.md` |
 | 原生工具窗口 | [ModularUIWindow](./modular-ui-window.md) | `docs/ldlib2/ui/modular-ui-window.md` |
 | 平滑字体 | [字体](./fonts.md) | `docs/ldlib2/ui/fonts.md` |
-| UI 自动化 | [UI 测试框架](./testing.md) | `docs/ldlib2/ui/testing.md` |
+| UI 自动化 | [UI 测试框架](./testing/index.md) | `docs/ldlib2/ui/testing/index.md` |
 | XEI（JEI/REI/EMI） | [XEI](./xei_support.md) | `docs/ldlib2/ui/xei_support.md` |
 | XML UI | [XML](./xml.md) | `docs/ldlib2/ui/xml.md` |
 | Kotlin DSL | [Kotlin](./kotlin_support.md) | `docs/ldlib2/ui/kotlin_support.md` |
@@ -325,5 +325,5 @@ Kotlin：`label { bindS2C({ Component.literal(serverData) }) }`
 - [ ] **工厂已注册**：Menu UI 需要工厂注册（方块/物品/玩家）或手动 MenuType
 - [ ] **KubeJS 脚本放置位置**：`LDLib2UI.*` 处理器必须在两侧运行 —— 建议放在 `startup_scripts/`
 - [ ] **XML 文件** 放在 `assets/&lt;modid&gt;/ui/` 下并通过 `ResourceLocation` 加载
-- [ ] **样式表已应用**：使用 `StylesheetManager.GDP`、`.MC` 或 `.MODERN` 作为内置主题，或提供自定义 LSS
+- [ ] **样式表已应用**：使用 `StylesheetManager.GDP`、`.MC`、`.MODERN`、`.ORE`，或 `.DUSK`/`.CARBON`/`.MINT`/`.PLUM`/`.PAPER`/`.LATTE` 之一作为内置主题，或提供自定义 LSS
 - [ ] **输出格式匹配请求**：完整 UI 返回 `ModularUI`，可复用组件返回 `UIElement`

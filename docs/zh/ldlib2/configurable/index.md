@@ -235,3 +235,7 @@ flowchart LR
 如果属性面板主要是普通字段，给字段加注解并让 `ConfiguratorParser` 构建 UI。如果面板需要自定义布局、条件行或者特殊控件，重写 `buildConfigurator(...)` 并手动添加 configurators。
 
 `@Configurable` 字段默认会持久化。`PersistedParser` 会像处理 `@Persisted` 字段一样处理它们，除非使用 `@Configurable(persisted = false)`。序列化部分见 [PersistedParser](../sync/PersistedParser.md)。
+
+::: warning 配置器仅限客户端
+配置器是编辑用的 UI，不会同步。accessor 注册表（`ldlib2:configurator_accessor`）只存在于客户端，因此在专用服务端调用 `buildConfigurator(...)` 或 `createDirectConfigurator()` 会失败。注解本身可以放在双端共用的类上：`@Configurable` 字段在两端仍会正常持久化。
+:::

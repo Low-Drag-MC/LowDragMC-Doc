@@ -254,7 +254,7 @@ Use this table to find detailed documentation by need.
 | HUD Overlays | [HUD](./hud.md) | `docs/ldlib2/ui/hud.md` |
 | Native tool windows | [ModularUIWindow](./modular-ui-window.md) | `docs/ldlib2/ui/modular-ui-window.md` |
 | Smooth fonts | [Fonts](./fonts.md) | `docs/ldlib2/ui/fonts.md` |
-| UI automation | [UI Test Harness](./testing.md) | `docs/ldlib2/ui/testing.md` |
+| UI automation | [UI Test Harness](./testing/index.md) | `docs/ldlib2/ui/testing/index.md` |
 | XEI (JEI/REI/EMI) | [XEI](./xei_support.md) | `docs/ldlib2/ui/xei_support.md` |
 | XML UI | [XML](./xml.md) | `docs/ldlib2/ui/xml.md` |
 | Kotlin DSL | [Kotlin](./kotlin_support.md) | `docs/ldlib2/ui/kotlin_support.md` |
@@ -325,5 +325,5 @@ Before returning code to the user, verify:
 - [ ] **Factory is registered**: Menu UIs need a factory registration (Block/Item/Player) or manual MenuType
 - [ ] **KubeJS script placement**: `LDLib2UI.*` handlers must run on both sides — prefer `startup_scripts/`
 - [ ] **XML files** are placed under `assets/&lt;modid&gt;/ui/` and loaded via `ResourceLocation`
-- [ ] **Stylesheet applied**: Use `StylesheetManager.GDP`, `.MC`, or `.MODERN` for built-in themes, or provide custom LSS
+- [ ] **Stylesheet applied**: Use `StylesheetManager.GDP`, `.MC`, `.MODERN`, `.ORE`, or one of `.DUSK`/`.CARBON`/`.MINT`/`.PLUM`/`.PAPER`/`.LATTE` for built-in themes, or provide custom LSS
 - [ ] **Output format matches request**: Return `ModularUI` for full UIs, `UIElement` for reusable components

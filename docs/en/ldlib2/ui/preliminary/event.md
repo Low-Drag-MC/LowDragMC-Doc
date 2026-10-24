@@ -128,7 +128,7 @@ We also provide method allow you to listen events on the `server`. Events are tr
 
 ```java
 root.addServerEventListener(UIEvents.CLICK, e -> {
-    LDLib2.LOGGER.info("Triggered on the server";
+    LDLib2.LOGGER.info("Triggered on the server");
 });
 ```
 
@@ -143,6 +143,20 @@ root.addServerEventListener(UIEvents.CLICK, e => {
 
 </DocTab>
 </DocTabs>
+
+#### Reading server listeners
+<VersionBadge version="2.2.38" label="Since" icon="tag" />
+
+`getServerEventListeners(String eventType, boolean useCapture)` returns the server listeners registered for one event type, or an empty list. Use it to test the server half of an element's behaviour without a client sending the RPC.
+
+```java
+var event = UIEvent.create(UIEvents.CLICK);
+for (var listener : button.getServerEventListeners(UIEvents.CLICK, false)) {
+    listener.handleEvent(event);
+}
+```
+
+The list is read-only. Register listeners with `addServerEventListener(...)`, which also registers the RPC the client needs to reach them.
 
 To remove a listener, call `removeEventListener(...)`.
 Make sure the useCapture flag matches how the listener was registered:
@@ -164,7 +178,7 @@ root.removeEventListener(UIEvents.CLICK, onClick, true);      // remove capture 
 <DocTab title="KubeJS">
 
 ```js
-let onClick = UIEventListener.creatre(e => LDLib2.LOGGER.info("clicked!"));
+let onClick = UIEventListener.create(e => LDLib2.LOGGER.info("clicked!"));
 
 button.addEventListener(UIEvents.CLICK, onClick);       // bubble
 root.addEventListener(UIEvents.CLICK, onClick, true);   // capture
@@ -532,12 +546,12 @@ elem.addEventListener(UIEvents.HOVER_TOOLTIPS, e => {
 ### Command Events
 
 Command events are used to handle high-level UI commands (e.g. copy, paste, select all).
-They follow a validation → execution flow. To claim a command during `validateCommand`, call `UIEvent.stopPropagation()`.
+Call `UIEvent.stopPropagation()` to claim a command during `validateCommand`, and again in `executeCommand` once you have acted on it.
 
 | Event             | Description                     | Capture down | Bubbles up | Support Server |
 | ----------------- | ------------------------------- | ------------ | ---------- | ---------- |
 | `validateCommand` | Fired to check whether an element can handle a command. | ❌ | ❌ | ❌ |
-| `executeCommand`  | Fired when a command is executed on an element.         | ❌ | ❌ | ❌ |
+| `executeCommand`  | Fired when a command is executed on an element. Bubbles since 2.2.42. | ❌ | ✅ | ❌ |
 
 | Field | Description | Supported Event |
 | ----- | ----------- | --------------- |
@@ -553,6 +567,7 @@ They follow a validation → execution flow. To claim a command during `validate
 | `copy` | ctrl + c |
 | `cut` | ctrl + x |
 | `paste` | ctrl + v |
+| `duplicate` | ctrl + d |
 | `select-all` | ctrl + a |
 | `undo` | ctrl + z |
 | `redo` | ctrl + y / ctrl + shift + z |
@@ -560,9 +575,17 @@ They follow a validation → execution flow. To claim a command during `validate
 | `save` | ctrl + s |
 
 
-::: info
-If a command input is detected. A command event will be sent to the `focus` element first (if exists). If it doesn't be consumed, it will be sent to the UI tree elements until an element cconsumes it.
+**Routing**
+<VersionBadge version="2.2.42" label="Changed" icon="triangle-alert" />
+
+- **An element has focus.** `executeCommand` is sent to the focused element and bubbles up through its ancestors. No `validateCommand` is sent. This lets a view handle copy, paste or undo while one of its children has focus.
+- **Nothing has focus.** `validateCommand` walks the UI tree until an element claims it with `stopPropagation()`. That element then receives `executeCommand`, which also bubbles.
+
+::: warning Stop the command once you handle it
+Because `executeCommand` bubbles, an ancestor that also listens for the same command runs it again unless you call `stopPropagation()`. Use the same condition in `executeCommand` as in `validateCommand`. Since 2.2.43, an editor shortcut key is kept from the game only when a handler stopped or claimed the command, not when a listener merely heard it.
 :::
+
+To run a command from code exactly as its key chord would, call `ModularUI#dispatchCommand(String)` (client only). It returns `true` if a handler stopped or claimed the command.
 
 **Usage**
 
@@ -571,15 +594,17 @@ If a command input is detected. A command event will be sent to the `focus` elem
 
 ```java
 elem.addEventListener(UIEvents.VALIDATE_COMMAND, e -> {
-    if (CommandEvents.COPY.equals(event.command)) {
-        // notify cosnuming
-        event.stopPropagation();
+    if (CommandEvents.COPY.equals(e.command)) {
+        // claim the command
+        e.stopPropagation();
     }
 });
 
 elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
-    if (CommandEvents.COPY.equals(event.command)) {
-        ClipboardManager.copyDirect("data");
+    if (CommandEvents.COPY.equals(e.command)) {
+        ClipboardManager.INSTANCE.copyDirect("data");
+        // handled: don't let ancestors run it again
+        e.stopPropagation();
     }
 });
 ```
@@ -589,15 +614,17 @@ elem.addEventListener(UIEvents.EXECUTE_COMMAND, e -> {
 
 ```js
 elem.addEventListener(UIEvents.VALIDATE_COMMAND, e => {
-    if (CommandEvents.COPY == event.command) {
-        // notify cosnuming
-        event.stopPropagation();
+    if (CommandEvents.COPY == e.command) {
+        // claim the command
+        e.stopPropagation();
     }
 });
 
 elem.addEventListener(UIEvents.EXECUTE_COMMAND, e => {
-    if (CommandEvents.COPY == event.command) {
-        ClipboardManager.copyDirect("data");
+    if (CommandEvents.COPY == e.command) {
+        ClipboardManager.INSTANCE.copyDirect("data");
+        // handled: don't let ancestors run it again
+        e.stopPropagation();
     }
 });
 ```

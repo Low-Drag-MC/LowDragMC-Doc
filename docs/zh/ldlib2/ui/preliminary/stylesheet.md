@@ -239,6 +239,20 @@ selector {
 
 当你定义一个样式表时，你可以将其应用到 UI 树。选择器根据 LSS 匹配元素以确定哪些属性适用。如果选择器匹配一个元素，则样式声明适用于该元素。
 
+**枚举值**
+<VersionBadge version="2.2.41" label="自" icon="tag" />
+
+枚举类型的属性值不区分大小写，也接受 kebab-case。匹配时会忽略 `-`、`_` 和空格，所以 `hover-roll`、`HOVER_ROLL` 和 `hoverRoll` 都表示 `TextWrap.HOVER_ROLL`。
+
+```css
+label {
+    text-wrap: hover-roll;
+    justify-content: space-between;
+}
+```
+
+无法识别的值会在日志里输出一条警告，列出所有可用的值。2.2.41 之前，`space-between` 这类 kebab-case 写法会被静默忽略。
+
 例如，以下规则匹配任何 `Button` 对象：
 ```css
 button {
@@ -488,10 +502,20 @@ panel.addLocalStylesheet(`
 </DocTab>
 </DocTabs>
 
-### 内置样式表
+### 内置样式表 { #builtin-stylesheets }
 
-LDLib2 提供了三个内置样式表 `gdp`、`mc` 和 `modern`，允许你灵活地切换主题。
-使用 LDLib2 组件时，`gdp` 是默认样式表。
+LDLib2 提供了以下内置样式表，方便你灵活切换主题：
+
+| 主题 | 常量 | 描述 |
+| --- | --- | --- |
+| `gdp` | `StylesheetManager.GDP` | LDLib2 组件的默认样式表。 |
+| `mc` | `StylesheetManager.MC` | 原版 Minecraft 外观。 |
+| `modern` | `StylesheetManager.MODERN` | 扁平的现代外观。 |
+| `ore` | `StylesheetManager.ORE` | 内置编辑器的外观。 |
+| `dusk`、`carbon`、`mint`、`plum` | `StylesheetManager.DUSK`、`CARBON`、`MINT`、`PLUM` | 同一套设计的深色配色（自 2.2.39）。 |
+| `paper`、`latte` | `StylesheetManager.PAPER`、`LATTE` | 同一套设计的浅色配色（自 2.2.39）。 |
+
+每个常量都指向 `ldlib2:lss/<name>.lss`。每个主题还有一个 `*_MERGED` 常量（例如 `DUSK_MERGED`），用于取得[合并](#merged-stylesheets)后的结果。
 
 你可以使用 `StylesheetManager` 来访问所有已注册的样式表。
 
@@ -520,7 +544,7 @@ function createModularUI() {
 </DocTab>
 </DocTabs>
 
-所有三种内置样式表如下所示：
+`gdp`、`mc` 和 `modern` 样式表：
 
 <figure>
 <img src="../assets/gdp_style.png" alt="size">
@@ -536,6 +560,43 @@ MC
 MODERN
 </figcaption>
 </figure>
+
+`ore` 编辑器主题：
+
+<figure>
+<img src="/assets/ldlib2/themes/ore.png" alt="使用 ore 主题的组件">
+<figcaption>
+ORE
+</figcaption>
+</figure>
+
+#### 同一设计的主题 { #shared-design-themes }
+<VersionBadge version="2.2.39" label="自" icon="tag" />
+
+`dusk`、`carbon`、`mint`、`plum`、`paper` 和 `latte` 是同一套设计的六种配色：四种深色（`dusk` 蓝灰、`carbon` 石墨、`mint` 绿、`plum` 紫）和两种浅色（`paper` 冷色、`latte` 暖色）。它们共用所有选择器，所以在其中一个主题里设置好的组件在六个主题里都有样式。可以把它们作为亮色/暗色选项提供给玩家，而不是当作六套互不相关的外观。
+
+```java
+var theme = StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.DUSK);
+```
+
+<figure>
+<img src="/assets/ldlib2/themes/dusk.png" alt="使用 dusk 主题的组件">
+<figcaption>DUSK</figcaption>
+<img src="/assets/ldlib2/themes/carbon.png" alt="使用 carbon 主题的组件">
+<figcaption>CARBON</figcaption>
+<img src="/assets/ldlib2/themes/mint.png" alt="使用 mint 主题的组件">
+<figcaption>MINT</figcaption>
+<img src="/assets/ldlib2/themes/plum.png" alt="使用 plum 主题的组件">
+<figcaption>PLUM</figcaption>
+<img src="/assets/ldlib2/themes/paper.png" alt="使用 paper 主题的组件">
+<figcaption>PAPER</figcaption>
+<img src="/assets/ldlib2/themes/latte.png" alt="使用 latte 主题的组件">
+<figcaption>LATTE</figcaption>
+</figure>
+
+::: warning 圆角顺序
+这些主题里的 `sdf(...)` 圆角按 1.21 的顺序书写：左下、右下、右上、左上。复制其中的数值之前请先看 [SDF Rect](../textures/sdf-rect.md)。
+:::
 
 ### 来自资源包的样式表
 
@@ -575,9 +636,9 @@ StylesheetManager.INSTANCE.getStylesheetSafe(
 </DocTab>
 </DocTabs>
 
-## 合并样式表
+## 合并样式表 { #merged-stylesheets }
 
-<VersionBadge version="2.2.12" label="Since" icon="tag" />
+<VersionBadge version="2.2.12" label="自" icon="tag" />
 
 路径相同的 `namespace:lss/path.lss` 样式表会被合并。先合并内置样式，再合并资源包样式，因此资源包可以扩展或覆盖内置主题，而不必替换整个文件。使用不带 `.lss` 的路径取得合并结果：
 
@@ -586,4 +647,4 @@ var theme = StylesheetManager.INSTANCE.getStylesheetSafe(
         ResourceLocation.parse("ldlib2:lss/ore"));
 ```
 
-LDLib2 提供 `mc`、`modern`、`gdp` 和 `ore` 主题；`ore` 样式表用于内置编辑器外观。
+所有[内置主题](#builtin-stylesheets)都可以这样获取，例如 `ldlib2:lss/dusk` 或 `StylesheetManager.DUSK_MERGED`。`ore` 样式表用于内置编辑器外观。

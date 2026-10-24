@@ -110,6 +110,39 @@ Variable node 和子图端口是不同的：
 * variable node 在图内部使用，
 * 暴露的变量声明会在面向父图的子图节点上生成端口。
 
+## 拖放时选择 Get/Set
+
+<VersionBadge version="2.2.41" label="自" icon="tag" />
+
+把变量从 Blackboard 拖到画布上，会创建一个读取该变量的 variable node。如果图还提供了写入变量的节点，可以改为弹出 **Get / Set** 菜单。
+
+只有同时满足以下条件时才会弹出菜单：
+
+* 只拖入了一个变量，
+* 放在画布空白处，而不是端口上，
+* `GraphModel.createVariableSetterItem(variable)` 返回非 null。
+
+其他情况仍然和以前一样，直接创建 getter。
+
+`createVariableSetterItem` 位于 `GraphModel` 上，而不是 `Graph` 上。需要在自定义图模型中覆盖它，并从 `Graph.createGraphModel()` 返回这个模型：
+
+```java
+public class MyGraph extends Graph {
+    @Override
+    protected CustomGraphModelImpl createGraphModel() {
+        return new CustomGraphModelImpl(this) {
+            @Override
+            public @Nullable NodeModelLibraryItem createVariableSetterItem(VariableDeclarationModelBase variable) {
+                return new NodeModelLibraryItem("set_variable",
+                        data -> createSetVariableNode(data, variable));
+            }
+        };
+    }
+}
+```
+
+`createSetVariableNode(...)` 代表你自己的代码：创建写入节点，并记录它写入哪个变量。两个菜单项都走普通的创建节点命令，因此任一选择都可以撤销。
+
 ## 支持的变量类型
 
 `Graph.getVariableSupportTypes()` 控制 Blackboard 和变量 Inspector 中出现哪些类型。

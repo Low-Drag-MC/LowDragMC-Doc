@@ -25,6 +25,9 @@
 | Context node | 拥有有序 block node 列表的节点。 |
 | Block node | 位于 context node 内部，而不是直接位于图画布上的节点。 |
 | Wire portal | 用于通过命名 entry/exit 点路由连线的紧凑节点对。 |
+| Reroute point（中继点） | `WireReroutePointModel`。连线经过的一个点，只改变走线，不改变连线的端口。见 [连线中继点](./graph-view.md#wire-reroute-points)。 |
+| Wire route style（连线样式） | `WireRouteStyle`。graph view 中所有连线的画法：默认、曲线、八向、正交或直线。见 [连线样式](./graph-view.md#wire-styles)。 |
+| Auto layout（自动布局） | 右键菜单命令，用 `GraphLayoutAlgorithm` 排列选区或整张图。见 [自动布局](./graph-view.md#auto-layout)。 |
 | Placemat | 用于可视化分组图元素的可调整大小画布区域。 |
 | Sticky note | 放在图画布上的注释元素。 |
 | Capability | 图元素模型上的标记，用于控制删除、移动、复制、重命名、着色、折叠或调整大小等操作。 |

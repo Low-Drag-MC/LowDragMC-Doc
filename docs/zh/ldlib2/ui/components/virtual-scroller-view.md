@@ -1,6 +1,6 @@
 # VirtualScrollerView
 
-<VersionBadge version="2.2.18" label="Since" icon="tag" />
+<VersionBadge version="2.2.18" label="自" icon="tag" />
 
 `VirtualScrollerView<T>` 是只挂载视口附近行的可滚动列表。普通 `ScrollerView` 会创建过多 UI 元素时，应使用它处理长列表。
 

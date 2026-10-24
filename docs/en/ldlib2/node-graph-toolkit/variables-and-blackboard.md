@@ -110,6 +110,39 @@ Variable nodes are separate from subgraph ports:
 * variable nodes are used inside the graph,
 * exposed variable declarations generate ports on the parent-facing subgraph node.
 
+## Get/Set on Drop
+
+<VersionBadge version="2.2.41" label="Since" icon="tag" />
+
+Dragging a variable from the blackboard onto the canvas creates a variable node that reads it. A graph that also has a node for writing variables can offer a **Get / Set** menu instead.
+
+The menu appears only when:
+
+* exactly one variable is dropped,
+* it is dropped on empty canvas, not on a port,
+* `GraphModel.createVariableSetterItem(variable)` returns a non-null item.
+
+In every other case the drop creates a getter, as before.
+
+`createVariableSetterItem` lives on `GraphModel`, not on `Graph`. Override it in a custom graph model and return that model from `Graph.createGraphModel()`:
+
+```java
+public class MyGraph extends Graph {
+    @Override
+    protected CustomGraphModelImpl createGraphModel() {
+        return new CustomGraphModelImpl(this) {
+            @Override
+            public @Nullable NodeModelLibraryItem createVariableSetterItem(VariableDeclarationModelBase variable) {
+                return new NodeModelLibraryItem("set_variable",
+                        data -> createSetVariableNode(data, variable));
+            }
+        };
+    }
+}
+```
+
+`createSetVariableNode(...)` stands for your own code that creates the writer node and records which variable it writes. Both menu entries go through the normal create-node command, so either choice can be undone.
+
 ## Supported Variable Types
 
 `Graph.getVariableSupportTypes()` controls which types appear in the blackboard and variable inspector.

@@ -111,6 +111,20 @@ private void buildModeOptions(Mode mode, ConfiguratorGroup group) {
 }
 ```
 
+### Translating enum entries
+<VersionBadge version="2.2.42" label="Since" icon="tag" />
+
+Each selector entry is shown through the translation key `<enum class>.<CONSTANT>`, where the class part is `Class#getName()`. A nested enum therefore has a `$` in its key.
+
+```json
+{
+  "com.example.Machine$Mode.BASIC": "Basic",
+  "com.example.Machine$Mode.ADVANCED": "Advanced"
+}
+```
+
+When the language file has no such key, the entry falls back to `getSerializedName()` for a `StringRepresentable` enum, or `name()` otherwise, and that name is still read as a translation key. `candidate` in `@ConfigSelector` always matches these untranslated names.
+
 ## Lists And Arrays
 
 Arrays and collections are displayed with `ArrayConfiguratorGroup`. `@ConfigList` controls add, remove, reorder, default element creation, and custom element UI.

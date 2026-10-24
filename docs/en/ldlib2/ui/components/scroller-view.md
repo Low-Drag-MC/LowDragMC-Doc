@@ -94,6 +94,8 @@ Which scroll axes are enabled. Values: `HORIZONTAL`, `VERTICAL`, `BOTH`.
 
 Default: `BOTH`
 
+In `BOTH` mode, holding <kbd>Shift</kbd> swaps the mouse wheel axes, so a vertical wheel scrolls horizontally (since 2.2.38). `VERTICAL` and `HORIZONTAL` modes are not affected.
+
 <DocTabs>
 <DocTab title="Java">
 
