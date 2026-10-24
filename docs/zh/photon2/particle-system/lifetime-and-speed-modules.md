@@ -12,13 +12,17 @@ Lifetime 模块使用归一化粒子 age 采样。Speed 模块先通过配置范
 | --- | --- | --- |
 | Color over Lifetime | 归一化 age | 使用 Gradient 或 Color Function 乘到粒子颜色/alpha。 |
 | Size over Lifetime | 归一化 age | 缩放 X/Y/Z Size。 |
-| Rotation over Lifetime | 归一化 age | 添加 roll、pitch、yaw。 |
+| Rotation over Lifetime | 归一化 age | 绕 Space 选定的坐标轴添加 roll、pitch、yaw。 |
 | Velocity over Lifetime | 归一化 age | 添加 linear/orbital/radial velocity 和 speed modification。 |
 | Force over Lifetime | 归一化 age | 把 acceleration 积分到 velocity。 |
 | Color by Speed | 重映射速度 | 根据移动速度乘到颜色。 |
 | Size by Speed | 重映射速度 | 根据速度缩放 Size。 |
 | Rotation by Speed | 重映射速度 | 根据速度添加 Rotation。 |
 | Lifetime by Emitter Speed | Emitter speed | 调整生成时分配的 Lifetime。 |
+| 固定光照（Fixed Light） | 归一化 age | 设置原版天空光和方块光数值。见 [固定光照](./physics-noise-lighting-uv.md#fixed-light)。 |
+| 粒子发光（Light Emission） | 归一化 age | 让一部分粒子成为跟随它们、并随它们淡出的动态光源。见 [粒子发光](../dynamic-lights/lit-particles-and-shaders.md#light-emission)。 |
+
+<VersionBadge version="2.2.8" label="自" icon="tag" /> 粒子发光（Light Emission）。
 
 ## Enable 也是 Runtime Value
 
@@ -32,7 +36,22 @@ By Speed 模块把配置的最小和最大速度映射到 `0..1` 后再采样 Fu
 
 ## Value Space
 
-产生向量的模块可能提供 `ValueSpace`，决定各轴按 Local、World 或其他支持的 basis 解释。它不会改变 Emitter 的 Particle Simulation Space。
+产生向量的模块可能提供 `ValueSpace` 字段，用来选择数值所在的坐标轴：`Local`、`World` 或 `Custom`。它不会改变 Emitter 的 Particle Simulation Space。
+
+<VersionBadge version="2.2.8" label="自" icon="tag" />
+
+选择 `Custom` 后会出现 **自定义空间**（Custom Space）选择器。从层级面板把一个对象拖进去，数值就使用该对象当前的坐标轴。未设置或对象被删除时，`Custom` 使用世界坐标轴。
+
+| 模块 | 字段 | 默认值 | `Local` | `World` 与 `Custom` |
+| --- | --- | --- | --- | --- |
+| 生命周期内受力（Force Over Lifetime） | 模拟空间（Simulation Space） | `Local` | Emitter 的坐标轴。 | 世界坐标轴，或对象的坐标轴。 |
+| 生命周期内速度（Velocity Over Lifetime） | 坐标系（Space） | `Local` | Emitter 的坐标轴。 | 世界坐标轴，或对象的坐标轴。使用 `Custom` 时，Orbital 和 Radial 的中心点移到该对象的原点。 |
+| 生命周期内旋转（Rotation Over Lifetime） | 坐标系（Space，2.2.8 新增） | `Local` | 粒子自身的坐标轴，与 2.2.8 之前一致。 | 绕世界坐标轴或对象的坐标轴旋转。只对 Model、Horizontal、Vertical 和 None 渲染模式生效。 |
+| AraTrail 物理（Physics） | 重力坐标系（Gravity Space，2.2.8 新增） | `World` | Emitter 的坐标轴。 | 世界坐标轴，或对象的坐标轴。 |
+
+- 使用 Billboard 类渲染模式时，生命周期内旋转的坐标系请保持 `Local`。
+- 2.2.8 之前保存的 AraTrail 文件会根据 Trail 的空间映射重力坐标系，因此外观不变。
+- 子发射器的继承旋转（Inherit Rotation）会忽略 `World` 或 `Custom` 坐标系下的生命周期内旋转。
 
 ## 模块组合
 

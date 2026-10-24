@@ -28,11 +28,31 @@ The trail has its own material/renderer path. A Particle Emitter may therefore q
 | Event | Trigger |
 | --- | --- |
 | Birth | Parent particle is created. |
-| Death | Parent particle finishes. |
-| Collision | Parent particle reports a collision. |
+| Death | Parent particle finishes its lifetime, or a collision rule removes it. A collision death carries the contact point. |
+| Collision | Parent particle makes a fresh impact with a solid surface. Resting on a surface does not fire it again. |
+| FirstCollision | Parent particle makes its first impact. |
 | Tick | Repeats at the configured tick interval. |
+| TriggerEnter | Parent particle enters a trigger collider, or an entity in Trigger mode. |
+| TriggerExit | Parent particle leaves a trigger. |
 
-Each entry includes target emitter reference, event, probability, tick interval, and inheritance flags for color, size, rotation, lifetime, and duration.
+<VersionBadge version="2.2.9" label="Since" icon="tag" /> TriggerEnter and TriggerExit.
+
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> Collision fires once per fresh impact. Before 2.2.9 it could fire again on every tick a particle stayed blocked.
+
+Which impacts and collision deaths are reported depends on the emitter's [collision Events options](./collision.md#events) (Min Impact Speed, De-duplicate).
+
+Each entry includes target emitter reference, event, probability, tick interval, and inheritance flags for color, size, rotation, lifetime, and duration. Entries also have contact options for collision, trigger, and death events:
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| Spawn At Contact | on for new entries | Spawn where the particle touched, not at its centre. Entries saved before 2.2.9 keep spawning at the centre. |
+| Align To Normal | off | Turn the spawned effect so its +Y follows the surface normal. |
+| Surface | `Any` | Fire only for contacts with `Blocks`, `Fluids`, `Entities`, or `Colliders`. A Death without a contact never passes a filter other than `Any`. Birth and Tick ignore it. |
+| Surface Blocks | empty | With `Blocks` or `Fluids`: only these blocks, as ids or `#tags`. Empty means any. |
+
+See [Particle Collision](./collision.md#events-and-sub-emitters) for how contacts become events.
 
 ## Search and References
 

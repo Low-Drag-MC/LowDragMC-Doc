@@ -12,19 +12,28 @@ Photon nodes bridge the generic graph compiler to particle instances, scene buff
 
 | Node | Outputs | Graph/stage behavior |
 | --- | --- | --- |
-| Particle Data | position, color, litColor, uv, normal | Particle and function graphs; usable in both stages |
+| Particle Data | position, color, litColor, light, uv, normal | Particle and function graphs; usable in both stages |
 | Additional Data | selected scalar or `vec3` channel | Read in vertex, auto-varying to fragment; unsupported = zero |
-| Custom Data | selected `vec4` stream | Read in vertex, auto-varying; preview/CPU path = zero |
+| Custom Data | selected `vec4` stream | Read in vertex, auto-varying; preview = zero |
 | Viewport | viewport size and screen information | Screen-dependent calculations |
 | Depth Fade | intersection fade | Fragment; needs scene depth |
+| Dynamic Light | `light` (`vec3`) | Fragment only; zero in previews and while dynamic lights are off |
 | World to Screen UV | screen UV from world position | Coordinate conversion |
 | Screen to World | reconstructed world position | Fragment; needs depth/camera matrices |
 
-**Particle Data.position** is camera-relative world position after interpolation. **color** is the authored/runtime particle color; **litColor** includes baked light-map multiplication. Trail UV normally uses the length axis instead of sprite-frame semantics.
+**Particle Data.position** is camera-relative world position after interpolation. **color** is the authored/runtime particle color, before lighting. **litColor** is color × the light map, sampled the way blocks sample it (filtered between levels). <VersionBadge version="2.2.8" label="Since" icon="tag" /> **light** is the light map at the particle, fetched the way vanilla particles fetch it: color × light is exactly a vanilla particle's lighting. Trail UV normally uses the length axis instead of sprite-frame semantics.
+
+On a Particle Emitter, Additional and Custom Data also work without GPU instancing since 2.2.8. Trails, beams and AraTrail need instancing for them; see [Additional GPU Data](./additional-gpu-data.md).
+
+## Dynamic Light
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" />
+
+**Dynamic Light** (group Photon Scene) returns the light Photon's [dynamic lights](../dynamic-lights/index.md) cast on this fragment, as `light` (`vec3`). It takes an optional world-space `normal` (leave it unconnected for billboards) and a `wrap` from 0 to 1. It is fragment-only and works in particle and function graphs. For ports, saturation and a typical setup, see [Dynamic Light Node](../dynamic-lights/lit-particles-and-shaders.md#dynamic-light-node).
 
 ## Additional Data Channels
 
-The node dropdown is generated from `PhotonGpuChannels`, so it stays aligned with the runtime registry. Selecting a channel also marks that stream as required; Shader Graph instancing uploads it without requiring the inspector toggle. See [Additional GPU Data](./additional-gpu-data.md) for meanings and emitter support.
+The node dropdown is generated from `PhotonGpuChannels`, so it stays aligned with the runtime registry. Selecting a channel also marks that stream as required; Photon uploads it without requiring the inspector toggle. See [Additional GPU Data](./additional-gpu-data.md) for meanings and emitter support.
 
 ## Fullscreen Graph Nodes
 

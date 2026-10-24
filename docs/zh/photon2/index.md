@@ -33,8 +33,10 @@ Photon 是一套直接在 Minecraft 客户端内使用的实时 VFX 工具。它
 | --- | --- |
 | 在编辑器中制作第一个效果 | [快速开始](./getting-started.md) |
 | 学习粒子发射器和模块 | [Particle System](./particle-system/) |
+| 在一个效果中复用另一个效果 | [FX 实例](./fx-instances.md) |
 | 编排效果和属性动画 | [Timeline](./timeline/) |
 | 制作材质与 GPU 效果 | [Shader 与 GPU](./shaders-and-gpu/) |
+| 用效果照亮世界 | [动态光照](./dynamic-lights/) |
 | 制作全屏后处理 | [Post Processing](./post-processing/) |
 | 从模组代码加载和控制效果 | [Java API](./java-api/) |
 
@@ -46,8 +48,12 @@ flowchart LR
     P --> R["可复用资源"]
     P --> T["Timeline"]
     H --> E["Particle / Trail / Beam 发射器"]
+    H --> I["FX 实例"]
+    I --> F["其他 .fx 效果"]
+    H --> L["Light 与 Fog Volume"]
+    L --> D["动态光照"]
     R --> M["Material 与 Mesh"]
-    M --> S["Shader Graph 或自定义 Shader"]
+    M --> S["Shader Graph、Kila 材质或自定义 Shader"]
     E --> G["Photon 渲染管线"]
     T --> E
     T --> X["后处理请求"]
@@ -55,25 +61,31 @@ flowchart LR
     S --> G
     Q --> O["最终画面"]
     G --> O
+    D --> O
 ```
 
-导出的 `.fx` 保存对象树和 Timeline。运行时，`FX#createRuntime()` 会创建一个独立的可播放实例。Runtime 将对象交给客户端粒子引擎，并在每帧提交当前生效的后处理 Clip。
+导出的 `.fx` 保存对象树和 Timeline。加载 `.fx` 时，FX 实例会被烘焙成普通对象。运行时，`FX#createRuntime()` 会创建一个独立的可播放实例。Runtime 将对象交给客户端粒子引擎，并在每帧提交当前生效的后处理 Clip。
 
 ## 主要功能
 
-- **粒子制作：** Particle、Trail、Beam 和 AraTrail 发射器，支持曲线、渐变、碰撞、Sub Emitter、UV Animation、自定义 Renderer 和 Simulation Space。
+- **粒子制作：** Particle、Trail、Beam 和 AraTrail 发射器，支持曲线、渐变、Sub Emitter、UV Animation、自定义 Renderer 和 Simulation Space。
+- **碰撞：** 粒子可以与方块、流体表面、实体和 Collider 对象碰撞；Trigger 让粒子穿过，并报告粒子进入和离开。见[粒子碰撞](./particle-system/collision.md)。<VersionBadge version="2.2.9" label="自" icon="tag" />
+- **模型：** 使用 OBJ、JSON 和 glTF / glb 模型制作 Mesh 粒子，包括带动画的 glTF。见 [glTF 模型](./particle-system/gltf-models.md)。<VersionBadge version="2.2.5" label="自" icon="tag" />
+- **动态光照：** 带柔和体素阴影的点光源和聚光灯、体积光、Fog Volume，以及能发光或被照亮的粒子。见[动态光照](./dynamic-lights/)。<VersionBadge version="2.2.8" label="自" icon="tag" />
+- **Kila 材质：** 一体化 VFX 材质，带 27 个预设，可以导出为 Shader Graph。见 [Kila 材质](./shaders-and-gpu/kila-material.md)。<VersionBadge version="2.2.8" label="自" icon="tag" />
+- **FX 实例：** 把一个 `.fx` 放进另一个效果中，只保存改动的部分。见 [FX 实例](./fx-instances.md)。<VersionBadge version="2.2.9" label="自" icon="tag" />
 - **Timeline：** Animation、Activator、Control、Speed、Signal、Audio、Group 和 Post Process Track。
 - **Shader Graph：** 使用节点制作 Vertex/Fragment Shader，读取 Scene 与 Particle 数据，支持函数和实时预览。
 - **GPU Data：** 每个发射器可以声明自定义数据流，并从 Shader Graph 或 GLSL 读取。
 - **后处理：** 使用 Render Graph 组合 Fullscreen Pass，支持权重混合、优先级、自定义 Texture、Mask Group 和 Custom Depth。
 - **分发：** 普通 `.fx` 导出和包含依赖资源的 `.fxpack`。
-- **Java 集成：** 使用内置方块/实体 Executor，或直接控制 `FXRuntime`。
+- **Java 集成：** 使用内置方块/实体 Executor、直接控制 `FXRuntime`，以及在效果首次播放前[预加载](./java-api/preloading.md)。
 
 ## 环境要求
 
 - Minecraft `1.21.1`
 - NeoForge `21.1+`
-- 互相兼容的 Photon `2.2.x` 与 LDLib2
+- Photon `2.2.9` 需要 LDLib2 `2.2.43` 或更高版本。KilaGraph 已打包在 Photon 的 jar 中，无需单独安装。
 - 客户端环境：Photon 的渲染和播放 API 都在客户端运行
 
 ::: warning Photon 1.x

@@ -15,6 +15,12 @@ flowchart TD
     R --> B["BeamEmitter"]
     R --> A["AraTrailEmitter"]
     R --> F["ForceFieldObject"]
+    R --> C["ColliderObject"]
+    R --> L["LightObject / FogVolumeObject"]
+    R --> I["FXInstanceObject"]
+    I --> IS["从另一个 .fx 放置的对象"]
+    F -. External Forces .-> P
+    C -. 碰撞 .-> P
     P --> PC["ParticleRuntime 与模块"]
     PC --> PP["TileParticle / Trail Particle"]
     PP --> RP["Render Pass"]
@@ -31,6 +37,14 @@ flowchart TD
 | Beam Emitter | 在端点之间或 Raycast 方向上渲染 Beam。 |
 | AraTrail Emitter | 模拟带物理运动和分段属性的 Trail。 |
 | Force Field | 通过 External Forces 施加 directional、gravity、drag 和 vortex 影响。 |
+| Collider（碰撞体） | 平面、盒或球，同一 FX 中的粒子会与它碰撞；设为触发器时只报告进出。见 [粒子碰撞](./collision.md#collider-objects)。 |
+| Light（光源） | 点光源或聚光灯形式的动态光源，可开启阴影和体积光。见 [光源与雾](../dynamic-lights/lights-and-fog.md)。 |
+| Fog Volume（雾体积） | 盒形或球形的体积雾。见 [光源与雾](../dynamic-lights/lights-and-fog.md)。 |
+| FX Instance（FX 实例） | 把另一个 `.fx` 放进当前效果，只覆盖不同的部分。见 [FX 实例](../fx-instances.md)。 |
+
+<VersionBadge version="2.2.8" label="自" icon="tag" /> Light 与 Fog Volume 对象。
+
+<VersionBadge version="2.2.9" label="自" icon="tag" /> Collider 与 FX Instance 对象。
 
 ## 推荐阅读顺序
 
@@ -41,6 +55,14 @@ flowchart TD
 5. [Simulation 与 Force](./simulation-and-forces.md)
 6. [Lifetime 与 Speed 模块](./lifetime-and-speed-modules.md)
 7. [Rendering、Material 与 Mesh](./rendering-materials-and-meshes.md)
+
+## 更多主题
+
+- [Physics、Noise、Lighting 与 UV](./physics-noise-lighting-uv.md)
+- [粒子碰撞](./collision.md)：方块、流体、实体、碰撞体对象、触发器和碰撞事件。
+- [Trail 与 Sub Emitter](./trails-and-sub-emitters.md)
+- [glTF 模型](./gltf-models.md)
+- [Trail、Beam 与 AraTrail Emitter](./trail-beam-and-aratrail.md)
 
 ## Runtime 模型
 

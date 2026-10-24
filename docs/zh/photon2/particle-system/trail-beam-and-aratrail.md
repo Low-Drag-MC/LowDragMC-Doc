@@ -24,9 +24,27 @@ Trail Config 包含 duration、looping、delay、time、minimum vertex distance�
 
 Beam Config 包含 duration、looping、delay、width、emission rate 和 color。Raycast Mode 根据 World 确定 Endpoint；Direct Mode 使用配置的 Transform。UV Animation 和 Lighting 与其他 Emitter 共用数据模块。
 
+**射线检测**（Raycast）默认为 `NONE`。`BLOCKS`、`ENTITIES` 和 `BLOCKS_AND_ENTITIES` 会在第一次命中处截短光束；检测方块时，**方块模式**（Block Mode）和 **流体模式**（Fluid Mode）决定射线如何处理方块形状和流体。
+
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> 方块射线检测的命中结果现在与原版射线检测（`clip`）一致。实体模式现在会命中实体；2.2.9 之前从未命中过。实体检测范围会按光束宽度扩大，因此宽光束会停在实体表面。检测会跳过效果的所有者、旁观者和无法被选中的实体。
+
 ## AraTrail Emitter
 
 AraTrail 可以按总长度、总时间和每 Segment 时间控制 Thickness 与 Color。Physics 控制模拟 Chain；Minimum Distance 和 Time Interval 控制 Segment 创建。普通 Trail 直接跟随 Emitter Motion 不够时使用 AraTrail。
+
+**物理**（Physics）组同时作用于 AraTrail Emitter 和 Ara 类型的粒子 Trail。
+
+| 设置 | 默认值 | 含义 |
+| --- | --- | --- |
+| 重力坐标系（Gravity Space） | `World` | 重力所在的坐标轴：`World`、`Local`（Emitter 的坐标轴）或 `Custom`（指定对象的坐标轴）。 |
+| 与方块碰撞（Collide With Blocks） | 关 | 拖尾节点沿方块滑动或被弹开，不再穿过方块，拖尾可以躺在地面上。 |
+| 碰撞半径（Collision Radius） | 0.05 | 拖尾节点与表面保持的距离。 |
+| 碰撞反弹（Collision Bounce） | 0 | 节点撞向表面的速度中被反弹回来的比例。 |
+| 碰撞摩擦（Collision Friction） | 0.5 | 每次接触损失的滑动速度比例。 |
+
+<VersionBadge version="2.2.8" label="自" icon="tag" /> 重力坐标系。之前保存的文件会根据 Trail 的空间映射该值，因此外观不变。同样从 2.2.8 起，拖尾节点平滑移动，不再以 20 Hz 跳动；平滑度（Smoothness）大于 1 时尾部也不再跳变。
+
+<VersionBadge version="2.2.9" label="自" icon="tag" /> 与方块碰撞及其三个设置。拖尾节点只与方块碰撞，不与流体、实体或碰撞体对象碰撞。粒子碰撞见 [粒子碰撞](./collision.md)。
 
 ## Runtime Value
 

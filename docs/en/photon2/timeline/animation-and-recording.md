@@ -17,6 +17,18 @@ Animation Tracks sample typed properties and apply them to an FX object. Transfo
 
 The property menu is built from the target object's `FXObjectType`. It cannot animate an arbitrary reflected field; the field needs a runtime binding with a supported `ConfigValueType`.
 
+### Newer Animatable Properties
+
+These objects and modules gained Timeline properties in recent versions:
+
+| Target | Properties | Since |
+| --- | --- | --- |
+| [Light](../dynamic-lights/lights-and-fog.md) | `color`, `intensity`, `range`, `innerAngle`, `outerAngle`, `sourceRadius`, `flicker`, `castShadows`, `volumetric.enable`, `volumetric.strength` | <VersionBadge version="2.2.8" label="Since" icon="tag" /> |
+| [Fog Volume](../dynamic-lights/lights-and-fog.md) | `density`, `color`, `emission`, `absorption`, `edgeFalloff` | <VersionBadge version="2.2.8" label="Since" icon="tag" /> |
+| Particle Emitter, Light Emission | `lightEmission.enable`, `lightEmission.color`, `lightEmission.intensity`, `lightEmission.range` | <VersionBadge version="2.2.8" label="Since" icon="tag" /> |
+| Particle Emitter, [Collision](../particle-system/collision.md) | `physics.collision.blocks`, `physics.collision.fluids`, `physics.collision.entities`, `physics.collision.colliders`, `physics.collision.response.dampen`, `physics.collision.response.lifetimeLoss` | <VersionBadge version="2.2.9" label="Since" icon="tag" /> |
+| [Collider](../particle-system/collision.md) | `radius`, `trigger`, plus the transform | <VersionBadge version="2.2.9" label="Since" icon="tag" /> |
+
 ## Keys and Sub-Clips
 
 | Item | Use |

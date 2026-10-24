@@ -65,6 +65,8 @@ wiki:dissolve_particle
 所有以 `Sampler` 开头的 sampler 和所有以 `U_` 开头的 uniform 都被视为内置项，不会出现在 Shader Settings 中。只使用[参考页](./custom-shader-builtins.md)列出的名称；自定义参数不要使用这两个前缀。
 :::
 
+<VersionBadge version="2.2.8" label="自" icon="tag" /> 动态光照的 Sampler 和 Uniform（`PhotonLightData`、`PhotonClusterInfo` 等）不带这两个前缀，但同样是内置项。JSON 声明了 `PhotonLightData` 时，Photon 会自动绑定它们，从 Shader Settings 中隐藏它们，也不会把它们随材质保存。完整列表见[动态光照](./custom-shader-builtins.md#dynamic-lights)。
+
 参数值随材质保存。重载 Shader 时，只要名称和类型仍匹配，Photon 会尽量保留已有值；删除或改名的参数需要重新配置。
 
 ## 选择 Shader Graph 还是手写 Shader

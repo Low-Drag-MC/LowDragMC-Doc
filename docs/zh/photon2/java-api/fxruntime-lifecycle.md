@@ -22,6 +22,7 @@
 FXRuntime runtime = fx.createRuntime();
 runtime.emit(executor);          // 或 emit(executor, delayTicks)
 
+// 之后：
 runtime.destroy(false);          // 停止未来工作，残留自然消散
 runtime.destroy(true);           // 立即移除可见残留
 ```
@@ -31,6 +32,25 @@ Emit 会把每个 Object 发送给目标 Particle Host 并重置 Timeline。之�
 <VersionBadge version="2.2.0" label="`emit` 拼写" icon="tag" />
 
 `emmit(...)` 只为源码兼容而保留并已 Deprecated。迁移到 `emit(...)`，二者行为相同。
+
+## 播放速率 {#playback-rate}
+
+<VersionBadge version="2.2.7" label="自" icon="tag" />
+
+```java
+runtime.setRate(0.5f);  // 半速
+runtime.setRate(0f);    // 冻结
+runtime.setRate(1f);    // 正常
+float rate = runtime.getRate();
+```
+
+`setRate` 设置整个播放的速度。小于 `0` 的值按 `0` 处理。
+
+- 速率同时缩放对象的模拟和 Timeline 的主时钟。根对象的时间缩放被设为该速率，所有子孙对象都会继承，因此 Activator、Control、Animation、Signal 和 Audio 片段与粒子保持同步。
+- 大于 `1` 时模拟会分步执行：每 tick `ceil(rate)` 步，最多 16 步。开销随模拟的时长增长。
+- 速率不会保存在特效中。Photon 每 tick 都会重新应用它，所以即使 Control 片段重启了对象树，速率依然有效。
+- 以根对象为目标的 [Speed Track](../timeline/activator-control-and-speed.md#speed-track)在其覆盖的 tick 内优先于该速率。
+- 大于 `1` 时 Timeline 每步前进超过一个 tick，比一步更短的片段可能被跳过；Signal 不会被跳过。
 
 ## 状态查询
 

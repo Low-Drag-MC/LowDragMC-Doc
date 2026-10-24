@@ -50,6 +50,37 @@ public final class OwnedExecutor implements IEffectExecutor {
 
 Store and destroy the runtime you own. Returning a stable `RandomSource` makes repeated authored random functions reproducible where their semantics allow it.
 
+## Owner Entity
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+```java
+@Override
+public Entity owner() {
+    return caster; // the entity this effect belongs to, or null
+}
+```
+
+`owner()` names the entity an effect belongs to. Beam raycasts skip it, and particle collision skips it while the emitter's **Ignore Owner** option is on, so a mob's own effect does not bounce off the mob. The default returns `null`. `EntityEffectExecutor` already returns its entity. Photon calls it on the game thread.
+
+## Collision Events
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+```java
+if (runtime.findObject("sparks") instanceof ParticleEmitter sparks) {
+    ParticleEmitter.CollisionListener listener = (emitter, particle, event) -> {
+        if (event.type() == CollisionEvent.Type.IMPACT && event.target() instanceof Entity hit) {
+            // client side: play a sound, or send your own packet to the server
+        }
+    };
+    sparks.addCollisionListener(listener);
+    // sparks.removeCollisionListener(listener) once you no longer need it
+}
+```
+
+A collision listener receives the contacts of one emitter's particles while collision is on for that emitter: `IMPACT`, `DEATH`, `TRIGGER_ENTER` and `TRIGGER_EXIT`. Listeners run on the game thread at the end of the emitter's tick, and the emitter's de-duplication applies to impacts and deaths. Each runtime has its own copy of the emitter, so add the listener to every runtime you want to hear from. `CollisionEvent` is in `com.lowdragmc.photon.client.collision`; see [Particle Collision](../particle-system/collision.md#events-and-sub-emitters) for its fields and the authoring side.
+
 ## Signals
 
 Signal Track events fire only during live forward playback, not arbitrary editor scrubbing/fast seek. They first call the originating executor's `onTimelineSignal`, then notify global listeners:

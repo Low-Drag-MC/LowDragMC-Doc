@@ -8,6 +8,10 @@
 
 下面制作一个带纹理、与方块交界处柔和消隐的粒子 Shader，并将它应用到发射器。
 
+::: tip 从 Kila 材质开始
+<VersionBadge version="2.2.8" label="自" icon="tag" /> 如果某个 [Kila 材质](./kila-material.md)已经接近想要的效果，可以在 Resources 中右键它，选择 **导出为着色器图**。导出会得到一个暴露了全部参数的 Graph，以及一个渲染状态相同的 Shader Graph Material，可以直接在此基础上扩展。未导出的内容见[导出为着色器图](./kila-material.md#export-as-shader-graph)。
+:::
+
 ## 1. 创建 Graph 和材质
 
 1. 在 **Resources** 中新建 **Shader Graph**，命名为 `soft_particle`。
@@ -16,6 +20,22 @@
 4. 把材质赋给 Particle Emitter 的 Renderer。
 
 Graph 与材质是两个资源：多个材质可以复用同一个 Graph，只覆盖不同纹理、颜色或数值参数。
+
+### 渲染状态
+
+<VersionBadge version="2.2.8" label="自" icon="tag" />
+
+Shader Graph Material 默认把混合、剔除和深度交给 Renderer 的材质槽位。要让材质自己携带这些设置，打开材质的 **渲染状态** 分组（位于着色器图相关行与 **暴露变量** 之间），开启 **自带渲染状态**：
+
+| 选项 | 默认值 |
+| --- | --- |
+| 混合 | 半透明 |
+| 双面 | 关 |
+| 先画背面 | 关；开启双面后显示 |
+| 深度测试 | 开 |
+| 深度写入 | 关 |
+
+渲染状态随材质一起保存。槽位的 **渲染状态** 为 **跟随材质**（默认）时就会使用它，见[使用材质的渲染状态](./material-system.md#render-state-from-the-material)。
 
 ## 2. 构建 Fragment 输出
 

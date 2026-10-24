@@ -17,6 +17,18 @@ Animation Track 采样强类型 Property，并应用到 FX Object。Transform Pr
 
 Property 菜单来自 Target Object 的 `FXObjectType`。它不能通过反射动画任意字段；字段必须有受支持 `ConfigValueType` 的 Runtime Binding。
 
+### 新增的可动画 Property
+
+以下对象和模块在近几个版本中增加了 Timeline Property：
+
+| 目标 | Property | 版本 |
+| --- | --- | --- |
+| [Light](../dynamic-lights/lights-and-fog.md) | `color`、`intensity`、`range`、`innerAngle`、`outerAngle`、`sourceRadius`、`flicker`、`castShadows`、`volumetric.enable`、`volumetric.strength` | <VersionBadge version="2.2.8" label="自" icon="tag" /> |
+| [Fog Volume](../dynamic-lights/lights-and-fog.md) | `density`、`color`、`emission`、`absorption`、`edgeFalloff` | <VersionBadge version="2.2.8" label="自" icon="tag" /> |
+| Particle Emitter 的 Light Emission | `lightEmission.enable`、`lightEmission.color`、`lightEmission.intensity`、`lightEmission.range` | <VersionBadge version="2.2.8" label="自" icon="tag" /> |
+| Particle Emitter 的 [Collision](../particle-system/collision.md) | `physics.collision.blocks`、`physics.collision.fluids`、`physics.collision.entities`、`physics.collision.colliders`、`physics.collision.response.dampen`、`physics.collision.response.lifetimeLoss` | <VersionBadge version="2.2.9" label="自" icon="tag" /> |
+| [Collider](../particle-system/collision.md) | `radius`、`trigger`，以及 Transform | <VersionBadge version="2.2.9" label="自" icon="tag" /> |
+
 ## Key 与 Sub Clip
 
 | Item | 用途 |

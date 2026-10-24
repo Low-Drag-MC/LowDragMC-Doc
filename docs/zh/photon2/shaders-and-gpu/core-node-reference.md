@@ -35,7 +35,7 @@ Texture Sample 使用 UV 和 Sampler State 读取 Texture/Sprite。颜色空间�
 
 ## Normal、Fog 与 Lighting
 
-Normal 节点解包并转换 Normal Map。Lighting 使用 World Normal、Light 和 View Direction；Fog 节点与 Minecraft Fog 混合。Photon **Particle Data.litColor** 已包含 Block/Sky Light，原始 **color** 没有。除非故意双重光照，不要同时重复相乘。
+Normal 节点解包并转换 Normal Map。Lighting 使用 World Normal、Light 和 View Direction；Fog 节点与 Minecraft Fog 混合。Photon **Particle Data.litColor** 是 color 乘以 Block/Sky 光照贴图，采样方式与方块相同；原始 **color** 没有光照。**Particle Data.light** 只是光照贴图本身，读取方式与原版粒子相同，因此 color × light 与原版粒子光照完全一致。只用其中一条受光路径：litColor 再乘 light 会被照亮两次。需要 Photon 动态光源时，添加 [Dynamic Light](./photon-node-reference.md#dynamic-light) 节点。
 
 ## 常用小结构
 

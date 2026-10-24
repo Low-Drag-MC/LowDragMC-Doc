@@ -44,6 +44,12 @@ var sparks = runtime.findObjects("spark");
 
 `findObject` returns the first matching object; `findObjects` returns every match. Use UUID-based references inside serialized data and unique names in integration code.
 
+## FX Instances
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+An **FX Instance** object places the hierarchy of another `.fx` under it. The placed objects follow the instance's transform like any other children, and the instance saves only the values you override. See [FX Instances](../fx-instances.md).
+
 ## Simulation Space Is Separate
 
 Transform inheritance says where the emitter is. Particle simulation space says where already-spawned particle state is stored. In `WORLD` space, moving the emitter does not drag old particles with it. See [Simulation and Forces](./simulation-and-forces.md).

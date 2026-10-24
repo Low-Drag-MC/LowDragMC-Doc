@@ -8,6 +8,10 @@
 
 This walkthrough creates a textured, softly fading particle shader and applies it to an emitter.
 
+::: tip Start from a Kila Material
+<VersionBadge version="2.2.8" label="Since" icon="tag" /> If a [Kila Material](./kila-material.md) already looks close to what you want, right-click it in Resources and choose **Export as Shader Graph**. You get a graph with every parameter exposed and a Shader Graph Material with the same render state, ready to extend. See [Export as Shader Graph](./kila-material.md#export-as-shader-graph) for what is left out.
+:::
+
 ## 1. Create the Graph and Material
 
 1. In **Resources**, create a **Shader Graph** and name it `soft_particle`.
@@ -16,6 +20,22 @@ This walkthrough creates a textured, softly fading particle shader and applies i
 4. Assign the material to a Particle Emitter's renderer.
 
 The graph and material are separate: several materials may reuse one graph with different textures, colors, or scalar parameters.
+
+### Render State
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" />
+
+By default a Shader Graph Material leaves blend, culling and depth to the renderer's material slot. To make the material carry them, open its **Render State** group, between the graph rows and **Exposed Variables**, and turn on **Own Render State**:
+
+| Option | Default |
+| --- | --- |
+| Blend | Alpha |
+| Double Sided | off |
+| Back First | off; shown with Double Sided |
+| Depth Test | on |
+| Depth Write | off |
+
+The state is saved with the material. A slot whose **Render State** is **From Material**, the default, then uses it; see [Render State from the Material](./material-system.md#render-state-from-the-material).
 
 ## 2. Build the Fragment Result
 

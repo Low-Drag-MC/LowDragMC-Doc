@@ -51,5 +51,5 @@ flowchart LR
 | Type mismatch | 报错端口两侧的 Vector 宽度与隐式转换 |
 | 缺少必须输出 | Fragment Output 连接及 Graph 类型 |
 | 未知 Function/Resource | Function Graph 路径及 FX Pack 依赖 |
-| 编译成功但数据全为 0 | Additional Data 不受支持或正在走 CPU 路径 |
+| 编译成功但数据全为 0 | Additional Data 不受支持，或 Trail/Beam/AraTrail 没有开启 GPU Instancing |
 | 编辑后仍显示旧结果 | 保存 Graph、Reload Shader，再清理 Photon FX Cache |

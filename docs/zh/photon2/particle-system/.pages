@@ -1,4 +1,4 @@
-title: Particle System
+title: 粒子系统
 nav:
   - index.md
   - hierarchy-and-transforms.md
@@ -8,7 +8,9 @@ nav:
   - simulation-and-forces.md
   - lifetime-and-speed-modules.md
   - physics-noise-lighting-uv.md
+  - collision.md
   - trails-and-sub-emitters.md
   - rendering-materials-and-meshes.md
+  - gltf-models.md
   - trail-beam-and-aratrail.md
 

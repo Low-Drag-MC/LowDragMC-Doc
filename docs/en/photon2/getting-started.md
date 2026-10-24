@@ -41,6 +41,8 @@ The Scene view restarts the preview after structural edits. Use its restart and 
 
 Open **Resources → Material**, choose a built-in particle texture such as `circle`, and drag it into the emitter's Renderer material list. Material settings control texture/shader, while Renderer settings control layer, sorting, culling, masks, model mode, and instancing.
 
+For a finished look in a few clicks, right-click in **Resources → Material**, choose **Add a New Resource → Kila Material**, and pick a look with **Browse Presets...**. See [Kila Material](./shaders-and-gpu/kila-material.md).
+
 ## 5. Add Motion and Color
 
 Enable **Color over Lifetime** and choose a gradient whose alpha fades to zero. Enable **Velocity over Lifetime** or **Force over Lifetime** for motion that changes after spawn.
@@ -52,13 +54,15 @@ Enable **Color over Lifetime** and choose a gradient whose alpha fades to zero. 
 
 ## 6. Save and Export
 
-Saving writes the editable `.fxproj`. To create a runtime effect, choose **File → Export → FX** and export as:
+Saving writes the editable `.fxproj`. To create a runtime effect, choose **File → Export → Export FX (Definition Only)** and export as:
 
 ```text
 <gameDir>/ldlib2/assets/photon/fx/first_effect.fx
 ```
 
 The runtime id is `photon:first_effect`. Exporting as an FX Pack is better when the effect must carry custom materials, graphs, meshes, and textures to another installation.
+
+Because the file sits under `assets/photon/fx/`, other effects can later place it as an [FX instance](./fx-instances.md).
 
 ## 7. Play the Export
 

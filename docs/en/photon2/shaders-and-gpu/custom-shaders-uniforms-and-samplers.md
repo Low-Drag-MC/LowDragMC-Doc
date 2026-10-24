@@ -65,6 +65,8 @@ Names therefore affect the editor. `TintColor` gets a color control; `Direction`
 Every sampler beginning with `Sampler` and every uniform beginning with `U_` is considered built in and is hidden from Shader Settings. Use only names listed in the [reference](./custom-shader-builtins.md); do not use either prefix for custom parameters.
 :::
 
+<VersionBadge version="2.2.8" label="Since" icon="tag" /> The dynamic-light samplers and uniforms (`PhotonLightData`, `PhotonClusterInfo` and the rest) have neither prefix but are built in too. When the JSON declares `PhotonLightData`, Photon binds all of them automatically, hides them from Shader Settings, and does not save them with the material. See [Dynamic Lights](./custom-shader-builtins.md#dynamic-lights) for the list.
+
 Parameter values are saved with the material. On reload, Photon retains values whose names and types still match. Renamed or removed entries must be configured again.
 
 ## Shader Graph or Hand-written Shader?

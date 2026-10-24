@@ -32,13 +32,17 @@ Additional GPU Data 将模拟数据直接暴露给材质，无需 CPU 每帧重�
 
 不支持的组合返回 0。`point t` 会沿 Trail Segment 插值；Beam Direction 等于 `end - start`，只需方向时要 Normalize。
 
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> 粒子碰到任何东西后，`isCollided` 就变为 1 并保持为 1。2.2.9 之前只有没有发生反弹的碰撞才会设置它，所以反弹的粒子读到的是 0。见[碰撞](../particle-system/collision.md)。
+
 ## 在 Shader Graph 中读取内置 Channel
 
 添加 **Additional Data** 节点并选择一个 Registry Channel。节点输出类型与上表一致；Compiler 会自动启用 Graph 实际读取的 Channel，无需为了 Shader Graph 手动勾选对应开关。数据在 Vertex Stage 从固定 `PhotonData` Record 读取，Fragment 使用时自动经过 Varying。
 
-非 Instanced CPU 路径与 Node Preview 返回 0。不支持当前 Renderer 的 Channel 同样返回 0。
+Node Preview 返回 0。不支持当前 Renderer 的 Channel 同样返回 0。
 
-## 配置 Custom Data Stream
+<VersionBadge version="2.2.8" label="Changed" icon="tag" /> 自 2.2.8 起，不开 GPU Instancing 的 Particle Emitter 只要有材质读取粒子数据，就会上传逐粒子 Record：Shader Graph 会编译一个 CPU 数据 Variant，Kila 材质的驱动也一样。Trail、Beam 和 AraTrail 仍需要 GPU Instancing；没有开启时读到 0，发射器 Inspector 会显示 **材质缺少数据**，其中的 **一键修复** 按钮会打开 Instancing。
+
+## 配置 Custom Data Stream { #configure-custom-data-streams }
 
 1. 在 Emitter Inspector 中启用 **Additional GPU Data Setting**。
 2. 在 **Custom Data** 列表中添加 Stream，最多 4 条。
@@ -80,24 +84,30 @@ Custom Data (Index 0)
       └─ y ──> UV Offset Strength
 ```
 
-节点在 Vertex Stage 调用 `photon_custom_data(index)`。当 Fragment 逻辑使用输出时，Compiler 自动创建 Varying；用户不需要手写 `out`/`in`。Compiler 也会标记该材质需要 Custom Data，Renderer 随后为每个 Instance 上传固定 4 个 RGBA32F Texel 的 `PhotonCustomData` Record。
+节点在 Vertex Stage 调用 `photon_custom_data(index)`。当 Fragment 逻辑使用输出时，Compiler 自动创建 Varying；用户不需要手写 `out`/`in`。Compiler 也会标记该材质需要 Custom Data，Renderer 随后为每个 Instance（不开 Instancing 的 Particle Emitter 则为每个粒子）上传固定 4 个 RGBA32F Texel 的 `PhotonCustomData` Record。
 
 以下情况输出 `vec4(0)`：
 
 - Node Preview；
-- 非 Instanced CPU 渲染；
+- 没有开启 GPU Instancing 的 Trail、Beam 或 AraTrail；
 - Additional GPU Data 未启用；
 - Emitter 没有对应 Stream；
 - Index 大于 3。负数选项会被钳制为 Stream 0。
 
-因此应在最终使用的 GPU Instanced Particle、Trail、Beam 或 AraTrail 上验证，而不是只看节点预览。
+因此应在最终使用的 Particle、Trail、Beam 或 AraTrail Renderer 上验证，而不是只看节点预览。
+
+## 在 Kila 材质中读取数据
+
+<VersionBadge version="2.2.8" label="自" icon="tag" />
+
+[Kila 材质](./kila-material.md)不用节点，而是通过[粒子数据驱动](./kila-material.md#drive-values-with-particle-data)读取同样的数据。**粒子生命周期** 读取 `t`，**粒子随机数** 读取 `random`，**拖尾点生命** 和 **拖尾点位置** 读取 `point life` 和 `point t`，**自定义数据** 读取某条 Stream 的一个 Channel。与 Graph 一样，材质会报告自己读取了什么，因此无需手动开关。自定义数据驱动要求发射器定义了对应 Stream；**材质缺少数据** 中的 **一键修复** 会添加它。
 
 ## 在 Custom Shader Material 中读取 Custom Data
 
 可以读取，但接口与 Shader Graph 不同。Custom Shader Material 使用传统 **Instance Attribute** 路径：每条 Custom Data Stream 是一个追加的 `vec4` Attribute。
 
 ::: warning 不要调用 `photon_custom_data()`
-`photon_custom_data()` 读取 `PhotonCustomData` Buffer Texture。这个 Buffer 只在同一 Pass 中有 Shader Graph Material 实际使用 Custom Data 时上传，不能作为手写材质的稳定接口。Custom Shader Material 应声明 Attribute。
+`photon_custom_data()` 读取 `PhotonCustomData` Buffer Texture。这个 Buffer 只在同一 Pass 中有 Shader Graph 或 Kila 材质实际使用 Custom Data 时上传，不能作为手写材质的稳定接口。Custom Shader Material 应声明 Attribute。
 :::
 
 ### Attribute Location
@@ -196,4 +206,4 @@ Timeline Animation 与 Java 写入相同 `RuntimeValue` Slot 时，当前采样�
 
 ## 性能
 
-Shader Graph 只上传编译后的 Pass 真实使用的 Channel；只有 Graph 读取 Custom Data 时才创建 Custom Stream Buffer。旧式 Shader 依赖手动 Toggle，并上传声明的 Attribute。优先让大量粒子共享少量紧凑 Stream，不要为了不同数值创建大量无法合批的独立材质。
+Shader Graph 和 Kila 材质只上传 Pass 中材质实际读取的 Channel；只有材质读取 Custom Data 时才创建 Custom Stream Buffer，Particle Emitter 的 CPU 路径也只在这时上传 Record。旧式 Shader 依赖手动 Toggle，并上传声明的 Attribute。优先让大量粒子共享少量紧凑 Stream，不要为了不同数值创建大量无法合批的独立材质。

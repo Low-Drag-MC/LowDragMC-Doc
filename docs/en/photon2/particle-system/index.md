@@ -15,6 +15,12 @@ flowchart TD
     R --> B["BeamEmitter"]
     R --> A["AraTrailEmitter"]
     R --> F["ForceFieldObject"]
+    R --> C["ColliderObject"]
+    R --> L["LightObject / FogVolumeObject"]
+    R --> I["FXInstanceObject"]
+    I --> IS["Objects placed from another .fx"]
+    F -. External Forces .-> P
+    C -. collision .-> P
     P --> PC["ParticleRuntime + modules"]
     PC --> PP["TileParticle / trail particles"]
     PP --> RP["Render pass"]
@@ -31,6 +37,14 @@ flowchart TD
 | Beam Emitter | Render a beam between endpoints or along a raycast. |
 | AraTrail Emitter | Simulate a physically moving trail with segment properties. |
 | Force Field | Apply directional, gravity, drag, and vortex influence through External Forces. |
+| Collider | A plane, box, or sphere that particles of the same FX collide with, or a trigger they report. See [Particle Collision](./collision.md#collider-objects). |
+| Light | A point or spot dynamic light, optionally shadowed and volumetric. See [Lights and Fog](../dynamic-lights/lights-and-fog.md). |
+| Fog Volume | A box or sphere of volumetric fog. See [Lights and Fog](../dynamic-lights/lights-and-fog.md). |
+| FX Instance | Place another `.fx` inside this effect and override only what differs. See [FX Instances](../fx-instances.md). |
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" /> Light and Fog Volume objects.
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" /> Collider and FX Instance objects.
 
 ## Recommended Reading Order
 
@@ -41,6 +55,14 @@ flowchart TD
 5. [Simulation and Forces](./simulation-and-forces.md)
 6. [Lifetime and Speed Modules](./lifetime-and-speed-modules.md)
 7. [Rendering, Materials, and Meshes](./rendering-materials-and-meshes.md)
+
+## More Topics
+
+- [Physics, Noise, Lighting, and UV](./physics-noise-lighting-uv.md)
+- [Particle Collision](./collision.md): blocks, fluids, entities, Collider objects, triggers, and collision events.
+- [Trails and Sub-Emitters](./trails-and-sub-emitters.md)
+- [glTF Models](./gltf-models.md)
+- [Trail, Beam, and AraTrail Emitters](./trail-beam-and-aratrail.md)
 
 ## Runtime Model
 

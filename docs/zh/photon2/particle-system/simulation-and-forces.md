@@ -20,13 +20,19 @@ Simulation Space 决定使用哪个 Transform basis 保存粒子 position 和 ve
 
 ## Velocity over Lifetime
 
-Velocity over Lifetime 提供 linear、orbital、offset、radial 和 speed modifier Function。`ValueSpace` 决定配置向量以哪个坐标空间解释，再加入粒子运动。
+Velocity over Lifetime 提供 linear、orbital、offset、radial 和 speed modifier Function。它的 **坐标系**（Space，即 `ValueSpace`）字段决定配置向量以哪个坐标空间解释，再加入粒子运动。
 
 <VersionBadge version="2.2.1" label="Velocity ValueSpace 自" icon="tag" />
+
+<VersionBadge version="2.2.8" label="自" icon="tag" /> 坐标系可以设为 **Custom**。把一个对象拖到 **自定义空间**（Custom Space）后，向量使用该对象当前的坐标轴。Orbital 和 Radial 的中心点也会移到该对象的原点，因此粒子可以围绕另一个对象旋转。所有提供这一选项的模块见 [Value Space](./lifetime-and-speed-modules.md#value-space)。
 
 ## Force over Lifetime
 
 Force 会随时间改变 Velocity，而不是直接设置位移。它适合重力式加速度、风或可控弯曲。变化中的 Force Curve 会沿粒子生命周期积分。
+
+它的 **模拟空间**（Simulation Space）字段是一个 Value Space，不是 Emitter 本身的 Simulation Space。`Local`（默认）使用 Emitter 的坐标轴；`World` 使用世界坐标轴。
+
+<VersionBadge version="2.2.8" label="自" icon="tag" /> `Custom` 使用 **自定义空间** 中对象的坐标轴。
 
 ## Inherit Velocity
 
@@ -45,7 +51,7 @@ Inherit Velocity 根据 Mode 与 Multiplier，把 Emitter 运动传给新粒子�
 
 ## 计算顺序
 
-Start Speed 和 Inherit Velocity 建立初始运动；每 tick 的 Velocity、Force、Physics、External Field 和 Noise 再通过各自 Runtime 模块产生影响。除非明确需要叠加，否则不要让多个模块重复完成同一件事。
+Start Speed 和 Inherit Velocity 建立初始运动；每 tick 的 Velocity、Force、Physics、External Field 和 Noise 再通过各自 Runtime 模块产生影响。开启碰撞后，Physics 会用方块、实体和碰撞体检测每一步的移动，见 [粒子碰撞](./collision.md)。除非明确需要叠加，否则不要让多个模块重复完成同一件事。
 
 ::: warning Transform Scale
 非均匀父级 Scale 会改变向量 basis。Custom Space 和 Orbital Motion 必须使用最终层级 Scale 测试，不能只在 `1 1 1` 下检查。

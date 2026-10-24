@@ -73,10 +73,14 @@ struct ParticleData {
     vec2 UV;
     ivec2 LightUV;
     vec3 Normal;
+    vec4 Tangent;       // xyz = dP/du，w = 手性
     vec3 ObjectPosition;
     vec3 ObjectNormal;
+    vec4 ObjectTangent;
 };
 ```
+
+<VersionBadge version="2.2.5" label="自" icon="tag" /> `Tangent` 与 `ObjectTangent` 提供表面切线坐标系。在 Model Instancing 上，只有打开 Model 渲染模式的 **tangent** 开关时它才是真实切线，见[附加 Define](./vertex-formats-and-instancing.md#extra-defines)。
 
 Instancing 和 Buffer Texture Accessor 使用 GLSL 330 功能，因此使用 Photon Helper 的 Vertex Shader 应声明 `#version 330 core`。
 
@@ -127,7 +131,7 @@ Photon 会按实际绘制方式重编译同一 Shader，并注入一个 Define�
 | `ARA_TRAIL_INSTANCE` | Flat AraTrail |
 | `ARA_TRAIL_TUBE_INSTANCE` | Tube AraTrail |
 
-`getParticleData()` 会处理这些差异。若绕过 Helper 自己声明 Attribute，必须为每个目标 Define 编写匹配布局，详见[Vertex Format 与 GPU Instancing](./vertex-formats-and-instancing.md)。
+`getParticleData()` 会处理这些差异。Model Instancing 上 Photon 还可能加入 `PHOTON_TANGENT` 或 `PHOTON_VAT`，Helper 同样会处理。若绕过 Helper 自己声明 Attribute，必须为每个目标 Define 编写匹配布局，详见[Vertex Format 与 GPU Instancing](./vertex-formats-and-instancing.md)。
 
 ## 几何着色器
 
@@ -145,7 +149,7 @@ ExtendedShader 允许在 JSON 中增加 `geometry`：
 
 ## Include、Curve 与粒子数据
 
-- `#moj_import <photon:particle.glsl>`：顶点布局与 `ParticleData`；其中的 GPU Data Buffer Accessor 服务 Shader Graph。Custom Shader Material 读取 Additional/Custom Data 时使用追加 Attribute，详见 [Additional GPU Data](./additional-gpu-data.md)。
+- `#moj_import <photon:particle.glsl>`：顶点布局与 `ParticleData`；其中的 GPU Data Buffer Accessor 服务 Shader Graph 和 Kila 材质。Custom Shader Material 读取 Additional/Custom Data 时使用追加 Attribute，详见 [Additional GPU Data](./additional-gpu-data.md)。
 - `#moj_import <photon:particle_utils.glsl>`：`getCurveValue()` 与 `getGradientValue()`。
 - `#moj_import <namespace:file.glsl>`：加载 `assets/<namespace>/shaders/include/file.glsl`。
 

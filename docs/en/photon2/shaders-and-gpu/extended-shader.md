@@ -73,10 +73,14 @@ struct ParticleData {
     vec2 UV;
     ivec2 LightUV;
     vec3 Normal;
+    vec4 Tangent;       // xyz = dP/du, w = handedness
     vec3 ObjectPosition;
     vec3 ObjectNormal;
+    vec4 ObjectTangent;
 };
 ```
+
+<VersionBadge version="2.2.5" label="Since" icon="tag" /> `Tangent` and `ObjectTangent` carry the surface tangent frame. On model instancing it is real only with the Model render mode's **tangent** toggle; see [Extra Defines](./vertex-formats-and-instancing.md#extra-defines).
 
 Instancing and buffer-texture accessors use GLSL 330 features, so a vertex shader using Photon helpers should declare `#version 330 core`.
 
@@ -127,7 +131,7 @@ Photon recompiles the same shader for the active draw path and injects one defin
 | `ARA_TRAIL_INSTANCE` | flat AraTrail |
 | `ARA_TRAIL_TUBE_INSTANCE` | tube AraTrail |
 
-`getParticleData()` handles these differences. If you bypass the helper and declare attributes yourself, implement the layout of every target define; see [Vertex Formats and GPU Instancing](./vertex-formats-and-instancing.md).
+`getParticleData()` handles these differences. On model instancing Photon may also add `PHOTON_TANGENT` or `PHOTON_VAT`, which the helper handles too. If you bypass the helper and declare attributes yourself, implement the layout of every target define; see [Vertex Formats and GPU Instancing](./vertex-formats-and-instancing.md).
 
 ## Geometry Shader
 
@@ -145,7 +149,7 @@ The corresponding file is `assets/wiki/shaders/core/wiki_particle.gsh`. It is at
 
 ## Includes, Curves, and Particle Data
 
-- `#moj_import <photon:particle.glsl>`: input layouts and `ParticleData`. Its GPU-data buffer accessors serve Shader Graph; Custom Shader Material reads Additional/Custom Data through appended attributes as described in [Additional GPU Data](./additional-gpu-data.md).
+- `#moj_import <photon:particle.glsl>`: input layouts and `ParticleData`. Its GPU-data buffer accessors serve Shader Graph and Kila Material; Custom Shader Material reads Additional/Custom Data through appended attributes as described in [Additional GPU Data](./additional-gpu-data.md).
 - `#moj_import <photon:particle_utils.glsl>`: `getCurveValue()` and `getGradientValue()`.
 - `#moj_import <namespace:file.glsl>`: loads `assets/<namespace>/shaders/include/file.glsl`.
 

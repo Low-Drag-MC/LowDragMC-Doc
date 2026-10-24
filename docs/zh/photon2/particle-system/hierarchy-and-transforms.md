@@ -44,6 +44,12 @@ var sparks = runtime.findObjects("spark");
 
 `findObject` 返回第一个匹配对象；`findObjects` 返回全部匹配对象。序列化数据使用 UUID，集成代码使用唯一名称。
 
+## FX 实例
+
+<VersionBadge version="2.2.9" label="自" icon="tag" />
+
+**FX 实例**（FX Instance）对象会把另一个 `.fx` 的层级放到自己下面。这些放置的对象和普通子对象一样跟随实例的 Transform，实例只保存你覆盖过的值。详见 [FX 实例](../fx-instances.md)。
+
 ## Simulation Space 是另一层概念
 
 Transform 继承决定 Emitter 在哪里；Particle Simulation Space 决定已经生成的粒子状态保存在哪里。在 `WORLD` 空间中移动 Emitter，不会拖动旧粒子。详见 [Simulation 与 Force](./simulation-and-forces.md)。

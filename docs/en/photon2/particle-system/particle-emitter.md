@@ -47,7 +47,9 @@ Prewarm is useful for looping smoke, aura, or ambient emitters that should look 
 
 ## Parallel Update
 
-Parallel update improves large independent particle systems. Photon keeps world/light access and sub-emitter spawning behind safe handshakes, but custom logic must not introduce unsafe shared mutable state. For small queues, scheduling overhead can exceed the work saved.
+Parallel update improves large independent particle systems. Photon keeps world/light access and sub-emitter spawning behind safe handshakes, but custom logic must not introduce unsafe shared mutable state. For small queues, scheduling overhead can exceed the work saved; below 128 particles an emitter updates serially.
+
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> Emitters with collision can run in parallel too. Before 2.2.9 they were always updated serially. The client config option **Parallel collision** (on by default) can turn this off. See [Particle Collision](./collision.md#performance-and-debugging).
 
 ## Runtime Access
 

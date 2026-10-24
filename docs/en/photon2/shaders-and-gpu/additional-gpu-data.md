@@ -32,11 +32,15 @@ Additional GPU Data exposes simulation values to a material without rebuilding p
 
 Unsupported combinations return zero. `point t` is interpolated along a trail segment. Beam direction is `end - start`; normalize it when only orientation is needed.
 
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> `isCollided` turns 1 once the particle has touched anything and stays 1. Before 2.2.9 only a hit that did not bounce set it, so a bouncing particle read 0. See [Collision](../particle-system/collision.md).
+
 ## Read Built-in Channels in Shader Graph
 
 Add an **Additional Data** node and choose a registered channel. Its output type matches the matrix above. The compiler automatically enables channels read by the graph, so Shader Graph does not require the corresponding manual toggle. Vertex logic reads the fixed `PhotonData` record and creates a varying automatically when fragment logic consumes it.
 
-Non-instanced CPU paths and node previews return zero. A channel unsupported by the active renderer also returns zero.
+Node previews return zero. A channel unsupported by the active renderer also returns zero.
+
+<VersionBadge version="2.2.8" label="Changed" icon="tag" /> Since 2.2.8, a Particle Emitter drawn without GPU instancing uploads per-particle records whenever one of its materials reads particle data: Shader Graph compiles a CPU-data variant, and Kila Material does the same for its drivers. Trails, beams and AraTrail still need GPU instancing; without it they read zero, and the emitter inspector shows **Material needs data** with a **Fix** button that turns instancing on.
 
 ## Configure Custom Data Streams
 
@@ -80,24 +84,30 @@ Custom Data (Index 0)
       └─ y ──> UV Offset Strength
 ```
 
-The node calls `photon_custom_data(index)` in the vertex stage. When fragment logic consumes the output, the compiler creates a varying automatically; no manual `out`/`in` is needed. It also marks the material as a Custom Data consumer, causing the renderer to upload four fixed RGBA32F `PhotonCustomData` texels per instance.
+The node calls `photon_custom_data(index)` in the vertex stage. When fragment logic consumes the output, the compiler creates a varying automatically; no manual `out`/`in` is needed. It also marks the material as a Custom Data consumer, causing the renderer to upload four fixed RGBA32F `PhotonCustomData` texels per instance (per particle on a non-instanced Particle Emitter).
 
 The result is `vec4(0)` for:
 
 - node previews;
-- non-instanced CPU rendering;
+- a trail, beam, or AraTrail drawn without GPU instancing;
 - disabled Additional GPU Data;
 - a missing stream;
 - an index above 3. A negative node option is clamped to stream 0.
 
-Test on the actual GPU-instanced particle, trail, beam, or AraTrail renderer rather than relying on node preview.
+Test on the actual particle, trail, beam, or AraTrail renderer rather than relying on node preview.
+
+## Read Data in Kila Material
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" />
+
+[Kila Material](./kila-material.md) reads the same data through [particle-data drivers](./kila-material.md#drive-values-with-particle-data) instead of nodes. **Particle Lifetime** reads `t`, **Particle Random** reads `random`, **Trail Point Life** and **Trail Point Position** read `point life` and `point t`, and **Custom Data** reads one channel of a stream. Like a graph, the material reports what it reads, so no manual toggle is needed. A Custom Data driver needs the emitter to define that stream; the **Fix** button on **Material needs data** adds it.
 
 ## Read Custom Data in Custom Shader Material
 
 This is supported, but it uses a different interface from Shader Graph. Custom Shader Material receives one appended `vec4` **instance attribute** per Custom Data stream.
 
 ::: warning Do not call `photon_custom_data()`
-`photon_custom_data()` reads the `PhotonCustomData` buffer texture. That buffer is uploaded only when a Shader Graph material in the same pass actually consumes Custom Data, so it is not a stable hand-written-material interface. Declare attributes in Custom Shader Material.
+`photon_custom_data()` reads the `PhotonCustomData` buffer texture. That buffer is uploaded only when a Shader Graph or Kila material in the same pass actually consumes Custom Data, so it is not a stable hand-written-material interface. Declare attributes in Custom Shader Material.
 :::
 
 ### Attribute Locations
@@ -196,4 +206,4 @@ Timeline Animation and Java write the same `RuntimeValue` slots. The most recent
 
 ## Performance
 
-Shader Graph uploads only channels used by the compiled pass. Custom stream buffers are created only when a graph reads Custom Data. Legacy shaders require manual toggles and upload the declared attributes. Prefer a few packed streams shared by many particles over many unique materials that prevent batching.
+Shader Graph and Kila Material upload only the channels the pass's materials read. Custom stream buffers are created only when a material reads Custom Data, and the CPU path of a Particle Emitter uploads records only then. Legacy shaders require manual toggles and upload the declared attributes. Prefer a few packed streams shared by many particles over many unique materials that prevent batching.

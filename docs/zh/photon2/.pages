@@ -3,11 +3,12 @@ nav:
   - index.md
   - getting-started.md
   - editor-and-projects.md
+  - fx-instances.md
   - commands.md
   - distribution.md
   - particle-system
   - timeline
   - shaders-and-gpu
+  - dynamic-lights
   - post-processing
   - java-api
-

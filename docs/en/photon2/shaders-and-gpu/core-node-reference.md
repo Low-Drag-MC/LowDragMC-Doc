@@ -35,7 +35,7 @@ Texture Sample reads a texture/sprite with UV and sampler state. Color-space con
 
 ## Normal, Fog, and Lighting
 
-Normal nodes unpack and transform normal maps. Lighting nodes consume world normal, light, and view direction; fog nodes mix with Minecraft fog. Photon **Particle Data.litColor** already includes baked block/sky lighting, while raw **color** does not—do not multiply both paths unless that double-lighting is intentional.
+Normal nodes unpack and transform normal maps. Lighting nodes consume world normal, light, and view direction; fog nodes mix with Minecraft fog. Photon **Particle Data.litColor** is color multiplied by the block/sky light map, sampled the way blocks sample it, while raw **color** has no lighting. **Particle Data.light** is the light map alone, fetched the way vanilla particles fetch it, so color × light matches vanilla particle lighting exactly. Use one lit path: multiplying litColor by light lights the particle twice. For Photon's dynamic lights, add the [Dynamic Light](./photon-node-reference.md#dynamic-light) node.
 
 ## Small Patterns
 

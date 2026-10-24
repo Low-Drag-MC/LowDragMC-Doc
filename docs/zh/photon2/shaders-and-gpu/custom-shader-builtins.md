@@ -81,6 +81,35 @@ uniform vec4 U_ViewPort;
 vec2 screenUV = (gl_FragCoord.xy - U_ViewPort.xy) / U_ViewPort.zw;
 ```
 
+## 动态光照 {#dynamic-lights}
+
+<VersionBadge version="2.2.8" label="自" icon="tag" />
+
+Custom Shader Material 可以被 Photon 的[动态光照](../dynamic-lights/index.md)照亮。在 Shader JSON 中声明下表的名称，并在片元着色器中引入 `photon:lit_particle.glsl`。头文件已经在 GLSL 中声明了它们，不要重复声明。
+
+JSON 声明了 `PhotonLightData` 时，Photon 会把这九个名称都视为内置项：每次绘制时以强度 1 绑定本帧的光源，从 Shader Settings 中隐藏这些条目，并且不保存它们。
+
+| 名称 | JSON 声明 | GLSL 类型 | 内容 |
+| --- | --- | --- | --- |
+| `PhotonLightData` | sampler | `sampler2D` | 本帧的光源，每个光源占四个 texel。 |
+| `PhotonClusterGrid` | sampler | `sampler2D` | 每个屏幕分块和深度切片的光源列表从哪里开始、有多长。 |
+| `PhotonClusterIndices` | sampler | `sampler2D` | 所有分簇的光源列表。 |
+| `PhotonVisibilityAtlas` | sampler | `sampler2D` | 投影光源的阴影图（仅体素阴影）。 |
+| `PhotonClusterInfo` | `int`，count 4 | `ivec4` | 分块大小、横向分块数、纵向分块数、深度切片数。 |
+| `PhotonClusterView` | `float`，count 4 | `vec4` | 近平面、切片缩放、视口原点。 |
+| `LitParticleParams` | `float`，count 4 | `vec4` | 绑定光源时 x = 1，y = 强度。 |
+| `PhotonVisibilityInfo` | `int`，count 4 | `ivec4` | 阴影图尺寸、图集每行的图数、本帧的图数。 |
+| `PhotonViewInverse` | `matrix4x4`，count 16 | `mat4` | 视图矩阵的逆矩阵。 |
+
+带默认值的 JSON 条目可以从[手写 Shader](../dynamic-lights/lit-particles-and-shaders.md#hand-written-shaders)或 Photon 的 `assets/photon/shaders/core/hdr_particle.json` 中复制。
+
+| 函数 | 返回值 |
+| --- | --- |
+| `vec3 photon_particle_light(vec3 viewPos)` | 从各个方向到达某个视图空间位置的光，适用于公告板粒子。 |
+| `vec3 photon_surface_light(vec3 viewPos, vec3 viewNormal, float wrap)` | 同上，但每个光源按它照在单位长度视图空间法线上的角度加权。法线为零时光从各个方向照来；`wrap` 大于 0 时光能绕过明暗交界线。 |
+
+两个函数都只能在片元着色器中使用。在预览中、动态光照关闭时，以及视野内没有光源时，它们返回 0。
+
 ## Minecraft `ShaderInstance` 内置 Uniform
 
 这些是 `ShaderInstance` 识别并按对应渲染状态更新的标准名称。只声明当前算法需要的项。

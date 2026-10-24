@@ -17,6 +17,16 @@ IFXObject root = runtime.getRoot();
 
 UUID is the stable identity used by parent references and Timeline targets. Names are convenient integration labels but are not enforced unique. Unknown UUID/name returns `null` (or an empty list for `findObjects`).
 
+## Objects Placed by FX Instances
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+Objects that an [FX instance](../fx-instances.md) places are ordinary runtime objects. They hang under the instance's own object, and the instance's timeline drives them on its own clock.
+
+- Placed objects do not keep the UUIDs they have in the source effect, so look them up by name, not by a UUID copied from the source.
+- If an effect places the same source twice, both copies have the same names. `findObjects` returns all of them.
+- Moving or scaling the instance object moves or scales everything it placed, like any parent.
+
 ## Updating Transforms
 
 ```java

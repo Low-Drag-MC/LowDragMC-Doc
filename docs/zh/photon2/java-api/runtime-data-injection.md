@@ -85,9 +85,11 @@ public final class PhotonInjection {
 
 `findObject(name)` 返回首个完全匹配；`findObjects(name)` 返回全部。需要稳定 API Contract 时，为对外对象使用唯一名字，并在效果资源旁记录这些名字。
 
+`ParticleEmitter` 的 `renderer` 层还包含 Model 模式的槽位，例如 `renderMode`、`model`、`tangent`、`modelPivot`、`useGPUInstance` 和 `facingMode`。把 `model` 设为 `DynamicMeshSource`，就能绘制每帧变化的[动态网格](./live-meshes-and-ui-scenes.md#live-meshes)。Light 对象、Fog Volume 和 Light Emission 有各自的槽位，见[动态光照 API](./dynamic-lights-api.md#override-an-authored-light)。
+
 ## 注入时机与所有权
 
-能提前配置的值应在 Runtime 创建后、`emit()` 前设置。跟随 Gameplay 的值在 Client Tick 更新；只有插值 Transform 或 Render-time Value 才每帧更新。
+Emit 会重置每个对象，而重置会清除该对象的全部 Runtime 覆盖，包括渲染器槽位。因此请在 `emit()` 之后设置覆盖；使用内置 Executor 时，在 `start()` 之后通过 `getRuntime()` 设置。Control 片段重启对象时会再次重置它，需要在重启后保留的值要重新写入。跟随 Gameplay 的值在 Client Tick 更新；只有插值 Transform 或 Render-time Value 才每帧更新。
 
 Timeline Animation 写的是同一批 Slot，并在求值时重复写入。一个 Sample 内最后写入生效；Timeline 每 Tick/Frame 驱动的值会覆盖 Java 的一次性值。请分配独立 Slot/Custom Data Stream，或只让一个系统拥有该值。
 

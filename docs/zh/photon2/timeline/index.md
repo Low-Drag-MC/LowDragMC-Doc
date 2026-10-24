@@ -38,6 +38,8 @@ flowchart LR
 
 始终启用的 FX Root 会在每个 Particle Engine tick 推进一次 `TimelinePlayer`。Per-frame Pass 使用小数时间平滑采样 Transform Animation，并提交生效的 Post Process Clip。Simulation 保持 tick 确定性，渲染运动则能插值。
 
+<VersionBadge version="2.2.9" label="自" icon="tag" /> [FX 实例](../fx-instances.md)在自己的时钟上播放源特效的 Timeline，外层 Track 负责启动、暂停这个时钟并改变它的速度。见 [FX 实例](./activator-control-and-speed.md#fx-实例)。
+
 ## 空 Timeline
 
 旧效果和简单效果可以没有 Timeline 数据。空 Timeline 不增加播放工作，FX 会像以前一样根据 Emitter 状态结束。

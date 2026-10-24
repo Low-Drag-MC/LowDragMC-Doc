@@ -10,6 +10,8 @@
 
 Activator Track 绑定一个 FX Object。当前时间被任意 Activator Clip 覆盖时，对象 Active；Clip 之外对象 Inactive，既不 tick 也不渲染。
 
+<VersionBadge version="2.2.9" label="自" icon="tag" /> 除 root 外，每个对象的 Inspector 中都有一个会保存的 **启用**（Enabled）开关。被禁用的对象始终保持关闭，Activator Clip 也无法唤醒它。
+
 ## Control Track
 
 Control Clip 分别绑定 Target。进入或切换到 Control Clip 时：
@@ -37,6 +39,20 @@ Speed Track 采样标量，并写入 Target `selfTimeScale`。Child 继承层级
 | `>1` | 每个 Game Tick 执行多个有上限的 Simulation Substep。 |
 
 Runtime 会限制每 tick Substep 数，避免极端值产生无限工作。超过上限的 Speed 不能在一个 tick 内模拟任意长时间。
+
+<VersionBadge version="2.2.7" label="自" icon="tag" /> Java 代码也可以用 `FXRuntime#setRate` 改变整个 Runtime 的速度，它会同时缩放对象和 Timeline 时钟。绑定 root 的 Speed Track 在它覆盖的 tick 内优先于这个速率。见 [FXRuntime 生命周期](../java-api/fxruntime-lifecycle.md)。
+
+## FX 实例
+
+<VersionBadge version="2.2.9" label="自" icon="tag" />
+
+[FX 实例](../fx-instances.md)在自己的时钟上播放源特效的 Timeline。外层 Track 像控制其他对象状态一样驱动这个时钟：
+
+- 重启实例或其父对象的 Control Clip，会让时钟从 `0` 开始；
+- 关闭实例的 Activator Track 会暂停时钟，实例重新打开后继续；
+- 作用于实例或其父对象的 Speed Track 会缩放时钟。
+
+外层 Timeline 和源驱动同一对象的同一通道时，外层优先。完整规则见 [FX 实例](../fx-instances.md#timeline)。
 
 ## 状态恢复
 

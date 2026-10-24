@@ -8,12 +8,28 @@ Timeline 面板组合 Track Tree、Time Ruler、Clip Lane 和 Property Editor。
 
 ## 播放控制
 
-| 控件 | 行为 |
-| --- | --- |
-| Play/Pause | 推进或冻结 Timeline Master Clock。 |
-| Stop/Restart | Reset Runtime Object，并从时间零重新计算。 |
-| Loop | 在编辑器中重复播放预览范围。 |
-| Scrub | 在指针时间计算效果，不进行正常 Forward Playback。 |
+<VersionBadge version="2.2.7" label="Changed" icon="tag" />
+
+播放控制栏位于 Timeline 面板顶部。自 2.2.7 起，控件改为方形图标按钮，并新增了单步和跳到末尾按钮。鼠标悬停在按钮上可以看到它的名称。
+
+<figure>
+<img src="/assets/photon2/timeline-transport.webp" alt="Timeline 播放控制栏，包含停止、后退、播放/暂停、前进和跳到末尾按钮">
+<figcaption>Timeline 播放控制栏：停止、后退一 tick、播放/暂停、前进一 tick 和跳到末尾，后面是时间输入框和播放模式开关。</figcaption>
+</figure>
+
+| 控件 | 默认快捷键 | 行为 |
+| --- | --- | --- |
+| 停止并回到开头 | `Shift+Space` | Reset Runtime Object，并从时间零重新计算。 |
+| 后退一 tick | `,` | 暂停，并把 Playhead 向后移动一 tick。 |
+| 播放 / 暂停预览 | `Space` | 推进或冻结 Timeline Master Clock。 |
+| 前进一 tick | `.` | 暂停，并把 Playhead 向前移动一 tick。 |
+| 跳到特效内容的末尾 | | 暂停，并把 Playhead 移到内容末尾。 |
+| 当前时间 | | 以秒显示 Playhead 时间。输入数值后点击别处即可跳转。 |
+| 结束条件开关 | | 关闭（默认）：所有 FX Object 都结束后预览才结束。开启：到 Timeline 末尾时结束。 |
+| 循环开关 | | 开启（默认）：预览结束后从头重新播放。关闭：停在最后一帧。 |
+| Scrub | | 拖动 Playhead，在该时间计算效果，不进行正常 Forward Playback。 |
+
+这些快捷键可以重新绑定，见[快捷键](../editor-and-projects.md#快捷键)。
 
 编辑器 Scrub 时会关闭 Signal 和 Audio Dispatch，避免拖动 Playhead 时反复触发 Gameplay Event 或叠加声音。游戏内 Forward Playback 会开启两者。
 

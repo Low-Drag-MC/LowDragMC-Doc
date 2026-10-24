@@ -38,6 +38,8 @@ flowchart LR
 
 The always-on FX root advances `TimelinePlayer` once per particle-engine tick. A per-frame pass samples fractional time for smooth transform animation and submits active post-process clips. This keeps simulation deterministic at ticks while rendering interpolated motion.
 
+<VersionBadge version="2.2.9" label="Since" icon="tag" /> An [FX instance](../fx-instances.md) plays its source's Timeline on a clock of its own, which the outer tracks start, pause, and speed up. See [FX Instances](./activator-control-and-speed.md#fx-instances).
+
 ## Empty Timelines
 
 Legacy and simple effects may have no Timeline data. An empty Timeline adds no playback work and the FX finishes according to its emitters exactly as before.

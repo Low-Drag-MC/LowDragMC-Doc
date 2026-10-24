@@ -36,7 +36,7 @@ executor.setForcedDeath(true);
 executor.start();
 ```
 
-The entity root follows interpolated eye position every frame.
+The entity root follows interpolated eye position every frame. Since 2.2.9 the executor also reports the entity as the effect's [owner](./custom-executors-timeline-and-signals.md#owner-entity), so beam raycasts and particle collision with **Ignore Owner** on skip it.
 
 | AutoRotate | Behavior |
 | --- | --- |
@@ -50,7 +50,11 @@ The entity root follows interpolated eye position every frame.
 - **offset/rotation/scale** transform the runtime root.
 - **delay** is assigned to every object after emit/reset, in ticks.
 - **forcedDeath** controls anchor loss: `true` removes remnants immediately; `false` lets existing particles drain.
-- **allowMulti=false** deduplicates an equal effect on the same anchor by FX instance or FX location.
+- **allowMulti=false** deduplicates an equal effect on the same anchor: the same `FX` definition object or the same FX id.
 - **onFinished** fires once when the runtime finishes, is destroyed, or becomes invalid because the particle engine discarded it.
+
+<VersionBadge version="2.2.9" label="Changed" icon="tag" />
+
+With `allowMulti=false`, a start is no longer always skipped. Since 2.2.9, if the equal effect already running plays an older load of a definition that has since been reloaded (a resource reload, a rewritten FX Pack), the new start stops it and plays the current definition.
 
 `getRuntime()` is nullable before a successful `start()` and when start is skipped. Keep the executor if later code needs its runtime or callback; avoid reaching into the static executor caches.

@@ -51,5 +51,5 @@ flowchart LR
 | Type mismatch | Vector width and implicit casts at the failing port |
 | Missing required output | Fragment output connections and graph type |
 | Unknown function/resource | Function graph path and FX Pack dependency |
-| Shader compiles but renders zero | Unsupported Additional Data channel or CPU path |
+| Shader compiles but renders zero | Unsupported Additional Data channel, or a trail/beam/AraTrail drawn without GPU instancing |
 | Old result after edit | Save graph, reload shader, then clear Photon FX cache |

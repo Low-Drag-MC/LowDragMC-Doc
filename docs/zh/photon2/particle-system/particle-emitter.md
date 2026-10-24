@@ -47,7 +47,9 @@ Prewarm 适合循环 Smoke、Aura 或环境效果，让它们第一帧就像已�
 
 ## Parallel Update
 
-Parallel Update 适合大量互相独立的粒子。Photon 对 World/Light 访问和 Sub Emitter 生成做了安全交接，但自定义逻辑不能引入不安全的共享可变状态。粒子较少时，调度成本可能高于收益。
+Parallel Update 适合大量互相独立的粒子。Photon 对 World/Light 访问和 Sub Emitter 生成做了安全交接，但自定义逻辑不能引入不安全的共享可变状态。粒子较少时，调度成本可能高于收益；粒子少于 128 个时，Emitter 会串行更新。
+
+<VersionBadge version="2.2.9" label="Changed" icon="tag" /> 带碰撞的 Emitter 现在也可以并行更新。2.2.9 之前它们总是串行更新。客户端配置中的 **并行碰撞**（Parallel collision，默认开启）可以关闭这一行为。见 [粒子碰撞](./collision.md#performance-and-debugging)。
 
 ## Runtime 访问
 

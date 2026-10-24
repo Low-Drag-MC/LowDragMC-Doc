@@ -33,8 +33,10 @@ The original video remains available. It focuses on the foundational particle wo
 | --- | --- |
 | Create a first effect in the editor | [Getting Started](./getting-started.md) |
 | Learn particle emitters and modules | [Particle System](./particle-system/) |
+| Reuse an effect inside another one | [FX Instances](./fx-instances.md) |
 | Sequence effects and properties | [Timeline](./timeline/) |
 | Build materials and GPU effects | [Shaders and GPU](./shaders-and-gpu/) |
+| Light the world with effects | [Dynamic Lights](./dynamic-lights/) |
 | Create fullscreen effects | [Post Processing](./post-processing/) |
 | Load and control effects from a mod | [Java API](./java-api/) |
 
@@ -46,8 +48,12 @@ flowchart LR
     P --> R["Reusable resources"]
     P --> T["Timeline"]
     H --> E["Particle / Trail / Beam emitters"]
+    H --> I["FX instances"]
+    I --> F["Other .fx effects"]
+    H --> L["Lights and fog volumes"]
+    L --> D["Dynamic lights"]
     R --> M["Materials and meshes"]
-    M --> S["Shader Graph or custom shader"]
+    M --> S["Shader Graph, Kila Material, or custom shader"]
     E --> G["Photon render pipeline"]
     T --> E
     T --> X["Post-effect requests"]
@@ -55,25 +61,31 @@ flowchart LR
     S --> G
     Q --> O["Final frame"]
     G --> O
+    D --> O
 ```
 
-An exported `.fx` stores the authored object tree and Timeline. At runtime, `FX#createRuntime()` creates an independent playable instance. The runtime emits its objects into the client particle engine and submits active post-process clips once per frame.
+An exported `.fx` stores the authored object tree and Timeline. FX instances are baked into ordinary objects when the `.fx` loads. At runtime, `FX#createRuntime()` creates an independent playable instance. The runtime emits its objects into the client particle engine and submits active post-process clips once per frame.
 
 ## Main Features
 
-- **Particle authoring:** particle, trail, beam, and AraTrail emitters with curves, gradients, collision, sub-emitters, UV animation, custom renderers, and simulation spaces.
+- **Particle authoring:** particle, trail, beam, and AraTrail emitters with curves, gradients, sub-emitters, UV animation, custom renderers, and simulation spaces.
+- **Collision:** particles collide with blocks, fluid surfaces, entities, and Collider objects; triggers let particles pass and report them entering and leaving. See [Particle Collision](./particle-system/collision.md). <VersionBadge version="2.2.9" label="Since" icon="tag" />
+- **Models:** mesh particles from OBJ, JSON, and glTF / glb models, including animated glTF. See [glTF models](./particle-system/gltf-models.md). <VersionBadge version="2.2.5" label="Since" icon="tag" />
+- **Dynamic lights:** point and spot lights with soft voxel shadows, volumetric light, fog volumes, and particles that emit or receive light. See [Dynamic Lights](./dynamic-lights/). <VersionBadge version="2.2.8" label="Since" icon="tag" />
+- **Kila Material:** an all-in-one VFX material with 27 presets that can be exported to a Shader Graph. See [Kila Material](./shaders-and-gpu/kila-material.md). <VersionBadge version="2.2.8" label="Since" icon="tag" />
+- **FX instances:** place one `.fx` inside another and save only what you change. See [FX Instances](./fx-instances.md). <VersionBadge version="2.2.9" label="Since" icon="tag" />
 - **Timeline:** animation, activation, control, speed, signal, audio, group, and post-process tracks.
 - **Shader Graph:** visual vertex and fragment shaders with scene inputs, particle inputs, reusable functions, and live previews.
 - **GPU data:** per-emitter custom streams readable from Shader Graph or GLSL.
 - **Post-processing:** fullscreen passes composed in a Render Graph, including weighted blending, priorities, custom textures, mask groups, and custom depth.
 - **Distribution:** plain `.fx` exports and self-contained `.fxpack` resource packs.
-- **Java integration:** built-in block/entity executors or direct control through `FXRuntime`.
+- **Java integration:** built-in block/entity executors, direct control through `FXRuntime`, and [preloading](./java-api/preloading.md) effects before they first play.
 
 ## Requirements
 
 - Minecraft `1.21.1`
 - NeoForge `21.1+`
-- A compatible Photon `2.2.x` and LDLib2 version
+- Photon `2.2.9` needs LDLib2 `2.2.43` or newer. KilaGraph is bundled inside Photon's jar, so it needs no separate install.
 - A client environment: Photon rendering and playback APIs are client-side
 
 ::: warning Photon 1.x

@@ -13,19 +13,33 @@ Photon batches equal geometry/material state and draws many instances together. 
 | Define | Geometry | Base instance content |
 | --- | --- | --- |
 | `PARTICLE_INSTANCE` | billboard/tile quad | position, rotation, size, color, UV/light |
-| `PARTICLE_MODEL_INSTANCE` | model mesh | transform, color, UV/light with model attributes |
+| `PARTICLE_MODEL_INSTANCE` | model mesh | transform, color, UV/light with model attributes; optional tangent |
 | `TRAIL_INSTANCE` | flat/tube trail segment | endpoints, width/color/UV per point |
 | `BEAM_INSTANCE` | ray/beam segment | start/end, width/color/UV |
-| `ARATRAIL_INSTANCE` | physics trail segment | adjacent point data and interpolation |
+| `ARA_TRAIL_INSTANCE` / `ARA_TRAIL_TUBE_INSTANCE` | flat / tube AraTrail segment | adjacent point data and interpolation |
 
-Non-instanced CPU paths still expose Particle Data, but Additional and Custom Data graph accessors return zero there. Enable GPU instancing when a graph relies on those streams.
+Non-instanced CPU paths still expose Particle Data. <VersionBadge version="2.2.8" label="Changed" icon="tag" /> Since 2.2.8, a non-instanced Particle Emitter also uploads per-particle Additional and Custom Data records when one of its materials reads them (a Shader Graph or Kila Material). Trails, beams and AraTrail still need GPU instancing for those streams; without it they read zero.
+
+## Extra Defines
+
+Photon adds these defines on top of a render variant:
+
+| Define | Added to | Version | Meaning |
+| --- | --- | --- | --- |
+| `PHOTON_TANGENT` | `PARTICLE_MODEL_INSTANCE` | <VersionBadge version="2.2.5" label="Since" icon="tag" /> | The Model render mode's **tangent** toggle is on. Adds `layout(location = 3) in vec4 aTangent` (xyz = tangent, w = handedness). |
+| `PHOTON_VAT` | `PARTICLE_MODEL_INSTANCE` | <VersionBadge version="2.2.7" label="Since" icon="tag" /> | An animated glTF model plays per particle. The vertex shader reads the pose from a baked table (`PhotonVat`). |
+| `PHOTON_CPU_DATA` | the CPU path (no instance define) | <VersionBadge version="2.2.8" label="Since" icon="tag" /> | A Particle Emitter draws without instancing and a material reads particle data. Records are found per particle, not by `gl_InstanceID`. |
+
+`getParticleData()` handles all three. With `PHOTON_TANGENT`, the model's per-instance attributes stay at locations 4–8 and legacy Custom Data still starts at 9. The tangent toggle needs GPU instancing; glTF models keep their own tangents, and other models get tangents generated from their UVs.
+
+`ParticleData.Tangent` and `ObjectTangent` carry the tangent frame. Instanced billboards, trails, beams and AraTrail build an exact tangent in the vertex shader, so they need no toggle. Model instancing without the toggle and the non-instanced CPU path report a constant `vec4(1, 0, 0, 1)`. See [glTF Models](../particle-system/gltf-models.md) for animated models.
 
 ## Two Data Layouts
 
 ```mermaid
 flowchart TD
     S["Emitter Additional GPU Data"] --> L["Legacy custom shader"]
-    S --> G["Shader Graph"]
+    S --> G["Shader Graph / Kila Material"]
     L --> A["Enabled channels as appended vertex attributes"]
     G --> B["Fixed PhotonData buffer-texture record"]
     G --> C["Fixed PhotonCustomData stream records"]
@@ -33,7 +47,7 @@ flowchart TD
 
 The legacy attribute layout contains only inspector-enabled channels, in registry order. Turning a channel on can move later attribute locations. A hand-written shader and emitter configuration must therefore agree exactly.
 
-Shader Graph uses a fixed `vec4` slot layout per emitter kind, indexed by `gl_InstanceID`. The compiler records which channels are read and uploads the effective mask. One compiled graph can serve emitters with different inspector toggles.
+Shader Graph uses a fixed `vec4` slot layout per emitter kind, indexed by `gl_InstanceID` (per particle on the `PHOTON_CPU_DATA` path). The compiler records which channels are read and uploads the effective mask. One compiled graph can serve emitters with different inspector toggles.
 
 ## Batching Limits
 
@@ -44,7 +58,7 @@ Use the profiler and render statistics rather than assuming instancing is always
 ## Shader Author Checklist
 
 - Shader Graph uses Photon accessors. The legacy Custom Shader Material path must declare attribute locations matching the emitter toggles.
-- Do not index `PhotonData` with vertex id; it is indexed by `gl_InstanceID`.
+- Read `PhotonData` through the `photon_data_*()` accessors instead of indexing it yourself: instanced draws index it by `gl_InstanceID`, the `PHOTON_CPU_DATA` path per particle.
 - Treat unsupported channels as zero and provide a sensible fallback.
 - Keep transparent sort/layer requirements consistent so emitters can batch.
 - Test tile, model, trail, and beam separately; their base inputs are not interchangeable.

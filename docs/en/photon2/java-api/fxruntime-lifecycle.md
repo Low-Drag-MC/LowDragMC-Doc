@@ -33,6 +33,25 @@ Emit sends every object to the selected particle host and resets Timeline. A lat
 
 `emmit(...)` remains deprecated for source compatibility. Migrate to `emit(...)`; there is no behavior difference.
 
+## Playback Rate
+
+<VersionBadge version="2.2.7" label="Since" icon="tag" />
+
+```java
+runtime.setRate(0.5f);  // half speed
+runtime.setRate(0f);    // frozen
+runtime.setRate(1f);    // normal
+float rate = runtime.getRate();
+```
+
+`setRate` sets how fast the whole playback runs. Values below `0` are clamped to `0`.
+
+- The rate scales the objects' simulation and the timeline's master clock together. The root's time scale is set to the rate and every descendant inherits it, so Activator, Control, Animation, Signal and Audio clips stay in step with the particles.
+- Above `1`, the simulation sub-steps: `ceil(rate)` steps per tick, at most 16. The cost grows with the simulated time.
+- The rate is not saved in the effect. Photon applies it again every tick, so it survives a Control clip that restarts the tree.
+- A [Speed Track](../timeline/activator-control-and-speed.md#speed-track) that targets the root wins over the rate for the ticks it covers.
+- Above `1`, the timeline advances in steps longer than one tick, so a clip shorter than one step can be skipped. Signals are not skipped.
+
 ## State Queries
 
 | Query | Meaning |

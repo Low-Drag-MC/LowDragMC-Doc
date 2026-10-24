@@ -81,6 +81,35 @@ uniform vec4 U_ViewPort;
 vec2 screenUV = (gl_FragCoord.xy - U_ViewPort.xy) / U_ViewPort.zw;
 ```
 
+## Dynamic Lights {#dynamic-lights}
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" />
+
+A Custom Shader Material can be lit by Photon's [dynamic lights](../dynamic-lights/index.md). Declare the names below in the shader JSON and import `photon:lit_particle.glsl` in the fragment shader. The include declares them in GLSL, so do not declare them again.
+
+When the JSON declares `PhotonLightData`, Photon treats all nine names as built in: it binds the frame's lights on every draw at intensity 1, hides the entries from Shader Settings, and does not save them.
+
+| Name | JSON declaration | GLSL type | Holds |
+| --- | --- | --- | --- |
+| `PhotonLightData` | sampler | `sampler2D` | The frame's lights, four texels per light. |
+| `PhotonClusterGrid` | sampler | `sampler2D` | For each screen tile and depth slice, where its light list starts and how long it is. |
+| `PhotonClusterIndices` | sampler | `sampler2D` | The light lists of all clusters. |
+| `PhotonVisibilityAtlas` | sampler | `sampler2D` | The shadow maps of the shadowed lights (Voxel shadows only). |
+| `PhotonClusterInfo` | `int`, count 4 | `ivec4` | Tile size, tiles across, tiles down, depth slices. |
+| `PhotonClusterView` | `float`, count 4 | `vec4` | Near plane, slice scale, viewport origin. |
+| `LitParticleParams` | `float`, count 4 | `vec4` | x = 1 while lights are bound, y = intensity. |
+| `PhotonVisibilityInfo` | `int`, count 4 | `ivec4` | Map size, maps per atlas row, maps this frame. |
+| `PhotonViewInverse` | `matrix4x4`, count 16 | `mat4` | The inverse view matrix. |
+
+Copy the JSON entries with their default values from [Hand-written Shaders](../dynamic-lights/lit-particles-and-shaders.md#hand-written-shaders) or from Photon's `assets/photon/shaders/core/hdr_particle.json`.
+
+| Function | Returns |
+| --- | --- |
+| `vec3 photon_particle_light(vec3 viewPos)` | The light reaching a view-space position from every direction, for billboards. |
+| `vec3 photon_surface_light(vec3 viewPos, vec3 viewNormal, float wrap)` | The same, with each light weighted by how squarely it falls on a unit view-space normal. A zero normal takes light from every direction; `wrap` above 0 lets light reach past the terminator. |
+
+Both functions are fragment-only. They return 0 in previews, while dynamic lights are off, and when no light is in view.
+
 ## Minecraft `ShaderInstance` Uniforms
 
 These standard names are recognized and populated from matching render state by `ShaderInstance`. Declare only what the shader needs.

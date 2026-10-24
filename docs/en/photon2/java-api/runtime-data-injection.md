@@ -85,9 +85,11 @@ public final class PhotonInjection {
 
 `findObject(name)` returns the first exact name match; `findObjects(name)` returns all matches. For a stable integration contract, give API-facing objects unique names and document them with the effect asset.
 
+A `ParticleEmitter`'s `renderer` layer also has the Model-mode slots, among them `renderMode`, `model`, `tangent`, `modelPivot`, `useGPUInstance` and `facingMode`. Setting `model` to a `DynamicMeshSource` draws a [live mesh](./live-meshes-and-ui-scenes.md#live-meshes) that changes every frame. Light objects, Fog Volumes and Light Emission have their own slots; see [Dynamic Lights API](./dynamic-lights-api.md#override-an-authored-light).
+
 ## Timing and Ownership
 
-Apply setup overrides after creating the runtime and before `emit()` when possible. For values that must follow gameplay, update on the client tick. Use per-frame updates only for interpolated transforms or render-time values.
+Emitting resets every object, and a reset clears all of its runtime overrides, renderer slots included. Set overrides after `emit()`; with a built-in executor, after `start()`, through `getRuntime()`. A Control clip that restarts an object resets it again, so re-apply values that must survive a restart. For values that must follow gameplay, update on the client tick. Use per-frame updates only for interpolated transforms or render-time values.
 
 Timeline Animation uses the same slots and writes them during evaluation. The last write for a sample wins. A Timeline track that writes every tick/frame will replace a one-time Java value; dedicate separate slots/Custom Data streams or establish one owner.
 

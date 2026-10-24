@@ -26,18 +26,22 @@ flowchart LR
 
 | 需求 | 使用 |
 | --- | --- |
-| 纹理、混合、深度和普通粒子 | Texture 或 Sprite Material |
+| 普通粒子上的一张贴图 | Texture 或 Sprite Material |
+| 不写 Graph 的常见 VFX 效果（序列帧、溶解、扭曲、柔边、边缘光、贴花） | Kila 材质 |
 | 不写 GLSL 的逐像素逻辑 | Shader Graph Material |
 | 已有 Core Shader JSON/VSH/FSH | Custom Shader Material |
 | Scene Color 或全屏处理 | Fullscreen Graph 与 Render Graph |
 | Shader 内的逐粒子动画 | Additional GPU Data |
 | 由 Timeline 或 Java 控制的值 | Custom Data Stream |
 
-新效果优先使用 Shader Graph：它会声明所需的数据流，并适配 Photon 的不同渲染路径。手写 Shader 适合移植现有代码或 Graph 暂时无法表达的算法。
+<VersionBadge version="2.2.8" label="Kila 材质" icon="tag" />
+
+新效果可以先从 [Kila 材质](./kila-material.md)开始：它的模块和预设覆盖了常见效果，不写 Graph 也能读取逐粒子数据。需要它没有的逻辑时，把它导出为着色器图，再在 Graph 中继续修改。Shader Graph 会声明所需的数据流，并适配 Photon 的不同渲染路径。手写 Shader 适合移植现有代码或 Graph 暂时无法表达的算法。
 
 ## 本章内容
 
 - [材质系统](./material-system.md)
+- [Kila 材质](./kila-material.md)
 - [Shader Graph 入门](./shader-graph-getting-started.md)
 - [Stage、Function 与 Subgraph](./stages-functions-and-subgraphs.md)
 - [核心 Shader 节点参考](./core-node-reference.md)

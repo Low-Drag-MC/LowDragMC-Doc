@@ -20,13 +20,19 @@ Use Local for attached aura and weapon effects, World for smoke left behind by a
 
 ## Velocity over Lifetime
 
-Velocity over Lifetime provides linear, orbital, offset, radial, and speed-modifier functions. Its `ValueSpace` decides how configured vectors are interpreted before they are added to particle motion.
+Velocity over Lifetime provides linear, orbital, offset, radial, and speed-modifier functions. Its **Space** field (`ValueSpace`) decides how configured vectors are interpreted before they are added to particle motion.
 
 <VersionBadge version="2.2.1" label="Velocity ValueSpace since" icon="tag" />
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" /> Space can be **Custom**. Drag an object into **Custom Space**, and the vectors use that object's current axes. The orbital and radial pivot also moves to the object's origin, so particles can orbit another object. See [Value Space](./lifetime-and-speed-modules.md#value-space) for every module with this choice.
 
 ## Force over Lifetime
 
 Force changes velocity over time rather than setting a direct displacement. Use it for gravity-like acceleration, wind, or controlled curvature. A changing force curve integrates over the particle lifetime.
+
+Its **Simulation Space** field is a value space, not the emitter's Simulation Space. `Local` (default) uses the emitter's axes; `World` uses the world axes.
+
+<VersionBadge version="2.2.8" label="Since" icon="tag" /> `Custom` uses the axes of the object in **Custom Space**.
 
 ## Inherit Velocity
 
@@ -45,7 +51,7 @@ Enable **External Forces** on a Particle Emitter and set its multiplier. The inf
 
 ## Ordering
 
-Start speed and inherited velocity establish initial motion. Per-tick velocity, force, physics, external fields, and noise then contribute through their runtime modules. Avoid using several modules to perform the same job unless their combination is intentional.
+Start speed and inherited velocity establish initial motion. Per-tick velocity, force, physics, external fields, and noise then contribute through their runtime modules. With collision on, Physics resolves each step's movement against blocks, entities, and colliders; see [Particle Collision](./collision.md). Avoid using several modules to perform the same job unless their combination is intentional.
 
 ::: warning Transform scale
 Non-uniform parent scale changes vector bases. Test Custom space and orbital motion with the final hierarchy scale, not only at `1 1 1`.

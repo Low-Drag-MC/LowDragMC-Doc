@@ -8,7 +8,9 @@ nav:
   - simulation-and-forces.md
   - lifetime-and-speed-modules.md
   - physics-noise-lighting-uv.md
+  - collision.md
   - trails-and-sub-emitters.md
   - rendering-materials-and-meshes.md
+  - gltf-models.md
   - trail-beam-and-aratrail.md
 

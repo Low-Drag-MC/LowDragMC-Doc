@@ -19,7 +19,7 @@
 
 ## 2. 创建 FX Project
 
-选择 **File → New → FX Project**，将项目保存为 `first-effect.fxproj`。项目保存可编辑的对象树、Timeline 和可复用资源引用，它不是游戏运行时直接加载的文件。
+选择 **文件 → 新建 → 特效项目**（File → New → FX Project），将项目保存为 `first-effect.fxproj`。项目保存可编辑的对象树、Timeline 和可复用资源引用，它不是游戏运行时直接加载的文件。
 
 ## 3. 添加 Particle Emitter
 
@@ -41,6 +41,8 @@
 
 打开 **Resources → Material**，选择 `circle` 等内置粒子纹理，并拖到发射器 Renderer 的 Material 列表中。Material 决定纹理或 Shader；Renderer 决定 Layer、排序、裁剪、Mask、Model 模式和 Instancing。
 
+想快速得到成品效果，可以在 **Resources → Material** 中右键，选择 **添加新资源 → Kila 材质**（Add a New Resource → Kila Material），再用 **浏览预设...**（Browse Presets...）挑一个外观。见 [Kila 材质](./shaders-and-gpu/kila-material.md)。
+
 ## 5. 添加运动和颜色
 
 开启 **Color over Lifetime**，设置末端 alpha 为零的渐变。开启 **Velocity over Lifetime** 或 **Force over Lifetime**，可以让粒子在生成后继续改变运动状态。
@@ -52,13 +54,15 @@
 
 ## 6. 保存与导出
 
-普通保存写入可编辑的 `.fxproj`。要生成运行时效果，请选择 **File → Export → FX**，导出到：
+普通保存写入可编辑的 `.fxproj`。要生成运行时效果，请选择 **文件 → 导出 → 导出特效（仅定义）**（File → Export → Export FX (Definition Only)），导出到：
 
 ```text
 <gameDir>/ldlib2/assets/photon/fx/first_effect.fx
 ```
 
 运行时 id 是 `photon:first_effect`。如果效果引用了自定义 Material、Graph、Mesh 和 Texture，推荐导出成 FX Pack。
+
+因为文件位于 `assets/photon/fx/` 下，之后其他效果也可以把它放置为 [FX 实例](./fx-instances.md)。
 
 ## 7. 播放导出的效果
 

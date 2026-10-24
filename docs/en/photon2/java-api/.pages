@@ -1,9 +1,14 @@
-index.md
-loading-listing-and-caching.md
-built-in-executors.md
-fxruntime-lifecycle.md
-runtime-data-injection.md
-runtime-objects-and-transforms.md
-custom-executors-timeline-and-signals.md
-post-processing-api.md
-extension-serialization-and-debugging.md
+title: Java API
+nav:
+  - index.md
+  - loading-listing-and-caching.md
+  - preloading.md
+  - built-in-executors.md
+  - fxruntime-lifecycle.md
+  - runtime-data-injection.md
+  - runtime-objects-and-transforms.md
+  - live-meshes-and-ui-scenes.md
+  - custom-executors-timeline-and-signals.md
+  - post-processing-api.md
+  - dynamic-lights-api.md
+  - extension-serialization-and-debugging.md

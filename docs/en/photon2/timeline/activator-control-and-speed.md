@@ -10,6 +10,8 @@ These tracks change whether simulation runs, when an object restarts, and how mu
 
 An Activator Track targets one FX object. The object is active while any Activator Clip covers the current time. Outside the clips it is inactive and neither ticks nor renders.
 
+<VersionBadge version="2.2.9" label="Since" icon="tag" /> Every object except the root has a saved **Enabled** switch in the Inspector. A disabled object stays off; an Activator Clip does not wake it.
+
 ## Control Track
 
 Control Clips target objects individually. Entering or switching to a Control Clip:
@@ -37,6 +39,20 @@ Speed Track samples a scalar and writes the target's `selfTimeScale`. Children i
 | `>1` | Multiple bounded simulation substeps per game tick. |
 
 The runtime limits substeps per tick to keep extreme values from creating unbounded work. Speeds beyond the cap cannot simulate arbitrary time in one tick.
+
+<VersionBadge version="2.2.7" label="Since" icon="tag" /> Java code can also change the speed of a whole runtime with `FXRuntime#setRate`, which scales the objects and the Timeline clock together. A Speed Track that targets the root wins over the rate for the ticks it covers. See [FXRuntime Lifecycle](../java-api/fxruntime-lifecycle.md).
+
+## FX Instances
+
+<VersionBadge version="2.2.9" label="Since" icon="tag" />
+
+An [FX instance](../fx-instances.md) plays its source's Timeline on its own clock. The outer tracks drive that clock like any object state:
+
+- a Control clip that restarts the instance, or one of its parents, starts the clock at `0`;
+- an Activator Track that turns the instance off pauses the clock, and it continues when the instance turns on again;
+- a Speed Track on the instance or a parent scales the clock.
+
+When the outer Timeline and the source drive the same object and channel, the outer Timeline wins. See [FX Instances](../fx-instances.md#timeline) for the full rules.
 
 ## State Restoration
 

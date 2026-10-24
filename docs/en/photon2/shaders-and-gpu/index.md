@@ -26,18 +26,22 @@ flowchart LR
 
 | Need | Use |
 | --- | --- |
-| Texture, blend, depth, and ordinary particles | Texture or Sprite Material |
+| One texture on ordinary particles | Texture or Sprite Material |
+| Common VFX looks (flipbook, dissolve, distortion, soft edges, rims, decals) without a graph | Kila Material |
 | Visual per-pixel logic without GLSL | Shader Graph Material |
 | Existing Core Shader JSON/VSH/FSH | Custom Shader Material |
 | Scene-color or full-screen processing | Fullscreen Graph and Render Graph |
 | Per-particle animation inside the shader | Additional GPU Data |
 | Values controlled by Timeline or Java | Custom Data streams |
 
-Shader Graph is the preferred path for new effects because it declares its required streams and works across Photon render contexts. Hand-written shaders remain useful when porting a shader or when graph nodes cannot express an operation.
+<VersionBadge version="2.2.8" label="Kila Material" icon="tag" />
+
+Start a new effect with [Kila Material](./kila-material.md): its modules and presets cover the common looks, and it reads per-particle data without a graph. When you need logic it has no module for, export it as a Shader Graph and continue there. Shader Graph declares its required streams and works across Photon render contexts. Hand-written shaders remain useful when porting a shader or when graph nodes cannot express an operation.
 
 ## In This Section
 
 - [Material System](./material-system.md)
+- [Kila Material](./kila-material.md)
 - [Shader Graph: Getting Started](./shader-graph-getting-started.md)
 - [Stages, Functions, and Subgraphs](./stages-functions-and-subgraphs.md)
 - [Core Node Reference](./core-node-reference.md)
