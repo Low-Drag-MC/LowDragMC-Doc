@@ -107,7 +107,7 @@ Because game time is far past the end of any clip, a clip with Loop off sits on 
 
 Per-Particle Phase works with and without GPU instancing.
 
-The pose table holds `(Baked Frames + 1) × vertices × 16` bytes. It is capped at 2,000,000 texels (32 MiB). That is about 64,000 vertices at the default 30 frames. Above the cap, Photon refuses the bake and logs a warning.
+The pose table holds `(Baked Frames + 1) × vertices × 16` bytes. It is capped at 2,000,000 texels (32 MiB). That is about 64,000 vertices at the default 30 frames. Above the cap, Photon does not bake: the model keeps animating, but in lockstep as with Per-Particle Phase off, and the log says once how many texels it would need. Lower Baked Frames to bring it under the cap.
 
 The mesh preview and the emission shape always show the shared-clock pose, even with Per-Particle Phase on.
 

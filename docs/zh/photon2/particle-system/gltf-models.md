@@ -10,7 +10,7 @@
 2. 从游戏外把一个或多个 `.glb`、`.gltf` 文件拖到面板上。`.obj` 和 `.json` 模型也可以这样导入。
 3. 已经位于 `<gameDir>/ldlib2/assets/` 下的文件直接原地使用；其他位置的文件会被复制进 `ldlib2` 资源包，编辑器会询问保存路径，默认建议 `models/<文件名>`。
 
-新建的 Mesh 资源使用 **glTF 模型** 来源。如果文件带骨骼且至少有一段动画，则改用 **Animated glTF Model** 来源，拖进来就能直接播放。
+新建的 Mesh 资源使用 **glTF 模型** 来源。如果文件带骨骼且至少有一段动画，则改用 **动画 glTF 模型** 来源，拖进来就能直接播放。
 
 要让已有的 Mesh 指向某个文件，把 **模型来源** 设为 **glTF 模型**，再点击 **选择 glb / gltf 文件**。
 
@@ -60,29 +60,29 @@ Shader 一侧的细节（`PHOTON_TANGENT` 与属性布局）见[顶点格式与 
 
 <figure>
 <img src="/assets/photon2/gltf-animated-swarm.webp" alt="用 Kila 全息预设绘制的一群动画狐狸模型，每个处在同一段动画的不同位置">
-<figcaption>开启 Per-Particle Phase 的狐狸模型群，用 Kila 全息预设绘制：每个粒子都从自己的位置播放同一段动画。</figcaption>
+<figcaption>开启逐粒子相位的狐狸模型群，用 Kila 全息预设绘制：每个粒子都从自己的位置播放同一段动画。</figcaption>
 </figure>
 
-从 2.2.7 起，**Animated glTF Model** 来源会在每个使用它的粒子上播放带骨骼 glTF 文件中的一段动画。把带骨骼且至少有一段动画的文件拖进 Mesh 资源面板，就会自动创建这种来源；只含动画的文件和普通模型则导入为 **glTF 模型**。
+从 2.2.7 起，**动画 glTF 模型** 来源会在每个使用它的粒子上播放带骨骼 glTF 文件中的一段动画。把带骨骼且至少有一段动画的文件拖进 Mesh 资源面板，就会自动创建这种来源；只含动画的文件和普通模型则导入为 **glTF 模型**。
 
 ### 字段 {#fields}
 
 <figure>
-<img src="/assets/photon2/gltf-animated-source.webp" alt="设为 Animated glTF Model 的模型来源及其字段">
-<figcaption>设为 Animated glTF Model 的模型来源：glTF Location、Flip V、Speed、Loop、Animation Files、Per-Particle Phase、Baked Frames 和 Interpolate Frames。</figcaption>
+<img src="/assets/photon2/gltf-animated-source.webp" alt="设为动画 glTF 模型的模型来源及其字段">
+<figcaption>设为动画 glTF 模型的模型来源：glTF 位置、翻转 V、速度、循环、动画文件、逐粒子相位、烘焙帧数和帧间插值。</figcaption>
 </figure>
 
 | 字段 | 默认值 | 描述 |
 | --- | --- | --- |
 | glTF 位置、翻转 V | –、关 | 与 glTF 模型来源相同。 |
-| Animation | (first in the file) | 列出文件本身和 Animation Files 中的动画片段。按名称保存，重新导出时即使片段顺序变了，选择也不会丢。 |
-| Speed | `1` | 播放速率。`2` 为两倍速，负数倒放。Phase From 为 Lifetime 时，表示粒子一生中播放几遍。 |
-| Loop | 开 | 播放结束后从头开始。关闭时停在最后一帧。 |
-| Animation Files | 空 | 额外的 `.glb` 文件，其中的片段会加入列表。见[额外的动画文件](#extra-animation-files)。 |
-| Per-Particle Phase | 关 | 让每个粒子处在动画的不同位置，而不是全部摆出同一个姿势。 |
-| Baked Frames | `30`（2–240） | 仅用于 Per-Particle Phase。烘焙的姿势数量，越多越平滑，占用也越大。 |
-| Interpolate Frames | 开 | 仅用于 Per-Particle Phase。在相邻烘焙帧之间混合，而不是直接跳帧。每个顶点多一次纹素读取。 |
-| Phase From | Random | 仅用于 Per-Particle Phase。**Random**：在共享时钟上加一个固定的逐粒子偏移。**Lifetime**：从出生到死亡播放 Speed 遍。 |
+| 动画（Animation） | （文件中的第一个） | 列出文件本身和动画文件中的动画片段。按名称保存，重新导出时即使片段顺序变了，选择也不会丢。 |
+| 速度（Speed） | `1` | 播放速率。`2` 为两倍速，负数倒放。相位来源为 Lifetime 时，表示粒子一生中播放几遍。 |
+| 循环（Loop） | 开 | 播放结束后从头开始。关闭时停在最后一帧。 |
+| 动画文件（Animation Files） | 空 | 额外的 `.glb` 文件，其中的片段会加入列表。见[额外的动画文件](#extra-animation-files)。 |
+| 逐粒子相位（Per-Particle Phase） | 关 | 让每个粒子处在动画的不同位置，而不是全部摆出同一个姿势。 |
+| 烘焙帧数（Baked Frames） | `30`（2–240） | 仅用于逐粒子相位。烘焙的姿势数量，越多越平滑，占用也越大。 |
+| 帧间插值（Interpolate Frames） | 开 | 仅用于逐粒子相位。在相邻烘焙帧之间混合，而不是直接跳帧。每个顶点多一次纹素读取。 |
+| 相位来源（Phase From） | Random | 仅用于逐粒子相位。**Random**：在共享时钟上加一个固定的逐粒子偏移。**Lifetime**：从出生到死亡播放“速度”遍。 |
 
 面板中还有 **选择 glb / gltf 文件** 和 **重新加载网格** 两个按钮。
 
@@ -93,27 +93,27 @@ Shader 一侧的细节（`PHOTON_TANGENT` 与属性布局）见[顶点格式与 
 - **在编辑器中**，动画跟随时间轴播放头。拖动播放头时姿势随之变化，暂停时保持不动。
 - **在世界中**，动画跟随关卡的游戏时间。所有特效的所有实例共用这一个时钟，所以特效开始播放时动画并不会从头开始。
 
-游戏时间早已超过任何动画片段的长度，因此在世界中关闭 Loop 的片段会一直停在最后一帧，除非 Phase From 设为 Lifetime。一次性动画请使用 Lifetime。
+游戏时间早已超过任何动画片段的长度，因此在世界中关闭循环的片段会一直停在最后一帧，除非相位来源设为 Lifetime。一次性动画请使用 Lifetime。
 
-### 共享时钟与 Per-Particle Phase {#shared-clock-and-per-particle-phase}
+### 共享时钟与逐粒子相位 {#shared-clock-and-per-particle-phase}
 
-| | 关闭 Per-Particle Phase（共享时钟） | 开启 Per-Particle Phase |
+| | 关闭逐粒子相位（共享时钟） | 开启逐粒子相位 |
 | --- | --- | --- |
 | 姿势来源 | CPU 每帧蒙皮一次。 | 动画片段烘焙一次，存入姿势表；顶点着色器据此为每个粒子摆姿势。 |
 | 粒子 | 全部同步运动。 | 各自处在动画的不同位置。 |
-| 每帧开销 | 每种“模型 + 片段 + Speed + Loop”组合蒙皮一次，所有用到它的 Emitter 共享。 | 烘焙之后没有开销。 |
+| 每帧开销 | 每种“模型 + 片段 + 速度 + 循环”组合蒙皮一次，所有用到它的 Emitter 共享。 | 烘焙之后没有开销。 |
 | 法线 | 跟随形变。 | 与位置一起烘焙，同样跟随形变。 |
 | 切线（`tangent` 开关） | 跟随形变。 | 不烘焙，保持静止姿势（rest pose）。 |
 
-Per-Particle Phase 在开启和关闭 GPU 实例化时都能工作。
+逐粒子相位在开启和关闭 GPU 实例化时都能工作。
 
-姿势表大小为 `(Baked Frames + 1) × 顶点数 × 16` 字节，上限为 2,000,000 个纹素（32 MiB），按默认 30 帧计算约为 64,000 个顶点。超过上限时，Photon 会拒绝烘焙并在日志中给出警告。
+姿势表大小为 `(烘焙帧数 + 1) × 顶点数 × 16` 字节，上限为 2,000,000 个纹素（32 MiB），按默认 30 帧计算约为 64,000 个顶点。超过上限时 Photon 不会烘焙：模型仍然播放动画，但像关闭逐粒子相位时一样同步播放，日志中会提示一次需要多少纹素。降低烘焙帧数即可回到上限以内。
 
-无论是否开启 Per-Particle Phase，Mesh 预览和发射形状显示的都是共享时钟下的姿势。
+无论是否开启逐粒子相位，Mesh 预览和发射形状显示的都是共享时钟下的姿势。
 
 ### 额外的动画文件 {#extra-animation-files}
 
-导出工具常把角色存为一个文件，每段动画各存一个文件。把这些动画文件加入 **Animation Files** 即可：
+导出工具常把角色存为一个文件，每段动画各存一个文件。把这些动画文件加入 **动画文件** 即可：
 
 - 其中的片段按骨骼名称匹配到模型的骨架上。两个文件必须导出自同一套骨骼。
 - 只有一段动画的文件以文件名命名，例如 `run.glb` 中的片段名为 `run`。包含多段动画的文件命名为 `<文件名>/<片段名>`。
@@ -132,7 +132,7 @@ Per-Particle Phase 在开启和关闭 GPU 实例化时都能工作。
 
 ### 实用建议 {#tips}
 
-- **一次性动画**（跳跃、花朵绽放）：开启 Per-Particle Phase，把 Phase From 设为 **Lifetime**。Speed 为 `1` 时，每个粒子一生中正好播放一遍。Speed 大于 `1` 且关闭 Loop 时，动画提前播完并停在最后一帧。
-- **鸟群、虫群**：开启 Per-Particle Phase 并使用 **Random**，粒子就不会整齐划一地运动。
-- **面数较多的模型**：降低 Baked Frames，并保持 Interpolate Frames 开启。姿势表会随帧数增大。帧数低、片段又长时，不插值会明显卡顿：4 秒的片段只烘焙 30 帧，相当于每秒 7.5 个姿势。
-- **带法线贴图的动画模型**：使用共享时钟。开启 Per-Particle Phase 时，切线会停留在静止姿势。
+- **一次性动画**（跳跃、花朵绽放）：开启逐粒子相位，把相位来源设为 **Lifetime**。速度为 `1` 时，每个粒子一生中正好播放一遍。速度大于 `1` 且关闭循环时，动画提前播完并停在最后一帧。
+- **鸟群、虫群**：开启逐粒子相位并使用 **Random**，粒子就不会整齐划一地运动。
+- **面数较多的模型**：降低烘焙帧数，并保持帧间插值开启。姿势表会随帧数增大。帧数低、片段又长时，不插值会明显卡顿：4 秒的片段只烘焙 30 帧，相当于每秒 7.5 个姿势。
+- **带法线贴图的动画模型**：使用共享时钟。开启逐粒子相位时，切线会停留在静止姿势。

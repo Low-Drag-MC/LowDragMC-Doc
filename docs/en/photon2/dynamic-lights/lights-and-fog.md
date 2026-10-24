@@ -29,7 +29,7 @@ A Light is a point or spot light that moves with its transform. A spot light shi
 | **Flicker Speed** | 8 (0–50) | How fast the flicker changes. |
 | **Volumetric** → **Strength** | off → 1 | Makes the light glow in the air. See [Volumetric Lights](#volumetric-lights). |
 
-Intensity, Range and Strength accept a constant, a random range, a curve or a random curve. The angle rows also show for a point light, but a point light ignores them.
+Intensity, Range and Strength accept a constant, a random range, a curve or a random curve. The two angle rows appear under **Type** only while it is **Spot**.
 
 The light shines only while its object is active and visible, so an Activator track can switch it on and off. Its random values are picked once each time the object starts.
 
